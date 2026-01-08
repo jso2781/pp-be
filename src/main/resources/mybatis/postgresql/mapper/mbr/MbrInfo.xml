@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.pp.mbr.mapper.MbrInfoMapper">
+
+    <select id="getMbrInfo" parameterType="MbrInfoPVO" resultType="MbrInfoRVO" >
+        /* 대국민포털_회원정보기본 조회 (MbrInfoMapper.getMbrInfo) */
+        SELECT
+             mbr_no
+            ,mbr_id
+            ,mbr_encpt_flnm
+            ,mbr_encpt_eml
+            ,mbr_enpswd
+            ,mbr_encpt_telno
+            ,mbr_type_cd
+            ,mbr_join_stts
+            ,mbr_join_dt
+            ,mbr_whdwl_rsn
+            ,mbr_whdwl_dt
+            ,bfr_enpswd
+            ,pswd_chg_dt
+            ,pswd_err_nmtm
+            ,link_info_idntf_id
+            ,cert_token
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        FROM "KIDS_OWN"."TB_PP_M_MBR_INFO"
+        WHERE 1=1
+        AND mbr_no = #{mbrNo}
+    </select>
+
+    <insert id="insertMbrInfo" parameterType="MbrInfoPVO">
+        /* 대국민포털_회원정보기본 입력 (MbrInfoMapper.insertMbrInfo) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_MBR_INFO"
+        (
+             mbr_no
+            ,mbr_id
+            ,mbr_encpt_flnm
+            ,mbr_encpt_eml
+            ,mbr_enpswd
+            ,mbr_encpt_telno
+            ,mbr_type_cd
+            ,mbr_join_stts
+            ,mbr_join_dt
+            ,mbr_whdwl_rsn
+            ,mbr_whdwl_dt
+            ,bfr_enpswd
+            ,pswd_chg_dt
+            ,pswd_err_nmtm
+            ,link_info_idntf_id
+            ,cert_token
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{mbrNo}
+            ,#{mbrId}
+            ,#{mbrEncptFlnm}
+            ,#{mbrEncptEml}
+            ,#{mbrEnpswd}
+            ,#{mbrEncptTelno}
+            ,#{mbrTypeCd}
+            ,#{mbrJoinStts}
+            ,#{mbrJoinDt}
+            ,#{mbrWhdwlRsn}
+            ,#{mbrWhdwlDt}
+            ,#{bfrEnpswd}
+            ,#{pswdChgDt}
+            ,#{pswdErrNmtm}
+            ,#{linkInfoIdntfId}
+            ,#{certToken}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+    </insert>
+
+    <update id="updateMbrInfo" parameterType="MbrInfoPVO">
+        /* 대국민포털_회원정보기본 수정 (MbrInfoMapper.updateMbrInfo) */
+        UPDATE "KIDS_OWN"."TB_PP_M_MBR_INFO"
+        SET
+             mbr_id = coalesce(#{mbrId}, mbr_id)
+            ,mbr_encpt_flnm = coalesce(#{mbrEncptFlnm}, mbr_encpt_flnm)
+            ,mbr_encpt_eml = coalesce(#{mbrEncptEml}, mbr_encpt_eml)
+            ,mbr_enpswd = coalesce(#{mbrEnpswd}, mbr_enpswd)
+            ,mbr_encpt_telno = coalesce(#{mbrEncptTelno}, mbr_encpt_telno)
+            ,mbr_type_cd = coalesce(#{mbrTypeCd}, mbr_type_cd)
+            ,mbr_join_stts = coalesce(#{mbrJoinStts}, mbr_join_stts)
+            ,mbr_join_dt = coalesce(#{mbrJoinDt}, mbr_join_dt)
+            ,mbr_whdwl_rsn = coalesce(#{mbrWhdwlRsn}, mbr_whdwl_rsn)
+            ,mbr_whdwl_dt = coalesce(#{mbrWhdwlDt}, mbr_whdwl_dt)
+            ,bfr_enpswd = coalesce(#{bfrEnpswd}, bfr_enpswd)
+            ,pswd_chg_dt = coalesce(#{pswdChgDt}, pswd_chg_dt)
+            ,pswd_err_nmtm = coalesce(#{pswdErrNmtm}, pswd_err_nmtm)
+            ,link_info_idntf_id = coalesce(#{linkInfoIdntfId}, link_info_idntf_id)
+            ,cert_token = coalesce(#{certToken}, cert_token)
+            ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+        WHERE 1=1
+        AND mbr_no = #{mbrNo}
+    </update>
+
+    <insert id="saveMbrInfo" parameterType="MbrInfoPVO">
+        /* 대국민포털_회원정보기본 저장 (MbrInfoMapper.insertMbrInfo) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_MBR_INFO"
+        (
+             mbr_no
+            ,mbr_id
+            ,mbr_encpt_flnm
+            ,mbr_encpt_eml
+            ,mbr_enpswd
+            ,mbr_encpt_telno
+            ,mbr_type_cd
+            ,mbr_join_stts
+            ,mbr_join_dt
+            ,mbr_whdwl_rsn
+            ,mbr_whdwl_dt
+            ,bfr_enpswd
+            ,pswd_chg_dt
+            ,pswd_err_nmtm
+            ,link_info_idntf_id
+            ,cert_token
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{mbrNo}
+            ,#{mbrId}
+            ,#{mbrEncptFlnm}
+            ,#{mbrEncptEml}
+            ,#{mbrEnpswd}
+            ,#{mbrEncptTelno}
+            ,#{mbrTypeCd}
+            ,#{mbrJoinStts}
+            ,#{mbrJoinDt}
+            ,#{mbrWhdwlRsn}
+            ,#{mbrWhdwlDt}
+            ,#{bfrEnpswd}
+            ,#{pswdChgDt}
+            ,#{pswdErrNmtm}
+            ,#{linkInfoIdntfId}
+            ,#{certToken}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+        ON CONFLICT(mbr_no)
+        DO UPDATE SET
+             mbr_id = coalesce(excluded.mbr_id, "KIDS_OWN"."TB_PP_M_MBR_INFO".mbr_id)
+            ,mbr_encpt_flnm = coalesce(excluded.mbr_encpt_flnm, "KIDS_OWN"."TB_PP_M_MBR_INFO".mbr_encpt_flnm)
+            ,mbr_encpt_eml = coalesce(excluded.mbr_encpt_eml, "KIDS_OWN"."TB_PP_M_MBR_INFO".mbr_encpt_eml)
+            ,mbr_enpswd = coalesce(excluded.mbr_enpswd, "KIDS_OWN"."TB_PP_M_MBR_INFO".mbr_enpswd)
+            ,mbr_encpt_telno = coalesce(excluded.mbr_encpt_telno, "KIDS_OWN"."TB_PP_M_MBR_INFO".mbr_encpt_telno)
+            ,mbr_type_cd = coalesce(excluded.mbr_type_cd, "KIDS_OWN"."TB_PP_M_MBR_INFO".mbr_type_cd)
+            ,mbr_join_stts = coalesce(excluded.mbr_join_stts, "KIDS_OWN"."TB_PP_M_MBR_INFO".mbr_join_stts)
+            ,mbr_join_dt = coalesce(excluded.mbr_join_dt, "KIDS_OWN"."TB_PP_M_MBR_INFO".mbr_join_dt)
+            ,mbr_whdwl_rsn = coalesce(excluded.mbr_whdwl_rsn, "KIDS_OWN"."TB_PP_M_MBR_INFO".mbr_whdwl_rsn)
+            ,mbr_whdwl_dt = coalesce(excluded.mbr_whdwl_dt, "KIDS_OWN"."TB_PP_M_MBR_INFO".mbr_whdwl_dt)
+            ,bfr_enpswd = coalesce(excluded.bfr_enpswd, "KIDS_OWN"."TB_PP_M_MBR_INFO".bfr_enpswd)
+            ,pswd_chg_dt = coalesce(excluded.pswd_chg_dt, "KIDS_OWN"."TB_PP_M_MBR_INFO".pswd_chg_dt)
+            ,pswd_err_nmtm = coalesce(excluded.pswd_err_nmtm, "KIDS_OWN"."TB_PP_M_MBR_INFO".pswd_err_nmtm)
+            ,link_info_idntf_id = coalesce(excluded.link_info_idntf_id, "KIDS_OWN"."TB_PP_M_MBR_INFO".link_info_idntf_id)
+            ,cert_token = coalesce(excluded.cert_token, "KIDS_OWN"."TB_PP_M_MBR_INFO".cert_token)
+            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_MBR_INFO".mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_MBR_INFO".mdfcn_prgrm_id)
+    </insert>
+
+    <delete id="deleteMbrInfo" parameterType="MbrInfoDVO">
+        /* 대국민포털_회원정보기본 삭제 (MbrInfoMapper.deleteMbrInfo) */
+        DELETE FROM "KIDS_OWN"."TB_PP_M_MBR_INFO"
+        WHERE 1=1
+        AND mbr_no = #{mbrNo}
+    </delete>
+
+</mapper>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.pp.auth.mapper.MenuMapper">
+
+    <select id="selectMenuList" parameterType="MenuPVO" resultType="MenuRVO">
+        /* MenuMapper.selectMenuList */
+        WITH RECURSIVE menu_tree AS (
+            SELECT
+                m.menu_sn,
+                m.up_menu_sn,
+                1 AS dep_level,
+                m.menu_sn AS root_sn,
+                m.menu_nm,
+                m.menu_seq,
+                (m.menu_sn::text) AS path,
+                m.lang_se_cd
+            FROM "KIDS_OWN"."TB_PP_M_MENU" m
+            WHERE m.use_yn = 'Y'
+            AND m.up_menu_sn IS NULL
+            UNION ALL
+            SELECT
+                c.menu_sn,
+                c.up_menu_sn,
+                p.dep_level + 1,
+                p.root_sn,
+                c.menu_nm,
+                c.menu_seq,
+                (p.path || ' > ' || c.menu_sn::text) AS path,
+                c.lang_se_cd
+            FROM "KIDS_OWN"."TB_PP_M_MENU" c
+            JOIN menu_tree p
+                ON c.up_menu_sn = p.menu_sn
+            WHERE c.use_yn = 'Y'
+        )
+        SELECT
+            mt.menu_sn,
+            mt.up_menu_sn,
+            mt.dep_level,
+            mt.root_sn,
+            mt.path,
+            mt.menu_nm,
+            d.menu_url_addr,
+            mt.menu_seq,
+            mt.lang_se_cd
+        FROM menu_tree mt
+        LEFT JOIN "KIDS_OWN"."TB_PP_D_MENU" d
+            ON d.menu_sn = mt.menu_sn
+        WHERE 1=1
+        <if test="langSeCd != null and langSeCd != ''">
+            AND mt.lang_se_cd = #{langSeCd}
+        </if>
+        <if test="menuUrlAddr != null and menuUrlAddr != ''">
+            AND d.menu_url_addr = #{menuUrlAddr}
+        </if>
+        ORDER by mt.root_sn, mt.path, mt.menu_seq, mt.menu_sn
+    </select>
+
+    <select id="getMenu" parameterType="MenuPVO" resultType="MenuRVO" >
+        /* 대국민포털_메뉴기본 조회 (MenuMapper.getMenu) */
+        SELECT
+             menu_sn
+            ,menu_nm
+            ,up_menu_sn
+            ,task_se_cd
+            ,menu_type_cd
+            ,menu_seq
+            ,menu_expln
+            ,pic_dept_nm
+            ,pic_flnm
+            ,use_yn
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        FROM "KIDS_OWN"."TB_PP_M_MENU"
+        WHERE 1=1
+        AND menu_sn = #{menuSn}
+    </select>
+
+    <insert id="insertMenu" parameterType="MenuPVO">
+        /* 대국민포털_메뉴기본 입력 (MenuMapper.insertMenu) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_MENU"
+        (
+             menu_sn
+            ,menu_nm
+            ,up_menu_sn
+            ,task_se_cd
+            ,menu_type_cd
+            ,menu_seq
+            ,menu_expln
+            ,pic_dept_nm
+            ,pic_flnm
+            ,use_yn
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{menuSn}
+            ,#{menuNm}
+            ,#{upMenuSn}
+            ,#{taskSeCd}
+            ,#{menuTypeCd}
+            ,#{menuSeq}
+            ,#{menuExpln}
+            ,#{picDeptNm}
+            ,#{picFlnm}
+            ,#{useYn}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+    </insert>
+
+    <update id="updateMenu" parameterType="MenuPVO">
+        /* 대국민포털_메뉴기본 수정 (MenuMapper.updateMenu) */
+        UPDATE "KIDS_OWN"."TB_PP_M_MENU"
+        SET
+             menu_nm = coalesce(#{menuNm}, menu_nm)
+            ,up_menu_sn = coalesce(#{upMenuSn}, up_menu_sn)
+            ,task_se_cd = coalesce(#{taskSeCd}, task_se_cd)
+            ,menu_type_cd = coalesce(#{menuTypeCd}, menu_type_cd)
+            ,menu_seq = coalesce(#{menuSeq}, menu_seq)
+            ,menu_expln = coalesce(#{menuExpln}, menu_expln)
+            ,pic_dept_nm = coalesce(#{picDeptNm}, pic_dept_nm)
+            ,pic_flnm = coalesce(#{picFlnm}, pic_flnm)
+            ,use_yn = coalesce(#{useYn}, use_yn)
+            ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+        WHERE 1=1
+        AND menu_sn = #{menuSn}
+    </update>
+
+    <insert id="saveMenu" parameterType="MenuPVO">
+        /* 대국민포털_메뉴기본 저장 (MenuMapper.insertMenu) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_MENU"
+        (
+             menu_sn
+            ,menu_nm
+            ,up_menu_sn
+            ,task_se_cd
+            ,menu_type_cd
+            ,menu_seq
+            ,menu_expln
+            ,pic_dept_nm
+            ,pic_flnm
+            ,use_yn
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{menuSn}
+            ,#{menuNm}
+            ,#{upMenuSn}
+            ,#{taskSeCd}
+            ,#{menuTypeCd}
+            ,#{menuSeq}
+            ,#{menuExpln}
+            ,#{picDeptNm}
+            ,#{picFlnm}
+            ,#{useYn}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+        ON CONFLICT(menu_sn)
+        DO UPDATE SET
+             menu_nm = coalesce(excluded.menu_nm, "KIDS_OWN"."TB_PP_M_MENU".menu_nm)
+            ,up_menu_sn = coalesce(excluded.up_menu_sn, "KIDS_OWN"."TB_PP_M_MENU".up_menu_sn)
+            ,task_se_cd = coalesce(excluded.task_se_cd, "KIDS_OWN"."TB_PP_M_MENU".task_se_cd)
+            ,menu_type_cd = coalesce(excluded.menu_type_cd, "KIDS_OWN"."TB_PP_M_MENU".menu_type_cd)
+            ,menu_seq = coalesce(excluded.menu_seq, "KIDS_OWN"."TB_PP_M_MENU".menu_seq)
+            ,menu_expln = coalesce(excluded.menu_expln, "KIDS_OWN"."TB_PP_M_MENU".menu_expln)
+            ,pic_dept_nm = coalesce(excluded.pic_dept_nm, "KIDS_OWN"."TB_PP_M_MENU".pic_dept_nm)
+            ,pic_flnm = coalesce(excluded.pic_flnm, "KIDS_OWN"."TB_PP_M_MENU".pic_flnm)
+            ,use_yn = coalesce(excluded.use_yn, "KIDS_OWN"."TB_PP_M_MENU".use_yn)
+            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_MENU".mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_MENU".mdfcn_prgrm_id)
+    </insert>
+
+    <delete id="deleteMenu" parameterType="MenuDVO">
+        /* 대국민포털_메뉴기본 삭제 (MenuMapper.deleteMenu) */
+        DELETE FROM "KIDS_OWN"."TB_PP_M_MENU"
+        WHERE 1=1
+        AND menu_sn = #{menuSn}
+    </delete>
+
+</mapper>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.pp.dur.mapper.DurSnctzMapper">
+
+    <select id="getDurSnctz" parameterType="DurSnctzPVO" resultType="DurSnctzRVO" >
+        /* 대국민포털_DUR노인주의기본 조회 (DurSnctzMapper.getDurSnctz) */
+        SELECT
+             snctz_cutn_sn
+            ,prdct_cd
+            ,dur_igrd_nm
+            ,dur_igrd_cd
+            ,dur_prdct_nm
+            ,dur_bzenty_nm
+            ,mfds_prdct_nm
+            ,mfds_igrd_cd
+            ,mfds_igrd_nm
+            ,pbanc_ymd
+            ,pbanc_no
+            ,mdcn_dtl_info
+            ,aplcn_ym
+            ,rmrk
+            ,type_cd
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        FROM "KIDS_OWN"."TB_PP_M_DUR_SNCTZ"
+        WHERE 1=1
+        AND snctz_cutn_sn = #{snctzCutnSn}
+    </select>
+
+    <insert id="insertDurSnctz" parameterType="DurSnctzPVO">
+        /* 대국민포털_DUR노인주의기본 입력 (DurSnctzMapper.insertDurSnctz) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_DUR_SNCTZ"
+        (
+             snctz_cutn_sn
+            ,prdct_cd
+            ,dur_igrd_nm
+            ,dur_igrd_cd
+            ,dur_prdct_nm
+            ,dur_bzenty_nm
+            ,mfds_prdct_nm
+            ,mfds_igrd_cd
+            ,mfds_igrd_nm
+            ,pbanc_ymd
+            ,pbanc_no
+            ,mdcn_dtl_info
+            ,aplcn_ym
+            ,rmrk
+            ,type_cd
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{snctzCutnSn}
+            ,#{prdctCd}
+            ,#{durIgrdNm}
+            ,#{durIgrdCd}
+            ,#{durPrdctNm}
+            ,#{durBzentyNm}
+            ,#{mfdsPrdctNm}
+            ,#{mfdsIgrdCd}
+            ,#{mfdsIgrdNm}
+            ,#{pbancYmd}
+            ,#{pbancNo}
+            ,#{mdcnDtlInfo}
+            ,#{aplcnYm}
+            ,#{rmrk}
+            ,#{typeCd}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+    </insert>
+
+    <update id="updateDurSnctz" parameterType="DurSnctzPVO">
+        /* 대국민포털_DUR노인주의기본 수정 (DurSnctzMapper.updateDurSnctz) */
+        UPDATE "KIDS_OWN"."TB_PP_M_DUR_SNCTZ"
+        SET
+             prdct_cd = coalesce(#{prdctCd}, prdct_cd)
+            ,dur_igrd_nm = coalesce(#{durIgrdNm}, dur_igrd_nm)
+            ,dur_igrd_cd = coalesce(#{durIgrdCd}, dur_igrd_cd)
+            ,dur_prdct_nm = coalesce(#{durPrdctNm}, dur_prdct_nm)
+            ,dur_bzenty_nm = coalesce(#{durBzentyNm}, dur_bzenty_nm)
+            ,mfds_prdct_nm = coalesce(#{mfdsPrdctNm}, mfds_prdct_nm)
+            ,mfds_igrd_cd = coalesce(#{mfdsIgrdCd}, mfds_igrd_cd)
+            ,mfds_igrd_nm = coalesce(#{mfdsIgrdNm}, mfds_igrd_nm)
+            ,pbanc_ymd = coalesce(#{pbancYmd}, pbanc_ymd)
+            ,pbanc_no = coalesce(#{pbancNo}, pbanc_no)
+            ,mdcn_dtl_info = coalesce(#{mdcnDtlInfo}, mdcn_dtl_info)
+            ,aplcn_ym = coalesce(#{aplcnYm}, aplcn_ym)
+            ,rmrk = coalesce(#{rmrk}, rmrk)
+            ,type_cd = coalesce(#{typeCd}, type_cd)
+            ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+        WHERE 1=1
+        AND snctz_cutn_sn = #{snctzCutnSn}
+    </update>
+
+    <insert id="saveDurSnctz" parameterType="DurSnctzPVO">
+        /* 대국민포털_DUR노인주의기본 저장 (DurSnctzMapper.insertDurSnctz) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_DUR_SNCTZ"
+        (
+             snctz_cutn_sn
+            ,prdct_cd
+            ,dur_igrd_nm
+            ,dur_igrd_cd
+            ,dur_prdct_nm
+            ,dur_bzenty_nm
+            ,mfds_prdct_nm
+            ,mfds_igrd_cd
+            ,mfds_igrd_nm
+            ,pbanc_ymd
+            ,pbanc_no
+            ,mdcn_dtl_info
+            ,aplcn_ym
+            ,rmrk
+            ,type_cd
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{snctzCutnSn}
+            ,#{prdctCd}
+            ,#{durIgrdNm}
+            ,#{durIgrdCd}
+            ,#{durPrdctNm}
+            ,#{durBzentyNm}
+            ,#{mfdsPrdctNm}
+            ,#{mfdsIgrdCd}
+            ,#{mfdsIgrdNm}
+            ,#{pbancYmd}
+            ,#{pbancNo}
+            ,#{mdcnDtlInfo}
+            ,#{aplcnYm}
+            ,#{rmrk}
+            ,#{typeCd}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+        ON CONFLICT(snctz_cutn_sn)
+        DO UPDATE SET
+             prdct_cd = coalesce(excluded.prdct_cd, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".prdct_cd)
+            ,dur_igrd_nm = coalesce(excluded.dur_igrd_nm, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".dur_igrd_nm)
+            ,dur_igrd_cd = coalesce(excluded.dur_igrd_cd, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".dur_igrd_cd)
+            ,dur_prdct_nm = coalesce(excluded.dur_prdct_nm, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".dur_prdct_nm)
+            ,dur_bzenty_nm = coalesce(excluded.dur_bzenty_nm, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".dur_bzenty_nm)
+            ,mfds_prdct_nm = coalesce(excluded.mfds_prdct_nm, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".mfds_prdct_nm)
+            ,mfds_igrd_cd = coalesce(excluded.mfds_igrd_cd, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".mfds_igrd_cd)
+            ,mfds_igrd_nm = coalesce(excluded.mfds_igrd_nm, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".mfds_igrd_nm)
+            ,pbanc_ymd = coalesce(excluded.pbanc_ymd, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".pbanc_ymd)
+            ,pbanc_no = coalesce(excluded.pbanc_no, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".pbanc_no)
+            ,mdcn_dtl_info = coalesce(excluded.mdcn_dtl_info, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".mdcn_dtl_info)
+            ,aplcn_ym = coalesce(excluded.aplcn_ym, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".aplcn_ym)
+            ,rmrk = coalesce(excluded.rmrk, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".rmrk)
+            ,type_cd = coalesce(excluded.type_cd, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".type_cd)
+            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_DUR_SNCTZ".mdfcn_prgrm_id)
+    </insert>
+
+    <delete id="deleteDurSnctz" parameterType="DurSnctzDVO">
+        /* 대국민포털_DUR노인주의기본 삭제 (DurSnctzMapper.deleteDurSnctz) */
+        DELETE FROM "KIDS_OWN"."TB_PP_M_DUR_SNCTZ"
+        WHERE 1=1
+        AND snctz_cutn_sn = #{snctzCutnSn}
+    </delete>
+
+</mapper>

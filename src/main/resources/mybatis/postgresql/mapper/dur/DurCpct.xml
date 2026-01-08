@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.pp.dur.mapper.DurCpctMapper">
+
+    <select id="getDurCpct" parameterType="DurCpctPVO" resultType="DurCpctRVO" >
+        /* 대국민포털_DUR용량주의기본 조회 (DurCpctMapper.getDurCpct) */
+        SELECT
+             cpct_cutn_sn
+            ,mdcn_cd
+            ,mdcn_nm
+            ,gnrl_nm_cd
+            ,gnrl_nm
+            ,daily_max_admin_cpct
+            ,daily_max_admin_crtr_cpct
+            ,chck_crtr_igrd_con
+            ,mfds_prdct_nm
+            ,mfds_igrd_cd
+            ,mfds_igrd_nm
+            ,pbanc_ymd
+            ,pbanc_no
+            ,dtl_cn
+            ,aplcn_ym
+            ,type_cd
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        FROM "KIDS_OWN"."TB_PP_M_DUR_CPCT"
+        WHERE 1=1
+        AND cpct_cutn_sn = #{cpctCutnSn}
+    </select>
+
+    <insert id="insertDurCpct" parameterType="DurCpctPVO">
+        /* 대국민포털_DUR용량주의기본 입력 (DurCpctMapper.insertDurCpct) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_DUR_CPCT"
+        (
+             cpct_cutn_sn
+            ,mdcn_cd
+            ,mdcn_nm
+            ,gnrl_nm_cd
+            ,gnrl_nm
+            ,daily_max_admin_cpct
+            ,daily_max_admin_crtr_cpct
+            ,chck_crtr_igrd_con
+            ,mfds_prdct_nm
+            ,mfds_igrd_cd
+            ,mfds_igrd_nm
+            ,pbanc_ymd
+            ,pbanc_no
+            ,dtl_cn
+            ,aplcn_ym
+            ,type_cd
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{cpctCutnSn}
+            ,#{mdcnCd}
+            ,#{mdcnNm}
+            ,#{gnrlNmCd}
+            ,#{gnrlNm}
+            ,#{dailyMaxAdminCpct}
+            ,#{dailyMaxAdminCrtrCpct}
+            ,#{chckCrtrIgrdCon}
+            ,#{mfdsPrdctNm}
+            ,#{mfdsIgrdCd}
+            ,#{mfdsIgrdNm}
+            ,#{pbancYmd}
+            ,#{pbancNo}
+            ,#{dtlCn}
+            ,#{aplcnYm}
+            ,#{typeCd}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+    </insert>
+
+    <update id="updateDurCpct" parameterType="DurCpctPVO">
+        /* 대국민포털_DUR용량주의기본 수정 (DurCpctMapper.updateDurCpct) */
+        UPDATE "KIDS_OWN"."TB_PP_M_DUR_CPCT"
+        SET
+             mdcn_cd = coalesce(#{mdcnCd}, mdcn_cd)
+            ,mdcn_nm = coalesce(#{mdcnNm}, mdcn_nm)
+            ,gnrl_nm_cd = coalesce(#{gnrlNmCd}, gnrl_nm_cd)
+            ,gnrl_nm = coalesce(#{gnrlNm}, gnrl_nm)
+            ,daily_max_admin_cpct = coalesce(#{dailyMaxAdminCpct}, daily_max_admin_cpct)
+            ,daily_max_admin_crtr_cpct = coalesce(#{dailyMaxAdminCrtrCpct}, daily_max_admin_crtr_cpct)
+            ,chck_crtr_igrd_con = coalesce(#{chckCrtrIgrdCon}, chck_crtr_igrd_con)
+            ,mfds_prdct_nm = coalesce(#{mfdsPrdctNm}, mfds_prdct_nm)
+            ,mfds_igrd_cd = coalesce(#{mfdsIgrdCd}, mfds_igrd_cd)
+            ,mfds_igrd_nm = coalesce(#{mfdsIgrdNm}, mfds_igrd_nm)
+            ,pbanc_ymd = coalesce(#{pbancYmd}, pbanc_ymd)
+            ,pbanc_no = coalesce(#{pbancNo}, pbanc_no)
+            ,dtl_cn = coalesce(#{dtlCn}, dtl_cn)
+            ,aplcn_ym = coalesce(#{aplcnYm}, aplcn_ym)
+            ,type_cd = coalesce(#{typeCd}, type_cd)
+            ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+        WHERE 1=1
+        AND cpct_cutn_sn = #{cpctCutnSn}
+    </update>
+
+    <insert id="saveDurCpct" parameterType="DurCpctPVO">
+        /* 대국민포털_DUR용량주의기본 저장 (DurCpctMapper.insertDurCpct) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_DUR_CPCT"
+        (
+             cpct_cutn_sn
+            ,mdcn_cd
+            ,mdcn_nm
+            ,gnrl_nm_cd
+            ,gnrl_nm
+            ,daily_max_admin_cpct
+            ,daily_max_admin_crtr_cpct
+            ,chck_crtr_igrd_con
+            ,mfds_prdct_nm
+            ,mfds_igrd_cd
+            ,mfds_igrd_nm
+            ,pbanc_ymd
+            ,pbanc_no
+            ,dtl_cn
+            ,aplcn_ym
+            ,type_cd
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{cpctCutnSn}
+            ,#{mdcnCd}
+            ,#{mdcnNm}
+            ,#{gnrlNmCd}
+            ,#{gnrlNm}
+            ,#{dailyMaxAdminCpct}
+            ,#{dailyMaxAdminCrtrCpct}
+            ,#{chckCrtrIgrdCon}
+            ,#{mfdsPrdctNm}
+            ,#{mfdsIgrdCd}
+            ,#{mfdsIgrdNm}
+            ,#{pbancYmd}
+            ,#{pbancNo}
+            ,#{dtlCn}
+            ,#{aplcnYm}
+            ,#{typeCd}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+        ON CONFLICT(cpct_cutn_sn)
+        DO UPDATE SET
+             mdcn_cd = coalesce(excluded.mdcn_cd, "KIDS_OWN"."TB_PP_M_DUR_CPCT".mdcn_cd)
+            ,mdcn_nm = coalesce(excluded.mdcn_nm, "KIDS_OWN"."TB_PP_M_DUR_CPCT".mdcn_nm)
+            ,gnrl_nm_cd = coalesce(excluded.gnrl_nm_cd, "KIDS_OWN"."TB_PP_M_DUR_CPCT".gnrl_nm_cd)
+            ,gnrl_nm = coalesce(excluded.gnrl_nm, "KIDS_OWN"."TB_PP_M_DUR_CPCT".gnrl_nm)
+            ,daily_max_admin_cpct = coalesce(excluded.daily_max_admin_cpct, "KIDS_OWN"."TB_PP_M_DUR_CPCT".daily_max_admin_cpct)
+            ,daily_max_admin_crtr_cpct = coalesce(excluded.daily_max_admin_crtr_cpct, "KIDS_OWN"."TB_PP_M_DUR_CPCT".daily_max_admin_crtr_cpct)
+            ,chck_crtr_igrd_con = coalesce(excluded.chck_crtr_igrd_con, "KIDS_OWN"."TB_PP_M_DUR_CPCT".chck_crtr_igrd_con)
+            ,mfds_prdct_nm = coalesce(excluded.mfds_prdct_nm, "KIDS_OWN"."TB_PP_M_DUR_CPCT".mfds_prdct_nm)
+            ,mfds_igrd_cd = coalesce(excluded.mfds_igrd_cd, "KIDS_OWN"."TB_PP_M_DUR_CPCT".mfds_igrd_cd)
+            ,mfds_igrd_nm = coalesce(excluded.mfds_igrd_nm, "KIDS_OWN"."TB_PP_M_DUR_CPCT".mfds_igrd_nm)
+            ,pbanc_ymd = coalesce(excluded.pbanc_ymd, "KIDS_OWN"."TB_PP_M_DUR_CPCT".pbanc_ymd)
+            ,pbanc_no = coalesce(excluded.pbanc_no, "KIDS_OWN"."TB_PP_M_DUR_CPCT".pbanc_no)
+            ,dtl_cn = coalesce(excluded.dtl_cn, "KIDS_OWN"."TB_PP_M_DUR_CPCT".dtl_cn)
+            ,aplcn_ym = coalesce(excluded.aplcn_ym, "KIDS_OWN"."TB_PP_M_DUR_CPCT".aplcn_ym)
+            ,type_cd = coalesce(excluded.type_cd, "KIDS_OWN"."TB_PP_M_DUR_CPCT".type_cd)
+            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_DUR_CPCT".mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_DUR_CPCT".mdfcn_prgrm_id)
+    </insert>
+
+    <delete id="deleteDurCpct" parameterType="DurCpctDVO">
+        /* 대국민포털_DUR용량주의기본 삭제 (DurCpctMapper.deleteDurCpct) */
+        DELETE FROM "KIDS_OWN"."TB_PP_M_DUR_CPCT"
+        WHERE 1=1
+        AND cpct_cutn_sn = #{cpctCutnSn}
+    </delete>
+
+</mapper>

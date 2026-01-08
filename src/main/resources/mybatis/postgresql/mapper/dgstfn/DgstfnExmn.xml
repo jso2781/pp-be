@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.pp.dgstfn.mapper.DgstfnExmnMapper">
+
+    <select id="getDgstfnExmn" parameterType="DgstfnExmnPVO" resultType="DgstfnExmnRVO" >
+        /* 대국민포털_만족도조사기본 조회 (DgstfnExmnMapper.getDgstfnExmn) */
+        SELECT
+             dgstfn_exmn_sn
+            ,menu_sn
+            ,dgstfn_scr
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        FROM "KIDS_OWN"."TB_PP_M_DGSTFN_EXMN"
+        WHERE 1=1
+        AND dgstfn_exmn_sn = #{dgstfnExmnSn}
+    </select>
+
+    <insert id="insertDgstfnExmn" parameterType="DgstfnExmnPVO">
+        /* 대국민포털_만족도조사기본 입력 (DgstfnExmnMapper.insertDgstfnExmn) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_DGSTFN_EXMN"
+        (
+             dgstfn_exmn_sn
+            ,menu_sn
+            ,dgstfn_scr
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{dgstfnExmnSn}
+            ,#{menuSn}
+            ,#{dgstfnScr}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+    </insert>
+
+    <update id="updateDgstfnExmn" parameterType="DgstfnExmnPVO">
+        /* 대국민포털_만족도조사기본 수정 (DgstfnExmnMapper.updateDgstfnExmn) */
+        UPDATE "KIDS_OWN"."TB_PP_M_DGSTFN_EXMN"
+        SET
+             menu_sn = coalesce(#{menuSn}, menu_sn)
+            ,dgstfn_scr = coalesce(#{dgstfnScr}, dgstfn_scr)
+            ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+        WHERE 1=1
+        AND dgstfn_exmn_sn = #{dgstfnExmnSn}
+    </update>
+
+    <insert id="saveDgstfnExmn" parameterType="DgstfnExmnPVO">
+        /* 대국민포털_만족도조사기본 저장 (DgstfnExmnMapper.insertDgstfnExmn) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_DGSTFN_EXMN"
+        (
+             dgstfn_exmn_sn
+            ,menu_sn
+            ,dgstfn_scr
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{dgstfnExmnSn}
+            ,#{menuSn}
+            ,#{dgstfnScr}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+        ON CONFLICT(dgstfn_exmn_sn)
+        DO UPDATE SET
+             menu_sn = coalesce(excluded.menu_sn, "KIDS_OWN"."TB_PP_M_DGSTFN_EXMN".menu_sn)
+            ,dgstfn_scr = coalesce(excluded.dgstfn_scr, "KIDS_OWN"."TB_PP_M_DGSTFN_EXMN".dgstfn_scr)
+            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_DGSTFN_EXMN".mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_DGSTFN_EXMN".mdfcn_prgrm_id)
+    </insert>
+
+    <delete id="deleteDgstfnExmn" parameterType="DgstfnExmnDVO">
+        /* 대국민포털_만족도조사기본 삭제 (DgstfnExmnMapper.deleteDgstfnExmn) */
+        DELETE FROM "KIDS_OWN"."TB_PP_M_DGSTFN_EXMN"
+        WHERE 1=1
+        AND dgstfn_exmn_sn = #{dgstfnExmnSn}
+    </delete>
+
+</mapper>

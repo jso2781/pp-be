@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.pp.notice.mapper.PstMapper">
+
+    <select id="selectPstList" parameterType="PstPVO" resultType="PstRVO" >
+        /* 대국민포털_게시물기본 목록 조회 (PstMapper.selectPstList) */
+        SELECT
+             pst_sn
+            ,bbs_id
+            ,pst_ttl
+            ,pst_cn
+            ,pst_inq_cnt
+            ,pst_kogl_cprgt_type_cd
+            ,atch_file_id
+            ,thmb_id
+            ,ntc_yn
+            ,del_yn
+            ,wrtr_dept_nm
+            ,mdfr_dept_nm
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        FROM "KIDS_OWN"."TB_PP_M_PST"
+       WHERE bbs_id = #{bbsId}		
+	<if test="searchWrd != null and searchWrd != ''">
+	  <choose>
+	    <when test="searchCnd == 'title'">
+	      AND pst_ttl LIKE '%' || #{searchWrd} || '%'
+	    </when>
+	    <when test="searchCnd == 'content'">
+	      AND pst_cn LIKE '%' || #{searchWrd} || '%'
+	    </when>
+	  </choose>
+	</if>				
+       ORDER BY reg_dt DESC 
+    </select>
+
+    <select id="getPst" parameterType="PstPVO" resultType="PstRVO" >
+        /* 대국민포털_게시물기본 조회 (PstMapper.getPst) */
+        SELECT
+             pst_sn
+            ,bbs_id
+            ,pst_ttl
+            ,pst_cn
+            ,pst_inq_cnt
+            ,pst_kogl_cprgt_type_cd
+            ,atch_file_id
+            ,thmb_id
+            ,ntc_yn
+            ,del_yn
+            ,wrtr_dept_nm
+            ,mdfr_dept_nm
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        FROM "KIDS_OWN"."TB_PP_M_PST"
+        WHERE bbs_id = #{bbsId}		
+        AND pst_sn = #{pstSn}
+    </select>
+    
+    <update id="updtInqCnt" parameterType="PstPVO">
+        /* 대국민포털_게시물기본 조회수 증가 (PstMapper.updtInqCnt) */
+        UPDATE "KIDS_OWN"."TB_PP_M_PST"
+        SET pst_inq_cnt = COALESCE(pst_inq_cnt, 0) + 1
+        WHERE bbs_id = #{bbsId}		
+        AND pst_sn = #{pstSn}
+    </update>    
+
+</mapper>

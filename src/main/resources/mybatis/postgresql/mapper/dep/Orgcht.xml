@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.pp.dep.mapper.OrgchtMapper">
+
+    <select id="getOrgcht" parameterType="OrgchtPVO" resultType="OrgchtRVO" >
+        /* 대국민포털_KIDS조직도기본 조회 (OrgchtMapper.getOrgcht) */
+        SELECT
+             emp_no
+            ,dept_no
+            ,dept_nm
+            ,emp_nm
+        FROM "KIDS_OWN"."TB_PP_M_ORGCHT"
+        WHERE 1=1
+        AND emp_no = #{empNo}
+    </select>
+
+    <insert id="insertOrgcht" parameterType="OrgchtPVO">
+        /* 대국민포털_KIDS조직도기본 입력 (OrgchtMapper.insertOrgcht) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_ORGCHT"
+        (
+             emp_no
+            ,dept_no
+            ,dept_nm
+            ,emp_nm
+        )
+        VALUES
+        (
+             #{empNo}
+            ,#{deptNo}
+            ,#{deptNm}
+            ,#{empNm}
+        )
+    </insert>
+
+    <update id="updateOrgcht" parameterType="OrgchtPVO">
+        /* 대국민포털_KIDS조직도기본 수정 (OrgchtMapper.updateOrgcht) */
+        UPDATE "KIDS_OWN"."TB_PP_M_ORGCHT"
+        SET
+             dept_no = coalesce(#{deptNo}, dept_no)
+            ,dept_nm = coalesce(#{deptNm}, dept_nm)
+            ,emp_nm = coalesce(#{empNm}, emp_nm)
+        WHERE 1=1
+        AND emp_no = #{empNo}
+    </update>
+
+    <insert id="saveOrgcht" parameterType="OrgchtPVO">
+        /* 대국민포털_KIDS조직도기본 저장 (OrgchtMapper.insertOrgcht) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_ORGCHT"
+        (
+             emp_no
+            ,dept_no
+            ,dept_nm
+            ,emp_nm
+        )
+        VALUES
+        (
+             #{empNo}
+            ,#{deptNo}
+            ,#{deptNm}
+            ,#{empNm}
+        )
+        ON CONFLICT(emp_no)
+        DO UPDATE SET
+             dept_no = coalesce(excluded.dept_no, "KIDS_OWN"."TB_PP_M_ORGCHT".dept_no)
+            ,dept_nm = coalesce(excluded.dept_nm, "KIDS_OWN"."TB_PP_M_ORGCHT".dept_nm)
+            ,emp_nm = coalesce(excluded.emp_nm, "KIDS_OWN"."TB_PP_M_ORGCHT".emp_nm)
+    </insert>
+
+    <delete id="deleteOrgcht" parameterType="OrgchtDVO">
+        /* 대국민포털_KIDS조직도기본 삭제 (OrgchtMapper.deleteOrgcht) */
+        DELETE FROM "KIDS_OWN"."TB_PP_M_ORGCHT"
+        WHERE 1=1
+        AND emp_no = #{empNo}
+    </delete>
+
+</mapper>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.pp.auth.mapper.AuthrtMenuRoleMapper">
+
+    <select id="getAuthrtMenuRole" parameterType="AuthrtMenuRolePVO" resultType="AuthrtMenuRoleRVO" >
+        /* 대국민포털_권한메뉴롤기본 조회 (AuthrtMenuRoleMapper.getAuthrtMenuRole) */
+        SELECT
+             authrt_cd
+            ,role_cd
+            ,menu_sn
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        FROM "KIDS_OWN"."TB_PP_M_AUTHRT_MENU_ROLE"
+        WHERE 1=1
+        AND authrt_cd = #{authrtCd}
+        AND role_cd = #{roleCd}
+        AND menu_sn = #{menuSn}
+    </select>
+
+    <insert id="insertAuthrtMenuRole" parameterType="AuthrtMenuRolePVO">
+        /* 대국민포털_권한메뉴롤기본 입력 (AuthrtMenuRoleMapper.insertAuthrtMenuRole) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_AUTHRT_MENU_ROLE"
+        (
+             authrt_cd
+            ,role_cd
+            ,menu_sn
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{authrtCd}
+            ,#{roleCd}
+            ,#{menuSn}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+    </insert>
+
+    <update id="updateAuthrtMenuRole" parameterType="AuthrtMenuRolePVO">
+        /* 대국민포털_권한메뉴롤기본 수정 (AuthrtMenuRoleMapper.updateAuthrtMenuRole) */
+        UPDATE "KIDS_OWN"."TB_PP_M_AUTHRT_MENU_ROLE"
+        SET
+             mdfr_id = coalesce(#{mdfrId}, mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+        WHERE 1=1
+        AND authrt_cd = #{authrtCd}
+        AND role_cd = #{roleCd}
+        AND menu_sn = #{menuSn}
+    </update>
+
+    <insert id="saveAuthrtMenuRole" parameterType="AuthrtMenuRolePVO">
+        /* 대국민포털_권한메뉴롤기본 저장 (AuthrtMenuRoleMapper.insertAuthrtMenuRole) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_AUTHRT_MENU_ROLE"
+        (
+             authrt_cd
+            ,role_cd
+            ,menu_sn
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{authrtCd}
+            ,#{roleCd}
+            ,#{menuSn}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+        ON CONFLICT(authrt_cd,role_cd,menu_sn)
+        DO UPDATE SET
+             mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_AUTHRT_MENU_ROLE".mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_AUTHRT_MENU_ROLE".mdfcn_prgrm_id)
+    </insert>
+
+    <delete id="deleteAuthrtMenuRole" parameterType="AuthrtMenuRoleDVO">
+        /* 대국민포털_권한메뉴롤기본 삭제 (AuthrtMenuRoleMapper.deleteAuthrtMenuRole) */
+        DELETE FROM "KIDS_OWN"."TB_PP_M_AUTHRT_MENU_ROLE"
+        WHERE 1=1
+        AND authrt_cd = #{authrtCd}
+        AND role_cd = #{roleCd}
+        AND menu_sn = #{menuSn}
+    </delete>
+
+</mapper>

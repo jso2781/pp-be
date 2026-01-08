@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.pp.atch.mapper.AtchMapper">
+
+    <select id="getAtch" parameterType="AtchPVO" resultType="AtchRVO" >
+        /* 공통_첨부파일기본 조회 (AtchMapper.getAtch) */
+        SELECT
+             atch_file_sn
+            ,menu_sn
+            ,menu_type
+            ,atch_file_uld_hr
+            ,atch_file_use_yn
+            ,atch_file_path
+            ,atch_file_nm
+            ,atch_file_extn_nm
+            ,atch_file_cn
+            ,atch_file_sz
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        FROM "KIDS_OWN"."TB_CA_M_ATCH"
+        WHERE 1=1
+        AND atch_file_sn = #{atchFileSn}
+    </select>
+
+    <insert id="insertAtch" parameterType="AtchPVO">
+        /* 공통_첨부파일기본 입력 (AtchMapper.insertAtch) */
+        INSERT INTO "KIDS_OWN"."TB_CA_M_ATCH"
+        (
+             atch_file_sn
+            ,menu_sn
+            ,menu_type
+            ,atch_file_uld_hr
+            ,atch_file_use_yn
+            ,atch_file_path
+            ,atch_file_nm
+            ,atch_file_extn_nm
+            ,atch_file_cn
+            ,atch_file_sz
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{atchFileSn}
+            ,#{menuSn}
+            ,#{menuType}
+            ,#{atchFileUldHr}
+            ,#{atchFileUseYn}
+            ,#{atchFilePath}
+            ,#{atchFileNm}
+            ,#{atchFileExtnNm}
+            ,#{atchFileCn}
+            ,#{atchFileSz}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+    </insert>
+
+    <update id="updateAtch" parameterType="AtchPVO">
+        /* 공통_첨부파일기본 수정 (AtchMapper.updateAtch) */
+        UPDATE "KIDS_OWN"."TB_CA_M_ATCH"
+        SET
+             menu_sn = coalesce(#{menuSn}, menu_sn)
+            ,menu_type = coalesce(#{menuType}, menu_type)
+            ,atch_file_uld_hr = coalesce(#{atchFileUldHr}, atch_file_uld_hr)
+            ,atch_file_use_yn = coalesce(#{atchFileUseYn}, atch_file_use_yn)
+            ,atch_file_path = coalesce(#{atchFilePath}, atch_file_path)
+            ,atch_file_nm = coalesce(#{atchFileNm}, atch_file_nm)
+            ,atch_file_extn_nm = coalesce(#{atchFileExtnNm}, atch_file_extn_nm)
+            ,atch_file_cn = coalesce(#{atchFileCn}, atch_file_cn)
+            ,atch_file_sz = coalesce(#{atchFileSz}, atch_file_sz)
+            ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+        WHERE 1=1
+        AND atch_file_sn = #{atchFileSn}
+    </update>
+
+    <insert id="saveAtch" parameterType="AtchPVO">
+        /* 공통_첨부파일기본 저장 (AtchMapper.insertAtch) */
+        INSERT INTO "KIDS_OWN"."TB_CA_M_ATCH"
+        (
+             atch_file_sn
+            ,menu_sn
+            ,menu_type
+            ,atch_file_uld_hr
+            ,atch_file_use_yn
+            ,atch_file_path
+            ,atch_file_nm
+            ,atch_file_extn_nm
+            ,atch_file_cn
+            ,atch_file_sz
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{atchFileSn}
+            ,#{menuSn}
+            ,#{menuType}
+            ,#{atchFileUldHr}
+            ,#{atchFileUseYn}
+            ,#{atchFilePath}
+            ,#{atchFileNm}
+            ,#{atchFileExtnNm}
+            ,#{atchFileCn}
+            ,#{atchFileSz}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+        ON CONFLICT(atch_file_sn)
+        DO UPDATE SET
+             menu_sn = coalesce(excluded.menu_sn, "KIDS_OWN"."TB_CA_M_ATCH".menu_sn)
+            ,menu_type = coalesce(excluded.menu_type, "KIDS_OWN"."TB_CA_M_ATCH".menu_type)
+            ,atch_file_uld_hr = coalesce(excluded.atch_file_uld_hr, "KIDS_OWN"."TB_CA_M_ATCH".atch_file_uld_hr)
+            ,atch_file_use_yn = coalesce(excluded.atch_file_use_yn, "KIDS_OWN"."TB_CA_M_ATCH".atch_file_use_yn)
+            ,atch_file_path = coalesce(excluded.atch_file_path, "KIDS_OWN"."TB_CA_M_ATCH".atch_file_path)
+            ,atch_file_nm = coalesce(excluded.atch_file_nm, "KIDS_OWN"."TB_CA_M_ATCH".atch_file_nm)
+            ,atch_file_extn_nm = coalesce(excluded.atch_file_extn_nm, "KIDS_OWN"."TB_CA_M_ATCH".atch_file_extn_nm)
+            ,atch_file_cn = coalesce(excluded.atch_file_cn, "KIDS_OWN"."TB_CA_M_ATCH".atch_file_cn)
+            ,atch_file_sz = coalesce(excluded.atch_file_sz, "KIDS_OWN"."TB_CA_M_ATCH".atch_file_sz)
+            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_CA_M_ATCH".mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_CA_M_ATCH".mdfcn_prgrm_id)
+    </insert>
+
+    <delete id="deleteAtch" parameterType="AtchDVO">
+        /* 공통_첨부파일기본 삭제 (AtchMapper.deleteAtch) */
+        DELETE FROM "KIDS_OWN"."TB_CA_M_ATCH"
+        WHERE 1=1
+        AND atch_file_sn = #{atchFileSn}
+    </delete>
+
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.pp.auth.mapper.ExprtAuthrtMapper">
+
+    <select id="getExprtAuthrt" parameterType="ExprtAuthrtPVO" resultType="ExprtAuthrtRVO" >
+        /* 대국민포털_전문가권한기본 조회 (ExprtAuthrtMapper.getExprtAuthrt) */
+        SELECT
+             mbr_no
+            ,authrt_cd
+            ,use_yn
+            ,exprt_authrt_rmrk
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        FROM "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT"
+        WHERE 1=1
+        AND mbr_no = #{mbrNo}
+        AND authrt_cd = #{authrtCd}
+    </select>
+
+    <insert id="insertExprtAuthrt" parameterType="ExprtAuthrtPVO">
+        /* 대국민포털_전문가권한기본 입력 (ExprtAuthrtMapper.insertExprtAuthrt) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT"
+        (
+             mbr_no
+            ,authrt_cd
+            ,use_yn
+            ,exprt_authrt_rmrk
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{mbrNo}
+            ,#{authrtCd}
+            ,#{useYn}
+            ,#{exprtAuthrtRmrk}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+    </insert>
+
+    <update id="updateExprtAuthrt" parameterType="ExprtAuthrtPVO">
+        /* 대국민포털_전문가권한기본 수정 (ExprtAuthrtMapper.updateExprtAuthrt) */
+        UPDATE "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT"
+        SET
+             use_yn = coalesce(#{useYn}, use_yn)
+            ,exprt_authrt_rmrk = coalesce(#{exprtAuthrtRmrk}, exprt_authrt_rmrk)
+            ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+        WHERE 1=1
+        AND mbr_no = #{mbrNo}
+        AND authrt_cd = #{authrtCd}
+    </update>
+
+    <insert id="saveExprtAuthrt" parameterType="ExprtAuthrtPVO">
+        /* 대국민포털_전문가권한기본 저장 (ExprtAuthrtMapper.insertExprtAuthrt) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT"
+        (
+             mbr_no
+            ,authrt_cd
+            ,use_yn
+            ,exprt_authrt_rmrk
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{mbrNo}
+            ,#{authrtCd}
+            ,#{useYn}
+            ,#{exprtAuthrtRmrk}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+        ON CONFLICT(mbr_no,authrt_cd)
+        DO UPDATE SET
+             use_yn = coalesce(excluded.use_yn, "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT".use_yn)
+            ,exprt_authrt_rmrk = coalesce(excluded.exprt_authrt_rmrk, "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT".exprt_authrt_rmrk)
+            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT".mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT".mdfcn_prgrm_id)
+    </insert>
+
+    <delete id="deleteExprtAuthrt" parameterType="ExprtAuthrtDVO">
+        /* 대국민포털_전문가권한기본 삭제 (ExprtAuthrtMapper.deleteExprtAuthrt) */
+        DELETE FROM "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT"
+        WHERE 1=1
+        AND mbr_no = #{mbrNo}
+        AND authrt_cd = #{authrtCd}
+    </delete>
+
+</mapper>

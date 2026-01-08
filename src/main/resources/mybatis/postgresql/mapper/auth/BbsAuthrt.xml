@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.pp.auth.mapper.BbsAuthrtMapper">
+
+    <select id="getBbsAuthrt" parameterType="BbsAuthrtPVO" resultType="BbsAuthrtRVO" >
+        /* 대국민포털_게시판권한기본 조회 (BbsAuthrtMapper.getBbsAuthrt) */
+        SELECT
+             bbs_id
+            ,authrt_cd
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        FROM "KIDS_OWN"."TB_PP_M_BBS_AUTHRT"
+        WHERE 1=1
+        AND bbs_id = #{bbsId}
+        AND authrt_cd = #{authrtCd}
+    </select>
+
+    <insert id="insertBbsAuthrt" parameterType="BbsAuthrtPVO">
+        /* 대국민포털_게시판권한기본 입력 (BbsAuthrtMapper.insertBbsAuthrt) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_BBS_AUTHRT"
+        (
+             bbs_id
+            ,authrt_cd
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{bbsId}
+            ,#{authrtCd}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+    </insert>
+
+    <update id="updateBbsAuthrt" parameterType="BbsAuthrtPVO">
+        /* 대국민포털_게시판권한기본 수정 (BbsAuthrtMapper.updateBbsAuthrt) */
+        UPDATE "KIDS_OWN"."TB_PP_M_BBS_AUTHRT"
+        SET
+             mdfr_id = coalesce(#{mdfrId}, mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+        WHERE 1=1
+        AND bbs_id = #{bbsId}
+        AND authrt_cd = #{authrtCd}
+    </update>
+
+    <insert id="saveBbsAuthrt" parameterType="BbsAuthrtPVO">
+        /* 대국민포털_게시판권한기본 저장 (BbsAuthrtMapper.insertBbsAuthrt) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_BBS_AUTHRT"
+        (
+             bbs_id
+            ,authrt_cd
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+            ,mdfr_id
+            ,mdfcn_dt
+            ,mdfcn_prgrm_id
+        )
+        VALUES
+        (
+             #{bbsId}
+            ,#{authrtCd}
+            ,#{rgtrId}
+            ,now()
+            ,#{regPrgrmId}
+            ,#{mdfrId}
+            ,now()
+            ,#{mdfcnPrgrmId}
+        )
+        ON CONFLICT(bbs_id,authrt_cd)
+        DO UPDATE SET
+             mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_BBS_AUTHRT".mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_BBS_AUTHRT".mdfcn_prgrm_id)
+    </insert>
+
+    <delete id="deleteBbsAuthrt" parameterType="BbsAuthrtDVO">
+        /* 대국민포털_게시판권한기본 삭제 (BbsAuthrtMapper.deleteBbsAuthrt) */
+        DELETE FROM "KIDS_OWN"."TB_PP_M_BBS_AUTHRT"
+        WHERE 1=1
+        AND bbs_id = #{bbsId}
+        AND authrt_cd = #{authrtCd}
+    </delete>
+
+</mapper>
