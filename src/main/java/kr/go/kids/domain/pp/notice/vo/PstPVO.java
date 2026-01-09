@@ -3,13 +3,14 @@ package kr.go.kids.domain.pp.notice.vo;
 import java.math.BigInteger;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import kr.go.kids.global.system.common.vo.PageRequestDto;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Schema(name = "대국민포털_게시물기본", description = "대국민포털_게시물기본 Search Parameter VO")
-public class PstPVO {
+public class PstPVO extends PageRequestDto{
 	/**
 	 * 게시판아이디
 	 */
