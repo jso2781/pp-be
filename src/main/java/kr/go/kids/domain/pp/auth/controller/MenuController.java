@@ -20,6 +20,9 @@ import kr.go.kids.domain.pp.auth.vo.MenuDVO;
 import kr.go.kids.domain.pp.auth.vo.MenuPVO;
 import kr.go.kids.domain.pp.auth.vo.MenuRVO;
 
+import kr.go.kids.global.system.common.ApiResultCode;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
+
 @Tag(name = "MenuController", description = "대국민포털_메뉴기본 관리")
 @RestController
 @RequestMapping(value="/api/auth")
@@ -31,11 +34,16 @@ public class MenuController
     @Operation(summary = "대국민포털_메뉴 목록 조회", description = "대국민포털_메뉴 목록 조회한다.")
     @PostMapping(value="/selectMenuList")
     @ResponseBody
-    public ResponseEntity<List<MenuRVO>> selectMenuList(@RequestBody MenuPVO menuPVO)
+    public ResponseEntity<ApiPrnDto> selectMenuList(@RequestBody MenuPVO menuPVO)
     {
+        HashMap<String, Object> bizData = new HashMap<String, Object>();
         List<MenuRVO> menuList = menuService.selectMenuList(menuPVO);
 
-        return ResponseEntity.ok(menuList);
+        bizData.put("list", menuList);
+        ApiPrnDto apiPrnDto = ApiPrnDto.success(bizData);
+
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
 
     @Operation(summary = "대국민포털_메뉴 정보 조회", description = "대국민포털_메뉴 정보 조회한다.")
