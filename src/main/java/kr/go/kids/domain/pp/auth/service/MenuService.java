@@ -5,6 +5,7 @@ import java.util.List;
 import kr.go.kids.domain.pp.auth.vo.MenuDVO;
 import kr.go.kids.domain.pp.auth.vo.MenuPVO;
 import kr.go.kids.domain.pp.auth.vo.MenuRVO;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 public interface MenuService
 {
@@ -14,7 +15,7 @@ public interface MenuService
      * @param menuPVO 조회용 파라메터 정보 
      * @return 조회된 대국민포털_메뉴기본 
      */
-    public List<MenuRVO> selectMenuList(MenuPVO menuPVO);
+    public ApiPrnDto selectMenuList(MenuPVO menuPVO);
 
     /**
      * 대국민포털_메뉴 정보 조회 

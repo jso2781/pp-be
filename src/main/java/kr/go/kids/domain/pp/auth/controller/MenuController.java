@@ -36,11 +36,7 @@ public class MenuController
     @ResponseBody
     public ResponseEntity<ApiPrnDto> selectMenuList(@RequestBody MenuPVO menuPVO)
     {
-        HashMap<String, Object> bizData = new HashMap<String, Object>();
-        List<MenuRVO> menuList = menuService.selectMenuList(menuPVO);
-
-        bizData.put("list", menuList);
-        ApiPrnDto apiPrnDto = ApiPrnDto.success(bizData);
+        ApiPrnDto apiPrnDto = menuService.selectMenuList(menuPVO);
 
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
