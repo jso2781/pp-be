@@ -13,5 +13,5 @@ public class KidsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KidsApplication.class, args);
 	}
-
+ 
 }
