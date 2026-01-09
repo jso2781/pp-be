@@ -16,32 +16,8 @@ public class FaqServiceImpl implements FaqService
     private FaqMapper faqMapper;
 
     @Override
-    public FaqRVO getFaq(FaqPVO faqPVO)
+    public FaqRVO selectMenuList(FaqPVO faqPVO)
     {
-        return faqMapper.getFaq(faqPVO);
-    }
-
-    @Override
-    public int insertFaq(FaqPVO faqPVO)
-    {
-        return faqMapper.insertFaq(faqPVO);
-    }
-
-    @Override
-    public int updateFaq(FaqPVO faqPVO)
-    {
-        return faqMapper.updateFaq(faqPVO);
-    }
-
-    @Override
-    public int saveFaq(FaqPVO faqPVO)
-    {
-        return faqMapper.saveFaq(faqPVO);
-    }
-
-    @Override
-    public int deleteFaq(FaqDVO faqDVO)
-    {
-        return faqMapper.deleteFaq(faqDVO);
+        return faqMapper.selectMenuList(faqPVO);
     }
 }
