@@ -18,9 +18,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import kr.go.kids.domain.pp.file.service.FileService;
 import kr.go.kids.domain.pp.file.vo.FileGroupInsertReq;
-import kr.go.kids.domain.pp.global.system.common.ApiResultCode;
-import kr.go.kids.domain.pp.global.system.common.vo.ApiPrnDto;
-import kr.go.kids.domain.pp.global.system.common.vo.PageRequestDto;
+import kr.go.kids.global.system.common.ApiResultCode;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
+import kr.go.kids.global.system.common.vo.PageRequestDto;
 
 @RestController
 @CrossOrigin

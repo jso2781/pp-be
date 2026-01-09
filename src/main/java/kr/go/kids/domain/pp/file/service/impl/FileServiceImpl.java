@@ -1,6 +1,6 @@
 package kr.go.kids.domain.pp.file.service.impl;
 
-import static kr.go.kids.domain.pp.global.system.common.ApiResultCode.SUCCESS;
+import static kr.go.kids.global.system.common.ApiResultCode.SUCCESS;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -24,10 +24,10 @@ import kr.go.kids.domain.pp.file.service.FileService;
 import kr.go.kids.domain.pp.file.vo.FileDataResVO;
 import kr.go.kids.domain.pp.file.vo.FileGroupInsertReq;
 import kr.go.kids.domain.pp.file.vo.FileInsertReqVO;
-import kr.go.kids.domain.pp.global.config.FileProperties;
-import kr.go.kids.domain.pp.global.system.common.ApiResultCode;
-import kr.go.kids.domain.pp.global.system.common.vo.ApiPrnDto;
-import kr.go.kids.domain.pp.global.util.DrugsafeUtil;
+import kr.go.kids.global.config.FileProperties;
+import kr.go.kids.global.system.common.ApiResultCode;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
+import kr.go.kids.global.util.DrugsafeUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

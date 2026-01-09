@@ -1,7 +1,7 @@
 package kr.go.kids.domain.pp.test.service;
 
 
-import kr.go.kids.domain.pp.global.system.common.vo.ApiPrnDto;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 /**
  * 사용자 서비스 인터페이스

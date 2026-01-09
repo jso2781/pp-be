@@ -1,7 +1,7 @@
 package kr.go.kids.domain.pp.file.service;
 
 import kr.go.kids.domain.pp.file.vo.FileGroupInsertReq;
-import kr.go.kids.domain.pp.global.system.common.vo.ApiPrnDto;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 import org.springframework.web.multipart.MultipartFile;
 

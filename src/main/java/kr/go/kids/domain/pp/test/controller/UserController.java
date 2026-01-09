@@ -4,10 +4,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import kr.go.kids.domain.pp.global.system.common.ApiResultCode;
-import kr.go.kids.domain.pp.global.system.common.vo.ApiPrnDto;
-import kr.go.kids.domain.pp.global.system.common.vo.PageRequestDto;
 import kr.go.kids.domain.pp.test.service.UserService;
+import kr.go.kids.global.system.common.ApiResultCode;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
+import kr.go.kids.global.system.common.vo.PageRequestDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
