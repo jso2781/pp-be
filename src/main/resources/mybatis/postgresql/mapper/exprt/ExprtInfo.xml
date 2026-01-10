@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.go.kids.domain.pp.exprt.mapper.ExprtInfoMapper">
+<mapper namespace="kr.go.kids.domain.exprt.mapper.ExprtInfoMapper">
 
     <select id="getExprtInfo" parameterType="ExprtInfoPVO" resultType="ExprtInfoRVO" >
         /* 대국민포털_전문가정보기본 조회 (ExprtInfoMapper.getExprtInfo) */

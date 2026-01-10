@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.go.kids.domain.pp.auth.mapper.PicAuthrtMapper">
+<mapper namespace="kr.go.kids.domain.auth.mapper.PicAuthrtMapper">
 
     <select id="getPicAuthrt" parameterType="PicAuthrtPVO" resultType="PicAuthrtRVO" >
         /* 대국민포털_담당자권한기본 조회 (PicAuthrtMapper.getPicAuthrt) */

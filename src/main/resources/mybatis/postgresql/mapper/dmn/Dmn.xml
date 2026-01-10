@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.go.kids.domain.pp.dmn.mapper.DmnMapper">
+<mapper namespace="kr.go.kids.domain.dmn.mapper.DmnMapper">
 
     <select id="getDmn" parameterType="DmnPVO" resultType="DmnRVO" >
         /* 대국민포털_도메인기본 조회 (DmnMapper.getDmn) */

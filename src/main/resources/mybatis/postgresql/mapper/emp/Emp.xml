@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.go.kids.domain.pp.emp.mapper.EmpMapper">
+<mapper namespace="kr.go.kids.domain.emp.mapper.EmpMapper">
 
     <select id="getEmp" parameterType="EmpPVO" resultType="EmpRVO" >
         /* 대국민포털_관리자정보기본 조회 (EmpMapper.getEmp) */

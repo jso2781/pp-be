@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.go.kids.domain.pp.dgstfn.mapper.DgstfnExmnMapper">
+<mapper namespace="kr.go.kids.domain.dgstfn.mapper.DgstfnExmnMapper">
 
     <select id="getDgstfnExmn" parameterType="DgstfnExmnPVO" resultType="DgstfnExmnRVO" >
         /* 대국민포털_만족도조사기본 조회 (DgstfnExmnMapper.getDgstfnExmn) */

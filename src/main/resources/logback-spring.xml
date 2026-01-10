@@ -56,7 +56,7 @@
     <logger name="org.mybatis" level="DEBUG"/>
     <logger name="org.apache.ibatis" level="DEBUG"/>
     <logger name="org.springframework.jdbc.core" level="OFF"/>
-    <logger name="kr.go.kids.domain.pp" level="DEBUG"/>
+    <logger name="kr.go.kids.domain" level="DEBUG"/>
 
     <!-- DEBUG 6 -->
     <logger name="org.hibernate.SQL" level="OFF"/>
@@ -84,7 +84,7 @@
     <logger name="org.mybatis" level="OFF"/>
     <logger name="org.apache.ibatis" level="OFF"/>
     <logger name="org.springframework.jdbc.core" level="OFF"/>
-    <logger name="kr.go.kids.domain.pp" level="DEBUG"/>
+    <logger name="kr.go.kids.domain" level="DEBUG"/>
 
     <!-- Hibernate 6 -->
     <logger name="org.hibernate.SQL" level="OFF"/>
@@ -103,7 +103,7 @@
     <logger name="org.mybatis" level="INFO"/>
     <logger name="org.apache.ibatis" level="INFO"/>
     <logger name="org.springframework.jdbc.core" level="INFO"/>
-    <logger name="kr.go.kids.domain.pp" level="INFO"/>
+    <logger name="kr.go.kids.domain" level="INFO"/>
 
     <logger name="org.hibernate.SQL" level="OFF"/>
     <logger name="org.hibernate.orm.jdbc.bind" level="TRACE"/>

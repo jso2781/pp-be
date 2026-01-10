@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.go.kids.domain.pp.stt.mapper.TrmsSttMapper">
+<mapper namespace="kr.go.kids.domain.stt.mapper.TrmsSttMapper">
 
     <select id="getTrmsStt" parameterType="TrmsSttPVO" resultType="TrmsSttRVO" >
         /* 대국민포털_약관법령기본 조회 (TrmsSttMapper.getTrmsStt) */
