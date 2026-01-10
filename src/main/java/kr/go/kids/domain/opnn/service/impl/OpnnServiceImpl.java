@@ -16,32 +16,9 @@ public class OpnnServiceImpl implements OpnnService
     private OpnnMapper opnnMapper;
 
     @Override
-    public OpnnRVO getOpnn(OpnnPVO opnnPVO)
-    {
-        return opnnMapper.getOpnn(opnnPVO);
-    }
-
-    @Override
     public int insertOpnn(OpnnPVO opnnPVO)
     {
         return opnnMapper.insertOpnn(opnnPVO);
     }
 
-    @Override
-    public int updateOpnn(OpnnPVO opnnPVO)
-    {
-        return opnnMapper.updateOpnn(opnnPVO);
-    }
-
-    @Override
-    public int saveOpnn(OpnnPVO opnnPVO)
-    {
-        return opnnMapper.saveOpnn(opnnPVO);
-    }
-
-    @Override
-    public int deleteOpnn(OpnnDVO opnnDVO)
-    {
-        return opnnMapper.deleteOpnn(opnnDVO);
-    }
 }

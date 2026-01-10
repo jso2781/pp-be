@@ -2,29 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.go.kids.domain.opnn.mapper.OpnnMapper">
 
-    <select id="getOpnn" parameterType="OpnnPVO" resultType="OpnnRVO" >
-        /* 대국민포털_의견제안 조회 (OpnnMapper.getOpnn) */
-        SELECT
-             opnn_sn
-            ,wrtr_encpt_flnm
-            ,wrtr_encpt_telno
-            ,wrt_se_cd
-            ,pbpt_cn
-            ,dmnd_mttr
-            ,dmnd_mttr_dtl_cn
-            ,ref_mttr
-            ,atch_file_sn
-            ,rgtr_id
-            ,reg_dt
-            ,reg_prgrm_id
-            ,mdfr_id
-            ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_M_OPNN"
-        WHERE 1=1
-        AND opnn_sn = #{opnnSn}
-    </select>
-
     <insert id="insertOpnn" parameterType="OpnnPVO">
         /* 대국민포털_의견제안 입력 (OpnnMapper.insertOpnn) */
         INSERT INTO "KIDS_OWN"."TB_PP_M_OPNN"
@@ -64,84 +41,4 @@
             ,#{mdfcnPrgrmId}
         )
     </insert>
-
-    <update id="updateOpnn" parameterType="OpnnPVO">
-        /* 대국민포털_의견제안 수정 (OpnnMapper.updateOpnn) */
-        UPDATE "KIDS_OWN"."TB_PP_M_OPNN"
-        SET
-             wrtr_encpt_flnm = coalesce(#{wrtrEncptFlnm}, wrtr_encpt_flnm)
-            ,wrtr_encpt_telno = coalesce(#{wrtrEncptTelno}, wrtr_encpt_telno)
-            ,wrt_se_cd = coalesce(#{wrtSeCd}, wrt_se_cd)
-            ,pbpt_cn = coalesce(#{pbptCn}, pbpt_cn)
-            ,dmnd_mttr = coalesce(#{dmndMttr}, dmnd_mttr)
-            ,dmnd_mttr_dtl_cn = coalesce(#{dmndMttrDtlCn}, dmnd_mttr_dtl_cn)
-            ,ref_mttr = coalesce(#{refMttr}, ref_mttr)
-            ,atch_file_sn = coalesce(#{atchFileSn}, atch_file_sn)
-            ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
-            ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
-        WHERE 1=1
-        AND opnn_sn = #{opnnSn}
-    </update>
-
-    <insert id="saveOpnn" parameterType="OpnnPVO">
-        /* 대국민포털_의견제안 저장 (OpnnMapper.insertOpnn) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_OPNN"
-        (
-             opnn_sn
-            ,wrtr_encpt_flnm
-            ,wrtr_encpt_telno
-            ,wrt_se_cd
-            ,pbpt_cn
-            ,dmnd_mttr
-            ,dmnd_mttr_dtl_cn
-            ,ref_mttr
-            ,atch_file_sn
-            ,rgtr_id
-            ,reg_dt
-            ,reg_prgrm_id
-            ,mdfr_id
-            ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        )
-        VALUES
-        (
-             #{opnnSn}
-            ,#{wrtrEncptFlnm}
-            ,#{wrtrEncptTelno}
-            ,#{wrtSeCd}
-            ,#{pbptCn}
-            ,#{dmndMttr}
-            ,#{dmndMttrDtlCn}
-            ,#{refMttr}
-            ,#{atchFileSn}
-            ,#{rgtrId}
-            ,now()
-            ,#{regPrgrmId}
-            ,#{mdfrId}
-            ,now()
-            ,#{mdfcnPrgrmId}
-        )
-        ON CONFLICT(opnn_sn)
-        DO UPDATE SET
-             wrtr_encpt_flnm = coalesce(excluded.wrtr_encpt_flnm, "KIDS_OWN"."TB_PP_M_OPNN".wrtr_encpt_flnm)
-            ,wrtr_encpt_telno = coalesce(excluded.wrtr_encpt_telno, "KIDS_OWN"."TB_PP_M_OPNN".wrtr_encpt_telno)
-            ,wrt_se_cd = coalesce(excluded.wrt_se_cd, "KIDS_OWN"."TB_PP_M_OPNN".wrt_se_cd)
-            ,pbpt_cn = coalesce(excluded.pbpt_cn, "KIDS_OWN"."TB_PP_M_OPNN".pbpt_cn)
-            ,dmnd_mttr = coalesce(excluded.dmnd_mttr, "KIDS_OWN"."TB_PP_M_OPNN".dmnd_mttr)
-            ,dmnd_mttr_dtl_cn = coalesce(excluded.dmnd_mttr_dtl_cn, "KIDS_OWN"."TB_PP_M_OPNN".dmnd_mttr_dtl_cn)
-            ,ref_mttr = coalesce(excluded.ref_mttr, "KIDS_OWN"."TB_PP_M_OPNN".ref_mttr)
-            ,atch_file_sn = coalesce(excluded.atch_file_sn, "KIDS_OWN"."TB_PP_M_OPNN".atch_file_sn)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_OPNN".mdfr_id)
-            ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_OPNN".mdfcn_prgrm_id)
-    </insert>
-
-    <delete id="deleteOpnn" parameterType="OpnnDVO">
-        /* 대국민포털_의견제안 삭제 (OpnnMapper.deleteOpnn) */
-        DELETE FROM "KIDS_OWN"."TB_PP_M_OPNN"
-        WHERE 1=1
-        AND opnn_sn = #{opnnSn}
-    </delete>
-
 </mapper>
