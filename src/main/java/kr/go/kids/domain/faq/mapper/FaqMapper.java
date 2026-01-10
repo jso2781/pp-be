@@ -15,5 +15,5 @@ public interface FaqMapper
      * @param faqPVO 조회용 파라메터 정보 
      * @return 조회된 대국민포털_FAQ기본 
      */
-    public FaqRVO selectMenuList(FaqPVO faqPVO);
+    public FaqRVO selectFaqList(FaqPVO faqPVO);
 }

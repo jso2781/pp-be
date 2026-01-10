@@ -16,8 +16,8 @@ public class FaqServiceImpl implements FaqService
     private FaqMapper faqMapper;
 
     @Override
-    public FaqRVO selectMenuList(FaqPVO faqPVO)
+    public FaqRVO selectFaqList(FaqPVO faqPVO)
     {
-        return faqMapper.selectMenuList(faqPVO);
+        return faqMapper.selectFaqList(faqPVO);
     }
 }

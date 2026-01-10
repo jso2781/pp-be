@@ -29,11 +29,11 @@ public class FaqController
     private FaqService faqService;
 
     @Operation(summary = "대국민포털_FAQ 목록 조회", description = "대국민포털_FAQ 목록 조회한다.")
-    @PostMapping(value="/selectMenuList")
+    @PostMapping(value="/selectFaqList")
     @ResponseBody
-    public ResponseEntity<FaqRVO> getFaq(@RequestBody FaqPVO faqPVO)
+    public ResponseEntity<FaqRVO> selectFaqList(@RequestBody FaqPVO faqPVO)
     {
-        FaqRVO faq = faqService.selectMenuList(faqPVO);
+        FaqRVO faq = faqService.selectFaqList(faqPVO);
 
         return ResponseEntity.ok(faq);
     }
