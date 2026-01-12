@@ -1,8 +1,7 @@
 package kr.go.kids.domain.faq.service;
 
-import kr.go.kids.domain.faq.vo.FaqDVO;
 import kr.go.kids.domain.faq.vo.FaqPVO;
-import kr.go.kids.domain.faq.vo.FaqRVO;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 public interface FaqService
 {
@@ -12,5 +11,5 @@ public interface FaqService
      * @param faqPVO 조회용 파라메터 정보 
      * @return 조회된 대국민포털_FAQ기본 
      */
-    public FaqRVO selectFaqList(FaqPVO faqPVO);
+    public ApiPrnDto selectFaqList(FaqPVO faqPVO);
 }

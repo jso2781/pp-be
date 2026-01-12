@@ -1,8 +1,9 @@
 package kr.go.kids.domain.faq.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
-import kr.go.kids.domain.faq.vo.FaqDVO;
 import kr.go.kids.domain.faq.vo.FaqPVO;
 import kr.go.kids.domain.faq.vo.FaqRVO;
 
@@ -15,5 +16,5 @@ public interface FaqMapper
      * @param faqPVO 조회용 파라메터 정보 
      * @return 조회된 대국민포털_FAQ기본 
      */
-    public FaqRVO selectFaqList(FaqPVO faqPVO);
+    public List<FaqRVO> selectFaqList(FaqPVO faqPVO);
 }

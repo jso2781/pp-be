@@ -1,9 +1,5 @@
 package kr.go.kids.domain.faq.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.go.kids.domain.faq.service.FaqService;
-import kr.go.kids.domain.faq.vo.FaqDVO;
 import kr.go.kids.domain.faq.vo.FaqPVO;
-import kr.go.kids.domain.faq.vo.FaqRVO;
+import kr.go.kids.global.system.common.ApiResultCode;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "FaqController", description = "대국민포털_FAQ기본 관리")
 @RestController
@@ -31,10 +27,11 @@ public class FaqController
     @Operation(summary = "대국민포털_FAQ 목록 조회", description = "대국민포털_FAQ 목록 조회한다.")
     @PostMapping(value="/selectFaqList")
     @ResponseBody
-    public ResponseEntity<FaqRVO> selectFaqList(@RequestBody FaqPVO faqPVO)
+    public ResponseEntity<ApiPrnDto> selectFaqList(@RequestBody FaqPVO faqPVO)
     {
-        FaqRVO faq = faqService.selectFaqList(faqPVO);
+    	ApiPrnDto apiPrnDto = faqService.selectFaqList(faqPVO);
 
-        return ResponseEntity.ok(faq);
+    	ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
 }
