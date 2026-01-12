@@ -23,13 +23,24 @@ public class TrmsSttController
 {
     @Autowired
     private TrmsSttService trmsSttService;
-
-    @Operation(summary = "대국민포털_약관법령기본 조회", description = "대국민포털_약관법령기본 조회한다.")
-    @PostMapping(value="/getTrmsStt")
+    
+    @Operation(summary = "대국민포털_약관법령기본 목록 조회", description = "대국민포털_약관법령기본 목록 조회한다.")
+    @PostMapping(value="/selectTrmsSttList")
     @ResponseBody
-    public ResponseEntity<ApiPrnDto> getTrmsStt(@RequestBody TrmsSttPVO trmsSttPVO)
+    public ResponseEntity<ApiPrnDto> selectTrmsSttList(@RequestBody TrmsSttPVO trmsSttPVO)
     {
-    	ApiPrnDto apiPrnDto = trmsSttService.getTrmsStt(trmsSttPVO);
+    	ApiPrnDto apiPrnDto = trmsSttService.selectTrmsSttList(trmsSttPVO);
+
+    	ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
+    }
+
+    @Operation(summary = "대국민포털_약관법령기본 최신글 단건 조회", description = "대국민포털_약관법령기본 최신글 단건 조회한다.")
+    @PostMapping(value="/getTrmsSttLatest")
+    @ResponseBody
+    public ResponseEntity<ApiPrnDto> getTrmsSttLatest(@RequestBody TrmsSttPVO trmsSttPVO)
+    {
+    	ApiPrnDto apiPrnDto = trmsSttService.getTrmsSttLatest(trmsSttPVO);
 
     	ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);

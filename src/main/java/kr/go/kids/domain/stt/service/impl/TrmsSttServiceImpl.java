@@ -1,6 +1,7 @@
 package kr.go.kids.domain.stt.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,17 +21,37 @@ public class TrmsSttServiceImpl implements TrmsSttService
 {
     @Autowired
     private TrmsSttMapper trmsSttMapper;
+    @Override
+    public ApiPrnDto selectTrmsSttList(TrmsSttPVO trmsSttPVO) {
+    	
+        ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
+        HashMap<String, Object> data = new HashMap<String, Object>();
+        try {
+        	List<TrmsSttRVO> trmsSttList = trmsSttMapper.selectTrmsSttList(trmsSttPVO);
+        	
+        	data.put("list", trmsSttList);
+        	
+        } catch (Exception e) {
+            log.error("FAQ 목록 조회 실패", e);
+            result = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
+            result.setMsg(MessageContextHolder.getMessage("api.error.500"));
+        }
+        
+        result.setData(data);
+        return result;
+    }
 
     @Override
-    public ApiPrnDto getTrmsStt(TrmsSttPVO trmsSttPVO) {
+    public ApiPrnDto getTrmsSttLatest(TrmsSttPVO trmsSttPVO) {
     	ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
     	HashMap<String, Object> data = new HashMap<String, Object>();
     	try {
-    		TrmsSttRVO trmsSttRVO = trmsSttMapper.getTrmsStt(trmsSttPVO);
+    		TrmsSttRVO trmsSttRVO = trmsSttMapper.getTrmsSttLatest(trmsSttPVO);
+    		//data 추가작업 필요.
     		data.put("trmsSttCn", trmsSttRVO.getTrmsSttCn());
     		
     	} catch (Exception e) {
-            log.error("약관법령 단건 조회 실패", e);
+            log.error("약관법령 최신글 단건 조회 실패", e);
             result = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
             result.setMsg(MessageContextHolder.getMessage("api.error.500"));
     	}
