@@ -1,9 +1,5 @@
 package kr.go.kids.domain.opnn.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.go.kids.domain.opnn.service.OpnnService;
-import kr.go.kids.domain.opnn.vo.OpnnDVO;
 import kr.go.kids.domain.opnn.vo.OpnnPVO;
-import kr.go.kids.domain.opnn.vo.OpnnRVO;
+import kr.go.kids.global.system.common.ApiResultCode;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "OpnnController", description = "대국민포털_의견제안 관리")
 @RestController
@@ -31,30 +27,12 @@ public class OpnnController
     @Operation(summary = "대국민포털_의견제안 입력", description = "대국민포털_의견제안 입력한다.")
     @PostMapping(value="/insertOpnn")
     @ResponseBody
-    public Map<String,Object> insertOpnn(@RequestBody List<OpnnPVO> opnnList)
-    {
-        int opnnListCount = opnnList.size();
+    public ResponseEntity<ApiPrnDto> insertOpnn(@RequestBody OpnnPVO opnnPVO) {
 
-        int insertCnt = 0;
-        OpnnPVO opnn = null;
+        ApiPrnDto apiPrnDto = opnnService.insertOpnn(opnnPVO);
 
-        for(int i=0;i<opnnListCount;i++)
-        {
-            opnn = opnnList.get(i);
-
-            opnnService.insertOpnn(opnn);
-            insertCnt++;
-
-            opnn = null;
-        }
-
-//        List<OpnnRVO> selectedOpnnList = opnnService.selectOpnnList(opnn);
-
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        resultMap.put("insertCnt", insertCnt);
-//        resultMap.put("opnnList", selectedOpnnList);
-
-        return resultMap;
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
 
 }

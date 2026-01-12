@@ -2,9 +2,7 @@ package kr.go.kids.domain.opnn.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import kr.go.kids.domain.opnn.vo.OpnnDVO;
 import kr.go.kids.domain.opnn.vo.OpnnPVO;
-import kr.go.kids.domain.opnn.vo.OpnnRVO;
 
 @Mapper
 public interface OpnnMapper

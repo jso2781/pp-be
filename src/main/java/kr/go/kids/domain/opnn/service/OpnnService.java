@@ -1,8 +1,7 @@
 package kr.go.kids.domain.opnn.service;
 
-import kr.go.kids.domain.opnn.vo.OpnnDVO;
 import kr.go.kids.domain.opnn.vo.OpnnPVO;
-import kr.go.kids.domain.opnn.vo.OpnnRVO;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 public interface OpnnService
 {
@@ -12,5 +11,5 @@ public interface OpnnService
      * @param opnnPVO 입력할 대국민포털_의견제안 정보 
      * @return 입력된 건수 
      */
-    public int insertOpnn(OpnnPVO opnnPVO);
+    public ApiPrnDto insertOpnn(OpnnPVO opnnPVO);
 }

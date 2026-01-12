@@ -2,8 +2,11 @@ package kr.go.kids.domain.opnn.vo;
 
 import java.math.BigInteger;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 @Schema(name = "대국민포털_의견제안", description = "대국민포털_의견제안 Search Parameter VO")
 public class OpnnPVO
 {
@@ -96,126 +99,5 @@ public class OpnnPVO
      */
     @Schema(description = "수정프로그램아이디", type = "String")
     private String mdfcnPrgrmId;
-
-    public BigInteger getOpnnSn()
-    {
-        return opnnSn;
-    }
-    public void setOpnnSn(BigInteger opnnSn)
-    {
-        this.opnnSn = opnnSn;
-    }
-    public String getWrtrEncptFlnm()
-    {
-        return wrtrEncptFlnm;
-    }
-    public void setWrtrEncptFlnm(String wrtrEncptFlnm)
-    {
-        this.wrtrEncptFlnm = wrtrEncptFlnm;
-    }
-    public String getWrtrEncptTelno()
-    {
-        return wrtrEncptTelno;
-    }
-    public void setWrtrEncptTelno(String wrtrEncptTelno)
-    {
-        this.wrtrEncptTelno = wrtrEncptTelno;
-    }
-    public String getWrtSeCd()
-    {
-        return wrtSeCd;
-    }
-    public void setWrtSeCd(String wrtSeCd)
-    {
-        this.wrtSeCd = wrtSeCd;
-    }
-    public String getPbptCn()
-    {
-        return pbptCn;
-    }
-    public void setPbptCn(String pbptCn)
-    {
-        this.pbptCn = pbptCn;
-    }
-    public String getDmndMttr()
-    {
-        return dmndMttr;
-    }
-    public void setDmndMttr(String dmndMttr)
-    {
-        this.dmndMttr = dmndMttr;
-    }
-    public String getDmndMttrDtlCn()
-    {
-        return dmndMttrDtlCn;
-    }
-    public void setDmndMttrDtlCn(String dmndMttrDtlCn)
-    {
-        this.dmndMttrDtlCn = dmndMttrDtlCn;
-    }
-    public String getRefMttr()
-    {
-        return refMttr;
-    }
-    public void setRefMttr(String refMttr)
-    {
-        this.refMttr = refMttr;
-    }
-    public String getAtchFileSn()
-    {
-        return atchFileSn;
-    }
-    public void setAtchFileSn(String atchFileSn)
-    {
-        this.atchFileSn = atchFileSn;
-    }
-    public String getRgtrId()
-    {
-        return rgtrId;
-    }
-    public void setRgtrId(String rgtrId)
-    {
-        this.rgtrId = rgtrId;
-    }
-    public String getRegDt()
-    {
-        return regDt;
-    }
-    public void setRegDt(String regDt)
-    {
-        this.regDt = regDt;
-    }
-    public String getRegPrgrmId()
-    {
-        return regPrgrmId;
-    }
-    public void setRegPrgrmId(String regPrgrmId)
-    {
-        this.regPrgrmId = regPrgrmId;
-    }
-    public String getMdfrId()
-    {
-        return mdfrId;
-    }
-    public void setMdfrId(String mdfrId)
-    {
-        this.mdfrId = mdfrId;
-    }
-    public String getMdfcnDt()
-    {
-        return mdfcnDt;
-    }
-    public void setMdfcnDt(String mdfcnDt)
-    {
-        this.mdfcnDt = mdfcnDt;
-    }
-    public String getMdfcnPrgrmId()
-    {
-        return mdfcnPrgrmId;
-    }
-    public void setMdfcnPrgrmId(String mdfcnPrgrmId)
-    {
-        this.mdfcnPrgrmId = mdfcnPrgrmId;
-    }
 
 }

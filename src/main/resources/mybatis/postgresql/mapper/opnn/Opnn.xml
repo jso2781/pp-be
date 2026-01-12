@@ -33,12 +33,12 @@
             ,#{dmndMttrDtlCn}
             ,#{refMttr}
             ,#{atchFileSn}
-            ,#{rgtrId}
-            ,now()
-            ,#{regPrgrmId}
-            ,#{mdfrId}
-            ,now()
-            ,#{mdfcnPrgrmId}
+		    ,NULL
+		    ,now()
+		    ,NULL
+		    ,NULL
+		    ,now()
+		    ,NULL
         )
     </insert>
 </mapper>
