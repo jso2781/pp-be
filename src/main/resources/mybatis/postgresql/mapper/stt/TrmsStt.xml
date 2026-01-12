@@ -21,7 +21,7 @@
             ,mdfcn_prgrm_id
         FROM "KIDS_OWN"."TB_PP_M_TRMS_STT"
         WHERE 1=1
-        AND trms_stt_sn = #{trmsSttSn}
+        AND trms_stt_cd = #{trmsSttCd}
     </select>
 
 </mapper>

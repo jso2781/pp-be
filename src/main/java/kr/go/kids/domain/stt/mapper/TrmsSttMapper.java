@@ -2,7 +2,6 @@ package kr.go.kids.domain.stt.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import kr.go.kids.domain.stt.vo.TrmsSttDVO;
 import kr.go.kids.domain.stt.vo.TrmsSttPVO;
 import kr.go.kids.domain.stt.vo.TrmsSttRVO;
 

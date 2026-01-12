@@ -13,7 +13,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.go.kids.domain.stt.service.TrmsSttService;
 import kr.go.kids.domain.stt.vo.TrmsSttPVO;
-import kr.go.kids.domain.stt.vo.TrmsSttRVO;
+import kr.go.kids.global.system.common.ApiResultCode;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "TrmsSttController", description = "대국민포털_약관법령기본 관리")
 @RestController
@@ -26,11 +27,12 @@ public class TrmsSttController
     @Operation(summary = "대국민포털_약관법령기본 조회", description = "대국민포털_약관법령기본 조회한다.")
     @PostMapping(value="/getTrmsStt")
     @ResponseBody
-    public ResponseEntity<TrmsSttRVO> getTrmsStt(@RequestBody TrmsSttPVO trmsSttPVO)
+    public ResponseEntity<ApiPrnDto> getTrmsStt(@RequestBody TrmsSttPVO trmsSttPVO)
     {
-        TrmsSttRVO trmsStt = trmsSttService.getTrmsStt(trmsSttPVO);
+    	ApiPrnDto apiPrnDto = trmsSttService.getTrmsStt(trmsSttPVO);
 
-        return ResponseEntity.ok(trmsStt);
+    	ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
 
 }
