@@ -1,18 +1,19 @@
 package kr.go.kids.global.util;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import kr.go.kids.global.system.common.ApiResultCode;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.*;
-
-@Slf4j
-@Component
 public class DrugsafeUtil {
 
     public static List<Integer> RemoveNegativeNum(List<Integer> numbers) {
