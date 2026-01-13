@@ -1,10 +1,13 @@
+delete from "KIDS_OWN"."TB_PP_D_MENU";
+delete from "KIDS_OWN"."TB_PP_M_MENU";
+
 INSERT INTO "KIDS_OWN"."TB_PP_M_MENU"
 ( menu_sn, menu_nm, up_menu_sn, task_se_cd, menu_type_cd, menu_seq,
   menu_expln, lang_se_cd, pic_dept_nm, pic_flnm, use_yn,
   rgtr_id, reg_dt, reg_prgrm_id, mdfr_id, mdfcn_dt, mdfcn_prgrm_id )
 VALUES
 -- 1 Depth
-(1000, '주요 업무',  NULL, 'PP', 'MENU', 1, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+(1000, '주요업무',  NULL, 'PP', 'MENU', 1, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 (1100, '정보공개',   NULL, 'PP', 'MENU', 2, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 (1200, '기관소식',   NULL, 'PP', 'MENU', 3, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 (1300, '기관소개',   NULL, 'PP', 'MENU', 4, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
@@ -16,7 +19,7 @@ VALUES
 (1004, '의약품.의료정보.연계분석',        1000, 'PP', 'MENU', 4, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 (1005, 'DUR 정보',                       1000, 'PP', 'MENU', 5, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 (1006, '부작용 피해구제',                1000, 'PP', 'MENU', 6, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1007, '임상시험안전지원',                1000, 'PP', 'MENU', 7, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+(1007, '임상시험안전지원',                1000, 'PP', 'MENU', 7, NULL, 'ko', NULL, NULL, 'N', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 
 -- 3 Depth under 1001(의약품 이상사례보고)
 (1010, '이상사례보고',                    1001, 'PP', 'MENU', 1, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
@@ -50,28 +53,29 @@ VALUES
 
 -- 3 Depth under 1005(DUR 정보)
 (1070, 'DUR 이해',                          1005, 'PP', 'PAGE', 1, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1071, 'DUR 정보검색방',                    1005, 'PP', 'MENU', 2, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1072, '의약품 적정사용 정보방',            1005, 'PP', 'MENU', 3, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1073, 'DUR 게시판',                        1005, 'PP', 'PAGE', 4, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1074, 'DUR 제안',                          1005, 'PP', 'PAGE', 5, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+(1071, 'DUR 정보검색',                    1005, 'PP', 'PAGE', 2, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+(1072, '내가 먹는 약의 DUR 정보',            1005, 'PP', 'PAGE', 3, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+(1073, '의약품 적정사용 정보',               1005, 'PP', 'PAGE', 4, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+(1074, 'DUR 게시판',                        1005, 'PP', 'PAGE', 5, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+(1075, 'DUR 제안',                          1005, 'PP', 'PAGE', 6, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 
--- 4 Depth under 1071(DUR 정보검색방)
-(1080, 'DUR 통합검색',                       1071, 'PP', 'PAGE', 1, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1081, '병용금기',                           1071, 'PP', 'PAGE', 2, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1082, '특정연령대금기',                     1071, 'PP', 'PAGE', 3, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1083, '임부금기',                           1071, 'PP', 'PAGE', 4, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1084, '효능군중복주의',                     1071, 'PP', 'PAGE', 5, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1085, '용량주의',                           1071, 'PP', 'PAGE', 6, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1086, '투여기간주의',                       1071, 'PP', 'PAGE', 7, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1087, '노인주의',                           1071, 'PP', 'PAGE', 8, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1088, '수유부주의',                         1071, 'PP', 'PAGE', 9, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+-- 4 Depth under 1071(DUR 정보검색방) - DUR 정보검색(1071) 화면안에 포함됨.
+--(1080, 'DUR 통합검색',                       1071, 'PP', 'PAGE', 1, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+--(1081, '병용금기',                           1071, 'PP', 'PAGE', 2, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+--(1082, '특정연령대금기',                     1071, 'PP', 'PAGE', 3, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+--(1083, '임부금기',                           1071, 'PP', 'PAGE', 4, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+--(1084, '효능군중복주의',                     1071, 'PP', 'PAGE', 5, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+--(1085, '용량주의',                           1071, 'PP', 'PAGE', 6, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+--(1086, '투여기간주의',                       1071, 'PP', 'PAGE', 7, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+--(1087, '노인주의',                           1071, 'PP', 'PAGE', 8, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+--(1088, '수유부주의',                         1071, 'PP', 'PAGE', 9, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 
--- 4 Depth under 1072(의약품 적정사용 정보방)
-(1090, '노인 적정사용정보집',                1072, 'PP', 'PAGE', 1, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1091, '소아 적정사용정보집',                1072, 'PP', 'PAGE', 2, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1092, '임부 적정사용정보집',                1072, 'PP', 'PAGE', 3, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1093, '간질환 적정사용정보집',              1072, 'PP', 'PAGE', 4, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1094, '신질환 적정사용정보집',              1072, 'PP', 'PAGE', 5, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+-- 4 Depth under 1073(의약품 적정사용 정보방) - 의약품 적정사용 정보(1073) 화면안에 포함됨.
+--(1090, '노인 적정사용정보집',                1073, 'PP', 'PAGE', 1, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+--(1091, '소아 적정사용정보집',                1073, 'PP', 'PAGE', 2, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+--(1092, '임부 적정사용정보집',                1073, 'PP', 'PAGE', 3, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+--(1093, '간질환 적정사용정보집',              1073, 'PP', 'PAGE', 4, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+--(1094, '신질환 적정사용정보집',              1073, 'PP', 'PAGE', 5, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 
 -- 3 Depth under 1006(부작용 피해구제)
 (1110, '제도소개',                           1006, 'PP', 'PAGE', 1, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
@@ -79,13 +83,13 @@ VALUES
 (1112, '뉴스/소식',                          1006, 'PP', 'PAGE', 3, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 (1113, '자주하는 질문',                      1006, 'PP', 'PAGE', 4, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 
--- 3 Depth under 1007(임상시험안전지원)
-(1120, '임상시험안전지원기관',               1007, 'PP', 'PAGE', 1, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1121, '협약 안내',                          1007, 'PP', 'PAGE', 2, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1122, '중앙IRB신청',                        1007, 'PP', 'PAGE', 3, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1123, '임상시험헬프데스크',                  1007, 'PP', 'PAGE', 4, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1124, '공지사항',                           1007, 'PP', 'PAGE', 5, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
-(1125, '자료실',                             1007, 'PP', 'PAGE', 6, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+-- 3 Depth under 1007(임상시험안전지원) - 메뉴숨김
+(1120, '임상시험안전지원기관',               1007, 'PP', 'PAGE', 1, NULL, 'ko', NULL, NULL, 'N', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+(1121, '협약 안내',                          1007, 'PP', 'PAGE', 2, NULL, 'ko', NULL, NULL, 'N', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+(1122, '중앙IRB신청',                        1007, 'PP', 'PAGE', 3, NULL, 'ko', NULL, NULL, 'N', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+(1123, '임상시험헬프데스크',                  1007, 'PP', 'PAGE', 4, NULL, 'ko', NULL, NULL, 'N', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+(1124, '공지사항',                           1007, 'PP', 'PAGE', 5, NULL, 'ko', NULL, NULL, 'N', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+(1125, '자료실',                             1007, 'PP', 'PAGE', 6, NULL, 'ko', NULL, NULL, 'N', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 
 -- 2 Depth under 1100(정보공개)
 (2000, '정보공개',                           1100, 'PP', 'MENU', 1, NULL, 'ko', NULL, NULL, 'Y', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
@@ -146,13 +150,13 @@ INSERT INTO "KIDS_OWN"."TB_PP_D_MENU"
   rgtr_id, reg_dt, reg_prgrm_id, mdfr_id, mdfcn_dt, mdfcn_prgrm_id )
 VALUES
 -- 주요업무 > 의약품 이상사례보고 > 이상사례보고 > (이상사례 보고란?)
-(1020, '/safety/report1', NULL,
+(1020, '/maintask/adverse/report/AdverseIntro', NULL,
  'Y','Y','Y','Y','Y',
  NULL, '0000000000000', NULL,
  'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 
 -- 주요업무 > 의약품 이상사례보고 > 이상사례보고 > (KAERS란?)
-(1021, '/safety/report2', NULL,
+(1021, '/maintask/adverse/report/AdverseKaers', NULL,
  'Y','Y','Y','Y','Y',
  NULL, '0000000000000', NULL,
  'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
@@ -170,31 +174,31 @@ VALUES
  'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 
 -- 주요업무 > 의약품 이상사례보고 > 오프라인 보고
-(1012, '/safety/report5', NULL,
+(1012, '/maintask/adverse/AdverseOffline', NULL,
  'Y','Y','Y','Y','Y',
  NULL, '0000000000000', NULL,
  'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 
 -- 주요업무 > 의약품 이상사례보고 > 이상사례보고자료실
-(1013, '/safety/report6', NULL,
+(1013, '/maintask/adverse/AdverseDataRoom', NULL,
  'Y','Y','Y','Y','Y',
  NULL, '0000000000000', NULL,
  'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 
 -- 주요업무 > 의약품 이상사례보고 > 온라인보고방법 안내
-(1014, '/safety/report7', NULL,
+(1014, '/maintask/adverse/AdverseReportGuide', NULL,
  'Y','Y','Y','Y','Y',
  NULL, '0000000000000', NULL,
  'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 
 -- 주요업무 > DUR 정보 > DUR 게시판
-(1073, '/dur/notice', NULL,
+(1073, '/maintask/dur/DurNoticeList', NULL,
  'Y','Y','Y','Y','Y',
  NULL, '0000000000000', NULL,
  'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 
 -- 주요업무 > DUR 정보 > DUR 제안
-(1074, '/dur/proposal', NULL,
+(1074, '/maintask/dur/DurProposal', NULL,
  'Y','Y','Y','Y','Y',
  NULL, '0000000000000', NULL,
  'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
@@ -212,7 +216,7 @@ VALUES
  'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 
 -- 기관소식 > 공지사항
-(3000, '/notice', NULL,
+(3000, '/news/NewsNoticeList', NULL,
  'Y','Y','Y','Y','Y',
  NULL, '0000000000000', NULL,
  'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
@@ -228,4 +232,55 @@ VALUES
  'Y','Y','Y','Y','Y',
  NULL, '0000000000000', NULL,
  'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT')
+;
+
+--delete from "KIDS_OWN"."TB_PP_D_MENU";
+--delete from "KIDS_OWN"."TB_PP_M_MENU";
+--commit;
+
+WITH RECURSIVE menu_tree AS (
+    SELECT
+        m.menu_sn,
+        m.up_menu_sn,
+        1 AS dep_level,
+        m.menu_sn AS root_sn,
+        m.menu_nm,
+        m.menu_seq,
+        (m.menu_sn::text) AS path,
+        m.lang_se_cd
+    FROM "KIDS_OWN"."TB_PP_M_MENU" m
+    WHERE m.use_yn = 'Y'
+    AND m.up_menu_sn IS NULL
+
+    UNION ALL
+
+    SELECT
+        c.menu_sn,
+        c.up_menu_sn,
+        p.dep_level + 1,
+        p.root_sn,
+        c.menu_nm,
+        c.menu_seq,
+        (p.path || ' > ' || c.menu_sn::text) AS path,
+        c.lang_se_cd
+    FROM "KIDS_OWN"."TB_PP_M_MENU" c
+    JOIN menu_tree p
+        ON c.up_menu_sn = p.menu_sn
+    WHERE c.use_yn = 'Y'
+)
+SELECT
+    mt.menu_sn,
+    mt.menu_nm,
+    mt.up_menu_sn,
+    mt.dep_level,
+    mt.root_sn,
+    mt.path,
+    d.menu_url_addr,
+    mt.menu_seq,
+    mt.lang_se_cd
+FROM menu_tree mt
+LEFT JOIN "KIDS_OWN"."TB_PP_D_MENU" d
+    ON d.menu_sn = mt.menu_sn
+    AND mt.lang_se_cd = 'ko'
+ORDER by mt.root_sn, mt.path, mt.menu_seq, mt.menu_sn
 ;
