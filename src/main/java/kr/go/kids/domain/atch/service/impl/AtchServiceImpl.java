@@ -172,7 +172,7 @@ public class AtchServiceImpl implements AtchService
                 fileInsertReqVO.setAtchFileSn(BigInteger.valueOf(nextAtchFileSn));
                 fileInsertReqVO.setMenuSn(menuSn);
                 fileInsertReqVO.setMenuType(menuType);
-                fileInsertReqVO.setAtchFileUldHr(now.toString());
+                fileInsertReqVO.setAtchFileUldHr(now);
                 fileInsertReqVO.setAtchFileUseYn("Y");
                 fileInsertReqVO.setAtchFilePath(saveFolder.getAbsolutePath());
                 fileInsertReqVO.setAtchFileNm(realFileNm);

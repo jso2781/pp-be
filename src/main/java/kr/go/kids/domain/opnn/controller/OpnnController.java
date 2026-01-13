@@ -1,13 +1,12 @@
 package kr.go.kids.domain.opnn.controller;
 
-import java.util.HashMap;
+import java.math.BigInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,6 +34,9 @@ public class OpnnController
     @PostMapping(value="/insertOpnn")
     @ResponseBody
     public ResponseEntity<ApiPrnDto> insertOpnn(@ModelAttribute OpnnPVO opnnPVO) {
+        opnnPVO.setMenuSn(new BigInteger("111"));//메뉴 일련번호
+        opnnPVO.setMenuType("tempType1");//메뉴 유형
+        
         ApiPrnDto apiPrnDto = opnnService.insertOpnn(opnnPVO);
 
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
