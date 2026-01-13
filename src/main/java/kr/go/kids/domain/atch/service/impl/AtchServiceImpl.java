@@ -4,6 +4,9 @@ import static kr.go.kids.global.system.common.ApiResultCode.SUCCESS;
 
 import java.io.File;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,6 +15,9 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -20,9 +26,11 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.go.kids.domain.atch.mapper.AtchMapper;
 import kr.go.kids.domain.atch.service.AtchService;
 import kr.go.kids.domain.atch.vo.AtchDVO;
+import kr.go.kids.domain.atch.vo.AtchDWVO;
 import kr.go.kids.domain.atch.vo.AtchPVO;
 import kr.go.kids.domain.atch.vo.AtchRVO;
 import kr.go.kids.global.config.FileProperties;
+import kr.go.kids.global.exception.ApplicationException;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 import kr.go.kids.global.util.DrugsafeUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +45,9 @@ public class AtchServiceImpl implements AtchService
     @Autowired
     private AtchMapper atchMapper;
 
+    @Value("${file.storePath}")
+    private String fileStorePath;
+    
     @Override
     public AtchRVO getAtch(AtchPVO atchPVO)
     {
@@ -199,6 +210,96 @@ public class AtchServiceImpl implements AtchService
         return apiPrnDto;
     }
 
+    /**
+     * 파일 다운로드
+     * @param atchPVO 파일 일련번호 포함
+     * @return 파일 다운로드에 필요한 파라미터 반환
+     */    
+    @Override
+    public AtchDWVO downloadFile(AtchPVO atchPVO) {
+        try {
+            String filename = "";
+            String path = "";
+            
+            
+            if (atchPVO != null) {
+                AtchRVO atchRVO = atchMapper.getAtch(atchPVO);
+                filename = atchRVO.getAtchFileNm();
+                path = atchRVO.getAtchFilePath();
+            }
+            
+            // 파일명 검증 (경로 조작 공격 방지)
+            if (!isValidFilename(filename)) {
+                log.error("File name verification failed: {}", filename);
+                throw new ApplicationException("api.error.file.validation.name");  
+            }
+
+            // 다운로드 파일 경로 세팅
+            Path baseDir = Paths.get(fileStorePath).toAbsolutePath().normalize();
+            Path filePath = baseDir.resolve(path).resolve(filename).normalize();
+            File file = filePath.toFile();
+
+            // 파일 존재 여부 확인
+            if (!file.exists() || !file.isFile()) {
+                log.error("File not found: {}", filePath);
+                throw new ApplicationException("api.error.file.validation.exists");
+            }
+
+            // 보안: 파일이 지정된 디렉토리 내에 있는지 확인 (Path Traversal 방지)
+            if (!filePath.startsWith(Paths.get(fileStorePath).normalize())) {
+                log.error("Access denied - file outside allowed directory: {}", filePath);
+                throw new ApplicationException("api.error.file.validation.path");
+            }
+            
+            Resource resource = new FileSystemResource(file);
+            
+            String contentType = Files.probeContentType(filePath);
+            if (contentType == null) {
+                contentType = "application/octet-stream";
+            }
+            
+            AtchDWVO atchDWVO = AtchDWVO.builder()
+                    .filename(filename)
+                    .contentType(contentType)
+                    .contentLength(file.length())
+                    .resource(resource)
+                    .build();
+            
+            return atchDWVO;
+            
+        } catch (Exception e) {
+            throw new ApplicationException("api.error.file.download");          
+        }
+    }
+
+    /**
+     * 파일 존재 여부 확인 API
+     * 
+     * @param filename 확인할 파일명
+     * @return 존재 여부
+     */
+    private boolean isValidFilename(String filename) {
+        if (!StringUtils.hasText(filename)) {
+            return false;
+        }
+
+        // Path Traversal 공격만 차단 (..만 차단)
+        if (filename.contains("..") || filename.contains("\0")) {
+            return false;
+        }
+
+        // 정상적인 경로 구분자는 허용, 파일명 패턴 검증
+        String normalizedPath = filename.replace("\\", "/");
+
+        // 각 경로 구성 요소 검증 (빈 값, 특수문자 등)
+        String[] parts = normalizedPath.split("/");
+        for (String part : parts) {
+            if (part.isEmpty() || !part.matches("^[a-zA-Z0-9가-힣._\\-\\s()]+$")) {
+                return false;
+            }
+        }
+        return true;
+    }    
 
     /**
      * 저장경로 설정
