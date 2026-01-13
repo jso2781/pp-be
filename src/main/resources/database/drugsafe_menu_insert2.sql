@@ -221,6 +221,18 @@ VALUES
  NULL, '0000000000000', NULL,
  'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
 
+-- 기관소식 > 채용게시판
+(3001, '/news/NewsJobNoticeList', NULL, 
+'Y', 'Y', 'Y', 'Y', 'Y', 
+NULL, '0000000000000', NULL, 
+'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+
+-- 기관소식 > 자료실
+(3008, '/news/NewsDataRoomList', NULL, 
+'Y', 'Y', 'Y', 'Y', 'Y', 
+NULL, '0000000000000', NULL, 
+'SYSTEM', CURRENT_TIMESTAMP, 'INIT', 'SYSTEM', CURRENT_TIMESTAMP, 'INIT'),
+
 -- 기관소식 > 뉴스레터 > 첨단바이오 포커스
 (3010, 'https://ltfu.mfds.go.kr', NULL,
  'Y','Y','Y','Y','Y',
