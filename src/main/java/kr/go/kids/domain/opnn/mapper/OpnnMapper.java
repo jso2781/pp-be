@@ -14,4 +14,6 @@ public interface OpnnMapper
      * @return 입력된 건수 
      */
     public int insertOpnn(OpnnPVO opnnPVO);
+    
+    public long nextOpnnSn();
 }

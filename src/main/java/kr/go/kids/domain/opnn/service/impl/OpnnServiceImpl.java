@@ -1,5 +1,6 @@
 package kr.go.kids.domain.opnn.service.impl;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,10 +32,12 @@ public class OpnnServiceImpl implements OpnnService
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         
         try{
+            
 
             HashMap<String, Object> params = new HashMap<String, Object>();
             params.put("menuSn", opnnPVO.getMenuSn());
             params.put("menuType", opnnPVO.getMenuType());
+            
             
             // 대국민포털_의견제안 첨부파일 저장
             ApiPrnDto fileResult = atchService.uploadFile(params, opnnPVO.getAttachFiles());
@@ -49,8 +52,13 @@ public class OpnnServiceImpl implements OpnnService
             if (atchFileSnStr.endsWith(",")) {
                 atchFileSnStr = atchFileSnStr.substring(0, atchFileSnStr.length() - 1);
             }
+            
+            long nextOpnnSn = opnnMapper.nextOpnnSn();
 
+            opnnPVO.setOpnnSn(BigInteger.valueOf(nextOpnnSn));
             opnnPVO.setAtchFileSn(atchFileSnStr);
+            
+            opnnMapper.insertOpnn(opnnPVO);
             
         }catch(Exception e){
             log.debug("의견제안 등록 실패", e);

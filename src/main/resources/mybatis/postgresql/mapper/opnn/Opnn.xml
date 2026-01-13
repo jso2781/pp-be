@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.go.kids.domain.opnn.mapper.OpnnMapper">
 
+    <select id="nextOpnnSn" resultType="long">
+        SELECT nextval('TB_PP_M_OPNN_SEQ')
+    </select>
+
     <insert id="insertOpnn" parameterType="OpnnPVO">
         /* 대국민포털_의견제안 입력 (OpnnMapper.insertOpnn) */
         INSERT INTO "KIDS_OWN"."TB_PP_M_OPNN"
