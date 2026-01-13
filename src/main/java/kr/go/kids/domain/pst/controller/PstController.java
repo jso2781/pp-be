@@ -1,4 +1,4 @@
-package kr.go.kids.domain.notice.controller;
+package kr.go.kids.domain.pst.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import kr.go.kids.domain.notice.service.PstService;
-import kr.go.kids.domain.notice.vo.PstPVO;
+import kr.go.kids.domain.pst.service.PstService;
+import kr.go.kids.domain.pst.vo.PstPVO;
 import kr.go.kids.global.system.common.ApiResultCode;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 

@@ -1,4 +1,4 @@
-package kr.go.kids.domain.notice.vo;
+package kr.go.kids.domain.pst.vo;
 
 import java.math.BigInteger;
 

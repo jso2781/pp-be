@@ -1,6 +1,6 @@
-package kr.go.kids.domain.notice.service;
+package kr.go.kids.domain.pst.service;
 
-import kr.go.kids.domain.notice.vo.PstPVO;
+import kr.go.kids.domain.pst.vo.PstPVO;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 public interface PstService

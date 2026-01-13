@@ -1,11 +1,11 @@
-package kr.go.kids.domain.notice.mapper;
+package kr.go.kids.domain.pst.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import kr.go.kids.domain.notice.vo.PstPVO;
-import kr.go.kids.domain.notice.vo.PstRVO;
+import kr.go.kids.domain.pst.vo.PstPVO;
+import kr.go.kids.domain.pst.vo.PstRVO;
 
 @Mapper
 public interface PstMapper
