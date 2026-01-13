@@ -18,6 +18,12 @@ public interface AtchMapper
     public AtchRVO getAtch(AtchPVO atchPVO);
 
     /**
+     * 첨부파일일련번호 발번
+     * @return 발번된 첨부파일일련번호
+     */
+    public long nextAtchFileSn();
+
+    /**
      * 공통_첨부파일기본 정보 입력 
      *
      * @param atchPVO 입력할 공통_첨부파일기본 정보 

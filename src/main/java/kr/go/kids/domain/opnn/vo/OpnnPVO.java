@@ -1,6 +1,9 @@
 package kr.go.kids.domain.opnn.vo;
 
 import java.math.BigInteger;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -99,5 +102,23 @@ public class OpnnPVO
      */
     @Schema(description = "수정프로그램아이디", type = "String")
     private String mdfcnPrgrmId;
+
+    /**
+     * 메뉴일련번호(첨부파일 업로드시 파일정보 입력시 사용)
+     */
+    @Schema(description = "메뉴일련번호(첨부파일 업로드시 파일정보 입력시 사용)", type = "BigInteger")
+    private BigInteger menuSn;
+
+    /**
+     * 메뉴유형(첨부파일 업로드시 파일정보 입력시 사용)
+     */
+    @Schema(description = "메뉴유형(첨부파일 업로드시 파일정보 입력시 사용)", type = "String")
+    private String menuType;
+
+    /**
+     * 대국민포털_의견제안 첨부파일 목록
+     */
+    @Schema(description = "대국민포털_의견제안 첨부파일 목록", type = "MultipartFile[]")
+    private MultipartFile[] attachFiles;
 
 }

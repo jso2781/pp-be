@@ -26,6 +26,10 @@
         AND atch_file_sn = #{atchFileSn}
     </select>
 
+    <select id="nextAtchFileSn" resultType="long">
+        SELECT nextval('TB_CA_M_ATCH_SEQ')
+    </select>
+
     <insert id="insertAtch" parameterType="AtchPVO">
         /* 공통_첨부파일기본 입력 (AtchMapper.insertAtch) */
         INSERT INTO "KIDS_OWN"."TB_CA_M_ATCH"

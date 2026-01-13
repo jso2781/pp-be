@@ -1,8 +1,13 @@
 package kr.go.kids.domain.atch.service;
 
+import java.util.HashMap;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import kr.go.kids.domain.atch.vo.AtchDVO;
 import kr.go.kids.domain.atch.vo.AtchPVO;
 import kr.go.kids.domain.atch.vo.AtchRVO;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 public interface AtchService
 {
@@ -48,4 +53,12 @@ public interface AtchService
      * @return 삭제된 건수 
      */
     public int deleteAtch(AtchDVO atchDVO);
+
+    /**
+     * 파일 업로드(파일정보 입력 포함)
+     * @param params 파일 업로드시 사용할 파라메터 정보 
+     * @param uploadFiles 업로드할 파일 객체 배열
+     * @return 업로드후 응답결과 객체 반환
+     */
+    public ApiPrnDto uploadFile(HashMap<String, Object> params, MultipartFile[] uploadFiles);
 }

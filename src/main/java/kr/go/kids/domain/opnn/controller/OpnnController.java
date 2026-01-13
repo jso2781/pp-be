@@ -1,7 +1,11 @@
 package kr.go.kids.domain.opnn.controller;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,18 +25,21 @@ import kr.go.kids.global.system.common.vo.ApiPrnDto;
 @RequestMapping(value="/api/opnn")
 public class OpnnController
 {
+    @Value("${file.storePath}")
+    private String savePath;
+    
     @Autowired
     private OpnnService opnnService;
 
     @Operation(summary = "대국민포털_의견제안 입력", description = "대국민포털_의견제안 입력한다.")
     @PostMapping(value="/insertOpnn")
     @ResponseBody
-    public ResponseEntity<ApiPrnDto> insertOpnn(@RequestBody OpnnPVO opnnPVO) {
-
+    public ResponseEntity<ApiPrnDto> insertOpnn(@ModelAttribute OpnnPVO opnnPVO) {
         ApiPrnDto apiPrnDto = opnnService.insertOpnn(opnnPVO);
 
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
 
+    
 }
