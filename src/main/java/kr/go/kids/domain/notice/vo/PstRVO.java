@@ -1,8 +1,10 @@
 package kr.go.kids.domain.notice.vo;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import kr.go.kids.domain.atch.vo.AtchRVO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -118,6 +120,12 @@ public class PstRVO {
 	@Schema(description = "수정프로그램아이디", type = "String")
 	private String mdfcnPrgrmId;
 
+	/**
+	 * 첨부파일 목록
+	 */
+	@Schema(description = "첨부파일 목록", type = "AtchRVO")	
+	private List<AtchRVO> atchRVOs;
+	
 	/**
 	 * 조회수 증가
 	 */
