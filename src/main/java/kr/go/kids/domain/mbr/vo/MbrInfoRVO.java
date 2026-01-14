@@ -89,7 +89,7 @@ public class MbrInfoRVO
      * 비밀번호오류횟수
      */
     @Schema(description = "비밀번호오류횟수", type = "Integer")
-    private Integer pswdErrNmtm;
+    private Integer pswdErrNmtm = 0;
 
     /**
      * 연계정보식별아이디
@@ -144,6 +144,24 @@ public class MbrInfoRVO
      */
     @Schema(description = "JWT토큰ID", type = "BigInteger")
     private BigInteger tokenId;
+
+    /**
+     * 애플리케이션ID
+     */
+    @Schema(description = "애플리케이션ID", type = "String")
+    private String appId;
+
+    /**
+     * JWT_Refresh_Token
+     */
+    @Schema(description = "JWT_Refresh_Token", type = "String")
+    private String refreshToken;
+
+    /**
+     * JWT_Access_Token
+     */
+    @Schema(description = "JWT_Access_Token", type = "String")
+    private String accessToken;
 
     public String getMbrNo()
     {
@@ -326,5 +344,23 @@ public class MbrInfoRVO
     }
     public void setTokenId(BigInteger tokenId) {
         this.tokenId = tokenId;
+    }
+    public String getAppId() {
+        return appId;
+    }
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+    public String getAccessToken() {
+        return accessToken;
+    }
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- CONNECTTION_LOG 상세 테이블 MAPPER -->
+<mapper namespace="kr.go.kids.domain.connecionlog.mapper.ConnectionLogDetailMapper">
+
+
+    <!-- 다음 파일 일련번호 -->
+    <select id="nextConnecttionDetailId" resultType="long">
+        SELECT nextval('CONNECTTION_LOG_DETAIL_SEQ')
+    </select>
+
+    <!-- 접속로그 상세 단건 등록 -->
+    <insert id="insert" parameterType="ConnectionLogDetailInsertVO">
+        INSERT INTO "CONNECTTION_LOG_DETAIL" (
+                                            acsr_id,
+                                            cntn_log_sn,
+                                            inpt_dt,
+                                            inst_cd,
+                                            trgt_menu_nm,
+                                            qna,
+                                            url_addr,
+                                            task_se_cd_no,
+                                            cntn_dt,
+                                            acsr_nm,
+                                            rqstr_id,
+                                            task_se_cd,
+                                            flfmt_task_cd,
+                                            srvc_nm,
+                                            etc_memo,
+                                            prvc_incl_yn,
+                                            reg_dt,
+                                            rgtr_id
+                                        ) VALUES (
+                                             #{acsrId},
+                                             #{cntnLogSn},
+                                             NOW(),
+                                             '1',
+                                             #{trgtMenuNm},
+                                             '1',
+                                             '1',
+                                             '1',
+                                             NOW(),
+                                             '1',
+                                             '1',
+                                             '1',
+                                             '1',
+                                             '1',
+                                             '1',
+                                             '1',
+                                             NOW(),
+                                             'admin'
+                                     )
+    </insert>
+
+
+</mapper>

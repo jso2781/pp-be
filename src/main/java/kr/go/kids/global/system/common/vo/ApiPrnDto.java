@@ -17,6 +17,8 @@ public class ApiPrnDto {
     private String msg;
     private HashMap<String, Object> data = new HashMap<>();
 
+    public ApiPrnDto() {}
+
     public ApiPrnDto(ApiResultCode resultCode) {
         this.code = resultCode.getCode();
         this.msg = resultCode.getMessage();

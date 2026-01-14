@@ -114,7 +114,12 @@
             ,mdfcn_dt = now()
             ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
         WHERE 1=1
-        AND mbr_no = #{mbrNo}
+        <if test="mbrNo != null and mbrNo != ''">
+            AND mbr_no = #{mbrNo}
+        </if>
+        <if test="mbrId != null and mbrId != ''">
+            AND mbr_id = #{mbrId}
+        </if>
     </update>
 
     <insert id="saveMbrInfo" parameterType="MbrInfoPVO">

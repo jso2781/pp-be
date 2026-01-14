@@ -3010,6 +3010,106 @@ ALTER TABLE "TB_PP_M_POPUP"
 -- 대국민포털_팝업기본 기본키2
 COMMENT ON CONSTRAINT "PK_TB_PP_M_POPUP" ON "TB_PP_M_POPUP" IS '대국민포털_팝업기본 기본키2';
 
+CREATE SEQUENCE "TB_PP_M_MBR_TOKEN_SEQ" 
+   INCREMENT 1 
+   START 1 
+   MINVALUE 1 
+   MAXVALUE 9223372036854775807 
+   CACHE 1;
+
+CREATE TABLE "KIDS_OWN"."TB_PP_M_MBR_TOKEN" (
+    token_id numeric(19,0) NOT NULL,
+    mbr_id varchar(20) NOT NULL,
+    app_id varchar(50) NULL,
+    refresh_token text NULL,
+    access_token text NULL,
+    rgtr_id varchar(20) NULL,
+    reg_dt timestamp NULL,
+    reg_prgrm_id varchar(100) NULL,
+    mdfr_id varchar(20) NULL,
+    mdfcn_dt timestamp NULL,
+    mdfcn_prgrm_id varchar(100) NULL,
+    CONSTRAINT "PK_TB_PP_M_MBR_TOKEN" PRIMARY KEY (token_id)
+);
+
+COMMENT ON TABLE "KIDS_OWN"."TB_PP_M_MBR_TOKEN" IS '대국민포털_회원_TOKEN';
+COMMENT ON COLUMN "KIDS_OWN"."TB_PP_M_MBR_TOKEN".token_id IS 'JWT토큰ID';
+COMMENT ON COLUMN "KIDS_OWN"."TB_PP_M_MBR_TOKEN".mbr_id IS '회원아이디';
+COMMENT ON COLUMN "KIDS_OWN"."TB_PP_M_MBR_TOKEN".app_id IS '애플리케이션ID';
+COMMENT ON COLUMN "KIDS_OWN"."TB_PP_M_MBR_TOKEN".refresh_token IS 'JWT_Refresh_Token';
+COMMENT ON COLUMN "KIDS_OWN"."TB_PP_M_MBR_TOKEN".access_token IS 'JWT_Access_Token';
+COMMENT ON COLUMN "KIDS_OWN"."TB_PP_M_MBR_TOKEN".rgtr_id IS '등록자아이디';
+COMMENT ON COLUMN "KIDS_OWN"."TB_PP_M_MBR_TOKEN".reg_dt IS '등록일시';
+COMMENT ON COLUMN "KIDS_OWN"."TB_PP_M_MBR_TOKEN".reg_prgrm_id IS '등록프로그램아이디';
+COMMENT ON COLUMN "KIDS_OWN"."TB_PP_M_MBR_TOKEN".mdfr_id IS '수정자아이디';
+COMMENT ON COLUMN "KIDS_OWN"."TB_PP_M_MBR_TOKEN".mdfcn_dt IS '수정일시';
+COMMENT ON COLUMN "KIDS_OWN"."TB_PP_M_MBR_TOKEN".mdfcn_prgrm_id IS '수정프로그램아이디';
+
+CREATE SEQUENCE "KIDS_OWN"."CONNECTTION_LOG_SEQ"
+   INCREMENT BY 1
+   MINVALUE 1
+   MAXVALUE 9223372036854775807
+   START 1
+   CACHE 1
+   NO CYCLE;
+
+CREATE TABLE "KIDS_OWN"."CONNECTTION_LOG" (
+   cntn_log_sn numeric(10) NOT NULL, -- 일련번호
+   col bpchar(2) NULL, -- 내외부망구분
+   lgn_se bpchar(1) NULL, -- 에니ID 여부
+   srvc_user_id varchar(20) NULL, -- 로그인ID
+   rqstr_ip_addr varchar(255) NOT NULL, -- 접속IP
+   cntn_se_no varchar(10) NULL, -- 로그인아웃여부
+   cntn_ocrn_dt bpchar(14) NULL, -- 접속발생일시
+   cntn_dtl_expln varchar(40) NULL,
+   cert_token_vl varchar(300) NOT NULL,
+   token_crt_hr bpchar(6) NULL,
+   sess_expry_prnmnt_hr bpchar(6) NULL,
+   lgt_dt timestamp NULL,
+   reg_dt timestamp NULL,
+   rgtr_id varchar(20) NULL,
+   CONSTRAINT pk_connection_log PRIMARY KEY (cntn_log_sn)
+);
+
+-- Column comments
+COMMENT ON COLUMN "KIDS_OWN"."CONNECTTION_LOG".cntn_log_sn IS '일련번호';
+COMMENT ON COLUMN "KIDS_OWN"."CONNECTTION_LOG".col IS '내외부망구분';
+COMMENT ON COLUMN "KIDS_OWN"."CONNECTTION_LOG".lgn_se IS '에니ID 여부';
+COMMENT ON COLUMN "KIDS_OWN"."CONNECTTION_LOG".srvc_user_id IS '로그인ID';
+COMMENT ON COLUMN "KIDS_OWN"."CONNECTTION_LOG".rqstr_ip_addr IS '접속IP';
+COMMENT ON COLUMN "KIDS_OWN"."CONNECTTION_LOG".cntn_se_no IS '로그인아웃여부';
+COMMENT ON COLUMN "KIDS_OWN"."CONNECTTION_LOG".cntn_ocrn_dt IS '접속발생일시';
+
+CREATE SEQUENCE "KIDS_OWN"."CONNECTTION_LOG_DETAIL_SEQ"
+   INCREMENT BY 1
+   MINVALUE 1
+   MAXVALUE 9223372036854775807
+   START 1
+   CACHE 1
+   NO CYCLE;
+
+CREATE TABLE "KIDS_OWN"."CONNECTTION_LOG_DETAIL" (
+   acsr_id numeric(10) NOT NULL,
+   cntn_log_sn numeric(10) NOT NULL,
+   inpt_dt timestamp NULL,
+   inst_cd varchar(20) NULL,
+   trgt_menu_nm varchar(40) NULL,
+   qna text NULL,
+   url_addr varchar(2000) NULL,
+   task_se_cd_no varchar(100) NULL,
+   cntn_dt timestamp NULL,
+   acsr_nm varchar(20) NULL,
+   rqstr_id varchar(20) NULL,
+   task_se_cd varchar(10) NULL,
+   flfmt_task_cd varchar(10) NULL,
+   srvc_nm varchar(100) NULL,
+   etc_memo varchar(4000) NULL,
+   prvc_incl_yn bpchar(1) NULL,
+   reg_dt timestamp NULL,
+   rgtr_id varchar(20) NULL,
+   CONSTRAINT pk_connection_log_detail PRIMARY KEY (cntn_log_sn, acsr_id)
+);
+
 -- 대국민포털_회원정보기본
 CREATE TABLE "TB_PP_M_MBR_INFO"
 (

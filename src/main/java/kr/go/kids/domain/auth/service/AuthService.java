@@ -7,7 +7,7 @@ import kr.go.kids.domain.auth.vo.MbrTokenPVO;
 import kr.go.kids.domain.auth.vo.MbrTokenRVO;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
-public interface MbrTokenService
+public interface AuthService
 {
     /**
      * 사용자 로그인
@@ -20,6 +20,11 @@ public interface MbrTokenService
      * @return API 응답 DTO
      */
     public ApiPrnDto refresh(BigInteger tokenId, String refreshToken);
+
+    /**
+     * 토큰 삭제(로그아웃시)
+     */
+    public ApiPrnDto logout(MbrTokenDVO mbrTokenDVO);
 
     /**
      * 대국민포털_회원_TOKEN 정보 조회 

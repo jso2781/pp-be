@@ -101,7 +101,7 @@ public class AnyIdAuthController {
         ));
     }
 
-    @PostMapping("/logout")
+    @PostMapping("/anyid/logout")
     @Operation(
             summary = "로그아웃(세션 무효화)",
             description = "현재 세션을 invalidate하고 SecurityContext를 정리합니다."

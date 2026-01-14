@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- CONNECTTION_LOG 테이블 MAPPER -->
+<mapper namespace="kr.go.kids.domain.connecionlog.mapper.ConnectionLogMapper">
+
+
+    <!-- 기본조회 -->
+    <select id="getLastId"  resultType="long">
+        SELECT
+               MAX(cntn_log_sn)
+        FROM  "CONNECTTION_LOG" a
+        WHERE  cntn_se_no = '1'
+    </select>
+
+    <!-- 다음 파일 일련번호 -->
+    <select id="nextConnectionLogReq" resultType="long">
+        SELECT nextval('CONNECTTION_LOG_SEQ')
+    </select>
+
+    <!-- 접속로그 단건 등록 -->
+    <insert id="insert" parameterType="ConnectionLogInsertReqVO">
+        INSERT INTO "CONNECTTION_LOG" (
+                                        cntn_log_sn,
+                                        col,
+                                        lgn_se,
+                                        srvc_user_id,
+                                        rqstr_ip_addr,
+                                        cntn_se_no,
+                                        cntn_ocrn_dt,
+                                        cntn_dtl_expln,
+                                        cert_token_vl,
+                                        token_crt_hr,
+                                        sess_expry_prnmnt_hr,
+                                        lgt_dt,
+                                        reg_dt,
+                                        rgtr_id
+                                    ) VALUES (
+                                        #{cntnLogSn},
+                                        #{col},
+                                        #{lgnSe},
+                                        #{srvcUserId},
+                                        #{rqstrIpAddr},
+                                        #{cntnSeNo},
+                                        #{cntnOcrnDt},
+                                        #{cntnDtlExpln},
+                                        #{certTokenVl},
+                                        #{tokenCrtHr},
+                                        #{sessExpryPrnmntHr},
+                                        #{lgtDt},
+                                        #{regDt},
+                                        #{rgtrId}
+                                    )
+    </insert>
+
+
+
+
+</mapper>

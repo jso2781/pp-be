@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -15,23 +16,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import kr.go.kids.domain.auth.service.MbrTokenService;
+import kr.go.kids.domain.auth.service.AuthService;
+import kr.go.kids.domain.auth.vo.MbrTokenDVO;
 import kr.go.kids.domain.auth.vo.MbrTokenPVO;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
-@Tag(name = "MbrTokenController", description = "대국민포털_로그인토큰 관리(JWT)")
+@Tag(name = "Auth1Controller", description = "대국민포털_로그인토큰 관리(JWT)")
 @RestController
 @RequestMapping(value="/api/auth")
-public class MbrTokenController {
+public class AuthController {
 
     @Autowired
-    private MbrTokenService mbrTokenService;
+    private AuthService authService;
 
     @Operation(summary = "대국민포털_로그인 처리", description = "대국민포털_로그인 처리한다.(JWT)")
     @PostMapping(value="/login")
     @ResponseBody
     public ResponseEntity<ApiPrnDto> login(@RequestBody MbrTokenPVO input){
-        ApiPrnDto apiPrnDto = mbrTokenService.login(input);
+        ApiPrnDto apiPrnDto = authService.login(input);
 
         if("0".equals(apiPrnDto.getCode())){
             return ResponseEntity.ok(apiPrnDto);
@@ -49,7 +51,7 @@ public class MbrTokenController {
      */
     @PostMapping("/refresh")
     public ResponseEntity<ApiPrnDto> refresh(@RequestParam(value = "refreshToken") String refreshToken, @RequestParam(value = "tokenId") BigInteger tokenId){
-        ApiPrnDto apiPrnDto = mbrTokenService.refresh(tokenId, refreshToken);
+        ApiPrnDto apiPrnDto = authService.refresh(tokenId, refreshToken);
 
         if("0".equals(apiPrnDto.getCode())){
             return ResponseEntity.ok(apiPrnDto);
@@ -58,15 +60,19 @@ public class MbrTokenController {
         }
     }
 
-//    @PostMapping("/logout")
-//    public void logout(Authentication auth,
-//                       @RequestHeader(value = "X-App-Id", required = false) String appId) {
+    @PostMapping("/logout")
+    public ResponseEntity<ApiPrnDto> logout(Authentication auth, @RequestHeader(value = "X-App-Id", required = false) String appId, @RequestParam(value="tokenId") BigInteger tokenId) {
 //      String mbrId = (String) auth.getPrincipal();
-//      authService.logout(mbrId, appId);
-//      if("0".equals(apiPrnDto.getCode())){
-//          return ResponseEntity.ok(apiPrnDto);
-//      }else{
-//          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiPrnDto);
-//      }
-//    }
+
+        MbrTokenDVO mtd = new MbrTokenDVO();
+        mtd.setTokenId(tokenId);
+
+        ApiPrnDto apiPrnDto = authService.logout(mtd);
+
+        if("0".equals(apiPrnDto.getCode())){
+            return ResponseEntity.ok(apiPrnDto);
+        }else{
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiPrnDto);
+        }
+    }
 }
