@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.go.kids.domain.auth.mapper.MbrTokenMapper">
 
+    <select id="nextMbrTokenId" resultType="long">
+        SELECT nextval('TB_PP_M_MBR_TOKEN_SEQ')
+    </select>
+
     <select id="getMbrToken" parameterType="MbrTokenPVO" resultType="MbrTokenRVO" >
         /* 대국민포털_회원_TOKEN 조회 (MbrTokenMapper.getMbrToken) */
         SELECT
@@ -18,7 +22,7 @@
             ,mdfcn_prgrm_id
         FROM "KIDS_OWN"."TB_PP_M_MBR_TOKEN"
         WHERE 1=1
-        AND mbr_id = #{mbrId}
+        AND token_id = #{tokenId}
     </select>
 
     <insert id="insertMbrToken" parameterType="MbrTokenPVO">
@@ -64,7 +68,7 @@
             ,mdfcn_dt = now()
             ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
         WHERE 1=1
-        AND mbr_id = #{mbrId}
+        AND token_id = #{tokenId}
     </update>
 
     <insert id="saveMbrToken" parameterType="MbrTokenPVO">

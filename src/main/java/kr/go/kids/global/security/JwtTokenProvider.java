@@ -1,4 +1,4 @@
-package kr.go.kids.domain.auth.service.impl;
+package kr.go.kids.global.security;
 
 
 import java.util.Date;
@@ -13,6 +13,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
+import kr.go.kids.global.config.util.MessageContextHolder;
+import kr.go.kids.global.exception.ApplicationException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -22,6 +24,9 @@ public class JwtTokenProvider {
     @Value("${jwt.secret-key}")
     private String SECRET_KEY;
 
+    @Value("${jwt.access-token-expiration}")
+    private String ACCESS_TOKEN_EXPIRATION;
+    
     @Value("${jwt.refresh-token-name}")
     private String REFRESH_TOKEN_NAME;
 
@@ -29,22 +34,27 @@ public class JwtTokenProvider {
      * <PRE>
      * AccessToken 생성
      * </PRE>
-     * @param userId
+     * @param userId 회원ID
      * @param expTime(밀리초)
      * @param SECRET_KEY
      * @return
      */
-    public String createAccessToken(String appId, String userId, Long expTime) {
-        if (expTime < 0L) throw new RuntimeException("만료시간은0보다 커야합니다.");
+    public String createAccessToken(String issuer, String userId, Long expTime) {
+        if(expTime < 0L){
+            // 만료시간은 지났습니다.
+            throw new ApplicationException(MessageContextHolder.getMessage("ui.token.expired"));
+        }
 
+        // 현재시간 기준 이후 ACCESS_TOKEN_EXPIRATION 시간만큼 Access Token 유효시간 설정
         Date expireTime = new Date(System.currentTimeMillis() + expTime);
+
         // 토큰생성에필요한데이터설정으로토큰생성
         return Jwts.builder()
-                .setSubject(userId)                                // userId & 토큰생성주체지정
-                .setIssuer(appId)
-                .setIssuedAt(new Date())
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)    // key, key 암호화알고리즘설정
-                .setExpiration(expireTime)       // 만료 시간 설정& compact to String
+                .setSubject(userId)                                 // userId & 토큰생성주체지정
+                .setIssuer(issuer)                                  // 토큰 발행자(kids_user)
+                .setIssuedAt(new Date())                            // Access Token 발행 시간
+                .setExpiration(expireTime)                          // 만료 시간 설정& compact to String
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)     // key, key 암호화알고리즘설정
                 .compact();
     }
 
@@ -55,28 +65,35 @@ public class JwtTokenProvider {
      * @param expTime(밀리초)
      * @return
      */
-    public String createRefreshToken(Long expTime) {
-        if (expTime < 0L) throw new RuntimeException("만료시간은0보다 커야합니다.");
+    public String createRefreshToken(String issuer, String userId, Long expTime) {
+        if(expTime < 0L){
+            // 만료시간은 지났습니다.
+            throw new ApplicationException(MessageContextHolder.getMessage("ui.token.expired"));
+        }
 
+     // 현재시간 기준 이후 ACCESS_TOKEN_EXPIRATION 시간만큼 Access Token 유효시간 설정
         Date expireTime = new Date(System.currentTimeMillis() + expTime);
 
         // 토큰생성에필요한데이터설정으로토큰생성
         return Jwts.builder()
-                .setSubject(REFRESH_TOKEN_NAME)
-                .setIssuedAt(new Date())                           // 토큰생성주체지정
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)    // key, key 암호화알고리즘설정
+                .setSubject(userId)                                 // userId & 토큰생성주체지정
+                .setIssuer(issuer)                                  // 토큰 발행자(kids_user)
+//                .setSubject(REFRESH_TOKEN_NAME)                     // 토큰 생성 주체지정
+                .setIssuedAt(new Date())                            // Refresh Token 발행 시간
                 .setExpiration(expireTime)
-                .compact();                                        // 만료 시간 설정& compact to String
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)     // key, key 암호화알고리즘설정
+                .compact();                                         // 만료 시간 설정& compact to String
     }
 
     /**
-     * JWT 토큰문자열에서토큰데이터를가져오는메소드
+     * JWT 토큰 문자열에서 토큰데이터를 가져오는 메소드
      * @param accessToken
      * @return
      */
     public Claims getClaims(String token){
         if(!"Y".equals(this.validateToken(token))){
-            throw new RuntimeException("Invalid JWT Token");
+            // 유효하지 않은 JWT 토큰
+            throw new ApplicationException(MessageContextHolder.getMessage("ui.token.invalid"));
         }
 
         if(StringUtils.hasLength(token) && token.startsWith("Bearer ")){
@@ -86,6 +103,26 @@ public class JwtTokenProvider {
         // 토큰 파싱
         Claims claims = parseClaims(token);
         return claims;
+    }
+
+    /**
+     * JWT 토큰 문자열에서 회원ID(mbrId) 가져오는 메소드
+     * @param token - Access Token 혹은 Refresh Token
+     * @return Access Token의 토큰정보로부터 회원ID(mbrId)를 반환
+     */
+    public String getSubject(String token){
+        if(!"Y".equals(this.validateToken(token))){
+            // 유효하지 않은 JWT 토큰
+            throw new ApplicationException(MessageContextHolder.getMessage("ui.token.invalid"));
+        }
+
+        if(StringUtils.hasLength(token) && token.startsWith("Bearer ")){
+            token = token.substring(7);
+        }
+
+        // 토큰 파싱
+        Claims claims = parseClaims(token);
+        return claims.getSubject();
     }
 
     // 토큰 유효성검증메소드

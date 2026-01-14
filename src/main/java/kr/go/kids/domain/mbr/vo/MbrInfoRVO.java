@@ -1,5 +1,7 @@
 package kr.go.kids.domain.mbr.vo;
 
+import java.math.BigInteger;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(name = "대국민포털_회원정보기본", description = "대국민포털_회원정보기본 Search Result VO")
@@ -136,6 +138,12 @@ public class MbrInfoRVO
      */
     @Schema(description = "수정프로그램아이디", type = "String")
     private String mdfcnPrgrmId;
+
+    /**
+     * JWT토큰ID
+     */
+    @Schema(description = "JWT토큰ID", type = "BigInteger")
+    private BigInteger tokenId;
 
     public String getMbrNo()
     {
@@ -313,5 +321,10 @@ public class MbrInfoRVO
     {
         this.mdfcnPrgrmId = mdfcnPrgrmId;
     }
-
+    public BigInteger getTokenId() {
+        return tokenId;
+    }
+    public void setTokenId(BigInteger tokenId) {
+        this.tokenId = tokenId;
+    }
 }

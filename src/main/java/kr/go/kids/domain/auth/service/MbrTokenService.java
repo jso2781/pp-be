@@ -1,5 +1,7 @@
 package kr.go.kids.domain.auth.service;
 
+import java.math.BigInteger;
+
 import kr.go.kids.domain.auth.vo.MbrTokenDVO;
 import kr.go.kids.domain.auth.vo.MbrTokenPVO;
 import kr.go.kids.domain.auth.vo.MbrTokenRVO;
@@ -12,6 +14,12 @@ public interface MbrTokenService
      * @return API 응답 DTO
      */
     public ApiPrnDto  login(MbrTokenPVO loginVO);
+
+    /**
+     * 토큰 갱신
+     * @return API 응답 DTO
+     */
+    public ApiPrnDto refresh(BigInteger tokenId, String refreshToken);
 
     /**
      * 대국민포털_회원_TOKEN 정보 조회 
