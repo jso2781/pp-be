@@ -122,7 +122,7 @@ public class AuthServiceImpl implements AuthService
                     // 로그인 성공하변 회원정보기본에서 로그인 실패 횟수 + 1 증가
                     mp.setPswdErrNmtm(pswdErrNmtm);
                     mp.setMdfrId(mbrId);
-                    mp.setMdfcnPrgrmId("Auth1Service.login");
+                    mp.setMdfcnPrgrmId("AuthService.login");
 
                     mbrInfoMapper.updateMbrInfo(mp);
 
@@ -154,9 +154,9 @@ public class AuthServiceImpl implements AuthService
                         tokenInsertVO.setRefreshToken(refreshToken);
                         tokenInsertVO.setAccessToken(accessToken);
                         tokenInsertVO.setRgtrId(mbrId);
-                        tokenInsertVO.setRegPrgrmId("Auth1Service.login");
+                        tokenInsertVO.setRegPrgrmId("AuthService.login");
                         tokenInsertVO.setMdfrId(mbrId);
-                        tokenInsertVO.setMdfcnPrgrmId("Auth1Service.login");
+                        tokenInsertVO.setMdfcnPrgrmId("AuthService.login");
 
                         mbrTokenMapper.insertMbrToken(tokenInsertVO);
 
@@ -182,7 +182,7 @@ public class AuthServiceImpl implements AuthService
                         tokenUpdateVO.setRefreshToken(refreshToken);
                         tokenUpdateVO.setAccessToken(accessToken);
                         tokenUpdateVO.setMdfrId(mbrId);
-                        tokenUpdateVO.setMdfcnPrgrmId("Auth1Service.login");
+                        tokenUpdateVO.setMdfcnPrgrmId("AuthService.login");
 
                         mbrTokenMapper.updateMbrToken(tokenUpdateVO);
 
@@ -200,10 +200,10 @@ public class AuthServiceImpl implements AuthService
                     }
 
                     // 로그인 성공하변 회원정보기본에서 인증토큰(accessToken), 로그인 실패 횟수=0 지정
-                    mp.setCertToken(accessToken);
+//                    mp.setCertToken(accessToken); // accessToken 입력시 character varying(40) 자료형에 너무 긴 자료를 담으려고 합니다.
                     mp.setPswdErrNmtm(0);
                     mp.setMdfrId(mbrId);
-                    mp.setMdfcnPrgrmId("Auth1Service.login");
+                    mp.setMdfcnPrgrmId("AuthService.login");
 
                     mbrInfoMapper.updateMbrInfo(mp);
 
@@ -245,7 +245,7 @@ public class AuthServiceImpl implements AuthService
         tokenInsertVO.setRefreshToken(newRefreshToken);
         tokenInsertVO.setAccessToken(newAccessToken);
         tokenInsertVO.setMdfrId(mbrId);
-        tokenInsertVO.setMdfcnPrgrmId("Auth1Service.login");
+        tokenInsertVO.setMdfcnPrgrmId("AuthService.refresh");
 
         // 기존 토큰 정보 업데이트
         mbrTokenMapper.updateMbrToken(tokenInsertVO);
@@ -260,8 +260,9 @@ public class AuthServiceImpl implements AuthService
 
         HashMap<String, Object> bizData = new HashMap<>();
         bizData.put("tokenId", tokenId);
-        bizData.put("refreshToken", newRefreshToken);
         bizData.put("accessToken", newAccessToken);
+        bizData.put("refreshToken", newRefreshToken);
+        bizData.put("pswdErrNmtm", 0);
         bizData.put("userInfo", userInfo);
 
         apiPrnDto.setData(bizData);
