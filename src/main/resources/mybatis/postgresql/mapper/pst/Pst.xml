@@ -24,7 +24,8 @@
             ,mdfcn_dt
             ,mdfcn_prgrm_id
         FROM "KIDS_OWN"."TB_PP_M_PST"
-       WHERE bbs_id = #{bbsId}		
+       WHERE bbs_id = #{bbsId}
+         AND del_yn = 'N'		
 	<if test="searchWrd != null and searchWrd != ''">
 	  <choose>
 	    <when test="searchCnd == 'title'">
@@ -62,6 +63,7 @@
         FROM "KIDS_OWN"."TB_PP_M_PST"
         WHERE bbs_id = #{bbsId}		
         AND pst_sn = #{pstSn}
+        AND del_yn = 'N'
     </select>
     
     <update id="updtInqCnt" parameterType="PstPVO">
