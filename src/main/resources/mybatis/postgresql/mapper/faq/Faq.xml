@@ -12,7 +12,7 @@
         FROM "KIDS_OWN"."TB_PP_M_FAQ"
         WHERE 1=1
         AND use_yn = 'Y'
-		AND task_se_cd = 'tempTask'
+		AND task_se_cd = 'PP'
 		AND lang_se_cd = #{langSeCd}
     </select>
 </mapper>
