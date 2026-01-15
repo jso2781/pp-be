@@ -8,11 +8,11 @@
 		    faq_clsf,
 		    faq_ttl,
 		    faq_seq,
-		    lang_se_cd,
 		    faq_ans
         FROM "KIDS_OWN"."TB_PP_M_FAQ"
         WHERE 1=1
         AND use_yn = 'Y'
 		AND task_se_cd = 'tempTask'
+		AND lang_se_cd = #{langSeCd}
     </select>
 </mapper>
