@@ -126,6 +126,30 @@ public class PstRVO {
 	@Schema(description = "첨부파일 목록", type = "AtchRVO")	
 	private List<AtchRVO> atchRVOs;
 	
+    /**
+     * 이미지 첨부파일명
+     */
+    @Schema(description = "이미지 첨부파일명", type = "String")
+    private String imgFileNm;
+
+    /**
+     * 이미지 첨부파일경로
+     */
+    @Schema(description = "이미지 첨부파일경로", type = "String")
+    private String imgFilePath;
+    
+    /**
+     * 썸네일 첨부파일명
+     */
+    @Schema(description = "썸네일 첨부파일명", type = "String")
+    private String thmbFileNm;
+
+    /**
+     * 썸네일 첨부파일경로
+     */
+    @Schema(description = "썸네일 첨부파일경로", type = "String")
+    private String thmbFilePath;
+    
 	/**
 	 * 조회수 증가
 	 */
