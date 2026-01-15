@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.go.kids.domain.main.mapper.MainMapper">
 
-    <select id="selectRecent5PstList" parameterType="String" resultType="MainRVO" >
-        /* 대국민포털_메인화면 최근 게시물 조회 (MainMapper.selectRecent5PstList) */
+    <select id="selectRecent5PstListByTaskCd" parameterType="String" resultType="MainRVO" >
+        /* 대국민포털_메인화면 최근 게시물 조회 (MainMapper.selectRecent5PstListByTaskCd) */
 		SELECT
 		     p.pst_sn
 		    ,p.bbs_id
@@ -23,5 +23,25 @@
 	   ORDER BY p.reg_dt DESC
 	   LIMIT 5       
     </select>
+    
+    <select id="selectRecent5PstListByBoardId" parameterType="String" resultType="MainRVO" >
+        /* 대국민포털_메인화면 최근 게시물 조회 (MainMapper.selectRecent5PstListByBoardId) */
+		SELECT
+		     p.pst_sn
+		    ,p.bbs_id
+		    ,p.pst_ttl
+		    ,p.atch_file_id
+		    ,p.thmb_id
+		    ,f.atch_file_nm        
+		    ,f.atch_file_path
+		    ,p.reg_dt
+		FROM "KIDS_OWN"."TB_PP_M_PST" p
+		LEFT OUTER JOIN "KIDS_OWN"."TB_CA_M_ATCH" f
+		       ON p.thmb_id = CAST(f.atch_file_sn AS VARCHAR)
+	   WHERE p.bbs_id = #{bbsId}
+		 AND p.del_yn = 'N'
+	   ORDER BY p.reg_dt DESC
+	   LIMIT 5       
+    </select>    
     
 </mapper>
