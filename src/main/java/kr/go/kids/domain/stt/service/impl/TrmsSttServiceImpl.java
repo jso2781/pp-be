@@ -21,6 +21,27 @@ public class TrmsSttServiceImpl implements TrmsSttService
 {
     @Autowired
     private TrmsSttMapper trmsSttMapper;
+
+    @Override
+    public ApiPrnDto selectTrmsListForSignUp() {
+        ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
+        HashMap<String, Object> data = new HashMap<String, Object>();
+
+        try{
+            List<TrmsSttRVO> trmsSttList = trmsSttMapper.selectTrmsListForSignUp();
+            
+            data.put("list", trmsSttList);
+            
+        }catch(Exception e){
+            log.error("대국민포털 회원가입용 약관법령 목록 조회 실패", e);
+            result = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
+            result.setMsg(MessageContextHolder.getMessage("api.error.500"));
+        }
+
+        result.setData(data);
+        return result;
+    }
+
     @Override
     public ApiPrnDto selectTrmsSttList(TrmsSttPVO trmsSttPVO) {
     	

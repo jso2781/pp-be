@@ -23,15 +23,26 @@ public class TrmsSttController
 {
     @Autowired
     private TrmsSttService trmsSttService;
-    
+
+    @Operation(summary = "대국민포털 회원가입용 약관법령 목록 조회", description = "대국민포털 회원가입용 약관법령 목록 조회한다.")
+    @PostMapping(value="/selectTrmsListForSignUp")
+    @ResponseBody
+    public ResponseEntity<ApiPrnDto> selectTrmsListForSignUp()
+    {
+        ApiPrnDto apiPrnDto = trmsSttService.selectTrmsListForSignUp();
+
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
+    }
+
     @Operation(summary = "대국민포털_약관법령기본 목록 조회", description = "대국민포털_약관법령기본 목록 조회한다.")
     @PostMapping(value="/selectTrmsSttList")
     @ResponseBody
     public ResponseEntity<ApiPrnDto> selectTrmsSttList(@RequestBody TrmsSttPVO trmsSttPVO)
     {
-    	ApiPrnDto apiPrnDto = trmsSttService.selectTrmsSttList(trmsSttPVO);
+        ApiPrnDto apiPrnDto = trmsSttService.selectTrmsSttList(trmsSttPVO);
 
-    	ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
 

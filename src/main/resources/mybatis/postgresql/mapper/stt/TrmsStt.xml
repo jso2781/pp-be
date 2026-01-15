@@ -2,13 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.go.kids.domain.stt.mapper.TrmsSttMapper">
 
+    <select id="selectTrmsListForSignUp" resultType="TrmsSttRVO">
+        /* 대국민포털 회원가입용 약관법령 목록 조회 (TrmsSttPVO.selectTrmsListForSignUp) */
+        SELECT
+             A.trms_stt_cd
+            ,A.up_task_cd 
+            ,A.task_cd_nm
+            ,A.trms_stt_aplcn_day
+            ,A.trms_stt_end_day
+            ,A.trms_stt_cn
+        FROM(
+            SELECT 
+                 ts.trms_stt_cd
+                ,tc.up_task_cd 
+                ,tc.task_cd_nm
+                ,ts.trms_stt_aplcn_day
+                ,ts.trms_stt_end_day
+                ,ts.trms_stt_cn 
+                ,ROW_NUMBER() over(partition by tc.task_cd order by ts.trms_stt_aplcn_day desc) as rownum
+            FROM "TB_PP_M_TASK_CD" tc 
+            INNER JOIN "TB_PP_M_TRMS_STT" ts
+            ON ts.trms_stt_cd = tc.task_cd 
+            WHERE 1=1
+            AND '' != trim(ts.trms_stt_cn)
+            AND tc.task_cd IN('UTZTN', 'STT_PRVC', 'CLCT', 'STTY_AGT')
+            AND to_char(now(), 'yyyymmdd') between ts.trms_stt_aplcn_day AND ts.trms_stt_end_day
+            AND tc.use_yn = 'Y'
+        ) A
+        WHERE A.rownum = 1
+    </select>
+
     <select id="selectTrmsSttList" parameterType="TrmsSttPVO" resultType="TrmsSttRVO" >
         /* 대국민포털_약관법령 목록 조회 (TrmsSttPVO.selectTrmsSttList) */
         SELECT
-			trms_stt_aplcn_day,
-			trms_stt_end_day,
-			trms_stt_cn,
-			atch_file_id
+            trms_stt_aplcn_day,
+            trms_stt_end_day,
+            trms_stt_cn,
+            atch_file_id
         FROM "KIDS_OWN"."TB_PP_M_TRMS_STT"
         WHERE 1=1
         AND trms_stt_cd = #{trmsSttCd}
@@ -17,15 +47,15 @@
     <select id="getTrmsSttLatest" parameterType="TrmsSttPVO" resultType="TrmsSttRVO" >
         /* 대국민포털_약관법령 최신글 단건 조회 (TrmsSttMapper.getTrmsSttLatest) */
         SELECT
-			trms_stt_aplcn_day,
-			trms_stt_end_day,
-			trms_stt_cn,
-			atch_file_id
+            trms_stt_aplcn_day,
+            trms_stt_end_day,
+            trms_stt_cn,
+            atch_file_id
         FROM "KIDS_OWN"."TB_PP_M_TRMS_STT"
         WHERE 1=1
         AND trms_stt_cd = #{trmsSttCd}
         ORDER BY reg_dt DESC
-		LIMIT 1;
+        LIMIT 1;
     </select>
 
 </mapper>

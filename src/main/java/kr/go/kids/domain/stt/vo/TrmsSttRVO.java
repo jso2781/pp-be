@@ -93,4 +93,15 @@ public class TrmsSttRVO
     @Schema(description = "수정프로그램아이디", type = "String")
     private String mdfcnPrgrmId;
 
+    /**
+     * 상위업무코드(TB_PP_M_TASK_CD.up_task_cd)
+     */
+    @Schema(description = "상위업무코드", type = "String")
+    private String upTaskCd;
+
+    /**
+     * 업무코드명(TB_PP_M_TASK_CD.task_cd_nm)
+     */
+    @Schema(description = "업무코드명", type = "String")
+    private String taskCdNm;
 }
