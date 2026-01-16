@@ -1,6 +1,7 @@
 package kr.go.kids.domain.pst.service.impl;
 
 import java.math.BigInteger;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,9 @@ import kr.go.kids.global.system.common.ApiResultCode;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 import kr.go.kids.global.util.PagingUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PstServiceImpl implements PstService {
@@ -69,7 +72,6 @@ public class PstServiceImpl implements PstService {
 			List<AtchRVO> files = new ArrayList<AtchRVO>();
 			
 			String attchId = pstRVO.getAtchFileId();
-			
 			if (StringUtils.isNotBlank(attchId)) {
 				BigInteger bi = new BigInteger(attchId);
 				
@@ -88,6 +90,13 @@ public class PstServiceImpl implements PstService {
 			pstRVO.setAtchRVOs(files);
 			// ========================================= 
 			
+			// FIXME 동영상 URL 관련 컬럼명 확정시 수정 필요
+			// 임시 컬럼 : mdfcnPrgrmId (수정자 프로그램ID)
+            String mdfcnPrgrmId = pstRVO.getMdfcnPrgrmId();
+            if (StringUtils.isNotBlank(mdfcnPrgrmId)) {
+                pstRVO.setVideoId(extractYoutubeVideoId(mdfcnPrgrmId));
+            }
+            // =========================================			
 			
 			data.put("detailData", pstRVO);
 		}
@@ -95,4 +104,35 @@ public class PstServiceImpl implements PstService {
 		result.setData(data);
 		return result;
 	}
+	
+	private String extractYoutubeVideoId(String url) {
+	    try {
+	        URI uri = new URI(url);
+	        String host = uri.getHost();
+
+	        // youtu.be/ID
+	        if (host.contains("youtu.be")) {
+	            return uri.getPath().substring(1);
+	        }
+
+	        // www.youtube.com/shorts/ID
+	        if (uri.getPath().startsWith("/shorts/")) {
+	            return uri.getPath().replace("/shorts/", "");
+	        }
+
+	        // www.youtube.com/watch?v=ID
+	        String query = uri.getQuery();
+	        if (query != null) {
+	            for (String param : query.split("&")) {
+	                if (param.startsWith("v=")) {
+	                    return param.substring(2);
+	                }
+	            }
+	        }
+	    } catch (Exception e) {
+	        log.error("동영상 ID 추출에 실패하였습니다.", e);
+	    }
+
+	    return "";
+	}	
 }

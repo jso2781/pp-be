@@ -68,7 +68,7 @@
 		    ,f.atch_file_path as img_file_path
         FROM "KIDS_OWN"."TB_PP_M_PST" p
         LEFT OUTER JOIN "KIDS_OWN"."TB_CA_M_ATCH" f
-          ON p.thmb_id = CAST(f.atch_file_sn AS VARCHAR)
+          ON p.atch_file_id = CAST(f.atch_file_sn AS VARCHAR)
        WHERE p.bbs_id = #{bbsId}
          AND p.pst_sn = #{pstSn}
          AND p.del_yn = 'N'		

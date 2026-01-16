@@ -149,6 +149,12 @@ public class PstRVO {
      */
     @Schema(description = "썸네일 첨부파일경로", type = "String")
     private String thmbFilePath;
+
+    /**
+     * 유튜브 동영상 ID
+     */
+    @Schema(description = "동영상 ID", type = "String")
+    private String videoId;
     
 	/**
 	 * 조회수 증가
