@@ -5,7 +5,7 @@
     <select id="selectTrmsListForSignUp" resultType="TrmsSttRVO">
         /* 대국민포털 회원가입용 약관법령 목록 조회 (TrmsSttPVO.selectTrmsListForSignUp) */
         SELECT
-             A.trms_stt_cd
+             trim(A.trms_stt_cd) trms_stt_cd
             ,A.up_task_cd 
             ,A.task_cd_nm
             ,A.trms_stt_aplcn_day
