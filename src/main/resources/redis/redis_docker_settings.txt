@@ -1,0 +1,3 @@
+docker run -d --name pp-redis -p 6379:6379 redis:7 redis-server --requirepass drugsafe123456
+docker ps -as
+docker exec -it pp-redis redis-cli -a drugsafe123456 ping
