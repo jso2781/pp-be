@@ -13,12 +13,19 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import kr.go.kids.domain.auth.service.IdleTokenService;
+import kr.go.kids.domain.auth.service.TokenBlacklistService;
+
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final TokenBlacklistService tokenBlacklistService;
+    private final IdleTokenService idleTokenService;
 
-    public JwtAuthFilter(JwtTokenProvider jwtTokenProvider) {
+    public JwtAuthFilter(JwtTokenProvider jwtTokenProvider, TokenBlacklistService tokenBlacklistService, IdleTokenService idleTokenService) {
         this.jwtTokenProvider = jwtTokenProvider;
+        this.tokenBlacklistService = tokenBlacklistService;
+        this.idleTokenService = idleTokenService;
     }
 
     @Override
@@ -29,12 +36,34 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             String token = bearer.substring(7);
 
             try{
-                // JWT 토큰 문자열에서 회원ID(mbrId) 가져옴.
+                // 1) 로그아웃된 토큰 즉시 차단
+                if(tokenBlacklistService.isBlacklisted(token)){
+                    SecurityContextHolder.clearContext();
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    return;
+                }
+
+                // 2) ✅ tokenId Claim 추출
+                String tokenId = jwtTokenProvider.getTokenId(token);
+
+                // 3) ✅ idle 만료 체크: key 없으면(30분 idle) 408 (request idle)
+                if (!idleTokenService.exists(tokenId)) {
+                    SecurityContextHolder.clearContext();
+                    response.setStatus(HttpServletResponse.SC_REQUEST_TIMEOUT);
+                    return;
+                }
+
+                // 4) ✅ 활동 감지: TTL 30분으로 리셋
+                idleTokenService.touch(tokenId);
+
+                // 5) JWT 로그인 인증 처리, JWT 토큰 문자열에서 회원ID(mbrId) 가져옴.
                 String mbrId = jwtTokenProvider.getSubject(token);
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(mbrId, null, List.of());
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }catch(Exception e){
                 SecurityContextHolder.clearContext();
+                // 여기서 401로 끊을지, 그냥 체인 계속 태울지는 정책 선택
+                // 보통은 그냥 체인 진행(뒤에서 인증 실패 처리)해도 됩니다.
             }
         }
 

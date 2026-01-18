@@ -1,13 +1,12 @@
 package kr.go.kids.domain.auth.vo;
 
 import java.math.BigInteger;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 
-
-@Schema(name = "대국민포털_회원_TOKEN", description = "대국민포털_회원_TOKEN Delete Parameter VO")
-public class MbrTokenDVO
-{
+@Schema(name = "JWT Token Refresh 요청", description = "JWT Token Refresh 요청 Parameter VO")
+public class RefreshPVO {
     /**
      * JWT토큰ID
      */
@@ -15,10 +14,10 @@ public class MbrTokenDVO
     private BigInteger tokenId;
 
     /**
-     * 회원아이디
+     * JWT_Refresh_Token
      */
-    @Schema(description = "회원아이디", type = "String")
-    private String mbrId;
+    @Schema(description = "JWT_Refresh_Token", type = "String")
+    private String refreshToken;
 
     public BigInteger getTokenId()
     {
@@ -28,10 +27,10 @@ public class MbrTokenDVO
     {
         this.tokenId = tokenId;
     }
-    public String getMbrId() {
-        return mbrId;
+    public String getRefreshToken() {
+        return refreshToken;
     }
-    public void setMbrId(String mbrId) {
-        this.mbrId = mbrId;
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

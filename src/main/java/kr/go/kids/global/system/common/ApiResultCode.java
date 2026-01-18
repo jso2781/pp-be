@@ -9,7 +9,8 @@ public enum ApiResultCode {
     VALIDATION_ERROR("100", "유효성 검증 실패", HttpStatus.BAD_REQUEST),
     DUPLICATE_ERROR("200", "중복 데이터", HttpStatus.CONFLICT),
     AUTH_ERROR("300", "권한 없음", HttpStatus.FORBIDDEN),
-    NOT_FOUND("400", "데이터 없음", HttpStatus.NOT_FOUND);
+    NOT_FOUND("400", "데이터 없음", HttpStatus.NOT_FOUND),
+    UNAUTHORIZED("401", "권한 없음", HttpStatus.UNAUTHORIZED);
 
     private final String code;
     private final String message;

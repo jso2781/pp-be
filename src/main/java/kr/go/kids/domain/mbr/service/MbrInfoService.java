@@ -3,9 +3,18 @@ package kr.go.kids.domain.mbr.service;
 import kr.go.kids.domain.mbr.vo.MbrInfoDVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoPVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoRVO;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 public interface MbrInfoService
 {
+    /**
+     * 대국민포털_회원정보기본 기존 아이디, 이메일 존재여부 조회
+     * 
+     * @param mbrInfoPVO 조회용 파라메터 정보
+     * @return 조회된 대국민포털_회원정보기본
+     */
+    public ApiPrnDto checkMbrInfo(MbrInfoPVO mbrInfoPVO);
+
     /**
      * 대국민포털_회원정보기본 정보 조회 
      *

@@ -17,6 +17,11 @@ server:
       enabled: false
 
 spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: drugsafe123456
+    timeout: 2000ms
   servlet:
     multipart:
       enabled: true
@@ -69,9 +74,10 @@ spring:
 jwt:
   issuer: kids_user
   secret-key: ZGQtaW90LXBjd2ViLWFwaS1hZG1pbi1zZWNyZXRrZXk=
-  access-token-expiration: 900000        # 15분 (ms), 7 * 24 * 60 * 60 * 1000 -> 7일
-  refresh-token-expiration: 1209600000   # 14일 (ms), 365 * 24 * 60 * 60 * 1000 -> 365일
+  access-token-expiration: 1800000        # 30분 (ms), ex) 7 * 24 * 60 * 60 * 1000 -> 7일
+  refresh-token-expiration: 1209600000   # 14일 (ms), ex) 365 * 24 * 60 * 60 * 1000 -> 365일
   refresh-token-name: KIDS_REFRESH_TOKEN
+  idle-timeout-millis: 1800000  # 30분
 
 springdoc:
   swagger-ui:

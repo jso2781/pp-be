@@ -10,6 +10,14 @@ import kr.go.kids.domain.mbr.vo.MbrInfoRVO;
 public interface MbrInfoMapper
 {
     /**
+     * 대국민포털_회원정보기본 기존 아이디, 이메일 존재여부 조회
+     * 
+     * @param mbrInfoPVO 조회용 파라메터 정보
+     * @return 조회된 대국민포털_회원정보기본
+     */
+    public int checkMbrInfo(MbrInfoPVO mbrInfoPVO);
+
+    /**
      * 대국민포털_회원정보기본 정보 조회 
      *
      * @param mbrInfoPVO 조회용 파라메터 정보 

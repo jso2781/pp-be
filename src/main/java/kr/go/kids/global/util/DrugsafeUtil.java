@@ -1,15 +1,24 @@
 package kr.go.kids.global.util;
 
-import kr.go.kids.global.system.common.ApiResultCode;
-import kr.go.kids.global.system.common.vo.ApiPrnDto;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.*;
+
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
@@ -230,7 +239,25 @@ public class DrugsafeUtil {
         return request.getRemoteAddr();
     }
 
+    public static String sha256Hex(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] digest = md.digest(input.getBytes(StandardCharsets.UTF_8));
+            return toHex(digest);
+        } catch (NoSuchAlgorithmException e) {
+            // JVM에 SHA-256이 없을 확률은 사실상 없지만, 런타임 예외로 감싸서 올립니다.
+            throw new IllegalStateException("SHA-256 algorithm not available", e);
+        }
+    }
 
-
-
+    private static String toHex(byte[] bytes) {
+        char[] hexArray = "0123456789abcdef".toCharArray();
+        char[] hexChars = new char[bytes.length * 2];
+        for (int j = 0; j < bytes.length; j++) {
+            int v = bytes[j] & 0xFF;
+            hexChars[j * 2] = hexArray[v >>> 4];
+            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+        }
+        return new String(hexChars);
+    }
 }

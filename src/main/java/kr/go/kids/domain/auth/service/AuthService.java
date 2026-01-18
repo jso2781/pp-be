@@ -24,7 +24,14 @@ public interface AuthService
     /**
      * 토큰 삭제(로그아웃시)
      */
-    public ApiPrnDto logout(MbrTokenDVO mbrTokenDVO);
+    public ApiPrnDto logout(MbrTokenDVO mbrTokenDVO, String authorization);
+
+    /**
+     * Redis Idle Key 리셋
+     * @param authorizationHeader
+     * @return
+     */
+    public ApiPrnDto extend(String authorizationHeader);
 
     /**
      * 대국민포털_회원_TOKEN 정보 조회 

@@ -30,6 +30,9 @@ public class JwtTokenProvider {
     @Value("${jwt.refresh-token-name}")
     private String REFRESH_TOKEN_NAME;
 
+    public static final String CLAIM_TOKEN_ID = "tokenId";
+    public static final String CLAIM_APP_ID   = "appId";
+
     /**
      * <PRE>
      * AccessToken 생성
@@ -39,7 +42,7 @@ public class JwtTokenProvider {
      * @param SECRET_KEY
      * @return
      */
-    public String createAccessToken(String issuer, String userId, Long expTime) {
+    public String createAccessToken(String issuer, String mbrId, Long expTime, String tokenId, String appId) {
         if(expTime < 0L){
             // 만료시간은 지났습니다.
             throw new ApplicationException(MessageContextHolder.getMessage("ui.token.expired"));
@@ -50,8 +53,10 @@ public class JwtTokenProvider {
 
         // 토큰생성에필요한데이터설정으로토큰생성
         return Jwts.builder()
-                .setSubject(userId)                                 // userId & 토큰생성주체지정
+                .setSubject(mbrId)                                 // userId & 토큰생성주체지정
                 .setIssuer(issuer)                                  // 토큰 발행자(kids_user)
+                .claim(CLAIM_TOKEN_ID, tokenId)                     // ✅ 추가
+                .claim(CLAIM_APP_ID, appId)                         // ✅ 추가(원하면 생략 가능)
                 .setIssuedAt(new Date())                            // Access Token 발행 시간
                 .setExpiration(expireTime)                          // 만료 시간 설정& compact to String
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)     // key, key 암호화알고리즘설정
@@ -65,7 +70,7 @@ public class JwtTokenProvider {
      * @param expTime(밀리초)
      * @return
      */
-    public String createRefreshToken(String issuer, String userId, Long expTime) {
+    public String createRefreshToken(String issuer, String mbrId, Long expTime) {
         if(expTime < 0L){
             // 만료시간은 지났습니다.
             throw new ApplicationException(MessageContextHolder.getMessage("ui.token.expired"));
@@ -76,7 +81,7 @@ public class JwtTokenProvider {
 
         // 토큰생성에필요한데이터설정으로토큰생성
         return Jwts.builder()
-                .setSubject(userId)                                 // userId & 토큰생성주체지정
+                .setSubject(mbrId)                                  // userId & 토큰생성주체지정
                 .setIssuer(issuer)                                  // 토큰 발행자(kids_user)
 //                .setSubject(REFRESH_TOKEN_NAME)                     // 토큰 생성 주체지정
                 .setIssuedAt(new Date())                            // Refresh Token 발행 시간
@@ -168,5 +173,28 @@ public class JwtTokenProvider {
         } catch (ExpiredJwtException e) {
             return e.getClaims();
         }
+    }
+
+    /**
+     * JWT 토큰의 만료시간 얻기
+     * @param token -  AccessToken
+     * @return 만료시간(milliseconds)
+     */
+    public long getRemainingMillis(String token) {
+        Claims claims = getClaims(token); // 내부에서 Bearer 제거/validate 수행 :contentReference[oaicite:7]{index=7}
+        Date exp = claims.getExpiration();
+        return exp.getTime() - System.currentTimeMillis();
+    }
+
+    public String getTokenId(String token) {
+        Claims claims = getClaims(token);
+        Object v = claims.get(CLAIM_TOKEN_ID);
+        return v == null ? null : String.valueOf(v);
+    }
+
+    public String getAppId(String token) {
+        Claims claims = getClaims(token);
+        Object v = claims.get(CLAIM_APP_ID);
+        return v == null ? null : String.valueOf(v);
     }
 }

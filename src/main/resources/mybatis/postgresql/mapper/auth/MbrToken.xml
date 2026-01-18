@@ -117,6 +117,7 @@
         DELETE FROM "KIDS_OWN"."TB_PP_M_MBR_TOKEN"
         WHERE 1=1
         AND token_id = #{tokenId}
+        AND mbr_id = #{mbrId}
     </delete>
 
 </mapper>

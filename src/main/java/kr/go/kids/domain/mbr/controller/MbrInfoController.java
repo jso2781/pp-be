@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,7 @@ import kr.go.kids.domain.mbr.service.MbrInfoService;
 import kr.go.kids.domain.mbr.vo.MbrInfoDVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoPVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoRVO;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "MbrInfoController", description = "대국민포털_회원정보기본 관리")
 @RestController
@@ -27,6 +29,23 @@ public class MbrInfoController
 {
     @Autowired
     private MbrInfoService mbrInfoService;
+
+    @Operation(summary = "대국민포털_회원정보기본 기존 아이디, 이메일 존재여부 조회", description = "대국민포털_회원정보기본 기존 아이디, 이메일 존재여부 조회한다.")
+    @PostMapping(value="/checkMbrInfo")
+    @ResponseBody
+    public ResponseEntity<ApiPrnDto> checkMbrInfo(@RequestBody MbrInfoPVO mbrInfoPVO)
+    {
+        ApiPrnDto apiPrnDto = mbrInfoService.checkMbrInfo(mbrInfoPVO);
+
+        HashMap<String, Object> dataMap = apiPrnDto.getData();
+
+        Integer checkCnt = (Integer) dataMap.get("checkCnt");
+        if(0 == checkCnt){
+            return ResponseEntity.ok(apiPrnDto);
+        }else{
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiPrnDto);
+        }
+    }
 
     @Operation(summary = "대국민포털_회원정보기본 조회", description = "대국민포털_회원정보기본 조회한다.")
     @PostMapping(value="/getMbrInfo")
