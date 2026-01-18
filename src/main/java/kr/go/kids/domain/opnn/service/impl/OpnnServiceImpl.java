@@ -38,19 +38,20 @@ public class OpnnServiceImpl implements OpnnService
             params.put("menuSn", opnnPVO.getMenuSn());
             params.put("menuType", opnnPVO.getMenuType());
             
-            
-            // 대국민포털_의견제안 첨부파일 저장
-            ApiPrnDto fileResult = atchService.uploadFile(params, opnnPVO.getAttachFiles());
-            
             String atchFileSnStr = "";
             
-            HashMap<String, Object> fileMap = fileResult.getData();
-            List<HashMap<String, Object>> fileList = (List<HashMap<String, Object>>) fileMap.get("uploadList");
-            for(HashMap<String, Object> fileInfo : fileList) {
-                atchFileSnStr += fileInfo.get("fileId") + ",";
-            }
-            if (atchFileSnStr.endsWith(",")) {
-                atchFileSnStr = atchFileSnStr.substring(0, atchFileSnStr.length() - 1);
+            if(opnnPVO.getAttachFiles() != null) {
+                // 대국민포털_의견제안 첨부파일 저장
+                ApiPrnDto fileResult = atchService.uploadFile(params, opnnPVO.getAttachFiles());
+                
+                HashMap<String, Object> fileMap = fileResult.getData();
+                List<HashMap<String, Object>> fileList = (List<HashMap<String, Object>>) fileMap.get("uploadList");
+                for(HashMap<String, Object> fileInfo : fileList) {
+                    atchFileSnStr += fileInfo.get("fileId") + ",";
+                }
+                if (atchFileSnStr.endsWith(",")) {
+                    atchFileSnStr = atchFileSnStr.substring(0, atchFileSnStr.length() - 1);
+                }
             }
             
             long nextOpnnSn = opnnMapper.nextOpnnSn();
