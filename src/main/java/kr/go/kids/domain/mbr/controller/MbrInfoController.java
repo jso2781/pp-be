@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,20 +30,13 @@ public class MbrInfoController
     private MbrInfoService mbrInfoService;
 
     @Operation(summary = "대국민포털_회원정보기본 기존 아이디, 이메일 존재여부 조회", description = "대국민포털_회원정보기본 기존 아이디, 이메일 존재여부 조회한다.")
-    @PostMapping(value="/checkMbrInfo")
+    @PostMapping(value="/existMbrInfo")
     @ResponseBody
     public ResponseEntity<ApiPrnDto> checkMbrInfo(@RequestBody MbrInfoPVO mbrInfoPVO)
     {
-        ApiPrnDto apiPrnDto = mbrInfoService.checkMbrInfo(mbrInfoPVO);
+        ApiPrnDto apiPrnDto = mbrInfoService.existMbrInfo(mbrInfoPVO);
 
-        HashMap<String, Object> dataMap = apiPrnDto.getData();
-
-        Integer checkCnt = (Integer) dataMap.get("checkCnt");
-        if(0 == checkCnt){
-            return ResponseEntity.ok(apiPrnDto);
-        }else{
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiPrnDto);
-        }
+        return ResponseEntity.ok(apiPrnDto);
     }
 
     @Operation(summary = "대국민포털_회원정보기본 조회", description = "대국민포털_회원정보기본 조회한다.")
@@ -60,30 +52,15 @@ public class MbrInfoController
     @Operation(summary = "대국민포털_회원정보기본 입력", description = "대국민포털_회원정보기본 입력한다.")
     @PostMapping(value="/insertMbrInfo")
     @ResponseBody
-    public Map<String,Object> insertMbrInfo(@RequestBody List<MbrInfoPVO> mbrInfoList)
+    public ResponseEntity<ApiPrnDto> insertMbrInfo(@RequestBody MbrInfoPVO mbrInfo)
     {
-        int mbrInfoListCount = mbrInfoList.size();
+        ApiPrnDto apiPrnDto = mbrInfoService.insertMbrInfo(mbrInfo);
 
-        int insertCnt = 0;
-        MbrInfoPVO mbrInfo = null;
-
-        for(int i=0;i<mbrInfoListCount;i++)
-        {
-            mbrInfo = mbrInfoList.get(i);
-
-            mbrInfoService.insertMbrInfo(mbrInfo);
-            insertCnt++;
-
-            mbrInfo = null;
+        if("0".equals(apiPrnDto.getCode())) {
+            return ResponseEntity.ok(apiPrnDto);
+        }else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiPrnDto);
         }
-
-//        List<MbrInfoRVO> selectedMbrInfoList = mbrInfoService.selectMbrInfoList(mbrInfo);
-
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        resultMap.put("insertCnt", insertCnt);
-//        resultMap.put("mbrInfoList", selectedMbrInfoList);
-
-        return resultMap;
     }
 
     @Operation(summary = "대국민포털_회원정보기본 수정", description = "대국민포털_회원정보기본 수정한다.")

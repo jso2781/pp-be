@@ -13,7 +13,7 @@ public interface MbrInfoService
      * @param mbrInfoPVO 조회용 파라메터 정보
      * @return 조회된 대국민포털_회원정보기본
      */
-    public ApiPrnDto checkMbrInfo(MbrInfoPVO mbrInfoPVO);
+    public ApiPrnDto existMbrInfo(MbrInfoPVO mbrInfoPVO);
 
     /**
      * 대국민포털_회원정보기본 정보 조회 
@@ -27,9 +27,9 @@ public interface MbrInfoService
      * 대국민포털_회원정보기본 정보 입력 
      *
      * @param mbrInfoPVO 입력할 대국민포털_회원정보기본 정보 
-     * @return 입력된 건수 
+     * @return 입력 결과 ApiPrnDto 객체 반환
      */
-    public int insertMbrInfo(MbrInfoPVO mbrInfoPVO);
+    public ApiPrnDto insertMbrInfo(MbrInfoPVO mbrInfoPVO);
 
     /**
      * 대국민포털_회원정보기본 정보 수정 

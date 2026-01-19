@@ -19,13 +19,19 @@ public class MbrInfoServiceImpl implements MbrInfoService
     @Autowired
     private MbrInfoMapper mbrInfoMapper;
 
-    public ApiPrnDto checkMbrInfo(MbrInfoPVO mbrInfoPVO)
+    public ApiPrnDto existMbrInfo(MbrInfoPVO mbrInfoPVO)
     {
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
 
         int checkCnt = mbrInfoMapper.checkMbrInfo(mbrInfoPVO);
+
         HashMap<String, Object> bizData = new HashMap<>();
-        bizData.put("checkCnt", checkCnt);
+
+        if(0 < checkCnt) {
+            bizData.put("existYn", "Y");
+        }else{
+            bizData.put("existYn", "N");
+        }
 
         apiPrnDto.setData(bizData);
 
@@ -39,9 +45,20 @@ public class MbrInfoServiceImpl implements MbrInfoService
     }
 
     @Override
-    public int insertMbrInfo(MbrInfoPVO mbrInfoPVO)
+    public ApiPrnDto insertMbrInfo(MbrInfoPVO mbrInfoPVO)
     {
-        return mbrInfoMapper.insertMbrInfo(mbrInfoPVO);
+        ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+        int insertCnt = mbrInfoMapper.insertMbrInfo(mbrInfoPVO);
+
+        if(0 < insertCnt) {
+            HashMap<String, Object> dataMap = new HashMap<String, Object>();
+            dataMap.put("insertCnt", insertCnt);
+            apiPrnDto.setData(dataMap);
+
+            return apiPrnDto;
+        }
+
+        return ApiPrnDto.fail(ApiResultCode.SYSTEM_ERROR);
     }
 
     @Override

@@ -4,13 +4,13 @@
 
     <select id="checkMbrInfo" parameterType="MbrInfoPVO" resultType="int" >
         /* 대국민포털_회원정보기본 조회 (MbrInfoMapper.getMbrInfo) */
-        SELECT COUNT(*) cnt
+        SELECT COUNT(*) as cnt
         FROM "KIDS_OWN"."TB_PP_M_MBR_INFO"
         WHERE 1=1
         <if test="mbrId != null and mbrId != ''">
             AND mbr_id = #{mbrId}
         </if>
-        <if test="mbr_encpt_eml != null and mbr_encpt_eml != ''">
+        <if test="mbrEncptEml != null and mbrEncptEml != ''">
             AND mbr_encpt_eml = #{mbrEncptEml}
         </if>
     </select>
