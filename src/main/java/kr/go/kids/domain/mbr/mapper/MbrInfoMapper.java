@@ -26,12 +26,12 @@ public interface MbrInfoMapper
     public MbrInfoRVO getMbrInfo(MbrInfoPVO mbrInfoPVO);
 
     /**
-     * 대국민포털_회원정보기본 정보 입력 
+     * 대국민포털_회원정보기본 정보 입력(연도별 발번 테이블 "KIDS_OWN"."TB_PP_M_MBR_NO_SEQ" 이용)
      *
      * @param mbrInfoPVO 입력할 대국민포털_회원정보기본 정보 
-     * @return 입력된 건수 
+     * @return 입력된 회원정보의 회원번호(MBR_NO) 
      */
-    public int insertMbrInfo(MbrInfoPVO mbrInfoPVO);
+    public String insertMbrInfo(MbrInfoPVO mbrInfoPVO);
 
     /**
      * 대국민포털_회원정보기본 정보 수정 
