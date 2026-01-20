@@ -2,8 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.go.kids.domain.mbr.mapper.MbrInfoMapper">
 
+    <select id="verifyPassword" parameterType="VerifyPasswordPVO" resultType="int" >
+        /* 대국민포털_회원정보기본 기존 아이디, 패스워드 기준으로 데이터 존재 여부 조회 (MbrInfoMapper.verifyPassword) */
+        SELECT COUNT(*) as cnt
+        FROM "KIDS_OWN"."TB_PP_M_MBR_INFO"
+        WHERE 1=1
+        AND mbr_id = #{mbrId}
+        AND mbr_enpswd = #{mbrEnpswd}
+    </select>
+
     <select id="checkMbrInfo" parameterType="MbrInfoPVO" resultType="int" >
-        /* 대국민포털_회원정보기본 조회 (MbrInfoMapper.getMbrInfo) */
+        /* 대국민포털_회원정보기본 기존 아이디, 이메일 존재여부 조회 (MbrInfoMapper.checkMbrInfo) */
         SELECT COUNT(*) as cnt
         FROM "KIDS_OWN"."TB_PP_M_MBR_INFO"
         WHERE 1=1

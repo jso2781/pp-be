@@ -5,10 +5,19 @@ import org.apache.ibatis.annotations.Mapper;
 import kr.go.kids.domain.mbr.vo.MbrInfoDVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoPVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoRVO;
+import kr.go.kids.domain.mbr.vo.VerifyPasswordPVO;
 
 @Mapper
 public interface MbrInfoMapper
 {
+    /**
+     * 대국민포털_회원정보기본 기존 아이디, 패스워드 기준으로 데이터 존재 여부 조회
+     * 
+     * @param verifyPassword 조회용 파라메터 정보
+     * @return 조회된 대국민포털_회원정보기본
+     */
+    public int verifyPassword(VerifyPasswordPVO verifyPassword);
+
     /**
      * 대국민포털_회원정보기본 기존 아이디, 이메일 존재여부 조회
      * 

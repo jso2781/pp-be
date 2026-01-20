@@ -19,6 +19,7 @@ import kr.go.kids.domain.mbr.service.MbrInfoService;
 import kr.go.kids.domain.mbr.vo.MbrInfoDVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoPVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoRVO;
+import kr.go.kids.domain.mbr.vo.VerifyPasswordPVO;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "MbrInfoController", description = "대국민포털_회원정보기본 관리")
@@ -28,6 +29,17 @@ public class MbrInfoController
 {
     @Autowired
     private MbrInfoService mbrInfoService;
+
+
+    @Operation(summary = "대국민포털_회원정보기본 기존 아이디, 패스워드 기준으로 데이터 존재 여부 조회", description = "대국민포털_회원정보기본 기존 아이디, 패스워드 기준으로 데이터 존재 여부 조회한다.")
+    @PostMapping(value="/verifyPassword")
+    @ResponseBody
+    public ResponseEntity<ApiPrnDto> verifyPassword(@RequestBody VerifyPasswordPVO verifyPasswordPVO)
+    {
+        ApiPrnDto apiPrnDto = mbrInfoService.verifyPassword(verifyPasswordPVO);
+
+        return ResponseEntity.ok(apiPrnDto);
+    }
 
     @Operation(summary = "대국민포털_회원정보기본 기존 아이디, 이메일 존재여부 조회", description = "대국민포털_회원정보기본 기존 아이디, 이메일 존재여부 조회한다.")
     @PostMapping(value="/existMbrInfo")
