@@ -10,6 +10,7 @@ import kr.go.kids.domain.mbr.service.MbrInfoService;
 import kr.go.kids.domain.mbr.vo.MbrInfoDVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoPVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoRVO;
+import kr.go.kids.domain.mbr.vo.VerifyPasswordPVO;
 import kr.go.kids.global.system.common.ApiResultCode;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
@@ -18,6 +19,24 @@ public class MbrInfoServiceImpl implements MbrInfoService
 {
     @Autowired
     private MbrInfoMapper mbrInfoMapper;
+
+    public ApiPrnDto verifyPassword(VerifyPasswordPVO yerifyPasswordPVO) {
+        ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+
+        int checkCnt = mbrInfoMapper.verifyPassword(yerifyPasswordPVO);
+
+        HashMap<String, Object> bizData = new HashMap<>();
+
+        if(0 < checkCnt) {
+            bizData.put("existYn", "Y");
+        }else{
+            bizData.put("existYn", "N");
+        }
+
+        apiPrnDto.setData(bizData);
+
+        return apiPrnDto;
+    }
 
     public ApiPrnDto existMbrInfo(MbrInfoPVO mbrInfoPVO)
     {

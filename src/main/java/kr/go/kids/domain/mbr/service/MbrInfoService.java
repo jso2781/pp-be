@@ -3,10 +3,17 @@ package kr.go.kids.domain.mbr.service;
 import kr.go.kids.domain.mbr.vo.MbrInfoDVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoPVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoRVO;
+import kr.go.kids.domain.mbr.vo.VerifyPasswordPVO;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 public interface MbrInfoService
 {
+    /**
+     * 대국민포털_회원정보기본 기존 아이디, 패스워드 기준으로 데이터 존재 여부 조회
+     * @param verifyPasswordPVO
+     * @return 조회시 데이터가 존재하면 'Y', 아니면 'N'
+     */
+    public ApiPrnDto verifyPassword( VerifyPasswordPVO verifyPasswordPVO);
     /**
      * 대국민포털_회원정보기본 기존 아이디, 이메일 존재여부 조회
      * 
