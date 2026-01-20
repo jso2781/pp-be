@@ -81,9 +81,24 @@ public class MbrInfoServiceImpl implements MbrInfoService
     }
 
     @Override
-    public int updateMbrInfo(MbrInfoPVO mbrInfoPVO)
+    public ApiPrnDto updateMbrInfo(MbrInfoPVO mbrInfoPVO)
     {
-        return mbrInfoMapper.updateMbrInfo(mbrInfoPVO);
+        ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+        int updateCnt = mbrInfoMapper.updateMbrInfo(mbrInfoPVO);
+
+        if(0 < updateCnt) {
+            // 수정된 회원 정보를 다시 조회해서 UI에 반환한다.
+            MbrInfoRVO userInfo = mbrInfoMapper.getMbrInfo(mbrInfoPVO);
+
+            HashMap<String, Object> dataMap = new HashMap<String, Object>();
+            dataMap.put("updateCnt", 1);
+            dataMap.put("userInfo", userInfo);
+            apiPrnDto.setData(dataMap);
+
+            return apiPrnDto;
+        }
+
+        return ApiPrnDto.fail(ApiResultCode.SYSTEM_ERROR); 
     }
 
     @Override

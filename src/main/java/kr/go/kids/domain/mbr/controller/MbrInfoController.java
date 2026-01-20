@@ -78,30 +78,15 @@ public class MbrInfoController
     @Operation(summary = "대국민포털_회원정보기본 수정", description = "대국민포털_회원정보기본 수정한다.")
     @PostMapping(value="/updateMbrInfo")
     @ResponseBody
-    public Map<String,Object> updateMbrInfo(@RequestBody List<MbrInfoPVO> mbrInfoList)
+    public ResponseEntity<ApiPrnDto> updateMbrInfo(@RequestBody MbrInfoPVO mbrInfoList)
     {
-        int mbrInfoListCount = mbrInfoList.size();
+        ApiPrnDto apiPrnDto = mbrInfoService.updateMbrInfo(mbrInfoList);
 
-        int updateCnt = 0;
-        MbrInfoPVO mbrInfo = null;
-
-        for(int i=0;i<mbrInfoListCount;i++)
-        {
-            mbrInfo = mbrInfoList.get(i);
-
-            mbrInfoService.updateMbrInfo(mbrInfo);
-            updateCnt++;
-
-            mbrInfo = null;
+        if("0".equals(apiPrnDto.getCode())) {
+            return ResponseEntity.ok(apiPrnDto);
+        }else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiPrnDto);
         }
-
-//        List<MbrInfoRVO> selectedMbrInfoList = mbrInfoService.selectMbrInfoList(mbrInfo);
-
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        resultMap.put("updateCnt", updateCnt);
-//        resultMap.put("mbrInfoList", selectedMbrInfoList);
-
-        return resultMap;
     }
 
     @Operation(summary = "대국민포털_회원정보기본 저장", description = "대국민포털_회원정보기본 저장한다.")

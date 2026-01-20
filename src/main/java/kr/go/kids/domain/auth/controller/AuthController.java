@@ -21,6 +21,7 @@ import kr.go.kids.domain.auth.vo.LogoutPVO;
 import kr.go.kids.domain.auth.vo.MbrTokenDVO;
 import kr.go.kids.domain.auth.vo.MbrTokenPVO;
 import kr.go.kids.domain.auth.vo.RefreshPVO;
+import kr.go.kids.global.system.common.ApiResultCode;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "Auth1Controller", description = "대국민포털_로그인토큰 관리(JWT)")
@@ -49,11 +50,8 @@ public class AuthController {
     public ResponseEntity<ApiPrnDto> login(@RequestBody MbrTokenPVO input){
         ApiPrnDto apiPrnDto = authService.login(input);
 
-        if("0".equals(apiPrnDto.getCode())){
-            return ResponseEntity.ok(apiPrnDto);
-        }else{
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiPrnDto);
-        }
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
 
     /**
@@ -75,11 +73,8 @@ public class AuthController {
     public ResponseEntity<ApiPrnDto> refresh(@RequestBody RefreshPVO refreshPVO){
         ApiPrnDto apiPrnDto = authService.refresh(refreshPVO.getTokenId(), refreshPVO.getRefreshToken());
 
-        if("0".equals(apiPrnDto.getCode())){
-            return ResponseEntity.ok(apiPrnDto);
-        }else{
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiPrnDto);
-        }
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
 
     /**
@@ -106,11 +101,8 @@ public class AuthController {
 
         ApiPrnDto apiPrnDto = authService.logout(mtd, authorization);
 
-        if("0".equals(apiPrnDto.getCode())){
-            return ResponseEntity.ok(apiPrnDto);
-        }else{
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiPrnDto);
-        }
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
 
     /**

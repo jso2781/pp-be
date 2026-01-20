@@ -42,9 +42,9 @@ public interface MbrInfoService
      * 대국민포털_회원정보기본 정보 수정 
      *
      * @param mbrInfoPVO 수정할 대국민포털_회원정보기본 정보 
-     * @return 수정된 건수 
+     * @return 업데이트 결과 ApiPrnDto 객체 반환
      */
-    public int updateMbrInfo(MbrInfoPVO mbrInfoPVO);
+    public ApiPrnDto updateMbrInfo(MbrInfoPVO mbrInfoPVO);
 
     /**
      * 대국민포털_회원정보기본 정보 저장 
