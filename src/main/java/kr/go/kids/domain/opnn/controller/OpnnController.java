@@ -23,14 +23,14 @@ import kr.go.kids.global.system.common.vo.ApiPrnDto;
 @RestController
 @RequestMapping(value="/api/opnn")
 public class OpnnController
-{
+{ 
     @Value("${file.storePath}")
     private String savePath;
     
     @Autowired
     private OpnnService opnnService;
 
-    @Operation(summary = "대국민포털_의견제안 입력", description = "대국민포털_의견제안 입력한다.")
+    @Operation(summary = "대국민포털_의견제안 입력 ", description = "대국민포털_의견제안 입력한다.")
     @PostMapping(value="/insertOpnn")
     @ResponseBody
     public ResponseEntity<ApiPrnDto> insertOpnn(@ModelAttribute OpnnPVO opnnPVO) {
