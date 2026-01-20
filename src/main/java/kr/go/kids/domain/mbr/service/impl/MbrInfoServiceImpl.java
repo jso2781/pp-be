@@ -67,11 +67,11 @@ public class MbrInfoServiceImpl implements MbrInfoService
     public ApiPrnDto insertMbrInfo(MbrInfoPVO mbrInfoPVO)
     {
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
-        int insertCnt = mbrInfoMapper.insertMbrInfo(mbrInfoPVO);
+        String mbrNo = mbrInfoMapper.insertMbrInfo(mbrInfoPVO);
 
-        if(0 < insertCnt) {
+        if(mbrNo != null) {
             HashMap<String, Object> dataMap = new HashMap<String, Object>();
-            dataMap.put("insertCnt", insertCnt);
+            dataMap.put("insertCnt", 1);
             apiPrnDto.setData(dataMap);
 
             return apiPrnDto;

@@ -2334,6 +2334,7 @@ ALTER TABLE "TB_PP_M_DEPT_AUTHRT"
 -- 대국민포털_부서권한기본 기본키2
 COMMENT ON CONSTRAINT "PK_TB_PP_M_DEPT_AUTHRT" ON "TB_PP_M_DEPT_AUTHRT" IS '대국민포털_부서권한기본 기본키2';
 
+
 CREATE SEQUENCE "KIDS_OWN"."TB_PP_M_TRMS_STT_SEQ"
     INCREMENT BY 1
     MINVALUE 1
@@ -3117,6 +3118,13 @@ CREATE TABLE "KIDS_OWN"."CONNECTTION_LOG_DETAIL" (
    rgtr_id varchar(20) NULL,
    CONSTRAINT pk_connection_log_detail PRIMARY KEY (cntn_log_sn, acsr_id)
 );
+
+
+CREATE TABLE IF NOT EXISTS "KIDS_OWN"."TB_PP_M_MBR_NO_SEQ" (
+  yyyy     char(4) PRIMARY KEY,
+  last_seq integer NOT NULL
+);
+
 
 -- 대국민포털_회원정보기본
 CREATE TABLE "TB_PP_M_MBR_INFO"

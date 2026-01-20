@@ -59,36 +59,43 @@
         </if>
     </select>
 
-    <insert id="insertMbrInfo" parameterType="MbrInfoPVO">
+    <select id="insertMbrInfo" parameterType="MbrInfoPVO">
         /* 대국민포털_회원정보기본 입력 (MbrInfoMapper.insertMbrInfo) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_MBR_INFO"
-        (
-             mbr_no
-            ,mbr_id
-            ,mbr_encpt_flnm
-            ,mbr_encpt_eml
-            ,mbr_enpswd
-            ,mbr_encpt_telno
-            ,mbr_type_cd
-            ,mbr_join_stts
-            ,mbr_join_dt
-            ,mbr_whdwl_rsn
-            ,mbr_whdwl_dt
-            ,bfr_enpswd
-            ,pswd_chg_dt
-            ,pswd_err_nmtm
-            ,link_info_idntf_id
-            ,cert_token
-            ,rgtr_id
-            ,reg_dt
-            ,reg_prgrm_id
-            ,mdfr_id
-            ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        )
-        VALUES
-        (
-             #{mbrNo}
+        WITH seq AS (
+          INSERT INTO "KIDS_OWN"."TB_PP_M_MBR_NO_SEQ" (yyyy, last_seq)
+          VALUES (to_char(CURRENT_TIMESTAMP, 'YYYY'), 1)
+          ON CONFLICT (yyyy)
+          DO UPDATE SET last_seq = "TB_PP_M_MBR_NO_SEQ".last_seq + 1
+          RETURNING yyyy, last_seq
+        ),
+        ins AS (
+          INSERT INTO "KIDS_OWN"."TB_PP_M_MBR_INFO"
+          (
+               mbr_no
+              ,mbr_id
+              ,mbr_encpt_flnm
+              ,mbr_encpt_eml
+              ,mbr_enpswd
+              ,mbr_encpt_telno
+              ,mbr_type_cd
+              ,mbr_join_stts
+              ,mbr_join_dt
+              ,mbr_whdwl_rsn
+              ,mbr_whdwl_dt
+              ,bfr_enpswd
+              ,pswd_chg_dt
+              ,pswd_err_nmtm
+              ,link_info_idntf_id
+              ,cert_token
+              ,rgtr_id
+              ,reg_dt
+              ,reg_prgrm_id
+              ,mdfr_id
+              ,mdfcn_dt
+              ,mdfcn_prgrm_id
+          )
+          SELECT
+             seq.yyyy || LPAD(seq.last_seq::text, 6, '0') AS mbr_no
             ,#{mbrId}
             ,#{mbrEncptFlnm}
             ,#{mbrEncptEml}
@@ -96,7 +103,7 @@
             ,#{mbrEncptTelno}
             ,#{mbrTypeCd}
             ,#{mbrJoinStts}
-            ,#{mbrJoinDt}
+            ,to_timestamp(#{mbrJoinDt}, 'YYYY-MM-DD HH24:MI:SS')
             ,#{mbrWhdwlRsn}
             ,#{mbrWhdwlDt}
             ,#{bfrEnpswd}
@@ -110,8 +117,11 @@
             ,#{mdfrId}
             ,now()
             ,#{mdfcnPrgrmId}
+          FROM seq
+          RETURNING mbr_no
         )
-    </insert>
+        SELECT mbr_no FROM ins
+    </select>
 
     <update id="updateMbrInfo" parameterType="MbrInfoPVO">
         /* 대국민포털_회원정보기본 수정 (MbrInfoMapper.updateMbrInfo) */
