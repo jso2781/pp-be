@@ -7,11 +7,9 @@ import org.springframework.core.io.Resource;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Builder
+@Getter
 @Schema(name = "공통_첨부파일기본", description = "공통_첨부파일기본 File Download Parameter VO")
 public class AtchDWVO {
 

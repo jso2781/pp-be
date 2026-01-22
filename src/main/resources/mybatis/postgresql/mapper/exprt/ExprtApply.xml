@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.exprt.mapper.ExprtApplyMapper">
+
+    <select id="existsInstByBrno" parameterType="String" resultType="boolean" >
+        /* 대국민포털_전문가회원전환신청관리 사업자등록번호 검증 (ExprtApplyMapper.existsInstByBrno) */        
+		SELECT EXISTS (
+		    SELECT 1
+		      FROM "KIDS_OWN"."TB_PP_M_INST"
+		     WHERE brno = #{brno}
+		)
+    </select>
+
+    <select id="selectInstTaskSystemByBrno" parameterType="String" resultType="ExprtApplyRVO" >
+        /* 대국민포털_전문가회원전환신청관리 기관 업무시스템 목록조회 (ExprtApplyMapper.selectInstTaskSystemByBrno) */        
+		<!--
+		테이블 및 컬럼명 확정 반영 		
+		SELECT cd.공통상세코드 AS value
+		     , cd.공통상세코드명 AS label
+		  FROM "KIDS_OWN"."공통_상세코드" cd
+		  LEFT OUTER JOIN "KIDS_OWN"."TB_PP_M_INST_TASK" tk
+		    ON cd.공통_상세코드 = tk.task_se_cd
+		 WHERE cd.공통그룹코드 컬럼명 = '공통그룹코드 값'
+		   AND tk.brno = #{brno}
+		   AND cd.use_yn = 'Y'
+		 ORDER BY cd.정렬순서 desc
+		 -->		 
+		SELECT '업무시스템1' AS label, 'SYS1' AS value
+		 UNION ALL
+		SELECT '업무시스템2' AS label, 'SYS2' AS value		   		   
+    </select>
+
+    <select id="existsByEmail" parameterType="String" resultType="boolean" >
+        /* 대국민포털_전문가회원전환신청관리 이메일 중복검사 (ExprtApplyMapper.existsByEmail) */        
+		SELECT EXISTS (
+		    SELECT 1
+		      FROM "KIDS_OWN"."TB_PP_M_EXPRT_INFO"
+		     WHERE exprt_ogdp_inst_encpt_eml = #{email}
+		)
+    </select>
+
+    <insert id="insertExprtInfo" parameterType="ExprtApplyIVO">
+        /* 대국민포털_전문가회원전환신청관리 전문가정보기본 입력 (ExprtApplyMapper.insertExprtInfo) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_EXPRT_INFO"
+        (
+             mbr_no
+            ,brno
+            ,exprt_ogdp_inst_encpt_eml
+            ,exprt_hdof_yn
+            ,exprt_aprv_stts_yn
+            ,atch_file_id
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+        )
+        VALUES
+        (
+             #{mbrNo}
+            ,#{brno}
+            ,#{email}
+            ,'Y'
+            ,'N'
+            ,#{atchFileId}
+            ,#{mbrId}
+            ,CURRENT_TIMESTAMP
+            ,'SYSTEM'
+        )
+    </insert>
+
+    <insert id="insertExprtTask" parameterType="ExprtApplyIVO">
+        /* 대국민포털_전문가회원전환신청관리 전문가정보기본 입력 (ExprtApplyMapper.insertExprtTask) */
+        INSERT INTO "KIDS_OWN"."TB_PP_M_EXPRT_TASK"
+        (
+             exprt_task_sn
+            ,mbr_no
+            ,task_se_cd
+            ,brno
+            ,exprt_aprv_stts_yn
+            ,rgtr_id
+            ,reg_dt
+            ,reg_prgrm_id
+        )
+        VALUES        
+	    <foreach collection="taskSystemCodes"
+	             item="taskSystemCd"
+	             separator=",">
+	        (
+	            nextval('"KIDS_OWN"."TB_PP_M_EXPRT_TASK_SEQ"')
+	            ,#{mbrNo}
+	            ,#{taskSystemCd}
+	            ,#{brno}
+	            ,'N'
+	            ,#{mbrId}
+	            ,CURRENT_TIMESTAMP
+	            ,'SYSTEM'
+	        )
+	    </foreach>                
+    </insert>    
+
+</mapper>
