@@ -20,6 +20,7 @@ import kr.go.kids.domain.mbr.vo.MbrInfoDVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoPVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoRVO;
 import kr.go.kids.domain.mbr.vo.VerifyPasswordPVO;
+import kr.go.kids.global.system.common.ApiResultCode;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "MbrInfoController", description = "대국민포털_회원정보기본 관리")
@@ -129,5 +130,31 @@ public class MbrInfoController
         resultMap.put("deleteCnt", deleteCnt);
 
         return resultMap;
+    }
+    
+    @Operation(summary = "대국민포털_회원정보기본 CI값 기준으로 ID 존재 여부 조회", description = "대국민포털_회원정보기본 CI값 기준으로 ID 존재 여부 조회한다.")
+    @PostMapping(value="/findId")
+    @ResponseBody
+    public ResponseEntity<ApiPrnDto> findId(@RequestBody MbrInfoPVO mbrInfoPVO )
+    {
+    	mbrInfoPVO.getLinkInfoIdntfId(); //CI값으로 예상중
+//    	ApiPrnDto apiPrnDto = mbrInfoService.findId(mbrInfoPVO);
+//
+//    	ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+//        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
+    	return new ResponseEntity(null);
+    }
+    
+    @Operation(summary = "대국민포털_회원정보기본 CI값 기준으로 PW 수정", description = "대국민포털_회원정보기본 CI값 기준으로 PW 수정한다.")
+    @PostMapping(value="/findPwModify")
+    @ResponseBody
+    public ResponseEntity<ApiPrnDto> findPwModify(@RequestBody MbrInfoPVO mbrInfoPVO )
+    {
+    	mbrInfoPVO.getLinkInfoIdntfId(); //CI값으로 예상중
+//    	ApiPrnDto apiPrnDto = mbrInfoService.findPwModify(mbrInfoPVO);
+//
+//    	ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+//        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
+    	return new ResponseEntity(null);
     }
 }
