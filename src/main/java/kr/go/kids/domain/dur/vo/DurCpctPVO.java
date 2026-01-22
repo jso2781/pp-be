@@ -39,7 +39,7 @@ public class DurCpctPVO
      * 1일최대투여용량
      */
     @Schema(description = "1일최대투여용량", type = "String")
-    private String dailyMaxAdminCpct;
+    private String dayMaxAdminCpctCn;
 
     /**
      * 1일최대투여기준용량
@@ -51,25 +51,7 @@ public class DurCpctPVO
      * 점검기준성분함량
      */
     @Schema(description = "점검기준성분함량", type = "Double")
-    private Double chckCrtrIgrdCon;
-
-    /**
-     * 식약처제품명
-     */
-    @Schema(description = "식약처제품명", type = "String")
-    private String mfdsPrdctNm;
-
-    /**
-     * 식약처성분코드
-     */
-    @Schema(description = "식약처성분코드", type = "String")
-    private String mfdsIgrdCd;
-
-    /**
-     * 식약처성분명
-     */
-    @Schema(description = "식약처성분명", type = "String")
-    private String mfdsIgrdNm;
+    private Double chckCrtrIgrdCpct;
 
     /**
      * 공고일자
@@ -96,12 +78,6 @@ public class DurCpctPVO
     private String aplcnYm;
 
     /**
-     * 유형코드
-     */
-    @Schema(description = "유형코드", type = "String")
-    private String typeCd;
-
-    /**
      * 등록자아이디
      */
     @Schema(description = "등록자아이디", type = "String")
@@ -112,12 +88,6 @@ public class DurCpctPVO
      */
     @Schema(description = "등록일시", type = "String")
     private String regDt;
-
-    /**
-     * 등록프로그램아이디
-     */
-    @Schema(description = "등록프로그램아이디", type = "String")
-    private String regPrgrmId;
 
     /**
      * 수정자아이디
@@ -135,7 +105,7 @@ public class DurCpctPVO
      * 수정프로그램아이디
      */
     @Schema(description = "수정프로그램아이디", type = "String")
-    private String mdfcnPrgrmId;
+
 
     public String getCpctCutnSn()
     {
@@ -177,13 +147,13 @@ public class DurCpctPVO
     {
         this.gnrlNm = gnrlNm;
     }
-    public String getDailyMaxAdminCpct()
+    public String getDayMaxAdminCpctCn()
     {
-        return dailyMaxAdminCpct;
+        return dayMaxAdminCpctCn;
     }
-    public void setDailyMaxAdminCpct(String dailyMaxAdminCpct)
+    public void setDayMaxAdminCpctCn(String dayMaxAdminCpctCn)
     {
-        this.dailyMaxAdminCpct = dailyMaxAdminCpct;
+        this.dayMaxAdminCpctCn = dayMaxAdminCpctCn;
     }
     public Double getDailyMaxAdminCrtrCpct()
     {
@@ -193,37 +163,13 @@ public class DurCpctPVO
     {
         this.dailyMaxAdminCrtrCpct = dailyMaxAdminCrtrCpct;
     }
-    public Double getChckCrtrIgrdCon()
+    public Double getChckCrtrIgrdCpct()
     {
-        return chckCrtrIgrdCon;
+        return chckCrtrIgrdCpct;
     }
-    public void setChckCrtrIgrdCon(Double chckCrtrIgrdCon)
+    public void setChckCrtrIgrdCpct(Double chckCrtrIgrdCpct)
     {
-        this.chckCrtrIgrdCon = chckCrtrIgrdCon;
-    }
-    public String getMfdsPrdctNm()
-    {
-        return mfdsPrdctNm;
-    }
-    public void setMfdsPrdctNm(String mfdsPrdctNm)
-    {
-        this.mfdsPrdctNm = mfdsPrdctNm;
-    }
-    public String getMfdsIgrdCd()
-    {
-        return mfdsIgrdCd;
-    }
-    public void setMfdsIgrdCd(String mfdsIgrdCd)
-    {
-        this.mfdsIgrdCd = mfdsIgrdCd;
-    }
-    public String getMfdsIgrdNm()
-    {
-        return mfdsIgrdNm;
-    }
-    public void setMfdsIgrdNm(String mfdsIgrdNm)
-    {
-        this.mfdsIgrdNm = mfdsIgrdNm;
+        this.chckCrtrIgrdCpct = chckCrtrIgrdCpct;
     }
     public String getPbancYmd()
     {
@@ -257,14 +203,6 @@ public class DurCpctPVO
     {
         this.aplcnYm = aplcnYm;
     }
-    public String getTypeCd()
-    {
-        return typeCd;
-    }
-    public void setTypeCd(String typeCd)
-    {
-        this.typeCd = typeCd;
-    }
     public String getRgtrId()
     {
         return rgtrId;
@@ -280,14 +218,6 @@ public class DurCpctPVO
     public void setRegDt(String regDt)
     {
         this.regDt = regDt;
-    }
-    public String getRegPrgrmId()
-    {
-        return regPrgrmId;
-    }
-    public void setRegPrgrmId(String regPrgrmId)
-    {
-        this.regPrgrmId = regPrgrmId;
     }
     public String getMdfrId()
     {
@@ -305,13 +235,4 @@ public class DurCpctPVO
     {
         this.mdfcnDt = mdfcnDt;
     }
-    public String getMdfcnPrgrmId()
-    {
-        return mdfcnPrgrmId;
-    }
-    public void setMdfcnPrgrmId(String mdfcnPrgrmId)
-    {
-        this.mdfcnPrgrmId = mdfcnPrgrmId;
-    }
-
 }

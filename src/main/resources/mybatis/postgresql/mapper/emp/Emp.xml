@@ -12,18 +12,18 @@
             ,bfr_enpswd
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_M_EMP"
+
+        FROM kids_own.TB_PP_M_EMP
         WHERE 1=1
         AND emp_no = #{empNo}
     </select>
 
     <insert id="insertEmp" parameterType="EmpPVO">
         /* 대국민포털_관리자정보기본 입력 (EmpMapper.insertEmp) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_EMP"
+        INSERT INTO kids_own.TB_PP_M_EMP
         (
              emp_no
             ,mngr_enpswd
@@ -32,10 +32,10 @@
             ,bfr_enpswd
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -46,16 +46,16 @@
             ,#{bfrEnpswd}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
     <update id="updateEmp" parameterType="EmpPVO">
         /* 대국민포털_관리자정보기본 수정 (EmpMapper.updateEmp) */
-        UPDATE "KIDS_OWN"."TB_PP_M_EMP"
+        UPDATE kids_own.TB_PP_M_EMP
         SET
              mngr_enpswd = coalesce(#{mngrEnpswd}, mngr_enpswd)
             ,tmpr_pswd_yn = coalesce(#{tmprPswdYn}, tmpr_pswd_yn)
@@ -63,14 +63,14 @@
             ,bfr_enpswd = coalesce(#{bfrEnpswd}, bfr_enpswd)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND emp_no = #{empNo}
     </update>
 
     <insert id="saveEmp" parameterType="EmpPVO">
         /* 대국민포털_관리자정보기본 저장 (EmpMapper.insertEmp) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_EMP"
+        INSERT INTO kids_own.TB_PP_M_EMP
         (
              emp_no
             ,mngr_enpswd
@@ -79,10 +79,10 @@
             ,bfr_enpswd
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -93,25 +93,25 @@
             ,#{bfrEnpswd}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(emp_no)
         DO UPDATE SET
-             mngr_enpswd = coalesce(excluded.mngr_enpswd, "KIDS_OWN"."TB_PP_M_EMP".mngr_enpswd)
-            ,tmpr_pswd_yn = coalesce(excluded.tmpr_pswd_yn, "KIDS_OWN"."TB_PP_M_EMP".tmpr_pswd_yn)
-            ,pswd_err_nmtm = coalesce(excluded.pswd_err_nmtm, "KIDS_OWN"."TB_PP_M_EMP".pswd_err_nmtm)
-            ,bfr_enpswd = coalesce(excluded.bfr_enpswd, "KIDS_OWN"."TB_PP_M_EMP".bfr_enpswd)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_EMP".mdfr_id)
+             mngr_enpswd = coalesce(excluded.mngr_enpswd, kids_own.TB_PP_M_EMP.mngr_enpswd)
+            ,tmpr_pswd_yn = coalesce(excluded.tmpr_pswd_yn, kids_own.TB_PP_M_EMP.tmpr_pswd_yn)
+            ,pswd_err_nmtm = coalesce(excluded.pswd_err_nmtm, kids_own.TB_PP_M_EMP.pswd_err_nmtm)
+            ,bfr_enpswd = coalesce(excluded.bfr_enpswd, kids_own.TB_PP_M_EMP.bfr_enpswd)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_EMP.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_EMP".mdfcn_prgrm_id)
+
     </insert>
 
     <delete id="deleteEmp" parameterType="EmpDVO">
         /* 대국민포털_관리자정보기본 삭제 (EmpMapper.deleteEmp) */
-        DELETE FROM "KIDS_OWN"."TB_PP_M_EMP"
+        DELETE FROM kids_own.TB_PP_M_EMP
         WHERE 1=1
         AND emp_no = #{empNo}
     </delete>

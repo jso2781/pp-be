@@ -23,18 +23,18 @@
             ,aplcn_ym
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM"
+
+        FROM kids_own.TB_PP_M_DUR_EFTGRP_ITEM
         WHERE 1=1
         AND eftgrp_dpcn_sn = #{eftgrpDpcnSn}
     </select>
 
     <insert id="insertDurEftgrpItem" parameterType="DurEftgrpItemPVO">
         /* 대국민포털_DUR효능군중복품목기본 입력 (DurEftgrpItemMapper.insertDurEftgrpItem) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM"
+        INSERT INTO kids_own.TB_PP_M_DUR_EFTGRP_ITEM
         (
              eftgrp_dpcn_sn
             ,mdcn_cd
@@ -54,10 +54,10 @@
             ,aplcn_ym
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -79,16 +79,16 @@
             ,#{aplcnYm}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
     <update id="updateDurEftgrpItem" parameterType="DurEftgrpItemPVO">
         /* 대국민포털_DUR효능군중복품목기본 수정 (DurEftgrpItemMapper.updateDurEftgrpItem) */
-        UPDATE "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM"
+        UPDATE kids_own.TB_PP_M_DUR_EFTGRP_ITEM
         SET
              mdcn_cd = coalesce(#{mdcnCd}, mdcn_cd)
             ,eft_group = coalesce(#{eftGroup}, eft_group)
@@ -107,14 +107,14 @@
             ,aplcn_ym = coalesce(#{aplcnYm}, aplcn_ym)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND eftgrp_dpcn_sn = #{eftgrpDpcnSn}
     </update>
 
     <insert id="saveDurEftgrpItem" parameterType="DurEftgrpItemPVO">
         /* 대국민포털_DUR효능군중복품목기본 저장 (DurEftgrpItemMapper.insertDurEftgrpItem) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM"
+        INSERT INTO kids_own.TB_PP_M_DUR_EFTGRP_ITEM
         (
              eftgrp_dpcn_sn
             ,mdcn_cd
@@ -134,10 +134,10 @@
             ,aplcn_ym
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -159,36 +159,36 @@
             ,#{aplcnYm}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(eftgrp_dpcn_sn)
         DO UPDATE SET
-             mdcn_cd = coalesce(excluded.mdcn_cd, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".mdcn_cd)
-            ,eft_group = coalesce(excluded.eft_group, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".eft_group)
-            ,group = coalesce(excluded.group, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".group)
-            ,group_1 = coalesce(excluded.group_1, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".group_1)
-            ,eftgrp_dpcn_chck_cd = coalesce(excluded.eftgrp_dpcn_chck_cd, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".eftgrp_dpcn_chck_cd)
-            ,gnrl_nm_cd = coalesce(excluded.gnrl_nm_cd, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".gnrl_nm_cd)
-            ,gnrl_nm = coalesce(excluded.gnrl_nm, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".gnrl_nm)
-            ,item_nm = coalesce(excluded.item_nm, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".item_nm)
-            ,bzenty_nm = coalesce(excluded.bzenty_nm, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".bzenty_nm)
-            ,mfds_prdct_nm = coalesce(excluded.mfds_prdct_nm, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".mfds_prdct_nm)
-            ,mfds_igrd_cd = coalesce(excluded.mfds_igrd_cd, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".mfds_igrd_cd)
-            ,mfds_igrd_nm = coalesce(excluded.mfds_igrd_nm, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".mfds_igrd_nm)
-            ,pbanc_ymd = coalesce(excluded.pbanc_ymd, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".pbanc_ymd)
-            ,pbanc_no = coalesce(excluded.pbanc_no, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".pbanc_no)
-            ,aplcn_ym = coalesce(excluded.aplcn_ym, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".aplcn_ym)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".mdfr_id)
+             mdcn_cd = coalesce(excluded.mdcn_cd, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.mdcn_cd)
+            ,eft_group = coalesce(excluded.eft_group, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.eft_group)
+            ,group = coalesce(excluded.group, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.group)
+            ,group_1 = coalesce(excluded.group_1, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.group_1)
+            ,eftgrp_dpcn_chck_cd = coalesce(excluded.eftgrp_dpcn_chck_cd, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.eftgrp_dpcn_chck_cd)
+            ,gnrl_nm_cd = coalesce(excluded.gnrl_nm_cd, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.gnrl_nm_cd)
+            ,gnrl_nm = coalesce(excluded.gnrl_nm, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.gnrl_nm)
+            ,item_nm = coalesce(excluded.item_nm, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.item_nm)
+            ,bzenty_nm = coalesce(excluded.bzenty_nm, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.bzenty_nm)
+            ,mfds_prdct_nm = coalesce(excluded.mfds_prdct_nm, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.mfds_prdct_nm)
+            ,mfds_igrd_cd = coalesce(excluded.mfds_igrd_cd, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.mfds_igrd_cd)
+            ,mfds_igrd_nm = coalesce(excluded.mfds_igrd_nm, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.mfds_igrd_nm)
+            ,pbanc_ymd = coalesce(excluded.pbanc_ymd, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.pbanc_ymd)
+            ,pbanc_no = coalesce(excluded.pbanc_no, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.pbanc_no)
+            ,aplcn_ym = coalesce(excluded.aplcn_ym, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.aplcn_ym)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_DUR_EFTGRP_ITEM.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM".mdfcn_prgrm_id)
+
     </insert>
 
     <delete id="deleteDurEftgrpItem" parameterType="DurEftgrpItemDVO">
         /* 대국민포털_DUR효능군중복품목기본 삭제 (DurEftgrpItemMapper.deleteDurEftgrpItem) */
-        DELETE FROM "KIDS_OWN"."TB_PP_M_DUR_EFTGRP_ITEM"
+        DELETE FROM kids_own.TB_PP_M_DUR_EFTGRP_ITEM
         WHERE 1=1
         AND eftgrp_dpcn_sn = #{eftgrpDpcnSn}
     </delete>

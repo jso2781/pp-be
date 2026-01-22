@@ -90,7 +90,7 @@ ALTER TABLE KIDS_OWN.TB_PP_M_DUR_CONC_BANN
 -- 대국민포털_DUR수유부주의기본
 CREATE TABLE KIDS_OWN.TB_PP_M_DUR_NURSW
 (
-	수유부주의일련번호 VARCHAR(50)   NOT NULL, -- 수유부주의일련번호
+	nursw_cutn_sn VARCHAR(50)   NOT NULL, -- 수유부주의일련번호
 	prdct_cd           CHAR(9)       NOT NULL, -- 제품코드
 	igrd_cd            VARCHAR(20)   NOT NULL, -- 성분코드
 	igrd_nm            VARCHAR(100)  NULL,     -- 성분명
@@ -115,7 +115,7 @@ COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_NURSW.slry_se_cd IS '품목(I), 성분(C)
 CREATE UNIQUE INDEX PK_TB_PP_M_DUR_NURSW
 	ON KIDS_OWN.TB_PP_M_DUR_NURSW
 	( -- 대국민포털_DUR수유부주의기본
-		수유부주의일련번호 ASC NULLS LAST -- 수유부주의일련번호
+		nursw_cutn_sn ASC NULLS LAST -- 수유부주의일련번호
 	);
 
 -- 대국민포털_DUR수유부주의기본

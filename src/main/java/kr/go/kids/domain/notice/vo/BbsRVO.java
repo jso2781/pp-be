@@ -21,7 +21,7 @@ public class BbsRVO
      * 게시판속성
      */
     @Schema(description = "게시판속성", type = "String")
-    private String bbsAtrb;
+    private String bbsAtrbCd;
 
     /**
      * 게시판설명
@@ -33,7 +33,7 @@ public class BbsRVO
      * 게시판요약
      */
     @Schema(description = "게시판요약", type = "String")
-    private String bbsSmry;
+    private String bbsSmryCn;
 
     /**
      * 댓글사용여부
@@ -129,13 +129,13 @@ public class BbsRVO
     {
         this.bbsNm = bbsNm;
     }
-    public String getBbsAtrb()
+    public String getBbsAtrbCd()
     {
-        return bbsAtrb;
+        return bbsAtrbCd;
     }
-    public void setBbsAtrb(String bbsAtrb)
+    public void setBbsAtrbCd(String bbsAtrbCd)
     {
-        this.bbsAtrb = bbsAtrb;
+        this.bbsAtrbCd = bbsAtrbCd;
     }
     public String getBbsExpln()
     {
@@ -145,13 +145,13 @@ public class BbsRVO
     {
         this.bbsExpln = bbsExpln;
     }
-    public String getBbsSmry()
+    public String getBbsSmryCn()
     {
-        return bbsSmry;
+        return bbsSmryCn;
     }
-    public void setBbsSmry(String bbsSmry)
+    public void setBbsSmryCn(String bbsSmryCn)
     {
-        this.bbsSmry = bbsSmry;
+        this.bbsSmryCn = bbsSmryCn;
     }
     public String getCmntUseYn()
     {

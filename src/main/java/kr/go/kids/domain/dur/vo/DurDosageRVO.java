@@ -9,7 +9,7 @@ public class DurDosageRVO
      * 투여기간주의일련번호
      */
     @Schema(description = "투여기간주의일련번호", type = "String")
-    private String dosagePrdCutnSn;
+    private String adminPrdCutnSn;
 
     /**
      * 약품코드
@@ -39,25 +39,7 @@ public class DurDosageRVO
      * 최대투여기간일수
      */
     @Schema(description = "최대투여기간일수", type = "Integer")
-    private Integer maxDosagePrdDays;
-
-    /**
-     * 식약처제품명
-     */
-    @Schema(description = "식약처제품명", type = "String")
-    private String mfdsPrdctNm;
-
-    /**
-     * 식약처성분코드
-     */
-    @Schema(description = "식약처성분코드", type = "String")
-    private String mfdsIgrdCd;
-
-    /**
-     * 식약처성분명
-     */
-    @Schema(description = "식약처성분명", type = "String")
-    private String mfdsIgrdNm;
+    private Integer maxAdminPrdDayCnt;
 
     /**
      * 공고일자
@@ -81,13 +63,7 @@ public class DurDosageRVO
      * 비고
      */
     @Schema(description = "비고", type = "String")
-    private String rmrk;
-
-    /**
-     * 유형코드
-     */
-    @Schema(description = "유형코드", type = "String")
-    private String typeCd;
+    private String rmrkCn;
 
     /**
      * 등록자아이디
@@ -102,12 +78,6 @@ public class DurDosageRVO
     private String regDt;
 
     /**
-     * 등록프로그램아이디
-     */
-    @Schema(description = "등록프로그램아이디", type = "String")
-    private String regPrgrmId;
-
-    /**
      * 수정자아이디
      */
     @Schema(description = "수정자아이디", type = "String")
@@ -119,19 +89,13 @@ public class DurDosageRVO
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
 
-    /**
-     * 수정프로그램아이디
-     */
-    @Schema(description = "수정프로그램아이디", type = "String")
-    private String mdfcnPrgrmId;
-
-    public String getDosagePrdCutnSn()
+    public String getAdminPrdCutnSn()
     {
-        return dosagePrdCutnSn;
+        return adminPrdCutnSn;
     }
-    public void setDosagePrdCutnSn(String dosagePrdCutnSn)
+    public void setAdminPrdCutnSn(String adminPrdCutnSn)
     {
-        this.dosagePrdCutnSn = dosagePrdCutnSn;
+        this.adminPrdCutnSn = adminPrdCutnSn;
     }
     public String getMdcnCd()
     {
@@ -165,37 +129,13 @@ public class DurDosageRVO
     {
         this.gnrlNm = gnrlNm;
     }
-    public Integer getMaxDosagePrdDays()
+    public Integer getMaxAdminPrdDayCnt()
     {
-        return maxDosagePrdDays;
+        return maxAdminPrdDayCnt;
     }
-    public void setMaxDosagePrdDays(Integer maxDosagePrdDays)
+    public void setMaxAdminPrdDayCnt(Integer maxAdminPrdDayCnt)
     {
-        this.maxDosagePrdDays = maxDosagePrdDays;
-    }
-    public String getMfdsPrdctNm()
-    {
-        return mfdsPrdctNm;
-    }
-    public void setMfdsPrdctNm(String mfdsPrdctNm)
-    {
-        this.mfdsPrdctNm = mfdsPrdctNm;
-    }
-    public String getMfdsIgrdCd()
-    {
-        return mfdsIgrdCd;
-    }
-    public void setMfdsIgrdCd(String mfdsIgrdCd)
-    {
-        this.mfdsIgrdCd = mfdsIgrdCd;
-    }
-    public String getMfdsIgrdNm()
-    {
-        return mfdsIgrdNm;
-    }
-    public void setMfdsIgrdNm(String mfdsIgrdNm)
-    {
-        this.mfdsIgrdNm = mfdsIgrdNm;
+        this.maxAdminPrdDayCnt = maxAdminPrdDayCnt;
     }
     public String getPbancYmd()
     {
@@ -221,21 +161,13 @@ public class DurDosageRVO
     {
         this.aplcnYm = aplcnYm;
     }
-    public String getRmrk()
+    public String getRmrkCn()
     {
-        return rmrk;
+        return rmrkCn;
     }
-    public void setRmrk(String rmrk)
+    public void setRmrkCn(String rmrkCn)
     {
-        this.rmrk = rmrk;
-    }
-    public String getTypeCd()
-    {
-        return typeCd;
-    }
-    public void setTypeCd(String typeCd)
-    {
-        this.typeCd = typeCd;
+        this.rmrkCn = rmrkCn;
     }
     public String getRgtrId()
     {
@@ -253,14 +185,6 @@ public class DurDosageRVO
     {
         this.regDt = regDt;
     }
-    public String getRegPrgrmId()
-    {
-        return regPrgrmId;
-    }
-    public void setRegPrgrmId(String regPrgrmId)
-    {
-        this.regPrgrmId = regPrgrmId;
-    }
     public String getMdfrId()
     {
         return mdfrId;
@@ -276,14 +200,6 @@ public class DurDosageRVO
     public void setMdfcnDt(String mdfcnDt)
     {
         this.mdfcnDt = mdfcnDt;
-    }
-    public String getMdfcnPrgrmId()
-    {
-        return mdfcnPrgrmId;
-    }
-    public void setMdfcnPrgrmId(String mdfcnPrgrmId)
-    {
-        this.mdfcnPrgrmId = mdfcnPrgrmId;
     }
 
 }

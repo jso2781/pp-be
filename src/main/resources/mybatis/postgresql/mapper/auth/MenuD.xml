@@ -18,18 +18,18 @@
             ,menu_tkcg_dept_no
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_D_MENU"
+
+        FROM kids_own.TB_PP_D_MENU
         WHERE 1=1
         AND menu_sn = #{menuSn}
     </select>
 
     <insert id="insertMenuD" parameterType="MenuDPVO">
         /* 대국민포털_메뉴상세 입력 (MenuDMapper.insertMenuD) */
-        INSERT INTO "KIDS_OWN"."TB_PP_D_MENU"
+        INSERT INTO kids_own.TB_PP_D_MENU
         (
              menu_sn
             ,menu_url_addr
@@ -44,10 +44,10 @@
             ,menu_tkcg_dept_no
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -64,16 +64,16 @@
             ,#{menuTkcgDeptNo}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
     <update id="updateMenuD" parameterType="MenuDPVO">
         /* 대국민포털_메뉴상세 수정 (MenuDMapper.updateMenuD) */
-        UPDATE "KIDS_OWN"."TB_PP_D_MENU"
+        UPDATE kids_own.TB_PP_D_MENU
         SET
              menu_url_addr = coalesce(#{menuUrlAddr}, menu_url_addr)
             ,menu_npag_nm = coalesce(#{menuNpagNm}, menu_npag_nm)
@@ -87,14 +87,14 @@
             ,menu_tkcg_dept_no = coalesce(#{menuTkcgDeptNo}, menu_tkcg_dept_no)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND menu_sn = #{menuSn}
     </update>
 
     <insert id="saveMenuD" parameterType="MenuDPVO">
         /* 대국민포털_메뉴상세 저장 (MenuDMapper.insertMenuD) */
-        INSERT INTO "KIDS_OWN"."TB_PP_D_MENU"
+        INSERT INTO kids_own.TB_PP_D_MENU
         (
              menu_sn
             ,menu_url_addr
@@ -109,10 +109,10 @@
             ,menu_tkcg_dept_no
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -129,31 +129,31 @@
             ,#{menuTkcgDeptNo}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(menu_sn)
         DO UPDATE SET
-             menu_url_addr = coalesce(excluded.menu_url_addr, "KIDS_OWN"."TB_PP_D_MENU".menu_url_addr)
-            ,menu_npag_nm = coalesce(excluded.menu_npag_nm, "KIDS_OWN"."TB_PP_D_MENU".menu_npag_nm)
-            ,prvc_incl_yn = coalesce(excluded.prvc_incl_yn, "KIDS_OWN"."TB_PP_D_MENU".prvc_incl_yn)
-            ,dgstfn_exmn_yn = coalesce(excluded.dgstfn_exmn_yn, "KIDS_OWN"."TB_PP_D_MENU".dgstfn_exmn_yn)
-            ,menu_expsr_yn = coalesce(excluded.menu_expsr_yn, "KIDS_OWN"."TB_PP_D_MENU".menu_expsr_yn)
-            ,dept_info_expsr_yn = coalesce(excluded.dept_info_expsr_yn, "KIDS_OWN"."TB_PP_D_MENU".dept_info_expsr_yn)
-            ,pic_info_expsr_yn = coalesce(excluded.pic_info_expsr_yn, "KIDS_OWN"."TB_PP_D_MENU".pic_info_expsr_yn)
-            ,menu_kogl_cprgt_type_cd = coalesce(excluded.menu_kogl_cprgt_type_cd, "KIDS_OWN"."TB_PP_D_MENU".menu_kogl_cprgt_type_cd)
-            ,menu_pic_id = coalesce(excluded.menu_pic_id, "KIDS_OWN"."TB_PP_D_MENU".menu_pic_id)
-            ,menu_tkcg_dept_no = coalesce(excluded.menu_tkcg_dept_no, "KIDS_OWN"."TB_PP_D_MENU".menu_tkcg_dept_no)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_D_MENU".mdfr_id)
+             menu_url_addr = coalesce(excluded.menu_url_addr, kids_own.TB_PP_D_MENU.menu_url_addr)
+            ,menu_npag_nm = coalesce(excluded.menu_npag_nm, kids_own.TB_PP_D_MENU.menu_npag_nm)
+            ,prvc_incl_yn = coalesce(excluded.prvc_incl_yn, kids_own.TB_PP_D_MENU.prvc_incl_yn)
+            ,dgstfn_exmn_yn = coalesce(excluded.dgstfn_exmn_yn, kids_own.TB_PP_D_MENU.dgstfn_exmn_yn)
+            ,menu_expsr_yn = coalesce(excluded.menu_expsr_yn, kids_own.TB_PP_D_MENU.menu_expsr_yn)
+            ,dept_info_expsr_yn = coalesce(excluded.dept_info_expsr_yn, kids_own.TB_PP_D_MENU.dept_info_expsr_yn)
+            ,pic_info_expsr_yn = coalesce(excluded.pic_info_expsr_yn, kids_own.TB_PP_D_MENU.pic_info_expsr_yn)
+            ,menu_kogl_cprgt_type_cd = coalesce(excluded.menu_kogl_cprgt_type_cd, kids_own.TB_PP_D_MENU.menu_kogl_cprgt_type_cd)
+            ,menu_pic_id = coalesce(excluded.menu_pic_id, kids_own.TB_PP_D_MENU.menu_pic_id)
+            ,menu_tkcg_dept_no = coalesce(excluded.menu_tkcg_dept_no, kids_own.TB_PP_D_MENU.menu_tkcg_dept_no)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_D_MENU.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_D_MENU".mdfcn_prgrm_id)
+
     </insert>
 
     <delete id="deleteMenuD" parameterType="MenuDDVO">
         /* 대국민포털_메뉴상세 삭제 (MenuDMapper.deleteMenuD) */
-        DELETE FROM "KIDS_OWN"."TB_PP_D_MENU"
+        DELETE FROM kids_own.TB_PP_D_MENU
         WHERE 1=1
         AND menu_sn = #{menuSn}
     </delete>

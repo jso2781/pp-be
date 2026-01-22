@@ -33,7 +33,7 @@ public class AuthrtRVO
      * 권한유형
      */
     @Schema(description = "권한유형", type = "String")
-    private String authrtType;
+    private String authrtTypeCd;
 
     /**
      * 권한설명
@@ -127,13 +127,13 @@ public class AuthrtRVO
     {
         this.authrtNm = authrtNm;
     }
-    public String getAuthrtType()
+    public String getAuthrtTypeCd()
     {
-        return authrtType;
+        return authrtTypeCd;
     }
-    public void setAuthrtType(String authrtType)
+    public void setAuthrtTypeCd(String authrtTypeCd)
     {
-        this.authrtType = authrtType;
+        this.authrtTypeCd = authrtTypeCd;
     }
     public String getAuthrtExpln()
     {

@@ -15,27 +15,27 @@
             ,mfds_igrd_cd
             ,mfds_igrd_nm
             ,rlvt_age
-            ,rlvt_age_unit
-            ,age_prcs_cnd
+            ,rlvt_age_unit_nm
+            ,age_prcs_cnd_nm
             ,ancmnt_no
             ,ancmnt_ymd
-            ,dtl_info
+            ,dtl_info_cn
             ,aplcn_ym
             ,type_cd
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_DUR_AGE_BANN"
+
+        FROM kids_own.tb_pp_m_dur_age_bann
         WHERE 1=1
         AND age_bann_sn = #{ageBannSn}
     </select>
 
     <insert id="insertDurAgeBann" parameterType="DurAgeBannPVO">
         /* 대국민포털_DUR연령금기기본 입력 (DurAgeBannMapper.insertDurAgeBann) */
-        INSERT INTO "KIDS_OWN"."TB_PP_DUR_AGE_BANN"
+        INSERT INTO kids_own.tb_pp_m_dur_age_bann
         (
              age_bann_sn
             ,prdct_cd
@@ -47,19 +47,19 @@
             ,mfds_igrd_cd
             ,mfds_igrd_nm
             ,rlvt_age
-            ,rlvt_age_unit
-            ,age_prcs_cnd
+            ,rlvt_age_unit_nm
+            ,age_prcs_cnd_nm
             ,ancmnt_no
             ,ancmnt_ymd
-            ,dtl_info
+            ,dtl_info_cn
             ,aplcn_ym
             ,type_cd
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -82,16 +82,16 @@
             ,#{typeCd}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
     <update id="updateDurAgeBann" parameterType="DurAgeBannPVO">
         /* 대국민포털_DUR연령금기기본 수정 (DurAgeBannMapper.updateDurAgeBann) */
-        UPDATE "KIDS_OWN"."TB_PP_DUR_AGE_BANN"
+        UPDATE kids_own.tb_pp_m_dur_age_bann
         SET
              prdct_cd = coalesce(#{prdctCd}, prdct_cd)
             ,dur_igrd_nm = coalesce(#{durIgrdNm}, dur_igrd_nm)
@@ -102,23 +102,23 @@
             ,mfds_igrd_cd = coalesce(#{mfdsIgrdCd}, mfds_igrd_cd)
             ,mfds_igrd_nm = coalesce(#{mfdsIgrdNm}, mfds_igrd_nm)
             ,rlvt_age = coalesce(#{rlvtAge}, rlvt_age)
-            ,rlvt_age_unit = coalesce(#{rlvtAgeUnit}, rlvt_age_unit)
-            ,age_prcs_cnd = coalesce(#{agePrcsCnd}, age_prcs_cnd)
+            ,rlvt_age_unit_nm = coalesce(#{rlvtAgeUnit}, rlvt_age_unit_nm)
+            ,age_prcs_cnd_nm = coalesce(#{agePrcsCnd}, age_prcs_cnd_nm)
             ,ancmnt_no = coalesce(#{ancmntNo}, ancmnt_no)
             ,ancmnt_ymd = coalesce(#{ancmntYmd}, ancmnt_ymd)
-            ,dtl_info = coalesce(#{dtlInfo}, dtl_info)
+            ,dtl_info_cn = coalesce(#{dtlInfo}, dtl_info_cn)
             ,aplcn_ym = coalesce(#{aplcnYm}, aplcn_ym)
             ,type_cd = coalesce(#{typeCd}, type_cd)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND age_bann_sn = #{ageBannSn}
     </update>
 
     <insert id="saveDurAgeBann" parameterType="DurAgeBannPVO">
         /* 대국민포털_DUR연령금기기본 저장 (DurAgeBannMapper.insertDurAgeBann) */
-        INSERT INTO "KIDS_OWN"."TB_PP_DUR_AGE_BANN"
+        INSERT INTO kids_own.tb_pp_m_dur_age_bann
         (
              age_bann_sn
             ,prdct_cd
@@ -130,19 +130,19 @@
             ,mfds_igrd_cd
             ,mfds_igrd_nm
             ,rlvt_age
-            ,rlvt_age_unit
-            ,age_prcs_cnd
+            ,rlvt_age_unit_nm
+            ,age_prcs_cnd_nm
             ,ancmnt_no
             ,ancmnt_ymd
-            ,dtl_info
+            ,dtl_info_cn
             ,aplcn_ym
             ,type_cd
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -165,37 +165,37 @@
             ,#{typeCd}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(age_bann_sn)
         DO UPDATE SET
-             prdct_cd = coalesce(excluded.prdct_cd, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".prdct_cd)
-            ,dur_igrd_nm = coalesce(excluded.dur_igrd_nm, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".dur_igrd_nm)
-            ,dur_igrd_cd = coalesce(excluded.dur_igrd_cd, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".dur_igrd_cd)
-            ,dur_prdct_nm = coalesce(excluded.dur_prdct_nm, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".dur_prdct_nm)
-            ,dur_bzenty_nm = coalesce(excluded.dur_bzenty_nm, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".dur_bzenty_nm)
-            ,mfds_prdct_nm = coalesce(excluded.mfds_prdct_nm, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".mfds_prdct_nm)
-            ,mfds_igrd_cd = coalesce(excluded.mfds_igrd_cd, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".mfds_igrd_cd)
-            ,mfds_igrd_nm = coalesce(excluded.mfds_igrd_nm, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".mfds_igrd_nm)
-            ,rlvt_age = coalesce(excluded.rlvt_age, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".rlvt_age)
-            ,rlvt_age_unit = coalesce(excluded.rlvt_age_unit, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".rlvt_age_unit)
-            ,age_prcs_cnd = coalesce(excluded.age_prcs_cnd, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".age_prcs_cnd)
-            ,ancmnt_no = coalesce(excluded.ancmnt_no, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".ancmnt_no)
-            ,ancmnt_ymd = coalesce(excluded.ancmnt_ymd, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".ancmnt_ymd)
-            ,dtl_info = coalesce(excluded.dtl_info, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".dtl_info)
-            ,aplcn_ym = coalesce(excluded.aplcn_ym, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".aplcn_ym)
-            ,type_cd = coalesce(excluded.type_cd, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".type_cd)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".mdfr_id)
+             prdct_cd = coalesce(excluded.prdct_cd, kids_own.tb_pp_m_dur_age_bann.prdct_cd)
+            ,dur_igrd_nm = coalesce(excluded.dur_igrd_nm, kids_own.tb_pp_m_dur_age_bann.dur_igrd_nm)
+            ,dur_igrd_cd = coalesce(excluded.dur_igrd_cd, kids_own.tb_pp_m_dur_age_bann.dur_igrd_cd)
+            ,dur_prdct_nm = coalesce(excluded.dur_prdct_nm, kids_own.tb_pp_m_dur_age_bann.dur_prdct_nm)
+            ,dur_bzenty_nm = coalesce(excluded.dur_bzenty_nm, kids_own.tb_pp_m_dur_age_bann.dur_bzenty_nm)
+            ,mfds_prdct_nm = coalesce(excluded.mfds_prdct_nm, kids_own.tb_pp_m_dur_age_bann.mfds_prdct_nm)
+            ,mfds_igrd_cd = coalesce(excluded.mfds_igrd_cd, kids_own.tb_pp_m_dur_age_bann.mfds_igrd_cd)
+            ,mfds_igrd_nm = coalesce(excluded.mfds_igrd_nm, kids_own.tb_pp_m_dur_age_bann.mfds_igrd_nm)
+            ,rlvt_age = coalesce(excluded.rlvt_age, kids_own.tb_pp_m_dur_age_bann.rlvt_age)
+            ,rlvt_age_unit_nm = coalesce(excluded.rlvt_age_unit_nm, kids_own.tb_pp_m_dur_age_bann.rlvt_age_unit_nm)
+            ,age_prcs_cnd_nm = coalesce(excluded.age_prcs_cnd_nm, kids_own.tb_pp_m_dur_age_bann.age_prcs_cnd_nm)
+            ,ancmnt_no = coalesce(excluded.ancmnt_no, kids_own.tb_pp_m_dur_age_bann.ancmnt_no)
+            ,ancmnt_ymd = coalesce(excluded.ancmnt_ymd, kids_own.tb_pp_m_dur_age_bann.ancmnt_ymd)
+            ,dtl_info_cn = coalesce(excluded.dtl_info_cn, kids_own.tb_pp_m_dur_age_bann.dtl_info_cn)
+            ,aplcn_ym = coalesce(excluded.aplcn_ym, kids_own.tb_pp_m_dur_age_bann.aplcn_ym)
+            ,type_cd = coalesce(excluded.type_cd, kids_own.tb_pp_m_dur_age_bann.type_cd)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.tb_pp_m_dur_age_bann.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_DUR_AGE_BANN".mdfcn_prgrm_id)
+
     </insert>
 
     <delete id="deleteDurAgeBann" parameterType="DurAgeBannDVO">
         /* 대국민포털_DUR연령금기기본 삭제 (DurAgeBannMapper.deleteDurAgeBann) */
-        DELETE FROM "KIDS_OWN"."TB_PP_DUR_AGE_BANN"
+        DELETE FROM kids_own.tb_pp_m_dur_age_bann
         WHERE 1=1
         AND age_bann_sn = #{ageBannSn}
     </delete>
