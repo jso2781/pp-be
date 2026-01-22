@@ -28,6 +28,12 @@ public class MainRVO {
      */
     @Schema(description = "게시물제목", type = "String")
     private String pstTtl;
+    
+    /**
+     * 게시물내용
+     */
+    @Schema(description = "게시물내용", type = "String")
+    private String pstCn;    
 
     /**
      * 첨부파일아이디
@@ -48,14 +54,44 @@ public class MainRVO {
     private String regDt;
 
     /**
-     * 첨부파일명
+     * SNS 유형
      */
-    @Schema(description = "첨부파일명", type = "String")
-    private String atchFileNm;
+    @Schema(description = "SNS 유형", type = "String")
+    private String snsType;    
+    
+    /**
+     * 썸네일 첨부파일명
+     */
+    @Schema(description = "썸네일 첨부파일명", type = "String")
+    private String thmbFileNm;
 
     /**
-     * 첨부파일경로
+     * 썸네일 첨부파일경로
      */
-    @Schema(description = "첨부파일경로", type = "String")
-    private String atchFilePath;
+    @Schema(description = "썸네일 첨부파일경로", type = "String")
+    private String thmbFilePath;
+
+    /**
+     * 유튜브 동영상 ID
+     */
+    @Schema(description = "동영상 ID", type = "String")
+    private String videoId;
+    
+    /**
+     * 팝업제목
+     */
+    @Schema(description = "팝업제목", type = "String")
+    private String popupTtl;    
+    
+    /**
+     * 팝업연결주소
+     */
+    @Schema(description = "팝업연결주소", type = "String")
+    private String popupLnkgAddr;        
+    
+    /**
+     * 수정프로그램아이디
+     */
+    @Schema(description = "수정프로그램아이디", type = "String")
+    private String mdfcnPrgrmId;    
 }

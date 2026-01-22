@@ -1,9 +1,12 @@
 package kr.go.kids.domain.main.service.impl;
 
+import java.net.URI;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +19,10 @@ import kr.go.kids.domain.task.vo.TaskCdRVO;
 import kr.go.kids.global.system.common.ApiResultCode;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class MainServiceImpl implements MainService {
 
@@ -58,22 +63,43 @@ public class MainServiceImpl implements MainService {
             data.put("mainImageUrl", "");            
         }
 
-        // 2. 홍보존 게시물 last5
-        List<MainRVO> promotion = mainMapper.selectRecent5PstListByTaskCd(TASK_CD_MN_BBS1);
+        // 2. 홍보존 게시물 last4
+        List<MainRVO> promotion = mainMapper.selectRecent4PstListByTaskCd(TASK_CD_MN_BBS1);
         data.put("promotion", promotion);
 
-        // 3.1 SNS 유튜브 게시물 last5
-        List<MainRVO> youtube = mainMapper.selectRecent5PstListByTaskCd(TASK_CD_MN_BBS2);
+        // 3.1 SNS 유튜브 게시물 last4
+        List<MainRVO> youtube = mainMapper.selectRecent4PstListByTaskCd(TASK_CD_MN_BBS2);        
+        // FIXME 동영상 URL 관련 컬럼명 확정시 수정 필요
+        // 임시 컬럼 : mdfcnPrgrmId (수정자 프로그램ID)        
+        for (MainRVO main : youtube) {
+            String mdfcnPrgrmId = main.getMdfcnPrgrmId();
+            if (StringUtils.isNotBlank(mdfcnPrgrmId)) {
+                main.setVideoId(extractYoutubeVideoId(mdfcnPrgrmId));
+            }
+        }        
+        // =========================================                        
         data.put("youtube", youtube);
 
-        // 3.2 SNS 인스타 게시물 last5
-        List<MainRVO> insta = mainMapper.selectRecent5PstListByTaskCd(TASK_CD_MN_BBS3);
+        // 3.2 SNS 인스타 게시물 last4
+        List<MainRVO> insta = mainMapper.selectRecent4PstListByTaskCd(TASK_CD_MN_BBS3);
         data.put("insta", insta);
 
-        // 3.3 SNS 블로그 게시물 last5
-        List<MainRVO> blog = mainMapper.selectRecent5PstListByTaskCd(TASK_CD_MN_BBS4);
+        // 3.3 SNS 블로그 게시물 last4
+        List<MainRVO> blog = mainMapper.selectRecent4PstListByTaskCd(TASK_CD_MN_BBS4);
         data.put("blog", blog);
-
+        
+        // 3.4 SNS 통합 20건 조회
+        List<MainRVO> all_sns = mainMapper.selectRecent20PstListByTaskCds(Arrays.asList(TASK_CD_MN_BBS2, TASK_CD_MN_BBS3, TASK_CD_MN_BBS4));
+        // FIXME 동영상 URL 관련 컬럼명 확정시 수정 필요
+        // 임시 컬럼 : mdfcnPrgrmId (수정자 프로그램ID)        
+        for (MainRVO main : all_sns) {
+            String mdfcnPrgrmId = main.getMdfcnPrgrmId();
+            if (StringUtils.isNotBlank(mdfcnPrgrmId)) {
+                main.setVideoId(extractYoutubeVideoId(mdfcnPrgrmId));
+            }
+        }          
+        data.put("all_sns", all_sns);
+        
         // 4.1 기관소식 공지사항 last5
         List<MainRVO> notice = mainMapper.selectRecent5PstListByBoardId(BBS_ID_NOTICE);
         data.put("notice", notice);
@@ -89,8 +115,43 @@ public class MainServiceImpl implements MainService {
         // 4.4 기관소식 카드뉴스 last5
         List<MainRVO> card = mainMapper.selectRecent5PstListByBoardId(BBS_ID_CARD);
         data.put("card", card);
-
+        
+        // 5. 팝업 목록조회
+        List<MainRVO> popup = mainMapper.selectPopupList();
+        data.put("popup", popup);
+        
         result.setData(data);
         return result;
     }
+    
+    private String extractYoutubeVideoId(String url) {
+        try {
+            URI uri = new URI(url);
+            String host = uri.getHost();
+
+            // youtu.be/ID
+            if (host.contains("youtu.be")) {
+                return uri.getPath().substring(1);
+            }
+
+            // www.youtube.com/shorts/ID
+            if (uri.getPath().startsWith("/shorts/")) {
+                return uri.getPath().replace("/shorts/", "");
+            }
+
+            // www.youtube.com/watch?v=ID
+            String query = uri.getQuery();
+            if (query != null) {
+                for (String param : query.split("&")) {
+                    if (param.startsWith("v=")) {
+                        return param.substring(2);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log.error("동영상 ID 추출에 실패하였습니다.", e);
+        }
+
+        return "";
+    }       
 }

@@ -2,17 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.go.kids.domain.main.mapper.MainMapper">
 
-    <select id="selectRecent5PstListByTaskCd" parameterType="String" resultType="MainRVO" >
-        /* 대국민포털_메인화면 최근 게시물 조회 (MainMapper.selectRecent5PstListByTaskCd) */
+    <select id="selectRecent4PstListByTaskCd" parameterType="String" resultType="MainRVO" >
+        /* 대국민포털_메인화면 최근 게시물 조회 (SNS 및 홍보존) (MainMapper.selectRecent4PstListByTaskCd) */
 		SELECT
 		     p.pst_sn
 		    ,p.bbs_id
 		    ,p.pst_ttl
 		    ,p.atch_file_id
 		    ,p.thmb_id
-		    ,f.atch_file_nm        
-		    ,f.atch_file_path
+		    ,f.atch_file_nm as thmb_file_nm        
+		    ,f.atch_file_path as thmb_file_path
 		    ,p.reg_dt
+		    ,p.mdfcn_prgrm_id
+		    ,p.pst_cn
 		FROM "KIDS_OWN"."TB_PP_M_PST" p
 		LEFT OUTER JOIN "KIDS_OWN"."TB_CA_M_ATCH" f
 		       ON p.thmb_id = CAST(f.atch_file_sn AS VARCHAR)
@@ -21,8 +23,47 @@
 		         		  WHERE task_cd = #{taskCd})
 		 AND p.del_yn = 'N'
 	   ORDER BY p.reg_dt DESC
-	   LIMIT 5       
+	   LIMIT 4       
     </select>
+    
+	<select id="selectRecent20PstListByTaskCds" resultType="MainRVO">
+		/* 대국민포털_메인화면 최근 게시물 조회 (SNS 통합) (MainMapper.selectRecent4PstListByTaskCd) */
+	    SELECT
+	         p.pst_sn
+	        ,p.bbs_id
+	        ,p.pst_ttl
+	        ,p.atch_file_id
+	        ,p.thmb_id
+	        ,f.atch_file_nm as thmb_file_nm
+	        ,f.atch_file_path as thmb_file_path
+	        ,p.reg_dt
+	        ,p.mdfcn_prgrm_id
+	        ,p.pst_cn
+		    ,CASE p.bbs_id
+		        WHEN 'BBS_VDO_002' THEN '유튜브'
+		        WHEN 'BBS_GAL_003' THEN '인스타'
+		        WHEN 'BBS_GAL_004' THEN '블로그'
+		        ELSE '기타'
+		     END AS sns_type	        
+	    FROM "KIDS_OWN"."TB_PP_M_PST" p
+	    LEFT JOIN "KIDS_OWN"."TB_CA_M_ATCH" f
+	           ON p.thmb_id = CAST(f.atch_file_sn AS VARCHAR)
+	    WHERE p.del_yn = 'N'
+	      AND p.bbs_id IN (
+	            SELECT task_cd_vl
+	            FROM "KIDS_OWN"."TB_PP_M_TASK_CD"
+	            WHERE task_cd IN
+	            <foreach collection="taskCdList"
+	                     item="taskCd"
+	                     open="("
+	                     separator=","
+	                     close=")">
+	                #{taskCd}
+	            </foreach>
+	      )
+	    ORDER BY p.reg_dt DESC
+	    LIMIT 20
+	</select>    
     
     <select id="selectRecent5PstListByBoardId" parameterType="String" resultType="MainRVO" >
         /* 대국민포털_메인화면 최근 게시물 조회 (MainMapper.selectRecent5PstListByBoardId) */
@@ -32,8 +73,8 @@
 		    ,p.pst_ttl
 		    ,p.atch_file_id
 		    ,p.thmb_id
-		    ,f.atch_file_nm        
-		    ,f.atch_file_path
+		    ,f.atch_file_nm as thmb_file_nm        
+		    ,f.atch_file_path as thmb_file_path
 		    ,p.reg_dt
 		FROM "KIDS_OWN"."TB_PP_M_PST" p
 		LEFT OUTER JOIN "KIDS_OWN"."TB_CA_M_ATCH" f
@@ -44,4 +85,22 @@
 	   LIMIT 5       
     </select>    
     
+    <select id="selectPopupList" resultType="MainRVO" >
+        /* 대국민포털_메인화면 팝업 목록 조회 (MainMapper.selectPopupList) */
+		SELECT p.popup_ttl
+		     , p.popup_lnkg_addr
+		     , a.atch_file_path as thmb_file_path
+		     , a.atch_file_nm as thmb_file_nm
+		  FROM "KIDS_OWN"."TB_PP_M_POPUP" p
+		  LEFT OUTER JOIN "KIDS_OWN"."TB_CA_M_ATCH" a
+		    ON p.atch_file_id = CAST(a.atch_file_sn AS VARCHAR)
+		 WHERE p.popup_pstg_yn = 'Y'
+		<![CDATA[    
+		   AND (p.popup_pstg_bgng_ymd <= CURRENT_TIMESTAMP
+		        AND
+		        p.popup_pstg_end_ymd >= CURRENT_TIMESTAMP)     
+		]]>		 
+		 ORDER BY p.popup_seq
+    </select>        
+
 </mapper>
