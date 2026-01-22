@@ -9,6 +9,7 @@
         WHERE 1=1
         AND mbr_id = #{mbrId}
         AND mbr_enpswd = #{mbrEnpswd}
+        AND mbr_whdwl_dt is null
     </select>
 
     <select id="checkMbrInfo" parameterType="MbrInfoPVO" resultType="int" >
@@ -22,6 +23,7 @@
         <if test="mbrEncptEml != null and mbrEncptEml != ''">
             AND mbr_encpt_eml = #{mbrEncptEml}
         </if>
+        AND mbr_whdwl_dt is null
     </select>
 
     <select id="getMbrInfo" parameterType="MbrInfoPVO" resultType="MbrInfoRVO" >
@@ -57,6 +59,7 @@
         <if test="mbrId != null and mbrId != ''">
             AND mbr_id = #{mbrId}
         </if>
+        AND mbr_whdwl_dt is null
     </select>
 
     <select id="insertMbrInfo" parameterType="MbrInfoPVO">
