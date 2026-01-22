@@ -6,14 +6,14 @@
         /* 공통_공통코드기본 조회 (ComCdMapper.getComCd) */
         SELECT
              com_cd
-        FROM "KIDS_OWN"."TB_CA_M_COM_CD"
+        FROM kids_own.TB_CA_M_COM_CD
         WHERE 1=1
         AND com_cd = #{comCd}
     </select>
 
     <insert id="insertComCd" parameterType="ComCdPVO">
         /* 공통_공통코드기본 입력 (ComCdMapper.insertComCd) */
-        INSERT INTO "KIDS_OWN"."TB_CA_M_COM_CD"
+        INSERT INTO kids_own.TB_CA_M_COM_CD
         (
              com_cd
         )
@@ -25,7 +25,7 @@
 
     <update id="updateComCd" parameterType="ComCdPVO">
         /* 공통_공통코드기본 수정 (ComCdMapper.updateComCd) */
-        UPDATE "KIDS_OWN"."TB_CA_M_COM_CD"
+        UPDATE kids_own.TB_CA_M_COM_CD
         SET
         WHERE 1=1
         AND com_cd = #{comCd}
@@ -33,7 +33,7 @@
 
     <insert id="saveComCd" parameterType="ComCdPVO">
         /* 공통_공통코드기본 저장 (ComCdMapper.insertComCd) */
-        INSERT INTO "KIDS_OWN"."TB_CA_M_COM_CD"
+        INSERT INTO kids_own.TB_CA_M_COM_CD
         (
              com_cd
         )
@@ -47,7 +47,7 @@
 
     <delete id="deleteComCd" parameterType="ComCdDVO">
         /* 공통_공통코드기본 삭제 (ComCdMapper.deleteComCd) */
-        DELETE FROM "KIDS_OWN"."TB_CA_M_COM_CD"
+        DELETE FROM kids_own.TB_CA_M_COM_CD
         WHERE 1=1
         AND com_cd = #{comCd}
     </delete>

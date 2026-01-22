@@ -8,40 +8,40 @@
              authrt_chg_sn
             ,authrt_cd
             ,menu_sn
-            ,aplcn_trgt_type
-            ,chg_role_list
-            ,aplcn_trgt
-            ,chg_type
-            ,rmrk
+            ,aplcn_trgt_type_cd
+            ,chg_role_list_cn
+            ,aplcn_trgt_nm
+            ,chg_type_cd
+            ,authrt_chg_rmrk_cn
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_M_AUTHRT_CHG_HSTRY"
+
+        FROM kids_own.TB_PP_M_AUTHRT_CHG_HSTRY
         WHERE 1=1
         AND authrt_chg_sn = #{authrtChgSn}
     </select>
 
     <insert id="insertAuthrtChgHstry" parameterType="AuthrtChgHstryPVO">
         /* 대국민포털_권한변경이력기본 입력 (AuthrtChgHstryMapper.insertAuthrtChgHstry) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_AUTHRT_CHG_HSTRY"
+        INSERT INTO kids_own.TB_PP_M_AUTHRT_CHG_HSTRY
         (
              authrt_chg_sn
             ,authrt_cd
             ,menu_sn
-            ,aplcn_trgt_type
-            ,chg_role_list
-            ,aplcn_trgt
-            ,chg_type
-            ,rmrk
+            ,aplcn_trgt_type_cd
+            ,chg_role_list_cn
+            ,aplcn_trgt_nm
+            ,chg_type_cd
+            ,authrt_chg_rmrk_cn
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -52,52 +52,52 @@
             ,#{chgRoleList}
             ,#{aplcnTrgt}
             ,#{chgType}
-            ,#{rmrk}
+            ,#{authrt_chg_rmrk_cn}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
     <update id="updateAuthrtChgHstry" parameterType="AuthrtChgHstryPVO">
         /* 대국민포털_권한변경이력기본 수정 (AuthrtChgHstryMapper.updateAuthrtChgHstry) */
-        UPDATE "KIDS_OWN"."TB_PP_M_AUTHRT_CHG_HSTRY"
+        UPDATE kids_own.TB_PP_M_AUTHRT_CHG_HSTRY
         SET
              authrt_cd = coalesce(#{authrtCd}, authrt_cd)
             ,menu_sn = coalesce(#{menuSn}, menu_sn)
-            ,aplcn_trgt_type = coalesce(#{aplcnTrgtType}, aplcn_trgt_type)
-            ,chg_role_list = coalesce(#{chgRoleList}, chg_role_list)
-            ,aplcn_trgt = coalesce(#{aplcnTrgt}, aplcn_trgt)
-            ,chg_type = coalesce(#{chgType}, chg_type)
-            ,rmrk = coalesce(#{rmrk}, rmrk)
+            ,aplcn_trgt_type_cd = coalesce(#{aplcnTrgtType}, aplcn_trgt_type_cd)
+            ,chg_role_list_cn = coalesce(#{chgRoleList}, chg_role_list_cn)
+            ,aplcn_trgt_nm = coalesce(#{aplcnTrgt}, aplcn_trgt_nm)
+            ,chg_type_cd = coalesce(#{chgType}, chg_type_cd)
+            ,authrt_chg_rmrk_cn = coalesce(#{authrt_chg_rmrk_cn}, authrt_chg_rmrk_cn)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND authrt_chg_sn = #{authrtChgSn}
     </update>
 
     <insert id="saveAuthrtChgHstry" parameterType="AuthrtChgHstryPVO">
         /* 대국민포털_권한변경이력기본 저장 (AuthrtChgHstryMapper.insertAuthrtChgHstry) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_AUTHRT_CHG_HSTRY"
+        INSERT INTO kids_own.TB_PP_M_AUTHRT_CHG_HSTRY
         (
              authrt_chg_sn
             ,authrt_cd
             ,menu_sn
-            ,aplcn_trgt_type
-            ,chg_role_list
-            ,aplcn_trgt
-            ,chg_type
-            ,rmrk
+            ,aplcn_trgt_type_cd
+            ,chg_role_list_cn
+            ,aplcn_trgt_nm
+            ,chg_type_cd
+            ,authrt_chg_rmrk_cn
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -108,31 +108,31 @@
             ,#{chgRoleList}
             ,#{aplcnTrgt}
             ,#{chgType}
-            ,#{rmrk}
+            ,#{authrt_chg_rmrk_cn}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(authrt_chg_sn)
         DO UPDATE SET
-             authrt_cd = coalesce(excluded.authrt_cd, "KIDS_OWN"."TB_PP_M_AUTHRT_CHG_HSTRY".authrt_cd)
-            ,menu_sn = coalesce(excluded.menu_sn, "KIDS_OWN"."TB_PP_M_AUTHRT_CHG_HSTRY".menu_sn)
-            ,aplcn_trgt_type = coalesce(excluded.aplcn_trgt_type, "KIDS_OWN"."TB_PP_M_AUTHRT_CHG_HSTRY".aplcn_trgt_type)
-            ,chg_role_list = coalesce(excluded.chg_role_list, "KIDS_OWN"."TB_PP_M_AUTHRT_CHG_HSTRY".chg_role_list)
-            ,aplcn_trgt = coalesce(excluded.aplcn_trgt, "KIDS_OWN"."TB_PP_M_AUTHRT_CHG_HSTRY".aplcn_trgt)
-            ,chg_type = coalesce(excluded.chg_type, "KIDS_OWN"."TB_PP_M_AUTHRT_CHG_HSTRY".chg_type)
-            ,rmrk = coalesce(excluded.rmrk, "KIDS_OWN"."TB_PP_M_AUTHRT_CHG_HSTRY".rmrk)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_AUTHRT_CHG_HSTRY".mdfr_id)
+             authrt_cd = coalesce(excluded.authrt_cd, kids_own.TB_PP_M_AUTHRT_CHG_HSTRY.authrt_cd)
+            ,menu_sn = coalesce(excluded.menu_sn, kids_own.TB_PP_M_AUTHRT_CHG_HSTRY.menu_sn)
+            ,aplcn_trgt_type_cd = coalesce(excluded.aplcn_trgt_type_cd, kids_own.TB_PP_M_AUTHRT_CHG_HSTRY.aplcn_trgt_type_cd)
+            ,chg_role_list_cn = coalesce(excluded.chg_role_list_cn, kids_own.TB_PP_M_AUTHRT_CHG_HSTRY.chg_role_list_cn)
+            ,aplcn_trgt_nm = coalesce(excluded.aplcn_trgt_nm, kids_own.TB_PP_M_AUTHRT_CHG_HSTRY.aplcn_trgt_nm)
+            ,chg_type_cd = coalesce(excluded.chg_type_cd, kids_own.TB_PP_M_AUTHRT_CHG_HSTRY.chg_type_cd)
+            ,authrt_chg_rmrk_cn = coalesce(excluded.authrt_chg_rmrk_cn, kids_own.TB_PP_M_AUTHRT_CHG_HSTRY.authrt_chg_rmrk_cn)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_AUTHRT_CHG_HSTRY.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_AUTHRT_CHG_HSTRY".mdfcn_prgrm_id)
+
     </insert>
 
     <delete id="deleteAuthrtChgHstry" parameterType="AuthrtChgHstryDVO">
         /* 대국민포털_권한변경이력기본 삭제 (AuthrtChgHstryMapper.deleteAuthrtChgHstry) */
-        DELETE FROM "KIDS_OWN"."TB_PP_M_AUTHRT_CHG_HSTRY"
+        DELETE FROM kids_own.TB_PP_M_AUTHRT_CHG_HSTRY
         WHERE 1=1
         AND authrt_chg_sn = #{authrtChgSn}
     </delete>

@@ -10,15 +10,15 @@ public class DurDosageDVO
      * 투여기간주의일련번호
      */
     @Schema(requiredMode = RequiredMode.REQUIRED, description = "투여기간주의일련번호", type = "String")
-    private String dosagePrdCutnSn;
+    private String adminPrdCutnSn;
 
-    public String getDosagePrdCutnSn()
+    public String getAdminPrdCutnSn()
     {
-        return dosagePrdCutnSn;
+        return adminPrdCutnSn;
     }
-    public void setDosagePrdCutnSn(String dosagePrdCutnSn)
+    public void setAdminPrdCutnSn(String adminPrdCutnSn)
     {
-        this.dosagePrdCutnSn = dosagePrdCutnSn;
+        this.adminPrdCutnSn = adminPrdCutnSn;
     }
 
 }

@@ -19,14 +19,14 @@
             ,p.mdfr_dept_nm
             ,p.rgtr_id
             ,p.reg_dt
-            ,p.reg_prgrm_id
+
             ,p.mdfr_id
             ,p.mdfcn_dt
-            ,p.mdfcn_prgrm_id
+
         	,f.atch_file_nm as thmb_file_nm        
 		    ,f.atch_file_path as thmb_file_path
-        FROM "KIDS_OWN"."TB_PP_M_PST" p
-        LEFT OUTER JOIN "KIDS_OWN"."TB_CA_M_ATCH" f
+        FROM kids_own.TB_PP_M_PST p
+        LEFT OUTER JOIN kids_own.TB_CA_M_ATCH f
           ON p.thmb_id = CAST(f.atch_file_sn AS VARCHAR)
        WHERE p.bbs_id = #{bbsId}
          AND p.del_yn = 'N'		
@@ -60,14 +60,14 @@
             ,p.mdfr_dept_nm
             ,p.rgtr_id
             ,p.reg_dt
-            ,p.reg_prgrm_id
+
             ,p.mdfr_id
             ,p.mdfcn_dt
-            ,p.mdfcn_prgrm_id
+
         	,f.atch_file_nm as img_file_nm        
 		    ,f.atch_file_path as img_file_path
-        FROM "KIDS_OWN"."TB_PP_M_PST" p
-        LEFT OUTER JOIN "KIDS_OWN"."TB_CA_M_ATCH" f
+        FROM kids_own.TB_PP_M_PST p
+        LEFT OUTER JOIN kids_own.TB_CA_M_ATCH f
           ON p.atch_file_id = CAST(f.atch_file_sn AS VARCHAR)
        WHERE p.bbs_id = #{bbsId}
          AND p.pst_sn = #{pstSn}
@@ -76,7 +76,7 @@
     
     <update id="updtInqCnt" parameterType="PstPVO">
         /* 대국민포털_게시물기본 조회수 증가 (PstMapper.updtInqCnt) */
-        UPDATE "KIDS_OWN"."TB_PP_M_PST"
+        UPDATE kids_own.TB_PP_M_PST
         SET pst_inq_cnt = COALESCE(pst_inq_cnt, 0) + 1
         WHERE bbs_id = #{bbsId}		
         AND pst_sn = #{pstSn}

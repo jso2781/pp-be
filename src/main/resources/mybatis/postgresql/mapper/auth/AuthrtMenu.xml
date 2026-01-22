@@ -10,11 +10,11 @@
             ,authrt_menu_role_rmrk
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_M_AUTHRT_MENU"
+
+        FROM kids_own.TB_PP_M_AUTHRT_MENU
         WHERE 1=1
         AND authrt_cd = #{authrtCd}
         AND menu_sn = #{menuSn}
@@ -22,17 +22,17 @@
 
     <insert id="insertAuthrtMenu" parameterType="AuthrtMenuPVO">
         /* 대국민포털_권한메뉴기본 입력 (AuthrtMenuMapper.insertAuthrtMenu) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_AUTHRT_MENU"
+        INSERT INTO kids_own.TB_PP_M_AUTHRT_MENU
         (
              authrt_cd
             ,menu_sn
             ,authrt_menu_role_rmrk
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -41,21 +41,21 @@
             ,#{authrtMenuRoleRmrk}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
     <update id="updateAuthrtMenu" parameterType="AuthrtMenuPVO">
         /* 대국민포털_권한메뉴기본 수정 (AuthrtMenuMapper.updateAuthrtMenu) */
-        UPDATE "KIDS_OWN"."TB_PP_M_AUTHRT_MENU"
+        UPDATE kids_own.TB_PP_M_AUTHRT_MENU
         SET
              authrt_menu_role_rmrk = coalesce(#{authrtMenuRoleRmrk}, authrt_menu_role_rmrk)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND authrt_cd = #{authrtCd}
         AND menu_sn = #{menuSn}
@@ -63,17 +63,17 @@
 
     <insert id="saveAuthrtMenu" parameterType="AuthrtMenuPVO">
         /* 대국민포털_권한메뉴기본 저장 (AuthrtMenuMapper.insertAuthrtMenu) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_AUTHRT_MENU"
+        INSERT INTO kids_own.TB_PP_M_AUTHRT_MENU
         (
              authrt_cd
             ,menu_sn
             ,authrt_menu_role_rmrk
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -82,22 +82,22 @@
             ,#{authrtMenuRoleRmrk}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(authrt_cd,menu_sn)
         DO UPDATE SET
-             authrt_menu_role_rmrk = coalesce(excluded.authrt_menu_role_rmrk, "KIDS_OWN"."TB_PP_M_AUTHRT_MENU".authrt_menu_role_rmrk)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_AUTHRT_MENU".mdfr_id)
+             authrt_menu_role_rmrk = coalesce(excluded.authrt_menu_role_rmrk, kids_own.TB_PP_M_AUTHRT_MENU.authrt_menu_role_rmrk)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_AUTHRT_MENU.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_AUTHRT_MENU".mdfcn_prgrm_id)
+
     </insert>
 
     <delete id="deleteAuthrtMenu" parameterType="AuthrtMenuDVO">
         /* 대국민포털_권한메뉴기본 삭제 (AuthrtMenuMapper.deleteAuthrtMenu) */
-        DELETE FROM "KIDS_OWN"."TB_PP_M_AUTHRT_MENU"
+        DELETE FROM kids_own.TB_PP_M_AUTHRT_MENU
         WHERE 1=1
         AND authrt_cd = #{authrtCd}
         AND menu_sn = #{menuSn}

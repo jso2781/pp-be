@@ -27,31 +27,31 @@ public class AuthrtChgHstryRVO
      * 적용대상유형
      */
     @Schema(description = "적용대상유형", type = "String")
-    private String aplcnTrgtType;
+    private String aplcnTrgtTypeCd;
 
     /**
      * 변경역할목록
      */
     @Schema(description = "변경역할목록", type = "String")
-    private String chgRoleList;
+    private String chgRoleListCn;
 
     /**
      * 적용대상
      */
     @Schema(description = "적용대상", type = "String")
-    private String aplcnTrgt;
+    private String aplcnTrgtNm;
 
     /**
      * 변경유형
      */
     @Schema(description = "변경유형", type = "String")
-    private String chgType;
+    private String chgTypeCd;
 
     /**
      * 비고
      */
     @Schema(description = "비고", type = "String")
-    private String rmrk;
+    private String authrtChgRmrkCn;
 
     /**
      * 등록자아이디
@@ -113,45 +113,45 @@ public class AuthrtChgHstryRVO
     {
         this.menuSn = menuSn;
     }
-    public String getAplcnTrgtType()
+    public String getAplcnTrgtTypeCd()
     {
-        return aplcnTrgtType;
+        return aplcnTrgtTypeCd;
     }
-    public void setAplcnTrgtType(String aplcnTrgtType)
+    public void setAplcnTrgtTypeCd(String aplcnTrgtTypeCd)
     {
-        this.aplcnTrgtType = aplcnTrgtType;
+        this.aplcnTrgtTypeCd = aplcnTrgtTypeCd;
     }
-    public String getChgRoleList()
+    public String getChgRoleListCn()
     {
-        return chgRoleList;
+        return chgRoleListCn;
     }
-    public void setChgRoleList(String chgRoleList)
+    public void setChgRoleListCn(String chgRoleListCn)
     {
-        this.chgRoleList = chgRoleList;
+        this.chgRoleListCn = chgRoleListCn;
     }
-    public String getAplcnTrgt()
+    public String getAplcnTrgtNm()
     {
-        return aplcnTrgt;
+        return aplcnTrgtNm;
     }
-    public void setAplcnTrgt(String aplcnTrgt)
+    public void setAplcnTrgtNm(String aplcnTrgtNm)
     {
-        this.aplcnTrgt = aplcnTrgt;
+        this.aplcnTrgtNm = aplcnTrgtNm;
     }
-    public String getChgType()
+    public String getChgTypeCd()
     {
-        return chgType;
+        return chgTypeCd;
     }
-    public void setChgType(String chgType)
+    public void setChgTypeCd(String chgTypeCd)
     {
-        this.chgType = chgType;
+        this.chgTypeCd = chgTypeCd;
     }
-    public String getRmrk()
+    public String getAuthrtChgRmrkCn()
     {
-        return rmrk;
+        return authrtChgRmrkCn;
     }
-    public void setRmrk(String rmrk)
+    public void setAuthrtChgRmrkCn(String authrtChgRmrkCn)
     {
-        this.rmrk = rmrk;
+        this.authrtChgRmrkCn = authrtChgRmrkCn;
     }
     public String getRgtrId()
     {

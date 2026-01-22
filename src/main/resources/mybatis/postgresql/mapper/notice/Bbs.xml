@@ -7,9 +7,9 @@
         SELECT
              bbs_id
             ,bbs_nm
-            ,bbs_atrb
+            ,bbs_atrb_cd
             ,bbs_expln
-            ,bbs_smry
+            ,bbs_smry_cn
             ,cmnt_use_yn
             ,inq_cnt_expsr_yn
             ,dept_expsr_yn
@@ -19,24 +19,24 @@
             ,use_yn
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_M_BBS"
+
+        FROM kids_own.TB_PP_M_BBS
         WHERE 1=1
         AND bbs_id = #{bbsId}
     </select>
 
     <insert id="insertBbs" parameterType="BbsPVO">
         /* 대국민포털_게시판기본 입력 (BbsMapper.insertBbs) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_BBS"
+        INSERT INTO kids_own.TB_PP_M_BBS
         (
              bbs_id
             ,bbs_nm
-            ,bbs_atrb
+            ,bbs_atrb_cd
             ,bbs_expln
-            ,bbs_smry
+            ,bbs_smry_cn
             ,cmnt_use_yn
             ,inq_cnt_expsr_yn
             ,dept_expsr_yn
@@ -46,10 +46,10 @@
             ,use_yn
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -67,21 +67,21 @@
             ,#{useYn}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
     <update id="updateBbs" parameterType="BbsPVO">
         /* 대국민포털_게시판기본 수정 (BbsMapper.updateBbs) */
-        UPDATE "KIDS_OWN"."TB_PP_M_BBS"
+        UPDATE kids_own.TB_PP_M_BBS
         SET
              bbs_nm = coalesce(#{bbsNm}, bbs_nm)
-            ,bbs_atrb = coalesce(#{bbsAtrb}, bbs_atrb)
+            ,bbs_atrb_cd = coalesce(#{bbsAtrb}, bbs_atrb_cd)
             ,bbs_expln = coalesce(#{bbsExpln}, bbs_expln)
-            ,bbs_smry = coalesce(#{bbsSmry}, bbs_smry)
+            ,bbs_smry_cn = coalesce(#{bbsSmry}, bbs_smry_cn)
             ,cmnt_use_yn = coalesce(#{cmntUseYn}, cmnt_use_yn)
             ,inq_cnt_expsr_yn = coalesce(#{inqCntExpsrYn}, inq_cnt_expsr_yn)
             ,dept_expsr_yn = coalesce(#{deptExpsrYn}, dept_expsr_yn)
@@ -91,20 +91,20 @@
             ,use_yn = coalesce(#{useYn}, use_yn)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND bbs_id = #{bbsId}
     </update>
 
     <insert id="saveBbs" parameterType="BbsPVO">
         /* 대국민포털_게시판기본 저장 (BbsMapper.insertBbs) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_BBS"
+        INSERT INTO kids_own.TB_PP_M_BBS
         (
              bbs_id
             ,bbs_nm
-            ,bbs_atrb
+            ,bbs_atrb_cd
             ,bbs_expln
-            ,bbs_smry
+            ,bbs_smry_cn
             ,cmnt_use_yn
             ,inq_cnt_expsr_yn
             ,dept_expsr_yn
@@ -114,10 +114,10 @@
             ,use_yn
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -135,32 +135,32 @@
             ,#{useYn}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(bbs_id)
         DO UPDATE SET
-             bbs_nm = coalesce(excluded.bbs_nm, "KIDS_OWN"."TB_PP_M_BBS".bbs_nm)
-            ,bbs_atrb = coalesce(excluded.bbs_atrb, "KIDS_OWN"."TB_PP_M_BBS".bbs_atrb)
-            ,bbs_expln = coalesce(excluded.bbs_expln, "KIDS_OWN"."TB_PP_M_BBS".bbs_expln)
-            ,bbs_smry = coalesce(excluded.bbs_smry, "KIDS_OWN"."TB_PP_M_BBS".bbs_smry)
-            ,cmnt_use_yn = coalesce(excluded.cmnt_use_yn, "KIDS_OWN"."TB_PP_M_BBS".cmnt_use_yn)
-            ,inq_cnt_expsr_yn = coalesce(excluded.inq_cnt_expsr_yn, "KIDS_OWN"."TB_PP_M_BBS".inq_cnt_expsr_yn)
-            ,dept_expsr_yn = coalesce(excluded.dept_expsr_yn, "KIDS_OWN"."TB_PP_M_BBS".dept_expsr_yn)
-            ,file_atch_yn = coalesce(excluded.file_atch_yn, "KIDS_OWN"."TB_PP_M_BBS".file_atch_yn)
-            ,atch_psblty_file_cnt = coalesce(excluded.atch_psblty_file_cnt, "KIDS_OWN"."TB_PP_M_BBS".atch_psblty_file_cnt)
-            ,lang_se_cd = coalesce(excluded.lang_se_cd, "KIDS_OWN"."TB_PP_M_BBS".lang_se_cd)
-            ,use_yn = coalesce(excluded.use_yn, "KIDS_OWN"."TB_PP_M_BBS".use_yn)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_BBS".mdfr_id)
+             bbs_nm = coalesce(excluded.bbs_nm, kids_own.TB_PP_M_BBS.bbs_nm)
+            ,bbs_atrb_cd = coalesce(excluded.bbs_atrb_cd, kids_own.TB_PP_M_BBS.bbs_atrb_cd)
+            ,bbs_expln = coalesce(excluded.bbs_expln, kids_own.TB_PP_M_BBS.bbs_expln)
+            ,bbs_smry_cn = coalesce(excluded.bbs_smry_cn, kids_own.TB_PP_M_BBS.bbs_smry_cn)
+            ,cmnt_use_yn = coalesce(excluded.cmnt_use_yn, kids_own.TB_PP_M_BBS.cmnt_use_yn)
+            ,inq_cnt_expsr_yn = coalesce(excluded.inq_cnt_expsr_yn, kids_own.TB_PP_M_BBS.inq_cnt_expsr_yn)
+            ,dept_expsr_yn = coalesce(excluded.dept_expsr_yn, kids_own.TB_PP_M_BBS.dept_expsr_yn)
+            ,file_atch_yn = coalesce(excluded.file_atch_yn, kids_own.TB_PP_M_BBS.file_atch_yn)
+            ,atch_psblty_file_cnt = coalesce(excluded.atch_psblty_file_cnt, kids_own.TB_PP_M_BBS.atch_psblty_file_cnt)
+            ,lang_se_cd = coalesce(excluded.lang_se_cd, kids_own.TB_PP_M_BBS.lang_se_cd)
+            ,use_yn = coalesce(excluded.use_yn, kids_own.TB_PP_M_BBS.use_yn)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_BBS.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_BBS".mdfcn_prgrm_id)
+
     </insert>
 
     <delete id="deleteBbs" parameterType="BbsDVO">
         /* 대국민포털_게시판기본 삭제 (BbsMapper.deleteBbs) */
-        DELETE FROM "KIDS_OWN"."TB_PP_M_BBS"
+        DELETE FROM kids_own.TB_PP_M_BBS
         WHERE 1=1
         AND bbs_id = #{bbsId}
     </delete>
