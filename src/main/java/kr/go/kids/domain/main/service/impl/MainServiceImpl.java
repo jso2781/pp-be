@@ -70,21 +70,11 @@ public class MainServiceImpl implements MainService {
         // 3.1 SNS 유튜브 게시물 last4
         List<MainRVO> youtube = mainMapper.selectRecent4PstListByTaskCd(TASK_CD_MN_BBS2);        
         // FIXME 동영상 URL 관련 컬럼명 확정시 수정 필요
-<<<<<<< HEAD
-
-=======
         // 임시 컬럼 : pstCn (게시글 내용)        
->>>>>>> branch 'main' of https://github.com/jso2781/pp-be.git
         for (MainRVO main : youtube) {
-<<<<<<< HEAD
-
-
-
-=======
             String pstCn = main.getPstCn();
             if (StringUtils.isNotBlank(pstCn)) {
                 main.setVideoId(extractYoutubeVideoId(pstCn));
->>>>>>> branch 'main' of https://github.com/jso2781/pp-be.git
             }
         }        
         // =========================================                        
@@ -101,24 +91,8 @@ public class MainServiceImpl implements MainService {
         // 3.4 SNS 통합 20건 조회
         List<MainRVO> all_sns = mainMapper.selectRecent20PstListByTaskCds(Arrays.asList(TASK_CD_MN_BBS2, TASK_CD_MN_BBS3, TASK_CD_MN_BBS4));
         // FIXME 동영상 URL 관련 컬럼명 확정시 수정 필요
-<<<<<<< HEAD
-
-=======
-        // 임시 컬럼 : pstCn (게시글 내용)      
->>>>>>> branch 'main' of https://github.com/jso2781/pp-be.git
-        // 임시 컬럼 : pstCn (게시글 내용)      
-        // 임시 컬럼 : pstCn (게시글 내용)      
         // 임시 컬럼 : pstCn (게시글 내용)      
         for (MainRVO main : all_sns) {
-<<<<<<< HEAD
-
-
-
-=======
-            String pstCn = main.getPstCn();
-            if (StringUtils.isNotBlank(pstCn)) {
-                main.setVideoId(extractYoutubeVideoId(pstCn));
->>>>>>> branch 'main' of https://github.com/jso2781/pp-be.git
             String pstCn = main.getPstCn();
             if (StringUtils.isNotBlank(pstCn)) {
                 main.setVideoId(extractYoutubeVideoId(pstCn));

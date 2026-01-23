@@ -87,10 +87,5 @@ public class MainRVO {
      * 팝업연결주소
      */
     @Schema(description = "팝업연결주소", type = "String")
-    private String popupLnkgAddr;        
-    
-    }
-=======
-}
->>>>>>> branch 'main' of https://github.com/jso2781/pp-be.git
+    private String popupLnkgAddr;               
 }
