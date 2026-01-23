@@ -241,7 +241,7 @@
     
     <update id="updateMbrInfoPw" parameterType="MbrInfoPVO">
         /* 대국민포털_회원정보 PW 수정 (MbrInfoMapper.updateMbrInfoPw) */
-        UPDATE "KIDS_OWN"."TB_PP_M_MBR_INFO"
+        UPDATE kids_own.TB_PP_M_MBR_INFO
         SET
             encpt_mbr_pswd = coalesce(#{encptMbrPswd}, encpt_mbr_pswd)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)

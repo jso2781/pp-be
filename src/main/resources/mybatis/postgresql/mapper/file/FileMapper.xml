@@ -24,7 +24,7 @@
              , a.rgtr_id
              , TO_CHAR(a.mdfcn_dt, 'YYYY-MM-DD HH24:MI:SS')
              , a.mdfr_id
-        FROM "TB_CA_E_FILE_TRSM" a
+        FROM TB_CA_E_FILE_TRSM a
         WHERE 1=1
         ORDER BY a.atch_file_dtl_sn DESC
     </select>
@@ -48,7 +48,7 @@
         , a.rgtr_id
         , TO_CHAR(a.mdfcn_dt, 'YYYY-MM-DD HH24:MI:SS')
         , a.mdfr_id
-        FROM "TB_CA_E_FILE_TRSM" a
+        FROM TB_CA_E_FILE_TRSM a
         WHERE 1=1
         <if test="atchFileDtlSn != null and atchFileDtlSn != ''">
             AND a.atch_file_dtl_sn = #{atchFileDtlSn}
@@ -66,7 +66,7 @@
 
     <!-- 파일정보 등록 -->
     <insert id="insert" parameterType="FileInsertReqVO">
-        INSERT INTO "TB_CA_E_FILE_TRSM" (
+        INSERT INTO TB_CA_E_FILE_TRSM (
                                           atch_file_dtl_sn
                                         , atch_file_group_sn
                                         , file_seq
@@ -109,7 +109,7 @@
 
     <!-- 파일 그룹 정보 등록 -->
     <insert id="groupInsert" parameterType="FileGroupInsertReq">
-        INSERT INTO "TB_CA_E_FILE_GROUP_TRSM" (
+        INSERT INTO TB_CA_E_FILE_GROUP_TRSM (
                                                 atch_file_group_sn
                                               , task_se_cd
                                               , task_se_trgt_id
