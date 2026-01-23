@@ -90,3 +90,7 @@ public class MainRVO {
     private String popupLnkgAddr;        
     
     }
+=======
+}
+>>>>>>> branch 'main' of https://github.com/jso2781/pp-be.git
+}

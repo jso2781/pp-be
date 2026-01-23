@@ -185,10 +185,6 @@ public class PrvcAcsHstryRVO
     {
         this.regDt = regDt;
     }
-
-    
-
-    
     public String getMdfrId()
     {
         return mdfrId;
@@ -205,9 +201,5 @@ public class PrvcAcsHstryRVO
     {
         this.mdfcnDt = mdfcnDt;
     }
-
-    
-
-    
 
 }
