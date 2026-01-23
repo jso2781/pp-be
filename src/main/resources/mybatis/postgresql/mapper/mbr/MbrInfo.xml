@@ -234,5 +234,17 @@
         WHERE 1=1
         AND mbr_no = #{mbrNo}
     </delete>
+    
+    <update id="updateMbrInfoPw" parameterType="MbrInfoPVO">
+        /* 대국민포털_회원정보 PW 수정 (MbrInfoMapper.updateMbrInfoPw) */
+        UPDATE "KIDS_OWN"."TB_PP_M_MBR_INFO"
+        SET
+            mbr_enpswd = coalesce(#{mbrEnpswd}, mbr_enpswd)
+            ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
+            ,mdfcn_dt = now()
+            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+        WHERE 1=1
+            AND mbr_no = #{mbrNo}
+    </update>
 
 </mapper>

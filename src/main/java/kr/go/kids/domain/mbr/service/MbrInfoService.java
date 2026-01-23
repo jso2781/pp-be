@@ -64,4 +64,12 @@ public interface MbrInfoService
      * @return 삭제된 건수 
      */
     public int deleteMbrInfo(MbrInfoDVO mbrInfoDVO);
+    
+    /**
+     * 대국민포털_회원정보기본 PW 정보 수정
+     * 
+     * @param mbrInfoDVO
+     * @return 
+     */
+    public ApiPrnDto updateMbrInfoPw(MbrInfoPVO mbrInfoPVO);
 }

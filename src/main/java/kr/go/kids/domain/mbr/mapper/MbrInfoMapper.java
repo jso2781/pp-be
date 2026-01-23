@@ -68,4 +68,12 @@ public interface MbrInfoMapper
      * @return 삭제된 건수 
      */
     public int deleteMbrInfo(MbrInfoDVO mbrInfoDVO);
+    
+    /**
+     * 
+     * 
+     * @param mbrInfoPVO
+     * @return
+     */
+    public int updateMbrInfoPw(MbrInfoPVO mbrInfoPVO);
 }

@@ -1,20 +1,25 @@
 package kr.go.kids.domain.mbr.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.go.kids.domain.faq.vo.FaqRVO;
 import kr.go.kids.domain.mbr.mapper.MbrInfoMapper;
 import kr.go.kids.domain.mbr.service.MbrInfoService;
 import kr.go.kids.domain.mbr.vo.MbrInfoDVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoPVO;
 import kr.go.kids.domain.mbr.vo.MbrInfoRVO;
 import kr.go.kids.domain.mbr.vo.VerifyPasswordPVO;
+import kr.go.kids.global.config.util.MessageContextHolder;
 import kr.go.kids.global.system.common.ApiResultCode;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class MbrInfoServiceImpl implements MbrInfoService
 {
     @Autowired
@@ -111,5 +116,19 @@ public class MbrInfoServiceImpl implements MbrInfoService
     public int deleteMbrInfo(MbrInfoDVO mbrInfoDVO)
     {
         return mbrInfoMapper.deleteMbrInfo(mbrInfoDVO);
+    }
+    
+    @Override
+    public ApiPrnDto updateMbrInfoPw(MbrInfoPVO mbrInfoPVO)
+    {
+        ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
+        try {
+	        	mbrInfoMapper.updateMbrInfoPw(mbrInfoPVO);
+        } catch (Exception e) {
+            log.error("회원정보기본 PW 정보 수정 실패", e);
+            result = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
+            result.setMsg(MessageContextHolder.getMessage("api.error.500"));
+        }
+        return result;
     }
 }
