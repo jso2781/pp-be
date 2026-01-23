@@ -13,7 +13,6 @@
 		    ,f.atch_file_nm as thmb_file_nm        
 		    ,f.atch_file_path as thmb_file_path
 		    ,p.reg_dt
-
 		    ,p.pst_cn
 		FROM kids_own.TB_PP_M_PST p
 		LEFT OUTER JOIN kids_own.TB_CA_M_ATCH f
@@ -37,7 +36,6 @@
 	        ,f.atch_file_nm as thmb_file_nm
 	        ,f.atch_file_path as thmb_file_path
 	        ,p.reg_dt
-
 	        ,p.pst_cn
 		    ,CASE p.bbs_id
 		        WHEN 'BBS_VDO_002' THEN '유튜브'
