@@ -76,132 +76,132 @@ CREATE SEQUENCE KIDS_OWN.TB_PP_M_TRMS_STT_SEQ
 -- 공통_파일그룹전송내역
 CREATE TABLE KIDS_OWN.TB_CA_E_FILE_GROUP_TRSM
 (
-	atch_file_group_id VARCHAR(40) NOT NULL, -- 첨부파일그룹아이디
-	task_se_cd         VARCHAR(10) NULL,     -- 업무구분코드
-	task_se_trgt_id    VARCHAR(40) NULL,     -- 업무구분대상아이디
-	use_yn             CHAR(1)     NULL,     -- 사용여부
-	reg_dt             TIMESTAMP   NULL,     -- 등록일시
-	rgtr_id            VARCHAR(40) NULL,     -- 등록자아이디
-	mdfcn_dt           TIMESTAMP   NULL,     -- 수정일시
-	mdfr_id            VARCHAR(40) NULL      -- 수정자아이디
+    atch_file_group_id VARCHAR(40) NOT NULL, -- 첨부파일그룹아이디
+    task_se_cd         VARCHAR(10) NULL,     -- 업무구분코드
+    task_se_trgt_id    VARCHAR(40) NULL,     -- 업무구분대상아이디
+    use_yn             CHAR(1)     NULL,     -- 사용여부
+    reg_dt             TIMESTAMP   NULL,     -- 등록일시
+    rgtr_id            VARCHAR(40) NULL,     -- 등록자아이디
+    mdfcn_dt           TIMESTAMP   NULL,     -- 수정일시
+    mdfr_id            VARCHAR(40) NULL      -- 수정자아이디
 );
 
 -- 공통_파일그룹전송내역 기본키
 CREATE UNIQUE INDEX PK_TB_CA_E_FILE_GROUP_TRSM
-	ON KIDS_OWN.TB_CA_E_FILE_GROUP_TRSM
-	( -- 공통_파일그룹전송내역
-		atch_file_group_id ASC NULLS LAST -- 첨부파일그룹아이디
-	);
+    ON KIDS_OWN.TB_CA_E_FILE_GROUP_TRSM
+    ( -- 공통_파일그룹전송내역
+        atch_file_group_id ASC NULLS LAST -- 첨부파일그룹아이디
+    );
 
 -- 공통_파일그룹전송내역
 ALTER TABLE KIDS_OWN.TB_CA_E_FILE_GROUP_TRSM
-	ADD CONSTRAINT PK_TB_CA_E_FILE_GROUP_TRSM
-		-- 공통_파일그룹전송내역 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_CA_E_FILE_GROUP_TRSM
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_CA_E_FILE_GROUP_TRSM
+        -- 공통_파일그룹전송내역 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_CA_E_FILE_GROUP_TRSM
+    NOT DEFERRABLE;
 
 -- 공통_파일전송내역
 CREATE TABLE KIDS_OWN.TB_CA_E_FILE_TRSM
 (
-	atch_file_id         VARCHAR(40)   NOT NULL, -- 첨부파일아이디
-	atch_file_group_id   VARCHAR(40)   NULL,     -- 첨부파일그룹아이디
-	file_seq             NUMERIC(10,0) NOT NULL, -- 파일순서
-	file_strg_path_dsctn VARCHAR(1000) NULL,     -- 파일저장경로내역
-	encpt_file_nm         VARCHAR(300)  NULL,    -- 인코딩파일명
-	prvc_incl_yn         CHAR(1)       NULL,     -- 개인정보포함여부
-	file_nm              VARCHAR(300)  NULL,     -- 파일명
-	file_extn_nm         VARCHAR(20)   NULL,     -- 파일확장자명
-	file_cn              TEXT          NULL,     -- 파일내용
-	file_sz              NUMERIC(10,0) NULL,     -- 파일크기
-	crt_dt               CHAR(14)      NULL,     -- 생성일시
-	use_yn               CHAR(1)       NULL,     -- 사용여부
-	reg_dt               TIMESTAMP     NULL,     -- 등록일시
-	rgtr_id              VARCHAR(40)   NULL,     -- 등록자아이디
-	mdfcn_dt             TIMESTAMP     NULL,     -- 수정일시
-	mdfr_id              VARCHAR(40)   NULL      -- 수정자아이디
+    atch_file_id         VARCHAR(40)   NOT NULL, -- 첨부파일아이디
+    atch_file_group_id   VARCHAR(40)   NULL,     -- 첨부파일그룹아이디
+    file_seq             NUMERIC(10,0) NOT NULL, -- 파일순서
+    file_strg_path_dsctn VARCHAR(1000) NULL,     -- 파일저장경로내역
+    encpt_file_nm         VARCHAR(300)  NULL,    -- 인코딩파일명
+    prvc_incl_yn         CHAR(1)       NULL,     -- 개인정보포함여부
+    file_nm              VARCHAR(300)  NULL,     -- 파일명
+    file_extn_nm         VARCHAR(20)   NULL,     -- 파일확장자명
+    file_cn              TEXT          NULL,     -- 파일내용
+    file_sz              NUMERIC(10,0) NULL,     -- 파일크기
+    crt_dt               CHAR(14)      NULL,     -- 생성일시
+    use_yn               CHAR(1)       NULL,     -- 사용여부
+    reg_dt               TIMESTAMP     NULL,     -- 등록일시
+    rgtr_id              VARCHAR(40)   NULL,     -- 등록자아이디
+    mdfcn_dt             TIMESTAMP     NULL,     -- 수정일시
+    mdfr_id              VARCHAR(40)   NULL      -- 수정자아이디
 );
 
 -- 공통_파일전송내역 기본키
 CREATE UNIQUE INDEX PK_TB_CA_E_FILE_TRSM
-	ON KIDS_OWN.TB_CA_E_FILE_TRSM
-	( -- 공통_파일전송내역
-		atch_file_id ASC NULLS LAST -- 첨부파일아이디
-	);
+    ON KIDS_OWN.TB_CA_E_FILE_TRSM
+    ( -- 공통_파일전송내역
+        atch_file_id ASC NULLS LAST -- 첨부파일아이디
+    );
 
 -- 공통_파일전송내역
 ALTER TABLE KIDS_OWN.TB_CA_E_FILE_TRSM
-	ADD CONSTRAINT PK_TB_CA_E_FILE_TRSM
-		-- 공통_파일전송내역 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_CA_E_FILE_TRSM
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_CA_E_FILE_TRSM
+        -- 공통_파일전송내역 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_CA_E_FILE_TRSM
+    NOT DEFERRABLE;
 
 -- 대국민포털_DUR노인주의기본
 CREATE TABLE KIDS_OWN.TB_PP_M_DUR_SNCTZ
 (
-	snctz_cutn_sn VARCHAR(50)   NOT NULL, -- 노인주의일련번호
-	prdct_cd      CHAR(9)       NOT NULL, -- 제품코드
-	igrd_nm       VARCHAR(100)  NULL,     -- 성분명
-	igrd_cd       VARCHAR(20)   NOT NULL, -- 성분코드
-	prdct_nm      VARCHAR(256)  NULL,     -- 제품명
-	bzenty_nm     VARCHAR(100)  NULL,     -- 업체명
-	pbanc_ymd     CHAR(8)       NULL,     -- 공고일자
-	pbanc_no      CHAR(8)       NULL,     -- 공고번호
-	mdcn_dtl_cn   VARCHAR(4000) NULL,     -- 약품상세내용
-	aplcn_ym      CHAR(6)       NULL,     -- 적용연월
-	rmrk_cn       VARCHAR(4000) NULL,     -- 비고내용
-	oper_stts_cd  CHAR(1)       NULL,     -- 운영상태코드
-	slry_se_cd    CHAR(1)       NULL,     -- 급여구분코드
-	rgtr_id       VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt        TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id       VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt      TIMESTAMP     NULL      -- 수정일시
+    snctz_cutn_sn VARCHAR(50)   NOT NULL, -- 노인주의일련번호
+    prdct_cd      CHAR(9)       NOT NULL, -- 제품코드
+    igrd_nm       VARCHAR(100)  NULL,     -- 성분명
+    igrd_cd       VARCHAR(20)   NOT NULL, -- 성분코드
+    prdct_nm      VARCHAR(256)  NULL,     -- 제품명
+    bzenty_nm     VARCHAR(100)  NULL,     -- 업체명
+    pbanc_ymd     CHAR(8)       NULL,     -- 공고일자
+    pbanc_no      CHAR(8)       NULL,     -- 공고번호
+    mdcn_dtl_cn   VARCHAR(4000) NULL,     -- 약품상세내용
+    aplcn_ym      CHAR(6)       NULL,     -- 적용연월
+    rmrk_cn       VARCHAR(4000) NULL,     -- 비고내용
+    oper_stts_cd  CHAR(1)       NULL,     -- 운영상태코드
+    slry_se_cd    CHAR(1)       NULL,     -- 급여구분코드
+    rgtr_id       VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt        TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id       VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt      TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_DUR노인주의기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_DUR_SNCTZ
-	ON KIDS_OWN.TB_PP_M_DUR_SNCTZ
-	( -- 대국민포털_DUR노인주의기본
-		snctz_cutn_sn ASC NULLS LAST -- 노인주의일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_DUR_SNCTZ
+    ( -- 대국민포털_DUR노인주의기본
+        snctz_cutn_sn ASC NULLS LAST -- 노인주의일련번호
+    );
 
 -- 대국민포털_DUR노인주의기본
 ALTER TABLE KIDS_OWN.TB_PP_M_DUR_SNCTZ
-	ADD CONSTRAINT PK_TB_PP_M_DUR_SNCTZ
-		-- 대국민포털_DUR노인주의기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_DUR_SNCTZ
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_DUR_SNCTZ
+        -- 대국민포털_DUR노인주의기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_DUR_SNCTZ
+    NOT DEFERRABLE;
 
 --drop table KIDS_OWN.TB_PP_M_DUR_CONC_BANN cascade;
 
 -- 대국민포털_DUR병용금기기본
 CREATE TABLE KIDS_OWN.TB_PP_M_DUR_CONC_BANN
 (
-	conc_bann_sn	 VARCHAR(50)   NOT NULL, -- 병용금기일련번호
-	igrd_nm_1        VARCHAR(100)  NOT NULL, -- 성분명_1
-	igrd_cd_1        VARCHAR(20)   NOT NULL, -- 성분코드_1
-	prdct_cd_1       CHAR(9)       NOT NULL, -- 제품코드_1
-	prdct_nm_1       VARCHAR(256)  NULL,     -- 제품명_1
-	bzenty_nm_1      VARCHAR(100)  NULL,     -- 업체명_1
-	slry_se_cd_1     CHAR(1)       NULL,     -- 급여구분코드_1
-	igrd_nm_2        VARCHAR(100)  NOT NULL, -- 성분명_2
-	igrd_cd_2        VARCHAR(20)   NOT NULL, -- 성분코드_2
-	prdct_cd_2       CHAR(9)       NOT NULL, -- 제품코드_2
-	prdct_nm_2       VARCHAR(256)  NULL,     -- 제품명_2
-	bzenty_nm_2      VARCHAR(100)  NULL,     -- 업체명_2
-	slry_se_cd_2     CHAR(1)       NULL,     -- 급여구분코드_2
-	ancmnt_no        CHAR(8)       NULL,     -- 고시번호
-	ancmnt_aplcn_ymd CHAR(8)       NULL,     -- 고시적용일자
-	bannRsn          VARCHAR(2000) NULL,     -- 금기사유
-	rmrk_cn          VARCHAR(4000) NULL,     -- 비고내용
-	aplcn_ym         CHAR(6)       NULL,     -- 적용연월
-	oper_stts_cd     CHAR(1)       NULL,     -- 운영상태코드
-	rgtr_id          VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt           TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id          VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt         TIMESTAMP     NULL      -- 수정일시
+    conc_bann_sn     VARCHAR(50)   NOT NULL, -- 병용금기일련번호
+    igrd_nm_1        VARCHAR(100)  NOT NULL, -- 성분명_1
+    igrd_cd_1        VARCHAR(20)   NOT NULL, -- 성분코드_1
+    prdct_cd_1       CHAR(9)       NOT NULL, -- 제품코드_1
+    prdct_nm_1       VARCHAR(256)  NULL,     -- 제품명_1
+    bzenty_nm_1      VARCHAR(100)  NULL,     -- 업체명_1
+    slry_se_cd_1     CHAR(1)       NULL,     -- 급여구분코드_1
+    igrd_nm_2        VARCHAR(100)  NOT NULL, -- 성분명_2
+    igrd_cd_2        VARCHAR(20)   NOT NULL, -- 성분코드_2
+    prdct_cd_2       CHAR(9)       NOT NULL, -- 제품코드_2
+    prdct_nm_2       VARCHAR(256)  NULL,     -- 제품명_2
+    bzenty_nm_2      VARCHAR(100)  NULL,     -- 업체명_2
+    slry_se_cd_2     CHAR(1)       NULL,     -- 급여구분코드_2
+    ancmnt_no        CHAR(8)       NULL,     -- 고시번호
+    ancmnt_aplcn_ymd CHAR(8)       NULL,     -- 고시적용일자
+    bannRsn          VARCHAR(2000) NULL,     -- 금기사유
+    rmrk_cn          VARCHAR(4000) NULL,     -- 비고내용
+    aplcn_ym         CHAR(6)       NULL,     -- 적용연월
+    oper_stts_cd     CHAR(1)       NULL,     -- 운영상태코드
+    rgtr_id          VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt           TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id          VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt         TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 급여구분코드_1
@@ -215,38 +215,38 @@ COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_CONC_BANN.oper_stts_cd IS 'O:운영,W:적
 
 -- 대국민포털_DUR병용금기기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_DUR_CONC_BANN
-	ON KIDS_OWN.TB_PP_M_DUR_CONC_BANN
-	( -- 대국민포털_DUR병용금기기본
-		conc_bann_sn ASC NULLS LAST -- 병용금기일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_DUR_CONC_BANN
+    ( -- 대국민포털_DUR병용금기기본
+        conc_bann_sn ASC NULLS LAST -- 병용금기일련번호
+    );
 
 -- 대국민포털_DUR병용금기기본
 ALTER TABLE KIDS_OWN.TB_PP_M_DUR_CONC_BANN
-	ADD CONSTRAINT PK_TB_PP_M_DUR_CONC_BANN
-		-- 대국민포털_DUR병용금기기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_DUR_CONC_BANN
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_DUR_CONC_BANN
+        -- 대국민포털_DUR병용금기기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_DUR_CONC_BANN
+    NOT DEFERRABLE;
 
 -- 대국민포털_DUR수유부주의기본
 CREATE TABLE KIDS_OWN.TB_PP_M_DUR_NURSW
 (
-	nursw_cutn_sn VARCHAR(50)   NOT NULL, -- 수유부주의일련번호
-	prdct_cd           CHAR(9)       NOT NULL, -- 제품코드
-	igrd_cd            VARCHAR(20)   NOT NULL, -- 성분코드
-	igrd_nm            VARCHAR(100)  NULL,     -- 성분명
-	prdct_nm           VARCHAR(256)  NULL,     -- 제품명
-	bzenty_nm          VARCHAR(100)  NULL,     -- 업체명
-	pbanc_ymd          CHAR(8)       NULL,     -- 공고일자
-	pbanc_no           CHAR(8)       NULL,     -- 공고번호
-	aplcn_ym           CHAR(6)       NULL,     -- 적용연월
-	rmrk_cn            VARCHAR(4000) NULL,     -- 비고내용
-	slry_se_cd         CHAR(1)       NULL,     -- 급여구분코드
-	oper_stts_cd       CHAR(1)       NULL,     -- 운영상태코드
-	rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt             TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
+    nursw_cutn_sn VARCHAR(50)   NOT NULL, -- 수유부주의일련번호
+    prdct_cd           CHAR(9)       NOT NULL, -- 제품코드
+    igrd_cd            VARCHAR(20)   NOT NULL, -- 성분코드
+    igrd_nm            VARCHAR(100)  NULL,     -- 성분명
+    prdct_nm           VARCHAR(256)  NULL,     -- 제품명
+    bzenty_nm          VARCHAR(100)  NULL,     -- 업체명
+    pbanc_ymd          CHAR(8)       NULL,     -- 공고일자
+    pbanc_no           CHAR(8)       NULL,     -- 공고번호
+    aplcn_ym           CHAR(6)       NULL,     -- 적용연월
+    rmrk_cn            VARCHAR(4000) NULL,     -- 비고내용
+    slry_se_cd         CHAR(1)       NULL,     -- 급여구분코드
+    oper_stts_cd       CHAR(1)       NULL,     -- 운영상태코드
+    rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt             TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 급여구분코드
@@ -254,40 +254,40 @@ COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_NURSW.slry_se_cd IS '품목(I), 성분(C)
 
 -- 대국민포털_DUR수유부주의기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_DUR_NURSW
-	ON KIDS_OWN.TB_PP_M_DUR_NURSW
-	( -- 대국민포털_DUR수유부주의기본
-		nursw_cutn_sn ASC NULLS LAST -- 수유부주의일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_DUR_NURSW
+    ( -- 대국민포털_DUR수유부주의기본
+        nursw_cutn_sn ASC NULLS LAST -- 수유부주의일련번호
+    );
 
 -- 대국민포털_DUR수유부주의기본
 ALTER TABLE KIDS_OWN.TB_PP_M_DUR_NURSW
-	ADD CONSTRAINT PK_TB_PP_M_DUR_NURSW
-		-- 대국민포털_DUR수유부주의기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_DUR_NURSW
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_DUR_NURSW
+        -- 대국민포털_DUR수유부주의기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_DUR_NURSW
+    NOT DEFERRABLE;
 
 -- 대국민포털_DUR용량주의기본
 CREATE TABLE KIDS_OWN.TB_PP_M_DUR_CPCT
 (
-	cpct_cutn_sn            VARCHAR(50)   NOT NULL, -- 용량주의일련번호
-	mdcn_cd                 CHAR(9)       NOT NULL, -- 약품코드
-	mdcn_nm                 VARCHAR(256)  NULL,     -- 약품명
-	gnrl_nm_cd              CHAR(9)       NOT NULL, -- 일반명코드
-	gnrl_nm                 VARCHAR(100)  NULL,     -- 일반명
-	day_max_admin_cpct_cn   VARCHAR(4000) NOT NULL, -- 일최대투여용량내용
-	day_max_admin_crtr_cpct NUMERIC(10,3) NULL,     -- 일최대투여기준용량
-	chck_crtr_igrd_cpct     NUMERIC(10,3) NULL,     -- 점검기준성분용량
-	pbanc_ymd               CHAR(8)       NULL,     -- 공고일자
-	pbanc_no                CHAR(8)       NULL,     -- 공고번호
-	dtl_cn                  VARCHAR(4000) NULL,     -- 상세내용
-	slry_se_cd              CHAR(1)       NULL,     -- 급여구분코드
-	aplcn_ym                CHAR(6)       NULL,     -- 적용연월
-	oper_stts_cd            CHAR(1)       NULL,     -- 운영상태코드
-	rgtr_id                 VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt                  TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id                 VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt                TIMESTAMP     NULL      -- 수정일시
+    cpct_cutn_sn            VARCHAR(50)   NOT NULL, -- 용량주의일련번호
+    mdcn_cd                 CHAR(9)       NOT NULL, -- 약품코드
+    mdcn_nm                 VARCHAR(256)  NULL,     -- 약품명
+    gnrl_nm_cd              CHAR(9)       NOT NULL, -- 일반명코드
+    gnrl_nm                 VARCHAR(100)  NULL,     -- 일반명
+    day_max_admin_cpct_cn   VARCHAR(4000) NOT NULL, -- 일최대투여용량내용
+    day_max_admin_crtr_cpct NUMERIC(10,3) NULL,     -- 일최대투여기준용량
+    chck_crtr_igrd_cpct     NUMERIC(10,3) NULL,     -- 점검기준성분용량
+    pbanc_ymd               CHAR(8)       NULL,     -- 공고일자
+    pbanc_no                CHAR(8)       NULL,     -- 공고번호
+    dtl_cn                  VARCHAR(4000) NULL,     -- 상세내용
+    slry_se_cd              CHAR(1)       NULL,     -- 급여구분코드
+    aplcn_ym                CHAR(6)       NULL,     -- 적용연월
+    oper_stts_cd            CHAR(1)       NULL,     -- 운영상태코드
+    rgtr_id                 VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt                  TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id                 VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt                TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 급여구분코드
@@ -298,41 +298,41 @@ COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_CPCT.oper_stts_cd IS 'O:운영,W:적용�
 
 -- 대국민포털_DUR용량주의기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_DUR_CPCT
-	ON KIDS_OWN.TB_PP_M_DUR_CPCT
-	( -- 대국민포털_DUR용량주의기본
-		cpct_cutn_sn ASC NULLS LAST -- 용량주의일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_DUR_CPCT
+    ( -- 대국민포털_DUR용량주의기본
+        cpct_cutn_sn ASC NULLS LAST -- 용량주의일련번호
+    );
 
 -- 대국민포털_DUR용량주의기본
 ALTER TABLE KIDS_OWN.TB_PP_M_DUR_CPCT
-	ADD CONSTRAINT PK_TB_PP_M_DUR_CPCT
-		-- 대국민포털_DUR용량주의기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_DUR_CPCT
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_DUR_CPCT
+        -- 대국민포털_DUR용량주의기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_DUR_CPCT
+    NOT DEFERRABLE;
 
 --drop table KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN cascade;
 
 -- 대국민포털_DUR임부금기기본
 CREATE TABLE KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN
 (
-	prgnt_bann_sn 	 VARCHAR(50)   NOT NULL, -- 임부금기일련번호
-	igrd_nm          VARCHAR(100)  NULL,     -- 성분명
-	igrd_cd          VARCHAR(20)   NOT NULL, -- 성분코드
-	prdct_cd         CHAR(9)       NOT NULL, -- 제품코드
-	prdct_nm         VARCHAR(256)  NULL,     -- 제품명
-	bzenty_nm        VARCHAR(100)  NULL,     -- 업체명
-	ancmnt_ymd       CHAR(8)       NULL,     -- 고시일자
-	ancmnt_no        CHAR(8)       NULL,     -- 고시번호
-	bann_grd       	 NUMERIC(2,0)  NULL,     -- 금기등급수
-	dtl_info_cn      VARCHAR(4000) NULL,     -- 상세정보내용
-	slry_se_cd       CHAR(1)       NULL,     -- 급여구분코드
-	aplcn_ym         CHAR(6)       NULL,     -- 적용연월
-	oper_stts_cd     CHAR(1)       NULL,     -- 운영상태코드
-	rgtr_id          VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt           TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id          VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt         TIMESTAMP     NULL      -- 수정일시
+    prgnt_bann_sn    VARCHAR(50)   NOT NULL, -- 임부금기일련번호
+    igrd_nm          VARCHAR(100)  NULL,     -- 성분명
+    igrd_cd          VARCHAR(20)   NOT NULL, -- 성분코드
+    prdct_cd         CHAR(9)       NOT NULL, -- 제품코드
+    prdct_nm         VARCHAR(256)  NULL,     -- 제품명
+    bzenty_nm        VARCHAR(100)  NULL,     -- 업체명
+    ancmnt_ymd       CHAR(8)       NULL,     -- 고시일자
+    ancmnt_no        CHAR(8)       NULL,     -- 고시번호
+    bann_grd         NUMERIC(2,0)  NULL,     -- 금기등급수
+    dtl_info_cn      VARCHAR(4000) NULL,     -- 상세정보내용
+    slry_se_cd       CHAR(1)       NULL,     -- 급여구분코드
+    aplcn_ym         CHAR(6)       NULL,     -- 적용연월
+    oper_stts_cd     CHAR(1)       NULL,     -- 운영상태코드
+    rgtr_id          VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt           TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id          VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt         TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 급여구분코드
@@ -343,38 +343,38 @@ COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN.oper_stts_cd IS 'O:운영,W:�
 
 -- 대국민포털_DUR임부금기기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_DUR_PRGNT_BANN
-	ON KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN
-	( -- 대국민포털_DUR임부금기기본
-		prgnt_bann_sn ASC NULLS LAST -- 임부금기일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN
+    ( -- 대국민포털_DUR임부금기기본
+        prgnt_bann_sn ASC NULLS LAST -- 임부금기일련번호
+    );
 
 -- 대국민포털_DUR임부금기기본
 ALTER TABLE KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN
-	ADD CONSTRAINT PK_TB_PP_M_DUR_PRGNT_BANN
-		-- 대국민포털_DUR임부금기기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_DUR_PRGNT_BANN
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_DUR_PRGNT_BANN
+        -- 대국민포털_DUR임부금기기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_DUR_PRGNT_BANN
+    NOT DEFERRABLE;
 
 -- 대국민포털_DUR투여기간주의기본
 CREATE TABLE KIDS_OWN.TB_PP_M_DUR_DOSAGE
 (
-	admin_prd_cutn_sn     VARCHAR(50)   NOT NULL, -- 투여기간주의일련번호
-	mdcn_cd               CHAR(9)       NOT NULL, -- 약품코드
-	mdcn_nm               VARCHAR(256)  NULL,     -- 약품명
-	gnrl_nm_cd            CHAR(9)       NOT NULL, -- 일반명코드
-	gnrl_nm               VARCHAR(100)  NULL,     -- 일반명
-	max_admin_prd_day_cnt NUMERIC(4,0)  NOT NULL, -- 최대투여기간일수
-	pbanc_ymd             CHAR(8)       NULL,     -- 공고일자
-	pbanc_no              CHAR(8)       NULL,     -- 공고번호
-	rmrk_cn               VARCHAR(4000) NULL,     -- 비고내용
-	slry_se_cd            CHAR(1)       NULL,     -- 급여구분코드
-	aplcn_ym              CHAR(6)       NULL,     -- 적용연월
-	oper_stts_cd          CHAR(1)       NULL,     -- 운영상태코드
-	rgtr_id               VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt                TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id               VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt              TIMESTAMP     NULL      -- 수정일시
+    admin_prd_cutn_sn     VARCHAR(50)   NOT NULL, -- 투여기간주의일련번호
+    mdcn_cd               CHAR(9)       NOT NULL, -- 약품코드
+    mdcn_nm               VARCHAR(256)  NULL,     -- 약품명
+    gnrl_nm_cd            CHAR(9)       NOT NULL, -- 일반명코드
+    gnrl_nm               VARCHAR(100)  NULL,     -- 일반명
+    max_admin_prd_day_cnt NUMERIC(4,0)  NOT NULL, -- 최대투여기간일수
+    pbanc_ymd             CHAR(8)       NULL,     -- 공고일자
+    pbanc_no              CHAR(8)       NULL,     -- 공고번호
+    rmrk_cn               VARCHAR(4000) NULL,     -- 비고내용
+    slry_se_cd            CHAR(1)       NULL,     -- 급여구분코드
+    aplcn_ym              CHAR(6)       NULL,     -- 적용연월
+    oper_stts_cd          CHAR(1)       NULL,     -- 운영상태코드
+    rgtr_id               VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt                TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id               VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt              TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 급여구분코드
@@ -385,43 +385,43 @@ COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_DOSAGE.oper_stts_cd IS 'O:운영,W:적용
 
 -- 대국민포털_DUR투여기간주의기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_DUR_DOSAGE
-	ON KIDS_OWN.TB_PP_M_DUR_DOSAGE
-	( -- 대국민포털_DUR투여기간주의기본
-		admin_prd_cutn_sn ASC NULLS LAST -- 투여기간주의일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_DUR_DOSAGE
+    ( -- 대국민포털_DUR투여기간주의기본
+        admin_prd_cutn_sn ASC NULLS LAST -- 투여기간주의일련번호
+    );
 
 -- 대국민포털_DUR투여기간주의기본
 ALTER TABLE KIDS_OWN.TB_PP_M_DUR_DOSAGE
-	ADD CONSTRAINT PK_TB_PP_M_DUR_DOSAGE
-		-- 대국민포털_DUR투여기간주의기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_DUR_DOSAGE
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_DUR_DOSAGE
+        -- 대국민포털_DUR투여기간주의기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_DUR_DOSAGE
+    NOT DEFERRABLE;
 
 --drop table KIDS_OWN.TB_PP_M_DUR_EFTGRP cascade;
 
 -- 대국민포털_DUR효능군중복기본
 CREATE TABLE KIDS_OWN.TB_PP_M_DUR_EFTGRP
 (
-	eftgrp_dpcn_sn VARCHAR(50)  NOT NULL, -- 효능군중복일련번호
-	eftgrp_nm         VARCHAR(20)  NOT NULL, -- 효능그룹명
-	group_nm           VARCHAR(20)  NOT NULL, -- 그룹명
-	group_nm_1         VARCHAR(20)  NOT NULL, -- 그룹명_1
-	gnrl_nm_cd         CHAR(9)      NULL,     -- 일반명코드
-	gnrl_nm            VARCHAR(100) NULL,     -- 일반명
-	eftgrp_dpcn_chck_cd CHAR(8)      NOT NULL, -- 효능군중복점검코드
-	mdcn_cd            CHAR(9)      NOT NULL, -- 약품코드
-	item_nm            VARCHAR(300) NULL,     -- 품목명
-	bzenty_nm          VARCHAR(100) NULL,     -- 업체명
-	pbanc_ymd          CHAR(8)      NULL,     -- 공고일자
-	pbanc_no           CHAR(8)      NULL,     -- 공고번호
-	slry_se_cd         CHAR(1)      NULL,     -- 급여구분코드
-	aplcn_ym           CHAR(6)      NULL,     -- 적용연월
-	oper_stts_cd       CHAR(1)      NULL,     -- 운영상태코드
-	rgtr_id            VARCHAR(40)  NULL,     -- 등록자아이디
-	reg_dt             TIMESTAMP    NULL,     -- 등록일시
-	mdfr_id            VARCHAR(40)  NULL,     -- 수정자아이디
-	mdfcn_dt           TIMESTAMP    NULL      -- 수정일시
+    eftgrp_dpcn_sn VARCHAR(50)  NOT NULL, -- 효능군중복일련번호
+    eftgrp_nm         VARCHAR(20)  NOT NULL, -- 효능그룹명
+    group_nm           VARCHAR(20)  NOT NULL, -- 그룹명
+    group_nm_1         VARCHAR(20)  NOT NULL, -- 그룹명_1
+    gnrl_nm_cd         CHAR(9)      NULL,     -- 일반명코드
+    gnrl_nm            VARCHAR(100) NULL,     -- 일반명
+    eftgrp_dpcn_chck_cd CHAR(8)      NOT NULL, -- 효능군중복점검코드
+    mdcn_cd            CHAR(9)      NOT NULL, -- 약품코드
+    item_nm            VARCHAR(300) NULL,     -- 품목명
+    bzenty_nm          VARCHAR(100) NULL,     -- 업체명
+    pbanc_ymd          CHAR(8)      NULL,     -- 공고일자
+    pbanc_no           CHAR(8)      NULL,     -- 공고번호
+    slry_se_cd         CHAR(1)      NULL,     -- 급여구분코드
+    aplcn_ym           CHAR(6)      NULL,     -- 적용연월
+    oper_stts_cd       CHAR(1)      NULL,     -- 운영상태코드
+    rgtr_id            VARCHAR(40)  NULL,     -- 등록자아이디
+    reg_dt             TIMESTAMP    NULL,     -- 등록일시
+    mdfr_id            VARCHAR(40)  NULL,     -- 수정자아이디
+    mdfcn_dt           TIMESTAMP    NULL      -- 수정일시
 );
 
 -- 급여구분코드
@@ -432,43 +432,43 @@ COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_EFTGRP.oper_stts_cd IS 'O:운영,W:적용
 
 -- 대국민포털_DUR효능군중복기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_DUR_EFTGRP
-	ON KIDS_OWN.TB_PP_M_DUR_EFTGRP
-	( -- 대국민포털_DUR효능군중복기본
-		eftgrp_dpcn_sn ASC NULLS LAST -- 효능군중복일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_DUR_EFTGRP
+    ( -- 대국민포털_DUR효능군중복기본
+        eftgrp_dpcn_sn ASC NULLS LAST -- 효능군중복일련번호
+    );
 
 -- 대국민포털_DUR효능군중복기본
 ALTER TABLE KIDS_OWN.TB_PP_M_DUR_EFTGRP
-	ADD CONSTRAINT PK_TB_PP_M_DUR_EFTGRP
-		-- 대국민포털_DUR효능군중복기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_DUR_EFTGRP
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_DUR_EFTGRP
+        -- 대국민포털_DUR효능군중복기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_DUR_EFTGRP
+    NOT DEFERRABLE;
 
 --drop table KIDS_OWN.TB_PP_M_DUR_AGE_BANN cascade;
 
 -- 대국민포털_DUR연령금기기본
 CREATE TABLE KIDS_OWN.TB_PP_M_DUR_AGE_BANN
 (
-	age_bann_sn		 VARCHAR(50)   NOT NULL, -- 연령금기일련번호
-	igrd_nm          VARCHAR(100)  NOT NULL, -- 성분명
-	igrd_cd          VARCHAR(20)   NOT NULL, -- 성분코드
-	prdct_cd         CHAR(9)       NOT NULL, -- 제품코드
-	prdct_nm         VARCHAR(256)  NOT NULL, -- 제품명
-	bzenty_nm        VARCHAR(100)  NOT NULL, -- 업체명
-	rlvt_age         NUMERIC(3,0)  NOT NULL, -- 해당연령
-	rlvt_age_unit_nm VARCHAR(20)   NULL,     -- 해당연령단위명
-	age_prcs_cnd_nm  VARCHAR(20)   NULL,     -- 연령처리조건명
-	ancmnt_no        CHAR(8)       NULL,     -- 고시번호
-	ancmnt_ymd       CHAR(8)       NULL,     -- 고시일자
-	dtl_info_cn      VARCHAR(4000) NULL,     -- 상세정보내용
-	slry_se_cd       CHAR(1)       NULL,     -- 급여구분코드
-	aplcn_ym         CHAR(6)       NULL,     -- 적용연월
-	oper_stts_cd     CHAR(1)       NULL,     -- 운영상태코드
-	rgtr_id          VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt           TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id          VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt         TIMESTAMP     NULL      -- 수정일시
+    age_bann_sn      VARCHAR(50)   NOT NULL, -- 연령금기일련번호
+    igrd_nm          VARCHAR(100)  NOT NULL, -- 성분명
+    igrd_cd          VARCHAR(20)   NOT NULL, -- 성분코드
+    prdct_cd         CHAR(9)       NOT NULL, -- 제품코드
+    prdct_nm         VARCHAR(256)  NOT NULL, -- 제품명
+    bzenty_nm        VARCHAR(100)  NOT NULL, -- 업체명
+    rlvt_age         NUMERIC(3,0)  NOT NULL, -- 해당연령
+    rlvt_age_unit_nm VARCHAR(20)   NULL,     -- 해당연령단위명
+    age_prcs_cnd_nm  VARCHAR(20)   NULL,     -- 연령처리조건명
+    ancmnt_no        CHAR(8)       NULL,     -- 고시번호
+    ancmnt_ymd       CHAR(8)       NULL,     -- 고시일자
+    dtl_info_cn      VARCHAR(4000) NULL,     -- 상세정보내용
+    slry_se_cd       CHAR(1)       NULL,     -- 급여구분코드
+    aplcn_ym         CHAR(6)       NULL,     -- 적용연월
+    oper_stts_cd     CHAR(1)       NULL,     -- 운영상태코드
+    rgtr_id          VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt           TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id          VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt         TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 급여구분코드
@@ -479,391 +479,391 @@ COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_AGE_BANN.oper_stts_cd IS 'O:운영,W:적�
 
 -- 대국민포털_DUR연령금기기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_DUR_AGE_BANN
-	ON KIDS_OWN.TB_PP_M_DUR_AGE_BANN
-	( -- 대국민포털_DUR연령금기기본
-		age_bann_sn ASC NULLS LAST -- 연령금기일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_DUR_AGE_BANN
+    ( -- 대국민포털_DUR연령금기기본
+        age_bann_sn ASC NULLS LAST -- 연령금기일련번호
+    );
 
 -- 대국민포털_DUR연령금기기본
 ALTER TABLE KIDS_OWN.TB_PP_M_DUR_AGE_BANN
-	ADD CONSTRAINT PK_TB_PP_M_DUR_AGE_BANN
-		-- 대국민포털_DUR연령금기기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_DUR_AGE_BANN
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_DUR_AGE_BANN
+        -- 대국민포털_DUR연령금기기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_DUR_AGE_BANN
+    NOT DEFERRABLE;
 
 -- 대국민포털_FAQ기본
 CREATE TABLE KIDS_OWN.TB_PP_M_FAQ
 (
-	faq_sn             NUMERIC(10,0) NOT NULL, -- FAQ일련번호
-	task_se_cd         CHAR(3)       NOT NULL, -- 업무구분코드
-	faq_clsf_nm        VARCHAR(80)   NULL,     -- FAQ분류명
-	faq_ttl            VARCHAR(256)  NULL,     -- FAQ제목
-	faq_seq            NUMERIC(10,0) NOT NULL, -- FAQ순서
-	use_yn             CHAR(1)       NOT NULL, -- 사용여부
-	lang_se_cd         CHAR(2)       NOT NULL, -- 언어구분코드
-	faq_ans_cn         VARCHAR(4000) NULL,     -- FAQ답변내용
-	atch_file_group_id VARCHAR(40)   NULL,     -- 첨부파일그룹아이디
-	wrtr_dept_nm       VARCHAR(40)   NULL,     -- 작성자부서명
-	mdfr_dept_nm       VARCHAR(40)   NULL,     -- 수정자부서명
-	rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt             TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
+    faq_sn             NUMERIC(10,0) NOT NULL, -- FAQ일련번호
+    task_se_cd         CHAR(3)       NOT NULL, -- 업무구분코드
+    faq_clsf_nm        VARCHAR(80)   NULL,     -- FAQ분류명
+    faq_ttl            VARCHAR(256)  NULL,     -- FAQ제목
+    faq_seq            NUMERIC(10,0) NOT NULL, -- FAQ순서
+    use_yn             CHAR(1)       NOT NULL, -- 사용여부
+    lang_se_cd         CHAR(2)       NOT NULL, -- 언어구분코드
+    faq_ans_cn         VARCHAR(4000) NULL,     -- FAQ답변내용
+    atch_file_group_id VARCHAR(40)   NULL,     -- 첨부파일그룹아이디
+    wrtr_dept_nm       VARCHAR(40)   NULL,     -- 작성자부서명
+    mdfr_dept_nm       VARCHAR(40)   NULL,     -- 수정자부서명
+    rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt             TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_FAQ기본 기본키2
 CREATE UNIQUE INDEX PK_TB_PP_M_FAQ
-	ON KIDS_OWN.TB_PP_M_FAQ
-	( -- 대국민포털_FAQ기본
-		faq_sn ASC NULLS LAST -- FAQ일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_FAQ
+    ( -- 대국민포털_FAQ기본
+        faq_sn ASC NULLS LAST -- FAQ일련번호
+    );
 
 -- 대국민포털_FAQ기본
 ALTER TABLE KIDS_OWN.TB_PP_M_FAQ
-	ADD CONSTRAINT PK_TB_PP_M_FAQ
-		-- 대국민포털_FAQ기본 기본키2
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_FAQ
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_FAQ
+        -- 대국민포털_FAQ기본 기본키2
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_FAQ
+    NOT DEFERRABLE;
 
 -- 대국민포털_KIDS직원정보기본
 CREATE TABLE KIDS_OWN.TB_PP_M_EMP_INFO
 (
-	emp_no           VARCHAR(20)  NOT NULL, -- 직원번호
-	emp_nm           VARCHAR(20)  NULL,     -- 직원명
-	dept_no          VARCHAR(20)  NULL,     -- 부서번호
-	jbgd_nm          VARCHAR(20)  NULL,     -- 직급명
-	encpt_emp_telno  VARCHAR(256) NULL,     -- 암호화직원전화번호
-	encpt_emp_eml_nm VARCHAR(256) NULL,     -- 암호화직원이메일명
-	rgtr_id          VARCHAR(40)  NULL,     -- 등록자아이디
-	reg_dt           TIMESTAMP    NULL,     -- 등록일시
-	mdfr_id          VARCHAR(40)  NULL,     -- 수정자아이디
-	mdfcn_dt         TIMESTAMP    NULL      -- 수정일시
+    emp_no           VARCHAR(20)  NOT NULL, -- 직원번호
+    emp_nm           VARCHAR(20)  NULL,     -- 직원명
+    dept_no          VARCHAR(20)  NULL,     -- 부서번호
+    jbgd_nm          VARCHAR(20)  NULL,     -- 직급명
+    encpt_emp_telno  VARCHAR(256) NULL,     -- 암호화직원전화번호
+    encpt_emp_eml_nm VARCHAR(256) NULL,     -- 암호화직원이메일명
+    rgtr_id          VARCHAR(40)  NULL,     -- 등록자아이디
+    reg_dt           TIMESTAMP    NULL,     -- 등록일시
+    mdfr_id          VARCHAR(40)  NULL,     -- 수정자아이디
+    mdfcn_dt         TIMESTAMP    NULL      -- 수정일시
 );
 
 -- 대국민포털_KIDS직원정보기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_EMP_INFO
-	ON KIDS_OWN.TB_PP_M_EMP_INFO
-	( -- 대국민포털_KIDS직원정보기본
-		emp_no ASC NULLS LAST -- 직원번호
-	);
+    ON KIDS_OWN.TB_PP_M_EMP_INFO
+    ( -- 대국민포털_KIDS직원정보기본
+        emp_no ASC NULLS LAST -- 직원번호
+    );
 
 -- 대국민포털_KIDS직원정보기본
 ALTER TABLE KIDS_OWN.TB_PP_M_EMP_INFO
-	ADD CONSTRAINT PK_TB_PP_M_EMP_INFO
-		-- 대국민포털_KIDS직원정보기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_EMP_INFO
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_EMP_INFO
+        -- 대국민포털_KIDS직원정보기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_EMP_INFO
+    NOT DEFERRABLE;
 
 -- 대국민포털_게시물기본
 CREATE TABLE KIDS_OWN.TB_PP_M_PST
 (
-	pst_sn                 NUMERIC(22,0) NOT NULL, -- 게시물일련번호
-	bbs_id                 VARCHAR(20)   NOT NULL, -- 게시판아이디
-	pst_ttl                VARCHAR(100)  NULL,     -- 게시물제목
-	pst_cn                 TEXT          NULL,     -- 게시물내용
-	pst_inq_cnt            NUMERIC(10,0) NOT NULL, -- 게시물조회수
-	pst_kogl_cprgt_type_cd CHAR(1)       NULL,     -- 게시물공공누리저작권유형코드
-	atch_file_group_id     VARCHAR(40)   NULL,     -- 첨부파일그룹아이디
-	thmb_id                VARCHAR(40)   NULL,     -- 썸네일아이디
-	fix_yn                 CHAR(1)       NOT NULL, -- 고정여부
-	fix_bgng_ymd           CHAR(8)       NULL,     -- 고정시작일자
-	fix_end_ymd            CHAR(8)       NULL,     -- 고정종료일자
-	vdo_url_addr           VARCHAR(200)  NULL,     -- 동영상URL주소
-	expsr_yn               CHAR(1)       NOT NULL, -- 노출여부
-	wrtr_dept_nm           VARCHAR(80)   NULL,     -- 작성자부서명
-	mdfr_dept_nm           VARCHAR(80)   NULL,     -- 수정자부서명
-	rgtr_id                VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt                 TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id                VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt               TIMESTAMP     NULL      -- 수정일시
+    pst_sn                 NUMERIC(22,0) NOT NULL, -- 게시물일련번호
+    bbs_id                 VARCHAR(20)   NOT NULL, -- 게시판아이디
+    pst_ttl                VARCHAR(100)  NULL,     -- 게시물제목
+    pst_cn                 TEXT          NULL,     -- 게시물내용
+    pst_inq_cnt            NUMERIC(10,0) NOT NULL, -- 게시물조회수
+    pst_kogl_cprgt_type_cd CHAR(1)       NULL,     -- 게시물공공누리저작권유형코드
+    atch_file_group_id     VARCHAR(40)   NULL,     -- 첨부파일그룹아이디
+    thmb_id                VARCHAR(40)   NULL,     -- 썸네일아이디
+    fix_yn                 CHAR(1)       NOT NULL, -- 고정여부
+    fix_bgng_ymd           CHAR(8)       NULL,     -- 고정시작일자
+    fix_end_ymd            CHAR(8)       NULL,     -- 고정종료일자
+    vdo_url_addr           VARCHAR(200)  NULL,     -- 동영상URL주소
+    expsr_yn               CHAR(1)       NOT NULL, -- 노출여부
+    wrtr_dept_nm           VARCHAR(80)   NULL,     -- 작성자부서명
+    mdfr_dept_nm           VARCHAR(80)   NULL,     -- 수정자부서명
+    rgtr_id                VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt                 TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id                VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt               TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_게시물기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_PST
-	ON KIDS_OWN.TB_PP_M_PST
-	( -- 대국민포털_게시물기본
-		pst_sn ASC NULLS LAST -- 게시물일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_PST
+    ( -- 대국민포털_게시물기본
+        pst_sn ASC NULLS LAST -- 게시물일련번호
+    );
 
 -- 대국민포털_게시물기본
 ALTER TABLE KIDS_OWN.TB_PP_M_PST
-	ADD CONSTRAINT PK_TB_PP_M_PST
-		-- 대국민포털_게시물기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_PST
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_PST
+        -- 대국민포털_게시물기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_PST
+    NOT DEFERRABLE;
 
 -- 대국민포털_게시판기본
 CREATE TABLE KIDS_OWN.TB_PP_M_BBS
 (
-	bbs_id               VARCHAR(20)   NOT NULL, -- 게시판아이디
-	bbs_nm               VARCHAR(300)  NULL,     -- 게시판명
-	bbs_atrb_cd          CHAR(3)       NOT NULL, -- 게시판속성코드
-	bbs_expln            VARCHAR(4000) NULL,     -- 게시판설명
-	bbs_smry_cn          VARCHAR(4000) NULL,     -- 게시판요약내용
-	cmnt_use_yn          CHAR(1)       NOT NULL, -- 댓글사용여부
-	inq_cnt_expsr_yn     CHAR(1)       NOT NULL, -- 조회수노출여부
-	dept_expsr_yn        CHAR(1)       NOT NULL, -- 부서노출여부
-	file_atch_yn         CHAR(1)       NOT NULL, -- 파일첨부여부
-	atch_psblty_file_cnt NUMERIC(2,0)  NULL,     -- 첨부가능파일수
-	lang_se_cd           CHAR(3)       NOT NULL, -- 언어구분코드
-	use_yn               CHAR(1)       NOT NULL, -- 사용여부
-	rgtr_id              VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt               TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id              VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt             TIMESTAMP     NULL      -- 수정일시
+    bbs_id               VARCHAR(20)   NOT NULL, -- 게시판아이디
+    bbs_nm               VARCHAR(300)  NULL,     -- 게시판명
+    bbs_atrb_cd          CHAR(3)       NOT NULL, -- 게시판속성코드
+    bbs_expln            VARCHAR(4000) NULL,     -- 게시판설명
+    bbs_smry_cn          VARCHAR(4000) NULL,     -- 게시판요약내용
+    cmnt_use_yn          CHAR(1)       NOT NULL, -- 댓글사용여부
+    inq_cnt_expsr_yn     CHAR(1)       NOT NULL, -- 조회수노출여부
+    dept_expsr_yn        CHAR(1)       NOT NULL, -- 부서노출여부
+    file_atch_yn         CHAR(1)       NOT NULL, -- 파일첨부여부
+    atch_psblty_file_cnt NUMERIC(2,0)  NULL,     -- 첨부가능파일수
+    lang_se_cd           CHAR(3)       NOT NULL, -- 언어구분코드
+    use_yn               CHAR(1)       NOT NULL, -- 사용여부
+    rgtr_id              VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt               TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id              VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt             TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_게시판기본 기본키2
 CREATE UNIQUE INDEX PK_TB_PP_M_BBS
-	ON KIDS_OWN.TB_PP_M_BBS
-	( -- 대국민포털_게시판기본
-		bbs_id ASC NULLS LAST -- 게시판아이디
-	);
+    ON KIDS_OWN.TB_PP_M_BBS
+    ( -- 대국민포털_게시판기본
+        bbs_id ASC NULLS LAST -- 게시판아이디
+    );
 
 -- 대국민포털_게시판기본
 ALTER TABLE KIDS_OWN.TB_PP_M_BBS
-	ADD CONSTRAINT PK_TB_PP_M_BBS
-		-- 대국민포털_게시판기본 기본키2
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_BBS
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_BBS
+        -- 대국민포털_게시판기본 기본키2
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_BBS
+    NOT DEFERRABLE;
 
 -- 대국민포털_관리자정보기본
 CREATE TABLE KIDS_OWN.TB_PP_M_MNGR_INFO
 (
-	emp_no          VARCHAR(20)  NOT NULL, -- 직원번호
-	encpt_mngr_pswd VARCHAR(256) NULL,     -- 암호화관리자비밀번호
-	tmpr_pswd_yn    CHAR(1)      NOT NULL, -- 임시비밀번호여부
-	pswd_err_nmtm   NUMERIC(2,0) NOT NULL, -- 비밀번호오류횟수
-	encpt_bfr_pswd  VARCHAR(256) NULL,     -- 암호화이전비밀번호
-	rgtr_id         VARCHAR(40)  NULL,     -- 등록자아이디
-	reg_dt          TIMESTAMP    NULL,     -- 등록일시
-	mdfr_id         VARCHAR(40)  NULL,     -- 수정자아이디
-	mdfcn_dt        TIMESTAMP    NULL      -- 수정일시
+    emp_no          VARCHAR(20)  NOT NULL, -- 직원번호
+    encpt_mngr_pswd VARCHAR(256) NULL,     -- 암호화관리자비밀번호
+    tmpr_pswd_yn    CHAR(1)      NOT NULL, -- 임시비밀번호여부
+    pswd_err_nmtm   NUMERIC(2,0) NOT NULL, -- 비밀번호오류횟수
+    encpt_bfr_pswd  VARCHAR(256) NULL,     -- 암호화이전비밀번호
+    rgtr_id         VARCHAR(40)  NULL,     -- 등록자아이디
+    reg_dt          TIMESTAMP    NULL,     -- 등록일시
+    mdfr_id         VARCHAR(40)  NULL,     -- 수정자아이디
+    mdfcn_dt        TIMESTAMP    NULL      -- 수정일시
 );
 
 -- 대국민포털_관리자정보기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_MNGR_INFO
-	ON KIDS_OWN.TB_PP_M_MNGR_INFO
-	( -- 대국민포털_관리자정보기본
-		emp_no ASC NULLS LAST -- 직원번호
-	);
+    ON KIDS_OWN.TB_PP_M_MNGR_INFO
+    ( -- 대국민포털_관리자정보기본
+        emp_no ASC NULLS LAST -- 직원번호
+    );
 
 -- 대국민포털_관리자정보기본
 ALTER TABLE KIDS_OWN.TB_PP_M_MNGR_INFO
-	ADD CONSTRAINT PK_TB_PP_M_MNGR_INFO
-		-- 대국민포털_관리자정보기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_MNGR_INFO
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_MNGR_INFO
+        -- 대국민포털_관리자정보기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_MNGR_INFO
+    NOT DEFERRABLE;
 
 -- 대국민포털_권한기본
 CREATE TABLE KIDS_OWN.TB_PP_M_AUTHRT
 (
-	authrt_cd      VARCHAR(10)   NOT NULL, -- 권한코드
-	up_authrt_cd   VARCHAR(20)   NOT NULL, -- 상위권한코드
-	task_se_cd     VARCHAR(20)   NULL,     -- 업무구분코드
-	authrt_nm      VARCHAR(20)   NULL,     -- 권한명
-	authrt_type_cd VARCHAR(20)   NULL,     -- 권한유형코드
-	authrt_expln   VARCHAR(4000) NULL,     -- 권한설명
-	use_yn         CHAR(1)       NOT NULL, -- 사용여부
-	wrtr_dept_nm   VARCHAR(40)   NULL,     -- 작성자부서명
-	mdfr_dept_nm   VARCHAR(40)   NULL,     -- 수정자부서명
-	rgtr_id        VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt         TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id        VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt       TIMESTAMP     NULL      -- 수정일시
+    authrt_cd      VARCHAR(10)   NOT NULL, -- 권한코드
+    up_authrt_cd   VARCHAR(20)   NOT NULL, -- 상위권한코드
+    task_se_cd     VARCHAR(20)   NULL,     -- 업무구분코드
+    authrt_nm      VARCHAR(20)   NULL,     -- 권한명
+    authrt_type_cd VARCHAR(20)   NULL,     -- 권한유형코드
+    authrt_expln   VARCHAR(4000) NULL,     -- 권한설명
+    use_yn         CHAR(1)       NOT NULL, -- 사용여부
+    wrtr_dept_nm   VARCHAR(40)   NULL,     -- 작성자부서명
+    mdfr_dept_nm   VARCHAR(40)   NULL,     -- 수정자부서명
+    rgtr_id        VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt         TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id        VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt       TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_권한기본 기본키2
 CREATE UNIQUE INDEX PK_TB_PP_M_AUTHRT
-	ON KIDS_OWN.TB_PP_M_AUTHRT
-	( -- 대국민포털_권한기본
-		authrt_cd ASC NULLS LAST -- 권한코드
-	);
+    ON KIDS_OWN.TB_PP_M_AUTHRT
+    ( -- 대국민포털_권한기본
+        authrt_cd ASC NULLS LAST -- 권한코드
+    );
 
 -- 대국민포털_권한기본
 ALTER TABLE KIDS_OWN.TB_PP_M_AUTHRT
-	ADD CONSTRAINT PK_TB_PP_M_AUTHRT
-		-- 대국민포털_권한기본 기본키2
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_AUTHRT
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_AUTHRT
+        -- 대국민포털_권한기본 기본키2
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_AUTHRT
+    NOT DEFERRABLE;
 
 -- 대국민포털_권한메뉴기본
 CREATE TABLE KIDS_OWN.TB_PP_M_AUTHRT_MENU
 (
-	authrt_cd                VARCHAR(10)   NOT NULL, -- 권한코드
-	menu_sn                  VARCHAR(20)   NOT NULL, -- 메뉴일련번호
-	authrt_menu_role_rmrk_cn VARCHAR(1000) NULL,     -- 권한메뉴역할비고내용
-	rgtr_id                  VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt                   TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id                  VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt                 TIMESTAMP     NULL      -- 수정일시
+    authrt_cd                VARCHAR(10)   NOT NULL, -- 권한코드
+    menu_sn                  VARCHAR(20)   NOT NULL, -- 메뉴일련번호
+    authrt_menu_role_rmrk_cn VARCHAR(1000) NULL,     -- 권한메뉴역할비고내용
+    rgtr_id                  VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt                   TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id                  VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt                 TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_권한메뉴기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_AUTHRT_MENU
-	ON KIDS_OWN.TB_PP_M_AUTHRT_MENU
-	( -- 대국민포털_권한메뉴기본
-		authrt_cd ASC NULLS LAST, -- 권한코드
-		menu_sn ASC NULLS LAST -- 메뉴일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_AUTHRT_MENU
+    ( -- 대국민포털_권한메뉴기본
+        authrt_cd ASC NULLS LAST, -- 권한코드
+        menu_sn ASC NULLS LAST -- 메뉴일련번호
+    );
 
 -- 대국민포털_권한메뉴기본
 ALTER TABLE KIDS_OWN.TB_PP_M_AUTHRT_MENU
-	ADD CONSTRAINT PK_TB_PP_M_AUTHRT_MENU
-		-- 대국민포털_권한메뉴기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_AUTHRT_MENU
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_AUTHRT_MENU
+        -- 대국민포털_권한메뉴기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_AUTHRT_MENU
+    NOT DEFERRABLE;
 
 -- 대국민포털_기관업무기본
 CREATE TABLE KIDS_OWN.TB_PP_M_INST_TASK
 (
-	brno       CHAR(10)    NOT NULL, -- 사업자등록번호
-	task_se_cd VARCHAR(10) NOT NULL, -- 업무구분코드
-	mbr_no     VARCHAR(10) NULL,     -- 회원번호
-	use_yn     CHAR(1)     NOT NULL, -- 사용여부
-	rgtr_id    VARCHAR(40) NULL,     -- 등록자아이디
-	reg_dt     TIMESTAMP   NULL,     -- 등록일시
-	mdfr_id    VARCHAR(40) NULL,     -- 수정자아이디
-	mdfcn_dt   TIMESTAMP   NULL      -- 수정일시
+    brno       CHAR(10)    NOT NULL, -- 사업자등록번호
+    task_se_cd VARCHAR(10) NOT NULL, -- 업무구분코드
+    mbr_no     VARCHAR(10) NULL,     -- 회원번호
+    use_yn     CHAR(1)     NOT NULL, -- 사용여부
+    rgtr_id    VARCHAR(40) NULL,     -- 등록자아이디
+    reg_dt     TIMESTAMP   NULL,     -- 등록일시
+    mdfr_id    VARCHAR(40) NULL,     -- 수정자아이디
+    mdfcn_dt   TIMESTAMP   NULL      -- 수정일시
 );
 
 -- 대국민포털_기관업무기본 기본키2
 CREATE UNIQUE INDEX PK_TB_PP_M_INST_TASK
-	ON KIDS_OWN.TB_PP_M_INST_TASK
-	( -- 대국민포털_기관업무기본
-		brno ASC NULLS LAST, -- 사업자등록번호
-		task_se_cd ASC NULLS LAST -- 업무구분코드
-	);
+    ON KIDS_OWN.TB_PP_M_INST_TASK
+    ( -- 대국민포털_기관업무기본
+        brno ASC NULLS LAST, -- 사업자등록번호
+        task_se_cd ASC NULLS LAST -- 업무구분코드
+    );
 
 -- 대국민포털_기관업무기본
 ALTER TABLE KIDS_OWN.TB_PP_M_INST_TASK
-	ADD CONSTRAINT PK_TB_PP_M_INST_TASK
-		-- 대국민포털_기관업무기본 기본키2
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_INST_TASK
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_INST_TASK
+        -- 대국민포털_기관업무기본 기본키2
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_INST_TASK
+    NOT DEFERRABLE;
 
 -- 대국민포털_담당자권한기본
 CREATE TABLE KIDS_OWN.TB_PP_M_PIC_AUTHRT
 (
-	emp_no             VARCHAR(20)   NOT NULL, -- 직원번호
-	authrt_cd          VARCHAR(10)   NOT NULL, -- 권한코드
-	pic_authrt_rmrk_cn VARCHAR(1000) NULL,     -- 담당자권한비고내용
-	rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt             TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
+    emp_no             VARCHAR(20)   NOT NULL, -- 직원번호
+    authrt_cd          VARCHAR(10)   NOT NULL, -- 권한코드
+    pic_authrt_rmrk_cn VARCHAR(1000) NULL,     -- 담당자권한비고내용
+    rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt             TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_담당자권한기본 기본키2
 CREATE UNIQUE INDEX PK_TB_PP_M_PIC_AUTHRT
-	ON KIDS_OWN.TB_PP_M_PIC_AUTHRT
-	( -- 대국민포털_담당자권한기본
-		emp_no ASC NULLS LAST, -- 직원번호
-		authrt_cd ASC NULLS LAST -- 권한코드
-	);
+    ON KIDS_OWN.TB_PP_M_PIC_AUTHRT
+    ( -- 대국민포털_담당자권한기본
+        emp_no ASC NULLS LAST, -- 직원번호
+        authrt_cd ASC NULLS LAST -- 권한코드
+    );
 
 -- 대국민포털_담당자권한기본
 ALTER TABLE KIDS_OWN.TB_PP_M_PIC_AUTHRT
-	ADD CONSTRAINT PK_TB_PP_M_PIC_AUTHRT
-		-- 대국민포털_담당자권한기본 기본키2
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_PIC_AUTHRT
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_PIC_AUTHRT
+        -- 대국민포털_담당자권한기본 기본키2
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_PIC_AUTHRT
+    NOT DEFERRABLE;
 
 -- 대국민포털_댓글기본
 CREATE TABLE KIDS_OWN.TB_PP_M_CMNT
 (
-	cmnt_sn         NUMERIC(22,0) NOT NULL, -- 댓글일련번호
-	pst_sn          NUMERIC(22,0) NOT NULL, -- 게시물일련번호
-	cmnt_cn         VARCHAR(4000) NULL,     -- 댓글내용
-	encpt_cmnt_pswd VARCHAR(256)  NULL,     -- 암호화댓글비밀번호
-	use_yn          CHAR(1)       NOT NULL, -- 사용여부
-	rgtr_id         VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt          TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id         VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt        TIMESTAMP     NULL      -- 수정일시
+    cmnt_sn         NUMERIC(22,0) NOT NULL, -- 댓글일련번호
+    pst_sn          NUMERIC(22,0) NOT NULL, -- 게시물일련번호
+    cmnt_cn         VARCHAR(4000) NULL,     -- 댓글내용
+    encpt_cmnt_pswd VARCHAR(256)  NULL,     -- 암호화댓글비밀번호
+    use_yn          CHAR(1)       NOT NULL, -- 사용여부
+    rgtr_id         VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt          TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id         VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt        TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_댓글기본 기본키2
 CREATE UNIQUE INDEX PK_TB_PP_M_CMNT
-	ON KIDS_OWN.TB_PP_M_CMNT
-	( -- 대국민포털_댓글기본
-		cmnt_sn ASC NULLS LAST -- 댓글일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_CMNT
+    ( -- 대국민포털_댓글기본
+        cmnt_sn ASC NULLS LAST -- 댓글일련번호
+    );
 
 -- 대국민포털_댓글기본
 ALTER TABLE KIDS_OWN.TB_PP_M_CMNT
-	ADD CONSTRAINT PK_TB_PP_M_CMNT
-		-- 대국민포털_댓글기본 기본키2
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_CMNT
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_CMNT
+        -- 대국민포털_댓글기본 기본키2
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_CMNT
+    NOT DEFERRABLE;
 
 -- 대국민포털_메뉴기본
 CREATE TABLE KIDS_OWN.TB_PP_M_MENU
 (
-	menu_sn      VARCHAR(20)   NOT NULL, -- 메뉴일련번호
-	menu_nm      VARCHAR(100)  NULL,     -- 메뉴명
-	up_menu_sn   VARCHAR(20)   NULL,     -- 상위메뉴일련번호
-	task_se_cd   VARCHAR(10)   NOT NULL, -- 업무구분코드
-	menu_type_cd VARCHAR(20)   NOT NULL, -- 메뉴유형코드
-	lang_se_cd   CHAR(3)       NOT NULL, -- 언어구분코드
-	menu_seq     NUMERIC(10,0) NOT NULL, -- 메뉴순서
-	menu_expln   VARCHAR(4000) NULL,     -- 메뉴설명
-	pic_dept_nm  VARCHAR(40)   NULL,     -- 담당자부서명
-	pic_flnm     VARCHAR(20)   NULL,     -- 담당자성명
-	use_yn       CHAR(1)       NOT NULL, -- 사용여부
-	rgtr_id      VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt       TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id      VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt     TIMESTAMP     NULL      -- 수정일시
+    menu_sn      VARCHAR(20)   NOT NULL, -- 메뉴일련번호
+    menu_nm      VARCHAR(100)  NULL,     -- 메뉴명
+    up_menu_sn   VARCHAR(20)   NULL,     -- 상위메뉴일련번호
+    task_se_cd   VARCHAR(10)   NOT NULL, -- 업무구분코드
+    menu_type_cd VARCHAR(20)   NOT NULL, -- 메뉴유형코드
+    lang_se_cd   CHAR(3)       NOT NULL, -- 언어구분코드
+    menu_seq     NUMERIC(10,0) NOT NULL, -- 메뉴순서
+    menu_expln   VARCHAR(4000) NULL,     -- 메뉴설명
+    pic_dept_nm  VARCHAR(40)   NULL,     -- 담당자부서명
+    pic_flnm     VARCHAR(20)   NULL,     -- 담당자성명
+    use_yn       CHAR(1)       NOT NULL, -- 사용여부
+    rgtr_id      VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt       TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id      VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt     TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_메뉴기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_MENU
-	ON KIDS_OWN.TB_PP_M_MENU
-	( -- 대국민포털_메뉴기본
-		menu_sn ASC NULLS LAST -- 메뉴일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_MENU
+    ( -- 대국민포털_메뉴기본
+        menu_sn ASC NULLS LAST -- 메뉴일련번호
+    );
 
 -- 대국민포털_메뉴기본
 ALTER TABLE KIDS_OWN.TB_PP_M_MENU
-	ADD CONSTRAINT PK_TB_PP_M_MENU
-		-- 대국민포털_메뉴기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_MENU
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_MENU
+        -- 대국민포털_메뉴기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_MENU
+    NOT DEFERRABLE;
 
 -- 대국민포털_메뉴상세
 CREATE TABLE KIDS_OWN.TB_PP_D_MENU
 (
-	menu_sn                 VARCHAR(20)  NOT NULL, -- 메뉴일련번호
-	menu_url_addr           VARCHAR(320) NULL,     -- 메뉴URL주소
-	menu_npag_nm            VARCHAR(20)  NULL,     -- 메뉴새창명
-	prvc_incl_yn            CHAR(1)      NOT NULL, -- 개인정보포함여부
-	dgstfn_exmn_yn          CHAR(1)      NOT NULL, -- 만족도조사여부
-	menu_expsr_yn           CHAR(1)      NOT NULL, -- 메뉴노출여부
-	dept_info_expsr_yn      CHAR(1)      NOT NULL, -- 부서정보노출여부
-	pic_info_expsr_yn       CHAR(1)      NOT NULL, -- 담당자정보노출여부
-	mobl_aplcn_yn           CHAR(1)      NOT NULL, -- 모바일적용여부
-	lgn_yn                  CHAR(1)      NULL,     -- 로그인여부
-	encpt_pic_telno         VARCHAR(256) NULL,     -- 암호화담당자전화번호
-	menu_kogl_cprgt_type_cd CHAR(1)      NULL,     -- 메뉴공공누리저작권유형코드
-	menu_pic_id             VARCHAR(40)  NOT NULL, -- 메뉴담당자아이디
-	menu_tkcg_dept_no       VARCHAR(100) NULL,     -- 메뉴담당부서번호
-	rgtr_id                 VARCHAR(40)  NULL,     -- 등록자아이디
-	reg_dt                  TIMESTAMP    NULL,     -- 등록일시
-	mdfr_id                 VARCHAR(40)  NULL,     -- 수정자아이디
-	mdfcn_dt                TIMESTAMP    NULL      -- 수정일시
+    menu_sn                 VARCHAR(20)  NOT NULL, -- 메뉴일련번호
+    menu_url_addr           VARCHAR(320) NULL,     -- 메뉴URL주소
+    menu_npag_nm            VARCHAR(20)  NULL,     -- 메뉴새창명
+    prvc_incl_yn            CHAR(1)      NOT NULL, -- 개인정보포함여부
+    dgstfn_exmn_yn          CHAR(1)      NOT NULL, -- 만족도조사여부
+    menu_expsr_yn           CHAR(1)      NOT NULL, -- 메뉴노출여부
+    dept_info_expsr_yn      CHAR(1)      NOT NULL, -- 부서정보노출여부
+    pic_info_expsr_yn       CHAR(1)      NOT NULL, -- 담당자정보노출여부
+    mobl_aplcn_yn           CHAR(1)      NOT NULL, -- 모바일적용여부
+    lgn_yn                  CHAR(1)      NULL,     -- 로그인여부
+    encpt_pic_telno         VARCHAR(256) NULL,     -- 암호화담당자전화번호
+    menu_kogl_cprgt_type_cd CHAR(1)      NULL,     -- 메뉴공공누리저작권유형코드
+    menu_pic_id             VARCHAR(40)  NOT NULL, -- 메뉴담당자아이디
+    menu_tkcg_dept_no       VARCHAR(100) NULL,     -- 메뉴담당부서번호
+    rgtr_id                 VARCHAR(40)  NULL,     -- 등록자아이디
+    reg_dt                  TIMESTAMP    NULL,     -- 등록일시
+    mdfr_id                 VARCHAR(40)  NULL,     -- 수정자아이디
+    mdfcn_dt                TIMESTAMP    NULL      -- 수정일시
 );
 
 -- 메뉴노출여부
@@ -871,328 +871,328 @@ COMMENT ON COLUMN KIDS_OWN.TB_PP_D_MENU.menu_expsr_yn IS 'default: Y';
 
 -- 대국민포털_메뉴상세 기본키
 CREATE UNIQUE INDEX PK_TB_PP_D_MENU
-	ON KIDS_OWN.TB_PP_D_MENU
-	( -- 대국민포털_메뉴상세
-		menu_sn ASC NULLS LAST -- 메뉴일련번호
-	);
+    ON KIDS_OWN.TB_PP_D_MENU
+    ( -- 대국민포털_메뉴상세
+        menu_sn ASC NULLS LAST -- 메뉴일련번호
+    );
 
 -- 대국민포털_메뉴상세
 ALTER TABLE KIDS_OWN.TB_PP_D_MENU
-	ADD CONSTRAINT PK_TB_PP_D_MENU
-		-- 대국민포털_메뉴상세 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_D_MENU
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_D_MENU
+        -- 대국민포털_메뉴상세 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_D_MENU
+    NOT DEFERRABLE;
 
 -- 대국민포털_권한메뉴롤기본
 CREATE TABLE KIDS_OWN.TB_PP_M_AUTHRT_MENU_ROLE
 (
-	authrt_cd VARCHAR(10) NOT NULL, -- 권한코드
-	role_cd   VARCHAR(20) NOT NULL, -- 역할코드
-	menu_sn   VARCHAR(20) NOT NULL, -- 메뉴일련번호
-	rgtr_id   VARCHAR(40) NULL,     -- 등록자아이디
-	reg_dt    TIMESTAMP   NULL,     -- 등록일시
-	mdfr_id   VARCHAR(40) NULL,     -- 수정자아이디
-	mdfcn_dt  TIMESTAMP   NULL      -- 수정일시
+    authrt_cd VARCHAR(10) NOT NULL, -- 권한코드
+    role_cd   VARCHAR(20) NOT NULL, -- 역할코드
+    menu_sn   VARCHAR(20) NOT NULL, -- 메뉴일련번호
+    rgtr_id   VARCHAR(40) NULL,     -- 등록자아이디
+    reg_dt    TIMESTAMP   NULL,     -- 등록일시
+    mdfr_id   VARCHAR(40) NULL,     -- 수정자아이디
+    mdfcn_dt  TIMESTAMP   NULL      -- 수정일시
 );
 
 -- 대국민포털_권한메뉴롤기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_AUTHRT_MENU_ROLE
-	ON KIDS_OWN.TB_PP_M_AUTHRT_MENU_ROLE
-	( -- 대국민포털_권한메뉴롤기본
-		authrt_cd ASC NULLS LAST, -- 권한코드
-		role_cd ASC NULLS LAST, -- 역할코드
-		menu_sn ASC NULLS LAST -- 메뉴일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_AUTHRT_MENU_ROLE
+    ( -- 대국민포털_권한메뉴롤기본
+        authrt_cd ASC NULLS LAST, -- 권한코드
+        role_cd ASC NULLS LAST, -- 역할코드
+        menu_sn ASC NULLS LAST -- 메뉴일련번호
+    );
 
 -- 대국민포털_권한메뉴롤기본
 ALTER TABLE KIDS_OWN.TB_PP_M_AUTHRT_MENU_ROLE
-	ADD CONSTRAINT PK_TB_PP_M_AUTHRT_MENU_ROLE
-		-- 대국민포털_권한메뉴롤기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_AUTHRT_MENU_ROLE
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_AUTHRT_MENU_ROLE
+        -- 대국민포털_권한메뉴롤기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_AUTHRT_MENU_ROLE
+    NOT DEFERRABLE;
 
 -- 대국민포털_부서권한기본
 CREATE TABLE KIDS_OWN.TB_PP_M_DEPT_AUTHRT
 (
-	dept_no             VARCHAR(20)   NOT NULL, -- 부서번호
-	authrt_cd           VARCHAR(10)   NOT NULL, -- 권한코드
-	dept_authrt_rmrk_cn VARCHAR(1000) NULL,     -- 부서권한비고내용
-	rgtr_id             VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt              TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id             VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt            TIMESTAMP     NULL      -- 수정일시
+    dept_no             VARCHAR(20)   NOT NULL, -- 부서번호
+    authrt_cd           VARCHAR(10)   NOT NULL, -- 권한코드
+    dept_authrt_rmrk_cn VARCHAR(1000) NULL,     -- 부서권한비고내용
+    rgtr_id             VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt              TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id             VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt            TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_부서권한기본 기본키2
 CREATE UNIQUE INDEX PK_TB_PP_M_DEPT_AUTHRT
-	ON KIDS_OWN.TB_PP_M_DEPT_AUTHRT
-	( -- 대국민포털_부서권한기본
-		dept_no ASC NULLS LAST, -- 부서번호
-		authrt_cd ASC NULLS LAST -- 권한코드
-	);
+    ON KIDS_OWN.TB_PP_M_DEPT_AUTHRT
+    ( -- 대국민포털_부서권한기본
+        dept_no ASC NULLS LAST, -- 부서번호
+        authrt_cd ASC NULLS LAST -- 권한코드
+    );
 
 -- 대국민포털_부서권한기본
 ALTER TABLE KIDS_OWN.TB_PP_M_DEPT_AUTHRT
-	ADD CONSTRAINT PK_TB_PP_M_DEPT_AUTHRT
-		-- 대국민포털_부서권한기본 기본키2
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_DEPT_AUTHRT
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_DEPT_AUTHRT
+        -- 대국민포털_부서권한기본 기본키2
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_DEPT_AUTHRT
+    NOT DEFERRABLE;
 
 -- 대국민포털_약관법령기본
 CREATE TABLE KIDS_OWN.TB_PP_M_TRMS_STT
 (
-	trms_stt_sn        NUMERIC(10,0) NOT NULL, -- 약관법령일련번호
-	trms_stt_cd        VARCHAR(20)   NOT NULL, -- 약관법령코드
-	trms_stt_aplcn_ymd CHAR(8)       NOT NULL, -- 약관법령적용일자
-	trms_stt_end_ymd   CHAR(8)       NULL,     -- 약관법령종료일자
-	trms_stt_cn        VARCHAR(4000) NULL,     -- 약관법령내용
-	atch_file_group_id VARCHAR(40)   NULL,     -- 첨부파일그룹아이디
-	wrtr_dept_nm       VARCHAR(40)   NULL,     -- 작성자부서명
-	mdfr_dept_nm       VARCHAR(40)   NULL,     -- 수정자부서명
-	rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt             TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
+    trms_stt_sn        NUMERIC(10,0) NOT NULL, -- 약관법령일련번호
+    trms_stt_cd        VARCHAR(20)   NOT NULL, -- 약관법령코드
+    trms_stt_aplcn_ymd CHAR(8)       NOT NULL, -- 약관법령적용일자
+    trms_stt_end_ymd   CHAR(8)       NULL,     -- 약관법령종료일자
+    trms_stt_cn        VARCHAR(4000) NULL,     -- 약관법령내용
+    atch_file_group_id VARCHAR(40)   NULL,     -- 첨부파일그룹아이디
+    wrtr_dept_nm       VARCHAR(40)   NULL,     -- 작성자부서명
+    mdfr_dept_nm       VARCHAR(40)   NULL,     -- 수정자부서명
+    rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt             TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_약관법령기본 기본키2
 CREATE UNIQUE INDEX PK_TB_PP_M_TRMS_STT
-	ON KIDS_OWN.TB_PP_M_TRMS_STT
-	( -- 대국민포털_약관법령기본
-		trms_stt_sn ASC NULLS LAST -- 약관법령일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_TRMS_STT
+    ( -- 대국민포털_약관법령기본
+        trms_stt_sn ASC NULLS LAST -- 약관법령일련번호
+    );
 
 -- 대국민포털_약관법령기본
 ALTER TABLE KIDS_OWN.TB_PP_M_TRMS_STT
-	ADD CONSTRAINT PK_TB_PP_M_TRMS_STT
-		-- 대국민포털_약관법령기본 기본키2
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_TRMS_STT
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_TRMS_STT
+        -- 대국민포털_약관법령기본 기본키2
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_TRMS_STT
+    NOT DEFERRABLE;
 
 -- 대국민포털_업무코드기본
 CREATE TABLE KIDS_OWN.TB_PP_M_TASK_CD
 (
-	task_cd       VARCHAR(20)   NOT NULL, -- 업무코드
-	task_cd_nm    VARCHAR(200)  NULL,     -- 업무코드명
-	up_task_cd    VARCHAR(20)   NULL,     -- 상위업무코드
-	task_cd_vl    VARCHAR(100)  NULL,     -- 업무코드값
-	task_cd_expln VARCHAR(4000) NULL,     -- 업무코드설명
-	use_yn        CHAR(1)       NOT NULL, -- 사용여부
-	rgtr_id       VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt        TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id       VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt      TIMESTAMP     NULL      -- 수정일시
+    task_cd       VARCHAR(20)   NOT NULL, -- 업무코드
+    task_cd_nm    VARCHAR(200)  NULL,     -- 업무코드명
+    up_task_cd    VARCHAR(20)   NULL,     -- 상위업무코드
+    task_cd_vl    VARCHAR(100)  NULL,     -- 업무코드값
+    task_cd_expln VARCHAR(4000) NULL,     -- 업무코드설명
+    use_yn        CHAR(1)       NOT NULL, -- 사용여부
+    rgtr_id       VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt        TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id       VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt      TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_업무코드기본 기본키2
 CREATE UNIQUE INDEX PK_TB_PP_M_TASK_CD
-	ON KIDS_OWN.TB_PP_M_TASK_CD
-	( -- 대국민포털_업무코드기본
-		task_cd ASC NULLS LAST -- 업무코드
-	);
+    ON KIDS_OWN.TB_PP_M_TASK_CD
+    ( -- 대국민포털_업무코드기본
+        task_cd ASC NULLS LAST -- 업무코드
+    );
 
 -- 대국민포털_업무코드기본
 ALTER TABLE KIDS_OWN.TB_PP_M_TASK_CD
-	ADD CONSTRAINT PK_TB_PP_M_TASK_CD
-		-- 대국민포털_업무코드기본 기본키2
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_TASK_CD
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_TASK_CD
+        -- 대국민포털_업무코드기본 기본키2
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_TASK_CD
+    NOT DEFERRABLE;
 
 -- 대국민포털_역할기본
 CREATE TABLE KIDS_OWN.TB_PP_M_ROLE
 (
-	role_cd       VARCHAR(20)   NOT NULL, -- 역할코드
-	role_nm       VARCHAR(40)   NULL,     -- 역할명
-	role_type_cd  VARCHAR(20)   NULL,     -- 역할유형코드
-	role_expln_cn VARCHAR(4000) NULL,     -- 역할설명내용
-	use_yn        CHAR(1)       NOT NULL, -- 사용여부
-	wrtr_dept_nm  VARCHAR(40)   NULL,     -- 작성자부서명
-	mdfr_dept_nm  VARCHAR(40)   NULL,     -- 수정자부서명
-	rgtr_id       VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt        TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id       VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt      TIMESTAMP     NULL      -- 수정일시
+    role_cd       VARCHAR(20)   NOT NULL, -- 역할코드
+    role_nm       VARCHAR(40)   NULL,     -- 역할명
+    role_type_cd  VARCHAR(20)   NULL,     -- 역할유형코드
+    role_expln_cn VARCHAR(4000) NULL,     -- 역할설명내용
+    use_yn        CHAR(1)       NOT NULL, -- 사용여부
+    wrtr_dept_nm  VARCHAR(40)   NULL,     -- 작성자부서명
+    mdfr_dept_nm  VARCHAR(40)   NULL,     -- 수정자부서명
+    rgtr_id       VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt        TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id       VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt      TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_역할기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_ROLE
-	ON KIDS_OWN.TB_PP_M_ROLE
-	( -- 대국민포털_역할기본
-		role_cd ASC NULLS LAST -- 역할코드
-	);
+    ON KIDS_OWN.TB_PP_M_ROLE
+    ( -- 대국민포털_역할기본
+        role_cd ASC NULLS LAST -- 역할코드
+    );
 
 -- 대국민포털_역할기본
 ALTER TABLE KIDS_OWN.TB_PP_M_ROLE
-	ADD CONSTRAINT PK_TB_PP_M_ROLE
-		-- 대국민포털_역할기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_ROLE
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_ROLE
+        -- 대국민포털_역할기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_ROLE
+    NOT DEFERRABLE;
 
 -- 대국민포털_전문가권한기본
 CREATE TABLE KIDS_OWN.TB_PP_M_EXPRT_AUTHRT
 (
-	mbr_no        VARCHAR(10)   NOT NULL, -- 회원번호
-	exprt_task_sn NUMERIC(10,0) NULL,     -- 전문가업무일련번호
-	authrt_cd     VARCHAR(10)   NOT NULL, -- 권한코드
-	rgtr_id       VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt        TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id       VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt      TIMESTAMP     NULL      -- 수정일시
+    mbr_no        VARCHAR(10)   NOT NULL, -- 회원번호
+    exprt_task_sn NUMERIC(10,0) NULL,     -- 전문가업무일련번호
+    authrt_cd     VARCHAR(10)   NOT NULL, -- 권한코드
+    rgtr_id       VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt        TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id       VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt      TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_전문가권한기본 기본키2
 CREATE UNIQUE INDEX PK_TB_PP_M_EXPRT_AUTHRT
-	ON KIDS_OWN.TB_PP_M_EXPRT_AUTHRT
-	( -- 대국민포털_전문가권한기본
-		mbr_no ASC NULLS LAST, -- 회원번호
-		authrt_cd ASC NULLS LAST -- 권한코드
-	);
+    ON KIDS_OWN.TB_PP_M_EXPRT_AUTHRT
+    ( -- 대국민포털_전문가권한기본
+        mbr_no ASC NULLS LAST, -- 회원번호
+        authrt_cd ASC NULLS LAST -- 권한코드
+    );
 
 -- 대국민포털_전문가권한기본
 ALTER TABLE KIDS_OWN.TB_PP_M_EXPRT_AUTHRT
-	ADD CONSTRAINT PK_TB_PP_M_EXPRT_AUTHRT
-		-- 대국민포털_전문가권한기본 기본키2
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_EXPRT_AUTHRT
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_EXPRT_AUTHRT
+        -- 대국민포털_전문가권한기본 기본키2
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_EXPRT_AUTHRT
+    NOT DEFERRABLE;
 
 -- 대국민포털_전문가업무기본
 CREATE TABLE KIDS_OWN.TB_PP_M_EXPRT_TASK
 (
-	exprt_task_sn      NUMERIC(10,0) NOT NULL, -- 전문가업무일련번호
-	mbr_no             VARCHAR(10)   NULL,     -- 회원번호
-	brno               CHAR(10)      NOT NULL, -- 사업자등록번호
-	task_se_cd         VARCHAR(10)   NOT NULL, -- 업무구분코드
-	exprt_aprv_stts_yn CHAR(1)       NOT NULL, -- 전문가승인상태여부
-	aprv_prcs_dt       TIMESTAMP     NULL,     -- 승인처리일시
-	rjct_rsn           VARCHAR(4000) NULL,     -- 반려사유
-	wrtr_dept_nm       VARCHAR(40)   NULL,     -- 작성자부서명
-	mdfr_dept_nm       VARCHAR(40)   NULL,     -- 수정자부서명
-	rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt             TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
+    exprt_task_sn      NUMERIC(10,0) NOT NULL, -- 전문가업무일련번호
+    mbr_no             VARCHAR(10)   NULL,     -- 회원번호
+    brno               CHAR(10)      NOT NULL, -- 사업자등록번호
+    task_se_cd         VARCHAR(10)   NOT NULL, -- 업무구분코드
+    exprt_aprv_stts_yn CHAR(1)       NOT NULL, -- 전문가승인상태여부
+    aprv_prcs_dt       TIMESTAMP     NULL,     -- 승인처리일시
+    rjct_rsn           VARCHAR(4000) NULL,     -- 반려사유
+    wrtr_dept_nm       VARCHAR(40)   NULL,     -- 작성자부서명
+    mdfr_dept_nm       VARCHAR(40)   NULL,     -- 수정자부서명
+    rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt             TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_전문가업무기본 기본키2
 CREATE UNIQUE INDEX PK_TB_PP_M_EXPRT_TASK
-	ON KIDS_OWN.TB_PP_M_EXPRT_TASK
-	( -- 대국민포털_전문가업무기본
-		exprt_task_sn ASC NULLS LAST -- 전문가업무일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_EXPRT_TASK
+    ( -- 대국민포털_전문가업무기본
+        exprt_task_sn ASC NULLS LAST -- 전문가업무일련번호
+    );
 
 -- 대국민포털_전문가업무기본
 ALTER TABLE KIDS_OWN.TB_PP_M_EXPRT_TASK
-	ADD CONSTRAINT PK_TB_PP_M_EXPRT_TASK
-		-- 대국민포털_전문가업무기본 기본키2
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_EXPRT_TASK
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_EXPRT_TASK
+        -- 대국민포털_전문가업무기본 기본키2
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_EXPRT_TASK
+    NOT DEFERRABLE;
 
 -- EXT_공통_첨부파일기본
 CREATE TABLE KIDS_OWN.TB_CA_M_ATCH
 (
-	atch_file_sn      NUMERIC(10,0) NOT NULL, -- 첨부파일일련번호
-	menu_sn           NUMERIC(22,0) NOT NULL, -- 메뉴일련번호
-	menu_type         VARCHAR(20)   NULL,     -- 메뉴유형
-	atch_file_uld_hr  TIMESTAMP     NOT NULL, -- 첨부파일업로드시간
-	atch_file_use_yn  CHAR(1)       NOT NULL, -- 첨부파일사용여부
-	atch_file_path    VARCHAR(1000) NULL,     -- 첨부파일경로
-	atch_file_nm      VARCHAR(100)  NULL,     -- 첨부파일명
-	atch_file_extn_nm VARCHAR(5)    NULL,     -- 첨부파일확장자명
-	atch_file_cn      VARCHAR(1000) NULL,     -- 첨부파일내용
-	atch_file_sz      NUMERIC(14,0) NULL,     -- 첨부파일크기
-	rgtr_id           VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt            TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id           VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt          TIMESTAMP     NULL      -- 수정일시
+    atch_file_sn      NUMERIC(10,0) NOT NULL, -- 첨부파일일련번호
+    menu_sn           NUMERIC(22,0) NOT NULL, -- 메뉴일련번호
+    menu_type         VARCHAR(20)   NULL,     -- 메뉴유형
+    atch_file_uld_hr  TIMESTAMP     NOT NULL, -- 첨부파일업로드시간
+    atch_file_use_yn  CHAR(1)       NOT NULL, -- 첨부파일사용여부
+    atch_file_path    VARCHAR(1000) NULL,     -- 첨부파일경로
+    atch_file_nm      VARCHAR(100)  NULL,     -- 첨부파일명
+    atch_file_extn_nm VARCHAR(5)    NULL,     -- 첨부파일확장자명
+    atch_file_cn      VARCHAR(1000) NULL,     -- 첨부파일내용
+    atch_file_sz      NUMERIC(14,0) NULL,     -- 첨부파일크기
+    rgtr_id           VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt            TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id           VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt          TIMESTAMP     NULL      -- 수정일시
 );
 
 -- EXT_공통_첨부파일기본 기본키
 CREATE UNIQUE INDEX PK_TB_CA_M_ATCH
-	ON KIDS_OWN.TB_CA_M_ATCH
-	( -- EXT_공통_첨부파일기본
-		atch_file_sn ASC NULLS LAST -- 첨부파일일련번호
-	);
+    ON KIDS_OWN.TB_CA_M_ATCH
+    ( -- EXT_공통_첨부파일기본
+        atch_file_sn ASC NULLS LAST -- 첨부파일일련번호
+    );
 
 -- EXT_공통_첨부파일기본
 ALTER TABLE KIDS_OWN.TB_CA_M_ATCH
-	ADD CONSTRAINT PK_TB_CA_M_ATCH
-		-- EXT_공통_첨부파일기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_CA_M_ATCH
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_CA_M_ATCH
+        -- EXT_공통_첨부파일기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_CA_M_ATCH
+    NOT DEFERRABLE;
 
 -- 대국민포털_양식기본
 CREATE TABLE KIDS_OWN.TB_PP_M_FORM
 (
-	form_sn      NUMERIC(22,0) NOT NULL, -- 양식일련번호
-	task_cd      VARCHAR(20)   NULL,     -- 업무코드
-	form_nm      VARCHAR(40)   NULL,     -- 양식명
-	form_path_nm VARCHAR(256)  NULL,     -- 양식경로명
-	use_yn       CHAR(1)       NOT NULL, -- 사용여부
-	rgtr_id      VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt       TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id      VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt     TIMESTAMP     NULL      -- 수정일시
+    form_sn      NUMERIC(22,0) NOT NULL, -- 양식일련번호
+    task_cd      VARCHAR(20)   NULL,     -- 업무코드
+    form_nm      VARCHAR(40)   NULL,     -- 양식명
+    form_path_nm VARCHAR(256)  NULL,     -- 양식경로명
+    use_yn       CHAR(1)       NOT NULL, -- 사용여부
+    rgtr_id      VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt       TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id      VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt     TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_양식기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_FORM
-	ON KIDS_OWN.TB_PP_M_FORM
-	( -- 대국민포털_양식기본
-		form_sn ASC NULLS LAST -- 양식일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_FORM
+    ( -- 대국민포털_양식기본
+        form_sn ASC NULLS LAST -- 양식일련번호
+    );
 
 -- 대국민포털_양식기본
 ALTER TABLE KIDS_OWN.TB_PP_M_FORM
-	ADD CONSTRAINT PK_TB_PP_M_FORM
-		-- 대국민포털_양식기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_FORM
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_FORM
+        -- 대국민포털_양식기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_FORM
+    NOT DEFERRABLE;
 
 -- 대국민포털_팝업기본
 CREATE TABLE KIDS_OWN.TB_PP_M_POPUP
 (
-	popup_sn           NUMERIC(10,0) NOT NULL, -- 팝업일련번호
-	popup_ttl          VARCHAR(100)  NULL,     -- 팝업제목
-	popup_pstg_bgng_dt TIMESTAMP     NOT NULL, -- 팝업게시시작일시
-	popup_pstg_end_dt  TIMESTAMP     NOT NULL, -- 팝업게시종료일시
-	popup_lnkg_addr    VARCHAR(320)  NULL,     -- 팝업연결주소
-	popup_seq          NUMERIC(10,0) NOT NULL, -- 팝업순서
-	popup_pstg_yn      CHAR(1)       NOT NULL, -- 팝업게시여부
-	popup_npag_yn      CHAR(1)       NOT NULL, -- 팝업새창여부
-	popup_expln        VARCHAR(4000) NULL,     -- 팝업설명
-	atch_file_group_id VARCHAR(40)   NULL,     -- 첨부파일그룹아이디
-	wrtr_dept_nm       VARCHAR(40)   NULL,     -- 작성자부서명
-	mdfr_dept_nm       VARCHAR(40)   NULL,     -- 수정자부서명
-	rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt             TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
+    popup_sn           NUMERIC(10,0) NOT NULL, -- 팝업일련번호
+    popup_ttl          VARCHAR(100)  NULL,     -- 팝업제목
+    popup_pstg_bgng_dt TIMESTAMP     NOT NULL, -- 팝업게시시작일시
+    popup_pstg_end_dt  TIMESTAMP     NOT NULL, -- 팝업게시종료일시
+    popup_lnkg_addr    VARCHAR(320)  NULL,     -- 팝업연결주소
+    popup_seq          NUMERIC(10,0) NOT NULL, -- 팝업순서
+    popup_pstg_yn      CHAR(1)       NOT NULL, -- 팝업게시여부
+    popup_npag_yn      CHAR(1)       NOT NULL, -- 팝업새창여부
+    popup_expln        VARCHAR(4000) NULL,     -- 팝업설명
+    atch_file_group_id VARCHAR(40)   NULL,     -- 첨부파일그룹아이디
+    wrtr_dept_nm       VARCHAR(40)   NULL,     -- 작성자부서명
+    mdfr_dept_nm       VARCHAR(40)   NULL,     -- 수정자부서명
+    rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt             TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_팝업기본 기본키2
 CREATE UNIQUE INDEX PK_TB_PP_M_POPUP
-	ON KIDS_OWN.TB_PP_M_POPUP
-	( -- 대국민포털_팝업기본
-		popup_sn ASC NULLS LAST -- 팝업일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_POPUP
+    ( -- 대국민포털_팝업기본
+        popup_sn ASC NULLS LAST -- 팝업일련번호
+    );
 
 -- 대국민포털_팝업기본
 ALTER TABLE KIDS_OWN.TB_PP_M_POPUP
-	ADD CONSTRAINT PK_TB_PP_M_POPUP
-		-- 대국민포털_팝업기본 기본키2
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_POPUP
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_POPUP
+        -- 대국민포털_팝업기본 기본키2
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_POPUP
+    NOT DEFERRABLE;
 
 CREATE TABLE KIDS_OWN.TB_PP_M_MBR_TOKEN (
     token_id numeric(19,0) NOT NULL,
@@ -1230,206 +1230,206 @@ CREATE TABLE IF NOT EXISTS KIDS_OWN.TB_PP_M_MBR_NO_SEQ (
 -- 대국민포털_회원정보기본
 CREATE TABLE KIDS_OWN.TB_PP_M_MBR_INFO
 (
-	mbr_no             VARCHAR(10)   NOT NULL, -- 회원번호
-	mbr_id             VARCHAR(40)   NOT NULL, -- 회원아이디
-	encpt_mbr_flnm     VARCHAR(256)  NOT NULL, -- 암호화회원성명
-	encpt_mbr_eml_nm   VARCHAR(256)  NULL,     -- 암호화회원이메일명
-	encpt_mbr_pswd     VARCHAR(256)  NOT NULL, -- 암호화회원비밀번호
-	encpt_mbr_telno    VARCHAR(256)  NULL,     -- 암호화회원전화번호
-	mbr_type_cd        CHAR(1)       NOT NULL, -- 회원유형코드
-	mbr_join_stts_cd   CHAR(1)       NOT NULL, -- 회원가입상태코드
-	mbr_join_dt        TIMESTAMP     NOT NULL, -- 회원가입일시
-	mbr_whdwl_rsn      VARCHAR(4000) NULL,     -- 회원탈퇴사유
-	mbr_whdwl_dt       TIMESTAMP     NULL,     -- 회원탈퇴일시
-	cnstn_mbcmt_yn     CHAR(1)       NULL,     -- 자문위원여부
-	bfr_enpswd         VARCHAR(256)  NULL,     -- 이전암호화비밀번호  >>> 변경 누락이 된 것 같네요. 암호화이전비밀번호(encpt_bfr_pswd)로 DA에게 수정 요청하겠습니다.
-	pswd_chg_dt        TIMESTAMP     NULL,     -- 비밀번호변경일시
-	pswd_err_nmtm      NUMERIC(2,0)  NULL,     -- 비밀번호오류횟수
-	link_info_idntf_id VARCHAR(100)  NULL,     -- 연계정보식별아이디
-	cert_token_vl      VARCHAR(40)   NULL,     -- 인증토큰값
-	rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt             TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
+    mbr_no             VARCHAR(10)   NOT NULL, -- 회원번호
+    mbr_id             VARCHAR(40)   NOT NULL, -- 회원아이디
+    encpt_mbr_flnm     VARCHAR(256)  NOT NULL, -- 암호화회원성명
+    encpt_mbr_eml_nm   VARCHAR(256)  NULL,     -- 암호화회원이메일명
+    encpt_mbr_pswd     VARCHAR(256)  NOT NULL, -- 암호화회원비밀번호
+    encpt_mbr_telno    VARCHAR(256)  NULL,     -- 암호화회원전화번호
+    mbr_type_cd        CHAR(1)       NOT NULL, -- 회원유형코드
+    mbr_join_stts_cd   CHAR(1)       NOT NULL, -- 회원가입상태코드
+    mbr_join_dt        TIMESTAMP     NOT NULL, -- 회원가입일시
+    mbr_whdwl_rsn      VARCHAR(4000) NULL,     -- 회원탈퇴사유
+    mbr_whdwl_dt       TIMESTAMP     NULL,     -- 회원탈퇴일시
+    cnstn_mbcmt_yn     CHAR(1)       NULL,     -- 자문위원여부
+    bfr_enpswd         VARCHAR(256)  NULL,     -- 이전암호화비밀번호  >>> 변경 누락이 된 것 같네요. 암호화이전비밀번호(encpt_bfr_pswd)로 DA에게 수정 요청하겠습니다.
+    pswd_chg_dt        TIMESTAMP     NULL,     -- 비밀번호변경일시
+    pswd_err_nmtm      NUMERIC(2,0)  NULL,     -- 비밀번호오류횟수
+    link_info_idntf_id VARCHAR(100)  NULL,     -- 연계정보식별아이디
+    cert_token_vl      VARCHAR(40)   NULL,     -- 인증토큰값
+    rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt             TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_회원정보기본 기본키2
 CREATE UNIQUE INDEX PK_TB_PP_M_MBR_INFO
-	ON KIDS_OWN.TB_PP_M_MBR_INFO
-	( -- 대국민포털_회원정보기본
-		mbr_no ASC NULLS LAST -- 회원번호
-	);
+    ON KIDS_OWN.TB_PP_M_MBR_INFO
+    ( -- 대국민포털_회원정보기본
+        mbr_no ASC NULLS LAST -- 회원번호
+    );
 
 -- 대국민포털_회원정보기본
 ALTER TABLE KIDS_OWN.TB_PP_M_MBR_INFO
-	ADD CONSTRAINT PK_TB_PP_M_MBR_INFO
-		-- 대국민포털_회원정보기본 기본키2
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_MBR_INFO
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_MBR_INFO
+        -- 대국민포털_회원정보기본 기본키2
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_MBR_INFO
+    NOT DEFERRABLE;
 
 -- 대국민포털_게시판권한기본
 CREATE TABLE KIDS_OWN.TB_PP_M_BBS_AUTHRT
 (
-	bbs_id    VARCHAR(20) NOT NULL, -- 게시판아이디
-	authrt_cd VARCHAR(10) NOT NULL, -- 권한코드
-	rgtr_id   VARCHAR(40) NULL,     -- 등록자아이디
-	reg_dt    TIMESTAMP   NULL,     -- 등록일시
-	mdfr_id   VARCHAR(40) NULL,     -- 수정자아이디
-	mdfcn_dt  TIMESTAMP   NULL      -- 수정일시
+    bbs_id    VARCHAR(20) NOT NULL, -- 게시판아이디
+    authrt_cd VARCHAR(10) NOT NULL, -- 권한코드
+    rgtr_id   VARCHAR(40) NULL,     -- 등록자아이디
+    reg_dt    TIMESTAMP   NULL,     -- 등록일시
+    mdfr_id   VARCHAR(40) NULL,     -- 수정자아이디
+    mdfcn_dt  TIMESTAMP   NULL      -- 수정일시
 );
 
 -- 대국민포털_게시판권한기본 기본키2
 CREATE UNIQUE INDEX PK_TB_PP_M_BBS_AUTHRT
-	ON KIDS_OWN.TB_PP_M_BBS_AUTHRT
-	( -- 대국민포털_게시판권한기본
-		bbs_id ASC NULLS LAST, -- 게시판아이디
-		authrt_cd ASC NULLS LAST -- 권한코드
-	);
+    ON KIDS_OWN.TB_PP_M_BBS_AUTHRT
+    ( -- 대국민포털_게시판권한기본
+        bbs_id ASC NULLS LAST, -- 게시판아이디
+        authrt_cd ASC NULLS LAST -- 권한코드
+    );
 
 -- 대국민포털_게시판권한기본
 ALTER TABLE KIDS_OWN.TB_PP_M_BBS_AUTHRT
-	ADD CONSTRAINT PK_TB_PP_M_BBS_AUTHRT
-		-- 대국민포털_게시판권한기본 기본키2
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_BBS_AUTHRT
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_BBS_AUTHRT
+        -- 대국민포털_게시판권한기본 기본키2
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_BBS_AUTHRT
+    NOT DEFERRABLE;
 
 -- 대국민포털_법정대리인정보기본
 CREATE TABLE KIDS_OWN.TB_PP_M_STTY_AGT_INFO
 (
-	mbr_no               VARCHAR(10)  NOT NULL, -- 회원번호
-	stty_agt_nm          VARCHAR(20)  NULL,     -- 법정대리인명
-	encpt_stty_agt_telno VARCHAR(256) NULL,     -- 암호화법정대리인전화번호
-	stty_agt_rel_nm      VARCHAR(20)  NULL,     -- 법정대리인관계명
-	link_info_idntf_id   VARCHAR(100) NULL,     -- 연계정보식별아이디
-	cert_token_vl        VARCHAR(40)  NULL,     -- 인증토큰값
-	rgtr_id              VARCHAR(40)  NULL,     -- 등록자아이디
-	reg_dt               TIMESTAMP    NULL,     -- 등록일시
-	mdfr_id              VARCHAR(40)  NULL,     -- 수정자아이디
-	mdfcn_dt             TIMESTAMP    NULL      -- 수정일시
+    mbr_no               VARCHAR(10)  NOT NULL, -- 회원번호
+    stty_agt_nm          VARCHAR(20)  NULL,     -- 법정대리인명
+    encpt_stty_agt_telno VARCHAR(256) NULL,     -- 암호화법정대리인전화번호
+    stty_agt_rel_nm      VARCHAR(20)  NULL,     -- 법정대리인관계명
+    link_info_idntf_id   VARCHAR(100) NULL,     -- 연계정보식별아이디
+    cert_token_vl        VARCHAR(40)  NULL,     -- 인증토큰값
+    rgtr_id              VARCHAR(40)  NULL,     -- 등록자아이디
+    reg_dt               TIMESTAMP    NULL,     -- 등록일시
+    mdfr_id              VARCHAR(40)  NULL,     -- 수정자아이디
+    mdfcn_dt             TIMESTAMP    NULL      -- 수정일시
 );
 
 -- 대국민포털_법정대리인정보기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_STTY_AGT_INFO
-	ON KIDS_OWN.TB_PP_M_STTY_AGT_INFO
-	( -- 대국민포털_법정대리인정보기본
-		mbr_no ASC NULLS LAST -- 회원번호
-	);
+    ON KIDS_OWN.TB_PP_M_STTY_AGT_INFO
+    ( -- 대국민포털_법정대리인정보기본
+        mbr_no ASC NULLS LAST -- 회원번호
+    );
 
 -- 대국민포털_법정대리인정보기본
 ALTER TABLE KIDS_OWN.TB_PP_M_STTY_AGT_INFO
-	ADD CONSTRAINT PK_TB_PP_M_STTY_AGT_INFO
-		-- 대국민포털_법정대리인정보기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_STTY_AGT_INFO
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_STTY_AGT_INFO
+        -- 대국민포털_법정대리인정보기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_STTY_AGT_INFO
+    NOT DEFERRABLE;
 
 -- 대국민포털_전문가정보기본
 CREATE TABLE KIDS_OWN.TB_PP_M_EXPRT_INFO
 (
-	mbr_no                  VARCHAR(10)   NOT NULL, -- 회원번호
-	brno                    CHAR(10)      NOT NULL, -- 사업자등록번호
-	task_se_cd              VARCHAR(10)   NULL,     -- 업무구분코드
-	encpt_exprt_inst_eml_nm VARCHAR(256)  NULL,     -- 암호화전문가기관이메일명
-	exprt_hdof_yn           CHAR(1)       NOT NULL, -- 전문가재직여부
-	exprt_aprv_stts_yn      CHAR(1)       NOT NULL, -- 전문가승인상태여부
-	aprv_prcs_dt            TIMESTAMP     NULL,     -- 승인처리일시
-	rjct_rsn                VARCHAR(4000) NULL,     -- 반려사유
-	atch_file_group_id      VARCHAR(40)   NULL,     -- 첨부파일그룹아이디
-	rgtr_id                 VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt                  TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id                 VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt                TIMESTAMP     NULL      -- 수정일시
+    mbr_no                  VARCHAR(10)   NOT NULL, -- 회원번호
+    brno                    CHAR(10)      NOT NULL, -- 사업자등록번호
+    task_se_cd              VARCHAR(10)   NULL,     -- 업무구분코드
+    encpt_exprt_inst_eml_nm VARCHAR(256)  NULL,     -- 암호화전문가기관이메일명
+    exprt_hdof_yn           CHAR(1)       NOT NULL, -- 전문가재직여부
+    exprt_aprv_stts_yn      CHAR(1)       NOT NULL, -- 전문가승인상태여부
+    aprv_prcs_dt            TIMESTAMP     NULL,     -- 승인처리일시
+    rjct_rsn                VARCHAR(4000) NULL,     -- 반려사유
+    atch_file_group_id      VARCHAR(40)   NULL,     -- 첨부파일그룹아이디
+    rgtr_id                 VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt                  TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id                 VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt                TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_전문가정보기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_EXPRT_INFO
-	ON KIDS_OWN.TB_PP_M_EXPRT_INFO
-	( -- 대국민포털_전문가정보기본
-		mbr_no ASC NULLS LAST -- 회원번호
-	);
+    ON KIDS_OWN.TB_PP_M_EXPRT_INFO
+    ( -- 대국민포털_전문가정보기본
+        mbr_no ASC NULLS LAST -- 회원번호
+    );
 
 -- 대국민포털_전문가정보기본
 ALTER TABLE KIDS_OWN.TB_PP_M_EXPRT_INFO
-	ADD CONSTRAINT PK_TB_PP_M_EXPRT_INFO
-		-- 대국민포털_전문가정보기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_EXPRT_INFO
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_EXPRT_INFO
+        -- 대국민포털_전문가정보기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_EXPRT_INFO
+    NOT DEFERRABLE;
 
 -- 대국민포털_기관정보기본
 CREATE TABLE KIDS_OWN.TB_PP_M_INST
 (
-	brno     CHAR(10)     NOT NULL, -- 사업자등록번호
-	inst_nm  VARCHAR(200) NOT NULL, -- 기관명
-	del_yn   CHAR(1)      NOT NULL, -- 삭제여부
-	rgtr_id  VARCHAR(40)  NULL,     -- 등록자아이디
-	reg_dt   TIMESTAMP    NULL,     -- 등록일시
-	mdfr_id  VARCHAR(40)  NULL,     -- 수정자아이디
-	mdfcn_dt TIMESTAMP    NULL      -- 수정일시
+    brno     CHAR(10)     NOT NULL, -- 사업자등록번호
+    inst_nm  VARCHAR(200) NOT NULL, -- 기관명
+    del_yn   CHAR(1)      NOT NULL, -- 삭제여부
+    rgtr_id  VARCHAR(40)  NULL,     -- 등록자아이디
+    reg_dt   TIMESTAMP    NULL,     -- 등록일시
+    mdfr_id  VARCHAR(40)  NULL,     -- 수정자아이디
+    mdfcn_dt TIMESTAMP    NULL      -- 수정일시
 );
 
 -- 대국민포털_기관정보기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_INST
-	ON KIDS_OWN.TB_PP_M_INST
-	( -- 대국민포털_기관정보기본
-		brno ASC NULLS LAST -- 사업자등록번호
-	);
+    ON KIDS_OWN.TB_PP_M_INST
+    ( -- 대국민포털_기관정보기본
+        brno ASC NULLS LAST -- 사업자등록번호
+    );
 
 -- 대국민포털_기관정보기본
 ALTER TABLE KIDS_OWN.TB_PP_M_INST
-	ADD CONSTRAINT PK_TB_PP_M_INST
-		-- 대국민포털_기관정보기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_INST
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_INST
+        -- 대국민포털_기관정보기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_INST
+    NOT DEFERRABLE;
 
 -- 대국민포털_만족도조사기본
 CREATE TABLE KIDS_OWN.TB_PP_M_DGSTFN_EXMN
 (
-	dgstfn_exmn_sn NUMERIC(22,0) NOT NULL, -- 만족도조사일련번호
-	menu_sn        VARCHAR(20)   NOT NULL, -- 메뉴일련번호
-	dgstfn_scr     NUMERIC(2,0)  NOT NULL, -- 만족도점수
-	rgtr_id        VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt         TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id        VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt       TIMESTAMP     NULL      -- 수정일시
+    dgstfn_exmn_sn NUMERIC(22,0) NOT NULL, -- 만족도조사일련번호
+    menu_sn        VARCHAR(20)   NOT NULL, -- 메뉴일련번호
+    dgstfn_scr     NUMERIC(2,0)  NOT NULL, -- 만족도점수
+    rgtr_id        VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt         TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id        VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt       TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_만족도조사기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_DGSTFN_EXMN
-	ON KIDS_OWN.TB_PP_M_DGSTFN_EXMN
-	( -- 대국민포털_만족도조사기본
-		dgstfn_exmn_sn ASC NULLS LAST -- 만족도조사일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_DGSTFN_EXMN
+    ( -- 대국민포털_만족도조사기본
+        dgstfn_exmn_sn ASC NULLS LAST -- 만족도조사일련번호
+    );
 
 -- 대국민포털_만족도조사기본
 ALTER TABLE KIDS_OWN.TB_PP_M_DGSTFN_EXMN
-	ADD CONSTRAINT PK_TB_PP_M_DGSTFN_EXMN
-		-- 대국민포털_만족도조사기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_DGSTFN_EXMN
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_DGSTFN_EXMN
+        -- 대국민포털_만족도조사기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_DGSTFN_EXMN
+    NOT DEFERRABLE;
 
 -- 대국민포털_의견제안기본
 CREATE TABLE KIDS_OWN.TB_PP_M_OPNN
 (
-	opnn_sn            NUMERIC(22,0) NOT NULL, -- 의견일련번호
-	encpt_wrtr_flnm    VARCHAR(256)  NULL,     -- 암호화작성자성명
-	encpt_wrtr_telno   VARCHAR(256)  NULL,     -- 암호화작성자전화번호
-	encpt_mbr_eml_nm   VARCHAR(256)  NULL,     -- 암호화회원이메일명
-	wrt_se_cd          CHAR(3)       NOT NULL, -- 작성구분코드
-	pbpt_cn            VARCHAR(4000) NULL,     -- 문제점내용
-	dmnd_mttr_cn       VARCHAR(4000) NULL,     -- 요청사항내용
-	dmnd_mttr_dtl_cn   TEXT          NULL,     -- 요청사항상세내용
-	ref_mttr_cn        VARCHAR(4000) NULL,     -- 참고사항내용
-	insd_ref_mttr_cn   TEXT          NULL,     -- 내부참고사항내용
-	atch_file_group_id VARCHAR(40)   NULL,     -- 첨부파일그룹아이디
-	rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt             TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
+    opnn_sn            NUMERIC(22,0) NOT NULL, -- 의견일련번호
+    encpt_wrtr_flnm    VARCHAR(256)  NULL,     -- 암호화작성자성명
+    encpt_wrtr_telno   VARCHAR(256)  NULL,     -- 암호화작성자전화번호
+    encpt_mbr_eml_nm   VARCHAR(256)  NULL,     -- 암호화회원이메일명
+    wrt_se_cd          CHAR(3)       NOT NULL, -- 작성구분코드
+    pbpt_cn            VARCHAR(4000) NULL,     -- 문제점내용
+    dmnd_mttr_cn       VARCHAR(4000) NULL,     -- 요청사항내용
+    dmnd_mttr_dtl_cn   TEXT          NULL,     -- 요청사항상세내용
+    ref_mttr_cn        VARCHAR(4000) NULL,     -- 참고사항내용
+    insd_ref_mttr_cn   TEXT          NULL,     -- 내부참고사항내용
+    atch_file_group_id VARCHAR(40)   NULL,     -- 첨부파일그룹아이디
+    rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt             TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 작성구분코드
@@ -1437,205 +1437,205 @@ COMMENT ON COLUMN KIDS_OWN.TB_PP_M_OPNN.wrt_se_cd IS '의사,약사,간호사,�
 
 -- 대국민포털_의견제안기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_OPNN
-	ON KIDS_OWN.TB_PP_M_OPNN
-	( -- 대국민포털_의견제안기본
-		opnn_sn ASC NULLS LAST -- 의견일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_OPNN
+    ( -- 대국민포털_의견제안기본
+        opnn_sn ASC NULLS LAST -- 의견일련번호
+    );
 
 -- 대국민포털_의견제안기본
 ALTER TABLE KIDS_OWN.TB_PP_M_OPNN
-	ADD CONSTRAINT PK_TB_PP_M_OPNN
-		-- 대국민포털_의견제안기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_OPNN
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_OPNN
+        -- 대국민포털_의견제안기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_OPNN
+    NOT DEFERRABLE;
 
 -- 대국민포털_개인정보접근이력기본
 CREATE TABLE KIDS_OWN.TB_PP_M_PRVC_ACS_HSTRY
 (
-	prvc_acs_sn   NUMERIC(10,0) NOT NULL, -- 개인정보접근일련번호
-	inq_crtr_dt   TIMESTAMP     NOT NULL, -- 조회기준일시
-	srvc_cd       CHAR(2)       NOT NULL, -- 서비스코드
-	menu_sn       VARCHAR(20)   NULL,     -- 메뉴일련번호
-	메소드명      VARCHAR(100)  NOT NULL, -- 메소드명
-	inq_info_cn   VARCHAR(1000) NOT NULL, -- 조회정보내용
-	rqstr_id      VARCHAR(40)   NOT NULL, -- 요청자아이디
-	rqstr_ip_addr VARCHAR(255)  NULL,     -- 요청자IP주소
-	inq_cnd_cn    VARCHAR(4000) NOT NULL, -- 조회조건내용
-	inq_telgm_cn  TEXT          NOT NULL, -- 조회전문내용
-	rgtr_id       VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt        TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id       VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt      TIMESTAMP     NULL      -- 수정일시
+    prvc_acs_sn   NUMERIC(10,0) NOT NULL, -- 개인정보접근일련번호
+    inq_crtr_dt   TIMESTAMP     NOT NULL, -- 조회기준일시
+    srvc_cd       CHAR(2)       NOT NULL, -- 서비스코드
+    menu_sn       VARCHAR(20)   NULL,     -- 메뉴일련번호
+    메소드명      VARCHAR(100)  NOT NULL, -- 메소드명
+    inq_info_cn   VARCHAR(1000) NOT NULL, -- 조회정보내용
+    rqstr_id      VARCHAR(40)   NOT NULL, -- 요청자아이디
+    rqstr_ip_addr VARCHAR(255)  NULL,     -- 요청자IP주소
+    inq_cnd_cn    VARCHAR(4000) NOT NULL, -- 조회조건내용
+    inq_telgm_cn  TEXT          NOT NULL, -- 조회전문내용
+    rgtr_id       VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt        TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id       VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt      TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_개인정보접근이력기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_PRVC_ACS_HSTRY
-	ON KIDS_OWN.TB_PP_M_PRVC_ACS_HSTRY
-	( -- 대국민포털_개인정보접근이력기본
-		prvc_acs_sn ASC NULLS LAST -- 개인정보접근일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_PRVC_ACS_HSTRY
+    ( -- 대국민포털_개인정보접근이력기본
+        prvc_acs_sn ASC NULLS LAST -- 개인정보접근일련번호
+    );
 
 -- 대국민포털_개인정보접근이력기본
 ALTER TABLE KIDS_OWN.TB_PP_M_PRVC_ACS_HSTRY
-	ADD CONSTRAINT PK_TB_PP_M_PRVC_ACS_HSTRY
-		-- 대국민포털_개인정보접근이력기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_PRVC_ACS_HSTRY
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_PRVC_ACS_HSTRY
+        -- 대국민포털_개인정보접근이력기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_PRVC_ACS_HSTRY
+    NOT DEFERRABLE;
 
 -- 대국민포털_권한변경이력기본
 CREATE TABLE KIDS_OWN.TB_PP_M_AUTHRT_CHG_HSTRY
 (
-	authrt_chg_sn      NUMERIC(10,0) NOT NULL, -- 권한변경일련번호
-	authrt_cd          VARCHAR(10)   NOT NULL, -- 권한코드
-	menu_sn            VARCHAR(20)   NULL,     -- 메뉴일련번호
-	aplcn_trgt_type_cd CHAR(5)       NOT NULL, -- 적용대상유형코드
-	chg_role_list_cn   VARCHAR(4000) NULL,     -- 변경역할목록내용
-	aplcn_trgt_nm      VARCHAR(20)   NULL,     -- 적용대상명
-	chg_type_cd        VARCHAR(20)   NOT NULL, -- 변경유형코드
-	authrt_chg_rmrk_cn VARCHAR(1000) NOT NULL, -- 권한변경비고내용
-	rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt             TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
+    authrt_chg_sn      NUMERIC(10,0) NOT NULL, -- 권한변경일련번호
+    authrt_cd          VARCHAR(10)   NOT NULL, -- 권한코드
+    menu_sn            VARCHAR(20)   NULL,     -- 메뉴일련번호
+    aplcn_trgt_type_cd CHAR(5)       NOT NULL, -- 적용대상유형코드
+    chg_role_list_cn   VARCHAR(4000) NULL,     -- 변경역할목록내용
+    aplcn_trgt_nm      VARCHAR(20)   NULL,     -- 적용대상명
+    chg_type_cd        VARCHAR(20)   NOT NULL, -- 변경유형코드
+    authrt_chg_rmrk_cn VARCHAR(1000) NOT NULL, -- 권한변경비고내용
+    rgtr_id            VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt             TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id            VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt           TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_권한변경이력기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_AUTHRT_CHG_HSTRY
-	ON KIDS_OWN.TB_PP_M_AUTHRT_CHG_HSTRY
-	( -- 대국민포털_권한변경이력기본
-		authrt_chg_sn ASC NULLS LAST -- 권한변경일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_AUTHRT_CHG_HSTRY
+    ( -- 대국민포털_권한변경이력기본
+        authrt_chg_sn ASC NULLS LAST -- 권한변경일련번호
+    );
 
 -- 대국민포털_권한변경이력기본
 ALTER TABLE KIDS_OWN.TB_PP_M_AUTHRT_CHG_HSTRY
-	ADD CONSTRAINT PK_TB_PP_M_AUTHRT_CHG_HSTRY
-		-- 대국민포털_권한변경이력기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_AUTHRT_CHG_HSTRY
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_AUTHRT_CHG_HSTRY
+        -- 대국민포털_권한변경이력기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_AUTHRT_CHG_HSTRY
+    NOT DEFERRABLE;
 
 -- 대국민포털_도메인기본
 CREATE TABLE KIDS_OWN.TB_PP_M_DMN
 (
-	com_std_dmn_nm       VARCHAR(100)  NOT NULL, -- 공통표준도메인명
-	sys_se_nm            VARCHAR(40)   NULL,     -- 시스템구분명
-	artcl_sou_nm         VARCHAR(40)   NULL,     -- 항목원천명
-	com_std_dmn_clsf_nm  VARCHAR(40)   NULL,     -- 공통표준도메인분류명
-	com_std_dmn_group_nm VARCHAR(40)   NULL,     -- 공통표준도메인그룹명
-	com_std_dmn_expln    VARCHAR(4000) NULL,     -- 공통표준도메인설명
-	dmn_type_nm          VARCHAR(40)   NULL,     -- 도메인유형명
-	dmn_len              NUMERIC(10,0) NULL,     -- 도메인길이
-	dmn_dcpt_len         NUMERIC(10,0) NULL,     -- 도메인소수점길이
-	rgtr_id              VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt               TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id              VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt             TIMESTAMP     NULL      -- 수정일시
+    com_std_dmn_nm       VARCHAR(100)  NOT NULL, -- 공통표준도메인명
+    sys_se_nm            VARCHAR(40)   NULL,     -- 시스템구분명
+    artcl_sou_nm         VARCHAR(40)   NULL,     -- 항목원천명
+    com_std_dmn_clsf_nm  VARCHAR(40)   NULL,     -- 공통표준도메인분류명
+    com_std_dmn_group_nm VARCHAR(40)   NULL,     -- 공통표준도메인그룹명
+    com_std_dmn_expln    VARCHAR(4000) NULL,     -- 공통표준도메인설명
+    dmn_type_nm          VARCHAR(40)   NULL,     -- 도메인유형명
+    dmn_len              NUMERIC(10,0) NULL,     -- 도메인길이
+    dmn_dcpt_len         NUMERIC(10,0) NULL,     -- 도메인소수점길이
+    rgtr_id              VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt               TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id              VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt             TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_도메인기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_DMN
-	ON KIDS_OWN.TB_PP_M_DMN
-	( -- 대국민포털_도메인기본
-		com_std_dmn_nm ASC NULLS LAST -- 공통표준도메인명
-	);
+    ON KIDS_OWN.TB_PP_M_DMN
+    ( -- 대국민포털_도메인기본
+        com_std_dmn_nm ASC NULLS LAST -- 공통표준도메인명
+    );
 
 -- 대국민포털_도메인기본
 ALTER TABLE KIDS_OWN.TB_PP_M_DMN
-	ADD CONSTRAINT PK_TB_PP_M_DMN
-		-- 대국민포털_도메인기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_DMN
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_DMN
+        -- 대국민포털_도메인기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_DMN
+    NOT DEFERRABLE;
 
 -- 대국민포털_단어기본
 CREATE TABLE KIDS_OWN.TB_PP_M_WORD
 (
-	com_std_word_nm          VARCHAR(100)  NOT NULL, -- 공통표준단어명
-	sys_se_nm                VARCHAR(40)   NULL,     -- 시스템구분명
-	artcl_sou_nm             VARCHAR(40)   NULL,     -- 항목원천명
-	com_std_word_eng_abbr_nm VARCHAR(40)   NULL,     -- 공통표준단어영문약어명
-	com_std_word_eng_nm      VARCHAR(256)  NULL,     -- 공통표준단어영문명
-	com_std_word_expln       VARCHAR(4000) NULL,     -- 공통표준단어설명
-	frm_word_yn              CHAR(1)       NULL,     -- 형식단어여부
-	rgtr_id                  VARCHAR(40)   NULL,     -- 등록자아이디
-	reg_dt                   TIMESTAMP     NULL,     -- 등록일시
-	mdfr_id                  VARCHAR(40)   NULL,     -- 수정자아이디
-	mdfcn_dt                 TIMESTAMP     NULL      -- 수정일시
+    com_std_word_nm          VARCHAR(100)  NOT NULL, -- 공통표준단어명
+    sys_se_nm                VARCHAR(40)   NULL,     -- 시스템구분명
+    artcl_sou_nm             VARCHAR(40)   NULL,     -- 항목원천명
+    com_std_word_eng_abbr_nm VARCHAR(40)   NULL,     -- 공통표준단어영문약어명
+    com_std_word_eng_nm      VARCHAR(256)  NULL,     -- 공통표준단어영문명
+    com_std_word_expln       VARCHAR(4000) NULL,     -- 공통표준단어설명
+    frm_word_yn              CHAR(1)       NULL,     -- 형식단어여부
+    rgtr_id                  VARCHAR(40)   NULL,     -- 등록자아이디
+    reg_dt                   TIMESTAMP     NULL,     -- 등록일시
+    mdfr_id                  VARCHAR(40)   NULL,     -- 수정자아이디
+    mdfcn_dt                 TIMESTAMP     NULL      -- 수정일시
 );
 
 -- 대국민포털_단어기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_WORD
-	ON KIDS_OWN.TB_PP_M_WORD
-	( -- 대국민포털_단어기본
-		com_std_word_nm ASC NULLS LAST -- 공통표준단어명
-	);
+    ON KIDS_OWN.TB_PP_M_WORD
+    ( -- 대국민포털_단어기본
+        com_std_word_nm ASC NULLS LAST -- 공통표준단어명
+    );
 
 -- 대국민포털_단어기본
 ALTER TABLE KIDS_OWN.TB_PP_M_WORD
-	ADD CONSTRAINT PK_TB_PP_M_WORD
-		-- 대국민포털_단어기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_WORD
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_WORD
+        -- 대국민포털_단어기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_WORD
+    NOT DEFERRABLE;
 
 -- 대국민포털_용어기본
 CREATE TABLE KIDS_OWN.TB_PP_M_TRM
 (
-	std_trm_nm          VARCHAR(100) NOT NULL, -- 표준용어명
-	sys_se_nm           VARCHAR(40)  NULL,     -- 시스템구분명
-	artcl_sou_nm        VARCHAR(40)  NULL,     -- 항목원천명
-	std_trm_eng_abbr_nm VARCHAR(40)  NULL,     -- 표준용어영문약어명
-	atrb_type_nm        VARCHAR(40)  NULL,     -- 속성유형명
-	com_std_dmn_nm      VARCHAR(100) NULL,     -- 공통표준도메인명
-	rgtr_id             VARCHAR(40)  NULL,     -- 등록자아이디
-	reg_dt              TIMESTAMP    NULL,     -- 등록일시
-	mdfr_id             VARCHAR(40)  NULL,     -- 수정자아이디
-	mdfcn_dt            TIMESTAMP    NULL      -- 수정일시
+    std_trm_nm          VARCHAR(100) NOT NULL, -- 표준용어명
+    sys_se_nm           VARCHAR(40)  NULL,     -- 시스템구분명
+    artcl_sou_nm        VARCHAR(40)  NULL,     -- 항목원천명
+    std_trm_eng_abbr_nm VARCHAR(40)  NULL,     -- 표준용어영문약어명
+    atrb_type_nm        VARCHAR(40)  NULL,     -- 속성유형명
+    com_std_dmn_nm      VARCHAR(100) NULL,     -- 공통표준도메인명
+    rgtr_id             VARCHAR(40)  NULL,     -- 등록자아이디
+    reg_dt              TIMESTAMP    NULL,     -- 등록일시
+    mdfr_id             VARCHAR(40)  NULL,     -- 수정자아이디
+    mdfcn_dt            TIMESTAMP    NULL      -- 수정일시
 );
 
 -- 대국민포털_용어기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_TRM
-	ON KIDS_OWN.TB_PP_M_TRM
-	( -- 대국민포털_용어기본
-		std_trm_nm ASC NULLS LAST -- 표준용어명
-	);
+    ON KIDS_OWN.TB_PP_M_TRM
+    ( -- 대국민포털_용어기본
+        std_trm_nm ASC NULLS LAST -- 표준용어명
+    );
 
 -- 대국민포털_용어기본
 ALTER TABLE KIDS_OWN.TB_PP_M_TRM
-	ADD CONSTRAINT PK_TB_PP_M_TRM
-		-- 대국민포털_용어기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_TRM
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_TRM
+        -- 대국민포털_용어기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_TRM
+    NOT DEFERRABLE;
 
 -- 대국민포털_KIDS부서정보기본
 CREATE TABLE KIDS_OWN.TB_PP_M_DEPT_INFO
 (
-	dept_no    VARCHAR(20) NOT NULL, -- 부서번호
-	dept_nm    VARCHAR(80) NULL,     -- 부서명
-	up_dept_no VARCHAR(20) NULL,     -- 상위부서번호
-	rgtr_id    VARCHAR(40) NULL,     -- 등록자아이디
-	reg_dt     TIMESTAMP   NULL,     -- 등록일시
-	mdfr_id    VARCHAR(40) NULL,     -- 수정자아이디
-	mdfcn_dt   TIMESTAMP   NULL      -- 수정일시
+    dept_no    VARCHAR(20) NOT NULL, -- 부서번호
+    dept_nm    VARCHAR(80) NULL,     -- 부서명
+    up_dept_no VARCHAR(20) NULL,     -- 상위부서번호
+    rgtr_id    VARCHAR(40) NULL,     -- 등록자아이디
+    reg_dt     TIMESTAMP   NULL,     -- 등록일시
+    mdfr_id    VARCHAR(40) NULL,     -- 수정자아이디
+    mdfcn_dt   TIMESTAMP   NULL      -- 수정일시
 );
 
 -- 대국민포털_KIDS부서정보기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_DEPT_INFO
-	ON KIDS_OWN.TB_PP_M_DEPT_INFO
-	( -- 대국민포털_KIDS부서정보기본
-		dept_no ASC NULLS LAST -- 부서번호
-	);
+    ON KIDS_OWN.TB_PP_M_DEPT_INFO
+    ( -- 대국민포털_KIDS부서정보기본
+        dept_no ASC NULLS LAST -- 부서번호
+    );
 
 -- 대국민포털_KIDS부서정보기본
 ALTER TABLE KIDS_OWN.TB_PP_M_DEPT_INFO
-	ADD CONSTRAINT PK_TB_PP_M_DEPT_INFO
-		-- 대국민포털_KIDS부서정보기본 기본키
-	PRIMARY KEY
-	USING INDEX PK_TB_PP_M_DEPT_INFO
-	NOT DEFERRABLE;
+    ADD CONSTRAINT PK_TB_PP_M_DEPT_INFO
+        -- 대국민포털_KIDS부서정보기본 기본키
+    PRIMARY KEY
+    USING INDEX PK_TB_PP_M_DEPT_INFO
+    NOT DEFERRABLE;
 
 
 COMMENT ON TABLE KIDS_OWN.TB_PP_M_DUR_SNCTZ
@@ -1801,7 +1801,7 @@ IS '수정일시';
 COMMENT ON TABLE KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN
 IS '대국민포털_DUR임부금기기본';
 
-COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN.임부금기일련번호
+COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN.prgnt_bann_sn
 IS '임부금기일련번호';
 COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN.igrd_nm
 IS '성분명';
@@ -1817,7 +1817,7 @@ COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN.ancmnt_ymd
 IS '고시일자';
 COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN.ancmnt_no
 IS '고시번호';
-COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN.금기등급수
+COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN.bann_grd
 IS '금기등급수';
 COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_PRGNT_BANN.dtl_info_cn
 IS '상세정보내용';
@@ -1873,9 +1873,9 @@ IS '수정일시';
 COMMENT ON TABLE KIDS_OWN.TB_PP_M_DUR_EFTGRP
 IS '대국민포털_DUR효능군중복기본';
 
-COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_EFTGRP.효능군중복일련번호
+COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_EFTGRP.eftgrp_dpcn_sn
 IS '효능군중복일련번호';
-COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_EFTGRP.효능그룹명
+COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_EFTGRP.eftgrp_nm
 IS '효능그룹명';
 COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_EFTGRP.group_nm
 IS '그룹명';
@@ -1885,7 +1885,7 @@ COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_EFTGRP.gnrl_nm_cd
 IS '일반명코드';
 COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_EFTGRP.gnrl_nm
 IS '일반명';
-COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_EFTGRP.효능군중복점검코드
+COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_EFTGRP.eftgrp_dpcn_chck_cd
 IS '효능군중복점검코드';
 COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_EFTGRP.mdcn_cd
 IS '약품코드';
@@ -1914,7 +1914,7 @@ IS '수정일시';
 COMMENT ON TABLE KIDS_OWN.TB_PP_M_DUR_AGE_BANN
 IS '대국민포털_DUR연령금기기본';
 
-COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_AGE_BANN.연령금기일련번호
+COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_AGE_BANN.age_bann_sn
 IS '연령금기일련번호';
 COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DUR_AGE_BANN.igrd_nm
 IS '성분명';
