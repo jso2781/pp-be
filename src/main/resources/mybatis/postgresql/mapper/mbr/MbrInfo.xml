@@ -8,7 +8,7 @@
         FROM kids_own.TB_PP_M_MBR_INFO
         WHERE 1=1
         AND mbr_id = #{mbrId}
-        AND mbr_enpswd = #{mbrEnpswd}
+        AND encpt_mbr_pswd = #{encptMbrPswd}
         AND mbr_whdwl_dt is null
     </select>
 
@@ -20,8 +20,8 @@
         <if test="mbrId != null and mbrId != ''">
             AND mbr_id = #{mbrId}
         </if>
-        <if test="mbrEncptEml != null and mbrEncptEml != ''">
-            AND mbr_encpt_eml = #{mbrEncptEml}
+        <if test="encptMbrEmlNm != null and encptMbrEmlNm != ''">
+            AND encpt_mbr_eml_nm = #{encptMbrEmlNm}
         </if>
         AND mbr_whdwl_dt is null
     </select>
@@ -31,20 +31,21 @@
         SELECT
              mbr_no
             ,mbr_id
-            ,mbr_encpt_flnm
-            ,mbr_encpt_eml
-            ,mbr_enpswd
-            ,mbr_encpt_telno
+            ,encpt_mbr_flnm
+            ,encpt_mbr_eml_nm
+            ,encpt_mbr_pswd
+            ,encpt_mbr_telno
             ,mbr_type_cd
-            ,mbr_join_stts
+            ,mbr_join_stts_cd
             ,mbr_join_dt
             ,mbr_whdwl_rsn
             ,mbr_whdwl_dt
+            ,cnstn_mbcmt_yn
             ,bfr_enpswd
             ,pswd_chg_dt
             ,pswd_err_nmtm
             ,link_info_idntf_id
-            ,cert_token
+            ,cert_token_vl
             ,rgtr_id
             ,reg_dt
 
@@ -68,7 +69,7 @@
           INSERT INTO kids_own.TB_PP_M_MBR_NO_SEQ (yyyy, last_seq)
           VALUES (to_char(CURRENT_TIMESTAMP, 'YYYY'), 1)
           ON CONFLICT (yyyy)
-          DO UPDATE SET last_seq = "TB_PP_M_MBR_NO_SEQ".last_seq + 1
+          DO UPDATE SET last_seq = kids_own.TB_PP_M_MBR_NO_SEQ.last_seq + 1
           RETURNING yyyy, last_seq
         ),
         ins AS (
@@ -76,12 +77,12 @@
           (
                mbr_no
               ,mbr_id
-              ,mbr_encpt_flnm
-              ,mbr_encpt_eml
-              ,mbr_enpswd
-              ,mbr_encpt_telno
+              ,encpt_mbr_flnm
+              ,encpt_mbr_eml_nm
+              ,encpt_mbr_pswd
+              ,encpt_mbr_telno
               ,mbr_type_cd
-              ,mbr_join_stts
+              ,mbr_join_stts_cd
               ,mbr_join_dt
               ,mbr_whdwl_rsn
               ,mbr_whdwl_dt
@@ -89,7 +90,7 @@
               ,pswd_chg_dt
               ,pswd_err_nmtm
               ,link_info_idntf_id
-              ,cert_token
+              ,cert_token_vl
               ,rgtr_id
               ,reg_dt
 
@@ -100,12 +101,12 @@
           SELECT
              seq.yyyy || LPAD(seq.last_seq::text, 6, '0') AS mbr_no
             ,#{mbrId}
-            ,#{mbrEncptFlnm}
-            ,#{mbrEncptEml}
-            ,#{mbrEnpswd}
-            ,#{mbrEncptTelno}
+            ,#{encptMbrFlnm}
+            ,#{encptMbrEmlNm}
+            ,#{encptMbrPswd}
+            ,#{encptMbrTelno}
             ,#{mbrTypeCd}
-            ,#{mbrJoinStts}
+            ,#{mbrJoinSttsCd}
             ,to_timestamp(#{mbrJoinDt}, 'YYYY-MM-DD HH24:MI:SS')
             ,#{mbrWhdwlRsn}
             ,#{mbrWhdwlDt}
@@ -113,7 +114,7 @@
             ,#{pswdChgDt}
             ,#{pswdErrNmtm}
             ,#{linkInfoIdntfId}
-            ,#{certToken}
+            ,#{certTokenVl}
             ,#{rgtrId}
             ,now()
 
@@ -131,12 +132,12 @@
         UPDATE kids_own.TB_PP_M_MBR_INFO
         SET
              mbr_id = coalesce(#{mbrId}, mbr_id)
-            ,mbr_encpt_flnm = coalesce(#{mbrEncptFlnm}, mbr_encpt_flnm)
-            ,mbr_encpt_eml = coalesce(#{mbrEncptEml}, mbr_encpt_eml)
-            ,mbr_enpswd = coalesce(#{mbrEnpswd}, mbr_enpswd)
-            ,mbr_encpt_telno = coalesce(#{mbrEncptTelno}, mbr_encpt_telno)
+            ,encpt_mbr_flnm = coalesce(#{encptMbrFlnm}, encpt_mbr_flnm)
+            ,encpt_mbr_eml_nm = coalesce(#{encptMbrEmlNm}, encpt_mbr_eml_nm)
+            ,encpt_mbr_pswd = coalesce(#{encptMbrPswd}, encpt_mbr_pswd)
+            ,encpt_mbr_telno = coalesce(#{encptMbrTelno}, encpt_mbr_telno)
             ,mbr_type_cd = coalesce(#{mbrTypeCd}, mbr_type_cd)
-            ,mbr_join_stts = coalesce(#{mbrJoinStts}, mbr_join_stts)
+            ,mbr_join_stts_cd = coalesce(#{mbrJoinSttsCd}, mbr_join_stts_cd)
             ,mbr_join_dt = coalesce(to_timestamp(#{mbrJoinDt}, 'YYYY-MM-DD HH24:MI:SS'), mbr_join_dt)
             ,mbr_whdwl_rsn = coalesce(#{mbrWhdwlRsn}, mbr_whdwl_rsn)
             ,mbr_whdwl_dt = coalesce(to_timestamp(#{mbrWhdwlDt}, 'YYYY-MM-DD HH24:MI:SS'), mbr_whdwl_dt)
@@ -144,7 +145,7 @@
             ,pswd_chg_dt = coalesce(to_timestamp(#{pswdChgDt}, 'YYYY-MM-DD HH24:MI:SS'), pswd_chg_dt)
             ,pswd_err_nmtm = coalesce(#{pswdErrNmtm}, pswd_err_nmtm)
             ,link_info_idntf_id = coalesce(#{linkInfoIdntfId}, link_info_idntf_id)
-            ,cert_token = coalesce(#{certToken}, cert_token)
+            ,cert_token_vl = coalesce(#{certTokenVl}, cert_token_vl)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
 
@@ -163,12 +164,12 @@
         (
              mbr_no
             ,mbr_id
-            ,mbr_encpt_flnm
-            ,mbr_encpt_eml
-            ,mbr_enpswd
-            ,mbr_encpt_telno
+            ,encpt_mbr_flnm
+            ,encpt_mbr_eml_nm
+            ,encpt_mbr_pswd
+            ,encpt_mbr_telno
             ,mbr_type_cd
-            ,mbr_join_stts
+            ,mbr_join_stts_cd
             ,mbr_join_dt
             ,mbr_whdwl_rsn
             ,mbr_whdwl_dt
@@ -176,7 +177,7 @@
             ,pswd_chg_dt
             ,pswd_err_nmtm
             ,link_info_idntf_id
-            ,cert_token
+            ,cert_token_vl
             ,rgtr_id
             ,reg_dt
 
@@ -188,12 +189,12 @@
         (
              #{mbrNo}
             ,#{mbrId}
-            ,#{mbrEncptFlnm}
-            ,#{mbrEncptEml}
-            ,#{mbrEnpswd}
-            ,#{mbrEncptTelno}
+            ,#{encptMbrFlnm}
+            ,#{encptMbrEmlNm}
+            ,#{encptMbrPswd}
+            ,#{encptMbrTelno}
             ,#{mbrTypeCd}
-            ,#{mbrJoinStts}
+            ,#{mbrJoinSttsCd}
             ,#{mbrJoinDt}
             ,#{mbrWhdwlRsn}
             ,#{mbrWhdwlDt}
@@ -201,7 +202,7 @@
             ,#{pswdChgDt}
             ,#{pswdErrNmtm}
             ,#{linkInfoIdntfId}
-            ,#{certToken}
+            ,#{certTokenVl}
             ,#{rgtrId}
             ,now()
 
@@ -212,12 +213,12 @@
         ON CONFLICT(mbr_no)
         DO UPDATE SET
              mbr_id = coalesce(excluded.mbr_id, kids_own.TB_PP_M_MBR_INFO.mbr_id)
-            ,mbr_encpt_flnm = coalesce(excluded.mbr_encpt_flnm, kids_own.TB_PP_M_MBR_INFO.mbr_encpt_flnm)
-            ,mbr_encpt_eml = coalesce(excluded.mbr_encpt_eml, kids_own.TB_PP_M_MBR_INFO.mbr_encpt_eml)
-            ,mbr_enpswd = coalesce(excluded.mbr_enpswd, kids_own.TB_PP_M_MBR_INFO.mbr_enpswd)
-            ,mbr_encpt_telno = coalesce(excluded.mbr_encpt_telno, kids_own.TB_PP_M_MBR_INFO.mbr_encpt_telno)
+            ,encpt_mbr_flnm = coalesce(excluded.encpt_mbr_flnm, kids_own.TB_PP_M_MBR_INFO.encpt_mbr_flnm)
+            ,encpt_mbr_eml_nm = coalesce(excluded.encpt_mbr_eml_nm, kids_own.TB_PP_M_MBR_INFO.encpt_mbr_eml_nm)
+            ,encpt_mbr_pswd = coalesce(excluded.encpt_mbr_pswd, kids_own.TB_PP_M_MBR_INFO.encpt_mbr_pswd)
+            ,encpt_mbr_telno = coalesce(excluded.encpt_mbr_telno, kids_own.TB_PP_M_MBR_INFO.encpt_mbr_telno)
             ,mbr_type_cd = coalesce(excluded.mbr_type_cd, kids_own.TB_PP_M_MBR_INFO.mbr_type_cd)
-            ,mbr_join_stts = coalesce(excluded.mbr_join_stts, kids_own.TB_PP_M_MBR_INFO.mbr_join_stts)
+            ,mbr_join_stts_cd = coalesce(excluded.mbr_join_stts_cd, kids_own.TB_PP_M_MBR_INFO.mbr_join_stts_cd)
             ,mbr_join_dt = coalesce(excluded.mbr_join_dt, kids_own.TB_PP_M_MBR_INFO.mbr_join_dt)
             ,mbr_whdwl_rsn = coalesce(excluded.mbr_whdwl_rsn, kids_own.TB_PP_M_MBR_INFO.mbr_whdwl_rsn)
             ,mbr_whdwl_dt = coalesce(excluded.mbr_whdwl_dt, kids_own.TB_PP_M_MBR_INFO.mbr_whdwl_dt)
@@ -225,7 +226,7 @@
             ,pswd_chg_dt = coalesce(excluded.pswd_chg_dt, kids_own.TB_PP_M_MBR_INFO.pswd_chg_dt)
             ,pswd_err_nmtm = coalesce(excluded.pswd_err_nmtm, kids_own.TB_PP_M_MBR_INFO.pswd_err_nmtm)
             ,link_info_idntf_id = coalesce(excluded.link_info_idntf_id, kids_own.TB_PP_M_MBR_INFO.link_info_idntf_id)
-            ,cert_token = coalesce(excluded.cert_token, kids_own.TB_PP_M_MBR_INFO.cert_token)
+            ,cert_token_vl = coalesce(excluded.cert_token_vl, kids_own.TB_PP_M_MBR_INFO.cert_token_vl)
             ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_MBR_INFO.mdfr_id)
             ,mdfcn_dt = now()
 
@@ -242,10 +243,9 @@
         /* 대국민포털_회원정보 PW 수정 (MbrInfoMapper.updateMbrInfoPw) */
         UPDATE "KIDS_OWN"."TB_PP_M_MBR_INFO"
         SET
-            mbr_enpswd = coalesce(#{mbrEnpswd}, mbr_enpswd)
+            encpt_mbr_pswd = coalesce(#{encptMbrPswd}, encpt_mbr_pswd)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
         WHERE 1=1
             AND mbr_no = #{mbrNo}
     </update>
