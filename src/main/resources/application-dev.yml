@@ -20,7 +20,7 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-    password: drugsafe123456  # 필요하면 사용
+    password: drugsafe123456
     timeout: 2000ms
   servlet:
     multipart:
@@ -38,9 +38,9 @@ spring:
     enabled: false
   datasource:
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:postgresql://127.0.0.1:5432/drugsafe?tcpKeepAlive=true&connectTimeout=10&socketTimeout=600
-    username: drugsafe
-    password: 7mw8kw8mw7kw
+    url: jdbc:log4jdbc:postgresql://192.168.12.146:34430/postgres?tcpKeepAlive=true&connectTimeout=10&socketTimeout=600
+    username: postgres
+    password: postgres
     hikari:
       connection-timeout: 5000
       validation-timeout: 1000
@@ -48,7 +48,7 @@ spring:
       minimum-idle: 5
       connection-test-query: SELECT 1
   path:
-    fileUploadDir: /inusquare/upload
+    fileUploadDir: /data/upload
     urlFilePath: /
     evdnDocFileUploadDir: /resources/doc
   web:
@@ -74,8 +74,8 @@ spring:
 jwt:
   issuer: kids_user
   secret-key: ZGQtaW90LXBjd2ViLWFwaS1hZG1pbi1zZWNyZXRrZXk=
-  access-token-expiration: 1800000        # 30분 (ms), 7 * 24 * 60 * 60 * 1000 -> 7일
-  refresh-token-expiration: 1209600000   # 14일 (ms), 365 * 24 * 60 * 60 * 1000 -> 365일
+  access-token-expiration: 1800000        # 30분 (ms), ex) 7 * 24 * 60 * 60 * 1000 -> 7일
+  refresh-token-expiration: 1209600000   # 14일 (ms), ex) 365 * 24 * 60 * 60 * 1000 -> 365일
   refresh-token-name: KIDS_REFRESH_TOKEN
   idle-timeout-millis: 1800000  # 30분
 
@@ -88,12 +88,13 @@ springdoc:
 file:
   storePath: C:\data
   url: /files
-      
+
 logging:
   level:
     kr.go.kids.domain: DEBUG
     jdbc.sqltiming: INFO
     jdbc.resultsettable: INFO
+    org.springframework.boot.context.config: DEBUG
 
 mybatis:
   type-aliases-package: kr.go.kids.domain
