@@ -3,7 +3,7 @@ package kr.go.kids.domain.dur.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(name = "대국민포털_DUR병용금기기본", description = "대국민포털_DUR병용금기기본 Search Parameter VO")
-public class ConcBannPVO
+public class DurConcBannPVO
 {
     /**
      * 병용금기일련번호
@@ -185,11 +185,11 @@ public class ConcBannPVO
     @Schema(description = "수정프로그램아이디", type = "String")
     private String mdfcnPrgrmId;
 
-    public String getConcBannSn()
+    public String getDurConcBannSn()
     {
         return concBannSn;
     }
-    public void setConcBannSn(String concBannSn)
+    public void setDurConcBannSn(String concBannSn)
     {
         this.concBannSn = concBannSn;
     }

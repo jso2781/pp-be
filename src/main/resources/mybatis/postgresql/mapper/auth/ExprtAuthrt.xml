@@ -11,11 +11,11 @@
             ,exprt_authrt_rmrk
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT"
+
+        FROM kids_own.TB_PP_M_EXPRT_AUTHRT
         WHERE 1=1
         AND mbr_no = #{mbrNo}
         AND authrt_cd = #{authrtCd}
@@ -23,7 +23,7 @@
 
     <insert id="insertExprtAuthrt" parameterType="ExprtAuthrtPVO">
         /* 대국민포털_전문가권한기본 입력 (ExprtAuthrtMapper.insertExprtAuthrt) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT"
+        INSERT INTO kids_own.TB_PP_M_EXPRT_AUTHRT
         (
              mbr_no
             ,authrt_cd
@@ -31,10 +31,10 @@
             ,exprt_authrt_rmrk
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -44,22 +44,22 @@
             ,#{exprtAuthrtRmrk}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
     <update id="updateExprtAuthrt" parameterType="ExprtAuthrtPVO">
         /* 대국민포털_전문가권한기본 수정 (ExprtAuthrtMapper.updateExprtAuthrt) */
-        UPDATE "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT"
+        UPDATE kids_own.TB_PP_M_EXPRT_AUTHRT
         SET
              use_yn = coalesce(#{useYn}, use_yn)
             ,exprt_authrt_rmrk = coalesce(#{exprtAuthrtRmrk}, exprt_authrt_rmrk)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND mbr_no = #{mbrNo}
         AND authrt_cd = #{authrtCd}
@@ -67,7 +67,7 @@
 
     <insert id="saveExprtAuthrt" parameterType="ExprtAuthrtPVO">
         /* 대국민포털_전문가권한기본 저장 (ExprtAuthrtMapper.insertExprtAuthrt) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT"
+        INSERT INTO kids_own.TB_PP_M_EXPRT_AUTHRT
         (
              mbr_no
             ,authrt_cd
@@ -75,10 +75,10 @@
             ,exprt_authrt_rmrk
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -88,23 +88,23 @@
             ,#{exprtAuthrtRmrk}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(mbr_no,authrt_cd)
         DO UPDATE SET
-             use_yn = coalesce(excluded.use_yn, "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT".use_yn)
-            ,exprt_authrt_rmrk = coalesce(excluded.exprt_authrt_rmrk, "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT".exprt_authrt_rmrk)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT".mdfr_id)
+             use_yn = coalesce(excluded.use_yn, kids_own.TB_PP_M_EXPRT_AUTHRT.use_yn)
+            ,exprt_authrt_rmrk = coalesce(excluded.exprt_authrt_rmrk, kids_own.TB_PP_M_EXPRT_AUTHRT.exprt_authrt_rmrk)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_EXPRT_AUTHRT.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT".mdfcn_prgrm_id)
+
     </insert>
 
     <delete id="deleteExprtAuthrt" parameterType="ExprtAuthrtDVO">
         /* 대국민포털_전문가권한기본 삭제 (ExprtAuthrtMapper.deleteExprtAuthrt) */
-        DELETE FROM "KIDS_OWN"."TB_PP_M_EXPRT_AUTHRT"
+        DELETE FROM kids_own.TB_PP_M_EXPRT_AUTHRT
         WHERE 1=1
         AND mbr_no = #{mbrNo}
         AND authrt_cd = #{authrtCd}

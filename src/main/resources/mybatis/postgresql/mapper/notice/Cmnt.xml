@@ -12,18 +12,18 @@
             ,use_yn
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_M_CMNT"
+
+        FROM kids_own.TB_PP_M_CMNT
         WHERE 1=1
         AND cmnt_sn = #{cmntSn}
     </select>
 
     <insert id="insertCmnt" parameterType="CmntPVO">
         /* 대국민포털_댓글기본 입력 (CmntMapper.insertCmnt) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_CMNT"
+        INSERT INTO kids_own.TB_PP_M_CMNT
         (
              cmnt_sn
             ,pst_sn
@@ -32,10 +32,10 @@
             ,use_yn
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -46,16 +46,16 @@
             ,#{useYn}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
     <update id="updateCmnt" parameterType="CmntPVO">
         /* 대국민포털_댓글기본 수정 (CmntMapper.updateCmnt) */
-        UPDATE "KIDS_OWN"."TB_PP_M_CMNT"
+        UPDATE kids_own.TB_PP_M_CMNT
         SET
              pst_sn = coalesce(#{pstSn}, pst_sn)
             ,cmnt_cn = coalesce(#{cmntCn}, cmnt_cn)
@@ -63,14 +63,14 @@
             ,use_yn = coalesce(#{useYn}, use_yn)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND cmnt_sn = #{cmntSn}
     </update>
 
     <insert id="saveCmnt" parameterType="CmntPVO">
         /* 대국민포털_댓글기본 저장 (CmntMapper.insertCmnt) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_CMNT"
+        INSERT INTO kids_own.TB_PP_M_CMNT
         (
              cmnt_sn
             ,pst_sn
@@ -79,10 +79,10 @@
             ,use_yn
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -93,25 +93,25 @@
             ,#{useYn}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(cmnt_sn)
         DO UPDATE SET
-             pst_sn = coalesce(excluded.pst_sn, "KIDS_OWN"."TB_PP_M_CMNT".pst_sn)
-            ,cmnt_cn = coalesce(excluded.cmnt_cn, "KIDS_OWN"."TB_PP_M_CMNT".cmnt_cn)
-            ,cmnt_enpswd = coalesce(excluded.cmnt_enpswd, "KIDS_OWN"."TB_PP_M_CMNT".cmnt_enpswd)
-            ,use_yn = coalesce(excluded.use_yn, "KIDS_OWN"."TB_PP_M_CMNT".use_yn)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_CMNT".mdfr_id)
+             pst_sn = coalesce(excluded.pst_sn, kids_own.TB_PP_M_CMNT.pst_sn)
+            ,cmnt_cn = coalesce(excluded.cmnt_cn, kids_own.TB_PP_M_CMNT.cmnt_cn)
+            ,cmnt_enpswd = coalesce(excluded.cmnt_enpswd, kids_own.TB_PP_M_CMNT.cmnt_enpswd)
+            ,use_yn = coalesce(excluded.use_yn, kids_own.TB_PP_M_CMNT.use_yn)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_CMNT.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_CMNT".mdfcn_prgrm_id)
+
     </insert>
 
     <delete id="deleteCmnt" parameterType="CmntDVO">
         /* 대국민포털_댓글기본 삭제 (CmntMapper.deleteCmnt) */
-        DELETE FROM "KIDS_OWN"."TB_PP_M_CMNT"
+        DELETE FROM kids_own.TB_PP_M_CMNT
         WHERE 1=1
         AND cmnt_sn = #{cmntSn}
     </delete>

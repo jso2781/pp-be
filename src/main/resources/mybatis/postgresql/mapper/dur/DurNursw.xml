@@ -17,22 +17,22 @@
             ,pbanc_ymd
             ,pbanc_no
             ,aplcn_ym
-            ,rmrk
+            ,rmrk_cn
             ,type_cd
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_M_DUR_NURSW"
+
+        FROM kids_own.TB_PP_M_DUR_NURSW
         WHERE 1=1
         AND nursw_cutn_sn = #{nurswCutnSn}
     </select>
 
     <insert id="insertDurNursw" parameterType="DurNurswPVO">
         /* 대국민포털_DUR수유부주의기본 입력 (DurNurswMapper.insertDurNursw) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_DUR_NURSW"
+        INSERT INTO kids_own.TB_PP_M_DUR_NURSW
         (
              nursw_cutn_sn
             ,prdct_cd
@@ -46,14 +46,14 @@
             ,pbanc_ymd
             ,pbanc_no
             ,aplcn_ym
-            ,rmrk
+            ,rmrk_cn
             ,type_cd
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -69,20 +69,20 @@
             ,#{pbancYmd}
             ,#{pbancNo}
             ,#{aplcnYm}
-            ,#{rmrk}
+            ,#{rmrk_cn}
             ,#{typeCd}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
     <update id="updateDurNursw" parameterType="DurNurswPVO">
         /* 대국민포털_DUR수유부주의기본 수정 (DurNurswMapper.updateDurNursw) */
-        UPDATE "KIDS_OWN"."TB_PP_M_DUR_NURSW"
+        UPDATE kids_own.TB_PP_M_DUR_NURSW
         SET
              prdct_cd = coalesce(#{prdctCd}, prdct_cd)
             ,main_igrd_cd = coalesce(#{mainIgrdCd}, main_igrd_cd)
@@ -95,18 +95,18 @@
             ,pbanc_ymd = coalesce(#{pbancYmd}, pbanc_ymd)
             ,pbanc_no = coalesce(#{pbancNo}, pbanc_no)
             ,aplcn_ym = coalesce(#{aplcnYm}, aplcn_ym)
-            ,rmrk = coalesce(#{rmrk}, rmrk)
+            ,rmrk_cn = coalesce(#{rmrk_cn}, rmrk_cn)
             ,type_cd = coalesce(#{typeCd}, type_cd)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND nursw_cutn_sn = #{nurswCutnSn}
     </update>
 
     <insert id="saveDurNursw" parameterType="DurNurswPVO">
         /* 대국민포털_DUR수유부주의기본 저장 (DurNurswMapper.insertDurNursw) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_DUR_NURSW"
+        INSERT INTO kids_own.TB_PP_M_DUR_NURSW
         (
              nursw_cutn_sn
             ,prdct_cd
@@ -120,14 +120,14 @@
             ,pbanc_ymd
             ,pbanc_no
             ,aplcn_ym
-            ,rmrk
+            ,rmrk_cn
             ,type_cd
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -143,38 +143,38 @@
             ,#{pbancYmd}
             ,#{pbancNo}
             ,#{aplcnYm}
-            ,#{rmrk}
+            ,#{rmrk_cn}
             ,#{typeCd}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(nursw_cutn_sn)
         DO UPDATE SET
-             prdct_cd = coalesce(excluded.prdct_cd, "KIDS_OWN"."TB_PP_M_DUR_NURSW".prdct_cd)
-            ,main_igrd_cd = coalesce(excluded.main_igrd_cd, "KIDS_OWN"."TB_PP_M_DUR_NURSW".main_igrd_cd)
-            ,igrd_nm = coalesce(excluded.igrd_nm, "KIDS_OWN"."TB_PP_M_DUR_NURSW".igrd_nm)
-            ,prdct_nm = coalesce(excluded.prdct_nm, "KIDS_OWN"."TB_PP_M_DUR_NURSW".prdct_nm)
-            ,bzenty_nm = coalesce(excluded.bzenty_nm, "KIDS_OWN"."TB_PP_M_DUR_NURSW".bzenty_nm)
-            ,mfds_prdct_nm = coalesce(excluded.mfds_prdct_nm, "KIDS_OWN"."TB_PP_M_DUR_NURSW".mfds_prdct_nm)
-            ,mfds_igrd_cd = coalesce(excluded.mfds_igrd_cd, "KIDS_OWN"."TB_PP_M_DUR_NURSW".mfds_igrd_cd)
-            ,mfds_igrd_nm = coalesce(excluded.mfds_igrd_nm, "KIDS_OWN"."TB_PP_M_DUR_NURSW".mfds_igrd_nm)
-            ,pbanc_ymd = coalesce(excluded.pbanc_ymd, "KIDS_OWN"."TB_PP_M_DUR_NURSW".pbanc_ymd)
-            ,pbanc_no = coalesce(excluded.pbanc_no, "KIDS_OWN"."TB_PP_M_DUR_NURSW".pbanc_no)
-            ,aplcn_ym = coalesce(excluded.aplcn_ym, "KIDS_OWN"."TB_PP_M_DUR_NURSW".aplcn_ym)
-            ,rmrk = coalesce(excluded.rmrk, "KIDS_OWN"."TB_PP_M_DUR_NURSW".rmrk)
-            ,type_cd = coalesce(excluded.type_cd, "KIDS_OWN"."TB_PP_M_DUR_NURSW".type_cd)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_DUR_NURSW".mdfr_id)
+             prdct_cd = coalesce(excluded.prdct_cd, kids_own.TB_PP_M_DUR_NURSW.prdct_cd)
+            ,main_igrd_cd = coalesce(excluded.main_igrd_cd, kids_own.TB_PP_M_DUR_NURSW.main_igrd_cd)
+            ,igrd_nm = coalesce(excluded.igrd_nm, kids_own.TB_PP_M_DUR_NURSW.igrd_nm)
+            ,prdct_nm = coalesce(excluded.prdct_nm, kids_own.TB_PP_M_DUR_NURSW.prdct_nm)
+            ,bzenty_nm = coalesce(excluded.bzenty_nm, kids_own.TB_PP_M_DUR_NURSW.bzenty_nm)
+            ,mfds_prdct_nm = coalesce(excluded.mfds_prdct_nm, kids_own.TB_PP_M_DUR_NURSW.mfds_prdct_nm)
+            ,mfds_igrd_cd = coalesce(excluded.mfds_igrd_cd, kids_own.TB_PP_M_DUR_NURSW.mfds_igrd_cd)
+            ,mfds_igrd_nm = coalesce(excluded.mfds_igrd_nm, kids_own.TB_PP_M_DUR_NURSW.mfds_igrd_nm)
+            ,pbanc_ymd = coalesce(excluded.pbanc_ymd, kids_own.TB_PP_M_DUR_NURSW.pbanc_ymd)
+            ,pbanc_no = coalesce(excluded.pbanc_no, kids_own.TB_PP_M_DUR_NURSW.pbanc_no)
+            ,aplcn_ym = coalesce(excluded.aplcn_ym, kids_own.TB_PP_M_DUR_NURSW.aplcn_ym)
+            ,rmrk_cn = coalesce(excluded.rmrk_cn, kids_own.TB_PP_M_DUR_NURSW.rmrk_cn)
+            ,type_cd = coalesce(excluded.type_cd, kids_own.TB_PP_M_DUR_NURSW.type_cd)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_DUR_NURSW.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_DUR_NURSW".mdfcn_prgrm_id)
+
     </insert>
 
     <delete id="deleteDurNursw" parameterType="DurNurswDVO">
         /* 대국민포털_DUR수유부주의기본 삭제 (DurNurswMapper.deleteDurNursw) */
-        DELETE FROM "KIDS_OWN"."TB_PP_M_DUR_NURSW"
+        DELETE FROM kids_own.TB_PP_M_DUR_NURSW
         WHERE 1=1
         AND nursw_cutn_sn = #{nurswCutnSn}
     </delete>

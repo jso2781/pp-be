@@ -17,11 +17,11 @@
             ,atch_file_sz
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_CA_M_ATCH"
+
+        FROM kids_own.TB_CA_M_ATCH
         WHERE 1=1
         AND atch_file_sn = #{atchFileSn}
     </select>
@@ -32,7 +32,7 @@
 
     <insert id="insertAtch" parameterType="AtchPVO">
         /* 공통_첨부파일기본 입력 (AtchMapper.insertAtch) */
-        INSERT INTO "KIDS_OWN"."TB_CA_M_ATCH"
+        INSERT INTO kids_own.TB_CA_M_ATCH
         (
              atch_file_sn
             ,menu_sn
@@ -46,10 +46,10 @@
             ,atch_file_sz
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -65,16 +65,16 @@
             ,#{atchFileSz}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
     <update id="updateAtch" parameterType="AtchPVO">
         /* 공통_첨부파일기본 수정 (AtchMapper.updateAtch) */
-        UPDATE "KIDS_OWN"."TB_CA_M_ATCH"
+        UPDATE kids_own.TB_CA_M_ATCH
         SET
              menu_sn = coalesce(#{menuSn}, menu_sn)
             ,menu_type = coalesce(#{menuType}, menu_type)
@@ -87,14 +87,14 @@
             ,atch_file_sz = coalesce(#{atchFileSz}, atch_file_sz)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND atch_file_sn = #{atchFileSn}
     </update>
 
     <insert id="saveAtch" parameterType="AtchPVO">
         /* 공통_첨부파일기본 저장 (AtchMapper.insertAtch) */
-        INSERT INTO "KIDS_OWN"."TB_CA_M_ATCH"
+        INSERT INTO kids_own.TB_CA_M_ATCH
         (
              atch_file_sn
             ,menu_sn
@@ -108,10 +108,10 @@
             ,atch_file_sz
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -127,30 +127,30 @@
             ,#{atchFileSz}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(atch_file_sn)
         DO UPDATE SET
-             menu_sn = coalesce(excluded.menu_sn, "KIDS_OWN"."TB_CA_M_ATCH".menu_sn)
-            ,menu_type = coalesce(excluded.menu_type, "KIDS_OWN"."TB_CA_M_ATCH".menu_type)
-            ,atch_file_uld_hr = coalesce(excluded.atch_file_uld_hr, "KIDS_OWN"."TB_CA_M_ATCH".atch_file_uld_hr)
-            ,atch_file_use_yn = coalesce(excluded.atch_file_use_yn, "KIDS_OWN"."TB_CA_M_ATCH".atch_file_use_yn)
-            ,atch_file_path = coalesce(excluded.atch_file_path, "KIDS_OWN"."TB_CA_M_ATCH".atch_file_path)
-            ,atch_file_nm = coalesce(excluded.atch_file_nm, "KIDS_OWN"."TB_CA_M_ATCH".atch_file_nm)
-            ,atch_file_extn_nm = coalesce(excluded.atch_file_extn_nm, "KIDS_OWN"."TB_CA_M_ATCH".atch_file_extn_nm)
-            ,atch_file_cn = coalesce(excluded.atch_file_cn, "KIDS_OWN"."TB_CA_M_ATCH".atch_file_cn)
-            ,atch_file_sz = coalesce(excluded.atch_file_sz, "KIDS_OWN"."TB_CA_M_ATCH".atch_file_sz)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_CA_M_ATCH".mdfr_id)
+             menu_sn = coalesce(excluded.menu_sn, kids_own.TB_CA_M_ATCH.menu_sn)
+            ,menu_type = coalesce(excluded.menu_type, kids_own.TB_CA_M_ATCH.menu_type)
+            ,atch_file_uld_hr = coalesce(excluded.atch_file_uld_hr, kids_own.TB_CA_M_ATCH.atch_file_uld_hr)
+            ,atch_file_use_yn = coalesce(excluded.atch_file_use_yn, kids_own.TB_CA_M_ATCH.atch_file_use_yn)
+            ,atch_file_path = coalesce(excluded.atch_file_path, kids_own.TB_CA_M_ATCH.atch_file_path)
+            ,atch_file_nm = coalesce(excluded.atch_file_nm, kids_own.TB_CA_M_ATCH.atch_file_nm)
+            ,atch_file_extn_nm = coalesce(excluded.atch_file_extn_nm, kids_own.TB_CA_M_ATCH.atch_file_extn_nm)
+            ,atch_file_cn = coalesce(excluded.atch_file_cn, kids_own.TB_CA_M_ATCH.atch_file_cn)
+            ,atch_file_sz = coalesce(excluded.atch_file_sz, kids_own.TB_CA_M_ATCH.atch_file_sz)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_CA_M_ATCH.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_CA_M_ATCH".mdfcn_prgrm_id)
+
     </insert>
 
     <delete id="deleteAtch" parameterType="AtchDVO">
         /* 공통_첨부파일기본 삭제 (AtchMapper.deleteAtch) */
-        DELETE FROM "KIDS_OWN"."TB_CA_M_ATCH"
+        DELETE FROM kids_own.TB_CA_M_ATCH
         WHERE 1=1
         AND atch_file_sn = #{atchFileSn}
     </delete>

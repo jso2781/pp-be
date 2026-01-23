@@ -19,18 +19,18 @@
             ,mdfr_dept_nm
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_M_POPUP"
+
+        FROM kids_own.TB_PP_M_POPUP
         WHERE 1=1
         AND popup_sn = #{popupSn}
     </select>
 
     <insert id="insertPopup" parameterType="PopupPVO">
         /* 대국민포털_팝업기본 입력 (PopupMapper.insertPopup) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_POPUP"
+        INSERT INTO kids_own.TB_PP_M_POPUP
         (
              popup_sn
             ,popup_ttl
@@ -46,10 +46,10 @@
             ,mdfr_dept_nm
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -67,16 +67,16 @@
             ,#{mdfrDeptNm}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
     <update id="updatePopup" parameterType="PopupPVO">
         /* 대국민포털_팝업기본 수정 (PopupMapper.updatePopup) */
-        UPDATE "KIDS_OWN"."TB_PP_M_POPUP"
+        UPDATE kids_own.TB_PP_M_POPUP
         SET
              popup_ttl = coalesce(#{popupTtl}, popup_ttl)
             ,popup_pstg_bgng_ymd = coalesce(#{popupPstgBgngYmd}, popup_pstg_bgng_ymd)
@@ -91,14 +91,14 @@
             ,mdfr_dept_nm = coalesce(#{mdfrDeptNm}, mdfr_dept_nm)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND popup_sn = #{popupSn}
     </update>
 
     <insert id="savePopup" parameterType="PopupPVO">
         /* 대국민포털_팝업기본 저장 (PopupMapper.insertPopup) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_POPUP"
+        INSERT INTO kids_own.TB_PP_M_POPUP
         (
              popup_sn
             ,popup_ttl
@@ -114,10 +114,10 @@
             ,mdfr_dept_nm
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -135,32 +135,32 @@
             ,#{mdfrDeptNm}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(popup_sn)
         DO UPDATE SET
-             popup_ttl = coalesce(excluded.popup_ttl, "KIDS_OWN"."TB_PP_M_POPUP".popup_ttl)
-            ,popup_pstg_bgng_ymd = coalesce(excluded.popup_pstg_bgng_ymd, "KIDS_OWN"."TB_PP_M_POPUP".popup_pstg_bgng_ymd)
-            ,popup_pstg_end_ymd = coalesce(excluded.popup_pstg_end_ymd, "KIDS_OWN"."TB_PP_M_POPUP".popup_pstg_end_ymd)
-            ,popup_lnkg_addr = coalesce(excluded.popup_lnkg_addr, "KIDS_OWN"."TB_PP_M_POPUP".popup_lnkg_addr)
-            ,popup_seq = coalesce(excluded.popup_seq, "KIDS_OWN"."TB_PP_M_POPUP".popup_seq)
-            ,popup_pstg_yn = coalesce(excluded.popup_pstg_yn, "KIDS_OWN"."TB_PP_M_POPUP".popup_pstg_yn)
-            ,popup_npag_yn = coalesce(excluded.popup_npag_yn, "KIDS_OWN"."TB_PP_M_POPUP".popup_npag_yn)
-            ,popup_expln = coalesce(excluded.popup_expln, "KIDS_OWN"."TB_PP_M_POPUP".popup_expln)
-            ,atch_file_id = coalesce(excluded.atch_file_id, "KIDS_OWN"."TB_PP_M_POPUP".atch_file_id)
-            ,wrtr_dept_nm = coalesce(excluded.wrtr_dept_nm, "KIDS_OWN"."TB_PP_M_POPUP".wrtr_dept_nm)
-            ,mdfr_dept_nm = coalesce(excluded.mdfr_dept_nm, "KIDS_OWN"."TB_PP_M_POPUP".mdfr_dept_nm)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_POPUP".mdfr_id)
+             popup_ttl = coalesce(excluded.popup_ttl, kids_own.TB_PP_M_POPUP.popup_ttl)
+            ,popup_pstg_bgng_ymd = coalesce(excluded.popup_pstg_bgng_ymd, kids_own.TB_PP_M_POPUP.popup_pstg_bgng_ymd)
+            ,popup_pstg_end_ymd = coalesce(excluded.popup_pstg_end_ymd, kids_own.TB_PP_M_POPUP.popup_pstg_end_ymd)
+            ,popup_lnkg_addr = coalesce(excluded.popup_lnkg_addr, kids_own.TB_PP_M_POPUP.popup_lnkg_addr)
+            ,popup_seq = coalesce(excluded.popup_seq, kids_own.TB_PP_M_POPUP.popup_seq)
+            ,popup_pstg_yn = coalesce(excluded.popup_pstg_yn, kids_own.TB_PP_M_POPUP.popup_pstg_yn)
+            ,popup_npag_yn = coalesce(excluded.popup_npag_yn, kids_own.TB_PP_M_POPUP.popup_npag_yn)
+            ,popup_expln = coalesce(excluded.popup_expln, kids_own.TB_PP_M_POPUP.popup_expln)
+            ,atch_file_id = coalesce(excluded.atch_file_id, kids_own.TB_PP_M_POPUP.atch_file_id)
+            ,wrtr_dept_nm = coalesce(excluded.wrtr_dept_nm, kids_own.TB_PP_M_POPUP.wrtr_dept_nm)
+            ,mdfr_dept_nm = coalesce(excluded.mdfr_dept_nm, kids_own.TB_PP_M_POPUP.mdfr_dept_nm)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_POPUP.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_POPUP".mdfcn_prgrm_id)
+
     </insert>
 
     <delete id="deletePopup" parameterType="PopupDVO">
         /* 대국민포털_팝업기본 삭제 (PopupMapper.deletePopup) */
-        DELETE FROM "KIDS_OWN"."TB_PP_M_POPUP"
+        DELETE FROM kids_own.TB_PP_M_POPUP
         WHERE 1=1
         AND popup_sn = #{popupSn}
     </delete>

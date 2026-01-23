@@ -16,18 +16,18 @@
             ,aplcn_ym
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD"
+
+        FROM kids_own.TB_PP_M_DUR_PRGNT_IGRD
         WHERE 1=1
         AND prgnt_bann_sn = #{prgntBannSn}
     </select>
 
     <insert id="insertDurPrgntIgrd" parameterType="DurPrgntIgrdPVO">
         /* 대국민포털_DUR임부금기성분기본 입력 (DurPrgntIgrdMapper.insertDurPrgntIgrd) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD"
+        INSERT INTO kids_own.TB_PP_M_DUR_PRGNT_IGRD
         (
              prgnt_bann_sn
             ,igrd_nm
@@ -40,10 +40,10 @@
             ,aplcn_ym
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -58,16 +58,16 @@
             ,#{aplcnYm}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
     <update id="updateDurPrgntIgrd" parameterType="DurPrgntIgrdPVO">
         /* 대국민포털_DUR임부금기성분기본 수정 (DurPrgntIgrdMapper.updateDurPrgntIgrd) */
-        UPDATE "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD"
+        UPDATE kids_own.TB_PP_M_DUR_PRGNT_IGRD
         SET
              igrd_nm = coalesce(#{igrdNm}, igrd_nm)
             ,bann_grd = coalesce(#{bannGrd}, bann_grd)
@@ -79,14 +79,14 @@
             ,aplcn_ym = coalesce(#{aplcnYm}, aplcn_ym)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND prgnt_bann_sn = #{prgntBannSn}
     </update>
 
     <insert id="saveDurPrgntIgrd" parameterType="DurPrgntIgrdPVO">
         /* 대국민포털_DUR임부금기성분기본 저장 (DurPrgntIgrdMapper.insertDurPrgntIgrd) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD"
+        INSERT INTO kids_own.TB_PP_M_DUR_PRGNT_IGRD
         (
              prgnt_bann_sn
             ,igrd_nm
@@ -99,10 +99,10 @@
             ,aplcn_ym
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -117,29 +117,29 @@
             ,#{aplcnYm}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(prgnt_bann_sn)
         DO UPDATE SET
-             igrd_nm = coalesce(excluded.igrd_nm, "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD".igrd_nm)
-            ,bann_grd = coalesce(excluded.bann_grd, "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD".bann_grd)
-            ,rmrk = coalesce(excluded.rmrk, "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD".rmrk)
-            ,dtl_cn = coalesce(excluded.dtl_cn, "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD".dtl_cn)
-            ,mfds_prdct_nm = coalesce(excluded.mfds_prdct_nm, "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD".mfds_prdct_nm)
-            ,mfds_igrd_cd = coalesce(excluded.mfds_igrd_cd, "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD".mfds_igrd_cd)
-            ,mfds_igrd_nm = coalesce(excluded.mfds_igrd_nm, "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD".mfds_igrd_nm)
-            ,aplcn_ym = coalesce(excluded.aplcn_ym, "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD".aplcn_ym)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD".mdfr_id)
+             igrd_nm = coalesce(excluded.igrd_nm, kids_own.TB_PP_M_DUR_PRGNT_IGRD.igrd_nm)
+            ,bann_grd = coalesce(excluded.bann_grd, kids_own.TB_PP_M_DUR_PRGNT_IGRD.bann_grd)
+            ,rmrk = coalesce(excluded.rmrk, kids_own.TB_PP_M_DUR_PRGNT_IGRD.rmrk)
+            ,dtl_cn = coalesce(excluded.dtl_cn, kids_own.TB_PP_M_DUR_PRGNT_IGRD.dtl_cn)
+            ,mfds_prdct_nm = coalesce(excluded.mfds_prdct_nm, kids_own.TB_PP_M_DUR_PRGNT_IGRD.mfds_prdct_nm)
+            ,mfds_igrd_cd = coalesce(excluded.mfds_igrd_cd, kids_own.TB_PP_M_DUR_PRGNT_IGRD.mfds_igrd_cd)
+            ,mfds_igrd_nm = coalesce(excluded.mfds_igrd_nm, kids_own.TB_PP_M_DUR_PRGNT_IGRD.mfds_igrd_nm)
+            ,aplcn_ym = coalesce(excluded.aplcn_ym, kids_own.TB_PP_M_DUR_PRGNT_IGRD.aplcn_ym)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_DUR_PRGNT_IGRD.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD".mdfcn_prgrm_id)
+
     </insert>
 
     <delete id="deleteDurPrgntIgrd" parameterType="DurPrgntIgrdDVO">
         /* 대국민포털_DUR임부금기성분기본 삭제 (DurPrgntIgrdMapper.deleteDurPrgntIgrd) */
-        DELETE FROM "KIDS_OWN"."TB_PP_M_DUR_PRGNT_IGRD"
+        DELETE FROM kids_own.TB_PP_M_DUR_PRGNT_IGRD
         WHERE 1=1
         AND prgnt_bann_sn = #{prgntBannSn}
     </delete>

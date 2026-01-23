@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.go.kids.domain.dur.mapper.ConcBannMapper">
+<mapper namespace="kr.go.kids.domain.dur.mapper.DurConcBannMapper">
 
-    <select id="getConcBann" parameterType="ConcBannPVO" resultType="ConcBannRVO" >
+    <select id="getDurConcBann" parameterType="DurConcBannPVO" resultType="DurConcBannRVO" >
         /* 대국민포털_DUR병용금기기본 조회 (ConcBannMapper.getConcBann) */
         SELECT
              conc_bann_sn
@@ -27,22 +27,22 @@
             ,ancmnt_no
             ,ancmnt_aplcn_day
             ,cutn_mttr
-            ,rmrk
+            ,rmrk_cn
             ,type_cd
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_M_CONC_BANN"
+
+        FROM kids_own.tb_pp_m_dur_conc_bann
         WHERE 1=1
         AND conc_bann_sn = #{concBannSn}
     </select>
 
-    <insert id="insertConcBann" parameterType="ConcBannPVO">
+    <insert id="insertDurConcBann" parameterType="DurConcBannPVO">
         /* 대국민포털_DUR병용금기기본 입력 (ConcBannMapper.insertConcBann) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_CONC_BANN"
+        INSERT INTO kids_own.tb_pp_m_dur_conc_bann
         (
              conc_bann_sn
             ,prdct_cd_1
@@ -66,14 +66,14 @@
             ,ancmnt_no
             ,ancmnt_aplcn_day
             ,cutn_mttr
-            ,rmrk
+            ,rmrk_cn
             ,type_cd
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -99,20 +99,20 @@
             ,#{ancmntNo}
             ,#{ancmntAplcnDay}
             ,#{cutnMttr}
-            ,#{rmrk}
+            ,#{rmrk_cn}
             ,#{typeCd}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
-    <update id="updateConcBann" parameterType="ConcBannPVO">
+    <update id="updateDurConcBann" parameterType="DurConcBannPVO">
         /* 대국민포털_DUR병용금기기본 수정 (ConcBannMapper.updateConcBann) */
-        UPDATE "KIDS_OWN"."TB_PP_M_CONC_BANN"
+        UPDATE kids_own.tb_pp_m_dur_conc_bann
         SET
              prdct_cd_1 = coalesce(#{prdctCd1}, prdct_cd_1)
             ,prdct_cd_2 = coalesce(#{prdctCd2}, prdct_cd_2)
@@ -135,18 +135,18 @@
             ,ancmnt_no = coalesce(#{ancmntNo}, ancmnt_no)
             ,ancmnt_aplcn_day = coalesce(#{ancmntAplcnDay}, ancmnt_aplcn_day)
             ,cutn_mttr = coalesce(#{cutnMttr}, cutn_mttr)
-            ,rmrk = coalesce(#{rmrk}, rmrk)
+            ,rmrk_cn = coalesce(#{rmrk_cn}, rmrk_cn)
             ,type_cd = coalesce(#{typeCd}, type_cd)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND conc_bann_sn = #{concBannSn}
     </update>
 
-    <insert id="saveConcBann" parameterType="ConcBannPVO">
+    <insert id="saveDurConcBann" parameterType="DurConcBannPVO">
         /* 대국민포털_DUR병용금기기본 저장 (ConcBannMapper.insertConcBann) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_CONC_BANN"
+        INSERT INTO kids_own.tb_pp_m_dur_conc_bann
         (
              conc_bann_sn
             ,prdct_cd_1
@@ -170,14 +170,14 @@
             ,ancmnt_no
             ,ancmnt_aplcn_day
             ,cutn_mttr
-            ,rmrk
+            ,rmrk_cn
             ,type_cd
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -203,48 +203,48 @@
             ,#{ancmntNo}
             ,#{ancmntAplcnDay}
             ,#{cutnMttr}
-            ,#{rmrk}
+            ,#{rmrk_cn}
             ,#{typeCd}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(conc_bann_sn)
         DO UPDATE SET
-             prdct_cd_1 = coalesce(excluded.prdct_cd_1, "KIDS_OWN"."TB_PP_M_CONC_BANN".prdct_cd_1)
-            ,prdct_cd_2 = coalesce(excluded.prdct_cd_2, "KIDS_OWN"."TB_PP_M_CONC_BANN".prdct_cd_2)
-            ,igrd_nm_1 = coalesce(excluded.igrd_nm_1, "KIDS_OWN"."TB_PP_M_CONC_BANN".igrd_nm_1)
-            ,igrd_cd_1 = coalesce(excluded.igrd_cd_1, "KIDS_OWN"."TB_PP_M_CONC_BANN".igrd_cd_1)
-            ,prdct_nm_1 = coalesce(excluded.prdct_nm_1, "KIDS_OWN"."TB_PP_M_CONC_BANN".prdct_nm_1)
-            ,bzenty_nm_1 = coalesce(excluded.bzenty_nm_1, "KIDS_OWN"."TB_PP_M_CONC_BANN".bzenty_nm_1)
-            ,se_1 = coalesce(excluded.se_1, "KIDS_OWN"."TB_PP_M_CONC_BANN".se_1)
-            ,mfds_prdct_nm_1 = coalesce(excluded.mfds_prdct_nm_1, "KIDS_OWN"."TB_PP_M_CONC_BANN".mfds_prdct_nm_1)
-            ,mfds_igrd_cd_1 = coalesce(excluded.mfds_igrd_cd_1, "KIDS_OWN"."TB_PP_M_CONC_BANN".mfds_igrd_cd_1)
-            ,mfds_igrd_nm_1 = coalesce(excluded.mfds_igrd_nm_1, "KIDS_OWN"."TB_PP_M_CONC_BANN".mfds_igrd_nm_1)
-            ,igrd_nm_2 = coalesce(excluded.igrd_nm_2, "KIDS_OWN"."TB_PP_M_CONC_BANN".igrd_nm_2)
-            ,igrd_cd_2 = coalesce(excluded.igrd_cd_2, "KIDS_OWN"."TB_PP_M_CONC_BANN".igrd_cd_2)
-            ,prdct_nm_2 = coalesce(excluded.prdct_nm_2, "KIDS_OWN"."TB_PP_M_CONC_BANN".prdct_nm_2)
-            ,bzenty_nm_2 = coalesce(excluded.bzenty_nm_2, "KIDS_OWN"."TB_PP_M_CONC_BANN".bzenty_nm_2)
-            ,se_2 = coalesce(excluded.se_2, "KIDS_OWN"."TB_PP_M_CONC_BANN".se_2)
-            ,mfds_prdct_nm_2 = coalesce(excluded.mfds_prdct_nm_2, "KIDS_OWN"."TB_PP_M_CONC_BANN".mfds_prdct_nm_2)
-            ,mfds_igrd_cd_2 = coalesce(excluded.mfds_igrd_cd_2, "KIDS_OWN"."TB_PP_M_CONC_BANN".mfds_igrd_cd_2)
-            ,mfds_igrd_nm_2 = coalesce(excluded.mfds_igrd_nm_2, "KIDS_OWN"."TB_PP_M_CONC_BANN".mfds_igrd_nm_2)
-            ,ancmnt_no = coalesce(excluded.ancmnt_no, "KIDS_OWN"."TB_PP_M_CONC_BANN".ancmnt_no)
-            ,ancmnt_aplcn_day = coalesce(excluded.ancmnt_aplcn_day, "KIDS_OWN"."TB_PP_M_CONC_BANN".ancmnt_aplcn_day)
-            ,cutn_mttr = coalesce(excluded.cutn_mttr, "KIDS_OWN"."TB_PP_M_CONC_BANN".cutn_mttr)
-            ,rmrk = coalesce(excluded.rmrk, "KIDS_OWN"."TB_PP_M_CONC_BANN".rmrk)
-            ,type_cd = coalesce(excluded.type_cd, "KIDS_OWN"."TB_PP_M_CONC_BANN".type_cd)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_CONC_BANN".mdfr_id)
+             prdct_cd_1 = coalesce(excluded.prdct_cd_1, kids_own.tb_pp_m_dur_conc_bann.prdct_cd_1)
+            ,prdct_cd_2 = coalesce(excluded.prdct_cd_2, kids_own.tb_pp_m_dur_conc_bann.prdct_cd_2)
+            ,igrd_nm_1 = coalesce(excluded.igrd_nm_1, kids_own.tb_pp_m_dur_conc_bann.igrd_nm_1)
+            ,igrd_cd_1 = coalesce(excluded.igrd_cd_1, kids_own.tb_pp_m_dur_conc_bann.igrd_cd_1)
+            ,prdct_nm_1 = coalesce(excluded.prdct_nm_1, kids_own.tb_pp_m_dur_conc_bann.prdct_nm_1)
+            ,bzenty_nm_1 = coalesce(excluded.bzenty_nm_1, kids_own.tb_pp_m_dur_conc_bann.bzenty_nm_1)
+            ,se_1 = coalesce(excluded.se_1, kids_own.tb_pp_m_dur_conc_bann.se_1)
+            ,mfds_prdct_nm_1 = coalesce(excluded.mfds_prdct_nm_1, kids_own.tb_pp_m_dur_conc_bann.mfds_prdct_nm_1)
+            ,mfds_igrd_cd_1 = coalesce(excluded.mfds_igrd_cd_1, kids_own.tb_pp_m_dur_conc_bann.mfds_igrd_cd_1)
+            ,mfds_igrd_nm_1 = coalesce(excluded.mfds_igrd_nm_1, kids_own.tb_pp_m_dur_conc_bann.mfds_igrd_nm_1)
+            ,igrd_nm_2 = coalesce(excluded.igrd_nm_2, kids_own.tb_pp_m_dur_conc_bann.igrd_nm_2)
+            ,igrd_cd_2 = coalesce(excluded.igrd_cd_2, kids_own.tb_pp_m_dur_conc_bann.igrd_cd_2)
+            ,prdct_nm_2 = coalesce(excluded.prdct_nm_2, kids_own.tb_pp_m_dur_conc_bann.prdct_nm_2)
+            ,bzenty_nm_2 = coalesce(excluded.bzenty_nm_2, kids_own.tb_pp_m_dur_conc_bann.bzenty_nm_2)
+            ,se_2 = coalesce(excluded.se_2, kids_own.tb_pp_m_dur_conc_bann.se_2)
+            ,mfds_prdct_nm_2 = coalesce(excluded.mfds_prdct_nm_2, kids_own.tb_pp_m_dur_conc_bann.mfds_prdct_nm_2)
+            ,mfds_igrd_cd_2 = coalesce(excluded.mfds_igrd_cd_2, kids_own.tb_pp_m_dur_conc_bann.mfds_igrd_cd_2)
+            ,mfds_igrd_nm_2 = coalesce(excluded.mfds_igrd_nm_2, kids_own.tb_pp_m_dur_conc_bann.mfds_igrd_nm_2)
+            ,ancmnt_no = coalesce(excluded.ancmnt_no, kids_own.tb_pp_m_dur_conc_bann.ancmnt_no)
+            ,ancmnt_aplcn_day = coalesce(excluded.ancmnt_aplcn_day, kids_own.tb_pp_m_dur_conc_bann.ancmnt_aplcn_day)
+            ,cutn_mttr = coalesce(excluded.cutn_mttr, kids_own.tb_pp_m_dur_conc_bann.cutn_mttr)
+            ,rmrk_cn = coalesce(excluded.rmrk_cn, kids_own.tb_pp_m_dur_conc_bann.rmrk_cn)
+            ,type_cd = coalesce(excluded.type_cd, kids_own.tb_pp_m_dur_conc_bann.type_cd)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.tb_pp_m_dur_conc_bann.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_CONC_BANN".mdfcn_prgrm_id)
+
     </insert>
 
-    <delete id="deleteConcBann" parameterType="ConcBannDVO">
+    <delete id="deleteDurConcBann" parameterType="DurConcBannDVO">
         /* 대국민포털_DUR병용금기기본 삭제 (ConcBannMapper.deleteConcBann) */
-        DELETE FROM "KIDS_OWN"."TB_PP_M_CONC_BANN"
+        DELETE FROM kids_own.tb_pp_m_dur_conc_bann
         WHERE 1=1
         AND conc_bann_sn = #{concBannSn}
     </delete>

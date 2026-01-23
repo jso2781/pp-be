@@ -13,18 +13,18 @@
             ,use_yn
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
-        FROM "KIDS_OWN"."TB_PP_M_TASK_CD"
+
+        FROM kids_own.TB_PP_M_TASK_CD
         WHERE 1=1
         AND task_cd = #{taskCd}
     </select>
 
     <insert id="insertTaskCd" parameterType="TaskCdPVO">
         /* 대국민포털_업무코드기본 입력 (TaskCdMapper.insertTaskCd) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_TASK_CD"
+        INSERT INTO kids_own.TB_PP_M_TASK_CD
         (
              task_cd
             ,task_cd_nm
@@ -34,10 +34,10 @@
             ,use_yn
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -49,16 +49,16 @@
             ,#{useYn}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
     </insert>
 
     <update id="updateTaskCd" parameterType="TaskCdPVO">
         /* 대국민포털_업무코드기본 수정 (TaskCdMapper.updateTaskCd) */
-        UPDATE "KIDS_OWN"."TB_PP_M_TASK_CD"
+        UPDATE kids_own.TB_PP_M_TASK_CD
         SET
              task_cd_nm = coalesce(#{taskCdNm}, task_cd_nm)
             ,up_task_cd = coalesce(#{upTaskCd}, up_task_cd)
@@ -67,14 +67,14 @@
             ,use_yn = coalesce(#{useYn}, use_yn)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(#{mdfcnPrgrmId}, mdfcn_prgrm_id)
+
         WHERE 1=1
         AND task_cd = #{taskCd}
     </update>
 
     <insert id="saveTaskCd" parameterType="TaskCdPVO">
         /* 대국민포털_업무코드기본 저장 (TaskCdMapper.insertTaskCd) */
-        INSERT INTO "KIDS_OWN"."TB_PP_M_TASK_CD"
+        INSERT INTO kids_own.TB_PP_M_TASK_CD
         (
              task_cd
             ,task_cd_nm
@@ -84,10 +84,10 @@
             ,use_yn
             ,rgtr_id
             ,reg_dt
-            ,reg_prgrm_id
+
             ,mdfr_id
             ,mdfcn_dt
-            ,mdfcn_prgrm_id
+
         )
         VALUES
         (
@@ -99,26 +99,26 @@
             ,#{useYn}
             ,#{rgtrId}
             ,now()
-            ,#{regPrgrmId}
+
             ,#{mdfrId}
             ,now()
-            ,#{mdfcnPrgrmId}
+
         )
         ON CONFLICT(task_cd)
         DO UPDATE SET
-             task_cd_nm = coalesce(excluded.task_cd_nm, "KIDS_OWN"."TB_PP_M_TASK_CD".task_cd_nm)
-            ,up_task_cd = coalesce(excluded.up_task_cd, "KIDS_OWN"."TB_PP_M_TASK_CD".up_task_cd)
-            ,task_cd_vl = coalesce(excluded.task_cd_vl, "KIDS_OWN"."TB_PP_M_TASK_CD".task_cd_vl)
-            ,task_cd_expln = coalesce(excluded.task_cd_expln, "KIDS_OWN"."TB_PP_M_TASK_CD".task_cd_expln)
-            ,use_yn = coalesce(excluded.use_yn, "KIDS_OWN"."TB_PP_M_TASK_CD".use_yn)
-            ,mdfr_id = coalesce(excluded.mdfr_id, "KIDS_OWN"."TB_PP_M_TASK_CD".mdfr_id)
+             task_cd_nm = coalesce(excluded.task_cd_nm, kids_own.TB_PP_M_TASK_CD.task_cd_nm)
+            ,up_task_cd = coalesce(excluded.up_task_cd, kids_own.TB_PP_M_TASK_CD.up_task_cd)
+            ,task_cd_vl = coalesce(excluded.task_cd_vl, kids_own.TB_PP_M_TASK_CD.task_cd_vl)
+            ,task_cd_expln = coalesce(excluded.task_cd_expln, kids_own.TB_PP_M_TASK_CD.task_cd_expln)
+            ,use_yn = coalesce(excluded.use_yn, kids_own.TB_PP_M_TASK_CD.use_yn)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_TASK_CD.mdfr_id)
             ,mdfcn_dt = now()
-            ,mdfcn_prgrm_id = coalesce(excluded.mdfcn_prgrm_id, "KIDS_OWN"."TB_PP_M_TASK_CD".mdfcn_prgrm_id)
+
     </insert>
 
     <delete id="deleteTaskCd" parameterType="TaskCdDVO">
         /* 대국민포털_업무코드기본 삭제 (TaskCdMapper.deleteTaskCd) */
-        DELETE FROM "KIDS_OWN"."TB_PP_M_TASK_CD"
+        DELETE FROM kids_own.TB_PP_M_TASK_CD
         WHERE 1=1
         AND task_cd = #{taskCd}
     </delete>
