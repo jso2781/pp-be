@@ -39,7 +39,7 @@
             trms_stt_end_day,
             trms_stt_cn,
             atch_file_id
-        FROM kids_own.TB_PP_M_TRMS_STT
+        FROM "KIDS_OWN"."TB_PP_M_TRMS_STT"
         WHERE 1=1
         AND trms_stt_cd = #{trmsSttCd}
     </select>
@@ -51,7 +51,7 @@
             trms_stt_end_day,
             trms_stt_cn,
             atch_file_id
-        FROM kids_own.TB_PP_M_TRMS_STT
+        FROM "KIDS_OWN"."TB_PP_M_TRMS_STT"
         WHERE 1=1
         AND trms_stt_cd = #{trmsSttCd}
         ORDER BY reg_dt DESC

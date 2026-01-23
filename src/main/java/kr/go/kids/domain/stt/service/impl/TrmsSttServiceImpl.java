@@ -53,7 +53,7 @@ public class TrmsSttServiceImpl implements TrmsSttService
         	data.put("list", trmsSttList);
         	
         } catch (Exception e) {
-            log.error("FAQ 목록 조회 실패", e);
+            log.error("약관법령 목록 조회 실패", e);
             result = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
             result.setMsg(MessageContextHolder.getMessage("api.error.500"));
         }
