@@ -180,9 +180,7 @@ public class AtchServiceImpl implements AtchService
                 fileInsertReqVO.setAtchFileCn(null);
                 fileInsertReqVO.setAtchFileSz(fileSize);
                 fileInsertReqVO.setRgtrId("system");
-                fileInsertReqVO.setRegPrgrmId("");
                 fileInsertReqVO.setMdfrId("system");
-                fileInsertReqVO.setMdfcnPrgrmId("");
 
                 // DB에 파일정보 insert
                 atchMapper.insertAtch(fileInsertReqVO);

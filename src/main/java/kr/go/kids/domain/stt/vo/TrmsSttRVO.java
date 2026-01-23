@@ -70,12 +70,6 @@ public class TrmsSttRVO
     private String regDt;
 
     /**
-     * 등록프로그램아이디
-     */
-    @Schema(description = "등록프로그램아이디", type = "String")
-    private String regPrgrmId;
-
-    /**
      * 수정자아이디
      */
     @Schema(description = "수정자아이디", type = "String")
@@ -86,12 +80,6 @@ public class TrmsSttRVO
      */
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
-
-    /**
-     * 수정프로그램아이디
-     */
-    @Schema(description = "수정프로그램아이디", type = "String")
-    private String mdfcnPrgrmId;
 
     /**
      * 상위업무코드(TB_PP_M_TASK_CD.up_task_cd)

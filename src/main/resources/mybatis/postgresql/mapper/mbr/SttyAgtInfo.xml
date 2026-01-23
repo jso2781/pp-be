@@ -10,7 +10,7 @@
             ,stty_agt_encpt_telno
             ,stty_agt_rel
             ,link_info_idntf_id
-            ,cert_token
+            ,cert_token_vl
             ,rgtr_id
             ,reg_dt
 
@@ -31,7 +31,7 @@
             ,stty_agt_encpt_telno
             ,stty_agt_rel
             ,link_info_idntf_id
-            ,cert_token
+            ,cert_token_vl
             ,rgtr_id
             ,reg_dt
 
@@ -46,7 +46,7 @@
             ,#{sttyAgtEncptTelno}
             ,#{sttyAgtRel}
             ,#{linkInfoIdntfId}
-            ,#{certToken}
+            ,#{certTokenVl}
             ,#{rgtrId}
             ,now()
 
@@ -64,7 +64,7 @@
             ,stty_agt_encpt_telno = coalesce(#{sttyAgtEncptTelno}, stty_agt_encpt_telno)
             ,stty_agt_rel = coalesce(#{sttyAgtRel}, stty_agt_rel)
             ,link_info_idntf_id = coalesce(#{linkInfoIdntfId}, link_info_idntf_id)
-            ,cert_token = coalesce(#{certToken}, cert_token)
+            ,cert_token_vl = coalesce(#{certTokenVl}, cert_token_vl)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
 
@@ -81,7 +81,7 @@
             ,stty_agt_encpt_telno
             ,stty_agt_rel
             ,link_info_idntf_id
-            ,cert_token
+            ,cert_token_vl
             ,rgtr_id
             ,reg_dt
 
@@ -96,7 +96,7 @@
             ,#{sttyAgtEncptTelno}
             ,#{sttyAgtRel}
             ,#{linkInfoIdntfId}
-            ,#{certToken}
+            ,#{certTokenVl}
             ,#{rgtrId}
             ,now()
 
@@ -110,7 +110,7 @@
             ,stty_agt_encpt_telno = coalesce(excluded.stty_agt_encpt_telno, kids_own.TB_PP_M_STTY_AGT_INFO.stty_agt_encpt_telno)
             ,stty_agt_rel = coalesce(excluded.stty_agt_rel, kids_own.TB_PP_M_STTY_AGT_INFO.stty_agt_rel)
             ,link_info_idntf_id = coalesce(excluded.link_info_idntf_id, kids_own.TB_PP_M_STTY_AGT_INFO.link_info_idntf_id)
-            ,cert_token = coalesce(excluded.cert_token, kids_own.TB_PP_M_STTY_AGT_INFO.cert_token)
+            ,cert_token_vl = coalesce(excluded.cert_token_vl, kids_own.TB_PP_M_STTY_AGT_INFO.cert_token_vl)
             ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_STTY_AGT_INFO.mdfr_id)
             ,mdfcn_dt = now()
 

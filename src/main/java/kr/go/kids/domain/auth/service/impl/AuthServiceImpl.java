@@ -102,9 +102,9 @@ public class AuthServiceImpl implements AuthService
                 throw new ApplicationException("error.param.required", new String[] {MessageContextHolder.getMessage("label.user.mbrId")});
             }
 
-            if(!StringUtils.hasLength(loginVO.getMbrEnpswd())){
+            if(!StringUtils.hasLength(loginVO.getEncptMbrPswd())){
                 // 회원암호화비밀번호 필수 파라메터가 누락되었습니다.
-                throw new ApplicationException("error.param.required", new String[] {MessageContextHolder.getMessage("label.user.mbrEnpswd")});
+                throw new ApplicationException("error.param.required", new String[] {MessageContextHolder.getMessage("label.user.EncptMbrPswd")});
             }
 
             MbrInfoPVO mp = new MbrInfoPVO();
@@ -123,8 +123,8 @@ public class AuthServiceImpl implements AuthService
             else{
                 String mbrId = userInfo.getMbrId();
 
-//                if(!passwordEncoder.matches(loginVO.getMbrEnpswd(), userInfo.getMbrEnpswd())) {
-                if(loginVO.getMbrEnpswd() != null && !loginVO.getMbrEnpswd().equals(userInfo.getMbrEnpswd())){
+//                if(!passwordEncoder.matches(loginVO.getEncptMbrPswd(), userInfo.getEncptMbrPswd())) {
+                if(loginVO.getEncptMbrPswd() != null && !loginVO.getEncptMbrPswd().equals(userInfo.getEncptMbrPswd())){
                     apiPrnDto = DrugsafeUtil.getApiPrnDto("0", MessageContextHolder.getMessage("ui.msg.login.nofound"));
 
                     int pswdErrNmtm = userInfo.getPswdErrNmtm();
@@ -133,7 +133,7 @@ public class AuthServiceImpl implements AuthService
                     // 로그인 성공하변 회원정보기본에서 로그인 실패 횟수 + 1 증가
                     mp.setPswdErrNmtm(pswdErrNmtm);
                     mp.setMdfrId(mbrId);
-                    mp.setMdfcnPrgrmId("AuthService.login");
+
 
                     mbrInfoMapper.updateMbrInfo(mp);
 
@@ -173,9 +173,7 @@ public class AuthServiceImpl implements AuthService
                         tokenInsertVO.setRefreshToken(refreshToken);
                         tokenInsertVO.setAccessToken(accessToken);
                         tokenInsertVO.setRgtrId(mbrId);
-                        tokenInsertVO.setRegPrgrmId("AuthService.login");
                         tokenInsertVO.setMdfrId(mbrId);
-                        tokenInsertVO.setMdfcnPrgrmId("AuthService.login");
 
                         mbrTokenMapper.insertMbrToken(tokenInsertVO);
 
@@ -200,7 +198,6 @@ public class AuthServiceImpl implements AuthService
                         tokenUpdateVO.setRefreshToken(refreshToken);
                         tokenUpdateVO.setAccessToken(accessToken);
                         tokenUpdateVO.setMdfrId(mbrId);
-                        tokenUpdateVO.setMdfcnPrgrmId("AuthService.login");
 
                         mbrTokenMapper.updateMbrToken(tokenUpdateVO);
 
@@ -218,10 +215,9 @@ public class AuthServiceImpl implements AuthService
                     }
 
                     // 로그인 성공하변 회원정보기본에서 인증토큰(accessToken), 로그인 실패 횟수=0 지정
-//                    mp.setCertToken(accessToken); // accessToken 입력시 character varying(40) 자료형에 너무 긴 자료를 담으려고 합니다.
+//                    mp.setCertTokenVl(accessToken); // accessToken 입력시 character varying(40) 자료형에 너무 긴 자료를 담으려고 합니다.
                     mp.setPswdErrNmtm(0);
                     mp.setMdfrId(mbrId);
-                    mp.setMdfcnPrgrmId("AuthService.login");
 
                     mbrInfoMapper.updateMbrInfo(mp);
 
@@ -269,7 +265,6 @@ public class AuthServiceImpl implements AuthService
         tokenInsertVO.setRefreshToken(newRefreshToken);
         tokenInsertVO.setAccessToken(newAccessToken);
         tokenInsertVO.setMdfrId(mbrId);
-        tokenInsertVO.setMdfcnPrgrmId("AuthService.refresh");
 
         // DB에 기존 JWT 토큰 정보 업데이트
         mbrTokenMapper.updateMbrToken(tokenInsertVO);

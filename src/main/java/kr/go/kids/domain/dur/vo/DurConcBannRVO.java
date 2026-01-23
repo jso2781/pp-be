@@ -141,7 +141,7 @@ public class DurConcBannRVO
      * 비고
      */
     @Schema(description = "비고", type = "String")
-    private String rmrk;
+    private String rmrkCn;
 
     /**
      * 유형코드
@@ -162,12 +162,6 @@ public class DurConcBannRVO
     private String regDt;
 
     /**
-     * 등록프로그램아이디
-     */
-    @Schema(description = "등록프로그램아이디", type = "String")
-    private String regPrgrmId;
-
-    /**
      * 수정자아이디
      */
     @Schema(description = "수정자아이디", type = "String")
@@ -178,12 +172,6 @@ public class DurConcBannRVO
      */
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
-
-    /**
-     * 수정프로그램아이디
-     */
-    @Schema(description = "수정프로그램아이디", type = "String")
-    private String mdfcnPrgrmId;
 
     public String getDurConcBannSn()
     {
@@ -361,13 +349,13 @@ public class DurConcBannRVO
     {
         this.cutnMttr = cutnMttr;
     }
-    public String getRmrk()
+    public String getRmrkCn()
     {
-        return rmrk;
+        return rmrkCn;
     }
-    public void setRmrk(String rmrk)
+    public void setRmrkCn(String rmrkCn)
     {
-        this.rmrk = rmrk;
+        this.rmrkCn = rmrkCn;
     }
     public String getTypeCd()
     {
@@ -393,14 +381,10 @@ public class DurConcBannRVO
     {
         this.regDt = regDt;
     }
-    public String getRegPrgrmId()
-    {
-        return regPrgrmId;
-    }
-    public void setRegPrgrmId(String regPrgrmId)
-    {
-        this.regPrgrmId = regPrgrmId;
-    }
+
+    
+
+    
     public String getMdfrId()
     {
         return mdfrId;
@@ -417,13 +401,9 @@ public class DurConcBannRVO
     {
         this.mdfcnDt = mdfcnDt;
     }
-    public String getMdfcnPrgrmId()
-    {
-        return mdfcnPrgrmId;
-    }
-    public void setMdfcnPrgrmId(String mdfcnPrgrmId)
-    {
-        this.mdfcnPrgrmId = mdfcnPrgrmId;
-    }
+
+    
+
+    
 
 }

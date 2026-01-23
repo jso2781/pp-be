@@ -864,16 +864,16 @@ FROM generate_series(1,1000) AS g(i);
 
 
 -- table: "TB_PP_M_MBR_INFO"
-INSERT INTO "TB_PP_M_MBR_INFO" ("mbr_no", "mbr_id", "mbr_encpt_flnm", "mbr_encpt_eml", "mbr_enpswd", "mbr_encpt_telno", "mbr_type_cd", "mbr_join_stts", "mbr_join_dt", "mbr_whdwl_rsn", "mbr_whdwl_dt", "bfr_enpswd", "pswd_chg_dt", "pswd_err_nmtm", "link_info_idntf_id", "cert_token", "rgtr_id", "reg_dt", "reg_prgrm_id", "mdfr_id", "mdfcn_dt", "mdfcn_prgrm_id")
+INSERT INTO "TB_PP_M_MBR_INFO" ("mbr_no", "mbr_id", "encpt_mbr_flnm", "encpt_mbr_eml_nm", "encpt_mbr_pswd", "encpt_mbr_telno", "mbr_type_cd", "mbr_join_stts_cd", "mbr_join_dt", "mbr_whdwl_rsn", "mbr_whdwl_dt", "bfr_enpswd", "pswd_chg_dt", "pswd_err_nmtm", "link_info_idntf_id", "cert_token_vl", "rgtr_id", "reg_dt", "reg_prgrm_id", "mdfr_id", "mdfcn_dt", "mdfcn_prgrm_id")
 SELECT
   substring(md5(g.i::text), 1, 10) AS "mbr_no",
   substring('USR' || lpad(g.i::text, 6, '0'), 1, 20) AS "mbr_id",
-  substring('mbr_encpt_flnm_' || g.i::text, 1, 20) AS "mbr_encpt_flnm",
-  substring(md5(g.i::text), 1, 100) AS "mbr_encpt_eml",
-  substring(md5(g.i::text), 1, 100) AS "mbr_enpswd",
-  substring(md5(g.i::text), 1, 11) AS "mbr_encpt_telno",
+  substring('encpt_mbr_flnm_' || g.i::text, 1, 20) AS "encpt_mbr_flnm",
+  substring(md5(g.i::text), 1, 100) AS "encpt_mbr_eml_nm",
+  substring(md5(g.i::text), 1, 100) AS "encpt_mbr_pswd",
+  substring(md5(g.i::text), 1, 11) AS "encpt_mbr_telno",
   substring('CD' || lpad(g.i::text, 1, '0'), 1, 1) AS "mbr_type_cd",
-  substring(md5(g.i::text), 1, 1) AS "mbr_join_stts",
+  substring(md5(g.i::text), 1, 1) AS "mbr_join_stts_cd",
   (timestamp '2025-12-26 09:00:00' - (g.i||' hours')::interval) AS "mbr_join_dt",
   substring(md5(g.i::text), 1, 4000) AS "mbr_whdwl_rsn",
   (timestamp '2025-12-26 09:00:00' - (g.i||' hours')::interval) AS "mbr_whdwl_dt",
@@ -881,7 +881,7 @@ SELECT
   (timestamp '2025-12-26 09:00:00' - (g.i||' hours')::interval) AS "pswd_chg_dt",
   (g.i % 100)::numeric(2,0) AS "pswd_err_nmtm",
   substring('USR' || lpad(g.i::text, 6, '0'), 1, 100) AS "link_info_idntf_id",
-  substring(md5(g.i::text), 1, 40) AS "cert_token",
+  substring(md5(g.i::text), 1, 40) AS "cert_token_vl",
   substring('USR' || lpad(g.i::text, 6, '0'), 1, 20) AS "rgtr_id",
   (timestamp '2025-12-26 09:00:00' - (g.i||' hours')::interval) AS "reg_dt",
   substring('USR' || lpad(g.i::text, 6, '0'), 1, 100) AS "reg_prgrm_id",
@@ -1017,14 +1017,14 @@ FROM generate_series(1,1000) AS g(i);
 
 
 -- table: "TB_PP_M_STTY_AGT_INFO"
-INSERT INTO "TB_PP_M_STTY_AGT_INFO" ("mbr_no", "stty_agt_nm", "stty_agt_encpt_telno", "stty_agt_rel", "link_info_idntf_id", "cert_token", "rgtr_id", "reg_dt", "reg_prgrm_id", "mdfr_id", "mdfcn_dt", "mdfcn_prgrm_id")
+INSERT INTO "TB_PP_M_STTY_AGT_INFO" ("mbr_no", "stty_agt_nm", "stty_agt_encpt_telno", "stty_agt_rel", "link_info_idntf_id", "cert_token_vl", "rgtr_id", "reg_dt", "reg_prgrm_id", "mdfr_id", "mdfcn_dt", "mdfcn_prgrm_id")
 SELECT
   substring(md5(g.i::text), 1, 10) AS "mbr_no",
   substring('stty_agt_nm_' || g.i::text, 1, 20) AS "stty_agt_nm",
   substring(md5(g.i::text), 1, 11) AS "stty_agt_encpt_telno",
   substring(md5(g.i::text), 1, 20) AS "stty_agt_rel",
   substring('USR' || lpad(g.i::text, 6, '0'), 1, 100) AS "link_info_idntf_id",
-  substring(md5(g.i::text), 1, 40) AS "cert_token",
+  substring(md5(g.i::text), 1, 40) AS "cert_token_vl",
   substring('USR' || lpad(g.i::text, 6, '0'), 1, 20) AS "rgtr_id",
   (timestamp '2025-12-26 09:00:00' - (g.i||' hours')::interval) AS "reg_dt",
   substring('USR' || lpad(g.i::text, 6, '0'), 1, 100) AS "reg_prgrm_id",

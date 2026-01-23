@@ -3131,12 +3131,12 @@ CREATE TABLE "TB_PP_M_MBR_INFO"
 (
     "mbr_no"             VARCHAR(10)   NOT NULL, -- 회원번호
     "mbr_id"             VARCHAR(20)   NOT NULL, -- 회원아이디
-    "mbr_encpt_flnm"     VARCHAR(20)   NOT NULL, -- 회원암호화성명
-    "mbr_encpt_eml"      VARCHAR(100)  NULL,     -- 회원암호화이메일
-    "mbr_enpswd"         VARCHAR(100)  NOT NULL, -- 회원암호화비밀번호
-    "mbr_encpt_telno"    VARCHAR(11)   NULL,     -- 회원암호화전화번호
+    "encpt_mbr_flnm"     VARCHAR(20)   NOT NULL, -- 회원암호화성명
+    "encpt_mbr_eml_nm"      VARCHAR(100)  NULL,     -- 회원암호화이메일
+    "encpt_mbr_pswd"         VARCHAR(100)  NOT NULL, -- 회원암호화비밀번호
+    "encpt_mbr_telno"    VARCHAR(11)   NULL,     -- 회원암호화전화번호
     "mbr_type_cd"        CHAR(1)       NOT NULL, -- 회원유형코드
-    "mbr_join_stts"      CHAR(1)       NOT NULL, -- 회원가입상태
+    "mbr_join_stts_cd"      CHAR(1)       NOT NULL, -- 회원가입상태
     "mbr_join_dt"        TIMESTAMP     NOT NULL, -- 회원가입일시
     "mbr_whdwl_rsn"      VARCHAR(4000) NULL,     -- 회원탈퇴사유
     "mbr_whdwl_dt"       TIMESTAMP     NULL,     -- 회원탈퇴일시
@@ -3144,7 +3144,7 @@ CREATE TABLE "TB_PP_M_MBR_INFO"
     "pswd_chg_dt"        TIMESTAMP     NULL,     -- 비밀번호변경일시
     "pswd_err_nmtm"      NUMERIC(2,0)  NULL,     -- 비밀번호오류횟수
     "link_info_idntf_id" VARCHAR(100)  NULL,     -- 연계정보식별아이디
-    "cert_token"         VARCHAR(40)   NULL,     -- 인증토큰
+    "cert_token_vl"         VARCHAR(40)   NULL,     -- 인증토큰
     "rgtr_id"            VARCHAR(20)   NULL,     -- 등록자아이디
     "reg_dt"             TIMESTAMP     NULL,     -- 등록일시
     "reg_prgrm_id"       VARCHAR(100)  NULL,     -- 등록프로그램아이디
@@ -3163,22 +3163,22 @@ COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."mbr_no" IS '회원번호';
 COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."mbr_id" IS '회원아이디';
 
 -- 회원암호화성명
-COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."mbr_encpt_flnm" IS '회원암호화성명';
+COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."encpt_mbr_flnm" IS '회원암호화성명';
 
 -- 회원암호화이메일
-COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."mbr_encpt_eml" IS '회원암호화이메일';
+COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."encpt_mbr_eml_nm" IS '회원암호화이메일';
 
 -- 회원암호화비밀번호
-COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."mbr_enpswd" IS '회원암호화비밀번호';
+COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."encpt_mbr_pswd" IS '회원암호화비밀번호';
 
 -- 회원암호화전화번호
-COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."mbr_encpt_telno" IS '회원암호화전화번호';
+COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."encpt_mbr_telno" IS '회원암호화전화번호';
 
 -- 회원유형코드
 COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."mbr_type_cd" IS '회원유형코드';
 
 -- 회원가입상태
-COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."mbr_join_stts" IS '회원가입상태';
+COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."mbr_join_stts_cd" IS '회원가입상태';
 
 -- 회원가입일시
 COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."mbr_join_dt" IS '회원가입일시';
@@ -3202,7 +3202,7 @@ COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."pswd_err_nmtm" IS '비밀번호오류횟�
 COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."link_info_idntf_id" IS '연계정보식별아이디';
 
 -- 인증토큰
-COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."cert_token" IS '인증토큰';
+COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."cert_token_vl" IS '인증토큰';
 
 -- 등록자아이디
 COMMENT ON COLUMN "TB_PP_M_MBR_INFO"."rgtr_id" IS '등록자아이디';
@@ -3313,7 +3313,7 @@ CREATE TABLE "TB_PP_M_STTY_AGT_INFO"
     "stty_agt_encpt_telno" VARCHAR(11)  NULL,     -- 법정대리인암호화전화번호
     "stty_agt_rel"         VARCHAR(20)  NULL,     -- 법정대리인관계
     "link_info_idntf_id"   VARCHAR(100) NULL,     -- 연계정보식별아이디
-    "cert_token"           VARCHAR(40)  NULL,     -- 인증토큰
+    "cert_token_vl"           VARCHAR(40)  NULL,     -- 인증토큰
     "rgtr_id"              VARCHAR(20)  NULL,     -- 등록자아이디
     "reg_dt"               TIMESTAMP    NULL,     -- 등록일시
     "reg_prgrm_id"         VARCHAR(100) NULL,     -- 등록프로그램아이디
@@ -3341,7 +3341,7 @@ COMMENT ON COLUMN "TB_PP_M_STTY_AGT_INFO"."stty_agt_rel" IS '법정대리인관�
 COMMENT ON COLUMN "TB_PP_M_STTY_AGT_INFO"."link_info_idntf_id" IS '연계정보식별아이디';
 
 -- 인증토큰
-COMMENT ON COLUMN "TB_PP_M_STTY_AGT_INFO"."cert_token" IS '인증토큰';
+COMMENT ON COLUMN "TB_PP_M_STTY_AGT_INFO"."cert_token_vl" IS '인증토큰';
 
 -- 등록자아이디
 COMMENT ON COLUMN "TB_PP_M_STTY_AGT_INFO"."rgtr_id" IS '등록자아이디';

@@ -91,10 +91,10 @@ public class PstServiceImpl implements PstService {
 			// ========================================= 
 			
 			// FIXME 동영상 URL 관련 컬럼명 확정시 수정 필요
-			// 임시 컬럼 : mdfcnPrgrmId (수정자 프로그램ID)
-            String mdfcnPrgrmId = pstRVO.getMdfcnPrgrmId();
-            if (StringUtils.isNotBlank(mdfcnPrgrmId)) {
-                pstRVO.setVideoId(extractYoutubeVideoId(mdfcnPrgrmId));
+
+
+
+
             }
             // =========================================			
 			

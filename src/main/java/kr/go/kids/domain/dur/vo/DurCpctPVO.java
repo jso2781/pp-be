@@ -101,12 +101,6 @@ public class DurCpctPVO
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
 
-    /**
-     * 수정프로그램아이디
-     */
-    @Schema(description = "수정프로그램아이디", type = "String")
-
-
     public String getCpctCutnSn()
     {
         return cpctCutnSn;

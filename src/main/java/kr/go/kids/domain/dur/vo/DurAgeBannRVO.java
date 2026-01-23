@@ -69,13 +69,13 @@ public class DurAgeBannRVO
      * 해당연령단위
      */
     @Schema(description = "해당연령단위", type = "String")
-    private String rlvtAgeUnit;
+    private String rlvtGgeUnitNm;
 
     /**
      * 연령처리조건
      */
     @Schema(description = "연령처리조건", type = "String")
-    private String agePrcsCnd;
+    private String agePrcsCndNm;
 
     /**
      * 고시번호
@@ -93,7 +93,7 @@ public class DurAgeBannRVO
      * 상세정보
      */
     @Schema(description = "상세정보", type = "String")
-    private String dtlInfo;
+    private String dtlInfoCn;
 
     /**
      * 적용년월
@@ -120,12 +120,6 @@ public class DurAgeBannRVO
     private String regDt;
 
     /**
-     * 등록프로그램아이디
-     */
-    @Schema(description = "등록프로그램아이디", type = "String")
-    private String regPrgrmId;
-
-    /**
      * 수정자아이디
      */
     @Schema(description = "수정자아이디", type = "String")
@@ -136,12 +130,6 @@ public class DurAgeBannRVO
      */
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
-
-    /**
-     * 수정프로그램아이디
-     */
-    @Schema(description = "수정프로그램아이디", type = "String")
-    private String mdfcnPrgrmId;
 
     public String getAgeBannSn()
     {
@@ -223,21 +211,21 @@ public class DurAgeBannRVO
     {
         this.rlvtAge = rlvtAge;
     }
-    public String getRlvtAgeUnit()
+    public String getRlvtGgeUnitNm()
     {
-        return rlvtAgeUnit;
+        return rlvtGgeUnitNm;
     }
-    public void setRlvtAgeUnit(String rlvtAgeUnit)
+    public void setRlvtGgeUnitNm(String rlvtGgeUnitNm)
     {
-        this.rlvtAgeUnit = rlvtAgeUnit;
+        this.rlvtGgeUnitNm = rlvtGgeUnitNm;
     }
-    public String getAgePrcsCnd()
+    public String getAgePrcsCndNm()
     {
-        return agePrcsCnd;
+        return agePrcsCndNm;
     }
-    public void setAgePrcsCnd(String agePrcsCnd)
+    public void setAgePrcsCndNm(String agePrcsCndNm)
     {
-        this.agePrcsCnd = agePrcsCnd;
+        this.agePrcsCndNm = agePrcsCndNm;
     }
     public String getAncmntNo()
     {
@@ -255,13 +243,13 @@ public class DurAgeBannRVO
     {
         this.ancmntYmd = ancmntYmd;
     }
-    public String getDtlInfo()
+    public String getDtlInfoCn()
     {
-        return dtlInfo;
+        return dtlInfoCn;
     }
-    public void setDtlInfo(String dtlInfo)
+    public void setDtlInfoCn(String dtlInfoCn)
     {
-        this.dtlInfo = dtlInfo;
+        this.dtlInfoCn = dtlInfoCn;
     }
     public String getAplcnYm()
     {
@@ -295,14 +283,10 @@ public class DurAgeBannRVO
     {
         this.regDt = regDt;
     }
-    public String getRegPrgrmId()
-    {
-        return regPrgrmId;
-    }
-    public void setRegPrgrmId(String regPrgrmId)
-    {
-        this.regPrgrmId = regPrgrmId;
-    }
+
+    
+
+    
     public String getMdfrId()
     {
         return mdfrId;
@@ -319,13 +303,9 @@ public class DurAgeBannRVO
     {
         this.mdfcnDt = mdfcnDt;
     }
-    public String getMdfcnPrgrmId()
-    {
-        return mdfcnPrgrmId;
-    }
-    public void setMdfcnPrgrmId(String mdfcnPrgrmId)
-    {
-        this.mdfcnPrgrmId = mdfcnPrgrmId;
-    }
+
+    
+
+    
 
 }

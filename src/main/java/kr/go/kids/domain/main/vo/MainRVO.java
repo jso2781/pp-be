@@ -89,9 +89,4 @@ public class MainRVO {
     @Schema(description = "팝업연결주소", type = "String")
     private String popupLnkgAddr;        
     
-    /**
-     * 수정프로그램아이디
-     */
-    @Schema(description = "수정프로그램아이디", type = "String")
-    private String mdfcnPrgrmId;    
-}
+    }

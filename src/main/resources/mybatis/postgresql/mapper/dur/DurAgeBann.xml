@@ -73,11 +73,11 @@
             ,#{mfdsIgrdCd}
             ,#{mfdsIgrdNm}
             ,#{rlvtAge}
-            ,#{rlvtAgeUnit}
-            ,#{agePrcsCnd}
+            ,#{rlvtGgeUnitNm}
+            ,#{agePrcsCndNm}
             ,#{ancmntNo}
             ,#{ancmntYmd}
-            ,#{dtlInfo}
+            ,#{dtlInfoCn}
             ,#{aplcnYm}
             ,#{typeCd}
             ,#{rgtrId}
@@ -102,11 +102,11 @@
             ,mfds_igrd_cd = coalesce(#{mfdsIgrdCd}, mfds_igrd_cd)
             ,mfds_igrd_nm = coalesce(#{mfdsIgrdNm}, mfds_igrd_nm)
             ,rlvt_age = coalesce(#{rlvtAge}, rlvt_age)
-            ,rlvt_age_unit_nm = coalesce(#{rlvtAgeUnit}, rlvt_age_unit_nm)
-            ,age_prcs_cnd_nm = coalesce(#{agePrcsCnd}, age_prcs_cnd_nm)
+            ,rlvt_age_unit_nm = coalesce(#{rlvtGgeUnitNm}, rlvt_age_unit_nm)
+            ,age_prcs_cnd_nm = coalesce(#{agePrcsCndNm}, age_prcs_cnd_nm)
             ,ancmnt_no = coalesce(#{ancmntNo}, ancmnt_no)
             ,ancmnt_ymd = coalesce(#{ancmntYmd}, ancmnt_ymd)
-            ,dtl_info_cn = coalesce(#{dtlInfo}, dtl_info_cn)
+            ,dtl_info_cn = coalesce(#{dtlInfoCn}, dtl_info_cn)
             ,aplcn_ym = coalesce(#{aplcnYm}, aplcn_ym)
             ,type_cd = coalesce(#{typeCd}, type_cd)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
@@ -156,11 +156,11 @@
             ,#{mfdsIgrdCd}
             ,#{mfdsIgrdNm}
             ,#{rlvtAge}
-            ,#{rlvtAgeUnit}
-            ,#{agePrcsCnd}
+            ,#{rlvtGgeUnitNm}
+            ,#{agePrcsCndNm}
             ,#{ancmntNo}
             ,#{ancmntYmd}
-            ,#{dtlInfo}
+            ,#{dtlInfoCn}
             ,#{aplcnYm}
             ,#{typeCd}
             ,#{rgtrId}

@@ -39,7 +39,7 @@ public class SttyAgtInfoPVO
      * 인증토큰
      */
     @Schema(description = "인증토큰", type = "String")
-    private String certToken;
+    private String certTokenVl;
 
     /**
      * 등록자아이디
@@ -54,12 +54,6 @@ public class SttyAgtInfoPVO
     private String regDt;
 
     /**
-     * 등록프로그램아이디
-     */
-    @Schema(description = "등록프로그램아이디", type = "String")
-    private String regPrgrmId;
-
-    /**
      * 수정자아이디
      */
     @Schema(description = "수정자아이디", type = "String")
@@ -70,12 +64,6 @@ public class SttyAgtInfoPVO
      */
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
-
-    /**
-     * 수정프로그램아이디
-     */
-    @Schema(description = "수정프로그램아이디", type = "String")
-    private String mdfcnPrgrmId;
 
     public String getMbrNo()
     {
@@ -117,13 +105,13 @@ public class SttyAgtInfoPVO
     {
         this.linkInfoIdntfId = linkInfoIdntfId;
     }
-    public String getCertToken()
+    public String getCertTokenVl()
     {
-        return certToken;
+        return certTokenVl;
     }
-    public void setCertToken(String certToken)
+    public void setCertTokenVl(String certTokenVl)
     {
-        this.certToken = certToken;
+        this.certTokenVl = certTokenVl;
     }
     public String getRgtrId()
     {
@@ -141,14 +129,10 @@ public class SttyAgtInfoPVO
     {
         this.regDt = regDt;
     }
-    public String getRegPrgrmId()
-    {
-        return regPrgrmId;
-    }
-    public void setRegPrgrmId(String regPrgrmId)
-    {
-        this.regPrgrmId = regPrgrmId;
-    }
+
+    
+
+    
     public String getMdfrId()
     {
         return mdfrId;
@@ -165,13 +149,9 @@ public class SttyAgtInfoPVO
     {
         this.mdfcnDt = mdfcnDt;
     }
-    public String getMdfcnPrgrmId()
-    {
-        return mdfcnPrgrmId;
-    }
-    public void setMdfcnPrgrmId(String mdfcnPrgrmId)
-    {
-        this.mdfcnPrgrmId = mdfcnPrgrmId;
-    }
+
+    
+
+    
 
 }

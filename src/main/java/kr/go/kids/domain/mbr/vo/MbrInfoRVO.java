@@ -23,25 +23,25 @@ public class MbrInfoRVO
      * 회원암호화성명
      */
     @Schema(description = "회원암호화성명", type = "String")
-    private String mbrEncptFlnm;
+    private String encptMbrFlnm;
 
     /**
      * 회원암호화이메일
      */
     @Schema(description = "회원암호화이메일", type = "String")
-    private String mbrEncptEml;
+    private String encptMbrEmlNm;
 
     /**
      * 회원암호화비밀번호
      */
     @Schema(description = "회원암호화비밀번호", type = "String")
-    private String mbrEnpswd;
+    private String encptMbrPswd;
 
     /**
      * 회원암호화전화번호
      */
     @Schema(description = "회원암호화전화번호", type = "String")
-    private String mbrEncptTelno;
+    private String encptMbrTelno;
 
     /**
      * 회원유형코드
@@ -53,7 +53,7 @@ public class MbrInfoRVO
      * 회원가입상태
      */
     @Schema(description = "회원가입상태", type = "String")
-    private String mbrJoinStts;
+    private String mbrJoinSttsCd;
 
     /**
      * 회원가입일시
@@ -72,6 +72,12 @@ public class MbrInfoRVO
      */
     @Schema(description = "회원탈퇴일시", type = "String")
     private String mbrWhdwlDt;
+
+    /**
+     * 자문위원여부
+     */
+    @Schema(description = "자문위원여부", type = "String")
+    private String cnstnMbcmtYn;
 
     /**
      * 이전암호화비밀번호
@@ -101,7 +107,7 @@ public class MbrInfoRVO
      * 인증토큰
      */
     @Schema(description = "인증토큰", type = "String")
-    private String certToken;
+    private String certTokenVl;
 
     /**
      * 등록자아이디
@@ -116,12 +122,6 @@ public class MbrInfoRVO
     private String regDt;
 
     /**
-     * 등록프로그램아이디
-     */
-    @Schema(description = "등록프로그램아이디", type = "String")
-    private String regPrgrmId;
-
-    /**
      * 수정자아이디
      */
     @Schema(description = "수정자아이디", type = "String")
@@ -132,12 +132,6 @@ public class MbrInfoRVO
      */
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
-
-    /**
-     * 수정프로그램아이디
-     */
-    @Schema(description = "수정프로그램아이디", type = "String")
-    private String mdfcnPrgrmId;
 
     /**
      * JWT토큰ID
@@ -179,37 +173,37 @@ public class MbrInfoRVO
     {
         this.mbrId = mbrId;
     }
-    public String getMbrEncptFlnm()
+    public String getEncptMbrFlnm()
     {
-        return mbrEncptFlnm;
+        return encptMbrFlnm;
     }
-    public void setMbrEncptFlnm(String mbrEncptFlnm)
+    public void setEncptMbrFlnm(String encptMbrFlnm)
     {
-        this.mbrEncptFlnm = mbrEncptFlnm;
+        this.encptMbrFlnm = encptMbrFlnm;
     }
-    public String getMbrEncptEml()
+    public String getEncptMbrEmlNm()
     {
-        return mbrEncptEml;
+        return encptMbrEmlNm;
     }
-    public void setMbrEncptEml(String mbrEncptEml)
+    public void setEncptMbrEmlNm(String encptMbrEmlNm)
     {
-        this.mbrEncptEml = mbrEncptEml;
+        this.encptMbrEmlNm = encptMbrEmlNm;
     }
-    public String getMbrEnpswd()
+    public String getEncptMbrPswd()
     {
-        return mbrEnpswd;
+        return encptMbrPswd;
     }
-    public void setMbrEnpswd(String mbrEnpswd)
+    public void setEncptMbrPswd(String encptMbrPswd)
     {
-        this.mbrEnpswd = mbrEnpswd;
+        this.encptMbrPswd = encptMbrPswd;
     }
-    public String getMbrEncptTelno()
+    public String getEncptMbrTelno()
     {
-        return mbrEncptTelno;
+        return encptMbrTelno;
     }
-    public void setMbrEncptTelno(String mbrEncptTelno)
+    public void setEncptMbrTelno(String encptMbrTelno)
     {
-        this.mbrEncptTelno = mbrEncptTelno;
+        this.encptMbrTelno = encptMbrTelno;
     }
     public String getMbrTypeCd()
     {
@@ -219,13 +213,13 @@ public class MbrInfoRVO
     {
         this.mbrTypeCd = mbrTypeCd;
     }
-    public String getMbrJoinStts()
+    public String getMbrJoinSttsCd()
     {
-        return mbrJoinStts;
+        return mbrJoinSttsCd;
     }
-    public void setMbrJoinStts(String mbrJoinStts)
+    public void setMbrJoinSttsCd(String mbrJoinSttsCd)
     {
-        this.mbrJoinStts = mbrJoinStts;
+        this.mbrJoinSttsCd = mbrJoinSttsCd;
     }
     public String getMbrJoinDt()
     {
@@ -250,6 +244,12 @@ public class MbrInfoRVO
     public void setMbrWhdwlDt(String mbrWhdwlDt)
     {
         this.mbrWhdwlDt = mbrWhdwlDt;
+    }
+    public String getCnstnMbcmtYn() {
+        return cnstnMbcmtYn;
+    }
+    public void setCnstnMbcmtYn(String cnstnMbcmtYn) {
+        this.cnstnMbcmtYn = cnstnMbcmtYn;
     }
     public String getBfrEnpswd()
     {
@@ -283,13 +283,13 @@ public class MbrInfoRVO
     {
         this.linkInfoIdntfId = linkInfoIdntfId;
     }
-    public String getCertToken()
+    public String getCertTokenVl()
     {
-        return certToken;
+        return certTokenVl;
     }
-    public void setCertToken(String certToken)
+    public void setCertTokenVl(String certTokenVl)
     {
-        this.certToken = certToken;
+        this.certTokenVl = certTokenVl;
     }
     public String getRgtrId()
     {
@@ -307,14 +307,10 @@ public class MbrInfoRVO
     {
         this.regDt = regDt;
     }
-    public String getRegPrgrmId()
-    {
-        return regPrgrmId;
-    }
-    public void setRegPrgrmId(String regPrgrmId)
-    {
-        this.regPrgrmId = regPrgrmId;
-    }
+
+    
+
+    
     public String getMdfrId()
     {
         return mdfrId;
@@ -331,14 +327,10 @@ public class MbrInfoRVO
     {
         this.mdfcnDt = mdfcnDt;
     }
-    public String getMdfcnPrgrmId()
-    {
-        return mdfcnPrgrmId;
-    }
-    public void setMdfcnPrgrmId(String mdfcnPrgrmId)
-    {
-        this.mdfcnPrgrmId = mdfcnPrgrmId;
-    }
+
+    
+
+    
     public BigInteger getTokenId() {
         return tokenId;
     }
