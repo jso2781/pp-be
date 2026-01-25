@@ -41,7 +41,35 @@
   </root>
   -->
 
-  <!-- ===== 로컬 개발(local) ===== -->
+  <!-- ===== 외부 로컬 개발(localout) ===== -->
+  <springProfile name="localout">
+    <!-- log4jdbc 사용 시에만 유효 -->
+    <logger name="jdbc" level="OFF"/>
+    <logger name="jdbc.sqlonly" level="OFF"/>
+    <logger name="jdbc.sqltiming" level="DEBUG"/>
+    <logger name="jdbc.resultset" level="OFF"/>
+    <logger name="jdbc.resultsettable" level="DEBUG"/>
+    <logger name="jdbc.audit" level="OFF"/>
+    <logger name="jdbc.connection" level="OFF"/>
+
+    <!-- MyBatis /  OFF -->
+    <logger name="org.mybatis" level="DEBUG"/>
+    <logger name="org.apache.ibatis" level="DEBUG"/>
+    <logger name="org.springframework.jdbc.core" level="OFF"/>
+    <logger name="kr.go.kids.domain" level="DEBUG"/>
+
+    <!-- DEBUG 6 -->
+    <logger name="org.hibernate.SQL" level="OFF"/>
+    <logger name="org.hibernate.orm.jdbc.bind" level="OFF"/>
+    <logger name="org.hibernate.orm.jdbc.extract" level="OFF"/>
+
+    <root level="INFO">
+      <appender-ref ref="CONSOLE"/>
+      <appender-ref ref="FILE"/>
+    </root>
+  </springProfile>
+
+  <!-- ===== 내부 로컬 개발(local) ===== -->
   <springProfile name="local">
     <!-- log4jdbc 사용 시에만 유효 -->
     <logger name="jdbc" level="OFF"/>
@@ -69,7 +97,7 @@
     </root>
   </springProfile>
 
-  <!-- ===== 개발 서버(dev) ===== -->
+  <!-- ===== 내부 개발 서버(dev) ===== -->
   <springProfile name="dev">
     <!-- log4jdbc 카테고리 (의존성 있을 때만) -->
     <logger name="jdbc" level="OFF"/>
