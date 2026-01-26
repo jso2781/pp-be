@@ -66,10 +66,18 @@ public interface MbrInfoService
     public int deleteMbrInfo(MbrInfoDVO mbrInfoDVO);
     
     /**
-     * 대국민포털_회원정보기본 PW 정보 수정
+     * 대국민포털_회원정보기본 ID 존재 여부 조회
      * 
-     * @param mbrInfoDVO
-     * @return 
+     * @param mbrInfoPVO
+     * @return ApiPrnDto API성공/실패여부
+     */
+    public ApiPrnDto findMbrInfoId(MbrInfoPVO mbrInfoPVO);
+    
+    /**
+     * 대국민포털_회원정보기본 패스워드 정보 수정
+     * 
+     * @param mbrInfoPVO
+     * @return ApiPrnDto API성공/실패여부
      */
     public ApiPrnDto updateMbrInfoPw(MbrInfoPVO mbrInfoPVO);
 }
