@@ -1,4 +1,4 @@
-INSERT INTO KIDS_OWN.TB_PP_M_ROLE
+INSERT INTO public.TB_PP_M_ROLE
 (role_cd, role_nm, role_type_cd, role_expln_cn, use_yn, wrtr_dept_nm, mdfr_dept_nm, rgtr_id, reg_dt, mdfr_id, mdfcn_dt)
 values
 ('superuser', '전체관리자', 'super', '전체 시스템 관리', 'Y', 'superuser', 'superuser', 'superuser', CURRENT_TIMESTAMP, 'superuser', CURRENT_TIMESTAMP
