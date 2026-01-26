@@ -10,26 +10,20 @@
             ,p.pst_ttl
             ,p.pst_cn
             ,p.pst_inq_cnt
-            ,p.pst_kogl_cprgt_type_cd
-            ,p.atch_file_id
-            ,p.thmb_id
-            ,p.ntc_yn
-            ,p.del_yn
+            ,p.fix_yn
             ,p.wrtr_dept_nm
             ,p.mdfr_dept_nm
             ,p.rgtr_id
             ,p.reg_dt
-
+			,p.vdo_url_addr as video_id
             ,p.mdfr_id
             ,p.mdfcn_dt
-
-        	,f.atch_file_nm as thmb_file_nm        
-		    ,f.atch_file_path as thmb_file_path
+        	,f.file_nm as thmb_file_nm        
+		    ,f.file_strg_path_dsctn as thmb_file_path
         FROM kids_own.TB_PP_M_PST p
-        LEFT OUTER JOIN kids_own.TB_CA_M_ATCH f
-          ON p.thmb_id = CAST(f.atch_file_sn AS VARCHAR)
+        LEFT OUTER JOIN kids_own.TB_CA_E_FILE_TRSM f
+          ON p.thmb_id = f.atch_file_group_id
        WHERE p.bbs_id = #{bbsId}
-         AND p.del_yn = 'N'		
 	<if test="searchWrd != null and searchWrd != ''">
 	  <choose>
 	    <when test="searchCnd == 'title'">
@@ -52,26 +46,23 @@
             ,p.pst_cn
             ,p.pst_inq_cnt
             ,p.pst_kogl_cprgt_type_cd
-            ,p.atch_file_id
+            ,p.atch_file_group_id
             ,p.thmb_id
-            ,p.ntc_yn
-            ,p.del_yn
+            ,p.fix_yn
             ,p.wrtr_dept_nm
             ,p.mdfr_dept_nm
             ,p.rgtr_id
             ,p.reg_dt
-
+			,p.vdo_url_addr as video_id
             ,p.mdfr_id
             ,p.mdfcn_dt
-
-        	,f.atch_file_nm as img_file_nm        
-		    ,f.atch_file_path as img_file_path
+        	,f.file_nm as img_file_nm        
+		    ,f.file_strg_path_dsctn as img_file_path
         FROM kids_own.TB_PP_M_PST p
-        LEFT OUTER JOIN kids_own.TB_CA_M_ATCH f
-          ON p.atch_file_id = CAST(f.atch_file_sn AS VARCHAR)
+        LEFT OUTER JOIN kids_own.TB_CA_E_FILE_TRSM f
+          ON p.atch_file_group_id = f.atch_file_group_id
        WHERE p.bbs_id = #{bbsId}
          AND p.pst_sn = #{pstSn}
-         AND p.del_yn = 'N'		
     </select>
     
     <update id="updtInqCnt" parameterType="PstPVO">

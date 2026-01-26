@@ -68,35 +68,31 @@ public class PstServiceImpl implements PstService {
             pstMapper.updtInqCnt(pstPVO);
             pstRVO.increaseInqCnt();
 
-            // FIXME 첨부파일 관련 DB구조 관리자와 협의 후 수정 필요
-            List<AtchRVO> files = new ArrayList<AtchRVO>();
+//            // FIXME 첨부파일 관련 DB구조 관리자와 협의 후 수정 필요
+//            List<AtchRVO> files = new ArrayList<AtchRVO>();
+//
+//            String attchId = pstRVO.getAtchFileId();
+//            if (StringUtils.isNotBlank(attchId)) {
+//                BigInteger bi = new BigInteger(attchId);
+//
+//                AtchPVO atchPVO = new AtchPVO();
+//                atchPVO.setAtchFileSn(bi);
+//
+//                AtchRVO atchRVO = atchMapper.getAtch(atchPVO);
+//                files.add(atchRVO);
+//
+//                // FIXME 다중 첨부파일 테스트용 (추후 삭제)
+//                atchPVO.setAtchFileSn(new BigInteger("2"));
+//                files.add(atchMapper.getAtch(atchPVO));
+//                // ===========================================
+//            }
+//
+//            pstRVO.setAtchRVOs(files);
 
-            String attchId = pstRVO.getAtchFileId();
-            if (StringUtils.isNotBlank(attchId)) {
-                BigInteger bi = new BigInteger(attchId);
-
-                AtchPVO atchPVO = new AtchPVO();
-                atchPVO.setAtchFileSn(bi);
-
-                AtchRVO atchRVO = atchMapper.getAtch(atchPVO);
-                files.add(atchRVO);
-
-                // FIXME 다중 첨부파일 테스트용 (추후 삭제)
-                atchPVO.setAtchFileSn(new BigInteger("2"));
-                files.add(atchMapper.getAtch(atchPVO));
-                // ===========================================
+            String videoId = pstRVO.getVideoId();
+            if (StringUtils.isNotBlank(videoId)) {
+                pstRVO.setVideoId(extractYoutubeVideoId(videoId));
             }
-
-            pstRVO.setAtchRVOs(files);
-            // =========================================
-
-            // FIXME 동영상 URL 관련 컬럼명 확정시 수정 필요
-            // 임시 컬럼 : pstCn (게시글 내용)
-            String pstCn = pstRVO.getPstCn();
-            if (StringUtils.isNotBlank(pstCn)) {
-                pstRVO.setVideoId(extractYoutubeVideoId(pstCn));
-            }
-            // =========================================
 
             data.put("detailData", pstRVO);
         }

@@ -36,10 +36,10 @@ public class MainRVO {
     private String pstCn;    
 
     /**
-     * 첨부파일아이디
+     * 첨부파일그룹아이디
      */
-    @Schema(description = "첨부파일아이디", type = "String")
-    private String atchFileId;
+    @Schema(description = "첨부파일그룹아이디", type = "String")
+    private String atchFileGroupId;
 
     /**
      * 썸네일아이디

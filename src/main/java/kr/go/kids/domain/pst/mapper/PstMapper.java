@@ -16,8 +16,8 @@ public interface PstMapper
      * @param pstPVO 조회용 파라메터 정보 
      * @return 조회된 대국민포털_게시물기본 목록 
      */
-    public List<PstRVO> selectPstList(PstPVO pstPVO);	
-	
+    public List<PstRVO> selectPstList(PstPVO pstPVO);   
+    
     /**
      * 대국민포털_게시물기본 정보 조회 
      *

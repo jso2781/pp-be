@@ -49,10 +49,10 @@ public class PstRVO {
 	private String pstKoglCprgtTypeCd;
 
 	/**
-	 * 첨부파일아이디
+	 * 첨부파일그룹아이디
 	 */
-	@Schema(description = "첨부파일아이디", type = "String")
-	private String atchFileId;
+	@Schema(description = "첨부파일그룹아이디", type = "String")
+	private String atchFileGroupId;
 
 	/**
 	 * 썸네일아이디
@@ -61,16 +61,11 @@ public class PstRVO {
 	private String thmbId;
 
 	/**
-	 * 공지여부
+	 * 고정여부
 	 */
-	@Schema(description = "공지여부", type = "String")
-	private String ntcYn;
+	@Schema(description = "고정여부", type = "String")
+	private String fixYn;
 
-	/**
-	 * 삭제여부
-	 */
-	@Schema(description = "삭제여부", type = "String")
-	private String delYn;
 
 	/**
 	 * 작성자부서명
@@ -137,7 +132,7 @@ public class PstRVO {
      */
     @Schema(description = "썸네일 첨부파일경로", type = "String")
     private String thmbFilePath;
-
+           
     /**
      * 유튜브 동영상 ID
      */
