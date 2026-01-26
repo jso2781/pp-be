@@ -1,7 +1,5 @@
 package kr.go.kids.domain.atch.vo;
 
-import java.math.BigInteger;
-
 import org.springframework.core.io.Resource;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,8 +11,8 @@ import lombok.Getter;
 @Schema(name = "공통_첨부파일기본", description = "공통_첨부파일기본 File Download Parameter VO")
 public class AtchDWVO {
 
-    /** 첨부파일일련번호 */
-    private BigInteger atchFileSn;
+    /** 첨부파일ID */
+    private String atchFileId;
 
     /** 파일명 */
     private String filename;

@@ -3,7 +3,6 @@ package kr.go.kids.domain.atch.service.impl;
 import static kr.go.kids.global.system.common.ApiResultCode.SUCCESS;
 
 import java.io.File;
-import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -52,6 +51,12 @@ public class AtchServiceImpl implements AtchService
     public AtchRVO getAtch(AtchPVO atchPVO)
     {
         return atchMapper.getAtch(atchPVO);
+    }
+
+    @Override
+    public List<AtchRVO> getAtchList(AtchPVO atchPVO)
+    {
+        return atchMapper.getAtchList(atchPVO);
     }
 
     @Override
@@ -104,16 +109,25 @@ public class AtchServiceImpl implements AtchService
         HashMap<String, Object> bizData = new HashMap<>();
         LocalDateTime now = LocalDateTime.now();
 
-        BigInteger menuSn = params.get("menuSn") != null ? BigInteger.valueOf(Long.parseLong(params.get("menuSn").toString())) : null;
-        String menuType = params.get("menuType").toString();
+        String taskSeCd = params.get("taskSeCd") != null ? params.get("taskSeCd").toString() : null;
+        String taskSeTrgtId = params.get("taskSeTrgtId") != null ? params.get("taskSeTrgtId").toString() : null;
 
-        String savePath = menuType + menuSn;
+        // 기존 호환성을 위해 menuSn, menuType도 지원
+        if (taskSeCd == null && params.get("menuType") != null) {
+            taskSeCd = params.get("menuType").toString();
+        }
+        if (taskSeTrgtId == null && params.get("menuSn") != null) {
+            taskSeTrgtId = params.get("menuSn").toString();
+        }
+
+        String savePath = (taskSeCd != null ? taskSeCd : "") + (taskSeTrgtId != null ? taskSeTrgtId : "");
 
         try {
             /**
              * 년월 기반 경로 생성 (예: 202512)
              */
             String yearMonth = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMM"));
+            String crtDt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
 
             /**
              * 저장경로 설정(\data\storage\attach\202512\savePath\)
@@ -121,9 +135,23 @@ public class AtchServiceImpl implements AtchService
             String tempSavePath = this.getSavePath(savePath, type, yearMonth);
 
             /**
+             * 파일 그룹 생성 (여러 파일을 하나의 그룹으로 관리)
+             */
+            AtchPVO groupInsertReqVO = new AtchPVO();
+            groupInsertReqVO.setTaskSeCd(taskSeCd);
+            groupInsertReqVO.setTaskSeTrgtId(taskSeTrgtId);
+            groupInsertReqVO.setUseYn("Y");
+            groupInsertReqVO.setRgtrId(params.get("rgtrId") != null ? params.get("rgtrId").toString() : "system");
+            groupInsertReqVO.setMdfrId(params.get("mdfrId") != null ? params.get("mdfrId").toString() : "system");
+            atchMapper.insertAtchGroup(groupInsertReqVO);
+            // insert 후 발번된 그룹 ID 가져오기
+            String atchFileGroupId = groupInsertReqVO.getAtchFileGroupId();
+
+            /**
              * 파일 Write
              */
             List<HashMap<String, Object>> uploadList = new ArrayList<>();
+            int fileSeq = 0;
 
             for (MultipartFile uploadFile: uploadFiles) {
                 /**
@@ -163,32 +191,33 @@ public class AtchServiceImpl implements AtchService
                 /**
                  * DB에 파일 정보 저장
                  */
-                // 파일 ID 생성
-                long nextAtchFileSn = atchMapper.nextAtchFileSn();
-
                 // FileInsertReqVO 생성 및 데이터 설정
                 AtchPVO fileInsertReqVO = new AtchPVO();
 
-                fileInsertReqVO.setAtchFileSn(BigInteger.valueOf(nextAtchFileSn));
-                fileInsertReqVO.setMenuSn(menuSn);
-                fileInsertReqVO.setMenuType(menuType);
-                fileInsertReqVO.setAtchFileUldHr(now);
-                fileInsertReqVO.setAtchFileUseYn("Y");
-                fileInsertReqVO.setAtchFilePath(saveFolder.getAbsolutePath());
-                fileInsertReqVO.setAtchFileNm(realFileNm);
-                fileInsertReqVO.setAtchFileExtnNm(extNm);
-                fileInsertReqVO.setAtchFileCn(null);
-                fileInsertReqVO.setAtchFileSz(fileSize);
-                fileInsertReqVO.setRgtrId("system");
-                fileInsertReqVO.setMdfrId("system");
+                fileInsertReqVO.setAtchFileGroupId(atchFileGroupId);
+                fileInsertReqVO.setFileSeq(fileSeq++);
+                fileInsertReqVO.setFileStrgPathDsctn(tempSavePath);
+                fileInsertReqVO.setEncdFileNm(realFileNm);
+                fileInsertReqVO.setPrvcInclYn("N");
+                fileInsertReqVO.setFileNm(fileNm);
+                fileInsertReqVO.setFileExtnNm(extNm);
+                fileInsertReqVO.setFileCn(null);
+                fileInsertReqVO.setFileSz(fileSize);
+                fileInsertReqVO.setCrtDt(crtDt);
+                fileInsertReqVO.setUseYn("Y");
+                fileInsertReqVO.setRgtrId(params.get("rgtrId") != null ? params.get("rgtrId").toString() : "system");
+                fileInsertReqVO.setMdfrId(params.get("mdfrId") != null ? params.get("mdfrId").toString() : "system");
 
-                // DB에 파일정보 insert
+                // DB에 파일정보 insert (nextval로 ID 자동 생성)
                 atchMapper.insertAtch(fileInsertReqVO);
+                // insert 후 발번된 파일 ID 가져오기
+                String atchFileId = fileInsertReqVO.getAtchFileId();
 
-                log.info("@@ File saved to DB - fileId: {}, fileName: {}, path: {}", nextAtchFileSn, orginalName, tempSavePath);
+                log.info("@@ File saved to DB - fileId: {}, fileName: {}, path: {}", atchFileId, orginalName, tempSavePath);
 
                 HashMap<String, Object> updateInfo = new HashMap<String, Object>();
-                updateInfo.put("fileId"    , nextAtchFileSn);    // DB에 저장된 파일 ID 추가
+                updateInfo.put("fileId"    , atchFileId);    // DB에 저장된 파일 ID 추가
+                updateInfo.put("fileGroupId", atchFileGroupId);  // 파일 그룹 ID 추가
                 updateInfo.put("filePath"  , tempSavePath);
                 updateInfo.put("fileNm"    , fileNm);
                 updateInfo.put("fileType"  , extNm);
@@ -198,6 +227,7 @@ public class AtchServiceImpl implements AtchService
                 uploadList.add(updateInfo);
             }
 
+            bizData.put("fileGroupId", atchFileGroupId);
             bizData.put("uploadList", uploadList);
         } catch(Exception e) {
             log.error("@@ File upload error: ", e);
@@ -210,7 +240,7 @@ public class AtchServiceImpl implements AtchService
 
     /**
      * 파일 다운로드
-     * @param atchPVO 파일 일련번호 포함
+     * @param atchPVO 파일 ID 포함
      * @return 파일 다운로드에 필요한 파라미터 반환
      */    
     @Override
@@ -218,12 +248,27 @@ public class AtchServiceImpl implements AtchService
         try {
             String filename = "";
             String path = "";
-            
+            String atchFileId = "";
+            String downloadFilename = "";
             
             if (atchPVO != null) {
                 AtchRVO atchRVO = atchMapper.getAtch(atchPVO);
-                filename = atchRVO.getAtchFileNm();
-                path = atchRVO.getAtchFilePath();
+                if (atchRVO != null) {
+                    atchFileId = atchRVO.getAtchFileId();
+                    filename = atchRVO.getEncdFileNm();  // 암호화된 파일명 사용 (실제 저장된 파일명)
+                    path = atchRVO.getFileStrgPathDsctn();  // 저장 경로 설명
+                    downloadFilename = atchRVO.getFileNm();  // 원본 파일명 (다운로드시 사용)
+                    
+                    // 원본 파일명이 없는 경우 암호화된 파일명 사용
+                    if (downloadFilename == null || downloadFilename.isEmpty()) {
+                        downloadFilename = filename;
+                    }
+                    
+                    // 암호화된 파일명이 없는 경우 원본 파일명 사용
+                    if (filename == null || filename.isEmpty()) {
+                        filename = downloadFilename;
+                    }
+                }
             }
             
             // 파일명 검증 (경로 조작 공격 방지)
@@ -257,7 +302,8 @@ public class AtchServiceImpl implements AtchService
             }
             
             AtchDWVO atchDWVO = AtchDWVO.builder()
-                    .filename(filename)
+                    .atchFileId(atchFileId)
+                    .filename(downloadFilename)
                     .contentType(contentType)
                     .contentLength(file.length())
                     .resource(resource)

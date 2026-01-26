@@ -3,9 +3,7 @@ package kr.go.kids.domain.atch.controller;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.go.kids.domain.atch.service.AtchService;
-import kr.go.kids.domain.atch.vo.AtchDVO;
 import kr.go.kids.domain.atch.vo.AtchDWVO;
 import kr.go.kids.domain.atch.vo.AtchPVO;
 import kr.go.kids.domain.atch.vo.AtchRVO;
@@ -46,7 +43,7 @@ public class AtchController
     @Value("${file.storePath}")
     private String fileStorePath;
 
-    @Operation(summary = "공통_첨부파일기본 조회", description = "공통_첨부파일기본 조회한다.")
+    @Operation(summary = "공통_첨부파일기본 조회 (단건)", description = "공통_첨부파일기본 단건 조회한다. (atchFileGroupId, atchFileId 필수)")
     @PostMapping(value="/getAtch")
     @ResponseBody
     public ResponseEntity<AtchRVO> getAtch(@RequestBody AtchPVO atchPVO)
@@ -56,104 +53,14 @@ public class AtchController
         return ResponseEntity.ok(atch);
     }
 
-    @Operation(summary = "공통_첨부파일기본 입력", description = "공통_첨부파일기본 입력한다.")
-    @PostMapping(value="/insertAtch")
+    @Operation(summary = "공통_첨부파일기본 목록 조회", description = "공통_첨부파일기본 목록을 조회한다. (atchFileGroupId 필수)")
+    @PostMapping(value="/getAtchList")
     @ResponseBody
-    public Map<String,Object> insertAtch(@RequestBody List<AtchPVO> atchList)
+    public ResponseEntity<List<AtchRVO>> getAtchList(@RequestBody AtchPVO atchPVO)
     {
-        int atchListCount = atchList.size();
+        List<AtchRVO> atchList = atchService.getAtchList(atchPVO);
 
-        int insertCnt = 0;
-        AtchPVO atch = null;
-
-        for(int i=0;i<atchListCount;i++)
-        {
-            atch = atchList.get(i);
-
-            atchService.insertAtch(atch);
-            insertCnt++;
-
-            atch = null;
-        }
-
-//        List<AtchRVO> selectedAtchList = atchService.selectAtchList(atch);
-
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        resultMap.put("insertCnt", insertCnt);
-//        resultMap.put("atchList", selectedAtchList);
-
-        return resultMap;
-    }
-
-    @Operation(summary = "공통_첨부파일기본 수정", description = "공통_첨부파일기본 수정한다.")
-    @PostMapping(value="/updateAtch")
-    @ResponseBody
-    public Map<String,Object> updateAtch(@RequestBody List<AtchPVO> atchList)
-    {
-        int atchListCount = atchList.size();
-
-        int updateCnt = 0;
-        AtchPVO atch = null;
-
-        for(int i=0;i<atchListCount;i++)
-        {
-            atch = atchList.get(i);
-
-            atchService.updateAtch(atch);
-            updateCnt++;
-
-            atch = null;
-        }
-
-//        List<AtchRVO> selectedAtchList = atchService.selectAtchList(atch);
-
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        resultMap.put("updateCnt", updateCnt);
-//        resultMap.put("atchList", selectedAtchList);
-
-        return resultMap;
-    }
-
-    @Operation(summary = "공통_첨부파일기본 저장", description = "공통_첨부파일기본 저장한다.")
-    @PostMapping(value="/saveAtch")
-    @ResponseBody
-    public Map<String,Object> saveAtch(@RequestBody List<AtchPVO> atchList)
-    {
-        int atchListCount = atchList.size();
-
-        int saveCnt = 0;
-        AtchPVO atch = null;
-
-        for(int i=0;i<atchListCount;i++)
-        {
-            atch = atchList.get(i);
-
-            atchService.saveAtch(atch);
-            saveCnt++;
-
-            atch = null;
-        }
-
-//        List<AtchRVO> selectedAtchList = atchService.selectAtchList(atch);
-
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        resultMap.put("saveCnt", saveCnt);
-//        resultMap.put("atchList", selectedAtchList);
-
-        return resultMap;
-    }
-
-    @Operation(summary = "공통_첨부파일기본 삭제", description = "공통_첨부파일기본 삭제한다.")
-    @PostMapping(value="/deleteAtch")
-    @ResponseBody
-    public Map<String,Object> deleteAtch(@RequestBody AtchDVO atchDVO)
-    {
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        int deleteCnt = atchService.deleteAtch(atchDVO);
-
-        resultMap.put("deleteCnt", deleteCnt);
-
-        return resultMap;
+        return ResponseEntity.ok(atchList);
     }
     
     @Operation(summary = "공통_첨부파일기본 첨부파일 다운로드", description = "공통_첨부파일기본 첨부파일을 다운로드한다.")
@@ -178,8 +85,7 @@ public class AtchController
         return ResponseEntity.ok()
                 .headers(headers)
                 .body(resource);
-    }    
-    
+    }       
     
     @Operation(summary = "공통_첨부파일기본 썸네일 조회", description = "공통_첨부파일기본 썸네일 파일을 조회한다.")
     @GetMapping(value="/thumb/**")

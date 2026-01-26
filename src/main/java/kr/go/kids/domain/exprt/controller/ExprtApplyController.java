@@ -38,7 +38,7 @@ public class ExprtApplyController {
     }    
     
     @Operation(summary = "대국민포털_전문가회원전환신청관리 전환 신청", description = "대국민포털_전문가회원전환신청관리 전문가 회원으로 전환 신청을 처리한다.")
-    @PostMapping(value = "/expertapply")
+    @PostMapping
     public ResponseEntity<ApiPrnDto> expertApply(@RequestBody ExprtApplyIVO exprtApplyIVO) {
         ApiPrnDto apiPrnDto = exprtApplyService.expertApply(exprtApplyIVO);
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());

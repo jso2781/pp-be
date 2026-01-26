@@ -1,5 +1,7 @@
 package kr.go.kids.domain.atch.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.go.kids.domain.atch.vo.AtchDVO;
@@ -10,18 +12,40 @@ import kr.go.kids.domain.atch.vo.AtchRVO;
 public interface AtchMapper
 {
     /**
-     * 공통_첨부파일기본 정보 조회 
+     * 공통_첨부파일기본 정보 조회 (단건)
      *
-     * @param atchPVO 조회용 파라메터 정보 
+     * @param atchPVO 조회용 파라메터 정보 (atchFileGroupId, atchFileId 필수)
      * @return 조회된 공통_첨부파일기본 
      */
     public AtchRVO getAtch(AtchPVO atchPVO);
 
     /**
-     * 첨부파일일련번호 발번
-     * @return 발번된 첨부파일일련번호
+     * 공통_첨부파일기본 목록 조회
+     *
+     * @param atchPVO 조회용 파라메터 정보 (atchFileGroupId 필수)
+     * @return 조회된 공통_첨부파일기본 목록
      */
-    public long nextAtchFileSn();
+    public List<AtchRVO> getAtchList(AtchPVO atchPVO);
+
+    /**
+     * 첨부파일그룹 ID 시퀀스 발번
+     * @return 발번된 첨부파일그룹 ID
+     */
+    public long nextAtchFileGroupId();
+
+    /**
+     * 첨부파일 ID 시퀀스 발번
+     * @return 발번된 첨부파일 ID
+     */
+    public long nextAtchFileId();
+
+    /**
+     * 첨부파일그룹 정보 입력
+     *
+     * @param atchPVO 입력할 첨부파일그룹 정보 
+     * @return 입력된 건수 
+     */
+    public int insertAtchGroup(AtchPVO atchPVO);
 
     /**
      * 공통_첨부파일기본 정보 입력 
@@ -57,4 +81,12 @@ public interface AtchMapper
      * @return 삭제된 건수 
      */
     public int deleteAtch(AtchDVO atchDVO);
+
+    /**
+     * 첨부파일그룹 정보 삭제
+     *
+     * @param atchDVO 삭제용 파라메터 정보 
+     * @return 삭제된 건수 
+     */
+    public int deleteAtchGroup(AtchDVO atchDVO);
 }

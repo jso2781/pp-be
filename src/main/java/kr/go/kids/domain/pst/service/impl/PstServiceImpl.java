@@ -68,26 +68,14 @@ public class PstServiceImpl implements PstService {
             pstMapper.updtInqCnt(pstPVO);
             pstRVO.increaseInqCnt();
 
-//            // FIXME 첨부파일 관련 DB구조 관리자와 협의 후 수정 필요
-//            List<AtchRVO> files = new ArrayList<AtchRVO>();
-//
-//            String attchId = pstRVO.getAtchFileId();
-//            if (StringUtils.isNotBlank(attchId)) {
-//                BigInteger bi = new BigInteger(attchId);
-//
-//                AtchPVO atchPVO = new AtchPVO();
-//                atchPVO.setAtchFileSn(bi);
-//
-//                AtchRVO atchRVO = atchMapper.getAtch(atchPVO);
-//                files.add(atchRVO);
-//
-//                // FIXME 다중 첨부파일 테스트용 (추후 삭제)
-//                atchPVO.setAtchFileSn(new BigInteger("2"));
-//                files.add(atchMapper.getAtch(atchPVO));
-//                // ===========================================
-//            }
-//
-//            pstRVO.setAtchRVOs(files);
+            String atchFileGroupId = pstRVO.getAtchFileGroupId();
+            if (StringUtils.isNotBlank(atchFileGroupId)) {                
+                AtchPVO atchPVO = new AtchPVO();
+                atchPVO.setAtchFileGroupId(atchFileGroupId);
+
+                List<AtchRVO> atchList = atchMapper.getAtchList(atchPVO);
+                pstRVO.setAtchRVOs(atchList);
+            }
 
             String videoId = pstRVO.getVideoId();
             if (StringUtils.isNotBlank(videoId)) {

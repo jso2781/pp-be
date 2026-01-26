@@ -1,6 +1,7 @@
 package kr.go.kids.domain.atch.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,12 +14,20 @@ import kr.go.kids.global.system.common.vo.ApiPrnDto;
 public interface AtchService
 {
     /**
-     * 공통_첨부파일기본 정보 조회 
+     * 공통_첨부파일기본 정보 조회 (단건)
      *
-     * @param atchPVO 조회용 파라메터 정보 
+     * @param atchPVO 조회용 파라메터 정보 (atchFileGroupId, atchFileId 필수)
      * @return 조회된 공통_첨부파일기본 
      */
     public AtchRVO getAtch(AtchPVO atchPVO);
+
+    /**
+     * 공통_첨부파일기본 목록 조회
+     *
+     * @param atchPVO 조회용 파라메터 정보 (atchFileGroupId 필수)
+     * @return 조회된 공통_첨부파일기본 목록
+     */
+    public List<AtchRVO> getAtchList(AtchPVO atchPVO);
 
     /**
      * 공통_첨부파일기본 정보 입력 

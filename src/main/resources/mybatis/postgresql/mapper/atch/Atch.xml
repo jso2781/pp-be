@@ -3,156 +3,254 @@
 <mapper namespace="kr.go.kids.domain.atch.mapper.AtchMapper">
 
     <select id="getAtch" parameterType="AtchPVO" resultType="AtchRVO" >
-        /* 공통_첨부파일기본 조회 (AtchMapper.getAtch) */
-        SELECT
-             atch_file_sn
-            ,menu_sn
-            ,menu_type
-            ,atch_file_uld_hr
-            ,atch_file_use_yn
-            ,atch_file_path
-            ,atch_file_nm
-            ,atch_file_extn_nm
-            ,atch_file_cn
-            ,atch_file_sz
-            ,rgtr_id
-            ,reg_dt
-
-            ,mdfr_id
-            ,mdfcn_dt
-
-        FROM kids_own.TB_CA_M_ATCH
+        /* 공통_첨부파일기본 조회 (단건) (AtchMapper.getAtch) */
+        
+		SELECT 
+			  atch_file_id
+			, atch_file_group_id
+			, file_seq
+			, file_strg_path_dsctn
+			, encd_file_nm
+			, prvc_incl_yn
+			, file_nm
+			, file_extn_nm
+			, file_cn
+			, file_sz
+			, crt_dt
+			, use_yn
+			, reg_dt
+			, rgtr_id
+			, mdfcn_dt
+			, mdfr_id			
+		FROM kids_own.TB_CA_E_FILE_TRSM        
         WHERE 1=1
-        AND atch_file_sn = #{atchFileSn}
+        <if test="atchFileGroupId != null and atchFileGroupId != ''">
+        AND atch_file_group_id = #{atchFileGroupId}
+        </if>
+        <if test="atchFileId != null and atchFileId != ''">
+        AND atch_file_id = #{atchFileId}
+        </if>
     </select>
 
-    <select id="nextAtchFileSn" resultType="long">
-        SELECT nextval('TB_CA_M_ATCH_SEQ')
+    <select id="getAtchList" parameterType="AtchPVO" resultType="AtchRVO" >
+        /* 공통_첨부파일기본 목록 조회 (AtchMapper.getAtchList) */
+        
+		SELECT 
+			  atch_file_id
+			, atch_file_group_id
+			, file_seq
+			, file_strg_path_dsctn
+			, encd_file_nm
+			, prvc_incl_yn
+			, file_nm
+			, file_extn_nm
+			, file_cn
+			, file_sz
+			, crt_dt
+			, use_yn
+			, reg_dt
+			, rgtr_id
+			, mdfcn_dt
+			, mdfr_id			
+		FROM kids_own.TB_CA_E_FILE_TRSM        
+        WHERE 1=1
+        <if test="atchFileGroupId != null and atchFileGroupId != ''">
+        AND atch_file_group_id = #{atchFileGroupId}
+        </if>
+        <if test="useYn != null and useYn != ''">
+        AND use_yn = #{useYn}
+        </if>
+        ORDER BY file_seq ASC, reg_dt ASC
     </select>
 
-    <insert id="insertAtch" parameterType="AtchPVO">
-        /* 공통_첨부파일기본 입력 (AtchMapper.insertAtch) */
-        INSERT INTO kids_own.TB_CA_M_ATCH
+    <select id="nextAtchFileGroupId" resultType="long">
+        /* 첨부파일그룹 ID 시퀀스 발번 (AtchMapper.nextAtchFileGroupId) */
+        SELECT nextval('kids_own.tb_ca_m_atch_group_seq')
+    </select>
+
+    <select id="nextAtchFileId" resultType="long">
+        /* 첨부파일 ID 시퀀스 발번 (AtchMapper.nextAtchFileId) */
+        SELECT nextval('kids_own.tb_ca_m_atch_seq')
+    </select>
+
+    <insert id="insertAtchGroup" parameterType="AtchPVO">
+        /* 첨부파일그룹 정보 입력 (AtchMapper.insertAtchGroup) */
+        <selectKey keyProperty="atchFileGroupId" resultType="String" order="AFTER">
+            SELECT CAST(atch_file_group_id AS VARCHAR) FROM kids_own.tb_ca_e_file_group_trsm 
+            WHERE atch_file_group_id = (SELECT last_value FROM kids_own.tb_ca_m_atch_group_seq)
+        </selectKey>
+        INSERT INTO kids_own.tb_ca_e_file_group_trsm
         (
-             atch_file_sn
-            ,menu_sn
-            ,menu_type
-            ,atch_file_uld_hr
-            ,atch_file_use_yn
-            ,atch_file_path
-            ,atch_file_nm
-            ,atch_file_extn_nm
-            ,atch_file_cn
-            ,atch_file_sz
+             atch_file_group_id
+            ,task_se_cd
+            ,task_se_trgt_id
+            ,use_yn
             ,rgtr_id
             ,reg_dt
-
             ,mdfr_id
             ,mdfcn_dt
-
         )
         VALUES
         (
-             #{atchFileSn}
-            ,#{menuSn}
-            ,#{menuType}
-            ,#{atchFileUldHr}
-            ,#{atchFileUseYn}
-            ,#{atchFilePath}
-            ,#{atchFileNm}
-            ,#{atchFileExtnNm}
-            ,#{atchFileCn}
-            ,#{atchFileSz}
+             nextval('kids_own.tb_ca_m_atch_group_seq')
+            ,#{taskSeCd}
+            ,#{taskSeTrgtId}
+            ,#{useYn}
             ,#{rgtrId}
             ,now()
-
             ,#{mdfrId}
             ,now()
+        )
+    </insert>
 
+    <insert id="insertAtch" parameterType="AtchPVO">
+        /* 공통_첨부파일기본 입력 (AtchMapper.insertAtch) */
+        <selectKey keyProperty="atchFileId" resultType="String" order="AFTER">
+            SELECT CAST(atch_file_id AS VARCHAR) FROM kids_own.TB_CA_E_FILE_TRSM 
+            WHERE atch_file_id = (SELECT last_value FROM kids_own.tb_ca_m_atch_seq)
+        </selectKey>
+        INSERT INTO kids_own.TB_CA_E_FILE_TRSM
+        (
+             atch_file_id
+            ,atch_file_group_id
+            ,file_seq
+            ,file_strg_path_dsctn
+            ,encd_file_nm
+            ,prvc_incl_yn
+            ,file_nm
+            ,file_extn_nm
+            ,file_cn
+            ,file_sz
+            ,crt_dt
+            ,use_yn
+            ,rgtr_id
+            ,reg_dt
+            ,mdfr_id
+            ,mdfcn_dt
+        )
+        VALUES
+        (
+             nextval('kids_own.tb_ca_m_atch_seq')
+            ,#{atchFileGroupId}
+            ,#{fileSeq}
+            ,#{fileStrgPathDsctn}
+            ,#{encdFileNm}
+            ,#{prvcInclYn}
+            ,#{fileNm}
+            ,#{fileExtnNm}
+            ,#{fileCn}
+            ,#{fileSz}
+            ,#{crtDt}
+            ,#{useYn}
+            ,#{rgtrId}
+            ,now()
+            ,#{mdfrId}
+            ,now()
         )
     </insert>
 
     <update id="updateAtch" parameterType="AtchPVO">
         /* 공통_첨부파일기본 수정 (AtchMapper.updateAtch) */
-        UPDATE kids_own.TB_CA_M_ATCH
+        UPDATE kids_own.tb_ca_e_file_trsm
         SET
-             menu_sn = coalesce(#{menuSn}, menu_sn)
-            ,menu_type = coalesce(#{menuType}, menu_type)
-            ,atch_file_uld_hr = coalesce(#{atchFileUldHr}, atch_file_uld_hr)
-            ,atch_file_use_yn = coalesce(#{atchFileUseYn}, atch_file_use_yn)
-            ,atch_file_path = coalesce(#{atchFilePath}, atch_file_path)
-            ,atch_file_nm = coalesce(#{atchFileNm}, atch_file_nm)
-            ,atch_file_extn_nm = coalesce(#{atchFileExtnNm}, atch_file_extn_nm)
-            ,atch_file_cn = coalesce(#{atchFileCn}, atch_file_cn)
-            ,atch_file_sz = coalesce(#{atchFileSz}, atch_file_sz)
+             atch_file_group_id = coalesce(#{atchFileGroupId}, atch_file_group_id)
+            ,file_seq = coalesce(#{fileSeq}, file_seq)
+            ,file_strg_path_dsctn = coalesce(#{fileStrgPathDsctn}, file_strg_path_dsctn)
+            ,encd_file_nm = coalesce(#{encdFileNm}, encd_file_nm)
+            ,prvc_incl_yn = coalesce(#{prvcInclYn}, prvc_incl_yn)
+            ,file_nm = coalesce(#{fileNm}, file_nm)
+            ,file_extn_nm = coalesce(#{fileExtnNm}, file_extn_nm)
+            ,file_cn = coalesce(#{fileCn}, file_cn)
+            ,file_sz = coalesce(#{fileSz}, file_sz)
+            ,crt_dt = coalesce(#{crtDt}, crt_dt)
+            ,use_yn = coalesce(#{useYn}, use_yn)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-
         WHERE 1=1
-        AND atch_file_sn = #{atchFileSn}
+        AND atch_file_id = #{atchFileId}
     </update>
 
     <insert id="saveAtch" parameterType="AtchPVO">
-        /* 공통_첨부파일기본 저장 (AtchMapper.insertAtch) */
-        INSERT INTO kids_own.TB_CA_M_ATCH
+        /* 공통_첨부파일기본 저장 (AtchMapper.saveAtch) */
+        INSERT INTO kids_own.tb_ca_e_file_trsm
         (
-             atch_file_sn
-            ,menu_sn
-            ,menu_type
-            ,atch_file_uld_hr
-            ,atch_file_use_yn
-            ,atch_file_path
-            ,atch_file_nm
-            ,atch_file_extn_nm
-            ,atch_file_cn
-            ,atch_file_sz
+             atch_file_id
+            ,atch_file_group_id
+            ,file_seq
+            ,file_strg_path_dsctn
+            ,encd_file_nm
+            ,prvc_incl_yn
+            ,file_nm
+            ,file_extn_nm
+            ,file_cn
+            ,file_sz
+            ,crt_dt
+            ,use_yn
             ,rgtr_id
             ,reg_dt
-
             ,mdfr_id
             ,mdfcn_dt
-
         )
         VALUES
         (
-             #{atchFileSn}
-            ,#{menuSn}
-            ,#{menuType}
-            ,#{atchFileUldHr}
-            ,#{atchFileUseYn}
-            ,#{atchFilePath}
-            ,#{atchFileNm}
-            ,#{atchFileExtnNm}
-            ,#{atchFileCn}
-            ,#{atchFileSz}
+             <choose>
+                 <when test="atchFileId != null and atchFileId != ''">
+                     #{atchFileId}
+                 </when>
+                 <otherwise>
+                     nextval('kids_own.tb_ca_m_atch_seq')
+                 </otherwise>
+             </choose>
+            ,#{atchFileGroupId}
+            ,#{fileSeq}
+            ,#{fileStrgPathDsctn}
+            ,#{encdFileNm}
+            ,#{prvcInclYn}
+            ,#{fileNm}
+            ,#{fileExtnNm}
+            ,#{fileCn}
+            ,#{fileSz}
+            ,#{crtDt}
+            ,#{useYn}
             ,#{rgtrId}
             ,now()
-
             ,#{mdfrId}
             ,now()
-
         )
-        ON CONFLICT(atch_file_sn)
+        ON CONFLICT(atch_file_id)
         DO UPDATE SET
-             menu_sn = coalesce(excluded.menu_sn, kids_own.TB_CA_M_ATCH.menu_sn)
-            ,menu_type = coalesce(excluded.menu_type, kids_own.TB_CA_M_ATCH.menu_type)
-            ,atch_file_uld_hr = coalesce(excluded.atch_file_uld_hr, kids_own.TB_CA_M_ATCH.atch_file_uld_hr)
-            ,atch_file_use_yn = coalesce(excluded.atch_file_use_yn, kids_own.TB_CA_M_ATCH.atch_file_use_yn)
-            ,atch_file_path = coalesce(excluded.atch_file_path, kids_own.TB_CA_M_ATCH.atch_file_path)
-            ,atch_file_nm = coalesce(excluded.atch_file_nm, kids_own.TB_CA_M_ATCH.atch_file_nm)
-            ,atch_file_extn_nm = coalesce(excluded.atch_file_extn_nm, kids_own.TB_CA_M_ATCH.atch_file_extn_nm)
-            ,atch_file_cn = coalesce(excluded.atch_file_cn, kids_own.TB_CA_M_ATCH.atch_file_cn)
-            ,atch_file_sz = coalesce(excluded.atch_file_sz, kids_own.TB_CA_M_ATCH.atch_file_sz)
-            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_CA_M_ATCH.mdfr_id)
+             atch_file_group_id = coalesce(excluded.atch_file_group_id, kids_own.tb_ca_e_file_trsm.atch_file_group_id)
+            ,file_seq = coalesce(excluded.file_seq, kids_own.tb_ca_e_file_trsm.file_seq)
+            ,file_strg_path_dsctn = coalesce(excluded.file_strg_path_dsctn, kids_own.tb_ca_e_file_trsm.file_strg_path_dsctn)
+            ,encd_file_nm = coalesce(excluded.encd_file_nm, kids_own.tb_ca_e_file_trsm.encd_file_nm)
+            ,prvc_incl_yn = coalesce(excluded.prvc_incl_yn, kids_own.tb_ca_e_file_trsm.prvc_incl_yn)
+            ,file_nm = coalesce(excluded.file_nm, kids_own.tb_ca_e_file_trsm.file_nm)
+            ,file_extn_nm = coalesce(excluded.file_extn_nm, kids_own.tb_ca_e_file_trsm.file_extn_nm)
+            ,file_cn = coalesce(excluded.file_cn, kids_own.tb_ca_e_file_trsm.file_cn)
+            ,file_sz = coalesce(excluded.file_sz, kids_own.tb_ca_e_file_trsm.file_sz)
+            ,crt_dt = coalesce(excluded.crt_dt, kids_own.tb_ca_e_file_trsm.crt_dt)
+            ,use_yn = coalesce(excluded.use_yn, kids_own.tb_ca_e_file_trsm.use_yn)
+            ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.tb_ca_e_file_trsm.mdfr_id)
             ,mdfcn_dt = now()
-
     </insert>
 
     <delete id="deleteAtch" parameterType="AtchDVO">
         /* 공통_첨부파일기본 삭제 (AtchMapper.deleteAtch) */
-        DELETE FROM kids_own.TB_CA_M_ATCH
+        DELETE FROM kids_own.tb_ca_e_file_trsm
         WHERE 1=1
-        AND atch_file_sn = #{atchFileSn}
+        <if test="atchFileId != null and atchFileId != ''">
+        AND atch_file_id = #{atchFileId}
+        </if>
+        <if test="atchFileGroupId != null and atchFileGroupId != ''">
+        AND atch_file_group_id = #{atchFileGroupId}
+        </if>
+    </delete>
+
+    <delete id="deleteAtchGroup" parameterType="AtchDVO">
+        /* 첨부파일그룹 정보 삭제 (AtchMapper.deleteAtchGroup) */
+        DELETE FROM kids_own.tb_ca_e_file_group_trsm
+        WHERE 1=1
+        AND atch_file_group_id = #{atchFileGroupId}
     </delete>
 
 </mapper>

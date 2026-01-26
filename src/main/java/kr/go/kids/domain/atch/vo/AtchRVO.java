@@ -1,71 +1,88 @@
 package kr.go.kids.domain.atch.vo;
 
 import java.math.BigInteger;
+
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
 
 
+@Getter
+@Setter
 @Schema(name = "공통_첨부파일기본", description = "공통_첨부파일기본 Search Result VO")
 public class AtchRVO
 {
     /**
-     * 첨부파일일련번호
+     * 첨부파일ID (atch_file_id)
      */
-    @Schema(description = "첨부파일일련번호", type = "BigInteger")
-    private BigInteger atchFileSn;
+    @Schema(description = "첨부파일ID", type = "String")
+    private String atchFileId;
 
     /**
-     * 메뉴일련번호
+     * 첨부파일그룹ID (atch_file_group_id)
      */
-    @Schema(description = "메뉴일련번호", type = "BigInteger")
-    private BigInteger menuSn;
+    @Schema(description = "첨부파일그룹ID", type = "String")
+    private String atchFileGroupId;
 
     /**
-     * 메뉴유형
+     * 파일순번 (file_seq)
      */
-    @Schema(description = "메뉴유형", type = "String")
-    private String menuType;
+    @Schema(description = "파일순번", type = "Integer")
+    private Integer fileSeq;
 
     /**
-     * 첨부파일업로드시간
+     * 파일저장경로설명 (file_strg_path_dsctn)
      */
-    @Schema(description = "첨부파일업로드시간", type = "String")
-    private String atchFileUldHr;
+    @Schema(description = "파일저장경로설명", type = "String")
+    private String fileStrgPathDsctn;
 
     /**
-     * 첨부파일사용여부
+     * 암호화파일명 (encd_file_nm)
      */
-    @Schema(description = "첨부파일사용여부", type = "String")
-    private String atchFileUseYn;
+    @Schema(description = "암호화파일명", type = "String")
+    private String encdFileNm;
 
     /**
-     * 첨부파일경로
+     * 개인정보포함여부 (prvc_incl_yn)
      */
-    @Schema(description = "첨부파일경로", type = "String")
-    private String atchFilePath;
+    @Schema(description = "개인정보포함여부", type = "String")
+    private String prvcInclYn;
 
     /**
-     * 첨부파일명
+     * 파일명 (file_nm)
      */
-    @Schema(description = "첨부파일명", type = "String")
-    private String atchFileNm;
+    @Schema(description = "파일명", type = "String")
+    private String fileNm;
 
     /**
-     * 첨부파일확장자명
+     * 파일확장자명 (file_extn_nm)
      */
-    @Schema(description = "첨부파일확장자명", type = "String")
-    private String atchFileExtnNm;
+    @Schema(description = "파일확장자명", type = "String")
+    private String fileExtnNm;
 
     /**
-     * 첨부파일내용
+     * 파일내용 (file_cn)
      */
-    @Schema(description = "첨부파일내용", type = "String")
-    private String atchFileCn;
+    @Schema(description = "파일내용", type = "String")
+    private String fileCn;
 
     /**
-     * 첨부파일크기
+     * 파일크기 (file_sz)
      */
-    @Schema(description = "첨부파일크기", type = "Long")
-    private Long atchFileSz;
+    @Schema(description = "파일크기", type = "Long")
+    private Long fileSz;
+
+    /**
+     * 생성일시 (crt_dt)
+     */
+    @Schema(description = "생성일시", type = "String")
+    private String crtDt;
+
+    /**
+     * 사용여부 (use_yn)
+     */
+    @Schema(description = "사용여부", type = "String")
+    private String useYn;
 
     /**
      * 등록자아이디
@@ -90,122 +107,4 @@ public class AtchRVO
      */
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
-
-    public BigInteger getAtchFileSn()
-    {
-        return atchFileSn;
-    }
-    public void setAtchFileSn(BigInteger atchFileSn)
-    {
-        this.atchFileSn = atchFileSn;
-    }
-    public BigInteger getMenuSn()
-    {
-        return menuSn;
-    }
-    public void setMenuSn(BigInteger menuSn)
-    {
-        this.menuSn = menuSn;
-    }
-    public String getMenuType()
-    {
-        return menuType;
-    }
-    public void setMenuType(String menuType)
-    {
-        this.menuType = menuType;
-    }
-    public String getAtchFileUldHr()
-    {
-        return atchFileUldHr;
-    }
-    public void setAtchFileUldHr(String atchFileUldHr)
-    {
-        this.atchFileUldHr = atchFileUldHr;
-    }
-    public String getAtchFileUseYn()
-    {
-        return atchFileUseYn;
-    }
-    public void setAtchFileUseYn(String atchFileUseYn)
-    {
-        this.atchFileUseYn = atchFileUseYn;
-    }
-    public String getAtchFilePath()
-    {
-        return atchFilePath;
-    }
-    public void setAtchFilePath(String atchFilePath)
-    {
-        this.atchFilePath = atchFilePath;
-    }
-    public String getAtchFileNm()
-    {
-        return atchFileNm;
-    }
-    public void setAtchFileNm(String atchFileNm)
-    {
-        this.atchFileNm = atchFileNm;
-    }
-    public String getAtchFileExtnNm()
-    {
-        return atchFileExtnNm;
-    }
-    public void setAtchFileExtnNm(String atchFileExtnNm)
-    {
-        this.atchFileExtnNm = atchFileExtnNm;
-    }
-    public String getAtchFileCn()
-    {
-        return atchFileCn;
-    }
-    public void setAtchFileCn(String atchFileCn)
-    {
-        this.atchFileCn = atchFileCn;
-    }
-    public Long getAtchFileSz()
-    {
-        return atchFileSz;
-    }
-    public void setAtchFileSz(Long atchFileSz)
-    {
-        this.atchFileSz = atchFileSz;
-    }
-    public String getRgtrId()
-    {
-        return rgtrId;
-    }
-    public void setRgtrId(String rgtrId)
-    {
-        this.rgtrId = rgtrId;
-    }
-    public String getRegDt()
-    {
-        return regDt;
-    }
-    public void setRegDt(String regDt)
-    {
-        this.regDt = regDt;
-    }
-    public String getMdfrId()
-    {
-        return mdfrId;
-    }
-    public void setMdfrId(String mdfrId)
-    {
-        this.mdfrId = mdfrId;
-    }
-    public String getMdfcnDt()
-    {
-        return mdfcnDt;
-    }
-    public void setMdfcnDt(String mdfcnDt)
-    {
-        this.mdfcnDt = mdfcnDt;
-    }
-
-    
-
-    
-
 }

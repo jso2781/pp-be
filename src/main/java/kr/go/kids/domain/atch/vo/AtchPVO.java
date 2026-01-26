@@ -13,64 +13,88 @@ import lombok.Setter;
 public class AtchPVO
 {
     /**
-     * 첨부파일일련번호
+     * 첨부파일ID (atch_file_id)
      */
-    @Schema(description = "첨부파일일련번호", type = "BigInteger")
-    private BigInteger atchFileSn;
+    @Schema(description = "첨부파일ID", type = "String")
+    private String atchFileId;
 
     /**
-     * 메뉴일련번호
+     * 첨부파일그룹ID (atch_file_group_id)
      */
-    @Schema(description = "메뉴일련번호", type = "BigInteger")
-    private BigInteger menuSn;
+    @Schema(description = "첨부파일그룹ID", type = "String")
+    private String atchFileGroupId;
 
     /**
-     * 메뉴유형
+     * 파일순번 (file_seq)
      */
-    @Schema(description = "메뉴유형", type = "String")
-    private String menuType;
+    @Schema(description = "파일순번", type = "Integer")
+    private Integer fileSeq;
 
     /**
-     * 첨부파일업로드시간
+     * 업무구분코드 (task_se_cd)
      */
-    @Schema(description = "첨부파일업로드시간", type = "String")
-    private LocalDateTime atchFileUldHr;
+    @Schema(description = "업무구분코드", type = "String")
+    private String taskSeCd;
 
     /**
-     * 첨부파일사용여부
+     * 업무구분대상ID (task_se_trgt_id)
      */
-    @Schema(description = "첨부파일사용여부", type = "String")
-    private String atchFileUseYn;
+    @Schema(description = "업무구분대상ID", type = "String")
+    private String taskSeTrgtId;
 
     /**
-     * 첨부파일경로
+     * 파일저장경로설명 (file_strg_path_dsctn)
      */
-    @Schema(description = "첨부파일경로", type = "String")
-    private String atchFilePath;
+    @Schema(description = "파일저장경로설명", type = "String")
+    private String fileStrgPathDsctn;
 
     /**
-     * 첨부파일명
+     * 암호화파일명 (encd_file_nm)
      */
-    @Schema(description = "첨부파일명", type = "String")
-    private String atchFileNm;
+    @Schema(description = "암호화파일명", type = "String")
+    private String encdFileNm;
 
     /**
-     * 첨부파일확장자명
+     * 개인정보포함여부 (prvc_incl_yn)
      */
-    @Schema(description = "첨부파일확장자명", type = "String")
-    private String atchFileExtnNm;
+    @Schema(description = "개인정보포함여부", type = "String")
+    private String prvcInclYn;
 
     /**
-     * 첨부파일내용
+     * 파일명 (file_nm)
      */
-    @Schema(description = "첨부파일내용", type = "String")
-    private String atchFileCn;
+    @Schema(description = "파일명", type = "String")
+    private String fileNm;
 
     /**
-     * 첨부파일크기
+     * 파일확장자명 (file_extn_nm)
      */
-    @Schema(description = "첨부파일크기", type = "Long")
-    private Long atchFileSz;
+    @Schema(description = "파일확장자명", type = "String")
+    private String fileExtnNm;
+
+    /**
+     * 파일내용 (file_cn)
+     */
+    @Schema(description = "파일내용", type = "String")
+    private String fileCn;
+
+    /**
+     * 파일크기 (file_sz)
+     */
+    @Schema(description = "파일크기", type = "Long")
+    private Long fileSz;
+
+    /**
+     * 생성일시 (crt_dt)
+     */
+    @Schema(description = "생성일시", type = "String")
+    private String crtDt;
+
+    /**
+     * 사용여부 (use_yn)
+     */
+    @Schema(description = "사용여부", type = "String")
+    private String useYn;
 
     /**
      * 등록자아이디
