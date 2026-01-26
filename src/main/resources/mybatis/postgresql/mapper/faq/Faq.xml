@@ -5,10 +5,10 @@
     <select id="selectFaqList" parameterType="FaqPVO" resultType="FaqRVO" >
         /* 대국민포털_FAQ 목록 조회 (FaqMapper.selectMenuList) */
         SELECT
-		    faq_clsf,
+		    faq_clsf_nm,
 		    faq_ttl,
 		    faq_seq,
-		    faq_ans
+		    faq_ans_cn
         FROM kids_own.TB_PP_M_FAQ
         WHERE 1=1
         AND use_yn = 'Y'
