@@ -10,7 +10,7 @@
 			, atch_file_group_id
 			, file_seq
 			, file_strg_path_dsctn
-			, encd_file_nm
+			, encpt_file_nm
 			, prvc_incl_yn
 			, file_nm
 			, file_extn_nm
@@ -40,7 +40,7 @@
 			, atch_file_group_id
 			, file_seq
 			, file_strg_path_dsctn
-			, encd_file_nm
+			, encpt_file_nm
 			, prvc_incl_yn
 			, file_nm
 			, file_extn_nm
@@ -115,7 +115,7 @@
             ,atch_file_group_id
             ,file_seq
             ,file_strg_path_dsctn
-            ,encd_file_nm
+            ,encpt_file_nm
             ,prvc_incl_yn
             ,file_nm
             ,file_extn_nm
@@ -134,7 +134,7 @@
             ,#{atchFileGroupId}
             ,#{fileSeq}
             ,#{fileStrgPathDsctn}
-            ,#{encdFileNm}
+            ,#{encptFileNm}
             ,#{prvcInclYn}
             ,#{fileNm}
             ,#{fileExtnNm}
@@ -156,7 +156,7 @@
              atch_file_group_id = coalesce(#{atchFileGroupId}, atch_file_group_id)
             ,file_seq = coalesce(#{fileSeq}, file_seq)
             ,file_strg_path_dsctn = coalesce(#{fileStrgPathDsctn}, file_strg_path_dsctn)
-            ,encd_file_nm = coalesce(#{encdFileNm}, encd_file_nm)
+            ,encpt_file_nm = coalesce(#{encptFileNm}, encpt_file_nm)
             ,prvc_incl_yn = coalesce(#{prvcInclYn}, prvc_incl_yn)
             ,file_nm = coalesce(#{fileNm}, file_nm)
             ,file_extn_nm = coalesce(#{fileExtnNm}, file_extn_nm)
@@ -178,7 +178,7 @@
             ,atch_file_group_id
             ,file_seq
             ,file_strg_path_dsctn
-            ,encd_file_nm
+            ,encpt_file_nm
             ,prvc_incl_yn
             ,file_nm
             ,file_extn_nm
@@ -204,7 +204,7 @@
             ,#{atchFileGroupId}
             ,#{fileSeq}
             ,#{fileStrgPathDsctn}
-            ,#{encdFileNm}
+            ,#{encptFileNm}
             ,#{prvcInclYn}
             ,#{fileNm}
             ,#{fileExtnNm}
@@ -222,7 +222,7 @@
              atch_file_group_id = coalesce(excluded.atch_file_group_id, kids_own.tb_ca_e_file_trsm.atch_file_group_id)
             ,file_seq = coalesce(excluded.file_seq, kids_own.tb_ca_e_file_trsm.file_seq)
             ,file_strg_path_dsctn = coalesce(excluded.file_strg_path_dsctn, kids_own.tb_ca_e_file_trsm.file_strg_path_dsctn)
-            ,encd_file_nm = coalesce(excluded.encd_file_nm, kids_own.tb_ca_e_file_trsm.encd_file_nm)
+            ,encpt_file_nm = coalesce(excluded.encpt_file_nm, kids_own.tb_ca_e_file_trsm.encpt_file_nm)
             ,prvc_incl_yn = coalesce(excluded.prvc_incl_yn, kids_own.tb_ca_e_file_trsm.prvc_incl_yn)
             ,file_nm = coalesce(excluded.file_nm, kids_own.tb_ca_e_file_trsm.file_nm)
             ,file_extn_nm = coalesce(excluded.file_extn_nm, kids_own.tb_ca_e_file_trsm.file_extn_nm)

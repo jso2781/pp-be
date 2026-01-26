@@ -49,10 +49,10 @@ public class AtchPVO
     private String fileStrgPathDsctn;
 
     /**
-     * 암호화파일명 (encd_file_nm)
+     * 암호화파일명 (encpt_file_nm)
      */
     @Schema(description = "암호화파일명", type = "String")
-    private String encdFileNm;
+    private String encptFileNm;
 
     /**
      * 개인정보포함여부 (prvc_incl_yn)

@@ -60,37 +60,37 @@ VALUES('11', '', NULL, ' ', NULL, NULL, NULL, NULL);
 
 
 INSERT INTO kids_own.tb_ca_e_file_trsm
-(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encd_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
+(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encpt_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
 VALUES('1', '1', 1, 'fileTest\20260112\', 'encodingFileName', 'N', 'test.txt', 'txt', '파일내용', 135975, NULL, 'Y', NULL, NULL, NULL, NULL);
 INSERT INTO kids_own.tb_ca_e_file_trsm
-(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encd_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
+(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encpt_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
 VALUES('2', '2', 1, 'fileTest\20260112\', 'encodingFileName', 'N', 'imageTest_tsla_logo.png', 'png', '파일내용', 135975, NULL, 'Y', NULL, NULL, NULL, NULL);
 INSERT INTO kids_own.tb_ca_e_file_trsm
-(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encd_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
+(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encpt_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
 VALUES('3', '3', 1, 'fileTest\20260112\', 'encodingFileName', 'N', 'imageTest_car_logo2.png', 'png', '파일내용', 135975, NULL, 'Y', NULL, NULL, NULL, NULL);
 INSERT INTO kids_own.tb_ca_e_file_trsm
-(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encd_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
+(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encpt_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
 VALUES('4', '4', 1, 'fileTest\20260112\', 'encodingFileName', 'N', 'imageTest_tsla.png', 'png', '파일내용', 135975, NULL, 'Y', NULL, NULL, NULL, NULL);
 INSERT INTO kids_own.tb_ca_e_file_trsm
-(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encd_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
+(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encpt_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
 VALUES('5', '5', 1, 'fileTest\20260112\', 'encodingFileName', 'N', 'imageTest_tsla2.png', 'png', '파일내용', 135975, NULL, 'Y', NULL, NULL, NULL, NULL);
 INSERT INTO kids_own.tb_ca_e_file_trsm
-(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encd_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
+(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encpt_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
 VALUES('6', '6', 1, 'fileTest\20260112\', 'encodingFileName', 'N', 'imageTest_youtube_logo.png', 'png', '파일내용', 135975, NULL, 'Y', NULL, NULL, NULL, NULL);
 INSERT INTO kids_own.tb_ca_e_file_trsm
-(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encd_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
+(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encpt_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
 VALUES('7', '7', 1, 'fileTest\20260112\', 'encodingFileName', 'N', 'pop1.png', 'png', '파일내용', 135975, NULL, 'Y', NULL, NULL, NULL, NULL);
 INSERT INTO kids_own.tb_ca_e_file_trsm
-(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encd_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
+(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encpt_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
 VALUES('8', '8', 1, 'fileTest\20260112\', 'encodingFileName', 'N', 'pop2.png', 'png', '파일내용', 135975, NULL, 'Y', NULL, NULL, NULL, NULL);
 INSERT INTO kids_own.tb_ca_e_file_trsm
-(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encd_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
+(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encpt_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
 VALUES('9', '9', 1, 'fileTest\20260112\', 'encodingFileName', 'N', 'pop3.png', 'png', '파일내용', 135975, NULL, 'Y', NULL, NULL, NULL, NULL);
 INSERT INTO kids_own.tb_ca_e_file_trsm
-(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encd_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
+(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encpt_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
 VALUES('10', '10', 1, 'fileTest\20260112\', 'encodingFileName', 'N', 'imageTest_insta.png', 'png', '파일내용', 135975, NULL, 'Y', NULL, NULL, NULL, NULL);
 INSERT INTO kids_own.tb_ca_e_file_trsm
-(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encd_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
+(atch_file_id, atch_file_group_id, file_seq, file_strg_path_dsctn, encpt_file_nm, prvc_incl_yn, file_nm, file_extn_nm, file_cn, file_sz, crt_dt, use_yn, reg_dt, rgtr_id, mdfcn_dt, mdfr_id)
 VALUES('11', '11', 1, 'fileTest\20260112\', 'encodingFileName', 'N', 'imageTest_blog.png', 'png', '파일내용', 135975, NULL, 'Y', NULL, NULL, NULL, NULL);
 
 

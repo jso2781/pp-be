@@ -197,7 +197,7 @@ public class AtchServiceImpl implements AtchService
                 fileInsertReqVO.setAtchFileGroupId(atchFileGroupId);
                 fileInsertReqVO.setFileSeq(fileSeq++);
                 fileInsertReqVO.setFileStrgPathDsctn(tempSavePath);
-                fileInsertReqVO.setEncdFileNm(realFileNm);
+                fileInsertReqVO.setEncptFileNm(realFileNm);
                 fileInsertReqVO.setPrvcInclYn("N");
                 fileInsertReqVO.setFileNm(fileNm);
                 fileInsertReqVO.setFileExtnNm(extNm);
@@ -255,7 +255,7 @@ public class AtchServiceImpl implements AtchService
                 AtchRVO atchRVO = atchMapper.getAtch(atchPVO);
                 if (atchRVO != null) {
                     atchFileId = atchRVO.getAtchFileId();
-                    filename = atchRVO.getEncdFileNm();  // 암호화된 파일명 사용 (실제 저장된 파일명)
+                    filename = atchRVO.getEncptFileNm();  // 암호화된 파일명 사용 (실제 저장된 파일명)
                     path = atchRVO.getFileStrgPathDsctn();  // 저장 경로 설명
                     downloadFilename = atchRVO.getFileNm();  // 원본 파일명 (다운로드시 사용)
                     
