@@ -70,10 +70,18 @@ public interface MbrInfoMapper
     public int deleteMbrInfo(MbrInfoDVO mbrInfoDVO);
     
     /**
-     * 
+     * 대국민포털_회원정보기본 ID 존재 여부 조회
      * 
      * @param mbrInfoPVO
-     * @return
+     * @return MbrInfoRVO
+     */
+    public MbrInfoRVO findMbrInfoId(MbrInfoPVO mbrInfoPVO); 
+    
+    /**
+     * 대국민포털_회원정보기본 패스워드 정보 수정
+     * 
+     * @param mbrInfoPVO
+     * @return update 성공 row 갯수
      */
     public int updateMbrInfoPw(MbrInfoPVO mbrInfoPVO);
 }

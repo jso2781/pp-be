@@ -239,6 +239,20 @@
         AND mbr_no = #{mbrNo}
     </delete>
     
+    <select id="findMbrInfoId" parameterType="MbrInfoPVO"  resultType="MbrInfoRVO">
+    	/* 대국민포털_회원정보 ID 존재 여부 조회  */
+    	SELECT
+			mbr_id,
+			encpt_mbr_flnm
+		FROM
+			kids_own.TB_PP_M_MBR_INFO
+		WHERE
+			1=1
+		AND
+			mbr_no = #{mbrNo}
+		LIMIT 1
+    </select>
+    
     <update id="updateMbrInfoPw" parameterType="MbrInfoPVO">
         /* 대국민포털_회원정보 PW 수정 (MbrInfoMapper.updateMbrInfoPw) */
         UPDATE kids_own.TB_PP_M_MBR_INFO

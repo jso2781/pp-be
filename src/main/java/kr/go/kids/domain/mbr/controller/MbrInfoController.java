@@ -132,20 +132,19 @@ public class MbrInfoController
         return resultMap;
     }
     
-    @Operation(summary = "대국민포털_회원정보기본 CI값 기준으로 ID 존재 여부 조회", description = "대국민포털_회원정보기본 CI값 기준으로 ID 존재 여부 조회한다.")
+    @Operation(summary = "대국민포털_회원정보기본 ID 존재 여부 조회", description = "대국민포털_회원정보기본 ID 존재 여부 조회한다.")
     @PostMapping(value="/findMbrInfoId")
     @ResponseBody
     public ResponseEntity<ApiPrnDto> findMbrInfoId(@RequestBody MbrInfoPVO mbrInfoPVO )
     {
-    	mbrInfoPVO.getLinkInfoIdntfId(); //CI값으로 예상중
-//    	ApiPrnDto apiPrnDto = mbrInfoService.findMbrInfoId(mbrInfoPVO);
-//
-//    	ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
-//        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
-    	return new ResponseEntity(null);
+//    	mbrInfoPVO.getLinkInfoIdntfId(); CI값으로 예상중 AnyID연동후 변경
+    	ApiPrnDto apiPrnDto = mbrInfoService.findMbrInfoId(mbrInfoPVO);
+
+    	ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
     
-    @Operation(summary = "대국민포털_회원정보기본 CI값 기준으로 PW 수정", description = "대국민포털_회원정보기본 CI값 기준으로 PW 수정한다.")
+    @Operation(summary = "대국민포털_회원정보기본 패스워드 정보 수정", description = "대국민포털_회원정보기본 패스워드 정보 수정한다.")
     @PostMapping(value="/updateMbrInfoPw")
     @ResponseBody
     public ResponseEntity<ApiPrnDto> updateMbrInfoPw(@RequestBody MbrInfoPVO mbrInfoPVO )

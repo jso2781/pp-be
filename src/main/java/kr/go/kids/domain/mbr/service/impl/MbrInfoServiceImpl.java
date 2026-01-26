@@ -119,6 +119,23 @@ public class MbrInfoServiceImpl implements MbrInfoService
     }
     
     @Override
+    public ApiPrnDto findMbrInfoId(MbrInfoPVO mbrInfoPVO)
+    {
+        ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
+        try {
+	        	MbrInfoRVO mbrInfoRVO = mbrInfoMapper.findMbrInfoId(mbrInfoPVO);
+	        	HashMap<String, Object> map = new HashMap<>();
+	        	map.put("mbrInfoRVO", mbrInfoRVO);
+	        	result.setData(map);
+        } catch (Exception e) {
+            log.error("회원정보기본 ID 존재 여부 조회 실패", e);
+            result = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
+            result.setMsg(MessageContextHolder.getMessage("api.error.500"));
+        }
+        return result;
+    }
+    
+    @Override
     public ApiPrnDto updateMbrInfoPw(MbrInfoPVO mbrInfoPVO)
     {
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
