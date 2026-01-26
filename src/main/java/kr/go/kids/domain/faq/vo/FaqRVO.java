@@ -13,7 +13,7 @@ public class FaqRVO
      * FAQ분류
      */
     @Schema(description = "FAQ분류", type = "String")
-    private String faqClsf;
+    private String faqClsfNm;
 
     /**
      * FAQ제목
@@ -37,6 +37,6 @@ public class FaqRVO
      * FAQ답변
      */
     @Schema(description = "FAQ답변", type = "String")
-    private String faqAns;
+    private String faqAnsCn;
 
 }
