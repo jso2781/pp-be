@@ -69,15 +69,12 @@ public class MainServiceImpl implements MainService {
 
         // 3.1 SNS 유튜브 게시물 last4
         List<MainRVO> youtube = mainMapper.selectRecent4PstListByTaskCd(TASK_CD_MN_BBS2);        
-        // FIXME 동영상 URL 관련 컬럼명 확정시 수정 필요
-        // 임시 컬럼 : pstCn (게시글 내용)        
         for (MainRVO main : youtube) {
-            String pstCn = main.getPstCn();
-            if (StringUtils.isNotBlank(pstCn)) {
-                main.setVideoId(extractYoutubeVideoId(pstCn));
+            String videoId = main.getVideoId();
+            if (StringUtils.isNotBlank(videoId)) {
+                main.setVideoId(extractYoutubeVideoId(videoId));
             }
         }        
-        // =========================================                        
         data.put("youtube", youtube);
 
         // 3.2 SNS 인스타 게시물 last4
@@ -90,12 +87,10 @@ public class MainServiceImpl implements MainService {
         
         // 3.4 SNS 통합 20건 조회
         List<MainRVO> all_sns = mainMapper.selectRecent20PstListByTaskCds(Arrays.asList(TASK_CD_MN_BBS2, TASK_CD_MN_BBS3, TASK_CD_MN_BBS4));
-        // FIXME 동영상 URL 관련 컬럼명 확정시 수정 필요
-        // 임시 컬럼 : pstCn (게시글 내용)      
         for (MainRVO main : all_sns) {
-            String pstCn = main.getPstCn();
-            if (StringUtils.isNotBlank(pstCn)) {
-                main.setVideoId(extractYoutubeVideoId(pstCn));
+            String videoId = main.getVideoId();
+            if (StringUtils.isNotBlank(videoId)) {
+                main.setVideoId(extractYoutubeVideoId(videoId));
             }
         }           
         data.put("all_sns", all_sns);
