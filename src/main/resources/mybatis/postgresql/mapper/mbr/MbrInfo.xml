@@ -64,6 +64,58 @@
     </select>
 
     <select id="insertMbrInfo" parameterType="MbrInfoPVO">
+        INSERT INTO kids_own.TB_PP_M_MBR_INFO
+        (
+             mbr_no
+            ,mbr_id
+            ,encpt_mbr_flnm
+            ,encpt_mbr_eml_nm
+            ,encpt_mbr_pswd
+            ,encpt_mbr_telno
+            ,mbr_type_cd
+            ,mbr_join_stts_cd
+            ,mbr_join_dt
+            ,mbr_whdwl_rsn
+            ,mbr_whdwl_dt
+            ,bfr_enpswd
+            ,pswd_chg_dt
+            ,pswd_err_nmtm
+            ,link_info_idntf_id
+            ,cert_token_vl
+            ,rgtr_id
+            ,reg_dt
+            ,mdfr_id
+            ,mdfcn_dt
+
+        )VALUES(
+            (
+                select to_char(now(), 'YYYY') || coalesce(LPAD((MAX(cast(substr(mbr_no, 5) as Integer)) + 1)::text, 6, '0'), '000001') as mbrNo
+                from kids_own.TB_PP_M_MBR_INFO
+                where mbr_no like to_char(now(), 'YYYY')|| '%'
+            )
+            ,#{mbrId}
+            ,#{encptMbrFlnm}
+            ,#{encptMbrEmlNm}
+            ,#{encptMbrPswd}
+            ,#{encptMbrTelno}
+            ,#{mbrTypeCd}
+            ,#{mbrJoinSttsCd}
+            ,to_timestamp(#{mbrJoinDt}, 'YYYY-MM-DD HH24:MI:SS')
+            ,#{mbrWhdwlRsn}
+            ,#{mbrWhdwlDt}
+            ,#{bfrEnpswd}
+            ,#{pswdChgDt}
+            ,#{pswdErrNmtm}
+            ,#{linkInfoIdntfId}
+            ,#{certTokenVl}
+            ,#{rgtrId}
+            ,now()
+            ,#{mdfrId}
+            ,now()
+        )
+    </select>
+
+    <select id="insertMbrInfo2" parameterType="MbrInfoPVO">
         /* 대국민포털_회원정보기본 입력 (MbrInfoMapper.insertMbrInfo) */
         WITH seq AS (
           INSERT INTO kids_own.TB_PP_M_MBR_NO_SEQ (yyyy, last_seq)
@@ -126,7 +178,6 @@
         )
         SELECT mbr_no FROM ins
     </select>
-
     <update id="updateMbrInfo" parameterType="MbrInfoPVO">
         /* 대국민포털_회원정보기본 수정 (MbrInfoMapper.updateMbrInfo) */
         UPDATE kids_own.TB_PP_M_MBR_INFO
