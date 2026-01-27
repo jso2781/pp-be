@@ -25,13 +25,13 @@ public class TrmsSttRVO
      * 약관법령적용일
      */
     @Schema(description = "약관법령적용일", type = "String")
-    private String trmsSttAplcnDay;
+    private String trmsSttAplcnYmd;
 
     /**
      * 약관법령종료일
      */
     @Schema(description = "약관법령종료일", type = "String")
-    private String trmsSttEndDay;
+    private String trmsSttEndYmd;
 
     /**
      * 약관법령내용
@@ -40,10 +40,10 @@ public class TrmsSttRVO
     private String trmsSttCn;
 
     /**
-     * 첨부파일아이디
+     * 첨부파일그룹아이디
      */
-    @Schema(description = "첨부파일아이디", type = "String")
-    private String atchFileId;
+    @Schema(description = "첨부파일그룹아이디", type = "String")
+    private String atchFileGroupId;
 
     /**
      * 작성자부서명
