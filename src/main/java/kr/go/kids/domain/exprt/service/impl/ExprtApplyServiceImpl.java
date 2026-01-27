@@ -36,10 +36,11 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
                     new String[] { MessageContextHolder.getMessage("label.inst.brno") });
         }
 
-        boolean isExists = exprtApplyMapper.existsInstByBrno(brno);
-        data.put("isExists", isExists);
-        
-        if (isExists) {
+        String instNm = exprtApplyMapper.existsInstByBrno(brno);
+        data.put("instNm", instNm);
+
+        // FIXME 업무시스템 없는 경우 테스트를 위한 데이터 조정
+        if (StringUtils.isNotBlank(instNm) && brno.equals("9999999999")) {
             // FIXME 공통코드 관련 DB 구조 확정 시 Mapper 쿼리 수정 필요
             List<ExprtApplyRVO> taskSystemList = exprtApplyMapper.selectInstTaskSystemByBrno(brno);
             data.put("taskSystemList", taskSystemList);            

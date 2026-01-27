@@ -16,7 +16,7 @@ public interface ExprtApplyMapper
      * @param brno 사업자등록번호
      * @return 기관존재여부 
      */    
-    public boolean existsInstByBrno(String brno);
+    public String existsInstByBrno(String brno);
     
     /**
      * 대국민포털_전문가회원전환신청관리 기관 업무시스템 목록 조회 

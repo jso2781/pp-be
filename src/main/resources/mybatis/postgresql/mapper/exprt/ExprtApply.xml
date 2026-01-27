@@ -2,13 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.go.kids.domain.exprt.mapper.ExprtApplyMapper">
 
-    <select id="existsInstByBrno" parameterType="String" resultType="boolean" >
-        /* 대국민포털_전문가회원전환신청관리 사업자등록번호 검증 (ExprtApplyMapper.existsInstByBrno) */        
-		SELECT EXISTS (
-		    SELECT 1
-		      FROM kids_own.TB_PP_M_INST
-		     WHERE brno = #{brno}
-		)
+    <select id="existsInstByBrno" parameterType="String" resultType="String" >
+        /* 대국민포털_전문가회원전환신청관리 사업자등록번호 검증 (ExprtApplyMapper.existsInstByBrno) */
+        SELECT inst_nm
+          FROM kids_own.TB_PP_M_INST
+         WHERE brno = #{brno}
     </select>
 
     <select id="selectInstTaskSystemByBrno" parameterType="String" resultType="ExprtApplyRVO" >
