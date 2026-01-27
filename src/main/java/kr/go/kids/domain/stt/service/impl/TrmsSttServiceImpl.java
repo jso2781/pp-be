@@ -48,9 +48,8 @@ public class TrmsSttServiceImpl implements TrmsSttService
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         HashMap<String, Object> data = new HashMap<String, Object>();
         try {
-        	List<TrmsSttRVO> trmsSttList = trmsSttMapper.selectTrmsSttList(trmsSttPVO);
-        	
-        	data.put("list", trmsSttList);
+        		List<TrmsSttRVO> trmsSttList = trmsSttMapper.selectTrmsSttList(trmsSttPVO);
+        		data.put("list", trmsSttList);
         	
         } catch (Exception e) {
             log.error("약관법령 목록 조회 실패", e);
@@ -68,8 +67,7 @@ public class TrmsSttServiceImpl implements TrmsSttService
     	HashMap<String, Object> data = new HashMap<String, Object>();
     	try {
     		TrmsSttRVO trmsSttRVO = trmsSttMapper.getTrmsSttLatest(trmsSttPVO);
-    		//data 추가작업 필요.
-    		data.put("trmsSttCn", trmsSttRVO.getTrmsSttCn());
+			data.put("trmsSttCn", trmsSttRVO);
     		
     	} catch (Exception e) {
             log.error("약관법령 최신글 단건 조회 실패", e);

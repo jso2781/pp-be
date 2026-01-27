@@ -38,7 +38,7 @@
             trms_stt_aplcn_ymd,
             trms_stt_end_ymd,
             trms_stt_cn,
-            atch_file_id
+            atch_file_group_id
         FROM kids_own.TB_PP_M_TRMS_STT
         WHERE 1=1
         AND trms_stt_cd = #{trmsSttCd}
@@ -50,7 +50,7 @@
             trms_stt_aplcn_ymd,
             trms_stt_end_ymd,
             trms_stt_cn,
-            atch_file_id
+            atch_file_group_id
         FROM kids_own.TB_PP_M_TRMS_STT
         WHERE 1=1
         AND trms_stt_cd = #{trmsSttCd}
