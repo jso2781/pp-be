@@ -10,9 +10,9 @@ import lombok.Setter;
 public class FaqRVO
 {
     /**
-     * FAQ분류
+     * FAQ분류명
      */
-    @Schema(description = "FAQ분류", type = "String")
+    @Schema(description = "FAQ분류명", type = "String")
     private String faqClsfNm;
 
     /**

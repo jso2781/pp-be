@@ -1,7 +1,11 @@
 package kr.go.kids.domain.faq.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Schema(name = "대국민포털_FAQ기본", description = "대국민포털_FAQ기본 Search Parameter VO")
 public class FaqPVO
 {
@@ -18,10 +22,10 @@ public class FaqPVO
     private String taskSeCd;
 
     /**
-     * FAQ분류
+     * FAQ분류명
      */
-    @Schema(description = "FAQ분류", type = "String")
-    private String faqClsf;
+    @Schema(description = "FAQ분류명", type = "String")
+    private String faqClsfNm;
 
     /**
      * FAQ제목
@@ -51,13 +55,13 @@ public class FaqPVO
      * FAQ답변
      */
     @Schema(description = "FAQ답변", type = "String")
-    private String faqAns;
+    private String faqAnsCn;
 
     /**
-     * 첨부파일아이디
+     * 첨부파일그룹아이디
      */
-    @Schema(description = "첨부파일아이디", type = "String")
-    private String atchFileId;
+    @Schema(description = "첨부파일그룹아이디", type = "String")
+    private String atchFileGroupId;
 
     /**
      * 작성자부서명
@@ -94,134 +98,4 @@ public class FaqPVO
      */
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
-
-    public Long getFaqSn()
-    {
-        return faqSn;
-    }
-    public void setFaqSn(Long faqSn)
-    {
-        this.faqSn = faqSn;
-    }
-    public String getTaskSeCd()
-    {
-        return taskSeCd;
-    }
-    public void setTaskSeCd(String taskSeCd)
-    {
-        this.taskSeCd = taskSeCd;
-    }
-    public String getFaqClsf()
-    {
-        return faqClsf;
-    }
-    public void setFaqClsf(String faqClsf)
-    {
-        this.faqClsf = faqClsf;
-    }
-    public String getFaqTtl()
-    {
-        return faqTtl;
-    }
-    public void setFaqTtl(String faqTtl)
-    {
-        this.faqTtl = faqTtl;
-    }
-    public Integer getFaqSeq()
-    {
-        return faqSeq;
-    }
-    public void setFaqSeq(Integer faqSeq)
-    {
-        this.faqSeq = faqSeq;
-    }
-    public String getUseYn()
-    {
-        return useYn;
-    }
-    public void setUseYn(String useYn)
-    {
-        this.useYn = useYn;
-    }
-    public String getLangSeCd()
-    {
-        return langSeCd;
-    }
-    public void setLangSeCd(String langSeCd)
-    {
-        this.langSeCd = langSeCd;
-    }
-    public String getFaqAns()
-    {
-        return faqAns;
-    }
-    public void setFaqAns(String faqAns)
-    {
-        this.faqAns = faqAns;
-    }
-    public String getAtchFileId()
-    {
-        return atchFileId;
-    }
-    public void setAtchFileId(String atchFileId)
-    {
-        this.atchFileId = atchFileId;
-    }
-    public String getWrtrDeptNm()
-    {
-        return wrtrDeptNm;
-    }
-    public void setWrtrDeptNm(String wrtrDeptNm)
-    {
-        this.wrtrDeptNm = wrtrDeptNm;
-    }
-    public String getMdfrDeptNm()
-    {
-        return mdfrDeptNm;
-    }
-    public void setMdfrDeptNm(String mdfrDeptNm)
-    {
-        this.mdfrDeptNm = mdfrDeptNm;
-    }
-    public String getRgtrId()
-    {
-        return rgtrId;
-    }
-    public void setRgtrId(String rgtrId)
-    {
-        this.rgtrId = rgtrId;
-    }
-    public String getRegDt()
-    {
-        return regDt;
-    }
-    public void setRegDt(String regDt)
-    {
-        this.regDt = regDt;
-    }
-
-    
-
-    
-    public String getMdfrId()
-    {
-        return mdfrId;
-    }
-    public void setMdfrId(String mdfrId)
-    {
-        this.mdfrId = mdfrId;
-    }
-    public String getMdfcnDt()
-    {
-        return mdfcnDt;
-    }
-    public void setMdfcnDt(String mdfcnDt)
-    {
-        this.mdfcnDt = mdfcnDt;
-    }
-
-    
-
-    
-
 }
