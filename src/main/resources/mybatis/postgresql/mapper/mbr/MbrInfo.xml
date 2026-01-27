@@ -63,7 +63,7 @@
         AND mbr_whdwl_dt is null
     </select>
 
-    <select id="insertMbrInfo" parameterType="MbrInfoPVO">
+    <insert id="insertMbrInfo" parameterType="MbrInfoPVO">
         INSERT INTO kids_own.TB_PP_M_MBR_INFO
         (
              mbr_no
@@ -113,7 +113,7 @@
             ,#{mdfrId}
             ,now()
         )
-    </select>
+    </insert>
 
     <select id="insertMbrInfo2" parameterType="MbrInfoPVO">
         /* 대국민포털_회원정보기본 입력 (MbrInfoMapper.insertMbrInfo) */
