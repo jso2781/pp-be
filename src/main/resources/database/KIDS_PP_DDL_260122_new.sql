@@ -3286,3 +3286,19 @@ COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DEPT_INFO.mdfr_id
 IS '수정자아이디';
 COMMENT ON COLUMN KIDS_OWN.TB_PP_M_DEPT_INFO.mdfcn_dt
 IS '수정일시';
+
+ALTER TABLE kids_own.tb_ca_m_mbr_token
+RENAME CONSTRAINT pk_tb_pp_m_mbr_token
+TO pk_tb_ca_m_mbr_token;
+
+ALTER TABLE kids_own.tb_ca_m_mbr_token
+RENAME CONSTRAINT tb_pp_m_mbr_token_mbr_id_not_null
+TO tb_ca_m_mbr_token_mbr_id_not_null;
+
+ALTER TABLE kids_own.tb_ca_m_mbr_token
+RENAME CONSTRAINT tb_pp_m_mbr_token_token_id_not_null
+TO tb_ca_m_mbr_token_token_id_not_null;
+
+SELECT conname
+FROM pg_constraint
+WHERE conrelid = 'kids_own.tb_ca_m_mbr_token'::regclass;

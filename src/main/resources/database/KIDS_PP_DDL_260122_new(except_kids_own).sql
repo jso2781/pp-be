@@ -3287,3 +3287,19 @@ COMMENT ON COLUMN public.TB_PP_M_DEPT_INFO.mdfr_id
 IS '수정자아이디';
 COMMENT ON COLUMN public.TB_PP_M_DEPT_INFO.mdfcn_dt
 IS '수정일시';
+
+ALTER TABLE public.tb_ca_m_mbr_token
+RENAME CONSTRAINT pk_tb_pp_m_mbr_token
+TO pk_tb_ca_m_mbr_token;
+
+ALTER TABLE public.tb_ca_m_mbr_token
+RENAME CONSTRAINT tb_pp_m_mbr_token_mbr_id_not_null
+TO tb_ca_m_mbr_token_mbr_id_not_null;
+
+ALTER TABLE public.tb_ca_m_mbr_token
+RENAME CONSTRAINT tb_pp_m_mbr_token_token_id_not_null
+TO tb_ca_m_mbr_token_token_id_not_null;
+
+SELECT conname
+FROM pg_constraint
+WHERE conrelid = 'public.tb_ca_m_mbr_token'::regclass;
