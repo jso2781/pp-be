@@ -89,7 +89,7 @@ public class MainServiceImpl implements MainService {
         List<MainRVO> all_sns = mainMapper.selectRecent20PstListByTaskCds(Arrays.asList(TASK_CD_MN_BBS2, TASK_CD_MN_BBS3, TASK_CD_MN_BBS4));
         for (MainRVO main : all_sns) {
             String videoId = main.getVideoId();
-            if (StringUtils.isNotBlank(videoId)) {
+            if (StringUtils.isNotBlank(videoId) && "유튜브".equals(main.getSnsType())) {
                 main.setVideoId(extractYoutubeVideoId(videoId));
             }
         }           
