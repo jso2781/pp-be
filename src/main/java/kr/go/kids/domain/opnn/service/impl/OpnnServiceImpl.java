@@ -57,7 +57,7 @@ public class OpnnServiceImpl implements OpnnService
             long nextOpnnSn = opnnMapper.nextOpnnSn();
 
             opnnPVO.setOpnnSn(BigInteger.valueOf(nextOpnnSn));
-            opnnPVO.setAtchFileSn(atchFileSnStr);
+            opnnPVO.setAtchFileGroupId(atchFileSnStr);
             
             opnnMapper.insertOpnn(opnnPVO);
             

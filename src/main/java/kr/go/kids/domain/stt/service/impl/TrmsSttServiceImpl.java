@@ -67,7 +67,7 @@ public class TrmsSttServiceImpl implements TrmsSttService
     	HashMap<String, Object> data = new HashMap<String, Object>();
     	try {
     		TrmsSttRVO trmsSttRVO = trmsSttMapper.getTrmsSttLatest(trmsSttPVO);
-			data.put("trmsSttCn", trmsSttRVO);
+			data.put("trmsSttRVO", trmsSttRVO);
     		
     	} catch (Exception e) {
             log.error("약관법령 최신글 단건 조회 실패", e);
