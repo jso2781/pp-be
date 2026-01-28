@@ -1,5 +1,7 @@
 package kr.go.kids.domain.exprt.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import kr.go.kids.domain.exprt.vo.ExprtApplyIVO;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
@@ -27,5 +29,5 @@ public interface ExprtApplyService
      * @param exprtApplyIVO 신청용 파라메터 정보 
      * @return 전환신청 성공여부
      */
-    public ApiPrnDto expertApply(ExprtApplyIVO exprtApplyIVO);    
+    public ApiPrnDto expertApply(ExprtApplyIVO exprtApplyIVO, MultipartFile file);    
 }

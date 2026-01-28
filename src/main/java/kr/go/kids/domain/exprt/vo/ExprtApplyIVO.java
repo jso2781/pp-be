@@ -42,14 +42,14 @@ public class ExprtApplyIVO
     private String exprtHdofYn;    
     
     /**
-     * 첨부파일아이디
+     * 첨부파일그룹아이디
      */
-    @Schema(description = "첨부파일아이디", type = "String")
-    private String atchFileId;    
+    @Schema(description = "첨부파일그룹아이디", type = "String")
+    private String atchFileGroupId;
     
     /**
      * 업무시스템 코드목록
      */
     @Schema(description = "업무시스템 코드목록", type = "List<String>")
-    private List<String> taskSystemCodes;       
+    private List<String> taskSystemCodes;
 }

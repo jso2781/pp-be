@@ -33,7 +33,7 @@
 		SELECT EXISTS (
 		    SELECT 1
 		      FROM kids_own.TB_PP_M_EXPRT_INFO
-		     WHERE exprt_ogdp_inst_encpt_eml = #{email}
+		     WHERE encpt_exprt_inst_eml_nm = #{email}
 		)
     </select>
 
@@ -43,10 +43,10 @@
         (
              mbr_no
             ,brno
-            ,exprt_ogdp_inst_encpt_eml
+            ,encpt_exprt_inst_eml_nm
             ,exprt_hdof_yn
             ,exprt_aprv_stts_yn
-            ,atch_file_id
+            ,atch_file_group_id
             ,rgtr_id
             ,reg_dt
 
@@ -58,10 +58,9 @@
             ,#{email}
             ,'Y'
             ,'N'
-            ,#{atchFileId}
+            ,#{atchFileGroupId}
             ,#{mbrId}
             ,CURRENT_TIMESTAMP
-            ,'SYSTEM'
         )
     </insert>
 
@@ -90,7 +89,6 @@
 	            ,'N'
 	            ,#{mbrId}
 	            ,CURRENT_TIMESTAMP
-	            ,'SYSTEM'
 	        )
 	    </foreach>                
     </insert>    
