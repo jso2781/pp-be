@@ -1,8 +1,12 @@
 package kr.go.kids.domain.auth.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
 
 @Schema(name = "MenuRVO", description = "메뉴 목록 조회 결과 VO")
+@Setter
+@Getter
 public class MenuRVO
 {
     /**
@@ -119,155 +123,87 @@ public class MenuRVO
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
 
-    public Long getMenuSn() {
-        return menuSn;
-    }
+    /**
+     * 메뉴새창명
+     */
+    @Schema(description = "메뉴새창명", type = "String")
+    private String menuNpagNm;
 
-    public void setMenuSn(Long menuSn) {
-        this.menuSn = menuSn;
-    }
+    /**
+     * 개인정보포함여부
+     */
+    @Schema(description = "개인정보포함여부", type = "String")
+    private String prvcInclYn;
 
-    public String getMenuNm() {
-        return menuNm;
-    }
+    /**
+     * 만족도조사여부
+     */
+    @Schema(description = "만족도조사여부", type = "String")
+    private String dgstfnExmnYn;
 
-    public void setMenuNm(String menuNm) {
-        this.menuNm = menuNm;
-    }
+    /**
+     * 메뉴노출여부
+     */
+    @Schema(description = "메뉴노출여부", type = "String")
+    private String menuExpsrYn;
 
-    public String getTaskSeCd() {
-        return taskSeCd;
-    }
+    /**
+     * 부서정보노출여부
+     */
+    @Schema(description = "부서정보노출여부", type = "String")
+    private String deptInfoExpsrYn;
 
-    public void setTaskSeCd(String taskSeCd) {
-        this.taskSeCd = taskSeCd;
-    }
+    /**
+     * 담당자정보노출여부
+     */
+    @Schema(description = "담당자정보노출여부", type = "String")
+    private String picInfoExpsrYn;
 
-    public String getLangSeCd() {
-        return langSeCd;
-    }
+    /**
+     * 모바일적용여부
+     */
+    @Schema(description = "모바일적용여부", type = "String")
+	private String moblAplcnYn;
 
-    public void setLangSeCd(String langSeCd) {
-        this.langSeCd = langSeCd;
-    }
+    /**
+     * 로그인여부
+     */
+    @Schema(description = "로그인여부", type = "String")
+	private String lgnYn;
 
-    public String getMenuUrlAddr() {
-        return menuUrlAddr;
-    }
+    /**
+     * 암호화담당자전화번호
+     */
+    @Schema(description = "암호화담당자전화번호", type = "String")
+    private String encptPicTelno;
 
-    public void setMenuUrlAddr(String menuUrlAddr) {
-        this.menuUrlAddr = menuUrlAddr;
-    }
+    /**
+     * 메뉴공공누리저작권유형코드
+     */
+    @Schema(description = "메뉴공공누리저작권유형코드", type = "String")
+    private String menuKoglCprgtTypeCd;
 
-    public Long getUpMenuSn() {
-        return upMenuSn;
-    }
+    /**
+     * 메뉴담당자아이디
+     */
+    @Schema(description = "메뉴담당자아이디", type = "String")
+    private String menuPicId;
 
-    public void setUpMenuSn(Long upMenuSn) {
-        this.upMenuSn = upMenuSn;
-    }
+    /**
+     * 메뉴담당자명
+     */
+    @Schema(description = "메뉴담당자명", type = "String")
+    private String menuPicFlnm;
 
-    public Integer getDepLevel() {
-        return depLevel;
-    }
+    /**
+     * 메뉴담당부서번호
+     */
+    @Schema(description = "메뉴담당부서번호", type = "String")
+    private String menuTkcgDeptNo;
 
-    public void setDepLevel(Integer depLevel) {
-        this.depLevel = depLevel;
-    }
-
-    public Long getRootSn() {
-        return rootSn;
-    }
-
-    public void setRootSn(Long rootSn) {
-        this.rootSn = rootSn;
-    }
-
-    public String getMenuTypeCd() {
-        return menuTypeCd;
-    }
-
-    public void setMenuTypeCd(String menuTypeCd) {
-        this.menuTypeCd = menuTypeCd;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public Integer getMenuSeq() {
-        return menuSeq;
-    }
-
-    public void setMenuSeq(Integer menuSeq) {
-        this.menuSeq = menuSeq;
-    }
-
-    public String getMenuExpln() {
-        return menuExpln;
-    }
-
-    public void setMenuExpln(String menuExpln) {
-        this.menuExpln = menuExpln;
-    }
-
-    public String getPicDeptNm() {
-        return picDeptNm;
-    }
-
-    public void setPicDeptNm(String picDeptNm) {
-        this.picDeptNm = picDeptNm;
-    }
-
-    public String getPicFlnm() {
-        return picFlnm;
-    }
-
-    public void setPicFlnm(String picFlnm) {
-        this.picFlnm = picFlnm;
-    }
-
-    public String getUseYn() {
-        return useYn;
-    }
-
-    public void setUseYn(String useYn) {
-        this.useYn = useYn;
-    }
-
-    public String getRgtrId() {
-        return rgtrId;
-    }
-
-    public void setRgtrId(String rgtrId) {
-        this.rgtrId = rgtrId;
-    }
-
-    public String getRegDt() {
-        return regDt;
-    }
-
-    public void setRegDt(String regDt) {
-        this.regDt = regDt;
-    }
-
-    public String getMdfrId() {
-        return mdfrId;
-    }
-
-    public void setMdfrId(String mdfrId) {
-        this.mdfrId = mdfrId;
-    }
-
-    public String getMdfcnDt() {
-        return mdfcnDt;
-    }
-
-    public void setMdfcnDt(String mdfcnDt) {
-        this.mdfcnDt = mdfcnDt;
-    }
+    /**
+     * 메뉴담당부서명
+     */
+    @Schema(description = "메뉴담당부서명", type = "String")
+    private String menuTkcgDeptNm;
 }

@@ -54,6 +54,24 @@ public class MenuDRVO
     private String picInfoExpsrYn;
 
     /**
+     * 모바일적용여부
+     */
+    @Schema(description = "모바일적용여부", type = "String")
+	private String moblAplcnYn;
+
+    /**
+     * 로그인여부
+     */
+    @Schema(description = "로그인여부", type = "String")
+	private String lgnYn;
+
+    /**
+     * 암호화담당자전화번호
+     */
+    @Schema(description = "암호화담당자전화번호", type = "String")
+    private String encptPicTelno;
+
+    /**
      * 메뉴공공누리저작권유형코드
      */
     @Schema(description = "메뉴공공누리저작권유형코드", type = "String")
@@ -159,6 +177,24 @@ public class MenuDRVO
     {
         this.picInfoExpsrYn = picInfoExpsrYn;
     }
+    public String getMoblAplcnYn() {
+		return moblAplcnYn;
+	}
+	public void setMoblAplcnYn(String moblAplcnYn) {
+		this.moblAplcnYn = moblAplcnYn;
+	}
+	public String getLgnYn() {
+		return lgnYn;
+	}
+	public void setLgnYn(String lgnYn) {
+		this.lgnYn = lgnYn;
+	}
+	public String getEncptPicTelno() {
+		return encptPicTelno;
+	}
+	public void setEncptPicTelno(String encptPicTelno) {
+		this.encptPicTelno = encptPicTelno;
+	}
     public String getMenuKoglCprgtTypeCd()
     {
         return menuKoglCprgtTypeCd;

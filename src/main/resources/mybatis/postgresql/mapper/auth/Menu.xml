@@ -39,12 +39,39 @@
             mt.root_sn,
             mt.path,
             mt.menu_nm,
-            d.menu_url_addr,
             mt.menu_seq,
-            mt.lang_se_cd
+            mt.lang_se_cd,
+            d.menu_url_addr,
+            d.menu_npag_nm,
+            d.prvc_incl_yn,
+            d.dgstfn_exmn_yn,
+            d.menu_expsr_yn,
+            d.dept_info_expsr_yn,
+            d.pic_info_expsr_yn,
+            d.mobl_aplcn_yn,
+            d.lgn_yn,
+            d.encpt_pic_telno,
+            d.menu_kogl_cprgt_type_cd,
+            d.menu_pic_id,
+            coalesce(emp.emp_nm, m.pic_flnm) as menu_pic_flnm,
+            emp.dept_no as menu_tkcg_dept_no,
+            coalesce(emp.dept_nm, m.pic_dept_nm) as menu_tkcg_dept_nm
         FROM menu_tree mt
+        LEFT JOIN kids_own.tb_pp_m_menu m
+            ON mt.menu_sn = m.menu_sn
         LEFT JOIN kids_own.TB_PP_D_MENU d
             ON d.menu_sn = mt.menu_sn
+        LEFT JOIN (
+            SELECT 
+                A.emp_no,
+                A.emp_nm,
+                A.dept_no,
+                B.dept_nm
+            FROM kids_own.tb_pp_m_emp_info A,
+                 kids_own.tb_pp_m_dept_info B
+            WHERE A.dept_no = B.dept_no
+        ) emp
+            ON d.menu_pic_id = emp.emp_no
         WHERE 1=1
         <if test="langSeCd != null and langSeCd != ''">
             AND mt.lang_se_cd = #{langSeCd}
