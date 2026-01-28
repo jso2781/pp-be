@@ -82,7 +82,7 @@
 	             item="taskSystemCd"
 	             separator=",">
 	        (
-	            nextval('kids_own.TB_PP_M_EXPRT_TASK_SEQ')
+	            nextval('kids_own.sq_pp_m_exprt_task_sn_1')
 	            ,#{mbrNo}
 	            ,#{taskSystemCd}
 	            ,#{brno}
