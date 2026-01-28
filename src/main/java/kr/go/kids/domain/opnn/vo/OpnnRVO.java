@@ -2,8 +2,11 @@ package kr.go.kids.domain.opnn.vo;
 
 import java.math.BigInteger;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 @Schema(name = "대국민포털_의견제안", description = "대국민포털_의견제안 Search Result VO")
 public class OpnnRVO
 {
@@ -17,13 +20,19 @@ public class OpnnRVO
      * 작성자암호화성명
      */
     @Schema(description = "작성자암호화성명", type = "String")
-    private String wrtrEncptFlnm;
+    private String encptWrtrFlnm;
 
     /**
      * 작성자암호화전화번호
      */
     @Schema(description = "작성자암호화전화번호", type = "String")
-    private String wrtrEncptTelno;
+    private String encptWrtrTelno;
+
+    /**
+     * 작성자암호화이메일
+     */
+    @Schema(description = "작성자암호화이메일", type = "String")
+    private String encptMbrEmlNm;
 
     /**
      * 작성구분코드
@@ -38,10 +47,10 @@ public class OpnnRVO
     private String pbptCn;
 
     /**
-     * 요청사항
+     * 요청사항내용
      */
-    @Schema(description = "요청사항", type = "String")
-    private String dmndMttr;
+    @Schema(description = "요청사항내용", type = "String")
+    private String dmndMttrCn;
 
     /**
      * 요청사항상세내용
@@ -50,16 +59,22 @@ public class OpnnRVO
     private String dmndMttrDtlCn;
 
     /**
-     * 참고사항
+     * 참고사항내용
      */
-    @Schema(description = "참고사항", type = "String")
-    private String refMttr;
+    @Schema(description = "참고사항내용", type = "String")
+    private String refMttrCn;
 
     /**
-     * 첨부파일일련번호
+     * 내부참고사항내용
      */
-    @Schema(description = "첨부파일일련번호", type = "String")
-    private String atchFileSn;
+    @Schema(description = "내부참고사항내용", type = "String")
+    private String insdRefMttrCn;
+
+    /**
+     * 첨부파일그룹아이디
+     */
+    @Schema(description = "첨부파일그룹아이디", type = "String")
+    private String atchFileGroupId;
 
     /**
      * 등록자아이디
@@ -84,118 +99,4 @@ public class OpnnRVO
      */
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
-
-    public BigInteger getOpnnSn()
-    {
-        return opnnSn;
-    }
-    public void setOpnnSn(BigInteger opnnSn)
-    {
-        this.opnnSn = opnnSn;
-    }
-    public String getWrtrEncptFlnm()
-    {
-        return wrtrEncptFlnm;
-    }
-    public void setWrtrEncptFlnm(String wrtrEncptFlnm)
-    {
-        this.wrtrEncptFlnm = wrtrEncptFlnm;
-    }
-    public String getWrtrEncptTelno()
-    {
-        return wrtrEncptTelno;
-    }
-    public void setWrtrEncptTelno(String wrtrEncptTelno)
-    {
-        this.wrtrEncptTelno = wrtrEncptTelno;
-    }
-    public String getWrtSeCd()
-    {
-        return wrtSeCd;
-    }
-    public void setWrtSeCd(String wrtSeCd)
-    {
-        this.wrtSeCd = wrtSeCd;
-    }
-    public String getPbptCn()
-    {
-        return pbptCn;
-    }
-    public void setPbptCn(String pbptCn)
-    {
-        this.pbptCn = pbptCn;
-    }
-    public String getDmndMttr()
-    {
-        return dmndMttr;
-    }
-    public void setDmndMttr(String dmndMttr)
-    {
-        this.dmndMttr = dmndMttr;
-    }
-    public String getDmndMttrDtlCn()
-    {
-        return dmndMttrDtlCn;
-    }
-    public void setDmndMttrDtlCn(String dmndMttrDtlCn)
-    {
-        this.dmndMttrDtlCn = dmndMttrDtlCn;
-    }
-    public String getRefMttr()
-    {
-        return refMttr;
-    }
-    public void setRefMttr(String refMttr)
-    {
-        this.refMttr = refMttr;
-    }
-    public String getAtchFileSn()
-    {
-        return atchFileSn;
-    }
-    public void setAtchFileSn(String atchFileSn)
-    {
-        this.atchFileSn = atchFileSn;
-    }
-    public String getRgtrId()
-    {
-        return rgtrId;
-    }
-    public void setRgtrId(String rgtrId)
-    {
-        this.rgtrId = rgtrId;
-    }
-    public String getRegDt()
-    {
-        return regDt;
-    }
-    public void setRegDt(String regDt)
-    {
-        this.regDt = regDt;
-    }
-
-    
-
-    
-    public String getMdfrId()
-    {
-        return mdfrId;
-    }
-    public void setMdfrId(String mdfrId)
-    {
-        this.mdfrId = mdfrId;
-    }
-    public String getMdfcnDt()
-    {
-        return mdfcnDt;
-    }
-    public void setMdfcnDt(String mdfcnDt)
-    {
-        this.mdfcnDt = mdfcnDt;
-    }
-
-    
-
-    
-
 }
