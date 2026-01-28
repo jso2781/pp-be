@@ -14,7 +14,7 @@
             ,p.wrtr_dept_nm
             ,p.mdfr_dept_nm
             ,p.rgtr_id
-            ,p.reg_dt
+            ,DATE(p.reg_dt) as reg_dt
 			,p.vdo_url_addr as video_id
             ,p.mdfr_id
             ,p.mdfcn_dt
@@ -34,7 +34,7 @@
 	    </when>
 	  </choose>
 	</if>				
-       ORDER BY p.reg_dt DESC 
+       ORDER BY p.fix_yn DESC, p.reg_dt DESC
     </select>
 
     <select id="getPst" parameterType="PstPVO" resultType="PstRVO" >
@@ -52,7 +52,7 @@
             ,p.wrtr_dept_nm
             ,p.mdfr_dept_nm
             ,p.rgtr_id
-            ,p.reg_dt
+            ,DATE(p.reg_dt) as reg_dt
 			,p.vdo_url_addr as video_id
             ,p.mdfr_id
             ,p.mdfcn_dt
