@@ -42,6 +42,7 @@
         FROM kids_own.TB_PP_M_TRMS_STT
         WHERE 1=1
         AND trms_stt_cd = #{trmsSttCd}
+        ORDER BY reg_dt DESC
     </select>
     
     <select id="getTrmsSttLatest" parameterType="TrmsSttPVO" resultType="TrmsSttRVO" >
@@ -55,7 +56,7 @@
         WHERE 1=1
         AND trms_stt_cd = #{trmsSttCd}
         ORDER BY reg_dt DESC
-        LIMIT 1;
+        LIMIT 1
     </select>
 
 </mapper>
