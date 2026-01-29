@@ -87,5 +87,11 @@ public class MainRVO {
      * 팝업연결주소
      */
     @Schema(description = "팝업연결주소", type = "String")
-    private String popupLnkgAddr;               
+    private String popupLnkgAddr;
+
+    /**
+     * 업무구분코드
+     */
+    @Schema(description = "업무구분코드", type = "String")
+    private String taskCd;
 }

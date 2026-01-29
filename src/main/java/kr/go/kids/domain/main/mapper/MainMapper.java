@@ -21,7 +21,7 @@ public interface MainMapper
     /**
      * 대국민포털_메인화면 최근 게시물 목록 조회 (SNS 통합)
      *
-     * @param taskCd 조회용 업무구분코드 
+     * @param taskCd 조회용 업무구분코드
      * @return 조회된 대국민포털_게시물 
      */
     public List<MainRVO> selectRecent20PstListByTaskCds(@Param("taskCdList") List<String> taskCdList);    
@@ -29,10 +29,10 @@ public interface MainMapper
     /**
      * 대국민포털_메인화면 최근 게시물 목록 조회 
      *
-     * @param bbsId 게시판 ID 
+     * @param taskCd 조회용 업무구분코드
      * @return 조회된 대국민포털_게시물 
      */
-    public List<MainRVO> selectRecent5PstListByBoardId(String bbsId);    
+    public List<MainRVO> selectRecent5PstListByTaskCd(String taskCd);
     
     /**
      * 대국민포털_메인화면 팝업 목록 조회
