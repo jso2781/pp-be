@@ -61,7 +61,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         // API 경로에 대한 CORS 설정
         registry.addMapping("/api/**")
                 // 개발 환경을 위한 기본 허용. 운영 시에는 실제 UI 도메인으로 제한하세요.
-                .allowedOrigins("http://localhost:5173", "http://localhost:3000")
+                .allowedOrigins("http://localhost:5173", "http://localhost:3000", "http://192.168.2.149:30020", "http://192.168.2.148:30020", "http://192.168.2.149:30022")
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
                 .allowCredentials(true);
     }
