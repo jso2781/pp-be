@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import kr.go.kids.domain.main.mapper.MainMapper;
@@ -26,9 +25,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class MainServiceImpl implements MainService {
 
-    @Value("${file.storePath}")
-    private String fileStorePath;
-
     private final TaskCdMapper taskCdMapper;
     private final MainMapper mainMapper;
 
@@ -38,12 +34,10 @@ public class MainServiceImpl implements MainService {
     private static final String TASK_CD_MN_BBS2 = "MN_BBS2";
     private static final String TASK_CD_MN_BBS3 = "MN_BBS3";
     private static final String TASK_CD_MN_BBS4 = "MN_BBS4";
-    
-    // 메인화면 컨텐츠 조회용 게시판ID
-    private static final String BBS_ID_NOTICE = "BBS_COM_001";
-    private static final String BBS_ID_BODO = "BBS_COM_004";
-    private static final String BBS_ID_NEWS = "BBS_COM_003";
-    private static final String BBS_ID_CARD = "BBS_GAL_001";
+    private static final String TASK_CD_MN_BBS5 = "MN_BBS5";
+    private static final String TASK_CD_MN_BBS6 = "MN_BBS6";
+    private static final String TASK_CD_MN_BBS7 = "MN_BBS7";
+    private static final String TASK_CD_MN_BBS8 = "MN_BBS8";
 
     @Override
     public ApiPrnDto selectMainContents() {
@@ -89,26 +83,26 @@ public class MainServiceImpl implements MainService {
         List<MainRVO> all_sns = mainMapper.selectRecent20PstListByTaskCds(Arrays.asList(TASK_CD_MN_BBS2, TASK_CD_MN_BBS3, TASK_CD_MN_BBS4));
         for (MainRVO main : all_sns) {
             String videoId = main.getVideoId();
-            if (StringUtils.isNotBlank(videoId) && "유튜브".equals(main.getSnsType())) {
+            if (StringUtils.isNotBlank(videoId) && TASK_CD_MN_BBS2.equals(main.getTaskCd())) {
                 main.setVideoId(extractYoutubeVideoId(videoId));
             }
         }           
         data.put("all_sns", all_sns);
         
         // 4.1 기관소식 공지사항 last5
-        List<MainRVO> notice = mainMapper.selectRecent5PstListByBoardId(BBS_ID_NOTICE);
+        List<MainRVO> notice = mainMapper.selectRecent5PstListByTaskCd(TASK_CD_MN_BBS5);
         data.put("notice", notice);
 
         // 4.2 기관소식 보도자료 last5
-        List<MainRVO> bodo = mainMapper.selectRecent5PstListByBoardId(BBS_ID_BODO);
+        List<MainRVO> bodo = mainMapper.selectRecent5PstListByTaskCd(TASK_CD_MN_BBS6);
         data.put("bodo", bodo);
 
         // 4.3 기관소식 뉴스레터 last5
-        List<MainRVO> news = mainMapper.selectRecent5PstListByBoardId(BBS_ID_NEWS);
+        List<MainRVO> news = mainMapper.selectRecent5PstListByTaskCd(TASK_CD_MN_BBS7);
         data.put("news", news);
 
         // 4.4 기관소식 카드뉴스 last5
-        List<MainRVO> card = mainMapper.selectRecent5PstListByBoardId(BBS_ID_CARD);
+        List<MainRVO> card = mainMapper.selectRecent5PstListByTaskCd(TASK_CD_MN_BBS8);
         data.put("card", card);
         
         // 5. 팝업 목록조회
