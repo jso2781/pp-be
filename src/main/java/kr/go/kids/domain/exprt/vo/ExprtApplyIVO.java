@@ -28,7 +28,19 @@ public class ExprtApplyIVO
      */
     @Schema(description = "사업자등록번호", type = "String")
     private String brno;
-    
+
+    /**
+     * 사업자업무관리번호
+     */
+    @Schema(description = "사업자업무관리번호", type = "String")
+    private String bzmnTaskMngNo;
+
+    /**
+     * 성명
+     */
+    @Schema(description = "성명", type = "String")
+    private String name;
+
     /**
      * 이메일
      */
@@ -52,4 +64,10 @@ public class ExprtApplyIVO
      */
     @Schema(description = "업무시스템 코드목록", type = "List<String>")
     private List<String> taskSystemCodes;
+
+    /**
+     * 전문가번호
+     */
+    @Schema(description = "전문가번호", type = "String")
+    private String exprtNo;
 }
