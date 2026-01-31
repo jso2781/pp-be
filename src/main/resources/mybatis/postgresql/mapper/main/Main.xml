@@ -43,15 +43,12 @@
 			 WHEN 'MN_BBS4' THEN '블로그'
 			 ELSE '기타'
 			  END AS sns_type
-		FROM kids_own.TB_PP_M_PST p
-	    LEFT JOIN kids_own.TB_CA_E_FILE_TRSM f
-	           ON p.thmb_id = f.atch_file_group_id
-		LEFT JOIN kids_own.TB_PP_M_TASK_CD t
-			   ON p.bbs_id = t.task_cd_vl
-	    WHERE p.bbs_id IN (
-	            SELECT task_cd_vl
-	            FROM kids_own.TB_PP_M_TASK_CD
-	            WHERE task_cd IN
+		FROM kids_own.TB_PP_M_TASK_CD t
+		LEFT JOIN kids_own.TB_PP_M_PST p
+		  ON t.task_cd_vl = p.bbs_id
+		LEFT JOIN kids_own.TB_CA_E_FILE_TRSM f
+		  ON p.thmb_id = f.atch_file_group_id
+	    WHERE t.task_cd IN
 	            <foreach collection="taskCdList"
 	                     item="taskCd"
 	                     open="("
@@ -59,7 +56,6 @@
 	                     close=")">
 	                #{taskCd}
 	            </foreach>
-	      )
 	    ORDER BY p.reg_dt DESC
 	    LIMIT 20
 	</select>    

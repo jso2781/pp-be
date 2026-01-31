@@ -10,22 +10,15 @@
     </select>
 
     <select id="selectInstTaskSystemByBrno" parameterType="String" resultType="ExprtApplyRVO" >
-        /* 대국민포털_전문가회원전환신청관리 기관 업무시스템 목록조회 (ExprtApplyMapper.selectInstTaskSystemByBrno) */        
-		<!--
-		테이블 및 컬럼명 확정 반영 		
-		SELECT cd.공통상세코드 AS value
-		     , cd.공통상세코드명 AS label
-		  FROM kids_own."공통_상세코드" cd
-		  LEFT OUTER JOIN kids_own.TB_PP_M_INST_TASK tk
-		    ON cd.공통_상세코드 = tk.task_se_cd
-		 WHERE cd.공통그룹코드 컬럼명 = '공통그룹코드 값'
-		   AND tk.brno = #{brno}
-		   AND cd.use_yn = 'Y'
-		 ORDER BY cd.정렬순서 desc
-		 -->		 
-		SELECT '업무시스템1' AS label, 'SYS1' AS value
-		 UNION ALL
-		SELECT '업무시스템2' AS label, 'SYS2' AS value		   		   
+        /* 대국민포털_전문가회원전환신청관리 기관 업무시스템 목록조회 (ExprtApplyMapper.selectInstTaskSystemByBrno) */
+        SELECT t.task_se_cd AS value
+             , (SELECT com_dtl_cd_nm
+                  FROM kids_own.TB_CA_C_DTL_CODE
+                 WHERE com_group_cd = 'P13'
+                   AND com_dtl_cd = t.task_se_cd) AS label
+          FROM kids_own.TB_PP_M_INST_TASK t
+         WHERE t.brno = #{brno}
+           AND t.use_yn = 'Y'
     </select>
 
     <select id="existsByEmail" parameterType="String" resultType="boolean" >
@@ -41,8 +34,10 @@
         /* 대국민포털_전문가회원전환신청관리 전문가정보기본 입력 (ExprtApplyMapper.insertExprtInfo) */
         INSERT INTO kids_own.TB_PP_M_EXPRT_INFO
         (
-             mbr_no
+             exprt_no
+            ,mbr_no
             ,brno
+            ,encpt_exprt_flnm
             ,encpt_exprt_inst_eml_nm
             ,exprt_hdof_yn
             ,exprt_aprv_stts_yn
@@ -53,8 +48,10 @@
         )
         VALUES
         (
-             #{mbrNo}
+             nextval('kids_own.sq_pp_exprt_no')
+            ,#{mbrNo}
             ,#{brno}
+            ,#{name}
             ,#{email}
             ,'Y'
             ,'N'
@@ -62,31 +59,36 @@
             ,#{mbrId}
             ,CURRENT_TIMESTAMP
         )
+        <selectKey keyProperty="exprtNo" resultType="String" order="AFTER">
+            SELECT currval('kids_own.sq_pp_exprt_no')
+        </selectKey>
     </insert>
 
     <insert id="insertExprtTask" parameterType="ExprtApplyIVO">
-        /* 대국민포털_전문가회원전환신청관리 전문가정보기본 입력 (ExprtApplyMapper.insertExprtTask) */
+        /* 대국민포털_전문가회원전환신청관리 전문가업무기본 입력 (ExprtApplyMapper.insertExprtTask) */
         INSERT INTO kids_own.TB_PP_M_EXPRT_TASK
         (
              exprt_task_sn
-            ,mbr_no
-            ,task_se_cd
-            ,brno
+            ,exprt_no
+            ,bzmn_task_mng_no
             ,exprt_aprv_stts_yn
+            ,use_yn
             ,rgtr_id
             ,reg_dt
-
         )
         VALUES        
 	    <foreach collection="taskSystemCodes"
 	             item="taskSystemCd"
 	             separator=",">
 	        (
-	            nextval('kids_own.sq_pp_m_exprt_task_sn_1')
-	            ,#{mbrNo}
-	            ,#{taskSystemCd}
-	            ,#{brno}
+	            nextval('kids_own.sq_pp_exprt_task_sn')
+	            ,#{exprtNo}
+                ,(SELECT bzmn_task_mng_no
+                    FROM kids_own.TB_PP_M_INST_TASK
+                   WHERE brno = #{brno}
+                     AND task_se_cd = #{taskSystemCd})
 	            ,'N'
+                ,'Y'
 	            ,#{mbrId}
 	            ,CURRENT_TIMESTAMP
 	        )
