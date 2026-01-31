@@ -3,6 +3,7 @@ package kr.go.kids.domain.dgstfn.service;
 import kr.go.kids.domain.dgstfn.vo.DgstfnExmnDVO;
 import kr.go.kids.domain.dgstfn.vo.DgstfnExmnPVO;
 import kr.go.kids.domain.dgstfn.vo.DgstfnExmnRVO;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 public interface DgstfnExmnService
 {
@@ -18,9 +19,9 @@ public interface DgstfnExmnService
      * 대국민포털_만족도조사기본 정보 입력 
      *
      * @param dgstfnExmnPVO 입력할 대국민포털_만족도조사기본 정보 
-     * @return 입력된 건수 
+     * @return 입력 처리후 결과 반환(ApiPrnDto)
      */
-    public int insertDgstfnExmn(DgstfnExmnPVO dgstfnExmnPVO);
+    public ApiPrnDto insertDgstfnExmn(DgstfnExmnPVO dgstfnExmnPVO);
 
     /**
      * 대국민포털_만족도조사기본 정보 수정 

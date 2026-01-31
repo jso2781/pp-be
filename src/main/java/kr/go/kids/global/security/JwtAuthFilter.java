@@ -46,7 +46,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 // 2) ✅ tokenId Claim 추출
                 String tokenId = jwtTokenProvider.getTokenId(token);
 
-                // 3) ✅ idle 만료 체크: key 없으면(30분 idle) 408 (request idle)
+                // 3) ✅ idle 만료 체크: key 없으면(30분 idle) --> frontend에 408 (request idle) 응답 반환
                 if (!idleTokenService.exists(tokenId)) {
                     SecurityContextHolder.clearContext();
                     response.setStatus(HttpServletResponse.SC_REQUEST_TIMEOUT);
@@ -60,6 +60,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 String mbrId = jwtTokenProvider.getSubject(token);
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(mbrId, null, List.of());
                 SecurityContextHolder.getContext().setAuthentication(auth);
+
+                // 6) RVO, PVO 객체의 Audit 정보 설정용
+                request.setAttribute("mbrId", mbrId);
             }catch(Exception e){
                 SecurityContextHolder.clearContext();
                 // 여기서 401로 끊을지, 그냥 체인 계속 태울지는 정책 선택

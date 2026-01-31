@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,6 +18,8 @@ import kr.go.kids.domain.dgstfn.service.DgstfnExmnService;
 import kr.go.kids.domain.dgstfn.vo.DgstfnExmnDVO;
 import kr.go.kids.domain.dgstfn.vo.DgstfnExmnPVO;
 import kr.go.kids.domain.dgstfn.vo.DgstfnExmnRVO;
+import kr.go.kids.global.system.common.ApiResultCode;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "DgstfnExmnController", description = "대국민포털_만족도조사기본 관리")
 @RestController
@@ -41,30 +42,12 @@ public class DgstfnExmnController
     @Operation(summary = "대국민포털_만족도조사기본 입력", description = "대국민포털_만족도조사기본 입력한다.")
     @PostMapping(value="/insertDgstfnExmn")
     @ResponseBody
-    public Map<String,Object> insertDgstfnExmn(@RequestBody List<DgstfnExmnPVO> dgstfnExmnList)
+    public ResponseEntity<ApiPrnDto> insertDgstfnExmn(@RequestBody DgstfnExmnPVO dgstfnExmn)
     {
-        int dgstfnExmnListCount = dgstfnExmnList.size();
+        ApiPrnDto apiPrnDto = dgstfnExmnService.insertDgstfnExmn(dgstfnExmn);
 
-        int insertCnt = 0;
-        DgstfnExmnPVO dgstfnExmn = null;
-
-        for(int i=0;i<dgstfnExmnListCount;i++)
-        {
-            dgstfnExmn = dgstfnExmnList.get(i);
-
-            dgstfnExmnService.insertDgstfnExmn(dgstfnExmn);
-            insertCnt++;
-
-            dgstfnExmn = null;
-        }
-
-//        List<DgstfnExmnRVO> selectedDgstfnExmnList = dgstfnExmnService.selectDgstfnExmnList(dgstfnExmn);
-
-        Map<String,Object> resultMap = new HashMap<String,Object>();
-        resultMap.put("insertCnt", insertCnt);
-//        resultMap.put("dgstfnExmnList", selectedDgstfnExmnList);
-
-        return resultMap;
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
 
     @Operation(summary = "대국민포털_만족도조사기본 수정", description = "대국민포털_만족도조사기본 수정한다.")

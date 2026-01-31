@@ -89,7 +89,7 @@ public class AuthController {
      * @param authorization
      * @return
      */
-    @Operation(summary = "로그아웃 처리(Redis Idle 키 갱신, Redis Active 키 갱신 포함)", description = "JWT 토큰 갱신(Redis Idle 키 갱신, Redis Active 키 갱신 포함)한다.")
+    @Operation(summary = "로그아웃 처리(1. DB에서 refresh/access 정보 삭제(token_id + mbr_id 조건), 2.Redis Idle 키, Redis Active 키 삭제, 3. 삭제된 Access Token을 Redis 블랙리스트에 등록 (로그아웃 즉시 무효화))", description = "로그아웃 처리(1. DB에서 refresh/access 정보 삭제(token_id + mbr_id 조건), 2.Redis Idle 키, Redis Active 키 삭제, 3. 삭제된 Access Token을 Redis 블랙리스트에 등록 (로그아웃 즉시 무효화))한다.")
     @PostMapping("/logout")
     @ResponseBody
     public ResponseEntity<ApiPrnDto> logout(Authentication auth, @RequestBody LogoutPVO loginPVO, @RequestHeader(value = "Authorization", required = false) String authorization){

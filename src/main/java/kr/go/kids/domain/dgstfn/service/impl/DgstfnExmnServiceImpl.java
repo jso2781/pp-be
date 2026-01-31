@@ -1,5 +1,7 @@
 package kr.go.kids.domain.dgstfn.service.impl;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,8 @@ import kr.go.kids.domain.dgstfn.service.DgstfnExmnService;
 import kr.go.kids.domain.dgstfn.vo.DgstfnExmnDVO;
 import kr.go.kids.domain.dgstfn.vo.DgstfnExmnPVO;
 import kr.go.kids.domain.dgstfn.vo.DgstfnExmnRVO;
+import kr.go.kids.global.system.common.ApiResultCode;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 @Service
 public class DgstfnExmnServiceImpl implements DgstfnExmnService
@@ -22,9 +26,20 @@ public class DgstfnExmnServiceImpl implements DgstfnExmnService
     }
 
     @Override
-    public int insertDgstfnExmn(DgstfnExmnPVO dgstfnExmnPVO)
+    public ApiPrnDto insertDgstfnExmn(DgstfnExmnPVO dgstfnExmnPVO)
     {
-        return dgstfnExmnMapper.insertDgstfnExmn(dgstfnExmnPVO);
+        ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+        int insertCnt = dgstfnExmnMapper.insertDgstfnExmn(dgstfnExmnPVO);
+
+        if(0 < insertCnt){
+            HashMap<String, Object> dataMap = new HashMap<String, Object>();
+            dataMap.put("insertCnt", 1);
+            apiPrnDto.setData(dataMap);
+
+            return apiPrnDto;
+        }
+
+        return ApiPrnDto.fail(ApiResultCode.SYSTEM_ERROR);
     }
 
     @Override

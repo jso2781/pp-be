@@ -28,22 +28,18 @@
             ,dgstfn_scr
             ,rgtr_id
             ,reg_dt
-
             ,mdfr_id
             ,mdfcn_dt
-
         )
         VALUES
         (
-             #{dgstfnExmnSn}
+             nextval('kids_own.tb_pp_m_dgstfn_exmn_seq')
             ,#{menuSn}
             ,#{dgstfnScr}
             ,#{rgtrId}
             ,now()
-
             ,#{mdfrId}
             ,now()
-
         )
     </insert>
 
