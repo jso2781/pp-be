@@ -1,12 +1,12 @@
-INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ymd,trms_stt_end_ymd,trms_stt_cn,atch_file_group_id,wrtr_dept_nm,mdfr_dept_nm,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     (6,'CLCT_ES_CH          ','20260115','20260228','','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (8,'STT_CCTV            ','20260115','20260228','','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (9,'STT_EML             ','20260115','20260228','','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (3,'UTZTN               ','20260115','20260228','제 1장 총칙
+INSERT INTO KIDS_OWN.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ymd,trms_stt_end_ymd,trms_stt_cn,atch_file_group_id,wrtr_dept_nm,mdfr_dept_nm,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
+     (6,'CLCT_ES_CH','20260115','20260228','','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
+     (8,'STT_CCTV','20260115','20260228','','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
+     (9,'STT_EML','20260115','20260228','','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
+     (3,'UTZTN','20260115','20260228','제 1장 총칙
 
 제1조(목적)
 
-본 약관은 한국의약품안전관리원(이하 안전원)이 제공하는 당 사이트의 가입조건 및 절차, 이용자와 당 사이트의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.
+본 약관은 한국의약품안전관리원(이하 "안전원")이 제공하는 당 사이트의 가입조건 및 절차, 이용자와 당 사이트의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.
 
 제2조(약관의 효력과 변경)
 ① 안전원은 귀하가 본 약관 내용에 동의하는 것을 조건으로 귀하에게 당 사이트의 서비스를 제공할 것이며, 귀하가 본 약관의 내용에 동의하는 경우, 당 사이트의 서비스 제공 행위 및 귀하의 서비스 사용 행위에는 본 약관이 우선적으로 적용될 것입니다.
@@ -174,49 +174,49 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 ① 본 약관은 2012년 10월 1일부터 시행됩니다.
 ② 본 약관 시행일 이전에 시행되던 종전의 약관은 본 약관으로 대체합니다.
 ③ 본 약관에 대한 저작권은 안전원에 귀속하며 무단 복제, 배포, 전송, 기타 저작권 침해행위를 엄금합니다.','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (7,'STT_PRVC            ','20260115','20260228','<p> 한국의약품안전관리원(이하 안전원)은 개인정보보호법 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련된 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.</p>
+     (7,'STT_PRVC','20260115','20260228','<p> 한국의약품안전관리원(이하 안전원)은 개인정보보호법 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련된 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.</p>
 <p> 본 개인정보처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 전 지체없이 공지사항을 통하여 고지할 것입니다.</p>
 <p> 본 방침은 : 2022 년 1 월 19 일 부터 시행됩니다.</p><br>
 
 
 <!-- 주요 개인정보 처리 표시 -->
-<table id=labelingTb border=1>
+<table id="labelingTb" border="1">
     <colgroup>
-        <col style=width: 33%;>
-        <col style=width: 33%;>
-        <col style=width: 33%;>
+        <col style="width: 33%;">
+        <col style="width: 33%;">
+        <col style="width: 33%;">
     </colgroup>
     <thead>
         <tr>
-            <th colspan=3>[주요 개인정보 처리 표시(라벨링)]</th>
+            <th colspan="3">[주요 개인정보 처리 표시(라벨링)]</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy01.png alt=일반 개인정보 수집 title=성명, 생년월일, 전화번호, 주소 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy01.png" alt="일반 개인정보 수집" title="성명, 생년월일, 전화번호, 주소 등"></p>
                 <p>일반 개인정보 수집</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy02.png alt=개인정보 처리목적 title=회원가입 및 서비스 제공, 서비스 개선목적 활용 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy02.png" alt="개인정보 처리목적" title="회원가입 및 서비스 제공, 서비스 개선목적 활용 등"></p>
                 <p>개인정보 처리목적</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy03.png alt=개인정보의 보유 기간 title=회원탈퇴 시, 수집일로부터 10년, 3년 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy03.png" alt="개인정보의 보유 기간" title="회원탈퇴 시, 수집일로부터 10년, 3년 등"></p>
                 <p>개인정보의 보유 기간</p>
             </td>
         </tr>
         <tr>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy04.png alt=개인정보의 제공 title=개인정보의 제공가능한 경우 안내, 정보주체 동의에 의한 제3자 제공 시, 고지사항 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy04.png" alt="개인정보의 제공" title="개인정보의 제공가능한 경우 안내, 정보주체 동의에 의한 제3자 제공 시, 고지사항 등"></p>
                 <p>개인정보의 제공</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy05.png alt=처리위탁 title=사이트운영 및 회원관리, 민원처리 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy05.png" alt="처리위탁" title="사이트운영 및 회원관리, 민원처리 등"></p>
                 <p>처리위탁</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy06.png alt=개인정보 열람 청구 title=(담당부서) 경영지원팀 (연락처) 02-2172-6763></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy06.png" alt="개인정보 열람 청구" title="(담당부서) 경영지원팀 (연락처) 02-2172-6763"></p>
                 <p>개인정보 열람 청구</p>
             </td>
         </tr>
@@ -228,7 +228,7 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 
 
 <h4>
-<img class=privacyIcon src=/images/egovframework/iwt/ds/ko/member/privacyIcon01.png alt=개인정보의 처리목적 title=회원가입 및 서비스 제공, 서비스 개선목적 활용 등>
+<img class="privacyIcon" src="/images/egovframework/iwt/ds/ko/member/privacyIcon01.png" alt="개인정보의 처리목적" title="회원가입 및 서비스 제공, 서비스 개선목적 활용 등">
 제1조(개인정보의 처리목적)</h4>
 <p>1. 안전원은 다음의 목적을 위하여 개인정보를 처리하며, 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p>
 <p>가. 회원가입 및 서비스 제공
@@ -245,64 +245,64 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 <p>각각의 개인정보 처리 및 보유기간은 다음과 같습니다.</p>
 <p>이용자 개인정보는 원칙적으로 개인정보의 처리목적이 달성되면 지체없이 파기합니다. 단, 다음의 정보에 대하여는 아래의 사유로 명시한 기간 동안 보존합니다.</p>
 
-<table class=intro>
+<table class="intro">
 <thead>
 <tr>
-    <th class=left>순번</th>
+    <th class="left">순번</th>
     <th>개인정보파일의 명칭</th>
     <th>운영근거/처리목적</th>
-    <th class=right>보유기간</th>
+    <th class="right">보유기간</th>
 </tr>
 </thead>
 <tbody>
 
 <tr>
-    <td class=left><cite>1</cite></td>
+    <td class="left"><cite>1</cite></td>
     <td><cite>안전원 통합 홈페이지 회원정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)</cite></td>
-    <td class=right><cite>회원탈퇴 시까지</cite></td>
+    <td class="right"><cite>회원탈퇴 시까지</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>2</cite></td>
+    <td class="left"><cite>2</cite></td>
     <td><cite>안전원에 바란다(고객의 소리)</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>3</cite></td>
+    <td class="left"><cite>3</cite></td>
     <td><cite>민원신청</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>4</cite></td>
+    <td class="left"><cite>4</cite></td>
     <td><cite>안전관리책임자교육정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제37조의4(안전관리책임자에 대한 교육)</cite></td>
-    <td class=right><cite>3년</cite></td>
+    <td class="right"><cite>3년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>5</cite></td>
+    <td class="left"><cite>5</cite></td>
     <td><cite>부작용보고 원시자료 요청</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)<br>-약사법 제68조 8(부작용 등의 보고)</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>6</cite></td>
+    <td class="left"><cite>6</cite></td>
     <td><cite>DUR정보 의견제안</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>    
 
 <tr>
-    <td class=left><cite>7</cite></td>
+    <td class="left"><cite>7</cite></td>
     <td><cite>뉴스레터 정기구독 신청</cite></td>
     <td><cite>-정보주체의 수집 동의</cite></td>
-    <td class=right><cite>구독해지시 까지</cite></td>
+    <td class="right"><cite>구독해지시 까지</cite></td>
 </tr>
 
 </tbody>
@@ -360,72 +360,72 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 <h4>제6조(처리하는 개인정보 항목)</h4>
 <p>1. 안전원은 다음의 개인정보 항목을 처리하고 있습니다.</p>
 
-<table class=intro>
+<table class="intro">
 <thead>
 <tr>
-    <th class=left>순번</th>
+    <th class="left">순번</th>
     <th>개인정보파일의 명칭</th>
     <th>운영근거/처리목적</th>
     <th>개인정보파일에 기록되는 개인정보의 항목</th>
-    <th class=right>보유기간</th>
+    <th class="right">보유기간</th>
 </tr>
 </thead>
 <tbody>
 
 <tr>
-    <td class=left><cite>1</cite></td>
+    <td class="left"><cite>1</cite></td>
     <td><cite>안전원통합 홈페이지 회원정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)</cite></td>
     <td><cite>성명, 아이디, 소속, 이메일, 비밀번호, 연락처</cite></td>
-    <td class=right><cite>회원 탈퇴시 까지</cite></td>
+    <td class="right"><cite>회원 탈퇴시 까지</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>2</cite></td>
+    <td class="left"><cite>2</cite></td>
     <td><cite>안전원에 바란다(고객의 소리)</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
     <td><cite>작성자, 이메일</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>3</cite></td>
+    <td class="left"><cite>3</cite></td>
     <td><cite>민원신청</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
     <td><cite>신청인 구분, 성명</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>4</cite></td>
+    <td class="left"><cite>4</cite></td>
     <td><cite>안전관리책임자교육정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제37조의4(안전관리책임자에 대한 교육)</cite></td>
     <td><cite>아이디, 비밀번호, 성명, 생년월일, 집주소, 휴대 전화, 전화번호, 이메일, 성별, 회사명, 회사업종, 관리자 분류, 관리자 신고일, 수강정보</cite></td>
-    <td class=right><cite>3년</cite></td>
+    <td class="right"><cite>3년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>5</cite></td>
+    <td class="left"><cite>5</cite></td>
     <td><cite>부작용보고 원시자료 요청</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)<br>-약사법 제68조 8(부작용 등의 보고)</cite></td>
     <td><cite>요청자 성명, 기관명, 소재지, 담당자 성명, 전화번호, 이메일, 주관연구책임자 성명, 소속기관, 최종학위, 전공, 주요경력, 연구실적</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>6</cite></td>
+    <td class="left"><cite>6</cite></td>
     <td><cite>DUR정보 의견제안</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
     <td><cite>성명, 연락처, 직업</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>    
 
 <tr>
-    <td class=left><cite>7</cite></td>
+    <td class="left"><cite>7</cite></td>
     <td><cite>뉴스레터 정기구독 신청</cite></td>
     <td><cite>-정보주체의 수집 동의</cite></td>
     <td><cite>이름, 이메일</cite></td>
-    <td class=right><cite>구독해지시 까지</cite></td>
+    <td class="right"><cite>구독해지시 까지</cite></td>
 </tr>
                 
 </tbody>
@@ -555,28 +555,28 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 <h4>제14조(개인정보 처리방침 변경)</h4>            
 <p>1. 이 개인정보 처리방침은 2022. 1. 19일부터 적용됩니다.</p>
 <p>2. 이전의 개인정보 처리방침은 아래에서 확인하실 수 있습니다.</p>  
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old.do>- 2012. 4. 17 ~ 2016. 3. 20 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old2.do>- 2016. 3. 21 ~ 2017. 5. 1 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old3.do>- 2017. 5. 2 ~ 2018. 5. 30 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old4.do>- 2018. 5. 30 ~ 2019. 2. 21 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old5.do>- 2019. 2. 21 ~ 2021. 2. 10 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old6.do>- 2021. 2. 22 ~ 2021.12. 31 적용 (클릭)</a></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (4,'CLCT                ','20260115','20260228','<p style=margin-left: 4px;color:#000;><span class=title_highlight>1. 개인정보의 수집/이용 목적</span></p>
-<p style=margin-left: 10px;color:#000;>회원관리 및 서비스제공, 서비스 개선목적 활용</p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>2. 수집하는 개인정보의 항목</span></p>
-<p style=margin-left: 10px;color:#000;>-수집항목(필수) : 성명, 이메일, 인증방법, 비밀번호, 연락처, 아이디</p> 
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>3. 개인정보의 보유 및 이용기간 :</span> <span class=highlight style=font-weight: bold; text-decoration: underline; font-size: 21px;>회원 탈퇴 시 까지</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>4. 동의거부권리 안내 : </span>본 회원가입에 대한 개인정보 수집동의를 거부하실 수 있으며, 이 경우 한국의약품안전관리원 홈페이지 서비스 이용이 제한됩니다.</p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (5,'STTY_AGT            ','20260115','20260228','<p style=margin-left: 10px;color:#000;>[만 14세 미만 아동의 개인정보 수집 및 이용에 관한 법정대리인 동의]</p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>1. 수집 항목: 아동의 성명, 생년월일, 법정대리인 성명, 연락처, 관계</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>2. 이용 목적: 아동의 서비스 이용에 대한 법정대리인 동의 확인 및 본인 인증</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>3. 보유 기간: 서비스 회원 탈퇴 시 혹은 법정 보유 기간까지</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>4. 본인은 만 14세 미만 아동의 법정대리인으로서 위와 같이 아동의 개인정보를 수집·이용하는 것에 동의합니다.</span></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (10,'UTZTN               ','20260113','20260228','제 1장 총칙
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old.do">- 2012. 4. 17 ~ 2016. 3. 20 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old2.do">- 2016. 3. 21 ~ 2017. 5. 1 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old3.do">- 2017. 5. 2 ~ 2018. 5. 30 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old4.do">- 2018. 5. 30 ~ 2019. 2. 21 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old5.do">- 2019. 2. 21 ~ 2021. 2. 10 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old6.do">- 2021. 2. 22 ~ 2021.12. 31 적용 (클릭)</a></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
+     (4,'CLCT','20260115','20260228','<p style="margin-left: 4px;color:#000;"><span class="title_highlight">1. 개인정보의 수집/이용 목적</span></p>
+<p style="margin-left: 10px;color:#000;">회원관리 및 서비스제공, 서비스 개선목적 활용</p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">2. 수집하는 개인정보의 항목</span></p>
+<p style="margin-left: 10px;color:#000;">-수집항목(필수) : 성명, 이메일, 인증방법, 비밀번호, 연락처, 아이디</p> 
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">3. 개인정보의 보유 및 이용기간 :</span> <span class="highlight" style="font-weight: bold; text-decoration: underline; font-size: 21px;">회원 탈퇴 시 까지</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">4. 동의거부권리 안내 : </span>본 회원가입에 대한 개인정보 수집동의를 거부하실 수 있으며, 이 경우 한국의약품안전관리원 홈페이지 서비스 이용이 제한됩니다.</p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
+     (5,'STTY_AGT','20260115','20260228','<p style="margin-left: 10px;color:#000;">[만 14세 미만 아동의 개인정보 수집 및 이용에 관한 법정대리인 동의]</p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">1. 수집 항목: 아동의 성명, 생년월일, 법정대리인 성명, 연락처, 관계</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">2. 이용 목적: 아동의 서비스 이용에 대한 법정대리인 동의 확인 및 본인 인증</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">3. 보유 기간: 서비스 회원 탈퇴 시 혹은 법정 보유 기간까지</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">4. 본인은 만 14세 미만 아동의 법정대리인으로서 위와 같이 아동의 개인정보를 수집·이용하는 것에 동의합니다.</span></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
+     (10,'UTZTN','20260113','20260228','제 1장 총칙
 
 제1조(목적)
 
-본 약관은 한국의약품안전관리원(이하 안전원)이 제공하는 당 사이트의 가입조건 및 절차, 이용자와 당 사이트의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.
+본 약관은 한국의약품안전관리원(이하 "안전원")이 제공하는 당 사이트의 가입조건 및 절차, 이용자와 당 사이트의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.
 
 제2조(약관의 효력과 변경)
 ① 안전원은 귀하가 본 약관 내용에 동의하는 것을 조건으로 귀하에게 당 사이트의 서비스를 제공할 것이며, 귀하가 본 약관의 내용에 동의하는 경우, 당 사이트의 서비스 제공 행위 및 귀하의 서비스 사용 행위에는 본 약관이 우선적으로 적용될 것입니다.
@@ -744,49 +744,49 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 ① 본 약관은 2012년 10월 1일부터 시행됩니다.
 ② 본 약관 시행일 이전에 시행되던 종전의 약관은 본 약관으로 대체합니다.
 ③ 본 약관에 대한 저작권은 안전원에 귀속하며 무단 복제, 배포, 전송, 기타 저작권 침해행위를 엄금합니다.','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (11,'STT_PRVC            ','20260113','20260228','<p> 한국의약품안전관리원(이하 안전원)은 개인정보보호법 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련된 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.</p>
+     (11,'STT_PRVC','20260113','20260228','<p> 한국의약품안전관리원(이하 안전원)은 개인정보보호법 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련된 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.</p>
 <p> 본 개인정보처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 전 지체없이 공지사항을 통하여 고지할 것입니다.</p>
 <p> 본 방침은 : 2022 년 1 월 19 일 부터 시행됩니다.</p><br>
 
 
 <!-- 주요 개인정보 처리 표시 -->
-<table id=labelingTb border=1>
+<table id="labelingTb" border="1">
     <colgroup>
-        <col style=width: 33%;>
-        <col style=width: 33%;>
-        <col style=width: 33%;>
+        <col style="width: 33%;">
+        <col style="width: 33%;">
+        <col style="width: 33%;">
     </colgroup>
     <thead>
         <tr>
-            <th colspan=3>[주요 개인정보 처리 표시(라벨링)]</th>
+            <th colspan="3">[주요 개인정보 처리 표시(라벨링)]</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy01.png alt=일반 개인정보 수집 title=성명, 생년월일, 전화번호, 주소 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy01.png" alt="일반 개인정보 수집" title="성명, 생년월일, 전화번호, 주소 등"></p>
                 <p>일반 개인정보 수집</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy02.png alt=개인정보 처리목적 title=회원가입 및 서비스 제공, 서비스 개선목적 활용 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy02.png" alt="개인정보 처리목적" title="회원가입 및 서비스 제공, 서비스 개선목적 활용 등"></p>
                 <p>개인정보 처리목적</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy03.png alt=개인정보의 보유 기간 title=회원탈퇴 시, 수집일로부터 10년, 3년 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy03.png" alt="개인정보의 보유 기간" title="회원탈퇴 시, 수집일로부터 10년, 3년 등"></p>
                 <p>개인정보의 보유 기간</p>
             </td>
         </tr>
         <tr>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy04.png alt=개인정보의 제공 title=개인정보의 제공가능한 경우 안내, 정보주체 동의에 의한 제3자 제공 시, 고지사항 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy04.png" alt="개인정보의 제공" title="개인정보의 제공가능한 경우 안내, 정보주체 동의에 의한 제3자 제공 시, 고지사항 등"></p>
                 <p>개인정보의 제공</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy05.png alt=처리위탁 title=사이트운영 및 회원관리, 민원처리 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy05.png" alt="처리위탁" title="사이트운영 및 회원관리, 민원처리 등"></p>
                 <p>처리위탁</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy06.png alt=개인정보 열람 청구 title=(담당부서) 경영지원팀 (연락처) 02-2172-6763></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy06.png" alt="개인정보 열람 청구" title="(담당부서) 경영지원팀 (연락처) 02-2172-6763"></p>
                 <p>개인정보 열람 청구</p>
             </td>
         </tr>
@@ -798,7 +798,7 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 
 
 <h4>
-<img class=privacyIcon src=/images/egovframework/iwt/ds/ko/member/privacyIcon01.png alt=개인정보의 처리목적 title=회원가입 및 서비스 제공, 서비스 개선목적 활용 등>
+<img class="privacyIcon" src="/images/egovframework/iwt/ds/ko/member/privacyIcon01.png" alt="개인정보의 처리목적" title="회원가입 및 서비스 제공, 서비스 개선목적 활용 등">
 제1조(개인정보의 처리목적)</h4>
 <p>1. 안전원은 다음의 목적을 위하여 개인정보를 처리하며, 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p>
 <p>가. 회원가입 및 서비스 제공
@@ -815,64 +815,64 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 <p>각각의 개인정보 처리 및 보유기간은 다음과 같습니다.</p>
 <p>이용자 개인정보는 원칙적으로 개인정보의 처리목적이 달성되면 지체없이 파기합니다. 단, 다음의 정보에 대하여는 아래의 사유로 명시한 기간 동안 보존합니다.</p>
 
-<table class=intro>
+<table class="intro">
 <thead>
 <tr>
-    <th class=left>순번</th>
+    <th class="left">순번</th>
     <th>개인정보파일의 명칭</th>
     <th>운영근거/처리목적</th>
-    <th class=right>보유기간</th>
+    <th class="right">보유기간</th>
 </tr>
 </thead>
 <tbody>
 
 <tr>
-    <td class=left><cite>1</cite></td>
+    <td class="left"><cite>1</cite></td>
     <td><cite>안전원 통합 홈페이지 회원정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)</cite></td>
-    <td class=right><cite>회원탈퇴 시까지</cite></td>
+    <td class="right"><cite>회원탈퇴 시까지</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>2</cite></td>
+    <td class="left"><cite>2</cite></td>
     <td><cite>안전원에 바란다(고객의 소리)</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>3</cite></td>
+    <td class="left"><cite>3</cite></td>
     <td><cite>민원신청</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>4</cite></td>
+    <td class="left"><cite>4</cite></td>
     <td><cite>안전관리책임자교육정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제37조의4(안전관리책임자에 대한 교육)</cite></td>
-    <td class=right><cite>3년</cite></td>
+    <td class="right"><cite>3년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>5</cite></td>
+    <td class="left"><cite>5</cite></td>
     <td><cite>부작용보고 원시자료 요청</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)<br>-약사법 제68조 8(부작용 등의 보고)</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>6</cite></td>
+    <td class="left"><cite>6</cite></td>
     <td><cite>DUR정보 의견제안</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>    
 
 <tr>
-    <td class=left><cite>7</cite></td>
+    <td class="left"><cite>7</cite></td>
     <td><cite>뉴스레터 정기구독 신청</cite></td>
     <td><cite>-정보주체의 수집 동의</cite></td>
-    <td class=right><cite>구독해지시 까지</cite></td>
+    <td class="right"><cite>구독해지시 까지</cite></td>
 </tr>
 
 </tbody>
@@ -930,72 +930,72 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 <h4>제6조(처리하는 개인정보 항목)</h4>
 <p>1. 안전원은 다음의 개인정보 항목을 처리하고 있습니다.</p>
 
-<table class=intro>
+<table class="intro">
 <thead>
 <tr>
-    <th class=left>순번</th>
+    <th class="left">순번</th>
     <th>개인정보파일의 명칭</th>
     <th>운영근거/처리목적</th>
     <th>개인정보파일에 기록되는 개인정보의 항목</th>
-    <th class=right>보유기간</th>
+    <th class="right">보유기간</th>
 </tr>
 </thead>
 <tbody>
 
 <tr>
-    <td class=left><cite>1</cite></td>
+    <td class="left"><cite>1</cite></td>
     <td><cite>안전원통합 홈페이지 회원정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)</cite></td>
     <td><cite>성명, 아이디, 소속, 이메일, 비밀번호, 연락처</cite></td>
-    <td class=right><cite>회원 탈퇴시 까지</cite></td>
+    <td class="right"><cite>회원 탈퇴시 까지</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>2</cite></td>
+    <td class="left"><cite>2</cite></td>
     <td><cite>안전원에 바란다(고객의 소리)</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
     <td><cite>작성자, 이메일</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>3</cite></td>
+    <td class="left"><cite>3</cite></td>
     <td><cite>민원신청</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
     <td><cite>신청인 구분, 성명</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>4</cite></td>
+    <td class="left"><cite>4</cite></td>
     <td><cite>안전관리책임자교육정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제37조의4(안전관리책임자에 대한 교육)</cite></td>
     <td><cite>아이디, 비밀번호, 성명, 생년월일, 집주소, 휴대 전화, 전화번호, 이메일, 성별, 회사명, 회사업종, 관리자 분류, 관리자 신고일, 수강정보</cite></td>
-    <td class=right><cite>3년</cite></td>
+    <td class="right"><cite>3년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>5</cite></td>
+    <td class="left"><cite>5</cite></td>
     <td><cite>부작용보고 원시자료 요청</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)<br>-약사법 제68조 8(부작용 등의 보고)</cite></td>
     <td><cite>요청자 성명, 기관명, 소재지, 담당자 성명, 전화번호, 이메일, 주관연구책임자 성명, 소속기관, 최종학위, 전공, 주요경력, 연구실적</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>6</cite></td>
+    <td class="left"><cite>6</cite></td>
     <td><cite>DUR정보 의견제안</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
     <td><cite>성명, 연락처, 직업</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>    
 
 <tr>
-    <td class=left><cite>7</cite></td>
+    <td class="left"><cite>7</cite></td>
     <td><cite>뉴스레터 정기구독 신청</cite></td>
     <td><cite>-정보주체의 수집 동의</cite></td>
     <td><cite>이름, 이메일</cite></td>
-    <td class=right><cite>구독해지시 까지</cite></td>
+    <td class="right"><cite>구독해지시 까지</cite></td>
 </tr>
                 
 </tbody>
@@ -1125,29 +1125,29 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 <h4>제14조(개인정보 처리방침 변경)</h4>            
 <p>1. 이 개인정보 처리방침은 2022. 1. 19일부터 적용됩니다.</p>
 <p>2. 이전의 개인정보 처리방침은 아래에서 확인하실 수 있습니다.</p>  
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old.do>- 2012. 4. 17 ~ 2016. 3. 20 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old2.do>- 2016. 3. 21 ~ 2017. 5. 1 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old3.do>- 2017. 5. 2 ~ 2018. 5. 30 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old4.do>- 2018. 5. 30 ~ 2019. 2. 21 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old5.do>- 2019. 2. 21 ~ 2021. 2. 10 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old6.do>- 2021. 2. 22 ~ 2021.12. 31 적용 (클릭)</a></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (12,'CLCT                ','20260113','20260228','<p style=margin-left: 4px;color:#000;><span class=title_highlight>1. 개인정보의 수집/이용 목적</span></p>
-<p style=margin-left: 10px;color:#000;>회원관리 및 서비스제공, 서비스 개선목적 활용</p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>2. 수집하는 개인정보의 항목</span></p>
-<p style=margin-left: 10px;color:#000;>-수집항목(필수) : 성명, 이메일, 인증방법, 비밀번호, 연락처, 아이디</p> 
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>3. 개인정보의 보유 및 이용기간 :</span> <span class=highlight style=font-weight: bold; text-decoration: underline; font-size: 21px;>회원 탈퇴 시 까지</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>4. 동의거부권리 안내 : </span>본 회원가입에 대한 개인정보 수집동의를 거부하실 수 있으며, 이 경우 한국의약품안전관리원 홈페이지 서비스 이용이 제한됩니다.</p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007');
-INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ymd,trms_stt_end_ymd,trms_stt_cn,atch_file_group_id,wrtr_dept_nm,mdfr_dept_nm,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     (13,'STTY_AGT            ','20260113','20260228','<p style=margin-left: 10px;color:#000;>[만 14세 미만 아동의 개인정보 수집 및 이용에 관한 법정대리인 동의]</p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>1. 수집 항목: 아동의 성명, 생년월일, 법정대리인 성명, 연락처, 관계</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>2. 이용 목적: 아동의 서비스 이용에 대한 법정대리인 동의 확인 및 본인 인증</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>3. 보유 기간: 서비스 회원 탈퇴 시 혹은 법정 보유 기간까지</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>4. 본인은 만 14세 미만 아동의 법정대리인으로서 위와 같이 아동의 개인정보를 수집·이용하는 것에 동의합니다.</span></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (14,'UTZTN               ','20260114','20260228','제 1장 총칙
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old.do">- 2012. 4. 17 ~ 2016. 3. 20 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old2.do">- 2016. 3. 21 ~ 2017. 5. 1 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old3.do">- 2017. 5. 2 ~ 2018. 5. 30 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old4.do">- 2018. 5. 30 ~ 2019. 2. 21 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old5.do">- 2019. 2. 21 ~ 2021. 2. 10 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old6.do">- 2021. 2. 22 ~ 2021.12. 31 적용 (클릭)</a></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
+     (12,'CLCT','20260113','20260228','<p style="margin-left: 4px;color:#000;"><span class="title_highlight">1. 개인정보의 수집/이용 목적</span></p>
+<p style="margin-left: 10px;color:#000;">회원관리 및 서비스제공, 서비스 개선목적 활용</p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">2. 수집하는 개인정보의 항목</span></p>
+<p style="margin-left: 10px;color:#000;">-수집항목(필수) : 성명, 이메일, 인증방법, 비밀번호, 연락처, 아이디</p> 
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">3. 개인정보의 보유 및 이용기간 :</span> <span class="highlight" style="font-weight: bold; text-decoration: underline; font-size: 21px;">회원 탈퇴 시 까지</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">4. 동의거부권리 안내 : </span>본 회원가입에 대한 개인정보 수집동의를 거부하실 수 있으며, 이 경우 한국의약품안전관리원 홈페이지 서비스 이용이 제한됩니다.</p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007');
+INSERT INTO KIDS_OWN.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ymd,trms_stt_end_ymd,trms_stt_cn,atch_file_group_id,wrtr_dept_nm,mdfr_dept_nm,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
+     (13,'STTY_AGT','20260113','20260228','<p style="margin-left: 10px;color:#000;">[만 14세 미만 아동의 개인정보 수집 및 이용에 관한 법정대리인 동의]</p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">1. 수집 항목: 아동의 성명, 생년월일, 법정대리인 성명, 연락처, 관계</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">2. 이용 목적: 아동의 서비스 이용에 대한 법정대리인 동의 확인 및 본인 인증</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">3. 보유 기간: 서비스 회원 탈퇴 시 혹은 법정 보유 기간까지</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">4. 본인은 만 14세 미만 아동의 법정대리인으로서 위와 같이 아동의 개인정보를 수집·이용하는 것에 동의합니다.</span></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
+     (14,'UTZTN','20260114','20260228','제 1장 총칙
 
 제1조(목적)
 
-본 약관은 한국의약품안전관리원(이하 안전원)이 제공하는 당 사이트의 가입조건 및 절차, 이용자와 당 사이트의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.
+본 약관은 한국의약품안전관리원(이하 "안전원")이 제공하는 당 사이트의 가입조건 및 절차, 이용자와 당 사이트의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.
 
 제2조(약관의 효력과 변경)
 ① 안전원은 귀하가 본 약관 내용에 동의하는 것을 조건으로 귀하에게 당 사이트의 서비스를 제공할 것이며, 귀하가 본 약관의 내용에 동의하는 경우, 당 사이트의 서비스 제공 행위 및 귀하의 서비스 사용 행위에는 본 약관이 우선적으로 적용될 것입니다.
@@ -1315,49 +1315,49 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 ① 본 약관은 2012년 10월 1일부터 시행됩니다.
 ② 본 약관 시행일 이전에 시행되던 종전의 약관은 본 약관으로 대체합니다.
 ③ 본 약관에 대한 저작권은 안전원에 귀속하며 무단 복제, 배포, 전송, 기타 저작권 침해행위를 엄금합니다.','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (15,'STT_PRVC            ','20260114','20260228','<p> 한국의약품안전관리원(이하 안전원)은 개인정보보호법 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련된 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.</p>
+     (15,'STT_PRVC','20260114','20260228','<p> 한국의약품안전관리원(이하 안전원)은 개인정보보호법 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련된 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.</p>
 <p> 본 개인정보처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 전 지체없이 공지사항을 통하여 고지할 것입니다.</p>
 <p> 본 방침은 : 2022 년 1 월 19 일 부터 시행됩니다.</p><br>
 
 
 <!-- 주요 개인정보 처리 표시 -->
-<table id=labelingTb border=1>
+<table id="labelingTb" border="1">
     <colgroup>
-        <col style=width: 33%;>
-        <col style=width: 33%;>
-        <col style=width: 33%;>
+        <col style="width: 33%;">
+        <col style="width: 33%;">
+        <col style="width: 33%;">
     </colgroup>
     <thead>
         <tr>
-            <th colspan=3>[주요 개인정보 처리 표시(라벨링)]</th>
+            <th colspan="3">[주요 개인정보 처리 표시(라벨링)]</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy01.png alt=일반 개인정보 수집 title=성명, 생년월일, 전화번호, 주소 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy01.png" alt="일반 개인정보 수집" title="성명, 생년월일, 전화번호, 주소 등"></p>
                 <p>일반 개인정보 수집</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy02.png alt=개인정보 처리목적 title=회원가입 및 서비스 제공, 서비스 개선목적 활용 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy02.png" alt="개인정보 처리목적" title="회원가입 및 서비스 제공, 서비스 개선목적 활용 등"></p>
                 <p>개인정보 처리목적</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy03.png alt=개인정보의 보유 기간 title=회원탈퇴 시, 수집일로부터 10년, 3년 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy03.png" alt="개인정보의 보유 기간" title="회원탈퇴 시, 수집일로부터 10년, 3년 등"></p>
                 <p>개인정보의 보유 기간</p>
             </td>
         </tr>
         <tr>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy04.png alt=개인정보의 제공 title=개인정보의 제공가능한 경우 안내, 정보주체 동의에 의한 제3자 제공 시, 고지사항 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy04.png" alt="개인정보의 제공" title="개인정보의 제공가능한 경우 안내, 정보주체 동의에 의한 제3자 제공 시, 고지사항 등"></p>
                 <p>개인정보의 제공</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy05.png alt=처리위탁 title=사이트운영 및 회원관리, 민원처리 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy05.png" alt="처리위탁" title="사이트운영 및 회원관리, 민원처리 등"></p>
                 <p>처리위탁</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy06.png alt=개인정보 열람 청구 title=(담당부서) 경영지원팀 (연락처) 02-2172-6763></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy06.png" alt="개인정보 열람 청구" title="(담당부서) 경영지원팀 (연락처) 02-2172-6763"></p>
                 <p>개인정보 열람 청구</p>
             </td>
         </tr>
@@ -1369,7 +1369,7 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 
 
 <h4>
-<img class=privacyIcon src=/images/egovframework/iwt/ds/ko/member/privacyIcon01.png alt=개인정보의 처리목적 title=회원가입 및 서비스 제공, 서비스 개선목적 활용 등>
+<img class="privacyIcon" src="/images/egovframework/iwt/ds/ko/member/privacyIcon01.png" alt="개인정보의 처리목적" title="회원가입 및 서비스 제공, 서비스 개선목적 활용 등">
 제1조(개인정보의 처리목적)</h4>
 <p>1. 안전원은 다음의 목적을 위하여 개인정보를 처리하며, 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p>
 <p>가. 회원가입 및 서비스 제공
@@ -1386,64 +1386,64 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 <p>각각의 개인정보 처리 및 보유기간은 다음과 같습니다.</p>
 <p>이용자 개인정보는 원칙적으로 개인정보의 처리목적이 달성되면 지체없이 파기합니다. 단, 다음의 정보에 대하여는 아래의 사유로 명시한 기간 동안 보존합니다.</p>
 
-<table class=intro>
+<table class="intro">
 <thead>
 <tr>
-    <th class=left>순번</th>
+    <th class="left">순번</th>
     <th>개인정보파일의 명칭</th>
     <th>운영근거/처리목적</th>
-    <th class=right>보유기간</th>
+    <th class="right">보유기간</th>
 </tr>
 </thead>
 <tbody>
 
 <tr>
-    <td class=left><cite>1</cite></td>
+    <td class="left"><cite>1</cite></td>
     <td><cite>안전원 통합 홈페이지 회원정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)</cite></td>
-    <td class=right><cite>회원탈퇴 시까지</cite></td>
+    <td class="right"><cite>회원탈퇴 시까지</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>2</cite></td>
+    <td class="left"><cite>2</cite></td>
     <td><cite>안전원에 바란다(고객의 소리)</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>3</cite></td>
+    <td class="left"><cite>3</cite></td>
     <td><cite>민원신청</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>4</cite></td>
+    <td class="left"><cite>4</cite></td>
     <td><cite>안전관리책임자교육정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제37조의4(안전관리책임자에 대한 교육)</cite></td>
-    <td class=right><cite>3년</cite></td>
+    <td class="right"><cite>3년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>5</cite></td>
+    <td class="left"><cite>5</cite></td>
     <td><cite>부작용보고 원시자료 요청</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)<br>-약사법 제68조 8(부작용 등의 보고)</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>6</cite></td>
+    <td class="left"><cite>6</cite></td>
     <td><cite>DUR정보 의견제안</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>    
 
 <tr>
-    <td class=left><cite>7</cite></td>
+    <td class="left"><cite>7</cite></td>
     <td><cite>뉴스레터 정기구독 신청</cite></td>
     <td><cite>-정보주체의 수집 동의</cite></td>
-    <td class=right><cite>구독해지시 까지</cite></td>
+    <td class="right"><cite>구독해지시 까지</cite></td>
 </tr>
 
 </tbody>
@@ -1501,72 +1501,72 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 <h4>제6조(처리하는 개인정보 항목)</h4>
 <p>1. 안전원은 다음의 개인정보 항목을 처리하고 있습니다.</p>
 
-<table class=intro>
+<table class="intro">
 <thead>
 <tr>
-    <th class=left>순번</th>
+    <th class="left">순번</th>
     <th>개인정보파일의 명칭</th>
     <th>운영근거/처리목적</th>
     <th>개인정보파일에 기록되는 개인정보의 항목</th>
-    <th class=right>보유기간</th>
+    <th class="right">보유기간</th>
 </tr>
 </thead>
 <tbody>
 
 <tr>
-    <td class=left><cite>1</cite></td>
+    <td class="left"><cite>1</cite></td>
     <td><cite>안전원통합 홈페이지 회원정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)</cite></td>
     <td><cite>성명, 아이디, 소속, 이메일, 비밀번호, 연락처</cite></td>
-    <td class=right><cite>회원 탈퇴시 까지</cite></td>
+    <td class="right"><cite>회원 탈퇴시 까지</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>2</cite></td>
+    <td class="left"><cite>2</cite></td>
     <td><cite>안전원에 바란다(고객의 소리)</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
     <td><cite>작성자, 이메일</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>3</cite></td>
+    <td class="left"><cite>3</cite></td>
     <td><cite>민원신청</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
     <td><cite>신청인 구분, 성명</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>4</cite></td>
+    <td class="left"><cite>4</cite></td>
     <td><cite>안전관리책임자교육정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제37조의4(안전관리책임자에 대한 교육)</cite></td>
     <td><cite>아이디, 비밀번호, 성명, 생년월일, 집주소, 휴대 전화, 전화번호, 이메일, 성별, 회사명, 회사업종, 관리자 분류, 관리자 신고일, 수강정보</cite></td>
-    <td class=right><cite>3년</cite></td>
+    <td class="right"><cite>3년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>5</cite></td>
+    <td class="left"><cite>5</cite></td>
     <td><cite>부작용보고 원시자료 요청</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)<br>-약사법 제68조 8(부작용 등의 보고)</cite></td>
     <td><cite>요청자 성명, 기관명, 소재지, 담당자 성명, 전화번호, 이메일, 주관연구책임자 성명, 소속기관, 최종학위, 전공, 주요경력, 연구실적</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>6</cite></td>
+    <td class="left"><cite>6</cite></td>
     <td><cite>DUR정보 의견제안</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
     <td><cite>성명, 연락처, 직업</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>    
 
 <tr>
-    <td class=left><cite>7</cite></td>
+    <td class="left"><cite>7</cite></td>
     <td><cite>뉴스레터 정기구독 신청</cite></td>
     <td><cite>-정보주체의 수집 동의</cite></td>
     <td><cite>이름, 이메일</cite></td>
-    <td class=right><cite>구독해지시 까지</cite></td>
+    <td class="right"><cite>구독해지시 까지</cite></td>
 </tr>
                 
 </tbody>
@@ -1696,28 +1696,28 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 <h4>제14조(개인정보 처리방침 변경)</h4>            
 <p>1. 이 개인정보 처리방침은 2022. 1. 19일부터 적용됩니다.</p>
 <p>2. 이전의 개인정보 처리방침은 아래에서 확인하실 수 있습니다.</p>  
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old.do>- 2012. 4. 17 ~ 2016. 3. 20 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old2.do>- 2016. 3. 21 ~ 2017. 5. 1 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old3.do>- 2017. 5. 2 ~ 2018. 5. 30 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old4.do>- 2018. 5. 30 ~ 2019. 2. 21 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old5.do>- 2019. 2. 21 ~ 2021. 2. 10 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old6.do>- 2021. 2. 22 ~ 2021.12. 31 적용 (클릭)</a></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (16,'CLCT                ','20260114','20260228','<p style=margin-left: 4px;color:#000;><span class=title_highlight>1. 개인정보의 수집/이용 목적</span></p>
-<p style=margin-left: 10px;color:#000;>회원관리 및 서비스제공, 서비스 개선목적 활용</p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>2. 수집하는 개인정보의 항목</span></p>
-<p style=margin-left: 10px;color:#000;>-수집항목(필수) : 성명, 이메일, 인증방법, 비밀번호, 연락처, 아이디</p> 
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>3. 개인정보의 보유 및 이용기간 :</span> <span class=highlight style=font-weight: bold; text-decoration: underline; font-size: 21px;>회원 탈퇴 시 까지</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>4. 동의거부권리 안내 : </span>본 회원가입에 대한 개인정보 수집동의를 거부하실 수 있으며, 이 경우 한국의약품안전관리원 홈페이지 서비스 이용이 제한됩니다.</p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (17,'STTY_AGT            ','20260114','20260228','<p style=margin-left: 10px;color:#000;>[만 14세 미만 아동의 개인정보 수집 및 이용에 관한 법정대리인 동의]</p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>1. 수집 항목: 아동의 성명, 생년월일, 법정대리인 성명, 연락처, 관계</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>2. 이용 목적: 아동의 서비스 이용에 대한 법정대리인 동의 확인 및 본인 인증</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>3. 보유 기간: 서비스 회원 탈퇴 시 혹은 법정 보유 기간까지</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>4. 본인은 만 14세 미만 아동의 법정대리인으로서 위와 같이 아동의 개인정보를 수집·이용하는 것에 동의합니다.</span></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (18,'UTZTN               ','20260114','20260228','제 1장 총칙
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old.do">- 2012. 4. 17 ~ 2016. 3. 20 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old2.do">- 2016. 3. 21 ~ 2017. 5. 1 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old3.do">- 2017. 5. 2 ~ 2018. 5. 30 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old4.do">- 2018. 5. 30 ~ 2019. 2. 21 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old5.do">- 2019. 2. 21 ~ 2021. 2. 10 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old6.do">- 2021. 2. 22 ~ 2021.12. 31 적용 (클릭)</a></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
+     (16,'CLCT','20260114','20260228','<p style="margin-left: 4px;color:#000;"><span class="title_highlight">1. 개인정보의 수집/이용 목적</span></p>
+<p style="margin-left: 10px;color:#000;">회원관리 및 서비스제공, 서비스 개선목적 활용</p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">2. 수집하는 개인정보의 항목</span></p>
+<p style="margin-left: 10px;color:#000;">-수집항목(필수) : 성명, 이메일, 인증방법, 비밀번호, 연락처, 아이디</p> 
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">3. 개인정보의 보유 및 이용기간 :</span> <span class="highlight" style="font-weight: bold; text-decoration: underline; font-size: 21px;">회원 탈퇴 시 까지</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">4. 동의거부권리 안내 : </span>본 회원가입에 대한 개인정보 수집동의를 거부하실 수 있으며, 이 경우 한국의약품안전관리원 홈페이지 서비스 이용이 제한됩니다.</p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
+     (17,'STTY_AGT','20260114','20260228','<p style="margin-left: 10px;color:#000;">[만 14세 미만 아동의 개인정보 수집 및 이용에 관한 법정대리인 동의]</p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">1. 수집 항목: 아동의 성명, 생년월일, 법정대리인 성명, 연락처, 관계</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">2. 이용 목적: 아동의 서비스 이용에 대한 법정대리인 동의 확인 및 본인 인증</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">3. 보유 기간: 서비스 회원 탈퇴 시 혹은 법정 보유 기간까지</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">4. 본인은 만 14세 미만 아동의 법정대리인으로서 위와 같이 아동의 개인정보를 수집·이용하는 것에 동의합니다.</span></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
+     (18,'UTZTN','20260114','20260228','제 1장 총칙
 
 제1조(목적)
 
-본 약관은 한국의약품안전관리원(이하 안전원)이 제공하는 당 사이트의 가입조건 및 절차, 이용자와 당 사이트의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.
+본 약관은 한국의약품안전관리원(이하 "안전원")이 제공하는 당 사이트의 가입조건 및 절차, 이용자와 당 사이트의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.
 
 제2조(약관의 효력과 변경)
 ① 안전원은 귀하가 본 약관 내용에 동의하는 것을 조건으로 귀하에게 당 사이트의 서비스를 제공할 것이며, 귀하가 본 약관의 내용에 동의하는 경우, 당 사이트의 서비스 제공 행위 및 귀하의 서비스 사용 행위에는 본 약관이 우선적으로 적용될 것입니다.
@@ -1885,49 +1885,49 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 ① 본 약관은 2012년 10월 1일부터 시행됩니다.
 ② 본 약관 시행일 이전에 시행되던 종전의 약관은 본 약관으로 대체합니다.
 ③ 본 약관에 대한 저작권은 안전원에 귀속하며 무단 복제, 배포, 전송, 기타 저작권 침해행위를 엄금합니다.','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (19,'STT_PRVC            ','20260114','20260228','<p> 한국의약품안전관리원(이하 안전원)은 개인정보보호법 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련된 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.</p>
+     (19,'STT_PRVC','20260114','20260228','<p> 한국의약품안전관리원(이하 안전원)은 개인정보보호법 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련된 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.</p>
 <p> 본 개인정보처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 전 지체없이 공지사항을 통하여 고지할 것입니다.</p>
 <p> 본 방침은 : 2022 년 1 월 19 일 부터 시행됩니다.</p><br>
 
 
 <!-- 주요 개인정보 처리 표시 -->
-<table id=labelingTb border=1>
+<table id="labelingTb" border="1">
     <colgroup>
-        <col style=width: 33%;>
-        <col style=width: 33%;>
-        <col style=width: 33%;>
+        <col style="width: 33%;">
+        <col style="width: 33%;">
+        <col style="width: 33%;">
     </colgroup>
     <thead>
         <tr>
-            <th colspan=3>[주요 개인정보 처리 표시(라벨링)]</th>
+            <th colspan="3">[주요 개인정보 처리 표시(라벨링)]</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy01.png alt=일반 개인정보 수집 title=성명, 생년월일, 전화번호, 주소 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy01.png" alt="일반 개인정보 수집" title="성명, 생년월일, 전화번호, 주소 등"></p>
                 <p>일반 개인정보 수집</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy02.png alt=개인정보 처리목적 title=회원가입 및 서비스 제공, 서비스 개선목적 활용 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy02.png" alt="개인정보 처리목적" title="회원가입 및 서비스 제공, 서비스 개선목적 활용 등"></p>
                 <p>개인정보 처리목적</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy03.png alt=개인정보의 보유 기간 title=회원탈퇴 시, 수집일로부터 10년, 3년 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy03.png" alt="개인정보의 보유 기간" title="회원탈퇴 시, 수집일로부터 10년, 3년 등"></p>
                 <p>개인정보의 보유 기간</p>
             </td>
         </tr>
         <tr>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy04.png alt=개인정보의 제공 title=개인정보의 제공가능한 경우 안내, 정보주체 동의에 의한 제3자 제공 시, 고지사항 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy04.png" alt="개인정보의 제공" title="개인정보의 제공가능한 경우 안내, 정보주체 동의에 의한 제3자 제공 시, 고지사항 등"></p>
                 <p>개인정보의 제공</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy05.png alt=처리위탁 title=사이트운영 및 회원관리, 민원처리 등></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy05.png" alt="처리위탁" title="사이트운영 및 회원관리, 민원처리 등"></p>
                 <p>처리위탁</p>
             </td>
             <td>
-                <p><img src=/images/egovframework/iwt/ds/ko/member/privacy06.png alt=개인정보 열람 청구 title=(담당부서) 경영지원팀 (연락처) 02-2172-6763></p>
+                <p><img src="/images/egovframework/iwt/ds/ko/member/privacy06.png" alt="개인정보 열람 청구" title="(담당부서) 경영지원팀 (연락처) 02-2172-6763"></p>
                 <p>개인정보 열람 청구</p>
             </td>
         </tr>
@@ -1939,7 +1939,7 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 
 
 <h4>
-<img class=privacyIcon src=/images/egovframework/iwt/ds/ko/member/privacyIcon01.png alt=개인정보의 처리목적 title=회원가입 및 서비스 제공, 서비스 개선목적 활용 등>
+<img class="privacyIcon" src="/images/egovframework/iwt/ds/ko/member/privacyIcon01.png" alt="개인정보의 처리목적" title="회원가입 및 서비스 제공, 서비스 개선목적 활용 등">
 제1조(개인정보의 처리목적)</h4>
 <p>1. 안전원은 다음의 목적을 위하여 개인정보를 처리하며, 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p>
 <p>가. 회원가입 및 서비스 제공
@@ -1956,64 +1956,64 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 <p>각각의 개인정보 처리 및 보유기간은 다음과 같습니다.</p>
 <p>이용자 개인정보는 원칙적으로 개인정보의 처리목적이 달성되면 지체없이 파기합니다. 단, 다음의 정보에 대하여는 아래의 사유로 명시한 기간 동안 보존합니다.</p>
 
-<table class=intro>
+<table class="intro">
 <thead>
 <tr>
-    <th class=left>순번</th>
+    <th class="left">순번</th>
     <th>개인정보파일의 명칭</th>
     <th>운영근거/처리목적</th>
-    <th class=right>보유기간</th>
+    <th class="right">보유기간</th>
 </tr>
 </thead>
 <tbody>
 
 <tr>
-    <td class=left><cite>1</cite></td>
+    <td class="left"><cite>1</cite></td>
     <td><cite>안전원 통합 홈페이지 회원정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)</cite></td>
-    <td class=right><cite>회원탈퇴 시까지</cite></td>
+    <td class="right"><cite>회원탈퇴 시까지</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>2</cite></td>
+    <td class="left"><cite>2</cite></td>
     <td><cite>안전원에 바란다(고객의 소리)</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>3</cite></td>
+    <td class="left"><cite>3</cite></td>
     <td><cite>민원신청</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>4</cite></td>
+    <td class="left"><cite>4</cite></td>
     <td><cite>안전관리책임자교육정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제37조의4(안전관리책임자에 대한 교육)</cite></td>
-    <td class=right><cite>3년</cite></td>
+    <td class="right"><cite>3년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>5</cite></td>
+    <td class="left"><cite>5</cite></td>
     <td><cite>부작용보고 원시자료 요청</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)<br>-약사법 제68조 8(부작용 등의 보고)</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>6</cite></td>
+    <td class="left"><cite>6</cite></td>
     <td><cite>DUR정보 의견제안</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>    
 
 <tr>
-    <td class=left><cite>7</cite></td>
+    <td class="left"><cite>7</cite></td>
     <td><cite>뉴스레터 정기구독 신청</cite></td>
     <td><cite>-정보주체의 수집 동의</cite></td>
-    <td class=right><cite>구독해지시 까지</cite></td>
+    <td class="right"><cite>구독해지시 까지</cite></td>
 </tr>
 
 </tbody>
@@ -2071,72 +2071,72 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 <h4>제6조(처리하는 개인정보 항목)</h4>
 <p>1. 안전원은 다음의 개인정보 항목을 처리하고 있습니다.</p>
 
-<table class=intro>
+<table class="intro">
 <thead>
 <tr>
-    <th class=left>순번</th>
+    <th class="left">순번</th>
     <th>개인정보파일의 명칭</th>
     <th>운영근거/처리목적</th>
     <th>개인정보파일에 기록되는 개인정보의 항목</th>
-    <th class=right>보유기간</th>
+    <th class="right">보유기간</th>
 </tr>
 </thead>
 <tbody>
 
 <tr>
-    <td class=left><cite>1</cite></td>
+    <td class="left"><cite>1</cite></td>
     <td><cite>안전원통합 홈페이지 회원정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)</cite></td>
     <td><cite>성명, 아이디, 소속, 이메일, 비밀번호, 연락처</cite></td>
-    <td class=right><cite>회원 탈퇴시 까지</cite></td>
+    <td class="right"><cite>회원 탈퇴시 까지</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>2</cite></td>
+    <td class="left"><cite>2</cite></td>
     <td><cite>안전원에 바란다(고객의 소리)</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
     <td><cite>작성자, 이메일</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>3</cite></td>
+    <td class="left"><cite>3</cite></td>
     <td><cite>민원신청</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
     <td><cite>신청인 구분, 성명</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>4</cite></td>
+    <td class="left"><cite>4</cite></td>
     <td><cite>안전관리책임자교육정보</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제37조의4(안전관리책임자에 대한 교육)</cite></td>
     <td><cite>아이디, 비밀번호, 성명, 생년월일, 집주소, 휴대 전화, 전화번호, 이메일, 성별, 회사명, 회사업종, 관리자 분류, 관리자 신고일, 수강정보</cite></td>
-    <td class=right><cite>3년</cite></td>
+    <td class="right"><cite>3년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>5</cite></td>
+    <td class="left"><cite>5</cite></td>
     <td><cite>부작용보고 원시자료 요청</cite></td>
     <td><cite>-정보주체의 수집동의<br>-약사법 제68조 7(자료제공의 요청)<br>-약사법 제68조 8(부작용 등의 보고)</cite></td>
     <td><cite>요청자 성명, 기관명, 소재지, 담당자 성명, 전화번호, 이메일, 주관연구책임자 성명, 소속기관, 최종학위, 전공, 주요경력, 연구실적</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>
 
 <tr>
-    <td class=left><cite>6</cite></td>
+    <td class="left"><cite>6</cite></td>
     <td><cite>DUR정보 의견제안</cite></td>
     <td><cite>-정보주체의 수집동의</cite></td>
     <td><cite>성명, 연락처, 직업</cite></td>
-    <td class=right><cite>10년</cite></td>
+    <td class="right"><cite>10년</cite></td>
 </tr>    
 
 <tr>
-    <td class=left><cite>7</cite></td>
+    <td class="left"><cite>7</cite></td>
     <td><cite>뉴스레터 정기구독 신청</cite></td>
     <td><cite>-정보주체의 수집 동의</cite></td>
     <td><cite>이름, 이메일</cite></td>
-    <td class=right><cite>구독해지시 까지</cite></td>
+    <td class="right"><cite>구독해지시 까지</cite></td>
 </tr>
                 
 </tbody>
@@ -2266,20 +2266,20 @@ INSERT INTO kids_own.TB_PP_M_TRMS_STT (trms_stt_sn,trms_stt_cd,trms_stt_aplcn_ym
 <h4>제14조(개인정보 처리방침 변경)</h4>            
 <p>1. 이 개인정보 처리방침은 2022. 1. 19일부터 적용됩니다.</p>
 <p>2. 이전의 개인정보 처리방침은 아래에서 확인하실 수 있습니다.</p>  
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old.do>- 2012. 4. 17 ~ 2016. 3. 20 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old2.do>- 2016. 3. 21 ~ 2017. 5. 1 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old3.do>- 2017. 5. 2 ~ 2018. 5. 30 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old4.do>- 2018. 5. 30 ~ 2019. 2. 21 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old5.do>- 2019. 2. 21 ~ 2021. 2. 10 적용 (클릭)</a></p>
-<p><a href=/iwt/ds/ko/member/EgovPrivacyAgreement_old6.do>- 2021. 2. 22 ~ 2021.12. 31 적용 (클릭)</a></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (20,'CLCT                ','20260114','20260228','<p style=margin-left: 4px;color:#000;><span class=title_highlight>1. 개인정보의 수집/이용 목적</span></p>
-<p style=margin-left: 10px;color:#000;>회원관리 및 서비스제공, 서비스 개선목적 활용</p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>2. 수집하는 개인정보의 항목</span></p>
-<p style=margin-left: 10px;color:#000;>-수집항목(필수) : 성명, 이메일, 인증방법, 비밀번호, 연락처, 아이디</p> 
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>3. 개인정보의 보유 및 이용기간 :</span> <span class=highlight style=font-weight: bold; text-decoration: underline; font-size: 21px;>회원 탈퇴 시 까지</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>4. 동의거부권리 안내 : </span>본 회원가입에 대한 개인정보 수집동의를 거부하실 수 있으며, 이 경우 한국의약품안전관리원 홈페이지 서비스 이용이 제한됩니다.</p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
-     (21,'STTY_AGT            ','20260114','20260228','<p style=margin-left: 10px;color:#000;>[만 14세 미만 아동의 개인정보 수집 및 이용에 관한 법정대리인 동의]</p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>1. 수집 항목: 아동의 성명, 생년월일, 법정대리인 성명, 연락처, 관계</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>2. 이용 목적: 아동의 서비스 이용에 대한 법정대리인 동의 확인 및 본인 인증</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>3. 보유 기간: 서비스 회원 탈퇴 시 혹은 법정 보유 기간까지</span></p>
-<p style=margin-left: 4px;color:#000;><span class=title_highlight>4. 본인은 만 14세 미만 아동의 법정대리인으로서 위와 같이 아동의 개인정보를 수집·이용하는 것에 동의합니다.</span></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007');
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old.do">- 2012. 4. 17 ~ 2016. 3. 20 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old2.do">- 2016. 3. 21 ~ 2017. 5. 1 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old3.do">- 2017. 5. 2 ~ 2018. 5. 30 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old4.do">- 2018. 5. 30 ~ 2019. 2. 21 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old5.do">- 2019. 2. 21 ~ 2021. 2. 10 적용 (클릭)</a></p>
+<p><a href="/iwt/ds/ko/member/EgovPrivacyAgreement_old6.do">- 2021. 2. 22 ~ 2021.12. 31 적용 (클릭)</a></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
+     (20,'CLCT','20260114','20260228','<p style="margin-left: 4px;color:#000;"><span class="title_highlight">1. 개인정보의 수집/이용 목적</span></p>
+<p style="margin-left: 10px;color:#000;">회원관리 및 서비스제공, 서비스 개선목적 활용</p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">2. 수집하는 개인정보의 항목</span></p>
+<p style="margin-left: 10px;color:#000;">-수집항목(필수) : 성명, 이메일, 인증방법, 비밀번호, 연락처, 아이디</p> 
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">3. 개인정보의 보유 및 이용기간 :</span> <span class="highlight" style="font-weight: bold; text-decoration: underline; font-size: 21px;">회원 탈퇴 시 까지</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">4. 동의거부권리 안내 : </span>본 회원가입에 대한 개인정보 수집동의를 거부하실 수 있으며, 이 경우 한국의약품안전관리원 홈페이지 서비스 이용이 제한됩니다.</p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007'),
+     (21,'STTY_AGT','20260114','20260228','<p style="margin-left: 10px;color:#000;">[만 14세 미만 아동의 개인정보 수집 및 이용에 관한 법정대리인 동의]</p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">1. 수집 항목: 아동의 성명, 생년월일, 법정대리인 성명, 연락처, 관계</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">2. 이용 목적: 아동의 서비스 이용에 대한 법정대리인 동의 확인 및 본인 인증</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">3. 보유 기간: 서비스 회원 탈퇴 시 혹은 법정 보유 기간까지</span></p>
+<p style="margin-left: 4px;color:#000;"><span class="title_highlight">4. 본인은 만 14세 미만 아동의 법정대리인으로서 위와 같이 아동의 개인정보를 수집·이용하는 것에 동의합니다.</span></p>','','','','SYSTEM','2026-01-15 22:24:44.369007','SYSTEM','2026-01-15 22:24:44.369007');

@@ -33,7 +33,7 @@
         )
         VALUES
         (
-             nextval('kids_own.tb_pp_m_dgstfn_exmn_seq')
+             nextval('kids_own.sq_pp_dgstfn_exmn_sn')
             ,#{menuSn}
             ,#{dgstfnScr}
             ,#{rgtrId}
