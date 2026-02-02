@@ -1,0 +1,149 @@
+-- 대국민포털_컨텐츠기본
+CREATE TABLE KIDS_OWN.TB_PP_M_CONTS
+(
+	conts_sn     VARCHAR(10)  NOT NULL, -- 콘텐츠일련번호
+	conts_ttl    VARCHAR(200) NOT NULL, -- 콘텐츠제목
+	conts_cn     TEXT         NOT NULL, -- 콘텐츠내용
+	conts_use_yn CHAR(1)      NOT NULL, -- 콘텐츠사용여부
+	rgtr_id      VARCHAR(40)  NULL,     -- 등록자아이디
+	reg_dt       TIMESTAMP    NULL,     -- 등록일시
+	mdfr_id      VARCHAR(40)  NULL,     -- 수정자아이디
+	mdfcn_dt     TIMESTAMP    NULL      -- 수정일시
+);
+
+-- 대국민포털_컨텐츠기본 기본키
+CREATE UNIQUE INDEX PK_TB_PP_M_CONTS
+	ON KIDS_OWN.TB_PP_M_CONTS
+	( -- 대국민포털_컨텐츠기본
+		conts_sn ASC NULLS LAST -- 콘텐츠일련번호
+	);
+
+-- 대국민포털_컨텐츠기본
+ALTER TABLE KIDS_OWN.TB_PP_M_CONTS
+	ADD CONSTRAINT PK_TB_PP_M_CONTS
+		-- 대국민포털_컨텐츠기본 기본키
+	PRIMARY KEY
+	USING INDEX PK_TB_PP_M_CONTS
+	NOT DEFERRABLE;
+
+-- 테이블 주석
+COMMENT ON TABLE kids_own.tb_pp_m_conts
+IS '대국민포털 콘텐츠 기본';
+
+-- 컬럼 주석
+COMMENT ON COLUMN kids_own.tb_pp_m_conts.conts_sn
+IS '콘텐츠일련번호';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_conts.conts_ttl
+IS '콘텐츠제목';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_conts.conts_cn
+IS '콘텐츠내용';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_conts.conts_use_yn
+IS '콘텐츠사용여부';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_conts.rgtr_id
+IS '등록자아이디';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_conts.reg_dt
+IS '등록일시';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_conts.mdfr_id
+IS '수정자아이디';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_conts.mdfcn_dt
+IS '수정일시';
+
+-- 대국민포털_부정신고기본
+CREATE TABLE KIDS_OWN.TB_PP_M_DSHSTY_DCLR
+(
+	dclr_sn                 NUMERIC(10,0) NOT NULL, -- 신고일련번호
+	encpt_mbr_flnm          VARCHAR(256)  NOT NULL, -- 암호화회원성명
+	encpt_mbr_telno         VARCHAR(256)  NULL,     -- 암호화회원전화번호
+	encpt_mbr_eml_nm        VARCHAR(256)  NULL,     -- 암호화회원이메일명
+	dclr_ttl_nm             VARCHAR(200)  NOT NULL, -- 신고제목명
+	dshsty_actr_flnm        VARCHAR(300)  NOT NULL, -- 부정행위자성명
+	dshsty_act_pip_cn       VARCHAR(1000) NOT NULL, -- 부정행위시점내용
+	dshsty_act_plc_cn       VARCHAR(1000) NOT NULL, -- 부정행위장소내용
+	dshsty_act_cn           TEXT          NOT NULL, -- 부정행위내용
+	add_idntf_idfr_nm       VARCHAR(300)  NULL,     -- 추가식별확인자명
+	dclr_cn_idnty_mthd_cn   VARCHAR(4000) NULL,     -- 신고내용확인방법내용
+	dshsty_act_idntf_rsn_cn VARCHAR(4000) NULL,     -- 부정행위식별사유내용
+	dshsty_act_prd_cn       VARCHAR(1000) NULL,     -- 부정행위기간내용
+	rgtr_id                 VARCHAR(40)   NULL,     -- 등록자아이디
+	reg_dt                  TIMESTAMP     NULL,     -- 등록일시
+	mdfr_id                 VARCHAR(40)   NULL,     -- 수정자아이디
+	mdfcn_dt                TIMESTAMP     NULL      -- 수정일시
+);
+
+-- 테이블 주석
+COMMENT ON TABLE kids_own.tb_pp_m_dshsty_dclr
+IS '대국민포털 부정신고 기본';
+
+-- 컬럼 주석
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.dclr_sn
+IS '신고일련번호';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.encpt_mbr_flnm
+IS '암호화회원성명';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.encpt_mbr_telno
+IS '암호화회원전화번호';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.encpt_mbr_eml_nm
+IS '암호화회원이메일명';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.dclr_ttl_nm
+IS '신고제목명';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.dshsty_actr_flnm
+IS '부정행위자성명';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.dshsty_act_pip_cn
+IS '부정행위시점내용';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.dshsty_act_plc_cn
+IS '부정행위장소내용';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.dshsty_act_cn
+IS '부정행위내용';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.add_idntf_idfr_nm
+IS '추가식별확인자명';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.dclr_cn_idnty_mthd_cn
+IS '신고내용확인방법내용';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.dshsty_act_idntf_rsn_cn
+IS '부정행위식별사유내용';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.dshsty_act_prd_cn
+IS '부정행위기간내용';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.rgtr_id
+IS '등록자아이디';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.reg_dt
+IS '등록일시';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.mdfr_id
+IS '수정자아이디';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.mdfcn_dt
+IS '수정일시';
+
+-- 대국민포털_부정신고기본 기본키
+CREATE UNIQUE INDEX PK_TB_PP_M_DSHSTY_DCLR
+	ON KIDS_OWN.TB_PP_M_DSHSTY_DCLR
+	( -- 대국민포털_부정신고기본
+		dclr_sn ASC NULLS LAST -- 신고일련번호
+	);
+
+-- 대국민포털_부정신고기본
+ALTER TABLE KIDS_OWN.TB_PP_M_DSHSTY_DCLR
+	ADD CONSTRAINT PK_TB_PP_M_DSHSTY_DCLR
+		-- 대국민포털_부정신고기본 기본키
+	PRIMARY KEY
+	USING INDEX PK_TB_PP_M_DSHSTY_DCLR
+	NOT DEFERRABLE;
