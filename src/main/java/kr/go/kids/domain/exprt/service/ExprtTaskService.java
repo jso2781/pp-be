@@ -1,51 +1,39 @@
 package kr.go.kids.domain.exprt.service;
 
-import kr.go.kids.domain.exprt.vo.ExprtTaskDVO;
 import kr.go.kids.domain.exprt.vo.ExprtTaskPVO;
-import kr.go.kids.domain.exprt.vo.ExprtTaskRVO;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 public interface ExprtTaskService
 {
     /**
-     * 대국민포털_전문가업무기본 정보 조회 
+     * 대국민포털_전문가내업무관리 전문가 회원 신청 정보 조회
      *
-     * @param exprtTaskPVO 조회용 파라메터 정보 
-     * @return 조회된 대국민포털_전문가업무기본 
+     * @param exprtTaskPVO 파라메터 정보
+     * @return 전문가 회원 신청 정보
      */
-    public ExprtTaskRVO getExprtTask(ExprtTaskPVO exprtTaskPVO);
+    ApiPrnDto selectExprtInfo(ExprtTaskPVO exprtTaskPVO);
 
     /**
-     * 대국민포털_전문가업무기본 정보 입력 
+     * 대국민포털_전문가내업무관리 전문가 회원 전환 신청 취소
      *
-     * @param exprtTaskPVO 입력할 대국민포털_전문가업무기본 정보 
-     * @return 입력된 건수 
+     * @param exprtTaskPVO 파라메터 정보
+     * @return 성공여부
      */
-    public int insertExprtTask(ExprtTaskPVO exprtTaskPVO);
+    ApiPrnDto withdrawExprt(ExprtTaskPVO exprtTaskPVO);
 
     /**
-     * 대국민포털_전문가업무기본 정보 수정 
+     * 대국민포털_전문가내업무관리 전문가 회원 업무 신청 취소
      *
-     * @param exprtTaskPVO 수정할 대국민포털_전문가업무기본 정보 
-     * @return 수정된 건수 
+     * @param exprtTaskPVO 파라메터 정보
+     * @return 성공여부
      */
-    public int updateExprtTask(ExprtTaskPVO exprtTaskPVO);
+    ApiPrnDto withdrawExprtTask(ExprtTaskPVO exprtTaskPVO);
 
     /**
-     * 대국민포털_전문가업무기본 정보 저장 
-     * <p>
-     * 기존 데이터가 존재하지 않으면 입력하고, 존재하면 수정한다.
-     * </p>
+     * 대국민포털_전문가내업무관리 전문가 회원 업무 신청
      *
-     * @param exprtTaskPVO 저장할 대국민포털_전문가업무기본 정보 
-     * @return 저장된 건수 
+     * @param exprtTaskPVO 파라메터 정보
+     * @return 성공여부
      */
-    public int saveExprtTask(ExprtTaskPVO exprtTaskPVO);
-
-    /**
-     * 대국민포털_전문가업무기본 정보 삭제 
-     *
-     * @param exprtTaskDVO 삭제용 파라메터 정보 
-     * @return 삭제된 건수 
-     */
-    public int deleteExprtTask(ExprtTaskDVO exprtTaskDVO);
+    ApiPrnDto applyExprtTask(ExprtTaskPVO exprtTaskPVO);
 }
