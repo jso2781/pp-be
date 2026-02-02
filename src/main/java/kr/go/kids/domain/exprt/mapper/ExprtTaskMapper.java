@@ -1,54 +1,59 @@
 package kr.go.kids.domain.exprt.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-
-import kr.go.kids.domain.exprt.vo.ExprtTaskDVO;
 import kr.go.kids.domain.exprt.vo.ExprtTaskPVO;
 import kr.go.kids.domain.exprt.vo.ExprtTaskRVO;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface ExprtTaskMapper
 {
     /**
-     * 대국민포털_전문가업무기본 정보 조회 
+     * 대국민포털_전문가내업무관리 전문가회원 정보 조회
      *
      * @param exprtTaskPVO 조회용 파라메터 정보 
-     * @return 조회된 대국민포털_전문가업무기본 
+     * @return 조회된 대국민포털_전문가내업무관리 전문가회원 정보
      */
-    public ExprtTaskRVO getExprtTask(ExprtTaskPVO exprtTaskPVO);
+    ExprtTaskRVO selectExprtInfo(ExprtTaskPVO exprtTaskPVO);
 
     /**
-     * 대국민포털_전문가업무기본 정보 입력 
+     * 대국민포털_전문가내업무관리 전문가회원 정보 조회
      *
-     * @param exprtTaskPVO 입력할 대국민포털_전문가업무기본 정보 
-     * @return 입력된 건수 
+     * @param exprtTaskPVO 조회용 파라메터 정보
+     * @return 조회된 대국민포털_전문가내업무관리 전문가회원 업무 목록 정보
      */
-    public int insertExprtTask(ExprtTaskPVO exprtTaskPVO);
+    List<ExprtTaskRVO> selectExprtTasks(ExprtTaskPVO exprtTaskPVO);
 
     /**
-     * 대국민포털_전문가업무기본 정보 수정 
+     * 대국민포털_전문가내업무관리 전문가회원 업무 전체 삭제
      *
-     * @param exprtTaskPVO 수정할 대국민포털_전문가업무기본 정보 
-     * @return 수정된 건수 
+     * @param exprtTaskPVO 삭제 파라메터 정보
+     * @return 삭제건수
      */
-    public int updateExprtTask(ExprtTaskPVO exprtTaskPVO);
+    int deleteAllExprtTask(ExprtTaskPVO exprtTaskPVO);
 
     /**
-     * 대국민포털_전문가업무기본 정보 저장 
-     * <p>
-     * 기존 데이터가 존재하지 않으면 입력하고, 존재하면 수정한다.
-     * </p>
+     * 대국민포털_전문가내업무관리 전문가회원 업무 삭제
      *
-     * @param exprtTaskPVO 저장할 대국민포털_전문가업무기본 정보 
-     * @return 저장된 건수 
+     * @param exprtTaskPVO 삭제 파라메터 정보
+     * @return 삭제건수
      */
-    public int saveExprtTask(ExprtTaskPVO exprtTaskPVO);
+    int deleteExprtTask(ExprtTaskPVO exprtTaskPVO);
 
     /**
-     * 대국민포털_전문가업무기본 정보 삭제 
+     * 대국민포털_전문가내업무관리 전문가회원 정보 삭제
      *
-     * @param exprtTaskDVO 삭제용 파라메터 정보 
-     * @return 삭제된 건수 
+     * @param exprtTaskPVO 삭제 파라메터 정보
+     * @return 삭제건수
      */
-    public int deleteExprtTask(ExprtTaskDVO exprtTaskDVO);
+    int deleteExprtInfo(ExprtTaskPVO exprtTaskPVO);
+
+    /**
+     * 대국민포털_전문가내업무관리 전문가회원 업무 입력
+     *
+     * @param exprtTaskPVO 등록 파라메터 정보
+     * @return 등록건수
+     */
+    int insertExprtTask(ExprtTaskPVO exprtTaskPVO);
 }

@@ -1,45 +1,19 @@
 package kr.go.kids.domain.exprt.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
 
-@Schema(name = "대국민포털_전문가업무기본", description = "대국민포털_전문가업무기본 Search Result VO")
-public class ExprtTaskRVO
+@Getter
+@Setter
+@Schema(name = "대국민포털_전문가내업무관리", description = "대국민포털_전문가내업무관리 Search Result VO")
+public class ExprtTaskRVO extends ExprtApplyRVO
 {
     /**
-     * 전문가업무일련번호
+     * 암호화전문가성명
      */
-    @Schema(description = "전문가업무일련번호", type = "Long")
-    private Long exprtTaskSn;
-
-    /**
-     * 회원번호
-     */
-    @Schema(description = "회원번호", type = "String")
-    private String mbrNo;
-
-    /**
-     * 업무구분코드
-     */
-    @Schema(description = "업무구분코드", type = "String")
-    private String taskSeCd;
-
-    /**
-     * 사업자등록번호
-     */
-    @Schema(description = "사업자등록번호", type = "String")
-    private String brno;
-
-    /**
-     * 전문가승인상태여부
-     */
-    @Schema(description = "전문가승인상태여부", type = "String")
-    private String exprtAprvSttsYn;
-
-    /**
-     * 승인처리일자
-     */
-    @Schema(description = "승인처리일자", type = "String")
-    private String aprvPrcsYmd;
+    @Schema(description = "암호화전문가성명", type = "String")
+    private String encptExprtFlnm;
 
     /**
      * 반려사유
@@ -48,152 +22,44 @@ public class ExprtTaskRVO
     private String rjctRsn;
 
     /**
-     * 작성자부서명
+     * 전문가번호
      */
-    @Schema(description = "작성자부서명", type = "String")
-    private String wrtrDeptNm;
+    @Schema(description = "전문가번호", type = "String")
+    private String exprtNo;
 
     /**
-     * 수정자부서명
+     * 회원번호
      */
-    @Schema(description = "수정자부서명", type = "String")
-    private String mdfrDeptNm;
+    @Schema(description = "회원번호", type = "String")
+    private String mbrNo;
 
     /**
-     * 등록자아이디
+     * 기관명
      */
-    @Schema(description = "등록자아이디", type = "String")
-    private String rgtrId;
+    @Schema(description = "기관명", type = "String")
+    private String instNm;
 
     /**
-     * 등록일시
+     * 전문가승인상태여부
      */
-    @Schema(description = "등록일시", type = "String")
-    private String regDt;
+    @Schema(description = "전문가승인상태여부", type = "String")
+    private String exprtAprvSttsYn;
 
     /**
-     * 수정자아이디
+     * 사용여부
      */
-    @Schema(description = "수정자아이디", type = "String")
-    private String mdfrId;
+    @Schema(description = "사용여부", type = "String")
+    private String useYn;
 
     /**
-     * 수정일시
+     * 전문가업무일련번호
      */
-    @Schema(description = "수정일시", type = "String")
-    private String mdfcnDt;
+    @Schema(description = "전문가업무일련번호", type = "Long")
+    private Long exprtTaskSn;
 
-    public Long getExprtTaskSn()
-    {
-        return exprtTaskSn;
-    }
-    public void setExprtTaskSn(Long exprtTaskSn)
-    {
-        this.exprtTaskSn = exprtTaskSn;
-    }
-    public String getMbrNo()
-    {
-        return mbrNo;
-    }
-    public void setMbrNo(String mbrNo)
-    {
-        this.mbrNo = mbrNo;
-    }
-    public String getTaskSeCd()
-    {
-        return taskSeCd;
-    }
-    public void setTaskSeCd(String taskSeCd)
-    {
-        this.taskSeCd = taskSeCd;
-    }
-    public String getBrno()
-    {
-        return brno;
-    }
-    public void setBrno(String brno)
-    {
-        this.brno = brno;
-    }
-    public String getExprtAprvSttsYn()
-    {
-        return exprtAprvSttsYn;
-    }
-    public void setExprtAprvSttsYn(String exprtAprvSttsYn)
-    {
-        this.exprtAprvSttsYn = exprtAprvSttsYn;
-    }
-    public String getAprvPrcsYmd()
-    {
-        return aprvPrcsYmd;
-    }
-    public void setAprvPrcsYmd(String aprvPrcsYmd)
-    {
-        this.aprvPrcsYmd = aprvPrcsYmd;
-    }
-    public String getRjctRsn()
-    {
-        return rjctRsn;
-    }
-    public void setRjctRsn(String rjctRsn)
-    {
-        this.rjctRsn = rjctRsn;
-    }
-    public String getWrtrDeptNm()
-    {
-        return wrtrDeptNm;
-    }
-    public void setWrtrDeptNm(String wrtrDeptNm)
-    {
-        this.wrtrDeptNm = wrtrDeptNm;
-    }
-    public String getMdfrDeptNm()
-    {
-        return mdfrDeptNm;
-    }
-    public void setMdfrDeptNm(String mdfrDeptNm)
-    {
-        this.mdfrDeptNm = mdfrDeptNm;
-    }
-    public String getRgtrId()
-    {
-        return rgtrId;
-    }
-    public void setRgtrId(String rgtrId)
-    {
-        this.rgtrId = rgtrId;
-    }
-    public String getRegDt()
-    {
-        return regDt;
-    }
-    public void setRegDt(String regDt)
-    {
-        this.regDt = regDt;
-    }
-
-    
-
-    
-    public String getMdfrId()
-    {
-        return mdfrId;
-    }
-    public void setMdfrId(String mdfrId)
-    {
-        this.mdfrId = mdfrId;
-    }
-    public String getMdfcnDt()
-    {
-        return mdfcnDt;
-    }
-    public void setMdfcnDt(String mdfcnDt)
-    {
-        this.mdfcnDt = mdfcnDt;
-    }
-
-    
-
-    
-
+    /**
+     * 사업자업무관리번호
+     */
+    @Schema(description = "사업자업무관리번호", type = "String")
+    private String bzmnTaskMngNo;
 }

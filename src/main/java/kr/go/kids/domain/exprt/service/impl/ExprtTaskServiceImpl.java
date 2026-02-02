@@ -1,47 +1,78 @@
 package kr.go.kids.domain.exprt.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import kr.go.kids.domain.exprt.mapper.ExprtTaskMapper;
 import kr.go.kids.domain.exprt.service.ExprtTaskService;
-import kr.go.kids.domain.exprt.vo.ExprtTaskDVO;
 import kr.go.kids.domain.exprt.vo.ExprtTaskPVO;
 import kr.go.kids.domain.exprt.vo.ExprtTaskRVO;
+import kr.go.kids.global.system.common.ApiResultCode;
+import kr.go.kids.global.system.common.vo.ApiPrnDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.List;
 
 @Service
-public class ExprtTaskServiceImpl implements ExprtTaskService
-{
-    @Autowired
-    private ExprtTaskMapper exprtTaskMapper;
+@RequiredArgsConstructor
+public class ExprtTaskServiceImpl implements ExprtTaskService {
+    private final ExprtTaskMapper exprtTaskMapper;
 
     @Override
-    public ExprtTaskRVO getExprtTask(ExprtTaskPVO exprtTaskPVO)
-    {
-        return exprtTaskMapper.getExprtTask(exprtTaskPVO);
+    public ApiPrnDto selectExprtInfo(ExprtTaskPVO exprtTaskPVO) {
+        ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
+        HashMap<String, Object> data = new HashMap<>();
+
+        ExprtTaskRVO info = exprtTaskMapper.selectExprtInfo(exprtTaskPVO);
+        data.put("info", info);
+
+        List<ExprtTaskRVO> tasks = exprtTaskMapper.selectExprtTasks(exprtTaskPVO);
+        data.put("task", tasks);
+
+        result.setData(data);
+        return result;
     }
 
     @Override
-    public int insertExprtTask(ExprtTaskPVO exprtTaskPVO)
-    {
-        return exprtTaskMapper.insertExprtTask(exprtTaskPVO);
+    @Transactional
+    public ApiPrnDto withdrawExprt(ExprtTaskPVO exprtTaskPVO) {
+        ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
+        HashMap<String, Object> data = new HashMap<>();
+
+        exprtTaskMapper.deleteAllExprtTask(exprtTaskPVO);
+        exprtTaskMapper.deleteExprtInfo(exprtTaskPVO);
+
+        data.put("result", "SUCCESS");
+
+        result.setData(data);
+        return result;
     }
 
     @Override
-    public int updateExprtTask(ExprtTaskPVO exprtTaskPVO)
-    {
-        return exprtTaskMapper.updateExprtTask(exprtTaskPVO);
+    @Transactional
+    public ApiPrnDto withdrawExprtTask(ExprtTaskPVO exprtTaskPVO) {
+        ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
+        HashMap<String, Object> data = new HashMap<>();
+
+        exprtTaskMapper.deleteExprtTask(exprtTaskPVO);
+
+        data.put("result", "SUCCESS");
+
+        result.setData(data);
+        return result;
     }
 
     @Override
-    public int saveExprtTask(ExprtTaskPVO exprtTaskPVO)
-    {
-        return exprtTaskMapper.saveExprtTask(exprtTaskPVO);
-    }
+    @Transactional
+    public ApiPrnDto applyExprtTask(ExprtTaskPVO exprtTaskPVO) {
+        ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
+        HashMap<String, Object> data = new HashMap<>();
 
-    @Override
-    public int deleteExprtTask(ExprtTaskDVO exprtTaskDVO)
-    {
-        return exprtTaskMapper.deleteExprtTask(exprtTaskDVO);
+        exprtTaskMapper.insertExprtTask(exprtTaskPVO);
+
+        data.put("result", "SUCCESS");
+
+        result.setData(data);
+        return result;
     }
 }
