@@ -3,7 +3,7 @@
 <mapper namespace="kr.go.kids.domain.auth.mapper.MbrTokenMapper">
 
     <select id="nextMbrTokenId" resultType="long">
-        SELECT nextval('kids_own.tb_ca_m_mbr_token_seq')
+        SELECT nextval('kids_own.sq_ca_token_id_1')
     </select>
 
     <select id="getMbrToken" parameterType="MbrTokenPVO" resultType="MbrTokenRVO" >

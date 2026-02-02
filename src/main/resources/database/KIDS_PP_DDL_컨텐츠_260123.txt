@@ -2,7 +2,8 @@
 CREATE TABLE KIDS_OWN.TB_PP_M_CONTS
 (
 	conts_sn     VARCHAR(10)  NOT NULL, -- 콘텐츠일련번호
-	conts_ttl    VARCHAR(200) NOT NULL, -- 콘텐츠제목
+    conts_ver_no NUMBER(12,0) NOT NULL, -- 콘텐츠버전일련번호
+    conts_ttl    VARCHAR(200) NOT NULL, -- 콘텐츠제목
 	conts_cn     TEXT         NOT NULL, -- 콘텐츠내용
 	conts_use_yn CHAR(1)      NOT NULL, -- 콘텐츠사용여부
 	rgtr_id      VARCHAR(40)  NULL,     -- 등록자아이디
@@ -13,10 +14,11 @@ CREATE TABLE KIDS_OWN.TB_PP_M_CONTS
 
 -- 대국민포털_컨텐츠기본 기본키
 CREATE UNIQUE INDEX PK_TB_PP_M_CONTS
-	ON KIDS_OWN.TB_PP_M_CONTS
-	( -- 대국민포털_컨텐츠기본
-		conts_sn ASC NULLS LAST -- 콘텐츠일련번호
-	);
+    ON KIDS_OWN.TB_PP_M_CONTS
+    ( -- 대국민포털_컨텐츠기본
+         conts_sn ASC NULLS LAST -- 콘텐츠일련번호
+        ,conts_ver_no
+    );
 
 -- 대국민포털_컨텐츠기본
 ALTER TABLE KIDS_OWN.TB_PP_M_CONTS
@@ -33,6 +35,9 @@ IS '대국민포털 콘텐츠 기본';
 -- 컬럼 주석
 COMMENT ON COLUMN kids_own.tb_pp_m_conts.conts_sn
 IS '콘텐츠일련번호';
+
+COMMENT ON COLUMN kids_own.tb_pp_m_conts.conts_ver_no
+IS '콘텐츠버전일련번호';
 
 COMMENT ON COLUMN kids_own.tb_pp_m_conts.conts_ttl
 IS '콘텐츠제목';

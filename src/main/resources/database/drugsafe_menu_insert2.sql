@@ -1,191 +1,157 @@
 delete from KIDS_OWN.TB_PP_D_MENU;
 delete from KIDS_OWN.TB_PP_M_MENU;
 
-INSERT INTO kids_own.tb_pp_m_menu (menu_sn,menu_nm,up_menu_sn,task_se_cd,menu_type_cd,lang_se_cd,menu_seq,menu_expln,pic_dept_nm,pic_flnm,use_yn,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('1000','주요업무',NULL,'PP','MENU','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1100','정보공개',NULL,'PP','MENU','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1200','기관소식',NULL,'PP','MENU','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1300','기관소개',NULL,'PP','MENU','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1001','의약품 이상사례보고','1000','PP','MENU','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1002','의약품 부작용 보고 자료','1000','PP','MENU','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1003','의약품 안전관리','1000','PP','MENU','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1004','의약품.의료정보.연계분석','1000','PP','MENU','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1005','DUR 정보','1000','PP','MENU','ko ',5,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1006','부작용 피해구제','1000','PP','MENU','ko ',6,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735');
-INSERT INTO kids_own.tb_pp_m_menu (menu_sn,menu_nm,up_menu_sn,task_se_cd,menu_type_cd,lang_se_cd,menu_seq,menu_expln,pic_dept_nm,pic_flnm,use_yn,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('1007','임상시험안전지원','1000','PP','MENU','ko ',7,NULL,NULL,NULL,'N','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1010','이상사례보고','1001','PP','MENU','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1011','온라인 보고','1001','PP','MENU','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1012','오프라인 보고','1001','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1013','이상사례보고자료실','1001','PP','PAGE','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1014','온라인보고방법 안내','1001','PP','PAGE','ko ',5,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1020','이상사례 보고란?','1010','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1021','KAERS란?','1010','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1030','의약품이상사례','1011','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1031','의약외품(생리대 등)','1011','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735');
-INSERT INTO kids_own.tb_pp_m_menu (menu_sn,menu_nm,up_menu_sn,task_se_cd,menu_type_cd,lang_se_cd,menu_seq,menu_expln,pic_dept_nm,pic_flnm,use_yn,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('1040','의약품 부작용 보고1','1002','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1041','의약품 부작용 보고2','1002','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1042','의약품 부작용 보고3','1002','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1050','약물감시용어','1003','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1051','부작용 인과관계규명','1003','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1052','유관기관','1003','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1060','의약품.의료정보.연계분석1','1004','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1061','의약품.의료정보.연계분석2','1004','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1062','의약품.의료정보.연계분석3','1004','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1070','DUR 이해','1005','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735');
-INSERT INTO kids_own.tb_pp_m_menu (menu_sn,menu_nm,up_menu_sn,task_se_cd,menu_type_cd,lang_se_cd,menu_seq,menu_expln,pic_dept_nm,pic_flnm,use_yn,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('1071','DUR 정보검색','1005','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1072','내가 먹는 약의 DUR 정보','1005','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1073','의약품 적정사용 정보','1005','PP','PAGE','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1110','제도소개','1006','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1111','피해구제 신청','1006','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1112','뉴스/소식','1006','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1113','자주하는 질문','1006','PP','PAGE','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1120','임상시험안전지원기관','1007','PP','PAGE','ko ',1,NULL,NULL,NULL,'N','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1121','협약 안내','1007','PP','PAGE','ko ',2,NULL,NULL,NULL,'N','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1122','중앙IRB신청','1007','PP','PAGE','ko ',3,NULL,NULL,NULL,'N','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735');
-INSERT INTO kids_own.tb_pp_m_menu (menu_sn,menu_nm,up_menu_sn,task_se_cd,menu_type_cd,lang_se_cd,menu_seq,menu_expln,pic_dept_nm,pic_flnm,use_yn,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('1123','임상시험헬프데스크','1007','PP','PAGE','ko ',4,NULL,NULL,NULL,'N','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1124','공지사항','1007','PP','PAGE','ko ',5,NULL,NULL,NULL,'N','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1125','자료실','1007','PP','PAGE','ko ',6,NULL,NULL,NULL,'N','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('2000','정보공개','1100','PP','MENU','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('2001','공공데이터 개방','1100','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('2002','경영공시','1100','PP','MENU','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('2003','사업실명제','1100','PP','PAGE','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('2010','업무처리절차','2000','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('2011','정보공개 청구','2000','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('2012','임직원국외출장','2000','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735');
-INSERT INTO kids_own.tb_pp_m_menu (menu_sn,menu_nm,up_menu_sn,task_se_cd,menu_type_cd,lang_se_cd,menu_seq,menu_expln,pic_dept_nm,pic_flnm,use_yn,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('2013','원장 업무추진비 집행내역','2000','PP','PAGE','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('2020','부패행위 징계현황','2002','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('2021','징계기준','2002','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('2022','징계현황','2002','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('3000','공지사항','1200','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('3001','채용게시판','1200','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('3002','FAQ','1200','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('3003','국민신문고','1200','PP','PAGE','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('3004','보도자료','1200','PP','PAGE','ko ',5,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('3005','뉴스레터','1200','PP','MENU','ko ',6,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735');
-INSERT INTO kids_own.tb_pp_m_menu (menu_sn,menu_nm,up_menu_sn,task_se_cd,menu_type_cd,lang_se_cd,menu_seq,menu_expln,pic_dept_nm,pic_flnm,use_yn,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('3006','카드뉴스','1200','PP','PAGE','ko ',7,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('3007','동영상','1200','PP','PAGE','ko ',8,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('3008','자료실','1200','PP','PAGE','ko ',9,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('3010','첨단바이오 포커스','3005','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('3011','마약류 안전정보지','3005','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('3012','리플릿','3005','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('1075','의견 제안','1005','PP','PAGE','ko ',6,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('4000','기관장 인사말','1300','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('4001','역대 기관장','1300','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('4002','연혁','1300','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735');
-INSERT INTO kids_own.tb_pp_m_menu (menu_sn,menu_nm,up_menu_sn,task_se_cd,menu_type_cd,lang_se_cd,menu_seq,menu_expln,pic_dept_nm,pic_flnm,use_yn,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('4003','비전 및 목표','1300','PP','PAGE','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('4004','조직도','1300','PP','PAGE','ko ',5,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('4005','설립근거 및 관련법령','1300','PP','PAGE','ko ',6,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('4006','고객헌장','1300','PP','PAGE','ko ',7,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('4007','우리원동정','1300','PP','PAGE','ko ',8,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('4008','CI소개','1300','PP','PAGE','ko ',9,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('4009','윤리경영','1300','PP','MENU','ko ',10,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('4010','캐릭터소개','1300','PP','PAGE','ko ',11,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('4011','오시는 길','1300','PP','PAGE','ko ',12,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
-     ('4012','클린신고센터','4009','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735');
-INSERT INTO kids_own.tb_pp_m_menu (menu_sn,menu_nm,up_menu_sn,task_se_cd,menu_type_cd,lang_se_cd,menu_seq,menu_expln,pic_dept_nm,pic_flnm,use_yn,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('1074','알림 게시판','1005','PP','PAGE','ko ',5,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735');
+INSERT INTO kids_own.tb_pp_m_menu
+(menu_sn, menu_nm, up_menu_sn, task_se_cd, menu_type_cd, lang_se_cd, menu_seq, menu_expln, pic_dept_nm, pic_flnm, use_yn, rgtr_id, reg_dt, mdfr_id, mdfcn_dt)
+VALUES
+('1','주요업무',NULL,'PP','MENU','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('2','의약품 이상사례보고','1','PP','MENU','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('3','이상사례보고','2','PP','MENU','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('4','이상사례 보고란?','3','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('5','KAERS란?','3','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('6','온라인 보고','2','PP','MENU','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('7','의약품이상사례','6','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('8','의약외품(생리대 등)','6','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('9','오프라인 보고','2','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('10','이상사례보고자료실','2','PP','PAGE','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('11','온라인보고방법 안내','2','PP','PAGE','ko ',5,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('12','의약품부작용보고원시자료','1','PP','MENU','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('13','의약품부작용보고원시자료','12','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('14','공지사항 및 이용지침서','12','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('15','의약품 안전관리','1','PP','MENU','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('16','약물감시용어','15','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('17','부작용 인과관계규명','15','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('18','유관기관','15','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('19','의약품·의료정보 연계분석','1','PP','MENU','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('20','의약품·의료정보 연계분석이란?','19','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('21','의약품·의료정보 연계분석 정보공개','19','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('22','DUR 정보','1','PP','MENU','ko ',5,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('23','DUR 이해','22','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('24','DUR 정보검색','22','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('25','내가 먹는 약의 DUR 정보','22','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('26','의약품 적정사용 정보','22','PP','PAGE','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('27','알림 게시판','22','PP','PAGE','ko ',5,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('28','의견 제안','22','PP','PAGE','ko ',6,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('29','부작용 피해구제','1','PP','MENU','ko ',6,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('30','제도소개','29','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('31','피해구제 신청','29','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('32','뉴스/소식','29','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('33','자주하는 질문','29','PP','PAGE','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('34','첨단바이오 포커스','1','PP','PAGE','ko ',7,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('35','마약류 안전정보지','1','PP','PAGE','ko ',8,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('36','정보공개',NULL,'PP','MENU','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('37','정보공개','36','PP','MENU','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('38','업무처리절차','37','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('39','정보공개 청구','37','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('40','임직원국외출장','37','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('41','원장 업무추진비 집행내역','37','PP','PAGE','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('42','공공데이터 개방','36','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('43','경영공시','36','PP','MENU','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('44','부패행위 징계현황','43','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('45','징계기준','43','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('46','징계현황','43','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('47','사업실명제','36','PP','PAGE','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+
+('48','기관소식',NULL,'PP','MENU','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('49','공지사항','48','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('50','채용게시판','48','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('51','FAQ','48','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('52','국민신문고','48','PP','PAGE','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('53','보도자료','48','PP','PAGE','ko ',5,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('54','뉴스레터','48','PP','PAGE','ko ',6,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('55','리플릿','48','PP','PAGE','ko ',7,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('56','카드뉴스','48','PP','PAGE','ko ',8,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('57','동영상','48','PP','PAGE','ko ',9,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('58','자료실','48','PP','PAGE','ko ',10,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+
+('59','기관소개',NULL,'PP','MENU','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('60','기관장 인사말','59','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('61','역대 기관장','59','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('62','연혁','59','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('63','비전 및 목표','59','PP','PAGE','ko ',4,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('64','조직도','59','PP','PAGE','ko ',5,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('65','설립근거 및 관련법령','59','PP','PAGE','ko ',6,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('66','고객헌장','59','PP','PAGE','ko ',7,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('67','우리원동정','59','PP','PAGE','ko ',8,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('68','CI소개','59','PP','PAGE','ko ',9,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('69','윤리경영','59','PP','MENU','ko ',10,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('70','인권경영선언문','69','PP','PAGE','ko ',1,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('71','클린신고센터','69','PP','PAGE','ko ',2,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('72','신고서 작성','69','PP','PAGE','ko ',3,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('73','캐릭터소개','59','PP','PAGE','ko ',11,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735'),
+('74','오시는 길','59','PP','PAGE','ko ',12,NULL,NULL,NULL,'Y','SYSTEM','2026-01-13 22:28:42.526735','SYSTEM','2026-01-13 22:28:42.526735');
 
 
--- 주요업무 > 의약품 이상사례보고 > 온라인 보고 > (의약품이상사례)
---(1030, 'https://nedrug.mfds.go.kr/CCCBA03F010/getReport', NULL,
+INSERT INTO kids_own.tb_pp_d_menu
+(menu_sn,menu_url_addr,menu_npag_nm,prvc_incl_yn,dgstfn_exmn_yn,menu_expsr_yn,dept_info_expsr_yn,pic_info_expsr_yn,mobl_aplcn_yn,lgn_yn,encpt_pic_telno,menu_kogl_cprgt_type_cd,menu_pic_id,menu_tkcg_dept_no,rgtr_id,reg_dt,mdfr_id,mdfcn_dt)
+VALUES
+('4','/maintask/adverse/report/AdverseIntro',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('5','/maintask/adverse/report/AdverseKaers',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('7','https://nedrug.mfds.go.kr/CCCBA03F010/getReport',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('8','https://nedrug.mfds.go.kr/CCCBA03F010/getReportQuasiDrug',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('9','/maintask/adverse/AdverseOffline',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('10','/maintask/adverse/AdverseDataRoom',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('11','/maintask/adverse/AdverseReportGuide',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
 
--- 주요업무 > 의약품 이상사례보고 > 온라인 보고 > (의약외품)
---(1031, 'https://nedrug.mfds.go.kr/CCCBA03F010/getReportQuasiDrug', NULL,
+('13','/maintask/sideeffects/Report1',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('14','https://nedrug.mfds.go.kr/bbs/148',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
 
--- 주요업무 > 부작용 피해구제 > 자주하는 질문
---(1113, 'https://nedrug.mfds.go.kr', NULL,
+('16','/maintask/safety/SafetyTerms',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('17','/maintask/safety/SafetyCausality',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('18','/maintask/safety/SafetyRelated',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
 
--- 정보공개 > 정보공개 > 정보공개 청구
---(2011, 'https://open.go.kr', NULL,
+('20','/maintask/linkage/analysis1',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('21','https://open.drugsafe.or.kr/analyze/opendatab/List.jsp',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
 
--- 기관소식 > 뉴스레터 > 첨단바이오 포커스
---(3010, 'https://ltfu.mfds.go.kr', NULL,
+('23','/maintask/dur/DurUnderstand',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('24','/maintask/dur/DurSearchRoom',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('25','/maintask/dur/MyDrugInfo',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('26','/maintask/dur/ApprUseBook',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('27','/maintask/dur/DurNoticeList/BBS_DUR_001',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('28','/maintask/dur/DurProposal',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
 
--- 기관소개 > 오시는 길
---(4011, 'https://www.drugsafe.or.kr/iwt/ds/ko/introduction/EgovLocation.do', NULL,
+('30','/maintask/relief/ReliefIntro',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('31','/maintask/relief/ReliefApply',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('32','/maintask/relief/ReliefNews',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('33','https://nedrug.mfds.go.kr',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
 
-INSERT INTO kids_own.tb_pp_d_menu (menu_sn,menu_url_addr,menu_npag_nm,prvc_incl_yn,dgstfn_exmn_yn,menu_expsr_yn,dept_info_expsr_yn,pic_info_expsr_yn,mobl_aplcn_yn,lgn_yn,encpt_pic_telno,menu_kogl_cprgt_type_cd,menu_pic_id,menu_tkcg_dept_no,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('1120','/maintask/trial/TrialTestSuppOrg',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1121','/maintask/trial/TrialAggrGuide',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1122','/maintask/trial/TrialCenterIRB',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1123','/maintask/trial/TrialHelpDesk',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1125','/maintask/trial/TrialDataRoom',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('2010','/open/open/TaskProgress',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('2012','/open/open/OverseaBizTrips',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('2013','/open/open/BizExpsDetails',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('2001','/open/PublicData',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('2020','/open/disclosure/CorruptionStatus',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157');
-INSERT INTO kids_own.tb_pp_d_menu (menu_sn,menu_url_addr,menu_npag_nm,prvc_incl_yn,dgstfn_exmn_yn,menu_expsr_yn,dept_info_expsr_yn,pic_info_expsr_yn,mobl_aplcn_yn,lgn_yn,encpt_pic_telno,menu_kogl_cprgt_type_cd,menu_pic_id,menu_tkcg_dept_no,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('2021','/open/disclosure/DisciplinaryGiude',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('2022','/open/disclosure/DisciplinaryStatus',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('2003','/open/BizRealName',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1020','/maintask/adverse/report/AdverseIntro',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1021','/maintask/adverse/report/AdverseKaers',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1012','/maintask/adverse/AdverseOffline',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1013','/maintask/adverse/AdverseDataRoom',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1014','/maintask/adverse/AdverseReportGuide',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1040','/maintask/sideeffects/Report1',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1041','/maintask/sideeffects/Report2',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157');
-INSERT INTO kids_own.tb_pp_d_menu (menu_sn,menu_url_addr,menu_npag_nm,prvc_incl_yn,dgstfn_exmn_yn,menu_expsr_yn,dept_info_expsr_yn,pic_info_expsr_yn,mobl_aplcn_yn,lgn_yn,encpt_pic_telno,menu_kogl_cprgt_type_cd,menu_pic_id,menu_tkcg_dept_no,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('1042','/maintask/sideeffects/Report3',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1050','/maintask/safety/SafetyTerms',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1051','/maintask/safety/SafetyCausality',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1052','/maintask/safety/SafetyRelated',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1060','/maintask/linkage/analysis1',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1061','/maintask/linkage/analysis2',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1062','/maintask/linkage/analysis3',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1070','/maintask/dur/DurUnderstand',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1071','/maintask/dur/DurSearchRoom',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1072','/maintask/dur/MyDrugInfo',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157');
-INSERT INTO kids_own.tb_pp_d_menu (menu_sn,menu_url_addr,menu_npag_nm,prvc_incl_yn,dgstfn_exmn_yn,menu_expsr_yn,dept_info_expsr_yn,pic_info_expsr_yn,mobl_aplcn_yn,lgn_yn,encpt_pic_telno,menu_kogl_cprgt_type_cd,menu_pic_id,menu_tkcg_dept_no,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('1073','/maintask/dur/ApprUseBook',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1074','/maintask/dur/DurNoticeList',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1075','/maintask/dur/DurProposal',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1110','/maintask/relief/ReliefIntro',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1111','/maintask/relief/ReliefApply',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1112','/maintask/relief/ReliefNews',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('3003','/news/NewsPetition',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('3004','/news/NewsPress',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('3011','/news/letter/NewsSafeInfo',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('3012','/news/letter/NewsLeaflet',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157');
-INSERT INTO kids_own.tb_pp_d_menu (menu_sn,menu_url_addr,menu_npag_nm,prvc_incl_yn,dgstfn_exmn_yn,menu_expsr_yn,dept_info_expsr_yn,pic_info_expsr_yn,mobl_aplcn_yn,lgn_yn,encpt_pic_telno,menu_kogl_cprgt_type_cd,menu_pic_id,menu_tkcg_dept_no,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('4000','/about/AboutGreeting',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('4001','/about/AboutFormer',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('4002','/about/AboutHistory',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('4003','/about/AboutVision',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1031','https://nedrug.mfds.go.kr/CCCBA03F010/getReportQuasiDrug',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1113','https://nedrug.mfds.go.kr',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('2011','https://open.go.kr',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('3010','https://ltfu.mfds.go.kr',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('3000','/news/NewsNoticeList',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('3001','/news/NewsJobNoticeList',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157');
-INSERT INTO kids_own.tb_pp_d_menu (menu_sn,menu_url_addr,menu_npag_nm,prvc_incl_yn,dgstfn_exmn_yn,menu_expsr_yn,dept_info_expsr_yn,pic_info_expsr_yn,mobl_aplcn_yn,lgn_yn,encpt_pic_telno,menu_kogl_cprgt_type_cd,menu_pic_id,menu_tkcg_dept_no,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('3008','/news/NewsDataRoomList',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('3002','/news/NewsFaqNotice',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('3007','/news/NewsVidioList',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('3006','/news/NewsCardNewsList',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('4004','/about/AboutOrg',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('4005','/about/AboutLaw',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('4006','/about/AboutCharter',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('4007','/about/AboutNews',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('4008','/about/AboutCi',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('4012','/about/ethics/AboutCleanCenter',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157');
-INSERT INTO kids_own.tb_pp_d_menu (menu_sn,menu_url_addr,menu_npag_nm,prvc_incl_yn,dgstfn_exmn_yn,menu_expsr_yn,dept_info_expsr_yn,pic_info_expsr_yn,mobl_aplcn_yn,lgn_yn,encpt_pic_telno,menu_kogl_cprgt_type_cd,menu_pic_id,menu_tkcg_dept_no,rgtr_id,reg_dt,mdfr_id,mdfcn_dt) VALUES
-     ('4010','/about/AboutCharacter',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('4011','/about/AboutMap',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
-     ('1030','https://nedrug.mfds.go.kr/CCCBA03F010/getReport',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157');
+('38','/open/open/TaskProgress',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('39','https://open.go.kr',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('40','/open/open/OverseaBizTrips',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('41','/open/open/BizExpsDetails',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('42','/open/PublicData',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('44','/open/disclosure/CorruptionStatus',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('45','/open/disclosure/DisciplinaryGiude',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('46','/open/disclosure/DisciplinaryStatus',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('47','/open/BizRealName',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
 
+('49','/news/NewsNoticeList/BBS_COM_001',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('50','/news/NewsJobNoticeList/BBS_COM_002',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('51','/news/NewsFaqNotice',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('52','/news/NewsPetition',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('53','/news/NewsPress',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('54','/news/NewsLetter',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('55','/news/NewsLeaflet',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('56','/news/NewsCardNewsList/BBS_GAL_001',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('57','/news/NewsVidioList/BBS_VDO_001',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('58','/news/NewsDataRoomList/BBS_COM_005',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
 
---delete from KIDS_OWN.TB_PP_D_MENU;
---delete from KIDS_OWN.TB_PP_M_MENU;
---commit;
+('60','/about/AboutGreeting',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('61','/about/AboutFormer',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('62','/about/AboutHistory',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('63','/about/AboutVision',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('64','/about/AboutOrg',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('65','/about/AboutLaw',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('66','/about/AboutCharter',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('67','/about/AboutNews',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('68','/about/AboutCi',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+
+('70','/about/ethics/EthicsAnn',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('71','/about/ethics/AboutCleanCenter',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('72','/about/ethics/AboutCleanForm',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('73','/about/AboutCharacter',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157'),
+('74','/about/AboutMap',NULL,'Y','Y','Y','Y','Y','Y','N','02-2172-3868','4','B0542','0000004','SYSTEM','2026-01-28 23:10:45.549157','SYSTEM','2026-01-28 23:10:45.549157');
+
 
 /* MenuMapper.selectMenuList */
 WITH RECURSIVE menu_tree AS (
@@ -196,7 +162,7 @@ WITH RECURSIVE menu_tree AS (
         m.menu_sn AS root_sn,
         m.menu_nm,
         m.menu_seq,
-        (m.menu_sn::text) AS path,
+        lpad(m.menu_sn::text, 2, '0') AS path,
         m.lang_se_cd
     FROM kids_own.TB_PP_M_MENU m
     WHERE m.use_yn = 'Y'
@@ -209,7 +175,7 @@ WITH RECURSIVE menu_tree AS (
         p.root_sn,
         c.menu_nm,
         c.menu_seq,
-        (p.path || ' > ' || c.menu_sn::text) AS path,
+        (p.path || ' > ' || lpad(c.menu_sn::text, 2, '0')) AS path,
         c.lang_se_cd
     FROM kids_own.TB_PP_M_MENU c
     JOIN menu_tree p
@@ -218,14 +184,17 @@ WITH RECURSIVE menu_tree AS (
 )
 SELECT
     mt.menu_sn,
+    mt.menu_nm,
+    d.menu_url_addr,
+    '' as detail_task,
     mt.up_menu_sn,
     mt.dep_level,
     mt.root_sn,
     mt.path,
-    mt.menu_nm,
+    
     mt.menu_seq,
     mt.lang_se_cd,
-    d.menu_url_addr,
+    
     d.menu_npag_nm,
     d.prvc_incl_yn,
     d.dgstfn_exmn_yn,
