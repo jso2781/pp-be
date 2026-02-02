@@ -31,6 +31,12 @@
     </select>
 
     <insert id="insertExprtInfo" parameterType="ExprtApplyIVO">
+        <selectKey keyProperty="exprtNo" resultType="String" order="BEFORE">
+            SELECT concat('EX'
+                          ,to_char(current_date, 'YY')
+                          ,lpad(nextval('kids_own.sq_pp_exprt_no')::text, 8, '0')
+                         ) as exprt_no
+        </selectKey>
         /* 대국민포털_전문가회원전환신청관리 전문가정보기본 입력 (ExprtApplyMapper.insertExprtInfo) */
         INSERT INTO kids_own.TB_PP_M_EXPRT_INFO
         (
@@ -44,11 +50,10 @@
             ,atch_file_group_id
             ,rgtr_id
             ,reg_dt
-
         )
         VALUES
         (
-             nextval('kids_own.sq_pp_exprt_no')
+            #{exprtNo}
             ,#{mbrNo}
             ,#{brno}
             ,#{name}
@@ -59,9 +64,6 @@
             ,#{mbrId}
             ,CURRENT_TIMESTAMP
         )
-        <selectKey keyProperty="exprtNo" resultType="String" order="AFTER">
-            SELECT currval('kids_own.sq_pp_exprt_no')
-        </selectKey>
     </insert>
 
     <insert id="insertExprtTask" parameterType="ExprtApplyIVO">
