@@ -13,11 +13,11 @@
              , ei.atch_file_group_id
              , et.reg_dt AS task_apply_reg_dt
              , et.aprv_prcs_dt AS task_aprv_prcs_dt
-             , et.exprt_aprv_stts_yn AS task_aprv_stts_code
+             , et.aprv_stts_cd AS task_aprv_stts_code
              , (SELECT com_dtl_cd_nm
                   FROM kids_own.TB_CA_C_DTL_CODE
                  WHERE com_group_cd = 'PP4'
-                   AND com_dtl_cd = et.exprt_aprv_stts_yn) AS task_aprv_stts_label
+                   AND com_dtl_cd = et.aprv_stts_cd) AS task_aprv_stts_label
              , et.exprt_task_sn
           FROM kids_own.TB_PP_M_INST_TASK it
              , kids_own.TB_PP_M_EXPRT_TASK et
@@ -39,11 +39,11 @@
              , et.reg_dt AS task_apply_reg_dt
              , ei.exprt_hdof_yn
              , ei.atch_file_group_id
-             , ei.exprt_aprv_stts_yn AS exprt_aprv_stts_code
+             , ei.aprv_stts_cd AS exprt_aprv_stts_code
              , (SELECT com_dtl_cd_nm
                 FROM kids_own.TB_CA_C_DTL_CODE
                 WHERE com_group_cd = 'PP4'
-                  AND com_dtl_cd = ei.exprt_aprv_stts_yn) AS exprt_aprv_stts_label
+                  AND com_dtl_cd = ei.aprv_stts_cd) AS exprt_aprv_stts_label
              , ei.rjct_rsn AS exprt_rjct_rsn
              , ei.aprv_prcs_dt AS exprt_aprv_prcs_dt
              , it.task_se_cd AS value
@@ -51,11 +51,11 @@
                   FROM kids_own.TB_CA_C_DTL_CODE
                  WHERE com_group_cd = 'PP13'
                    AND com_dtl_cd = it.task_se_cd) AS label
-             , et.exprt_aprv_stts_yn AS task_aprv_stts_code
+             , et.aprv_stts_cd AS task_aprv_stts_code
              , (SELECT com_dtl_cd_nm
                 FROM kids_own.TB_CA_C_DTL_CODE
                 WHERE com_group_cd = 'PP4'
-                  AND com_dtl_cd = et.exprt_aprv_stts_yn) AS task_aprv_stts_label
+                  AND com_dtl_cd = et.aprv_stts_cd) AS task_aprv_stts_label
 			 , et.rjct_rsn AS task_rjct_rsn
 			 , et.aprv_prcs_dt AS task_aprv_prcs_dt
         FROM kids_own.TB_PP_M_EXPRT_TASK et
