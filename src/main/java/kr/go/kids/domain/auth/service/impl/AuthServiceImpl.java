@@ -145,29 +145,29 @@ public class AuthServiceImpl implements AuthService
 
                     apiPrnDto.setData(failMap);
                 }else{
-                    BigInteger tokenId = null;
+                    BigInteger tokenSn = null;
 
                     // 기존 토큰 정보가 존재하면 없데이트, 없으면 토큰 생성후 토큰정보 입력,
                     MbrTokenRVO mtr = mbrTokenMapper.getMbrToken(loginVO);
 
                     if(mtr == null){
-                        long newTokenId = mbrTokenMapper.nextMbrTokenId();
-                        tokenId = BigInteger.valueOf(newTokenId);
+                        long newTokenSn = mbrTokenMapper.nextMbrTokenSn();
+                        tokenSn = BigInteger.valueOf(newTokenSn);
                     }else{
-                        tokenId = mtr.getTokenId();
+                        tokenSn = mtr.getTokenSn();
                     }
 
                     // Refresh Token 생성(Access Token, Refresh Token)
                     String refreshToken = jwtTokenProvider.createRefreshToken(ISSUER, mbrId, REFRESH_TOKEN_EXPIRE_TIME);
 
-                    // ✅ accessToken은 tokenId/appId claim 포함해서 생성
-                    String accessToken  = jwtTokenProvider.createAccessToken(ISSUER, mbrId, ACCESS_TOKEN_EXPIRE_TIME, tokenId.toString(), ISSUER);
+                    // ✅ accessToken은 tokenSn/appId claim 포함해서 생성
+                    String accessToken  = jwtTokenProvider.createAccessToken(ISSUER, mbrId, ACCESS_TOKEN_EXPIRE_TIME, tokenSn.toString(), ISSUER);
 
                     log.debug("AuthServiceImpl login userInfo != null, accessToken="+accessToken);
 
                     if(mtr == null){
                         MbrTokenPVO tokenInsertVO = new MbrTokenPVO();
-                        tokenInsertVO.setTokenId(tokenId);
+                        tokenInsertVO.setTokenSn(tokenSn);
                         tokenInsertVO.setAppId(ISSUER);
                         tokenInsertVO.setMbrId(mbrId);
                         tokenInsertVO.setRefreshToken(refreshToken);
@@ -177,13 +177,13 @@ public class AuthServiceImpl implements AuthService
 
                         mbrTokenMapper.insertMbrToken(tokenInsertVO);
 
-                        userInfo.setTokenId(tokenId);
+                        userInfo.setTokenSn(tokenSn);
                         userInfo.setAccessToken(accessToken);
                         userInfo.setRefreshToken(refreshToken);
                         userInfo.setPswdErrNmtm(0);             // 로그인 성공했으므로 기존 로그인 실패 횟수를 0으로 초기화
 
-                        // UI 에 전달한 사용자 정보(userInfo), 토큰 정보(tokenId, accessToken, refreshToken)
-                        bizData.put("tokenId", tokenId);
+                        // UI 에 전달한 사용자 정보(userInfo), 토큰 정보(tokenSn, accessToken, refreshToken)
+                        bizData.put("tokenSn", tokenSn);
                         bizData.put("accessToken", accessToken);
                         bizData.put("refreshToken", refreshToken);
                         bizData.put("pswdErrNmtm", 0);
@@ -192,7 +192,7 @@ public class AuthServiceImpl implements AuthService
                     // 기존 토큰 정보가 존재하면, 업데이트
                     else{
                         MbrTokenPVO tokenUpdateVO = new MbrTokenPVO();
-                        tokenUpdateVO.setTokenId(tokenId);
+                        tokenUpdateVO.setTokenSn(tokenSn);
                         tokenUpdateVO.setAppId(ISSUER);
                         tokenUpdateVO.setMbrId(mbrId);
                         tokenUpdateVO.setRefreshToken(refreshToken);
@@ -201,13 +201,13 @@ public class AuthServiceImpl implements AuthService
 
                         mbrTokenMapper.updateMbrToken(tokenUpdateVO);
 
-                        userInfo.setTokenId(tokenId);
+                        userInfo.setTokenSn(tokenSn);
                         userInfo.setAccessToken(accessToken);
                         userInfo.setRefreshToken(refreshToken);
                         userInfo.setPswdErrNmtm(0);             // 로그인 성공했으므로 기존 로그인 실패 횟수를 0으로 초기화
 
-                        // UI 에 전달한 사용자 정보(userInfo), 토큰 정보(tokenId, accessToken, refreshToken)
-                        bizData.put("tokenId", tokenId);
+                        // UI 에 전달한 사용자 정보(userInfo), 토큰 정보(tokenSn, accessToken, refreshToken)
+                        bizData.put("tokenSn", tokenSn);
                         bizData.put("accessToken", accessToken);
                         bizData.put("refreshToken", refreshToken);
                         bizData.put("pswdErrNmtm", 0);
@@ -222,10 +222,10 @@ public class AuthServiceImpl implements AuthService
                     mbrInfoMapper.updateMbrInfo(mp);
 
                     // Redis Idle 키 생성(30분)
-                    idleTokenService.touch(tokenId.toString());
+                    idleTokenService.touch(tokenSn.toString());
 
                     // Redis Active 키 생성(ACCESS_TOKEN_EXPIRE_TIME 만료시간 설정)
-                    activeTokenService.markActive(mbrId, tokenId.toString(), ACCESS_TOKEN_EXPIRE_TIME);
+                    activeTokenService.markActive(mbrId, tokenSn.toString(), ACCESS_TOKEN_EXPIRE_TIME);
 
                     // 로그인되었습니다.
                     apiPrnDto.setMsg(MessageContextHolder.getMessage("ui.msg.login.success"));
@@ -242,24 +242,24 @@ public class AuthServiceImpl implements AuthService
         return apiPrnDto;
     }
 
-    public ApiPrnDto refresh(BigInteger tokenId, String refreshToken) {
+    public ApiPrnDto refresh(BigInteger tokenSn, String refreshToken) {
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
 
         // JWT 토큰 문자열에서 회원ID(mbrId) 가져옴.
         String mbrId = jwtTokenProvider.getSubject(refreshToken);
 
         MbrTokenPVO mbrTokenPVO = new MbrTokenPVO();
-        mbrTokenPVO.setTokenId(tokenId);
+        mbrTokenPVO.setTokenSn(tokenSn);
 
         MbrTokenRVO mbrToken = mbrTokenMapper.getMbrToken(mbrTokenPVO);
         if(mbrToken == null)throw new RuntimeException("TOKEN_NOT_FOUND");
         if(!refreshToken.equals(mbrToken.getRefreshToken()))throw new RuntimeException("TOKEN_MISMATCH");
 
         String newRefreshToken = jwtTokenProvider.createRefreshToken(ISSUER, mbrId, REFRESH_TOKEN_EXPIRE_TIME);
-        String newAccessToken = jwtTokenProvider.createAccessToken(ISSUER, mbrId, ACCESS_TOKEN_EXPIRE_TIME, tokenId.toString(), ISSUER);
+        String newAccessToken = jwtTokenProvider.createAccessToken(ISSUER, mbrId, ACCESS_TOKEN_EXPIRE_TIME, tokenSn.toString(), ISSUER);
 
         MbrTokenPVO tokenInsertVO = new MbrTokenPVO();
-        tokenInsertVO.setTokenId(tokenId);
+        tokenInsertVO.setTokenSn(tokenSn);
         tokenInsertVO.setAppId(ISSUER);
         tokenInsertVO.setMbrId(mbrId);
         tokenInsertVO.setRefreshToken(newRefreshToken);
@@ -270,10 +270,10 @@ public class AuthServiceImpl implements AuthService
         mbrTokenMapper.updateMbrToken(tokenInsertVO);
 
         // Refresh도 사용자 활동이므로 Redis Idle Key 30분 리셋
-        idleTokenService.touch(tokenId.toString());
+        idleTokenService.touch(tokenSn.toString());
 
         // Redis Active Key도 갱신
-        activeTokenService.markActive(mbrId, tokenId.toString(), ACCESS_TOKEN_EXPIRE_TIME);
+        activeTokenService.markActive(mbrId, tokenSn.toString(), ACCESS_TOKEN_EXPIRE_TIME);
 
         MbrInfoPVO mp = new MbrInfoPVO();
         mp.setMbrId(mbrId);
@@ -281,10 +281,10 @@ public class AuthServiceImpl implements AuthService
         // 토큰과 연계된 사용자 정보 조회
         MbrInfoRVO userInfo = mbrInfoMapper.getMbrInfo(mp);
 
-        userInfo.setTokenId(tokenId);
+        userInfo.setTokenSn(tokenSn);
 
         HashMap<String, Object> bizData = new HashMap<>();
-        bizData.put("tokenId", tokenId);
+        bizData.put("tokenSn", tokenSn);
         bizData.put("accessToken", newAccessToken);
         bizData.put("refreshToken", newRefreshToken);
         bizData.put("pswdErrNmtm", 0);
@@ -309,12 +309,12 @@ public class AuthServiceImpl implements AuthService
         }
 
         // 2) idle 키, active 키 삭제
-        BigInteger tokenId = mbrTokenDVO.getTokenId();
+        BigInteger tokenSn = mbrTokenDVO.getTokenSn();
         String mbrId = mbrTokenDVO.getMbrId();
 
-        if(tokenId != null && StringUtils.hasText(mbrId)){
-            idleTokenService.delete(tokenId.toString());
-            activeTokenService.revoke(mbrId, tokenId.toString());
+        if(tokenSn != null && StringUtils.hasText(mbrId)){
+            idleTokenService.delete(tokenSn.toString());
+            activeTokenService.revoke(mbrId, tokenSn.toString());
         }
 
         // 3) access token 블랙리스트 등록 (로그아웃 즉시 무효화)
@@ -339,19 +339,19 @@ public class AuthServiceImpl implements AuthService
             return new ApiPrnDto(ApiResultCode.UNAUTHORIZED);
         }
 
-        // AccessToken에서 tokenId claim 추출
-        String tokenId = jwtTokenProvider.getTokenId(token);
-        if (tokenId == null || tokenId.isBlank()) {
+        // AccessToken에서 tokenSn claim 추출
+        String tokenSn = jwtTokenProvider.getTokenSn(token);
+        if (tokenSn == null || tokenSn.isBlank()) {
             return new ApiPrnDto(ApiResultCode.UNAUTHORIZED);
         }
 
         // Redis Idle 키가 이미 없으면(30분 idle 만료) 연장 불가 → 401 처리 권장
-        if (!idleTokenService.exists(tokenId)) {
+        if (!idleTokenService.exists(tokenSn)) {
             return new ApiPrnDto(ApiResultCode.UNAUTHORIZED);
         }
 
         // Redis Idle TTL 30분 리셋 (토큰 재발급 없음)
-        idleTokenService.touch(tokenId);
+        idleTokenService.touch(tokenSn);
 
         return new ApiPrnDto(ApiResultCode.SUCCESS);
     }

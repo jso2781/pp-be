@@ -9,10 +9,10 @@ import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 public class MbrTokenDVO
 {
     /**
-     * JWT토큰ID
+     * JWT토큰일련번호
      */
-    @Schema(requiredMode = RequiredMode.REQUIRED, description = "JWT토큰ID", type = "BigInteger")
-    private BigInteger tokenId;
+    @Schema(requiredMode = RequiredMode.REQUIRED, description = "JWT토큰일련번호", type = "BigInteger")
+    private BigInteger tokenSn;
 
     /**
      * 회원아이디
@@ -20,13 +20,13 @@ public class MbrTokenDVO
     @Schema(description = "회원아이디", type = "String")
     private String mbrId;
 
-    public BigInteger getTokenId()
+    public BigInteger getTokenSn()
     {
-        return tokenId;
+        return tokenSn;
     }
-    public void setTokenId(BigInteger tokenId)
+    public void setTokenSn(BigInteger tokenSn)
     {
-        this.tokenId = tokenId;
+        this.tokenSn = tokenSn;
     }
     public String getMbrId() {
         return mbrId;

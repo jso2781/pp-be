@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.go.kids.domain.auth.mapper.MbrTokenMapper">
 
-    <select id="nextMbrTokenId" resultType="long">
-        SELECT nextval('kids_own.sq_ca_token_id_1')
+    <select id="nextMbrtokenSn" resultType="long">
+        SELECT nextval('kids_own.sq_ca_token_sn')
     </select>
 
     <select id="getMbrToken" parameterType="MbrTokenPVO" resultType="MbrTokenRVO" >
         /* 대국민포털_회원_TOKEN 조회 (MbrTokenMapper.getMbrToken) */
         SELECT
-             token_id
+             token_sn
             ,mbr_id
             ,app_id
             ,refresh_token
@@ -22,14 +22,14 @@
 
         FROM kids_own.tb_ca_m_mbr_token
         WHERE 1=1
-        AND token_id = #{tokenId}
+        AND token_sn = #{tokenSn}
     </select>
 
     <insert id="insertMbrToken" parameterType="MbrTokenPVO">
         /* 대국민포털_회원_TOKEN 입력 (MbrTokenMapper.insertMbrToken) */
         INSERT INTO kids_own.tb_ca_m_mbr_token
         (
-             token_id
+             token_sn
             ,mbr_id
             ,app_id
             ,refresh_token
@@ -43,7 +43,7 @@
         )
         VALUES
         (
-             #{tokenId}
+             #{tokenSn}
             ,#{mbrId}
             ,#{appId}
             ,#{refreshToken}
@@ -68,14 +68,14 @@
             ,mdfcn_dt = now()
 
         WHERE 1=1
-        AND token_id = #{tokenId}
+        AND token_sn = #{tokenSn}
     </update>
 
     <insert id="saveMbrToken" parameterType="MbrTokenPVO">
         /* 대국민포털_회원_TOKEN 저장 (MbrTokenMapper.insertMbrToken) */
         INSERT INTO kids_own.tb_ca_m_mbr_token
         (
-             token_id
+             token_sn
             ,mbr_id
             ,app_id
             ,refresh_token
@@ -89,7 +89,7 @@
         )
         VALUES
         (
-             #{tokenId}
+             #{tokenSn}
             ,#{mbrId}
             ,#{appId}
             ,#{refreshToken}
@@ -101,7 +101,7 @@
             ,now()
 
         )
-        ON CONFLICT(token_id)
+        ON CONFLICT(token_sn)
         DO UPDATE SET
              mbr_id = coalesce(excluded.mbr_id, kids_own.tb_ca_m_mbr_token.mbr_id)
             ,app_id = coalesce(excluded.app_id, kids_own.tb_ca_m_mbr_token.app_id)
@@ -116,7 +116,7 @@
         /* 대국민포털_회원_TOKEN 삭제 (MbrTokenMapper.deleteMbrToken) */
         DELETE FROM kids_own.tb_ca_m_mbr_token
         WHERE 1=1
-        AND token_id = #{tokenId}
+        AND token_sn = #{tokenSn}
         AND mbr_id = #{mbrId}
     </delete>
 

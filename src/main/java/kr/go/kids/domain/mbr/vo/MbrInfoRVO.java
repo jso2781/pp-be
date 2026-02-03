@@ -138,10 +138,10 @@ public class MbrInfoRVO
     private String mdfcnDt;
 
     /**
-     * JWT토큰ID
+     * JWT토큰일련번호
      */
-    @Schema(description = "JWT토큰ID", type = "BigInteger")
-    private BigInteger tokenId;
+    @Schema(description = "JWT토큰일련번호", type = "BigInteger")
+    private BigInteger tokenSn;
 
     /**
      * 애플리케이션ID

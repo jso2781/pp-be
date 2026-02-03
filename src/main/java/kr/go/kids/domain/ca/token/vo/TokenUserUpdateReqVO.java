@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class TokenUserUpdateReqVO {
 
-    private String tokenId;         // 토큰 ID
+    private String tokenSn;         // 토큰일련번호
     private Long adminId;        // 관리자 번호
     private Long userId;         // 사용자번호
     private String appId;           // 앱ID
