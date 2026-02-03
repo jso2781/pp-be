@@ -23,7 +23,7 @@
         SELECT it.task_se_cd AS value
              , (SELECT com_dtl_cd_nm
                   FROM kids_own.TB_CA_C_DTL_CODE
-                 WHERE com_group_cd = 'P13'
+                 WHERE com_group_cd = 'PP13'
                    AND com_dtl_cd = it.task_se_cd) AS label
              , et.exprt_aprv_stts_yn
              , et.rjct_rsn
@@ -33,6 +33,7 @@
           FROM kids_own.TB_PP_M_INST_TASK it
           LEFT OUTER JOIN kids_own.TB_PP_M_EXPRT_TASK et
             ON it.bzmn_task_mng_no = et.bzmn_task_mng_no
+           AND et.exprt_no = #{exprtNo}
          WHERE it.brno = #{brno}
            AND it.use_yn = 'Y'
     </select>
@@ -72,7 +73,7 @@
             nextval('kids_own.sq_pp_exprt_task_sn')
             ,#{exprtNo}
             ,#{bzmnTaskMngNo}
-            ,'N'
+            ,'W'
             ,'Y'
             ,#{mbrId}
             ,CURRENT_TIMESTAMP

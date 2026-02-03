@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.exprt.mapper.ExprtApprovalMapper">
+
+    <select id="selectExprtApprovalList" parameterType="ExprtApprovalPVO" resultType="ExprtApprovalRVO" >
+        /* 대국민포털_전문가업무신청관리 소속 전문가 회원 목록 조회 (ExprtApprovalMapper.selectExprtApprovalList) */
+        SELECT ei.encpt_exprt_flnm AS name
+             , ei.encpt_exprt_inst_eml_nm AS instEmlNm
+             , (SELECT com_dtl_cd_nm
+                  FROM kids_own.TB_CA_C_DTL_CODE
+                 WHERE com_group_cd = 'PP13'
+                   AND com_dtl_cd = it.task_se_cd) AS label
+             , ei.atch_file_group_id
+             , et.reg_dt AS task_apply_reg_dt
+             , et.aprv_prcs_dt AS task_aprv_prcs_dt
+             , et.exprt_aprv_stts_yn AS task_aprv_stts_code
+             , (SELECT com_dtl_cd_nm
+                  FROM kids_own.TB_CA_C_DTL_CODE
+                 WHERE com_group_cd = 'PP4'
+                   AND com_dtl_cd = et.exprt_aprv_stts_yn) AS task_aprv_stts_label
+             , et.exprt_task_sn
+          FROM kids_own.TB_PP_M_INST_TASK it
+             , kids_own.TB_PP_M_EXPRT_TASK et
+             , kids_own.TB_PP_M_EXPRT_INFO ei
+         WHERE it.tkcg_exprt_no = (SELECT exprt_no
+                                     FROM kids_own.TB_PP_M_EXPRT_INFO
+                                    WHERE mbr_no = #{mbrNo})
+           AND it.use_yn = 'Y'
+           AND it.bzmn_task_mng_no = et.bzmn_task_mng_no
+           AND et.exprt_no = ei.exprt_no
+    </select>
+
+    <select id="selectExprtApproval" parameterType="ExprtApprovalPVO" resultType="ExprtApprovalRVO" >
+        /* 대국민포털_전문가업무신청관리 소속 전문가 회원 상세 조회 (ExprtApprovalMapper.selectExprtApproval) */
+        SELECT mi.mbr_id
+             , mi.encpt_mbr_flnm AS name
+             , mi.encpt_mbr_telno AS telNo
+             , ei.encpt_exprt_inst_eml_nm AS instEmlNm
+             , et.reg_dt AS task_apply_reg_dt
+             , ei.exprt_hdof_yn
+             , ei.atch_file_group_id
+             , ei.exprt_aprv_stts_yn AS exprt_aprv_stts_code
+             , (SELECT com_dtl_cd_nm
+                FROM kids_own.TB_CA_C_DTL_CODE
+                WHERE com_group_cd = 'PP4'
+                  AND com_dtl_cd = ei.exprt_aprv_stts_yn) AS exprt_aprv_stts_label
+             , ei.rjct_rsn AS exprt_rjct_rsn
+             , ei.aprv_prcs_dt AS exprt_aprv_prcs_dt
+             , it.task_se_cd AS value
+             , (SELECT com_dtl_cd_nm
+                  FROM kids_own.TB_CA_C_DTL_CODE
+                 WHERE com_group_cd = 'PP13'
+                   AND com_dtl_cd = it.task_se_cd) AS label
+             , et.exprt_aprv_stts_yn AS task_aprv_stts_code
+             , (SELECT com_dtl_cd_nm
+                FROM kids_own.TB_CA_C_DTL_CODE
+                WHERE com_group_cd = 'PP4'
+                  AND com_dtl_cd = et.exprt_aprv_stts_yn) AS task_aprv_stts_label
+			 , et.rjct_rsn AS task_rjct_rsn
+			 , et.aprv_prcs_dt AS task_aprv_prcs_dt
+        FROM kids_own.TB_PP_M_EXPRT_TASK et
+                , kids_own.TB_PP_M_EXPRT_INFO ei
+                , kids_own.TB_PP_M_INST_TASK it
+                , kids_own.TB_PP_M_MBR_INFO mi
+        WHERE et.exprt_task_sn = #{exprtTaskSn}
+          AND et.exprt_no = ei.exprt_no
+          AND et.bzmn_task_mng_no = it.bzmn_task_mng_no
+          AND ei.mbr_no = mi.mbr_no
+    </select>
+
+</mapper>
