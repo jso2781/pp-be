@@ -5,7 +5,7 @@
     <select id="selectExprtInfo" parameterType="ExprtTaskPVO" resultType="ExprtTaskRVO" >
         /* 대국민포털_전문가내업무관리 전문가회원 정보 조회 (ExprtTaskMapper.selectExprtInfo) */
         SELECT ei.encpt_exprt_flnm
-             , ei.exprt_aprv_stts_yn
+             , ei.aprv_stts_cd
              , ei.rjct_rsn
              , ei.exprt_no
              , ei.mbr_no
@@ -23,16 +23,16 @@
         SELECT it.task_se_cd AS value
              , (SELECT com_dtl_cd_nm
                   FROM kids_own.TB_CA_C_DTL_CODE
-                 WHERE com_group_cd = 'P13'
+                 WHERE com_group_cd = 'PP13'
                    AND com_dtl_cd = it.task_se_cd) AS label
-             , et.exprt_aprv_stts_yn
+             , et.aprv_stts_cd
              , et.rjct_rsn
-             , et.use_yn
              , et.exprt_task_sn
              , it.bzmn_task_mng_no
           FROM kids_own.TB_PP_M_INST_TASK it
           LEFT OUTER JOIN kids_own.TB_PP_M_EXPRT_TASK et
             ON it.bzmn_task_mng_no = et.bzmn_task_mng_no
+           AND et.exprt_no = #{exprtNo}
          WHERE it.brno = #{brno}
            AND it.use_yn = 'Y'
     </select>
@@ -62,8 +62,7 @@
              exprt_task_sn
             ,exprt_no
             ,bzmn_task_mng_no
-            ,exprt_aprv_stts_yn
-            ,use_yn
+            ,aprv_stts_cd
             ,rgtr_id
             ,reg_dt
         )
@@ -72,8 +71,7 @@
             nextval('kids_own.sq_pp_exprt_task_sn')
             ,#{exprtNo}
             ,#{bzmnTaskMngNo}
-            ,'N'
-            ,'Y'
+            ,'W'
             ,#{mbrId}
             ,CURRENT_TIMESTAMP
         )
