@@ -6,7 +6,7 @@
         /* 대국민포털_콘탠츠기본 정보 조회 (CmsMapper.getCms) */
         SELECT
             conts_sn,
-            '' as contsVerNo,
+            -1 as contsVerNo,
             conts_ttl,
             conts_cn,
             conts_use_yn,
