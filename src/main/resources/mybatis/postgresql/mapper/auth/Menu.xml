@@ -17,6 +17,7 @@
             FROM kids_own.TB_PP_M_MENU m
             WHERE m.use_yn = 'Y'
             AND m.up_menu_sn IS NULL
+            AND m.menu_type_cd = 'U'
             UNION ALL
             SELECT
                 c.menu_sn,
@@ -31,6 +32,7 @@
             JOIN menu_tree p
                 ON c.up_menu_sn = p.menu_sn
             WHERE c.use_yn = 'Y'
+            AND c.menu_type_cd = 'U'
         )
         SELECT
             mt.menu_sn,
