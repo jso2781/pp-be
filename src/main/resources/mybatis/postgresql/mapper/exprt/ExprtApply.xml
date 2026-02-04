@@ -14,7 +14,7 @@
         SELECT t.task_se_cd AS value
              , (SELECT com_dtl_cd_nm
                   FROM kids_own.TB_CA_C_DTL_CODE
-                 WHERE com_group_cd = 'P13'
+                 WHERE com_group_cd = 'PP13'
                    AND com_dtl_cd = t.task_se_cd) AS label
           FROM kids_own.TB_PP_M_INST_TASK t
          WHERE t.brno = #{brno}
@@ -46,7 +46,7 @@
             ,encpt_exprt_flnm
             ,encpt_exprt_inst_eml_nm
             ,exprt_hdof_yn
-            ,exprt_aprv_stts_yn
+            ,aprv_stts_cd
             ,atch_file_group_id
             ,rgtr_id
             ,reg_dt
@@ -59,7 +59,7 @@
             ,#{name}
             ,#{email}
             ,'Y'
-            ,'N'
+            ,'W'
             ,#{atchFileGroupId}
             ,#{mbrId}
             ,CURRENT_TIMESTAMP
@@ -73,8 +73,7 @@
              exprt_task_sn
             ,exprt_no
             ,bzmn_task_mng_no
-            ,exprt_aprv_stts_yn
-            ,use_yn
+            ,aprv_stts_cd
             ,rgtr_id
             ,reg_dt
         )
@@ -89,8 +88,7 @@
                     FROM kids_own.TB_PP_M_INST_TASK
                    WHERE brno = #{brno}
                      AND task_se_cd = #{taskSystemCd})
-	            ,'N'
-                ,'Y'
+	            ,'W'
 	            ,#{mbrId}
 	            ,CURRENT_TIMESTAMP
 	        )

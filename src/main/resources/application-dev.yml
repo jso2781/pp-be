@@ -38,7 +38,7 @@ spring:
     enabled: false
   datasource:
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:postgresql://192.168.12.146:5432/kids_db?tcpKeepAlive=true&connectTimeout=10&socketTimeout=600
+    url: jdbc:log4jdbc:postgresql://192.168.2.152:15432/kids_db?tcpKeepAlive=true&connectTimeout=10&socketTimeout=600
     username: pp_dev
     password: pp_dev
     hikari:

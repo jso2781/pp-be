@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.cms.mapper.CmsMapper">
+
+    <select id="getCms" parameterType="CmsPVO" resultType="CmsRVO" >
+        /* 대국민포털_콘탠츠기본 정보 조회 (CmsMapper.getCms) */
+        SELECT
+            conts_sn,
+            -1 as contsVerNo,
+            conts_ttl,
+            conts_cn,
+            conts_use_yn,
+            rgtr_id,
+            reg_dt,
+            mdfr_id,
+            mdfcn_dt
+        FROM kids_own.tb_pp_m_conts
+        WHERE 1=1
+        AND conts_sn = #{contsSn}
+    </select>
+</mapper>

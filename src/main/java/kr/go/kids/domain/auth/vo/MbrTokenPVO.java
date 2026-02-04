@@ -8,10 +8,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class MbrTokenPVO
 {
     /**
-     * JWT토큰ID
+     * JWT토큰일련번호
      */
-    @Schema(description = "JWT토큰ID", type = "BigInteger")
-    private BigInteger tokenId;
+    @Schema(description = "JWT토큰일련번호", type = "BigInteger")
+    private BigInteger tokenSn;
 
     /**
      * 회원아이디
@@ -67,13 +67,13 @@ public class MbrTokenPVO
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
 
-    public BigInteger getTokenId()
+    public BigInteger getTokenSn()
     {
-        return tokenId;
+        return tokenSn;
     }
-    public void setTokenId(BigInteger tokenId)
+    public void setTokenSn(BigInteger tokenSn)
     {
-        this.tokenId = tokenId;
+        this.tokenSn = tokenSn;
     }
     public String getEncptMbrPswd() {
         return encptMbrPswd;

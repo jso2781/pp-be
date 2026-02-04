@@ -36,6 +36,12 @@ public class MenuController
     @ResponseBody
     public ResponseEntity<ApiPrnDto> selectMenuList(@RequestBody MenuPVO menuPVO)
     {
+        if("ko".equals(menuPVO.getLangSeCd())){
+            menuPVO.setLangSeCd("KOR");
+        }else if("en".equals(menuPVO.getLangSeCd())){
+            menuPVO.setLangSeCd("ENG");
+        }
+
         ApiPrnDto apiPrnDto = menuService.selectMenuList(menuPVO);
 
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());

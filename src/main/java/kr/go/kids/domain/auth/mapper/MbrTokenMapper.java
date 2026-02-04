@@ -13,7 +13,7 @@ public interface MbrTokenMapper
      *  대국민포털_회원_TOKEN token_id 발번
      * @return 발번된 token_id
      */
-    public long nextMbrTokenId();
+    public long nextMbrTokenSn();
 
     /**
      * 대국민포털_회원_TOKEN 정보 조회 

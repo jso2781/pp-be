@@ -71,7 +71,7 @@ public class AuthController {
     @PostMapping("/refresh")
     @ResponseBody
     public ResponseEntity<ApiPrnDto> refresh(@RequestBody RefreshPVO refreshPVO){
-        ApiPrnDto apiPrnDto = authService.refresh(refreshPVO.getTokenId(), refreshPVO.getRefreshToken());
+        ApiPrnDto apiPrnDto = authService.refresh(refreshPVO.getTokenSn(), refreshPVO.getRefreshToken());
 
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
@@ -85,7 +85,7 @@ public class AuthController {
      * 
      * @param auth
      * @param appId
-     * @param tokenId
+     * @param tokenSn
      * @param authorization
      * @return
      */
@@ -96,7 +96,7 @@ public class AuthController {
         String mbrId = (String) auth.getPrincipal();
 
         MbrTokenDVO mtd = new MbrTokenDVO();
-        mtd.setTokenId(loginPVO.getTokenId());
+        mtd.setTokenSn(loginPVO.getTokenSn());
         mtd.setMbrId(mbrId);
 
         ApiPrnDto apiPrnDto = authService.logout(mtd, authorization);

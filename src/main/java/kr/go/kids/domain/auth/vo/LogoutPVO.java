@@ -8,16 +8,16 @@ import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 @Schema(name = "로그아웃 요청", description = "로그아웃 요청 Parameter VO")
 public class LogoutPVO {
     /**
-     * JWT토큰ID
+     * JWT토큰일련번호
      */
-    @Schema(requiredMode = RequiredMode.REQUIRED, description = "JWT토큰ID", type = "BigInteger")
-    private BigInteger tokenId;
+    @Schema(requiredMode = RequiredMode.REQUIRED, description = "JWT토큰일련번호", type = "BigInteger")
+    private BigInteger tokenSn;
 
-    public BigInteger getTokenId() {
-        return tokenId;
+    public BigInteger getTokenSn() {
+        return tokenSn;
     }
 
-    public void setTokenId(BigInteger tokenId) {
-        this.tokenId = tokenId;
+    public void setTokenSn(BigInteger tokenSn) {
+        this.tokenSn = tokenSn;
     }
 }
