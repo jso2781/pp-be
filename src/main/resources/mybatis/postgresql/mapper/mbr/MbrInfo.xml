@@ -29,38 +29,43 @@
     <select id="getMbrInfo" parameterType="MbrInfoPVO" resultType="MbrInfoRVO" >
         /* 대국민포털_회원정보기본 조회 (MbrInfoMapper.getMbrInfo) */
         SELECT
-             mbr_no
-            ,mbr_id
-            ,encpt_mbr_flnm
-            ,encpt_mbr_eml_nm
-            ,encpt_mbr_pswd
-            ,encpt_mbr_telno
-            ,mbr_type_cd
-            ,mbr_join_stts_cd
-            ,mbr_join_dt
-            ,mbr_whdwl_rsn
-            ,mbr_whdwl_dt
-            ,cnstn_mbcmt_yn
-            ,bfr_enpswd
-            ,pswd_chg_dt
-            ,pswd_err_nmtm
-            ,link_info_idntf_id
-            ,cert_token_vl
-            ,rgtr_id
-            ,reg_dt
-
-            ,mdfr_id
-            ,mdfcn_dt
-
-        FROM kids_own.TB_PP_M_MBR_INFO
+             mbr.mbr_no
+            ,mbr.mbr_id
+            ,mbr.encpt_mbr_flnm
+            ,mbr.encpt_mbr_eml_nm
+            ,mbr.encpt_mbr_pswd
+            ,mbr.encpt_mbr_telno
+            ,mbr.mbr_type_cd
+            ,mbr.mbr_join_stts_cd
+            ,mbr.mbr_join_dt
+            ,mbr.mbr_whdwl_rsn
+            ,mbr.mbr_whdwl_dt
+            ,mbr.cnstn_mbcmt_yn
+            ,mbr.bfr_enpswd
+            ,mbr.pswd_chg_dt
+            ,mbr.pswd_err_nmtm
+            ,mbr.link_info_idntf_id
+            ,mbr.cert_token_vl
+            ,mbr.rgtr_id
+            ,mbr.reg_dt
+            ,mbr.mdfr_id
+            ,mbr.mdfcn_dt
+            ,(
+                SELECT CASE WHEN COUNT(*) > 0 THEN 'Y' ELSE 'N' END
+                FROM kids_own.tb_pp_m_exprt_info ex
+                WHERE mbr.mbr_no = ex.mbr_no
+                AND ex.exprt_hdof_yn = 'Y'
+                AND ex.aprv_stts_cd = 'A'
+             ) as expert_yn
+        FROM kids_own.tb_pp_m_mbr_info mbr
         WHERE 1=1
         <if test="mbrNo != null and mbrNo != ''">
-            AND mbr_no = #{mbrNo}
+            AND mbr.mbr_no = #{mbrNo}
         </if>
         <if test="mbrId != null and mbrId != ''">
-            AND mbr_id = #{mbrId}
+            AND mbr.mbr_id = #{mbrId}
         </if>
-        AND mbr_whdwl_dt is null
+        AND mbr.mbr_whdwl_dt is null
     </select>
 
     <insert id="insertMbrInfo" parameterType="MbrInfoPVO">
@@ -291,17 +296,17 @@
     </delete>
     
     <select id="findMbrInfoId" parameterType="MbrInfoPVO"  resultType="MbrInfoRVO">
-    	/* 대국민포털_회원정보 ID 존재 여부 조회  */
-    	SELECT
-			mbr_id,
-			encpt_mbr_flnm
-		FROM
-			kids_own.TB_PP_M_MBR_INFO
-		WHERE
-			1=1
-		AND
-			mbr_no = #{mbrNo}
-		LIMIT 1
+        /* 대국민포털_회원정보 ID 존재 여부 조회  */
+        SELECT
+            mbr_id,
+            encpt_mbr_flnm
+        FROM
+            kids_own.TB_PP_M_MBR_INFO
+        WHERE
+            1=1
+        AND
+            mbr_no = #{mbrNo}
+        LIMIT 1
     </select>
     
     <update id="updateMbrInfoPw" parameterType="MbrInfoPVO">

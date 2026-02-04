@@ -86,7 +86,7 @@ public class MenuController
 
         return resultMap;
     }
-)
+
     @Operation(summary = "대국민포털_메뉴기본 수정", description = "대국민포털_메뉴기본 수정한다.")
     @PostMapping(value="/updateMenu")
     @ResponseBody

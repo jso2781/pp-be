@@ -160,4 +160,10 @@ public class MbrInfoRVO
      */
     @Schema(description = "JWT_Access_Token", type = "String")
     private String accessToken;
+
+    /**
+     * 전문가 회원 여부(Y/N)
+     */
+    @Schema(description = "전문가 회원 여부(Y/N)", type = "String")
+    private String expertYn;
 }
