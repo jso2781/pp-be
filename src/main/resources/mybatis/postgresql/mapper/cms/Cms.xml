@@ -5,17 +5,25 @@
     <select id="getCms" parameterType="CmsPVO" resultType="CmsRVO" >
         /* 대국민포털_콘탠츠기본 정보 조회 (CmsMapper.getCms) */
         SELECT
-            conts_sn,
-            -1 as contsVerNo,
-            conts_ttl,
-            conts_cn,
-            conts_use_yn,
-            rgtr_id,
-            reg_dt,
-            mdfr_id,
-            mdfcn_dt
-        FROM kids_own.tb_pp_m_conts
-        WHERE 1=1
-        AND conts_sn = #{contsSn}
+            A.conts_sn,
+            A.conts_ver_no,
+            A.conts_ttl,
+            A.conts_cn,
+            A.conts_use_yn,
+            A.rgtr_id,
+            A.reg_dt,
+            A.mdfr_id,
+            A.mdfcn_dt
+        FROM kids_own.tb_pp_m_conts A
+        INNER JOIN(
+            SELECT
+                #{contsSn} as conts_sn,
+                MAX(conts_ver_no) as conts_ver_no
+            FROM kids_own.tb_pp_m_conts
+            WHERE 1=1
+            AND conts_sn = #{contsSn}
+        ) B
+        ON A.conts_sn = B.conts_sn
+        AND A.conts_ver_no = B.conts_ver_no
     </select>
 </mapper>
