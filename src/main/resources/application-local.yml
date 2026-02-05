@@ -2,7 +2,7 @@ server:
   address: localhost
   port: 8080
   servlet:
-    context-path: /pp
+    context-path: /
     encoding:
       charset: UTF-8
       enabled: true
