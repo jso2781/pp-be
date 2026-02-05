@@ -1,10 +1,11 @@
-package kr.go.kids.domain.dshstyDclr.mapper;
+package kr.go.kids.domain.dclr.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import kr.go.kids.domain.dshstyDclr.vo.DshstyDclrPVO;
+import kr.go.kids.domain.dclr.vo.DshstyDclrPVO;
+import kr.go.kids.domain.dclr.vo.DshstyDclrRVO;
 
 @Mapper
 public interface DshstyDclrMapper
@@ -15,7 +16,7 @@ public interface DshstyDclrMapper
      * @param dshstyDclrPVO 조회용 파라메터 정보 
      * @return 조회된 대국민포털_부정신고기본 
      */
-    public List<DshstyDclrPVO> selectDshstyDclrList(DshstyDclrPVO dshstyDclrPVO);
+    public List<DshstyDclrRVO> selectDshstyDclrList(DshstyDclrPVO dshstyDclrPVO);
 
     /**
      * 대국민포털_부정신고 기본 정보 입력 

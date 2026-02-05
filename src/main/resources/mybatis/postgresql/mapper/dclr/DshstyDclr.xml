@@ -5,14 +5,8 @@
     <select id="selectDshstyDclrList" parameterType="DshstyDclrPVO" resultType="DshstyDclrRVO" >
         /* 대국민포털_부정신고 목록 조회 (DshstyDclrMapper.selectDshstyDclrList) */
         SELECT
-		    faq_clsf_nm,
-		    faq_ttl,
-		    faq_seq,
-		    faq_ans_cn
-        FROM kids_own.TB_PP_M_FAQ
+			dclr_sn
+        FROM kids_own.TB_PP_M_DSHSTY_DCLR
         WHERE 1=1
-        AND use_yn = 'Y'
-		AND task_se_cd = 'PP'
-		AND lang_se_cd = 'ko'
     </select>
 </mapper>

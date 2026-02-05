@@ -1,4 +1,4 @@
-package kr.go.kids.domain.dshstyDclr.vo;
+package kr.go.kids.domain.dclr.vo;
 
 import java.math.BigInteger;
 

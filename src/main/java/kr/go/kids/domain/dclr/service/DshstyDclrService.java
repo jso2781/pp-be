@@ -1,6 +1,6 @@
-package kr.go.kids.domain.dshstyDclr.service;
+package kr.go.kids.domain.dclr.service;
 
-import kr.go.kids.domain.dshstyDclr.vo.DshstyDclrPVO;
+import kr.go.kids.domain.dclr.vo.DshstyDclrPVO;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
 public interface DshstyDclrService

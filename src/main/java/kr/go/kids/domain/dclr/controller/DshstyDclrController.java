@@ -1,4 +1,4 @@
-package kr.go.kids.domain.dshstyDclr.controller;
+package kr.go.kids.domain.dclr.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import kr.go.kids.domain.dshstyDclr.service.DshstyDclrService;
-import kr.go.kids.domain.dshstyDclr.vo.DshstyDclrPVO;
+import kr.go.kids.domain.dclr.service.DshstyDclrService;
+import kr.go.kids.domain.dclr.vo.DshstyDclrPVO;
 import kr.go.kids.global.system.common.ApiResultCode;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 
