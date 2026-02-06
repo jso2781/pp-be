@@ -55,7 +55,6 @@
                 FROM kids_own.tb_pp_m_exprt_info ex
                 WHERE mbr.mbr_no = ex.mbr_no
                 AND ex.exprt_hdof_yn = 'Y'
-                AND ex.aprv_stts_cd = 'A'
              ) as expert_yn
         FROM kids_own.tb_pp_m_mbr_info mbr
         WHERE 1=1

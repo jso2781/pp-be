@@ -23,7 +23,7 @@ public class ExprtTaskController
 
     @Operation(summary = "대국민포털_전문가내업무관리 내 업무 조회", description = "대국민포털_전문가내업무관리 전문가 회원의 업무 신청 정보를 조회한다.")
     @PostMapping(value = "/info")
-    public ResponseEntity<ApiPrnDto> existsInstByBrno(@RequestBody ExprtTaskPVO exprtTaskPVO) {
+    public ResponseEntity<ApiPrnDto> selectExprtInfo(@RequestBody ExprtTaskPVO exprtTaskPVO) {
         ApiPrnDto apiPrnDto = exprtTaskService.selectExprtInfo(exprtTaskPVO);
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);

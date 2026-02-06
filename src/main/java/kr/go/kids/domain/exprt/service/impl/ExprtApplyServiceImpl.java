@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import kr.go.kids.domain.exprt.mapper.ExprtTaskMapper;
+import kr.go.kids.domain.exprt.vo.ExprtTaskPVO;
+import kr.go.kids.domain.exprt.vo.ExprtTaskRVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ExprtApplyServiceImpl implements ExprtApplyService {
     private final ExprtApplyMapper exprtApplyMapper;
+    private final ExprtTaskMapper exprtTaskMapper;
 
     @Override
     public ApiPrnDto existsInstByBrno(ExprtApplyIVO exprtApplyIVO) {
@@ -41,9 +45,19 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
         data.put("instNm", instNm);
 
         if (StringUtils.isNotBlank(instNm)) {
-            // FIXME 공통코드 관련 DB 구조 확정 시 Mapper 쿼리 수정 필요
             List<ExprtApplyRVO> taskSystemList = exprtApplyMapper.selectInstTaskSystemByBrno(brno);
-            data.put("taskSystemList", taskSystemList);            
+            data.put("taskSystemList", taskSystemList);
+
+            // 중복신청 방지, 재신청 프로세스 허용
+            ExprtTaskPVO exprtTaskPVO = new ExprtTaskPVO();
+            exprtTaskPVO.setMbrNo(exprtApplyIVO.getMbrNo());
+            ExprtTaskRVO info = exprtTaskMapper.selectExprtInfo(exprtTaskPVO);
+
+            if (info == null || "R".equals(info.getExprtAprvSttsCode())) {
+                data.put("nextStepYn", true);
+            } else {
+                data.put("nextStepYn", false);
+            }
         } else {
             data.put("taskSystemList", new ArrayList<ExprtApplyRVO>());
         }

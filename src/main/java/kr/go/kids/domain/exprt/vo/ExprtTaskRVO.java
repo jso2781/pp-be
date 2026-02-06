@@ -40,22 +40,40 @@ public class ExprtTaskRVO extends ExprtApplyRVO
     private String instNm;
 
     /**
-     * 전문가승인상태여부
+     * 전문가 승인상태코드
      */
-    @Schema(description = "전문가승인상태여부", type = "String")
-    private String exprtAprvSttsYn;
+    @Schema(description = "전문가 승인상태코드", type = "String")
+    private String exprtAprvSttsCode;
 
     /**
-     * 사용여부
+     * 전문가 승인상태코드라벨
      */
-    @Schema(description = "사용여부", type = "String")
-    private String useYn;
+    @Schema(description = "전문가 승인상태코드라벨", type = "String")
+    private String exprtAprvSttsLabel;
 
     /**
      * 전문가업무일련번호
      */
     @Schema(description = "전문가업무일련번호", type = "Long")
     private Long exprtTaskSn;
+
+    /**
+     * 업무시스템 승인상태코드
+     */
+    @Schema(description = "업무시스템 승인상태코드", type = "String")
+    private String taskAprvSttsCode;
+
+    /**
+     * 업무시스템 승인상태코드라벨
+     */
+    @Schema(description = "업무시스템 승인상태코드라벨", type = "String")
+    private String taskAprvSttsLabel;
+
+    /**
+     * 사업자등록번호
+     */
+    @Schema(description = "사업자등록번호", type = "String")
+    private String brno;
 
     /**
      * 사업자업무관리번호

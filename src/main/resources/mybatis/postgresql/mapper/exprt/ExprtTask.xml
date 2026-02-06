@@ -5,17 +5,22 @@
     <select id="selectExprtInfo" parameterType="ExprtTaskPVO" resultType="ExprtTaskRVO" >
         /* 대국민포털_전문가내업무관리 전문가회원 정보 조회 (ExprtTaskMapper.selectExprtInfo) */
         SELECT ei.encpt_exprt_flnm
-             , ei.aprv_stts_cd
+             , ei.aprv_stts_cd AS exprt_aprv_stts_code
+             , (SELECT com_dtl_cd_nm
+                FROM kids_own.TB_CA_C_DTL_CODE
+                WHERE com_group_cd = 'PP4'
+                  AND com_dtl_cd = ei.aprv_stts_cd) AS exprt_aprv_stts_label
              , ei.rjct_rsn
              , ei.exprt_no
              , ei.mbr_no
              , ii.inst_nm
+             , ii.brno
            -- 마지막 접속일시 추후 적용
          FROM kids_own.TB_PP_M_EXPRT_INFO ei
             , kids_own.TB_PP_M_INST ii
-        WHERE ei.brno = ii.brno
-          AND ei.mbr_no = #{mbrNo}
+        WHERE ei.mbr_no = #{mbrNo}
           AND ii.del_yn = 'N'
+          AND ei.brno = ii.brno
     </select>
 
     <select id="selectExprtTasks" parameterType="ExprtTaskPVO" resultType="ExprtTaskRVO" >
@@ -25,7 +30,11 @@
                   FROM kids_own.TB_CA_C_DTL_CODE
                  WHERE com_group_cd = 'PP13'
                    AND com_dtl_cd = it.task_se_cd) AS label
-             , et.aprv_stts_cd
+             , et.aprv_stts_cd AS task_aprv_stts_code
+             , (SELECT com_dtl_cd_nm
+                FROM kids_own.TB_CA_C_DTL_CODE
+                WHERE com_group_cd = 'PP4'
+                  AND com_dtl_cd = et.aprv_stts_cd) AS task_aprv_stts_label
              , et.rjct_rsn
              , et.exprt_task_sn
              , it.bzmn_task_mng_no

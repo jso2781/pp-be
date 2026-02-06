@@ -26,6 +26,11 @@ public class ExprtTaskServiceImpl implements ExprtTaskService {
         ExprtTaskRVO info = exprtTaskMapper.selectExprtInfo(exprtTaskPVO);
         data.put("info", info);
 
+        if (info != null) {
+            exprtTaskPVO.setBrno(info.getBrno());
+            exprtTaskPVO.setExprtNo(info.getExprtNo());
+        }
+
         List<ExprtTaskRVO> tasks = exprtTaskMapper.selectExprtTasks(exprtTaskPVO);
         data.put("task", tasks);
 
@@ -68,6 +73,9 @@ public class ExprtTaskServiceImpl implements ExprtTaskService {
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         HashMap<String, Object> data = new HashMap<>();
 
+        if (exprtTaskPVO.getExprtTaskSn() != null && exprtTaskPVO.getExprtTaskSn() > 0) {
+            exprtTaskMapper.deleteExprtTask(exprtTaskPVO);
+        }
         exprtTaskMapper.insertExprtTask(exprtTaskPVO);
 
         data.put("result", "SUCCESS");
