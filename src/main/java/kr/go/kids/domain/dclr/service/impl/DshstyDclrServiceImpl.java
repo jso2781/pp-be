@@ -1,5 +1,6 @@
 package kr.go.kids.domain.dclr.service.impl;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 
@@ -51,9 +52,9 @@ public class DshstyDclrServiceImpl implements DshstyDclrService
 
             HashMap<String, Object> params = new HashMap<String, Object>();
             
-//            long nextDclrSn = opnnMapper.nextDclrSn();
+            long nextDclrSn = dshstyDclrMapper.nextDclrSn();
 
-//            dshstyDclrPVO.setDclrSn(BigInteger.valueOf(nextDclrSn));
+            dshstyDclrPVO.setDclrSn(BigInteger.valueOf(nextDclrSn));
             
             dshstyDclrMapper.insertDshstyDclr(dshstyDclrPVO);
             

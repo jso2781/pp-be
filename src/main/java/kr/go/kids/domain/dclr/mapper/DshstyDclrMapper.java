@@ -26,5 +26,5 @@ public interface DshstyDclrMapper
      */
     public int insertDshstyDclr(DshstyDclrPVO dshstyDclrPVO);
 
-//    public long nextDclrSn();
+    public long nextDclrSn();
 }

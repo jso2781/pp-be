@@ -2,11 +2,60 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.go.kids.domain.dclr.mapper.DshstyDclrMapper">
 
+    <select id="nextDclrSn" resultType="long">
+		SELECT nextval('kids_own.sq_pp_dclr_sn')
+    </select>
+
     <select id="selectDshstyDclrList" parameterType="DshstyDclrPVO" resultType="DshstyDclrRVO" >
         /* 대국민포털_부정신고 목록 조회 (DshstyDclrMapper.selectDshstyDclrList) */
         SELECT
-			dclr_sn
+			*
         FROM kids_own.TB_PP_M_DSHSTY_DCLR
         WHERE 1=1
     </select>
+    
+    <insert id="insertDshstyDclr" parameterType="DshstyDclrPVO">
+	    /* 대국민포털_부정신고 입력 (DshstyDclrMapper.insertDshstyDclr) */
+	    INSERT INTO kids_own.TB_PP_M_DSHSTY_DCLR
+		(
+		    dclr_sn
+			,encpt_mbr_flnm
+			,encpt_mbr_telno
+			,encpt_mbr_eml_nm
+			,dclr_ttl_nm
+			,dshsty_actr_flnm
+			,dshsty_act_pip_cn
+			,dshsty_act_plc_cn
+			,dshsty_act_cn
+			,add_idntf_idfr_nm
+			,dclr_cn_idnty_mthd_cn
+			,dshsty_act_idntf_rsn_cn
+			,dshsty_act_prd_cn
+			,rgtr_id
+			,reg_dt
+			,mdfr_id
+			,mdfcn_dt
+		)
+		VALUES
+		(
+		     #{dclrSn}
+		    ,#{encptMbrFlnm}
+		    ,#{encptMbrTelno}
+		    ,#{encptMbrEmlNm}
+		    ,#{dclrTtlNm}
+		    ,#{dshstyActrFlnm}
+		    ,#{dshstyActPipCn}
+		    ,#{dshstyActPlcCn}
+		    ,#{dshstyActCn}
+		    ,#{addIdntfIdfrNm}
+		    ,#{dclrCnIdntyMthdCn}
+		    ,#{dshstyActIdntfRsnCn}
+		    ,#{dshstyActPrdCn}
+			  ,NULL
+			  ,now()
+			  ,NULL
+			  ,now()
+		)
+			    
+    </insert>
 </mapper>
