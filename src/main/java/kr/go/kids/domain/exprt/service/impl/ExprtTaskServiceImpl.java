@@ -1,5 +1,6 @@
 package kr.go.kids.domain.exprt.service.impl;
 
+import kr.go.kids.domain.auth.vo.MenuRVO;
 import kr.go.kids.domain.exprt.mapper.ExprtTaskMapper;
 import kr.go.kids.domain.exprt.service.ExprtTaskService;
 import kr.go.kids.domain.exprt.vo.ExprtTaskPVO;
@@ -79,6 +80,18 @@ public class ExprtTaskServiceImpl implements ExprtTaskService {
         exprtTaskMapper.insertExprtTask(exprtTaskPVO);
 
         data.put("result", "SUCCESS");
+
+        result.setData(data);
+        return result;
+    }
+
+    @Override
+    public ApiPrnDto selectExprtMenus(ExprtTaskPVO exprtTaskPVO) {
+        ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
+        HashMap<String, Object> data = new HashMap<>();
+
+        List<MenuRVO> exprtMenus = exprtTaskMapper.selectExprtMenus(exprtTaskPVO.getMbrNo());
+        data.put("exprtMenus", exprtMenus);
 
         result.setData(data);
         return result;

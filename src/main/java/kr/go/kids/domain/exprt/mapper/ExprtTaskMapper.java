@@ -1,5 +1,6 @@
 package kr.go.kids.domain.exprt.mapper;
 
+import kr.go.kids.domain.auth.vo.MenuRVO;
 import kr.go.kids.domain.exprt.vo.ExprtTaskPVO;
 import kr.go.kids.domain.exprt.vo.ExprtTaskRVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -56,4 +57,12 @@ public interface ExprtTaskMapper
      * @return 등록건수
      */
     int insertExprtTask(ExprtTaskPVO exprtTaskPVO);
+
+    /**
+     * 대국민포털_전문가내업무관리 업무시스템에 해당하는 메뉴 목록 조회
+     *
+     * @param mbrNo 회원번호
+     * @return 승인된 업무시스템에 대한 메뉴 목록
+     */
+    List<MenuRVO> selectExprtMenus(String mbrNo);
 }

@@ -52,4 +52,12 @@ public class ExprtTaskController
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
+
+    @Operation(summary = "대국민포털_전문가내업무관리 업무시스템에 해당하는 메뉴 목록 조회", description = "대국민포털_전문가내업무관리 업무시스템에 해당하는 메뉴 목록을 조회한다.")
+    @PostMapping(value = "/menus")
+    public ResponseEntity<ApiPrnDto> selectExprtMenus(@RequestBody ExprtTaskPVO exprtTaskPVO) {
+        ApiPrnDto apiPrnDto = exprtTaskService.selectExprtMenus(exprtTaskPVO);
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
+    }
 }

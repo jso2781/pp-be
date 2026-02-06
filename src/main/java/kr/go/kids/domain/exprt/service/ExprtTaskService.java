@@ -36,4 +36,12 @@ public interface ExprtTaskService
      * @return 성공여부
      */
     ApiPrnDto applyExprtTask(ExprtTaskPVO exprtTaskPVO);
+
+    /**
+     * 대국민포털_전문가내업무관리 업무시스템에 해당하는 메뉴 목록 조회
+     *
+     * @param exprtTaskPVO 파라메터 정보
+     * @return 메뉴 목록
+     */
+    ApiPrnDto selectExprtMenus(ExprtTaskPVO exprtTaskPVO);
 }
