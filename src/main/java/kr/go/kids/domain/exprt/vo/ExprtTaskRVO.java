@@ -80,4 +80,10 @@ public class ExprtTaskRVO extends ExprtApplyRVO
      */
     @Schema(description = "사업자업무관리번호", type = "String")
     private String bzmnTaskMngNo;
+
+    /**
+     * 최근 로그인 일시
+     */
+    @Schema(description = "최근 로그인 일시", type = "String")
+    private String lastLgnDt;
 }

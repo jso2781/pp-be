@@ -15,7 +15,9 @@
              , ei.mbr_no
              , ii.inst_nm
              , ii.brno
-           -- 마지막 접속일시 추후 적용
+             , (SELECT date_trunc('second', MAX(reg_dt))
+                  FROM kids_own.tb_ca_l_sesn_log_info_mng
+                 WHERE srvc_user_id = ei.rgtr_id) AS last_lgn_dt
          FROM kids_own.TB_PP_M_EXPRT_INFO ei
             , kids_own.TB_PP_M_INST ii
         WHERE ei.mbr_no = #{mbrNo}
