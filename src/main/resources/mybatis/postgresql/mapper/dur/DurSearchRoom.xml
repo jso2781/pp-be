@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.dur.mapper.DurSearchRoomMapper">
+
+    <select id="selectDurSearchRoom" parameterType="DurSearchRoomPVO" resultType="DurSearchRoomRVO" >
+        /* 대국민포털_DUR병용금기기본 */
+        SELECT
+                 prdct_nm_1 as prdct_nm                         /* 검색한 제품명 */
+                ,igrd_nm_1 as igrd_nm                           /* 검색한 제품의 성분 */
+                ,igrd_nm_2 as prohibit_igrd_nm                  /* 병용금기 성분 */
+                ,null as rlvt_age
+                ,null as rlvt_age_unit_nm
+                ,null as age_prcs_cnd_nm
+                ,null as condi_grd_cd
+                ,null as day_max_admin_cpct
+                ,null as max_admin_prd_day_cnt
+                ,null as eff_group_nm
+                ,null as item_nm
+                ,condi_rsn as dtl_info_cn                       /* 상세정보 */
+                ,rmrk_cn                                        /* 비고 */
+        FROM kids_own.tb_pp_m_dur_conc_bann
+        WHERE oper_stts_cd = 'O' AND (igrd_nm_1 like '%' || #{igrdNm} || '%' OR prdct_nm_1 like '%' || #{prdctNm} || '%')
+        UNION ALL
+        SELECT
+                 prdct_nm_2 as prdct_nm                         /* 검색한 제품명 */
+                ,igrd_nm_2 as igrd_nm                           /* 검색한 제품의 성분 */
+                ,igrd_nm_1 as prohibit_igrd_nm                  /* 병용금기 성분 */
+                ,null as rlvt_age
+                ,null as rlvt_age_unit_nm
+                ,null as age_prcs_cnd_nm
+                ,null as condi_grd_cd
+                ,null as day_max_admin_cpct
+                ,null as max_admin_prd_day_cnt
+                ,null as eff_group_nm
+                ,null as item_nm
+                ,condi_rsn as dtl_info_cn                       /* 상세정보 */
+                ,rmrk_cn                                        /* 비고 */
+        FROM kids_own.tb_pp_m_dur_conc_bann
+        WHERE oper_stts_cd = 'O' AND (igrd_nm_2 like '%' || #{igrdNm} || '%' OR prdct_nm_2 like '%' || #{prdctNm} || '%')
+        UNION ALL
+        /* 대국민포털_DUR연령금기기본 */
+        SELECT
+                 prdct_nm                                       /* 검색한 제품명 */
+                ,igrd_nm                                        /* 검색한 제품의 성분 */
+                ,null as prohibit_igrd_nm
+                ,rlvt_age::varchar                              /* 해당 연령 */ 
+                ,rlvt_age_unit_nm                               /* 해당 연령 단위명 */
+                ,age_prcs_cnd_nm                                /* 연령처리조건명 */
+                ,null as condi_grd_cd
+                ,null as day_max_admin_cpct
+                ,null as max_admin_prd_day_cnt
+                ,null as eff_group_nm
+                ,null as item_nm
+                ,dtl_info_cn                                    /* 상세정보 */
+                ,null as rmrk_cn
+        FROM kids_own.tb_pp_m_dur_age_bann
+        WHERE oper_stts_cd = 'O' AND (igrd_nm like '%' || #{igrdNm} || '%' OR prdct_nm like '%' || #{prdctNm} || '%')
+        UNION ALL
+        /* 대국민포털_DUR임부금기기본 */
+        SELECT
+                 prdct_nm                                       /* 검색한 제품명 */
+                ,igrd_nm                                        /* 검색한 제품의 성분 */
+                ,null as prohibit_igrd_nm
+                ,null as rlvt_age
+                ,null as rlvt_age_unit_nm
+                ,null as age_prcs_cnd_nm
+                ,condi_grd_cd                                   /* 금기등급코드 */
+                ,null as day_max_admin_cpct
+                ,null as max_admin_prd_day_cnt
+                ,null as eff_group_nm
+                ,null as item_nm
+                ,dtl_info_cn                                    /* 상세정보 */
+                ,null as rmrk_cn
+        FROM kids_own.tb_pp_m_dur_prgnt_bann
+        WHERE oper_stts_cd = 'O' AND (igrd_nm like '%' || #{igrdNm} || '%' OR prdct_nm like '%' || #{prdctNm} || '%')
+        UNION ALL
+        /* 대국민포털_DUR용량주의기본 */
+        SELECT
+                 mdcn_nm as prdct_nm                            /* 검색한 제품명 */
+                ,gnrl_nm as igrd_nm                             /* 검색한 제품의 성분 */
+                ,null as prohibit_igrd_nm
+                ,null as rlvt_age
+                ,null as rlvt_age_unit_nm
+                ,null as age_prcs_cnd_nm
+                ,null as condi_grd_cd
+                ,day_max_admin_cpct_cn || ' ' || day_max_admin_crtr_cpct as day_max_admin_cpct        /* 1일 최대용량 */
+                ,null as max_admin_prd_day_cnt
+                ,null as eff_group_nm
+                ,null as item_nm
+                ,dtl_cn as dtl_info_cn                          /* 상세정보(비고 대체) */
+                ,null as rmrk_cn
+        FROM kids_own.tb_pp_m_dur_cpct
+        WHERE oper_stts_cd = 'O' AND ((mdcn_nm like '%' || #{igrdNm} || '%' OR mfds_igrd_nm_cn like '%' || #{igrdNm} || '%') OR (gnrl_nm like '%' || #{prdctNm} || '%' OR mfds_prdct_nm like '%' || #{prdctNm} || '%'))
+        UNION ALL
+        /* 대국민포털_DUR투여기간주의기본 */
+        SELECT
+                 mdcn_nm as prdct_nm                            /* 검색한 제품명 */
+                ,gnrl_nm as igrd_nm                             /* 검색한 제품의 성분 */
+                ,null as prohibit_igrd_nm
+                ,null as rlvt_age
+                ,null as rlvt_age_unit_nm
+                ,null as age_prcs_cnd_nm
+                ,null as condi_grd_cd
+                ,null as day_max_admin_cpct
+                ,max_admin_prd_day_cnt::varchar                 /* 최대투여기간(일) */
+                ,null as eff_group_nm
+                ,null as item_nm
+                ,null as dtl_info_cn
+                ,rmrk_cn                                        /* 비고 */
+        FROM kids_own.tb_pp_m_dur_dosage
+        WHERE oper_stts_cd = 'O' AND ((gnrl_nm like '%' || #{prdctNm} || '%' OR mfds_prdct_nm like '%' || #{prdctNm} || '%') OR (mdcn_nm like '%' || #{igrdNm} || '%' OR mfds_igrd_nm_cn like '%' || #{igrdNm} || '%'))
+        UNION ALL
+        /* 대국민포털_DUR효능군중복기본 */
+        SELECT
+                 item_nm  as prdct_nm                           /* 검색한 제품명 */
+                ,gnrl_nm as igrd_nm                             /* 검색한 제품의 성분 */
+                ,null as prohibit_igrd_nm
+                ,null as rlvt_age
+                ,null as rlvt_age_unit_nm
+                ,null as age_prcs_cnd_nm
+                ,null as condi_grd_cd
+                ,null as day_max_admin_cpct
+                ,null as max_admin_prd_day_cnt
+                ,eff_group_nm                                   /* 효능그룹명 */
+                ,item_nm                                        /* 품목명(계열) */
+                ,null as dtl_info_cn
+                ,null as rmrk_cn
+        FROM kids_own.tb_pp_m_dur_eftgrp
+        WHERE oper_stts_cd = 'O' AND ((gnrl_nm like '%' || #{prdctNm} || '%' OR mfds_prdct_nm like '%' || #{prdctNm} || '%') OR (item_nm like '%' || #{igrdNm} || '%' OR mfds_igrd_nm_cn like '%' || #{igrdNm} || '%'))
+        UNION ALL
+        /* 대국민포털_DUR노인주의기본 */
+        SELECT
+                 prdct_nm                                       /* 검색한 제품명 */
+                ,igrd_nm                                        /* 검색한 제품의 성분 */
+                ,null as prohibit_igrd_nm
+                ,null as rlvt_age
+                ,null as rlvt_age_unit_nm
+                ,null as age_prcs_cnd_nm
+                ,null as condi_grd_cd
+                ,null as day_max_admin_cpct
+                ,null as max_admin_prd_day_cnt
+                ,null as eff_group_nm
+                ,null as item_nm
+                ,null as dtl_info_cn
+                ,rmrk_cn                                        /* 비고 */
+        FROM kids_own.tb_pp_m_dur_snctz
+        WHERE oper_stts_cd = 'O' AND (prdct_nm like '%' || #{prdctNm} || '%' OR igrd_nm like '%' || #{igrdNm} || '%')
+        UNION ALL
+        /* 대국민포털_DUR수유부주의기본 */
+        SELECT
+                 prdct_nm                                       /* 검색한 제품명 */
+                ,igrd_nm                                        /* 검색한 제품의 성분 */
+                ,null as prohibit_igrd_nm
+                ,null as rlvt_age
+                ,null as rlvt_age_unit_nm
+                ,null as age_prcs_cnd_nm
+                ,null as condi_grd_cd
+                ,null as day_max_admin_cpct
+                ,null as max_admin_prd_day_cnt
+                ,null as eff_group_nm
+                ,null as item_nm
+                ,null as dtl_info_cn
+                ,rmrk_cn                                        /* 비고 */
+        FROM kids_own.tb_pp_m_dur_nursw
+        WHERE oper_stts_cd = 'O' AND (prdct_nm like '%' || #{prdctNm} || '%' OR igrd_nm like '%' || #{igrdNm} || '%')
+    </select>
+</mapper>
