@@ -43,6 +43,22 @@ public interface ExprtTaskMapper
     int deleteExprtTask(ExprtTaskPVO exprtTaskPVO);
 
     /**
+     * 대국민포털_전문가내업무관리 전문가회원 권한 전체 삭제
+     *
+     * @param exprtTaskPVO 삭제 파라메터 정보
+     * @return 삭제건수
+     */
+    int deleteAllExprtAuth(ExprtTaskPVO exprtTaskPVO);
+
+    /**
+     * 대국민포털_전문가내업무관리 전문가회원 권한 삭제
+     *
+     * @param exprtTaskPVO 삭제 파라메터 정보
+     * @return 삭제건수
+     */
+    int deleteExprtAuth(ExprtTaskPVO exprtTaskPVO);
+
+    /**
      * 대국민포털_전문가내업무관리 전문가회원 정보 삭제
      *
      * @param exprtTaskPVO 삭제 파라메터 정보

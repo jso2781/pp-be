@@ -45,6 +45,7 @@ public class ExprtTaskServiceImpl implements ExprtTaskService {
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         HashMap<String, Object> data = new HashMap<>();
 
+        exprtTaskMapper.deleteAllExprtAuth(exprtTaskPVO);
         exprtTaskMapper.deleteAllExprtTask(exprtTaskPVO);
         exprtTaskMapper.deleteExprtInfo(exprtTaskPVO);
 
@@ -61,6 +62,7 @@ public class ExprtTaskServiceImpl implements ExprtTaskService {
         HashMap<String, Object> data = new HashMap<>();
 
         exprtTaskMapper.deleteExprtTask(exprtTaskPVO);
+        exprtTaskMapper.deleteExprtAuth(exprtTaskPVO);
 
         data.put("result", "SUCCESS");
 
