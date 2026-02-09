@@ -8,7 +8,7 @@
              , ei.aprv_stts_cd AS exprt_aprv_stts_code
              , (SELECT com_dtl_cd_nm
                 FROM kids_own.TB_CA_C_DTL_CODE
-                WHERE com_group_cd = 'PP4'
+                WHERE com_group_cd = 'PP000004'
                   AND com_dtl_cd = ei.aprv_stts_cd) AS exprt_aprv_stts_label
              , ei.rjct_rsn
              , ei.exprt_no
@@ -30,12 +30,12 @@
         SELECT it.task_se_cd AS value
              , (SELECT com_dtl_cd_nm
                   FROM kids_own.TB_CA_C_DTL_CODE
-                 WHERE com_group_cd = 'PP13'
+                 WHERE com_group_cd = 'PP000013'
                    AND com_dtl_cd = it.task_se_cd) AS label
              , et.aprv_stts_cd AS task_aprv_stts_code
              , (SELECT com_dtl_cd_nm
                 FROM kids_own.TB_CA_C_DTL_CODE
-                WHERE com_group_cd = 'PP4'
+                WHERE com_group_cd = 'PP000004'
                   AND com_dtl_cd = et.aprv_stts_cd) AS task_aprv_stts_label
              , et.rjct_rsn
              , et.exprt_task_sn

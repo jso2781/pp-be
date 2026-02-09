@@ -14,7 +14,7 @@
         SELECT t.task_se_cd AS value
              , (SELECT com_dtl_cd_nm
                   FROM kids_own.TB_CA_C_DTL_CODE
-                 WHERE com_group_cd = 'PP13'
+                 WHERE com_group_cd = 'PP000013'
                    AND com_dtl_cd = t.task_se_cd) AS label
           FROM kids_own.TB_PP_M_INST_TASK t
          WHERE t.brno = #{brno}
