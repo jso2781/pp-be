@@ -39,6 +39,7 @@
     <select id="selectExprtApproval" parameterType="ExprtApprovalPVO" resultType="ExprtApprovalRVO" >
         /* 대국민포털_전문가업무신청관리 소속 전문가 회원 상세 조회 (ExprtApprovalMapper.selectExprtApproval) */
         SELECT mi.mbr_id
+             , mi.mbr_no
              , mi.encpt_mbr_flnm AS name
              , mi.encpt_mbr_telno AS telNo
              , ei.encpt_exprt_inst_eml_nm AS instEmlNm
@@ -76,6 +77,28 @@
           AND ei.mbr_no = mi.mbr_no
     </select>
 
+    <select id="selectTaskAuthList" parameterType="String" resultType="ExprtApprovalAuthRVO" >
+        /* 대국민포털_전문가업무신청관리 업무시스템 권한 목록 조회 (ExprtApprovalMapper.selectTaskAuthList) */
+        SELECT authrt_cd
+             , authrt_nm
+          FROM kids_own.tb_pp_m_authrt
+         WHERE task_se_cd = #{taskSeCd}
+           AND use_yn = 'Y'
+         ORDER BY reg_dt
+    </select>
+
+    <select id="selectExprtTaskAuthList" parameterType="Long" resultType="ExprtApprovalAuthRVO" >
+        /* 대국민포털_전문가업무신청관리 전문가 업무시스템 권한 목록 조회 (ExprtApprovalMapper.selectExprtTaskAuthList) */
+        SELECT a.authrt_cd
+             , a.authrt_nm
+          FROM kids_own.tb_pp_m_exprt_authrt ea
+             , kids_own.tb_pp_m_authrt a
+         WHERE ea.exprt_task_sn = #{exprtTaskSn}
+           AND a.use_yn = 'Y'
+           AND ea.authrt_cd = a.authrt_cd
+         ORDER BY a.reg_dt
+    </select>
+
     <update id="updateExprtApproval" parameterType="ExprtApprovalUVO">
         /* 대국민포털_전문가업무신청관리 소속 전문가 회원 전환 신청 승인 상태 업데이트 (ExprtApprovalMapper.updateExprtApproval) */
        UPDATE kids_own.TB_PP_M_EXPRT_INFO
@@ -95,7 +118,38 @@
             , aprv_prcs_dt = CURRENT_TIMESTAMP
             , mdfr_id = #{mbrId}
             , mdfcn_dt = CURRENT_TIMESTAMP
-        WHERE exprt_no = #{exprtNo}
+        WHERE exprt_task_sn = #{exprtTaskSn}
     </update>
+
+    <insert id="insertExprtTaskAuth" parameterType="ExprtApprovalUVO">
+        /* 대국민포털_전문가업무신청관리 전문가 업무시스템 권한 추가 (ExprtApprovalMapper.insertExprtTaskAuth) */
+        INSERT INTO kids_own.tb_pp_m_exprt_authrt
+        (
+             mbr_no
+            , exprt_task_sn
+            , authrt_cd
+            , rgtr_id
+            , reg_dt
+            , mdfr_id
+            , mdfcn_dt
+        )
+        VALUES
+        (
+              #{mbrNo}
+            , #{exprtTaskSn}
+            , #{authrtCd}
+            , #{mbrId}
+            , CURRENT_TIMESTAMP
+            , #{mbrId}
+            , CURRENT_TIMESTAMP
+        )
+    </insert>
+
+    <delete id="deleteExprtTaskAuth" parameterType="ExprtApprovalUVO">
+        /* 대국민포털_전문가업무신청관리 전문가 업무시스템 권한 삭제 (ExprtApprovalMapper.deleteExprtTaskAuth) */
+        DELETE FROM kids_own.tb_pp_m_exprt_authrt
+        WHERE exprt_task_sn = #{exprtTaskSn}
+          AND authrt_cd = #{authrtCd}
+    </delete>
 
 </mapper>

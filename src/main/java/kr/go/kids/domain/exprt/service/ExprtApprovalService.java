@@ -23,6 +23,14 @@ public interface ExprtApprovalService {
     ApiPrnDto selectExprtApproval(ExprtApprovalPVO exprtApprovalPVO);
 
     /**
+     * 대국민포털_전문가업무신청관리 업무시스템 권한 목록 조회
+     *
+     * @param exprtApprovalPVO 파라메터 정보
+     * @return 업무시스템 권한 목록
+     */
+    ApiPrnDto selectTaskAuthList(ExprtApprovalPVO exprtApprovalPVO);
+
+    /**
      * 대국민포털_전문가업무신청관리 소속 전문가 회원 승인 상태 업데이트
      *
      * @param exprtApprovalPVO 파라메터 정보

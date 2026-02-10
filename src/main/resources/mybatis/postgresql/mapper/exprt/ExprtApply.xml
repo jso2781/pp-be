@@ -27,6 +27,7 @@
 		    SELECT 1
 		      FROM kids_own.TB_PP_M_EXPRT_INFO
 		     WHERE encpt_exprt_inst_eml_nm = #{email}
+		       AND aprv_stts_cd IN ('W', 'A')
 		)
     </select>
 

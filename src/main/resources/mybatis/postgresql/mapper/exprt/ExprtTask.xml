@@ -20,7 +20,11 @@
                  WHERE srvc_user_id = ei.rgtr_id) AS last_lgn_dt
          FROM kids_own.TB_PP_M_EXPRT_INFO ei
             , kids_own.TB_PP_M_INST ii
-        WHERE ei.mbr_no = #{mbrNo}
+        WHERE ei.exprt_no = (SELECT exprt_no
+                               FROM kids_own.TB_PP_M_EXPRT_INFO
+                              WHERE mbr_no = #{mbrNo}
+                              ORDER BY reg_dt DESC
+                              LIMIT 1)
           AND ii.del_yn = 'N'
           AND ei.brno = ii.brno
     </select>

@@ -33,4 +33,10 @@ public class ExprtApprovalPVO extends PageRequestDto{
      */
     @Schema(description = "검색어", type = "String")
     private String searchWrd;
+
+    /**
+     * 업무구분코드
+     */
+    @Schema(description = "업무구분코드", type = "String")
+    private String taskSeCd;
 }
