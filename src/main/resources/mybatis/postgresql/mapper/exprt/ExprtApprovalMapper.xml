@@ -11,8 +11,8 @@
                  WHERE com_group_cd = 'PP000013'
                    AND com_dtl_cd = it.task_se_cd) AS label
              , ei.atch_file_group_id
-             , et.reg_dt AS task_apply_reg_dt
-             , et.aprv_prcs_dt AS task_aprv_prcs_dt
+             , date_trunc('second', et.reg_dt) AS task_apply_reg_dt
+             , date_trunc('second', et.aprv_prcs_dt) AS task_aprv_prcs_dt
              , et.aprv_stts_cd AS task_aprv_stts_code
              , (SELECT com_dtl_cd_nm
                   FROM kids_own.TB_CA_C_DTL_CODE
@@ -22,12 +22,18 @@
           FROM kids_own.TB_PP_M_INST_TASK it
              , kids_own.TB_PP_M_EXPRT_TASK et
              , kids_own.TB_PP_M_EXPRT_INFO ei
-         WHERE it.tkcg_exprt_no = (SELECT exprt_no
+         WHERE it.tkcg_exprt_no = (SELECT MAX(exprt_no)
                                      FROM kids_own.TB_PP_M_EXPRT_INFO
-                                    WHERE mbr_no = #{mbrNo})
+                                    WHERE mbr_no = #{mbrNo}
+                                      AND aprv_stts_cd = 'A')
            AND it.use_yn = 'Y'
            AND it.bzmn_task_mng_no = et.bzmn_task_mng_no
            AND et.exprt_no = ei.exprt_no
+           AND ei.encpt_exprt_flnm LIKE '%' || #{searchWrd} || '%'
+        <if test="aprvSttsCode != 'all'">
+           AND et.aprv_stts_cd = #{aprvSttsCode}
+        </if>
+         ORDER BY et.exprt_task_sn DESC
     </select>
 
     <select id="selectExprtApproval" parameterType="ExprtApprovalPVO" resultType="ExprtApprovalRVO" >
@@ -36,7 +42,7 @@
              , mi.encpt_mbr_flnm AS name
              , mi.encpt_mbr_telno AS telNo
              , ei.encpt_exprt_inst_eml_nm AS instEmlNm
-             , et.reg_dt AS task_apply_reg_dt
+             , date_trunc('second', et.reg_dt) AS task_apply_reg_dt
              , ei.exprt_hdof_yn
              , ei.atch_file_group_id
              , ei.aprv_stts_cd AS exprt_aprv_stts_code
@@ -45,7 +51,7 @@
                 WHERE com_group_cd = 'PP000004'
                   AND com_dtl_cd = ei.aprv_stts_cd) AS exprt_aprv_stts_label
              , ei.rjct_rsn AS exprt_rjct_rsn
-             , ei.aprv_prcs_dt AS exprt_aprv_prcs_dt
+             , date_trunc('second', ei.aprv_prcs_dt) AS exprt_aprv_prcs_dt
              , it.task_se_cd AS value
              , (SELECT com_dtl_cd_nm
                   FROM kids_own.TB_CA_C_DTL_CODE
@@ -57,7 +63,9 @@
                 WHERE com_group_cd = 'PP000004'
                   AND com_dtl_cd = et.aprv_stts_cd) AS task_aprv_stts_label
 			 , et.rjct_rsn AS task_rjct_rsn
-			 , et.aprv_prcs_dt AS task_aprv_prcs_dt
+             , date_trunc('second', et.aprv_prcs_dt) AS task_aprv_prcs_dt
+             , date_trunc('second', ei.reg_dt) AS exprt_info_reg_dt
+             , ei.exprt_no
         FROM kids_own.TB_PP_M_EXPRT_TASK et
                 , kids_own.TB_PP_M_EXPRT_INFO ei
                 , kids_own.TB_PP_M_INST_TASK it
@@ -67,5 +75,27 @@
           AND et.bzmn_task_mng_no = it.bzmn_task_mng_no
           AND ei.mbr_no = mi.mbr_no
     </select>
+
+    <update id="updateExprtApproval" parameterType="ExprtApprovalUVO">
+        /* 대국민포털_전문가업무신청관리 소속 전문가 회원 전환 신청 승인 상태 업데이트 (ExprtApprovalMapper.updateExprtApproval) */
+       UPDATE kids_own.TB_PP_M_EXPRT_INFO
+          SET aprv_stts_cd = #{exprtAprvSttsCode}
+            , rjct_rsn = #{exprtRjctRsn}
+            , aprv_prcs_dt = CURRENT_TIMESTAMP
+            , mdfr_id = #{mbrId}
+            , mdfcn_dt = CURRENT_TIMESTAMP
+        WHERE exprt_no = #{exprtNo}
+    </update>
+
+    <update id="updateExprtTaskApproval" parameterType="ExprtApprovalUVO">
+        /* 대국민포털_전문가업무신청관리 소속 전문가 회원 업무시스템 승인 상태 업데이트 (ExprtApprovalMapper.updateExprtTaskApproval) */
+       UPDATE kids_own.TB_PP_M_EXPRT_TASK
+          SET aprv_stts_cd = #{taskAprvSttsCode}
+            , rjct_rsn = #{taskRjctRsn}
+            , aprv_prcs_dt = CURRENT_TIMESTAMP
+            , mdfr_id = #{mbrId}
+            , mdfcn_dt = CURRENT_TIMESTAMP
+        WHERE exprt_no = #{exprtNo}
+    </update>
 
 </mapper>

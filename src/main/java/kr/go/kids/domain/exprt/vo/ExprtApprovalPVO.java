@@ -21,4 +21,16 @@ public class ExprtApprovalPVO extends PageRequestDto{
      */
     @Schema(description = "전문가업무일련번호", type = "Long")
     private Long exprtTaskSn;
+
+    /**
+     * 승인상태코드
+     */
+    @Schema(description = "승인상태코드", type = "String")
+    private String aprvSttsCode;
+
+    /**
+     * 검색어
+     */
+    @Schema(description = "검색어", type = "String")
+    private String searchWrd;
 }

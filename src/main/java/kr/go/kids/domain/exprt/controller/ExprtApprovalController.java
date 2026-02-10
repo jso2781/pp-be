@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.go.kids.domain.exprt.service.ExprtApprovalService;
 import kr.go.kids.domain.exprt.vo.ExprtApprovalPVO;
+import kr.go.kids.domain.exprt.vo.ExprtApprovalUVO;
 import kr.go.kids.global.system.common.ApiResultCode;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,14 @@ public class ExprtApprovalController {
     @PostMapping(value = "/get")
     public ResponseEntity<ApiPrnDto> selectExprtApproval(@RequestBody ExprtApprovalPVO exprtApprovalPVO) {
         ApiPrnDto apiPrnDto = exprtApprovalService.selectExprtApproval(exprtApprovalPVO);
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
+    }
+
+    @Operation(summary = "대국민포털_전문가업무신청관리 소속 전문가 회원 승인 상태 업데이트", description = "대국민포털_전문가업무신청관리 담당하고 있는 업무 시스템에 사용 신청한 전문가 회원의 승인 상태를 업데이트한다.")
+    @PostMapping(value = "/update")
+    public ResponseEntity<ApiPrnDto> updateExprtApproval(@RequestBody ExprtApprovalUVO exprtApprovalUVO) {
+        ApiPrnDto apiPrnDto = exprtApprovalService.updateExprtApproval(exprtApprovalUVO);
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }

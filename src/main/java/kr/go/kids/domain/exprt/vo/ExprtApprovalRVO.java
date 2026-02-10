@@ -64,6 +64,12 @@ public class ExprtApprovalRVO extends ExprtApplyRVO {
     private String atchFileGroupId;
 
     /**
+     * 전문가 회원 전환 신청일시
+     */
+    @Schema(description = "전문가 회원 전환 신청일시", type = "String")
+    private String exprtInfoRegDt;
+
+    /**
      * 업무시스템 신청일시
      */
     @Schema(description = "업무시스템 신청일시", type = "String")
