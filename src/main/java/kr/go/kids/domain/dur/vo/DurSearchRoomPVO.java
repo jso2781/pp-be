@@ -1,11 +1,14 @@
 package kr.go.kids.domain.dur.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import kr.go.kids.global.system.common.vo.PageRequestDto;
+import lombok.Getter;
+import lombok.Setter;
 
 @Schema(name = "DUR 정보 검색 조회 파라메터", description = "DUR 정보 검색 조회 파라메터 VO")
-@Data
-public class DurSearchRoomPVO {
+@Setter
+@Getter
+public class DurSearchRoomPVO extends PageRequestDto{
 
     /**
      * 제품명

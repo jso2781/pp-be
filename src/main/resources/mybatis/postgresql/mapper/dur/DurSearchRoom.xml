@@ -5,14 +5,14 @@
     <resultMap id="DurSearchRoomMap" type="kr.go.kids.domain.dur.vo.DurSearchRoomRVO">
       <result property="igrdNm" column="igrd_nm"/>
       <result property="prdctNm" column="prdct_nm"/>
-      <result property="concJsonArray" column="conc_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.ConcJsonArrayTypeHandler"/>
-      <result property="ageJsonArray" column="age_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.AgeJsonArrayTypeHandler"/>
-      <result property="prgntJsonArray" column="prgnt_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.PrgntJsonArrayTypeHandler"/>
-      <result property="cpctJsonArray" column="cpct_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.CpctJsonArrayTypeHandler"/>
-      <result property="dosageJsonArray" column="dosage_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.DosageJsonArrayTypeHandler"/>
-      <result property="eftgrpJsonArray" column="eftgrp_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.EftgrpJsonArrayTypeHandler"/>
-      <result property="snctzJsonArray" column="snctz_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.SnctzJsonArrayTypeHandler"/>
-      <result property="nurswJsonArray" column="nursw_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.NurswJsonArrayTypeHandler"/>
+      <result property="concList" column="conc_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.ConcJsonArrayTypeHandler"/>
+      <result property="ageList" column="age_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.AgeJsonArrayTypeHandler"/>
+      <result property="prgntList" column="prgnt_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.PrgntJsonArrayTypeHandler"/>
+      <result property="cpctList" column="cpct_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.CpctJsonArrayTypeHandler"/>
+      <result property="dosageList" column="dosage_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.DosageJsonArrayTypeHandler"/>
+      <result property="eftgrpList" column="eftgrp_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.EftgrpJsonArrayTypeHandler"/>
+      <result property="snctzList" column="snctz_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.SnctzJsonArrayTypeHandler"/>
+      <result property="nurswList" column="nursw_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.NurswJsonArrayTypeHandler"/>
     </resultMap>
 
     <select id="selectDurSearchRoomList" parameterType="DurSearchRoomPVO" resultMap="DurSearchRoomMap" >
@@ -120,10 +120,10 @@
                     ,rmrk_cn                                        /* 비고 */
             FROM kids_own.tb_pp_m_dur_conc_bann
             WHERE oper_stts_cd = 'O'
-            <if test="igrd_nm != null and igrd_nm != ''">
+            <if test="igrdNm != null and igrdNm != ''">
                 AND igrd_nm_1 like '%' || #{igrdNm} || '%'
             </if>
-            <if test="prdct_nm != null and prdct_nm != ''">
+            <if test="prdctNm != null and prdctNm != ''">
                 AND prdct_nm_1 like '%' || #{prdctNm} || '%'
             </if>
             UNION ALL
@@ -144,10 +144,10 @@
                     ,rmrk_cn                                        /* 비고 */
             FROM kids_own.tb_pp_m_dur_conc_bann
             WHERE oper_stts_cd = 'O'
-            <if test="igrd_nm != null and igrd_nm != ''">
+            <if test="igrdNm != null and igrdNm != ''">
                 AND igrd_nm_2 like '%' || #{igrdNm} || '%'
             </if>
-            <if test="prdct_nm != null and prdct_nm != ''">
+            <if test="prdctNm != null and prdctNm != ''">
                 AND prdct_nm_2 like '%' || #{prdctNm} || '%'
             </if>
             UNION ALL
@@ -169,10 +169,10 @@
                     ,null as rmrk_cn
             FROM kids_own.tb_pp_m_dur_age_bann
             WHERE oper_stts_cd = 'O'
-            <if test="igrd_nm != null and igrd_nm != ''">
+            <if test="igrdNm != null and igrdNm != ''">
                 AND igrd_nm like '%' || #{igrdNm} || '%'
             </if>
-            <if test="prdct_nm != null and prdct_nm != ''">
+            <if test="prdctNm != null and prdctNm != ''">
                 AND prdct_nm like '%' || #{prdctNm} || '%'
             </if>
             UNION ALL
@@ -194,10 +194,10 @@
                     ,null as rmrk_cn
             FROM kids_own.tb_pp_m_dur_prgnt_bann
             WHERE oper_stts_cd = 'O'
-            <if test="igrd_nm != null and igrd_nm != ''">
+            <if test="igrdNm != null and igrdNm != ''">
                 AND igrd_nm like '%' || #{igrdNm} || '%'
             </if>
-            <if test="prdct_nm != null and prdct_nm != ''">
+            <if test="prdctNm != null and prdctNm != ''">
                 AND prdct_nm like '%' || #{prdctNm} || '%'
             </if>
             UNION ALL
@@ -219,10 +219,10 @@
                     ,null as rmrk_cn
             FROM kids_own.tb_pp_m_dur_cpct
             WHERE oper_stts_cd = 'O'
-            <if test="igrd_nm != null and igrd_nm != ''">
+            <if test="igrdNm != null and igrdNm != ''">
                 AND (mdcn_nm like '%' || #{igrdNm} || '%' OR mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
             </if>
-            <if test="prdct_nm != null and prdct_nm != ''">
+            <if test="prdctNm != null and prdctNm != ''">
                 AND (gnrl_nm like '%' || #{prdctNm} || '%' OR mfds_prdct_nm like '%' || #{prdctNm} || '%')
             </if>
             UNION ALL
@@ -244,10 +244,10 @@
                     ,rmrk_cn                                        /* 비고 */
             FROM kids_own.tb_pp_m_dur_dosage
             WHERE oper_stts_cd = 'O'
-            <if test="igrd_nm != null and igrd_nm != ''">
+            <if test="igrdNm != null and igrdNm != ''">
                 AND (mdcn_nm like '%' || #{igrdNm} || '%' OR mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
             </if>
-            <if test="prdct_nm != null and prdct_nm != ''">
+            <if test="prdctNm != null and prdctNm != ''">
                 AND (gnrl_nm like '%' || #{prdctNm} || '%' OR mfds_prdct_nm like '%' || #{prdctNm} || '%')
             </if>
             UNION ALL
@@ -269,10 +269,10 @@
                     ,null as rmrk_cn
             FROM kids_own.tb_pp_m_dur_eftgrp
             WHERE oper_stts_cd = 'O' 
-            <if test="igrd_nm != null and igrd_nm != ''">
+            <if test="igrdNm != null and igrdNm != ''">
                 AND (item_nm like '%' || #{igrdNm} || '%' OR mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
             </if>
-            <if test="prdct_nm != null and prdct_nm != ''">
+            <if test="prdctNm != null and prdctNm != ''">
                 AND (gnrl_nm like '%' || #{prdctNm} || '%' OR mfds_prdct_nm like '%' || #{prdctNm} || '%')
             </if>
             UNION ALL
@@ -294,10 +294,10 @@
                     ,rmrk_cn                                        /* 비고 */
             FROM kids_own.tb_pp_m_dur_snctz
             WHERE oper_stts_cd = 'O'
-            <if test="igrd_nm != null and igrd_nm != ''">
+            <if test="igrdNm != null and igrdNm != ''">
                 AND igrd_nm like '%' || #{igrdNm} || '%'
             </if>
-            <if test="prdct_nm != null and prdct_nm != ''">
+            <if test="prdctNm != null and prdctNm != ''">
                 AND prdct_nm like '%' || #{prdctNm} || '%'
             </if>
             UNION ALL
@@ -319,10 +319,10 @@
                     ,rmrk_cn                                        /* 비고 */
             FROM kids_own.tb_pp_m_dur_nursw
             WHERE oper_stts_cd = 'O'
-            <if test="igrd_nm != null and igrd_nm != ''">
+            <if test="igrdNm != null and igrdNm != ''">
                 AND igrd_nm like '%' || #{igrdNm} || '%'
             </if>
-            <if test="prdct_nm != null and prdct_nm != ''">
+            <if test="prdctNm != null and prdctNm != ''">
                 AND prdct_nm like '%' || #{prdctNm} || '%'
             </if>
         ) A

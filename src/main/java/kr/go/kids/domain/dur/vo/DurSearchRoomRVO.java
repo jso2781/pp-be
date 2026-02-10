@@ -20,14 +20,14 @@ public class DurSearchRoomRVO {
     @Schema(description = "검색한 제품명", type = "String")
     private String prdctNm;
 
-    private List<ConcItem> concJsonArray;
-    private List<AgeItem> ageJsonArray;
-    private List<PrgntItem> prgntJsonArray;
-    private List<CpctItem> cpctJsonArray;
-    private List<DosageItem> dosageJsonArray;
-    private List<EftgrpItem> eftgrpJsonArray;
-    private List<SnctzItem> snctzJsonArray;
-    private List<NurswItem> nurswJsonArray;
+    private List<ConcItem> concList;
+    private List<AgeItem> ageList;
+    private List<PrgntItem> prgntList;
+    private List<CpctItem> cpctList;
+    private List<DosageItem> dosageList;
+    private List<EftgrpItem> eftgrpList;
+    private List<SnctzItem> snctzList;
+    private List<NurswItem> nurswList;
 
     @Schema(name = "DUR 병용금기기본 조회 결과", description = "DUR 병용금기기본 조회 결과 VO")
     @Data
