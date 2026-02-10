@@ -152,4 +152,17 @@
           AND authrt_cd = #{authrtCd}
     </delete>
 
+    <update id="collectExprtApproval" parameterType="ExprtApprovalUVO">
+        /* 대국민포털_전문가업무신청관리 소속 전문가 회원 회수처리 (ExprtApprovalMapper.collectExprtApproval) */
+        UPDATE kids_own.TB_PP_M_EXPRT_INFO
+        SET aprv_stts_cd = #{exprtAprvSttsCode}
+          , rjct_rsn = NULL
+          , encpt_exprt_flnm = NULL
+          , encpt_exprt_inst_eml_nm = NULL
+          , exprt_hdof_yn = 'N'
+          , mdfr_id = #{mbrId}
+          , mdfcn_dt = CURRENT_TIMESTAMP
+        WHERE exprt_no = #{exprtNo}
+    </update>
+
 </mapper>

@@ -122,6 +122,29 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         return result;
     }
 
+    @Override
+    @Transactional
+    public ApiPrnDto withdrawExprtApproval(ExprtApprovalUVO exprtApprovalUVO) {
+        ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
+        HashMap<String, Object> data = new HashMap<>();
+
+        // 권한 삭제
+        ExprtTaskPVO exprtTaskPVO = new ExprtTaskPVO();
+        exprtTaskPVO.setMbrNo(exprtApprovalUVO.getMbrNo());
+        exprtTaskMapper.deleteAllExprtAuth(exprtTaskPVO);
+
+        // 업무 시스템 회수처리
+        exprtApprovalMapper.updateExprtTaskApproval(exprtApprovalUVO);
+
+        // 전문가 정보 개인정보 삭제 및 회수처리
+        exprtApprovalMapper.collectExprtApproval(exprtApprovalUVO);
+
+        data.put("result", "SUCCESS");
+
+        result.setData(data);
+        return result;
+    }
+
     /**
      * 전문가 회원 전환 신청 반려
      */

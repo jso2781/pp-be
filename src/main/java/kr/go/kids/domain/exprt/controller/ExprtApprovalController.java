@@ -52,4 +52,12 @@ public class ExprtApprovalController {
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
+
+    @Operation(summary = "대국민포털_전문가업무신청관리 소속 전문가 회원 탈퇴 처리", description = "대국민포털_전문가업무신청관리 담당하고 있는 업무 시스템의 전문가 회원을 탈퇴 처리 한다.")
+    @PostMapping(value = "/withdraw")
+    public ResponseEntity<ApiPrnDto> withdrawExprtApproval(@RequestBody ExprtApprovalUVO exprtApprovalUVO) {
+        ApiPrnDto apiPrnDto = exprtApprovalService.withdrawExprtApproval(exprtApprovalUVO);
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
+    }
 }

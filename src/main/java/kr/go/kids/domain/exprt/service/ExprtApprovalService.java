@@ -37,4 +37,12 @@ public interface ExprtApprovalService {
      * @return 소속 전문가 회원 목록
      */
     ApiPrnDto updateExprtApproval(ExprtApprovalUVO exprtApprovalUVO);
+
+    /**
+     * 대국민포털_전문가업무신청관리 소속 전문가 회원 탈퇴 처리
+     *
+     * @param exprtApprovalPVO 파라메터 정보
+     * @return 소속 전문가 회원 목록
+     */
+    ApiPrnDto withdrawExprtApproval(ExprtApprovalUVO exprtApprovalUVO);
 }

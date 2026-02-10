@@ -74,4 +74,12 @@ public interface ExprtApprovalMapper {
      * @return 삭제 건수
      */
     int deleteExprtTaskAuth(ExprtApprovalUVO exprtApprovalUVO);
+
+    /**
+     * 대국민포털_전문가업무신청관리 소속 전문가 회원 회수처리
+     *
+     * @param exprtApprovalUVO 파라메터 정보
+     * @return 수정 건수
+     */
+    int collectExprtApproval(ExprtApprovalUVO exprtApprovalUVO);
 }
