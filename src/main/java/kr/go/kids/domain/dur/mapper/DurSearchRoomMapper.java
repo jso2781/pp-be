@@ -1,5 +1,7 @@
 package kr.go.kids.domain.dur.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.go.kids.domain.dur.vo.DurSearchRoomRVO;
@@ -9,10 +11,10 @@ import kr.go.kids.domain.dur.vo.DurSearchRoomPVO;
 public interface DurSearchRoomMapper
 {
     /**
-     * 대국민포털_DUR노인주의해열진통소염제기본 정보 조회 
+     * DUR 정보 검색
      *
      * @param durSnctzMedPVO 조회용 파라메터 정보 
-     * @return 조회된 대국민포털_DUR노인주의해열진통소염제기본 
+     * @return 조회된 DUR 정보 검색 결과
      */
-    public DurSearchRoomRVO selectDurSearchRoom(DurSearchRoomPVO durSearchRoomPVO);
+    public List<DurSearchRoomRVO> selectDurSearchRoomList(DurSearchRoomPVO durSearchRoomPVO);
 }
