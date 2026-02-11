@@ -92,6 +92,8 @@
             ,aprv_stts_cd
             ,rgtr_id
             ,reg_dt
+            ,mdfr_id
+            ,mdfcn_dt
         )
         VALUES
         (
@@ -99,6 +101,8 @@
             ,#{exprtNo}
             ,#{bzmnTaskMngNo}
             ,'W'
+            ,#{mbrId}
+            ,CURRENT_TIMESTAMP
             ,#{mbrId}
             ,CURRENT_TIMESTAMP
         )

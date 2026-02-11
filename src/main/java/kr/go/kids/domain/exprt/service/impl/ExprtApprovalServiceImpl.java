@@ -7,6 +7,7 @@ import kr.go.kids.domain.exprt.service.ExprtApprovalService;
 import kr.go.kids.domain.exprt.vo.*;
 import kr.go.kids.global.system.common.ApiResultCode;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
+import kr.go.kids.global.util.MaskingUtil;
 import kr.go.kids.global.util.PagingUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,12 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         PageHelper.startPage(exprtApprovalPVO.getPageNum(), exprtApprovalPVO.getPageSize());
         List<ExprtApprovalRVO> list = exprtApprovalMapper.selectExprtApprovalList(exprtApprovalPVO);
 
+        // masking
+        list.forEach(l -> {
+            l.setName(MaskingUtil.maskName(l.getName().trim()));
+            l.setInstEmlNm(MaskingUtil.maskEmail(l.getInstEmlNm().trim()));
+        });
+
         data = PagingUtil.getPagingInfo(list);
 
         result.setData(data);
@@ -46,6 +53,12 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         HashMap<String, Object> data = new HashMap<>();
 
         ExprtApprovalRVO detail = exprtApprovalMapper.selectExprtApproval(exprtApprovalPVO);
+
+        // masking
+        detail.setMbrId(MaskingUtil.maskId(detail.getMbrId().trim()));
+        detail.setName(MaskingUtil.maskName(detail.getName().trim()));
+        detail.setTelNo(MaskingUtil.maskPhone(detail.getTelNo().trim()));
+        detail.setInstEmlNm(MaskingUtil.maskEmail(detail.getInstEmlNm().trim()));
         data.put("detail", detail);
 
         List<ExprtApprovalAuthRVO> list = exprtApprovalMapper.selectExprtTaskAuthList(exprtApprovalPVO.getExprtTaskSn());
@@ -134,7 +147,7 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         exprtTaskMapper.deleteAllExprtAuth(exprtTaskPVO);
 
         // 업무 시스템 회수처리
-        exprtApprovalMapper.updateExprtTaskApproval(exprtApprovalUVO);
+        exprtApprovalMapper.collectExprtTaskApproval(exprtApprovalUVO);
 
         // 전문가 정보 개인정보 삭제 및 회수처리
         exprtApprovalMapper.collectExprtApproval(exprtApprovalUVO);
