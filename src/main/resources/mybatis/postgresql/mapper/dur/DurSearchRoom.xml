@@ -78,7 +78,7 @@
                         'prdct_nm', A.prdct_nm,
                         'igrd_nm', A.igrd_nm,
                         'eff_group_nm', A.eff_group_nm,
-                        'item_nm', A.item_nm
+                        'group_nm', A.group_nm
                     )
                 ) FILTER (WHERE A.bann_type_cd = 'eftgrp'), '[]'::jsonb
              ) AS eftgrp_json_array
@@ -115,7 +115,7 @@
                     ,null as day_max_admin_cpct
                     ,null as max_admin_prd_day_cnt
                     ,null as eff_group_nm
-                    ,null as item_nm
+                    ,null as group_nm
                     ,condi_rsn as dtl_info_cn                       /* 상세정보 */
                     ,rmrk_cn                                        /* 비고 */
             FROM kids_own.tb_pp_m_dur_conc_bann
@@ -139,7 +139,7 @@
                     ,null as day_max_admin_cpct
                     ,null as max_admin_prd_day_cnt
                     ,null as eff_group_nm
-                    ,null as item_nm
+                    ,null as group_nm
                     ,condi_rsn as dtl_info_cn                       /* 상세정보 */
                     ,rmrk_cn                                        /* 비고 */
             FROM kids_own.tb_pp_m_dur_conc_bann
@@ -164,7 +164,7 @@
                     ,null as day_max_admin_cpct
                     ,null as max_admin_prd_day_cnt
                     ,null as eff_group_nm
-                    ,null as item_nm
+                    ,null as group_nm
                     ,dtl_info_cn                                    /* 상세정보 */
                     ,null as rmrk_cn
             FROM kids_own.tb_pp_m_dur_age_bann
@@ -189,7 +189,7 @@
                     ,null as day_max_admin_cpct
                     ,null as max_admin_prd_day_cnt
                     ,null as eff_group_nm
-                    ,null as item_nm
+                    ,null as group_nm
                     ,dtl_info_cn                                    /* 상세정보 */
                     ,null as rmrk_cn
             FROM kids_own.tb_pp_m_dur_prgnt_bann
@@ -214,7 +214,7 @@
                     ,day_max_admin_cpct_cn || ' ' || day_max_admin_crtr_cpct as day_max_admin_cpct        /* 1일 최대용량 */
                     ,null as max_admin_prd_day_cnt
                     ,null as eff_group_nm
-                    ,null as item_nm
+                    ,null as group_nm
                     ,dtl_cn as dtl_info_cn                          /* 상세정보(비고 대체) */
                     ,null as rmrk_cn
             FROM kids_own.tb_pp_m_dur_cpct
@@ -239,7 +239,7 @@
                     ,null as day_max_admin_cpct
                     ,max_admin_prd_day_cnt::varchar                 /* 최대투여기간(일) */
                     ,null as eff_group_nm
-                    ,null as item_nm
+                    ,null as group_nm
                     ,null as dtl_info_cn
                     ,rmrk_cn                                        /* 비고 */
             FROM kids_own.tb_pp_m_dur_dosage
@@ -253,6 +253,22 @@
             UNION ALL
             /* 대국민포털_DUR효능군중복기본 */
             SELECT
+                     bann_type_cd
+                    ,prdct_nm                                       /* 검색한 제품명 */
+                    ,igrd_nm                                        /* 검색한 제품의 성분 */
+                    ,prohibit_igrd_nm
+                    ,rlvt_age
+                    ,rlvt_age_unit_nm
+                    ,age_prcs_cnd_nm
+                    ,condi_grd_cd
+                    ,day_max_admin_cpct
+                    ,max_admin_prd_day_cnt
+                    ,eff_group_nm                                   /* 효능그룹명 */
+                    ,group_nm                                       /* 계열(그룹명) */
+                    ,dtl_info_cn
+                    ,rmrk_cn
+            FROM(
+                SELECT
                     'eftgrp' as bann_type_cd
                     ,item_nm  as prdct_nm                           /* 검색한 제품명 */
                     ,gnrl_nm as igrd_nm                             /* 검색한 제품의 성분 */
@@ -264,17 +280,24 @@
                     ,null as day_max_admin_cpct
                     ,null as max_admin_prd_day_cnt
                     ,eff_group_nm                                   /* 효능그룹명 */
-                    ,item_nm                                        /* 품목명(계열) */
+                    ,group_nm                                       /* 계열(그룹명) */
                     ,null as dtl_info_cn
                     ,null as rmrk_cn
-            FROM kids_own.tb_pp_m_dur_eftgrp
-            WHERE oper_stts_cd = 'O' 
-            <if test="igrdNm != null and igrdNm != ''">
-                AND (item_nm like '%' || #{igrdNm} || '%' OR mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
-            </if>
-            <if test="prdctNm != null and prdctNm != ''">
-                AND (gnrl_nm like '%' || #{prdctNm} || '%' OR mfds_prdct_nm like '%' || #{prdctNm} || '%')
-            </if>
+	            FROM kids_own.tb_pp_m_dur_eftgrp
+	            WHERE oper_stts_cd = 'O' 
+                AND group_nm_1 IN(
+	                SELECT
+	                    e.group_nm_1                                       /* 그룹명_1 */
+	                FROM kids_own.tb_pp_m_dur_eftgrp e
+	                WHERE oper_stts_cd = 'O' 
+	                <if test="igrdNm != null and igrdNm != ''">
+	                    AND (e.gnrl_nm like '%' || #{igrdNm} || '%' OR e.mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
+	                </if>
+	                <if test="prdctNm != null and prdctNm != ''">
+	                    AND (e.item_nm like '%' || #{prdctNm} || '%' OR e.mfds_prdct_nm like '%' || #{prdctNm} || '%')
+	                </if>
+                )
+            ) EFT
             UNION ALL
             /* 대국민포털_DUR노인주의기본 */
             SELECT
@@ -289,7 +312,7 @@
                     ,null as day_max_admin_cpct
                     ,null as max_admin_prd_day_cnt
                     ,null as eff_group_nm
-                    ,null as item_nm
+                    ,null as group_nm
                     ,null as dtl_info_cn
                     ,rmrk_cn                                        /* 비고 */
             FROM kids_own.tb_pp_m_dur_snctz
@@ -314,7 +337,7 @@
                     ,null as day_max_admin_cpct
                     ,null as max_admin_prd_day_cnt
                     ,null as eff_group_nm
-                    ,null as item_nm
+                    ,null as group_nm
                     ,null as dtl_info_cn
                     ,rmrk_cn                                        /* 비고 */
             FROM kids_own.tb_pp_m_dur_nursw

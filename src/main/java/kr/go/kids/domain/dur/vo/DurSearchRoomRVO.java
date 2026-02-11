@@ -195,10 +195,10 @@ public class DurSearchRoomRVO {
         @Schema(description = "효능그룹명", type = "String")
         private String effGroupNm;
         /**
-         * 품목명(계열)
+         * 계열(그룹명)
          */
-        @Schema(description = "품목명(계열)", type = "String")
-        private String itemNm;
+        @Schema(description = "계열(그룹명)", type = "String")
+        private String groupNm;
     }
 
     @Schema(name = "DUR 노인주의기본 조회 결과", description = "DUR 노인주의기본 조회 결과 VO")
