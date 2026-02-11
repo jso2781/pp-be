@@ -134,7 +134,7 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         exprtTaskMapper.deleteAllExprtAuth(exprtTaskPVO);
 
         // 업무 시스템 회수처리
-        exprtApprovalMapper.updateExprtTaskApproval(exprtApprovalUVO);
+        exprtApprovalMapper.collectExprtTaskApproval(exprtApprovalUVO);
 
         // 전문가 정보 개인정보 삭제 및 회수처리
         exprtApprovalMapper.collectExprtApproval(exprtApprovalUVO);

@@ -1,6 +1,7 @@
 package kr.go.kids.domain.exprt.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,10 +54,10 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
             exprtTaskPVO.setMbrNo(exprtApplyIVO.getMbrNo());
             ExprtTaskRVO info = exprtTaskMapper.selectExprtInfo(exprtTaskPVO);
 
-            if (info == null || "R".equals(info.getExprtAprvSttsCode())) {
-                data.put("nextStepYn", true);
-            } else {
+            if (Arrays.asList("W", "A").contains(info.getExprtAprvSttsCode())) {
                 data.put("nextStepYn", false);
+            } else {
+                data.put("nextStepYn", true);
             }
         } else {
             data.put("taskSystemList", new ArrayList<ExprtApplyRVO>());

@@ -155,7 +155,7 @@
     <update id="collectExprtApproval" parameterType="ExprtApprovalUVO">
         /* 대국민포털_전문가업무신청관리 소속 전문가 회원 회수처리 (ExprtApprovalMapper.collectExprtApproval) */
         UPDATE kids_own.TB_PP_M_EXPRT_INFO
-        SET aprv_stts_cd = #{exprtAprvSttsCode}
+        SET aprv_stts_cd = 'C'
           , rjct_rsn = NULL
           , encpt_exprt_flnm = NULL
           , encpt_exprt_inst_eml_nm = NULL
@@ -165,4 +165,13 @@
         WHERE exprt_no = #{exprtNo}
     </update>
 
+    <update id="collectExprtTaskApproval" parameterType="ExprtApprovalUVO">
+        /* 대국민포털_전문가업무신청관리 소속 전문가 회원 업무 회수처리 (ExprtApprovalMapper.collectExprtTaskApproval) */
+        UPDATE kids_own.TB_PP_M_EXPRT_TASK
+        SET aprv_stts_cd = 'C'
+          , rjct_rsn = NULL
+          , mdfr_id = #{mbrId}
+          , mdfcn_dt = CURRENT_TIMESTAMP
+        WHERE exprt_no = #{exprtNo}
+    </update>
 </mapper>
