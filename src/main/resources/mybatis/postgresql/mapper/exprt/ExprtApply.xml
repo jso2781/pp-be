@@ -51,6 +51,8 @@
             ,atch_file_group_id
             ,rgtr_id
             ,reg_dt
+            ,mdfr_id
+            ,mdfcn_dt
         )
         VALUES
         (
@@ -62,6 +64,8 @@
             ,'Y'
             ,'W'
             ,#{atchFileGroupId}
+            ,#{mbrId}
+            ,CURRENT_TIMESTAMP
             ,#{mbrId}
             ,CURRENT_TIMESTAMP
         )
@@ -77,6 +81,8 @@
             ,aprv_stts_cd
             ,rgtr_id
             ,reg_dt
+            ,mdfr_id
+            ,mdfcn_dt
         )
         VALUES        
 	    <foreach collection="taskSystemCodes"
@@ -92,6 +98,8 @@
 	            ,'W'
 	            ,#{mbrId}
 	            ,CURRENT_TIMESTAMP
+                ,#{mbrId}
+                ,CURRENT_TIMESTAMP
 	        )
 	    </foreach>                
     </insert>    
