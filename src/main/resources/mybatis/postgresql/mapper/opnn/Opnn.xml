@@ -3,7 +3,7 @@
 <mapper namespace="kr.go.kids.domain.opnn.mapper.OpnnMapper">
 
     <select id="nextOpnnSn" resultType="long">
-        SELECT nextval('TB_PP_M_OPNN_SEQ')
+	SELECT nextval('kids_own.sq_pp_opnn_sn')
     </select>
 
     <insert id="insertOpnn" parameterType="OpnnPVO">
@@ -11,38 +11,38 @@
         INSERT INTO kids_own.TB_PP_M_OPNN
         (
              opnn_sn
-            ,wrtr_encpt_flnm
-            ,wrtr_encpt_telno
+            ,encpt_wrtr_flnm
+            ,encpt_wrtr_telno
+            ,encpt_mbr_eml_nm
             ,wrt_se_cd
             ,pbpt_cn
-            ,dmnd_mttr
+            ,dmnd_mttr_cn
             ,dmnd_mttr_dtl_cn
-            ,ref_mttr
-            ,atch_file_sn
+            ,ref_mttr_cn
+            ,insd_ref_mttr_cn
+            ,atch_file_group_id
             ,rgtr_id
             ,reg_dt
-
             ,mdfr_id
             ,mdfcn_dt
-
         )
         VALUES
         (
              #{opnnSn}
-            ,#{wrtrEncptFlnm}
-            ,#{wrtrEncptTelno}
+            ,#{encptWrtrFlnm}
+            ,#{encptWrtrTelno}
+            ,#{encptMbrEmlNm}
             ,#{wrtSeCd}
             ,#{pbptCn}
-            ,#{dmndMttr}
+            ,#{dmndMttrCn}
             ,#{dmndMttrDtlCn}
-            ,#{refMttr}
-            ,#{atchFileSn}
+            ,#{refMttrCn}
+            ,#{insdRefMttrCn}
+            ,#{atchFileGroupId}
 		    ,NULL
 		    ,now()
 		    ,NULL
-		    ,NULL
 		    ,now()
-		    ,NULL
         )
     </insert>
 </mapper>

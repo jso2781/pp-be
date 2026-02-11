@@ -12,6 +12,7 @@
 			*
         FROM kids_own.TB_PP_M_DSHSTY_DCLR
         WHERE 1=1
+        ORDER BY reg_dt DESC;
     </select>
     
     <insert id="insertDshstyDclr" parameterType="DshstyDclrPVO">
