@@ -220,10 +220,10 @@
             FROM kids_own.tb_pp_m_dur_cpct
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND (mdcn_nm like '%' || #{igrdNm} || '%' OR mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
+                AND (gnrl_nm like '%' || #{igrdNm} || '%' OR mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
             </if>
             <if test="prdctNm != null and prdctNm != ''">
-                AND (gnrl_nm like '%' || #{prdctNm} || '%' OR mfds_prdct_nm like '%' || #{prdctNm} || '%')
+                AND (mdcn_nm like '%' || #{prdctNm} || '%' OR mfds_prdct_nm like '%' || #{prdctNm} || '%')
             </if>
             UNION ALL
             /* 대국민포털_DUR투여기간주의기본 */
@@ -245,10 +245,10 @@
             FROM kids_own.tb_pp_m_dur_dosage
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND (mdcn_nm like '%' || #{igrdNm} || '%' OR mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
+                AND (gnrl_nm like '%' || #{igrdNm} || '%' OR mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
             </if>
             <if test="prdctNm != null and prdctNm != ''">
-                AND (gnrl_nm like '%' || #{prdctNm} || '%' OR mfds_prdct_nm like '%' || #{prdctNm} || '%')
+                AND (mdcn_nm like '%' || #{prdctNm} || '%' OR mfds_prdct_nm like '%' || #{prdctNm} || '%')
             </if>
             UNION ALL
             /* 대국민포털_DUR효능군중복기본 */
@@ -351,5 +351,24 @@
         ) A
         GROUP BY A.igrd_nm
                 ,A.prdct_nm
+    </select>
+
+    <select id="selectEftgrpDetailList" parameterType="DurEftgrpDetailPVO" resultMap="DurEftgrpDetailRVO">
+        /* 효능군중복주의 상세 조회(특정 성분의 그룹1 기준으로 조회, 팝업용) */
+        SELECT
+             eff_group_nm                                   /* 효능그룹명 */
+            ,group_nm                                       /* 계열(그룹명) */
+            ,coalesce(gnrl_nm, mfds_igrd_nm_cn) as igrd_nm  /* 성분 */
+        FROM kids_own.tb_pp_m_dur_eftgrp
+        WHERE oper_stts_cd = 'O' 
+        AND group_nm_1 IN(
+            SELECT
+                e.group_nm_1                /* 그룹명_1 */
+            FROM kids_own.tb_pp_m_dur_eftgrp e
+            WHERE oper_stts_cd = 'O' 
+            <if test="igrdNm != null and igrdNm != ''">
+                AND (e.gnrl_nm like '%' || #{igrdNm} || '%' OR e.mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
+            </if>
+        )
     </select>
 </mapper>
