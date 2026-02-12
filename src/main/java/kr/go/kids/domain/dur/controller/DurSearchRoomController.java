@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.go.kids.domain.dur.service.DurSearchRoomService;
+import kr.go.kids.domain.dur.vo.DurEftgrpDetailPVO;
 import kr.go.kids.domain.dur.vo.DurSearchRoomPVO;
 import kr.go.kids.global.system.common.ApiResultCode;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
@@ -29,6 +30,17 @@ public class DurSearchRoomController {
     public ResponseEntity<ApiPrnDto> selectDurSearchRoomList(@RequestBody DurSearchRoomPVO durSearchRoomPVO)
     {
         ApiPrnDto apiPrnDto = durSearchRoomService.selectDurSearchRoomList(durSearchRoomPVO);
+
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
+    }
+
+    @Operation(summary = "효능군중복주의 상세 조회(특정 성분의 그룹1 기준으로 조회, 팝업용)", description = "효능군중복주의 상세 조회(특정 성분의 그룹1 기준으로 조회, 팝업용)한다.")
+    @PostMapping(value="/selectEftgrpDetailList")
+    @ResponseBody
+    public ResponseEntity<ApiPrnDto> selectEftgrpDetailList(@RequestBody DurEftgrpDetailPVO durEftgrpDetailPVO)
+    {
+        ApiPrnDto apiPrnDto = durSearchRoomService.selectEftgrpDetailList(durEftgrpDetailPVO);
 
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);

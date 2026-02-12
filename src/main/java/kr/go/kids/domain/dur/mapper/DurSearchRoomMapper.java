@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.go.kids.domain.dur.vo.DurSearchRoomRVO;
+import kr.go.kids.domain.dur.vo.DurEftgrpDetailPVO;
+import kr.go.kids.domain.dur.vo.DurEftgrpDetailRVO;
 import kr.go.kids.domain.dur.vo.DurSearchRoomPVO;
 
 @Mapper
@@ -17,4 +19,12 @@ public interface DurSearchRoomMapper
      * @return 조회된 DUR 정보 검색 결과
      */
     public List<DurSearchRoomRVO> selectDurSearchRoomList(DurSearchRoomPVO durSearchRoomPVO);
+
+    /**
+     * 효능군중복주의 상세 조회(특정 성분의 그룹1 기준으로 조회, 팝업용)
+     * 
+     * @param durEftgrpDetailPVO 조회용 파라메터 정보 
+     * @return 조회된 효능군중복주의 상세 결과
+     */
+    public List<DurEftgrpDetailRVO> selectEftgrpDetailList(DurEftgrpDetailPVO durEftgrpDetailPVO);
 }

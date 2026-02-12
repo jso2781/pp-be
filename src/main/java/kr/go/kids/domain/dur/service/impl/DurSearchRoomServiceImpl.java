@@ -11,6 +11,8 @@ import com.github.pagehelper.PageHelper;
 
 import kr.go.kids.domain.dur.mapper.DurSearchRoomMapper;
 import kr.go.kids.domain.dur.service.DurSearchRoomService;
+import kr.go.kids.domain.dur.vo.DurEftgrpDetailPVO;
+import kr.go.kids.domain.dur.vo.DurEftgrpDetailRVO;
 import kr.go.kids.domain.dur.vo.DurSearchRoomPVO;
 import kr.go.kids.domain.dur.vo.DurSearchRoomRVO;
 import kr.go.kids.global.config.util.MessageContextHolder;
@@ -50,4 +52,29 @@ public class DurSearchRoomServiceImpl implements DurSearchRoomService{
         result.setData(data);
         return result;
     }
+
+    @Override
+    public ApiPrnDto selectEftgrpDetailList(DurEftgrpDetailPVO durEftgrpDetailPVO) {
+        ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
+
+        HashMap<String, Object> data = new HashMap<String, Object>();
+        try{
+            PageHelper.startPage(durEftgrpDetailPVO.getPageNum(), durEftgrpDetailPVO.getPageSize());
+            List<DurEftgrpDetailRVO> resultList = durSearchRoomMapper.selectEftgrpDetailList(durEftgrpDetailPVO);
+
+            data = PagingUtil.getPagingInfo(resultList);
+
+            if(ObjectUtils.isEmpty(resultList)){
+                // 데이터가 존재하지 않습니다.
+                result.setMsg(MessageContextHolder.getMessage("U0003"));
+            }
+        }catch(Exception e){
+            log.error("DurSearchRoom 조회 실패", e);
+            result = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
+            result.setMsg(MessageContextHolder.getMessage("api.error.500"));
+        }
+
+        result.setData(data);
+        return result;
+	}
 }
