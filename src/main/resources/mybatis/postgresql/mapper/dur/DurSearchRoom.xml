@@ -353,7 +353,7 @@
                 ,A.prdct_nm
     </select>
 
-    <select id="selectEftgrpDetailList" parameterType="DurEftgrpDetailPVO" resultMap="DurEftgrpDetailRVO">
+    <select id="selectEftgrpDetailList" parameterType="DurEftgrpDetailPVO" resultType="DurEftgrpDetailRVO">
         /* 효능군중복주의 상세 조회(특정 성분의 그룹1 기준으로 조회, 팝업용) */
         SELECT
              eff_group_nm                                   /* 효능그룹명 */
