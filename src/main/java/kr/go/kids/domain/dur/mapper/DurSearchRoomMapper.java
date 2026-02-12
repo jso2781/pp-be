@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import kr.go.kids.domain.dur.vo.DurSearchRoomRVO;
 import kr.go.kids.domain.dur.vo.DurEftgrpDetailPVO;
 import kr.go.kids.domain.dur.vo.DurEftgrpDetailRVO;
+import kr.go.kids.domain.dur.vo.DurPrdctDetailPVO;
+import kr.go.kids.domain.dur.vo.DurPrdctDetailRVO;
 import kr.go.kids.domain.dur.vo.DurSearchRoomPVO;
 
 @Mapper
@@ -27,4 +29,12 @@ public interface DurSearchRoomMapper
      * @return 조회된 효능군중복주의 상세 결과
      */
     public List<DurEftgrpDetailRVO> selectEftgrpDetailList(DurEftgrpDetailPVO durEftgrpDetailPVO);
+
+    /**
+     * 제품 상세 조회(특정 성분명 기준으로 조회, 팝업용)
+     * 
+     * @param durPrdctDetailPVO 조회용 파라메터 정보 
+     * @return 조회된 제품 상세 결과
+     */
+    public List<DurPrdctDetailRVO> selectPrdctDetailList(DurPrdctDetailPVO durPrdctDetailPVO);
 }

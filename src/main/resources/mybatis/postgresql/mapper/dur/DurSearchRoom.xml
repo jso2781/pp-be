@@ -353,6 +353,112 @@
                 ,A.prdct_nm
     </select>
 
+    <select id="selectPrdctDetailList" parameterType="DurPrdctDetailPVO" resultType="DurPrdctDetailRVO">
+        /* DUR병용금기 정보에서 제품별 제약회사 조회(성분명 조건) */
+        select
+             prdct_nm_1 as prdct_nm                         /* 제품명(제품명_1) */
+            ,bzenty_nm_1 as bzenty_nm                       /* 제약회사(업체명_1) */
+        FROM kids_own.tb_pp_m_dur_conc_bann
+        WHERE oper_stts_cd = 'O'
+        <if test="igrdNm != null and igrdNm != ''">
+            AND igrd_nm_1 = #{igrdNm}
+        </if>
+        AND 'conc' = #{bannTypeCd}
+        UNION ALL
+        SELECT
+             prdct_nm_2 as prdct_nm                         /* 제품명(제품명_2) */
+            ,bzenty_nm_2 as bzenty_nm                       /* 제약회사(업체명_2) */
+        FROM kids_own.tb_pp_m_dur_conc_bann
+        WHERE oper_stts_cd = 'O'
+        <if test="igrdNm != null and igrdNm != ''">
+            AND igrd_nm_2 = #{igrdNm}
+        </if>
+        AND 'conc' = #{bannTypeCd}
+        UNION ALL
+        /* DUR연령금기 정보에서 제품별 제약회사 조회(성분명 조건) */
+        SELECT
+             prdct_nm                                       /* 제품명 */
+            ,bzenty_nm                                      /* 제약회사(업체명) */
+        FROM kids_own.tb_pp_m_dur_age_bann
+        WHERE oper_stts_cd = 'O'
+        <if test="igrdNm != null and igrdNm != ''">
+            AND igrd_nm = #{igrdNm}
+        </if>
+        AND 'age' = #{bannTypeCd}
+        UNION ALL
+        /* DUR임부금기 정보에서 제품별 제약회사 조회(성분명 조건) */
+        SELECT
+             prdct_nm                                       /* 제품명 */
+            ,bzenty_nm                                      /* 제약회사(업체명) */
+        FROM kids_own.tb_pp_m_dur_prgnt_bann
+        WHERE oper_stts_cd = 'O'
+        <if test="igrdNm != null and igrdNm != ''">
+            AND igrd_nm = #{igrdNm}
+        </if>
+        AND 'prgnt' = #{bannTypeCd}
+        UNION ALL
+        /* DUR용량주의 정보에서 제품별 제약회사 조회(성분명 조건) */
+        SELECT
+             coalesce(mdcn_nm, mfds_prdct_nm) as prdct_nm   /* 제품명 */
+            ,'' as bzenty_nm                                /* 제약회사(업체명) */
+        FROM kids_own.tb_pp_m_dur_cpct
+        WHERE oper_stts_cd = 'O'
+        <if test="igrdNm != null and igrdNm != ''">
+            AND (gnrl_nm = #{igrdNm} OR mfds_igrd_nm_cn = #{igrdNm})
+        </if>
+        AND 'cpct' = #{bannTypeCd}
+        UNION ALL
+        /* DUR투여기간주의 정보에서 제품별 제약회사 조회(성분명 조건) */
+        SELECT
+             mdcn_nm as prdct_nm                            /* 제품명 */
+            ,'' as bzenty_nm                                /* 제약회사(업체명) */
+        FROM kids_own.tb_pp_m_dur_dosage
+        WHERE oper_stts_cd = 'O'
+        <if test="igrdNm != null and igrdNm != ''">
+            AND (gnrl_nm = #{igrdNm} OR mfds_igrd_nm_cn = #{igrdNm})
+        </if>
+        AND 'dosage' = #{bannTypeCd}
+        UNION ALL
+        /* DUR효능군중복 정보에서 제품별 제약회사 조회(성분명에 대한 그룹명_1 소속 전체 제품 조회) */
+        SELECT
+             coalesce(item_nm, mfds_prdct_nm) as prdct_nm   /* 제품명 */
+            ,bzenty_nm                                      /* 제약회사(업체명) */
+        FROM kids_own.tb_pp_m_dur_eftgrp
+        WHERE oper_stts_cd = 'O' 
+        AND group_nm_1 IN(
+            SELECT
+                e.group_nm_1    /* 그룹명_1 */
+            FROM kids_own.tb_pp_m_dur_eftgrp e
+            WHERE oper_stts_cd = 'O' 
+            <if test="igrdNm != null and igrdNm != ''">
+                AND (e.gnrl_nm = #{igrdNm} OR e.mfds_igrd_nm_cn = #{igrdNm})
+            </if>
+        )
+        AND 'eftgrp' = #{bannTypeCd}
+        UNION ALL
+        /* DUR노인주의 정보에서 제품별 제약회사 조회(성분명 조건) */
+        SELECT
+             prdct_nm                                       /* 제품명 */
+            ,bzenty_nm                                      /* 제약회사(업체명) */
+        FROM kids_own.tb_pp_m_dur_snctz
+        WHERE oper_stts_cd = 'O'
+        <if test="igrdNm != null and igrdNm != ''">
+            AND igrd_nm = #{igrdNm}
+        </if>
+        AND 'snctz' = #{bannTypeCd}
+        UNION ALL
+        /* DUR수유부주의 정보에서 제품별 제약회사 조회(성분명 조건) */
+        SELECT
+             prdct_nm                                       /* 제품명 */
+            ,bzenty_nm                                      /* 제약회사(업체명) */
+        FROM kids_own.tb_pp_m_dur_nursw
+        WHERE oper_stts_cd = 'O'
+        <if test="igrdNm != null and igrdNm != ''">
+            AND igrd_nm = #{igrdNm}
+        </if>
+        AND 'nursw' = #{bannTypeCd}
+    </select>
+
     <select id="selectEftgrpDetailList" parameterType="DurEftgrpDetailPVO" resultType="DurEftgrpDetailRVO">
         /* 효능군중복주의 상세 조회(특정 성분의 그룹1 기준으로 조회, 팝업용) */
         SELECT
@@ -367,7 +473,7 @@
             FROM kids_own.tb_pp_m_dur_eftgrp e
             WHERE oper_stts_cd = 'O' 
             <if test="igrdNm != null and igrdNm != ''">
-                AND (e.gnrl_nm like '%' || #{igrdNm} || '%' OR e.mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
+                AND (e.gnrl_nm = #{igrdNm} OR e.mfds_igrd_nm_cn = #{igrdNm})
             </if>
         )
     </select>

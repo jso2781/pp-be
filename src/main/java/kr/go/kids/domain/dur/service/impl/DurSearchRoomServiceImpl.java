@@ -13,6 +13,8 @@ import kr.go.kids.domain.dur.mapper.DurSearchRoomMapper;
 import kr.go.kids.domain.dur.service.DurSearchRoomService;
 import kr.go.kids.domain.dur.vo.DurEftgrpDetailPVO;
 import kr.go.kids.domain.dur.vo.DurEftgrpDetailRVO;
+import kr.go.kids.domain.dur.vo.DurPrdctDetailPVO;
+import kr.go.kids.domain.dur.vo.DurPrdctDetailRVO;
 import kr.go.kids.domain.dur.vo.DurSearchRoomPVO;
 import kr.go.kids.domain.dur.vo.DurSearchRoomRVO;
 import kr.go.kids.global.config.util.MessageContextHolder;
@@ -69,12 +71,37 @@ public class DurSearchRoomServiceImpl implements DurSearchRoomService{
                 result.setMsg(MessageContextHolder.getMessage("U0003"));
             }
         }catch(Exception e){
-            log.error("DurSearchRoom 조회 실패", e);
+            log.error("selectEftgrpDetailList 조회 실패", e);
             result = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
             result.setMsg(MessageContextHolder.getMessage("api.error.500"));
         }
 
         result.setData(data);
         return result;
-	}
+    }
+
+    @Override
+    public ApiPrnDto selectPrdctDetailList(DurPrdctDetailPVO durPrdctDetailPVO) {
+        ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
+
+        HashMap<String, Object> data = new HashMap<String, Object>();
+        try{
+            PageHelper.startPage(durPrdctDetailPVO.getPageNum(), durPrdctDetailPVO.getPageSize());
+            List<DurPrdctDetailRVO> resultList = durSearchRoomMapper.selectPrdctDetailList(durPrdctDetailPVO);
+
+            data = PagingUtil.getPagingInfo(resultList);
+
+            if(ObjectUtils.isEmpty(resultList)){
+                // 데이터가 존재하지 않습니다.
+                result.setMsg(MessageContextHolder.getMessage("U0003"));
+            }
+        }catch(Exception e){
+            log.error("selectPrdctDetailList 조회 실패", e);
+            result = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
+            result.setMsg(MessageContextHolder.getMessage("api.error.500"));
+        }
+
+        result.setData(data);
+        return result;
+    }
 }

@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.go.kids.domain.dur.service.DurSearchRoomService;
 import kr.go.kids.domain.dur.vo.DurEftgrpDetailPVO;
+import kr.go.kids.domain.dur.vo.DurPrdctDetailPVO;
 import kr.go.kids.domain.dur.vo.DurSearchRoomPVO;
 import kr.go.kids.global.system.common.ApiResultCode;
 import kr.go.kids.global.system.common.vo.ApiPrnDto;
@@ -41,6 +42,17 @@ public class DurSearchRoomController {
     public ResponseEntity<ApiPrnDto> selectEftgrpDetailList(@RequestBody DurEftgrpDetailPVO durEftgrpDetailPVO)
     {
         ApiPrnDto apiPrnDto = durSearchRoomService.selectEftgrpDetailList(durEftgrpDetailPVO);
+
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
+    }
+
+    @Operation(summary = "제품 상세 조회(특정 성분명 기준으로 조회, 팝업용)", description = "제품 상세 조회(특정 성분명 기준으로 조회, 팝업용)한다.")
+    @PostMapping(value="/selectPrdctDetailList")
+    @ResponseBody
+    public ResponseEntity<ApiPrnDto> selectPrdctDetailList(@RequestBody DurPrdctDetailPVO durPrdctDetailPVO)
+    {
+        ApiPrnDto apiPrnDto = durSearchRoomService.selectPrdctDetailList(durPrdctDetailPVO);
 
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
