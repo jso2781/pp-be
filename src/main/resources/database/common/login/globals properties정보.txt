@@ -1,0 +1,33 @@
+Globals.mail.username = kids
+Globals.mail.password = 6k7i0d0s
+
+
+--------------
+안녕하세요, 손유정 과장입니다.
+업무단 이메일 계정정보 전달드리며, 해당 계정에 대해 이메일 방화벽 허용신청이 필요합니다. 
+출발지는 구축시스템 서버에서 도착지는 이메일 서버로 작성주시면 됩니다.
+
+
+[이상사례 시스템]
+
+이메일 계정ID: kaers
+비밀번호: Kids2172!@#   
+
+[약물안전카드 시스템]
+
+이메일 계정ID: kids_rpvc_qna
+비밀번호: wldurtpsxj1@#  
+
+[교육 플랫폼]
+
+edu / kids21721@#
+
+[ECRF]
+
+ID: ecrf
+PW: Kids2172!
+
+[CDM]
+
+ID : moacdm
+PW : kids2172!@#

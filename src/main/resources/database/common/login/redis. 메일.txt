@@ -1,0 +1,60 @@
+1. redis 정보
+
+* local 기준
+spring:
+  redis:
+    host: 192.168.2.149
+    port: 30901
+    password: kids2025!
+    timeout: 2000ms
+	
+* dev 기준
+spring:
+  redis:
+    #host: redis-dev-headless.redis-dev
+    #port: 6379
+    host: 192.168.2.149
+    port: 30901
+    password: kids2025!
+    timeout: 2000ms
+	
+2. 메일 
+  mail:
+    host: mail.drugsafe.or.kr
+    port: 25
+    username: kids@drugsafe.or.kr
+    password: 6k7i0d0s
+
+    protocol: smtp
+    default-encoding: UTF-8
+    test-mode: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true  # 'false'에서 'true'로 변경 (XML과 일치)
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+          debug: true  # 추가 (XML과 일치)
+		  
+=================================================================
+ 메일 API
+=================================================================
+http://192.168.2.149:30012/api/ca/mail/send
+Request
+ {     
+  "title" : "테스트 제목" , 
+  "content" :  "테스트 내용" , 
+  "senderName" :  "발신자" , 
+  "senderEmail" :  "sender@test.com" , 
+  "receiverName" : "수신자" ,  
+  "receiverEmail" :  "receiver2@test.com" 
+  } 
+Response
+{
+    "code": "1",
+    "msg": "TEST-MODE",
+    "errMsg": null
+}

@@ -1,0 +1,49 @@
+
+#CA 공통 로그인 처리
+Rest API: http://192.168.2.149:30012/api/ca/auth/login
+
+#Request Parameter
+appId: "kids-pp-dev"
+encptMbrPswd: "psj1234"
+mbrId: "psj"
+
+#Response Result JSON
+{
+    "code": "0",
+    "msg": "로그인되었습니다",
+    "data": {
+        "userInfo": {
+            "mbrNo": "10001",
+            "mbrId": "psj",
+            "encptMbrFlnm": "psj",
+            "encptMbrEmlNm": "psj@naver.com",
+            "encptMbrTelno": "010-3789-8555",
+            "mbrTypeCd": "S",
+            "mbrJoinStts": null,
+            "mbrJoinDt": "2026-01-20 00:00:00",
+            "mbrWhdwlRsn": null,
+            "mbrWhdwlDt": "2026-01-20 00:00:00",
+            "encptBfrPswd": null,
+            "pswdChgDt": "2026-01-01 00:00:00",
+            "pswdErrNmtm": 0,
+            "linkInfoIdntfId": "admin",
+            "certToken": null,
+            "rgtrId": "admin",
+            "regDt": "2026-01-01 00:00:00",
+            "regPrgrmId": null,
+            "mdfrId": "psj",
+            "mdfcnDt": "2026-02-12 18:02:38.404871",
+            "mdfcnPrgrmId": null,
+            "tokenId": 122,
+            "appId": null,
+            "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwc2oiLCJpc3MiOiJraWRzX3VzZXIiLCJpYXQiOjE3NzA4ODcwNTcsImV4cCI6MTc3MjA5NjY1N30.hKs8Xuf-7nAWKDRLsqGgbguA3kinc9vzVuEC6Q4aA9g",
+            "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwc2oiLCJpc3MiOiJraWRzX3VzZXIiLCJ0b2tlbklkIjoiMTIyIiwiYXBwSWQiOiJraWRzX3VzZXIiLCJpYXQiOjE3NzA4ODcwNTcsImV4cCI6MTc3MDg4ODg1N30.ddH_DB7jA5FqpYMiiyjizf-vQh5XnOojijpznKrYhxI",
+            "mbrEnpswd": "psj1234"
+        },
+        "tokenSn": 122,
+        "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwc2oiLCJpc3MiOiJraWRzX3VzZXIiLCJ0b2tlbklkIjoiMTIyIiwiYXBwSWQiOiJraWRzX3VzZXIiLCJpYXQiOjE3NzA4ODcwNTcsImV4cCI6MTc3MDg4ODg1N30.ddH_DB7jA5FqpYMiiyjizf-vQh5XnOojijpznKrYhxI",
+        "pswdErrNmtm": 0,
+        "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwc2oiLCJpc3MiOiJraWRzX3VzZXIiLCJpYXQiOjE3NzA4ODcwNTcsImV4cCI6MTc3MjA5NjY1N30.hKs8Xuf-7nAWKDRLsqGgbguA3kinc9vzVuEC6Q4aA9g"
+    }
+}
+
