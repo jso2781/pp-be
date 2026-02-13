@@ -1,6 +1,7 @@
 package kr.go.kids.domain.mbr.vo;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -166,4 +167,23 @@ public class MbrInfoRVO
      */
     @Schema(description = "전문가 회원 여부(Y/N)", type = "String")
     private String expertYn;
+
+    private List<InstTaskItem> apprInstTaskList;
+
+    @Getter
+    @Setter
+    @Schema(name = "전문가 승인권자의 기관 업무 조회 결과", description = "전문가 승인권자의 기관 업무 조회 결과 VO")
+    public static class InstTaskItem {
+        /**
+         * 사업자등록번호
+         */
+        @Schema(description = "사업자등록번호", type = "String")
+        private String brno;
+
+        /**
+         * 사업자업무관리번호
+         */
+        @Schema(description = "사업자업무관리번호", type = "String")
+        private String bzmnTaskMngNo;
+    }
 }

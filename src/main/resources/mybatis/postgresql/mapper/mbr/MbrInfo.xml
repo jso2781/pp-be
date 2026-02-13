@@ -2,6 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.go.kids.domain.mbr.mapper.MbrInfoMapper">
 
+    <resultMap id="MbrInfoMap" type="MbrInfoRVO">
+      <result property="mbrNo" column="mbr_no"/>
+      <result property="mbrId" column="mbr_id"/>
+      <result property="encptMbrFlnm" column="encpt_mbr_flnm"/>
+      <result property="encptMbrEmlNm" column="encpt_mbr_eml_nm"/>
+      <result property="encptMbrPswd" column="encpt_mbr_pswd"/>
+      <result property="encptMbrTelno" column="encpt_mbr_telno"/>
+      <result property="mbrTypeCd" column="mbr_type_cd"/>
+      <result property="mbrJoinSttsCd" column="mbr_join_stts_cd"/>
+      <result property="mbrJoinDt" column="mbr_join_dt"/>
+      <result property="mbrWhdwlRsn" column="mbr_whdwl_rsn"/>
+      <result property="mbrWhdwlDt" column="mbr_whdwl_dt"/>
+      <result property="cnstnMbcmtYn" column="cnstn_mbcmt_yn"/>
+      <result property="encptBfrPswd" column="encpt_bfr_pswd"/>
+      <result property="pswdChgDt" column="pswd_chg_dt"/>
+      <result property="pswdErrNmtm" column="pswd_err_nmtm"/>
+      <result property="linkInfoIdntfId" column="link_info_idntf_id"/>
+      <result property="certTokenVl" column="cert_token_vl"/>
+      <result property="rgtrId" column="rgtr_id"/>
+      <result property="regDt" column="reg_dt"/>
+      <result property="mdfrId" column="mdfr_id"/>
+      <result property="mdfcnDt" column="mdfcn_dt"/>
+      <result property="expertYn" column="expert_yn"/>
+      <result property="apprInstTaskList" column="appr_inst_task_json_array" typeHandler="kr.go.kids.domain.mbr.mapper.typehandler.ApprInstTaskJsonArrayTypeHandler"/>
+    </resultMap>
+
     <select id="verifyPassword" parameterType="VerifyPasswordPVO" resultType="int" >
         /* 대국민포털_회원정보기본 기존 아이디, 패스워드 기준으로 데이터 존재 여부 조회 (MbrInfoMapper.verifyPassword) */
         SELECT COUNT(*) as cnt
@@ -26,7 +52,7 @@
         AND mbr_whdwl_dt is null
     </select>
 
-    <select id="getMbrInfo" parameterType="MbrInfoPVO" resultType="MbrInfoRVO" >
+    <select id="getMbrInfo" parameterType="MbrInfoPVO" resultMap="MbrInfoMap" >
         /* 대국민포털_회원정보기본 조회 (MbrInfoMapper.getMbrInfo) */
         SELECT
              mbr.mbr_no
@@ -50,13 +76,28 @@
             ,mbr.reg_dt
             ,mbr.mdfr_id
             ,mbr.mdfcn_dt
-            ,(
-                SELECT CASE WHEN COUNT(*) > 0 THEN 'Y' ELSE 'N' END
-                FROM kids_own.tb_pp_m_exprt_info ex
-                WHERE mbr.mbr_no = ex.mbr_no
-                AND ex.exprt_hdof_yn = 'Y'
-             ) as expert_yn
+            ,ex.expert_yn
+            ,ex.appr_inst_task_json_array
         FROM kids_own.tb_pp_m_mbr_info mbr
+        LEFT JOIN LATERAL (
+            SELECT
+                 CASE WHEN COUNT(et.exprt_no) > 0 THEN 'Y' ELSE 'N' END as expert_yn
+                ,COALESCE(
+	                jsonb_agg(
+	                    jsonb_build_object(
+	                        'brno', it.brno,
+	                        'bzmn_task_mng_no', it.bzmn_task_mng_no
+	                    )
+	                ) FILTER (WHERE et.exprt_no = it.tkcg_exprt_no ), '[]'::jsonb
+	             ) AS appr_inst_task_json_array
+            FROM kids_own.tb_pp_m_exprt_info ex1
+            INNER JOIN kids_own.tb_pp_m_exprt_task et
+                ON ex1.exprt_no = et.exprt_no
+            LEFT JOIN kids_own.tb_pp_m_inst_task it
+                ON et.bzmn_task_mng_no = it.bzmn_task_mng_no
+            WHERE mbr.mbr_no = ex1.mbr_no
+            AND ex1.exprt_hdof_yn = 'Y'
+        ) ex ON TRUE
         WHERE 1=1
         <if test="mbrNo != null and mbrNo != ''">
             AND mbr.mbr_no = #{mbrNo}
