@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.kids.domain.dur.mapper.DurMyDrugInfoMapper">
+
+    <resultMap id="DurSearchRoomMap" type="kr.go.kids.domain.dur.vo.DurSearchRoomRVO">
+      <result property="igrdNm" column="igrd_nm"/>
+      <result property="prdctNm" column="prdct_nm"/>
+      <result property="concList" column="conc_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.ConcJsonArrayTypeHandler"/>
+      <result property="ageList" column="age_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.AgeJsonArrayTypeHandler"/>
+      <result property="prgntList" column="prgnt_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.PrgntJsonArrayTypeHandler"/>
+      <result property="cpctList" column="cpct_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.CpctJsonArrayTypeHandler"/>
+      <result property="dosageList" column="dosage_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.DosageJsonArrayTypeHandler"/>
+      <result property="eftgrpList" column="eftgrp_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.EftgrpJsonArrayTypeHandler"/>
+      <result property="snctzList" column="snctz_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.SnctzJsonArrayTypeHandler"/>
+      <result property="nurswList" column="nursw_json_array" typeHandler="kr.go.kids.domain.dur.mapper.typehandler.NurswJsonArrayTypeHandler"/>
+    </resultMap>
+
+    <!-- 입력 목록 중 하나라도 (제품명/성분명) 일치하면 포함. 공백이면 해당 항목은 조건 생략(=전부 허용). -->
+    <sql id="condInList">
+        <if test="durMyDrugInfoPVOs != null and durMyDrugInfoPVOs.size() > 0">
+            AND (
+            <foreach collection="durMyDrugInfoPVOs" item="item" separator=" OR ">
+                (
+                <choose><when test="item.prdctNm == null or item.prdctNm == ''">1=1</when><otherwise>prdct_nm = #{item.prdctNm}</otherwise></choose>
+                AND
+                <choose><when test="item.igrdNm == null or item.igrdNm == ''">1=1</when><otherwise>igrd_nm = #{item.igrdNm}</otherwise></choose>
+                )
+            </foreach>
+            )
+        </if>
+    </sql>
+
+    <select id="selectDurMyDrugInfoList" parameterType="kr.go.kids.domain.dur.vo.DurMyDrugInfoPVO" resultMap="DurSearchRoomMap">
+        SELECT
+             igrd_nm
+            ,prdct_nm
+            ,COALESCE(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'prdct_nm', A.prdct_nm,
+                        'igrd_nm', A.igrd_nm,
+                        'prohibit_igrd_nm', A.prohibit_igrd_nm,
+                        'dtl_info_cn', A.dtl_info_cn,
+                        'rmrk_cn', A.rmrk_cn
+                    )
+                ) FILTER (WHERE A.bann_type_cd = 'conc'), '[]'::jsonb
+             ) AS conc_json_array
+            ,COALESCE(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'prdct_nm', A.prdct_nm,
+                        'igrd_nm', A.igrd_nm,
+                        'rlvt_age', A.rlvt_age,
+                        'rlvt_age_unit_nm', A.rlvt_age_unit_nm,
+                        'age_prcs_cnd_nm', A.age_prcs_cnd_nm,
+                        'dtl_info_cn', A.dtl_info_cn
+                    )
+                ) FILTER (WHERE A.bann_type_cd = 'age'), '[]'::jsonb
+             ) AS age_json_array
+            ,COALESCE(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'prdct_nm', A.prdct_nm,
+                        'igrd_nm', A.igrd_nm,
+                        'condi_grd_cd', A.condi_grd_cd,
+                        'dtl_info_cn', A.dtl_info_cn
+                    )
+                ) FILTER (WHERE A.bann_type_cd = 'prgnt'), '[]'::jsonb
+             ) AS prgnt_json_array
+            ,COALESCE(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'prdct_nm', A.prdct_nm,
+                        'igrd_nm', A.igrd_nm,
+                        'day_max_admin_cpct', A.day_max_admin_cpct,
+                        'dtl_info_cn', A.dtl_info_cn
+                    )
+                ) FILTER (WHERE A.bann_type_cd = 'cpct'), '[]'::jsonb
+             ) AS cpct_json_array
+            ,COALESCE(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'prdct_nm', A.prdct_nm,
+                        'igrd_nm', A.igrd_nm,
+                        'max_admin_prd_day_cnt', A.max_admin_prd_day_cnt,
+                        'rmrk_cn', A.rmrk_cn
+                    )
+                ) FILTER (WHERE A.bann_type_cd = 'dosage'), '[]'::jsonb
+             ) AS dosage_json_array
+            ,COALESCE(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'prdct_nm', A.prdct_nm,
+                        'igrd_nm', A.igrd_nm,
+                        'eff_group_nm', A.eff_group_nm,
+                        'group_nm', A.group_nm
+                    )
+                ) FILTER (WHERE A.bann_type_cd = 'eftgrp'), '[]'::jsonb
+             ) AS eftgrp_json_array
+            ,COALESCE(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'prdct_nm', A.prdct_nm,
+                        'igrd_nm', A.igrd_nm,
+                        'rmrk_cn', A.rmrk_cn
+                    )
+                ) FILTER (WHERE A.bann_type_cd = 'snctz'), '[]'::jsonb
+             ) AS snctz_json_array
+            ,COALESCE(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'prdct_nm', A.prdct_nm,
+                        'igrd_nm', A.igrd_nm,
+                        'rmrk_cn', A.rmrk_cn
+                    )
+                ) FILTER (WHERE A.bann_type_cd = 'nursw'), '[]'::jsonb
+             ) AS nursw_json_array
+        FROM
+        (
+            /* 대국민포털_DUR병용금기기본 - 병용금기는 나중에 별도 처리 */
+            SELECT
+                    'conc' as bann_type_cd
+                    ,prdct_nm_1 as prdct_nm
+                    ,igrd_nm_1 as igrd_nm
+                    ,igrd_nm_2 as prohibit_igrd_nm
+                    ,null as rlvt_age
+                    ,null as rlvt_age_unit_nm
+                    ,null as age_prcs_cnd_nm
+                    ,null as condi_grd_cd
+                    ,null as day_max_admin_cpct
+                    ,null as max_admin_prd_day_cnt
+                    ,null as eff_group_nm
+                    ,null as group_nm
+                    ,condi_rsn as dtl_info_cn
+                    ,rmrk_cn
+            FROM kids_own.tb_pp_m_dur_conc_bann
+            WHERE oper_stts_cd = 'O'
+            <if test="durMyDrugInfoPVOs != null and durMyDrugInfoPVOs.size() > 0">
+                AND (
+                <foreach collection="durMyDrugInfoPVOs" item="item" separator=" OR ">
+                    (
+                    <choose><when test="item.prdctNm == null or item.prdctNm == ''">1=1</when><otherwise>prdct_nm_1 = #{item.prdctNm}</otherwise></choose>
+                    AND
+                    <choose><when test="item.igrdNm == null or item.igrdNm == ''">1=1</when><otherwise>igrd_nm_1 = #{item.igrdNm}</otherwise></choose>
+                    )
+                </foreach>
+                )
+            </if>
+            UNION ALL
+            SELECT
+                    'conc' as bann_type_cd
+                    ,prdct_nm_2 as prdct_nm
+                    ,igrd_nm_2 as igrd_nm
+                    ,igrd_nm_1 as prohibit_igrd_nm
+                    ,null as rlvt_age
+                    ,null as rlvt_age_unit_nm
+                    ,null as age_prcs_cnd_nm
+                    ,null as condi_grd_cd
+                    ,null as day_max_admin_cpct
+                    ,null as max_admin_prd_day_cnt
+                    ,null as eff_group_nm
+                    ,null as group_nm
+                    ,condi_rsn as dtl_info_cn
+                    ,rmrk_cn
+            FROM kids_own.tb_pp_m_dur_conc_bann
+            WHERE oper_stts_cd = 'O'
+            <if test="durMyDrugInfoPVOs != null and durMyDrugInfoPVOs.size() > 0">
+                AND (
+                <foreach collection="durMyDrugInfoPVOs" item="item" separator=" OR ">
+                    (
+                    <choose><when test="item.prdctNm == null or item.prdctNm == ''">1=1</when><otherwise>prdct_nm_2 = #{item.prdctNm}</otherwise></choose>
+                    AND
+                    <choose><when test="item.igrdNm == null or item.igrdNm == ''">1=1</when><otherwise>igrd_nm_2 = #{item.igrdNm}</otherwise></choose>
+                    )
+                </foreach>
+                )
+            </if>
+            UNION ALL
+            /* 대국민포털_DUR연령금기기본 */
+            SELECT
+                    'age' as bann_type_cd
+                    ,prdct_nm
+                    ,igrd_nm
+                    ,null as prohibit_igrd_nm
+                    ,rlvt_age::varchar as rlvt_age
+                    ,rlvt_age_unit_nm as rlvt_age_unit_nm
+                    ,age_prcs_cnd_nm as age_prcs_cnd_nm
+                    ,null as condi_grd_cd
+                    ,null as day_max_admin_cpct
+                    ,null as max_admin_prd_day_cnt
+                    ,null as eff_group_nm
+                    ,null as group_nm
+                    ,dtl_info_cn as dtl_info_cn
+                    ,null as rmrk_cn
+            FROM kids_own.tb_pp_m_dur_age_bann
+            WHERE oper_stts_cd = 'O'
+            <include refid="condInList"/>
+            UNION ALL
+            /* 대국민포털_DUR임부금기기본 */
+            SELECT
+                    'prgnt' as bann_type_cd
+                    ,prdct_nm
+                    ,igrd_nm
+                    ,null as prohibit_igrd_nm
+                    ,null as rlvt_age
+                    ,null as rlvt_age_unit_nm
+                    ,null as age_prcs_cnd_nm
+                    ,condi_grd_cd as condi_grd_cd
+                    ,null as day_max_admin_cpct
+                    ,null as max_admin_prd_day_cnt
+                    ,null as eff_group_nm
+                    ,null as group_nm
+                    ,dtl_info_cn as dtl_info_cn
+                    ,null as rmrk_cn
+            FROM kids_own.tb_pp_m_dur_prgnt_bann
+            WHERE oper_stts_cd = 'O'
+            <include refid="condInList"/>
+            UNION ALL
+            /* 대국민포털_DUR용량주의기본 */
+            SELECT
+                    'cpct' as bann_type_cd
+                    ,mdcn_nm as prdct_nm
+                    ,gnrl_nm as igrd_nm
+                    ,null as prohibit_igrd_nm
+                    ,null as rlvt_age
+                    ,null as rlvt_age_unit_nm
+                    ,null as age_prcs_cnd_nm
+                    ,null as condi_grd_cd
+                    ,day_max_admin_cpct_cn || ' ' || day_max_admin_crtr_cpct as day_max_admin_cpct
+                    ,null as max_admin_prd_day_cnt
+                    ,null as eff_group_nm
+                    ,null as group_nm
+                    ,dtl_cn as dtl_info_cn
+                    ,null as rmrk_cn
+            FROM kids_own.tb_pp_m_dur_cpct
+            WHERE oper_stts_cd = 'O'
+            <if test="durMyDrugInfoPVOs != null and durMyDrugInfoPVOs.size() > 0">
+                AND (
+                <foreach collection="durMyDrugInfoPVOs" item="item" separator=" OR ">
+                    (
+                    <choose><when test="item.prdctNm == null or item.prdctNm == ''">1=1</when><otherwise>(mdcn_nm = #{item.prdctNm} OR mfds_prdct_nm = #{item.prdctNm})</otherwise></choose>
+                    AND
+                    <choose><when test="item.igrdNm == null or item.igrdNm == ''">1=1</when><otherwise>(gnrl_nm = #{item.igrdNm} OR mfds_igrd_nm_cn = #{item.igrdNm})</otherwise></choose>
+                    )
+                </foreach>
+                )
+            </if>
+            UNION ALL
+            /* 대국민포털_DUR투여기간주의기본 */
+            SELECT
+                    'dosage' as bann_type_cd
+                    ,mdcn_nm as prdct_nm
+                    ,gnrl_nm as igrd_nm
+                    ,null as prohibit_igrd_nm
+                    ,null as rlvt_age
+                    ,null as rlvt_age_unit_nm
+                    ,null as age_prcs_cnd_nm
+                    ,null as condi_grd_cd
+                    ,null as day_max_admin_cpct
+                    ,max_admin_prd_day_cnt::varchar as max_admin_prd_day_cnt
+                    ,null as eff_group_nm
+                    ,null as group_nm
+                    ,null as dtl_info_cn
+                    ,rmrk_cn
+            FROM kids_own.tb_pp_m_dur_dosage
+            WHERE oper_stts_cd = 'O'
+            <if test="durMyDrugInfoPVOs != null and durMyDrugInfoPVOs.size() > 0">
+                AND (
+                <foreach collection="durMyDrugInfoPVOs" item="item" separator=" OR ">
+                    (
+                    <choose><when test="item.prdctNm == null or item.prdctNm == ''">1=1</when><otherwise>(mdcn_nm = #{item.prdctNm} OR mfds_prdct_nm = #{item.prdctNm})</otherwise></choose>
+                    AND
+                    <choose><when test="item.igrdNm == null or item.igrdNm == ''">1=1</when><otherwise>(gnrl_nm = #{item.igrdNm} OR mfds_igrd_nm_cn = #{item.igrdNm})</otherwise></choose>
+                    )
+                </foreach>
+                )
+            </if>
+            UNION ALL
+            /* 대국민포털_DUR효능군중복기본 */
+            SELECT
+                     bann_type_cd
+                    ,prdct_nm
+                    ,igrd_nm
+                    ,prohibit_igrd_nm
+                    ,rlvt_age
+                    ,rlvt_age_unit_nm
+                    ,age_prcs_cnd_nm
+                    ,condi_grd_cd
+                    ,day_max_admin_cpct
+                    ,max_admin_prd_day_cnt
+                    ,eff_group_nm
+                    ,group_nm
+                    ,dtl_info_cn
+                    ,rmrk_cn
+            FROM (
+                SELECT
+                    'eftgrp' as bann_type_cd
+                    ,item_nm as prdct_nm
+                    ,gnrl_nm as igrd_nm
+                    ,null as prohibit_igrd_nm
+                    ,null as rlvt_age
+                    ,null as rlvt_age_unit_nm
+                    ,null as age_prcs_cnd_nm
+                    ,null as condi_grd_cd
+                    ,null as day_max_admin_cpct
+                    ,null as max_admin_prd_day_cnt
+                    ,eff_group_nm
+                    ,group_nm
+                    ,null as dtl_info_cn
+                    ,null as rmrk_cn
+                FROM kids_own.tb_pp_m_dur_eftgrp
+                WHERE oper_stts_cd = 'O'
+                AND group_nm_1 IN (
+                    SELECT e.group_nm_1
+                    FROM kids_own.tb_pp_m_dur_eftgrp e
+                    WHERE oper_stts_cd = 'O'
+                    <if test="durMyDrugInfoPVOs != null and durMyDrugInfoPVOs.size() > 0">
+                        AND (
+                        <foreach collection="durMyDrugInfoPVOs" item="item" separator=" OR ">
+                            (
+                            <choose><when test="item.prdctNm == null or item.prdctNm == ''">1=1</when><otherwise>(e.item_nm = #{item.prdctNm} OR e.mfds_prdct_nm = #{item.prdctNm})</otherwise></choose>
+                            AND
+                            <choose><when test="item.igrdNm == null or item.igrdNm == ''">1=1</when><otherwise>(e.gnrl_nm = #{item.igrdNm} OR e.mfds_igrd_nm_cn = #{item.igrdNm})</otherwise></choose>
+                            )
+                        </foreach>
+                        )
+                    </if>
+                )
+            ) EFT
+            UNION ALL
+            /* 대국민포털_DUR노인주의기본 */
+            SELECT
+                    'snctz' as bann_type_cd
+                    ,prdct_nm
+                    ,igrd_nm
+                    ,null as prohibit_igrd_nm
+                    ,null as rlvt_age
+                    ,null as rlvt_age_unit_nm
+                    ,null as age_prcs_cnd_nm
+                    ,null as condi_grd_cd
+                    ,null as day_max_admin_cpct
+                    ,null as max_admin_prd_day_cnt
+                    ,null as eff_group_nm
+                    ,null as group_nm
+                    ,null as dtl_info_cn
+                    ,rmrk_cn
+            FROM kids_own.tb_pp_m_dur_snctz
+            WHERE oper_stts_cd = 'O'
+            <include refid="condInList"/>
+            UNION ALL
+            /* 대국민포털_DUR수유부주의기본 */
+            SELECT
+                    'nursw' as bann_type_cd
+                    ,prdct_nm
+                    ,igrd_nm
+                    ,null as prohibit_igrd_nm
+                    ,null as rlvt_age
+                    ,null as rlvt_age_unit_nm
+                    ,null as age_prcs_cnd_nm
+                    ,null as condi_grd_cd
+                    ,null as day_max_admin_cpct
+                    ,null as max_admin_prd_day_cnt
+                    ,null as eff_group_nm
+                    ,null as group_nm
+                    ,null as dtl_info_cn
+                    ,rmrk_cn
+            FROM kids_own.tb_pp_m_dur_nursw
+            WHERE oper_stts_cd = 'O'
+            <include refid="condInList"/>
+        ) A
+        GROUP BY A.igrd_nm, A.prdct_nm
+    </select>
+</mapper>
