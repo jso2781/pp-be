@@ -41,7 +41,7 @@
             ,mbr.mbr_whdwl_rsn
             ,mbr.mbr_whdwl_dt
             ,mbr.cnstn_mbcmt_yn
-            ,mbr.encpt_bfr_enpswd
+            ,mbr.encpt_bfr_pswd
             ,mbr.pswd_chg_dt
             ,mbr.pswd_err_nmtm
             ,mbr.link_info_idntf_id
@@ -81,7 +81,7 @@
             ,mbr_join_dt
             ,mbr_whdwl_rsn
             ,mbr_whdwl_dt
-            ,encpt_bfr_enpswd
+            ,encpt_bfr_pswd
             ,pswd_chg_dt
             ,pswd_err_nmtm
             ,link_info_idntf_id
@@ -107,7 +107,7 @@
             ,to_timestamp(#{mbrJoinDt}, 'YYYY-MM-DD HH24:MI:SS')
             ,#{mbrWhdwlRsn}
             ,#{mbrWhdwlDt}
-            ,#{encptBfrEnpswd}
+            ,#{encptBfrPswd}
             ,#{pswdChgDt}
             ,#{pswdErrNmtm}
             ,#{linkInfoIdntfId}
@@ -142,7 +142,7 @@
               ,mbr_join_dt
               ,mbr_whdwl_rsn
               ,mbr_whdwl_dt
-              ,encpt_bfr_enpswd
+              ,encpt_bfr_pswd
               ,pswd_chg_dt
               ,pswd_err_nmtm
               ,link_info_idntf_id
@@ -166,7 +166,7 @@
             ,to_timestamp(#{mbrJoinDt}, 'YYYY-MM-DD HH24:MI:SS')
             ,#{mbrWhdwlRsn}
             ,#{mbrWhdwlDt}
-            ,#{encptBfrEnpswd}
+            ,#{encptBfrPswd}
             ,#{pswdChgDt}
             ,#{pswdErrNmtm}
             ,#{linkInfoIdntfId}
@@ -196,7 +196,7 @@
             ,mbr_join_dt = coalesce(to_timestamp(#{mbrJoinDt}, 'YYYY-MM-DD HH24:MI:SS'), mbr_join_dt)
             ,mbr_whdwl_rsn = coalesce(#{mbrWhdwlRsn}, mbr_whdwl_rsn)
             ,mbr_whdwl_dt = coalesce(to_timestamp(#{mbrWhdwlDt}, 'YYYY-MM-DD HH24:MI:SS'), mbr_whdwl_dt)
-            ,encpt_bfr_enpswd = coalesce(#{encptBfrEnpswd}, encpt_bfr_enpswd)
+            ,encpt_bfr_pswd = coalesce(#{encptBfrPswd}, encpt_bfr_pswd)
             ,pswd_chg_dt = coalesce(to_timestamp(#{pswdChgDt}, 'YYYY-MM-DD HH24:MI:SS'), pswd_chg_dt)
             ,pswd_err_nmtm = coalesce(#{pswdErrNmtm}, pswd_err_nmtm)
             ,link_info_idntf_id = coalesce(#{linkInfoIdntfId}, link_info_idntf_id)
@@ -228,7 +228,7 @@
             ,mbr_join_dt
             ,mbr_whdwl_rsn
             ,mbr_whdwl_dt
-            ,encpt_bfr_enpswd
+            ,encpt_bfr_pswd
             ,pswd_chg_dt
             ,pswd_err_nmtm
             ,link_info_idntf_id
@@ -253,7 +253,7 @@
             ,#{mbrJoinDt}
             ,#{mbrWhdwlRsn}
             ,#{mbrWhdwlDt}
-            ,#{encptBfrEnpswd}
+            ,#{encptBfrPswd}
             ,#{pswdChgDt}
             ,#{pswdErrNmtm}
             ,#{linkInfoIdntfId}
@@ -277,7 +277,7 @@
             ,mbr_join_dt = coalesce(excluded.mbr_join_dt, kids_own.TB_PP_M_MBR_INFO.mbr_join_dt)
             ,mbr_whdwl_rsn = coalesce(excluded.mbr_whdwl_rsn, kids_own.TB_PP_M_MBR_INFO.mbr_whdwl_rsn)
             ,mbr_whdwl_dt = coalesce(excluded.mbr_whdwl_dt, kids_own.TB_PP_M_MBR_INFO.mbr_whdwl_dt)
-            ,encpt_bfr_enpswd = coalesce(excluded.encpt_bfr_enpswd, kids_own.TB_PP_M_MBR_INFO.encpt_bfr_enpswd)
+            ,encpt_bfr_pswd = coalesce(excluded.encpt_bfr_pswd, kids_own.TB_PP_M_MBR_INFO.encpt_bfr_pswd)
             ,pswd_chg_dt = coalesce(excluded.pswd_chg_dt, kids_own.TB_PP_M_MBR_INFO.pswd_chg_dt)
             ,pswd_err_nmtm = coalesce(excluded.pswd_err_nmtm, kids_own.TB_PP_M_MBR_INFO.pswd_err_nmtm)
             ,link_info_idntf_id = coalesce(excluded.link_info_idntf_id, kids_own.TB_PP_M_MBR_INFO.link_info_idntf_id)
