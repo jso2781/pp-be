@@ -33,7 +33,7 @@ public class EmpPVO
      * 이전암호화비밀번호
      */
     @Schema(description = "이전암호화비밀번호", type = "String")
-    private String bfrEnpswd;
+    private String encptBfrEnpswd;
 
     /**
      * 등록자아이디
@@ -91,13 +91,13 @@ public class EmpPVO
     {
         this.pswdErrNmtm = pswdErrNmtm;
     }
-    public String getBfrEnpswd()
+    public String getEncptBfrEnpswd()
     {
-        return bfrEnpswd;
+        return encptBfrEnpswd;
     }
-    public void setBfrEnpswd(String bfrEnpswd)
+    public void setEncptBfrEnpswd(String encptBfrEnpswd)
     {
-        this.bfrEnpswd = bfrEnpswd;
+        this.encptBfrEnpswd = encptBfrEnpswd;
     }
     public String getRgtrId()
     {

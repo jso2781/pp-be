@@ -9,7 +9,7 @@
             ,mngr_enpswd
             ,tmpr_pswd_yn
             ,pswd_err_nmtm
-            ,bfr_enpswd
+            ,encpt_bfr_enpswd
             ,rgtr_id
             ,reg_dt
 
@@ -29,7 +29,7 @@
             ,mngr_enpswd
             ,tmpr_pswd_yn
             ,pswd_err_nmtm
-            ,bfr_enpswd
+            ,encpt_bfr_enpswd
             ,rgtr_id
             ,reg_dt
 
@@ -43,7 +43,7 @@
             ,#{mngrEnpswd}
             ,#{tmprPswdYn}
             ,#{pswdErrNmtm}
-            ,#{bfrEnpswd}
+            ,#{encptBfrEnpswd}
             ,#{rgtrId}
             ,now()
 
@@ -60,7 +60,7 @@
              mngr_enpswd = coalesce(#{mngrEnpswd}, mngr_enpswd)
             ,tmpr_pswd_yn = coalesce(#{tmprPswdYn}, tmpr_pswd_yn)
             ,pswd_err_nmtm = coalesce(#{pswdErrNmtm}, pswd_err_nmtm)
-            ,bfr_enpswd = coalesce(#{bfrEnpswd}, bfr_enpswd)
+            ,encpt_bfr_enpswd = coalesce(#{encptBfrEnpswd}, encpt_bfr_enpswd)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
 
@@ -76,7 +76,7 @@
             ,mngr_enpswd
             ,tmpr_pswd_yn
             ,pswd_err_nmtm
-            ,bfr_enpswd
+            ,encpt_bfr_enpswd
             ,rgtr_id
             ,reg_dt
 
@@ -90,7 +90,7 @@
             ,#{mngrEnpswd}
             ,#{tmprPswdYn}
             ,#{pswdErrNmtm}
-            ,#{bfrEnpswd}
+            ,#{encptBfrEnpswd}
             ,#{rgtrId}
             ,now()
 
@@ -103,7 +103,7 @@
              mngr_enpswd = coalesce(excluded.mngr_enpswd, kids_own.TB_PP_M_EMP.mngr_enpswd)
             ,tmpr_pswd_yn = coalesce(excluded.tmpr_pswd_yn, kids_own.TB_PP_M_EMP.tmpr_pswd_yn)
             ,pswd_err_nmtm = coalesce(excluded.pswd_err_nmtm, kids_own.TB_PP_M_EMP.pswd_err_nmtm)
-            ,bfr_enpswd = coalesce(excluded.bfr_enpswd, kids_own.TB_PP_M_EMP.bfr_enpswd)
+            ,encpt_bfr_enpswd = coalesce(excluded.encpt_bfr_enpswd, kids_own.TB_PP_M_EMP.encpt_bfr_enpswd)
             ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_EMP.mdfr_id)
             ,mdfcn_dt = now()
 

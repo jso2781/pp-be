@@ -85,7 +85,7 @@ public class MbrInfoPVO
      * 이전암호화비밀번호
      */
     @Schema(description = "이전암호화비밀번호", type = "String")
-    private String bfrEnpswd;
+    private String encptBfrPswd;
 
     /**
      * 비밀번호변경일시

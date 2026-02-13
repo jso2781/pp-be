@@ -55,12 +55,13 @@ spring:
     resources:
       add-mappings: true
   mail:
-    host: smtp.gmail.com
+    host: mail.drugsafe.or.kr
     port: 587
     username: ${EMAIL_USERNAME}
     password: ${EMAIL_PASSWORD}
     protocol: smtp
     default-encoding: UTF-8
+    test-mode: true
     properties:
       mail:
         smtp:
@@ -70,6 +71,7 @@ spring:
           connectiontimeout: 5000
           timeout: 5000
           writetimeout: 5000
+          debug: true
 
 jwt:
   issuer: kids_user
