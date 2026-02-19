@@ -84,18 +84,18 @@ public class Auth1ServiceImpl  implements Auth1Service {
                     /**
                      * Login Token 생성
                      */
-                    String refreshToken = jwtToken1Provider.createRefreshToken(REFRESH_TOKEN_EXPIRE_TIME);
-                    String accessToken  = jwtToken1Provider.createAccessToken(APP_ID, userInfo.getUserId().toString(), ACCESS_TOKEN_EXPIRE_TIME);
+                    String updtTokenCn = jwtToken1Provider.createUpdtTokenCn(REFRESH_TOKEN_EXPIRE_TIME);
+                    String acsTokenCn  = jwtToken1Provider.createAcsTokenCn(APP_ID, userInfo.getUserId().toString(), ACCESS_TOKEN_EXPIRE_TIME);
 
                     TokenUserUpdateReqVO tokenUpdateVO = new TokenUserUpdateReqVO();
                     tokenUpdateVO.setUserId(Long.valueOf(userInfo.getUserId()));
-                    tokenUpdateVO.setRefreshToken(refreshToken);
-                    tokenUpdateVO.setAccessToken(accessToken);
+                    tokenUpdateVO.setUpdtTokenCn(updtTokenCn);
+                    tokenUpdateVO.setAcsTokenCn(acsTokenCn);
 
                     tokenMapper.userUpdate(tokenUpdateVO);
 
-                    bizData.put("accessToken", accessToken);
-                    bizData.put("refreshToken", refreshToken);
+                    bizData.put("acsTokenCn", acsTokenCn);
+                    bizData.put("updtTokenCn", updtTokenCn);
                     bizData.put("userInfo", userInfo);
                     result.setMsg("로그인되었습니다.");
                 }

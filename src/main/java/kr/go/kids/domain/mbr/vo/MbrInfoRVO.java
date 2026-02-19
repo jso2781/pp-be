@@ -145,22 +145,22 @@ public class MbrInfoRVO
     private BigInteger tokenSn;
 
     /**
-     * 애플리케이션ID
+     * 프로그램아이디
      */
-    @Schema(description = "애플리케이션ID", type = "String")
-    private String appId;
+    @Schema(description = "프로그램아이디", type = "String")
+    private String prgrmId;
 
     /**
      * JWT_Refresh_Token
      */
     @Schema(description = "JWT_Refresh_Token", type = "String")
-    private String refreshToken;
+    private String updtTokenCn;
 
     /**
      * JWT_Access_Token
      */
     @Schema(description = "JWT_Access_Token", type = "String")
-    private String accessToken;
+    private String acsTokenCn;
 
     /**
      * 전문가 회원 여부(Y/N)

@@ -62,16 +62,16 @@ public class AuthController {
      * 3. Refresh도 사용자 활동이므로 Redis Idle Key 30분 리셋
      * 4. Redis Active Key 만료시간도 리셋
      *
-     * old parameter - @RequestHeader("X-Refresh-Token") String refreshToken, @RequestHeader(value = "X-App-Id", required = false) String appId
-     * @param refreshToken
-     * @param appId
+     * old parameter - @RequestHeader("X-Refresh-Token") String updtTokenCn, @RequestHeader(value = "X-App-Id", required = false) String prgrmId
+     * @param updtTokenCn
+     * @param prgrmId
      * @return
      */
     @Operation(summary = "JWT 토큰 갱신(Redis Idle 키 리셋, Redis Active 키 리셋 포함)", description = "JWT 토큰 갱신(Redis Idle 키 리셋, Redis Active 키 리셋 포함)한다.")
     @PostMapping("/refresh")
     @ResponseBody
     public ResponseEntity<ApiPrnDto> refresh(@RequestBody RefreshPVO refreshPVO){
-        ApiPrnDto apiPrnDto = authService.refresh(refreshPVO.getTokenSn(), refreshPVO.getRefreshToken());
+        ApiPrnDto apiPrnDto = authService.refresh(refreshPVO.getTokenSn(), refreshPVO.getUpdtTokenCn());
 
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
@@ -84,7 +84,7 @@ public class AuthController {
      * 3. 삭제된 Access Token을 Redis 블랙리스트에 등록 (로그아웃 즉시 무효화)
      * 
      * @param auth
-     * @param appId
+     * @param prgrmId
      * @param tokenSn
      * @param authorization
      * @return

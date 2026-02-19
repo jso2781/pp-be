@@ -17,7 +17,7 @@ public class RefreshPVO {
      * JWT_Refresh_Token
      */
     @Schema(description = "JWT_Refresh_Token", type = "String")
-    private String refreshToken;
+    private String updtTokenCn;
 
     public BigInteger getTokenSn()
     {
@@ -27,10 +27,10 @@ public class RefreshPVO {
     {
         this.tokenSn = tokenSn;
     }
-    public String getRefreshToken() {
-        return refreshToken;
+    public String getUpdtTokenCn() {
+        return updtTokenCn;
     }
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
+    public void setUpdtTokenCn(String updtTokenCn) {
+        this.updtTokenCn = updtTokenCn;
     }
 }

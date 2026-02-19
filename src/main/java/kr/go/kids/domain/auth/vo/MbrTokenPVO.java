@@ -26,22 +26,22 @@ public class MbrTokenPVO
     private String encptMbrPswd;
 
     /**
-     * 애플리케이션ID
+     * 프로그램아이디
      */
-    @Schema(description = "애플리케이션ID", type = "String")
-    private String appId;
+    @Schema(description = "프로그램아이디", type = "String")
+    private String prgrmId;
 
     /**
      * JWT_Refresh_Token
      */
     @Schema(description = "JWT_Refresh_Token", type = "String")
-    private String refreshToken;
+    private String updtTokenCn;
 
     /**
      * JWT_Access_Token
      */
     @Schema(description = "JWT_Access_Token", type = "String")
-    private String accessToken;
+    private String acsTokenCn;
 
     /**
      * 등록자아이디
@@ -89,29 +89,29 @@ public class MbrTokenPVO
     {
         this.mbrId = mbrId;
     }
-    public String getAppId()
+    public String getPrgrmId()
     {
-        return appId;
+        return prgrmId;
     }
-    public void setAppId(String appId)
+    public void setPrgrmId(String prgrmId)
     {
-        this.appId = appId;
+        this.prgrmId = prgrmId;
     }
-    public String getRefreshToken()
+    public String getUpdtTokenCn()
     {
-        return refreshToken;
+        return updtTokenCn;
     }
-    public void setRefreshToken(String refreshToken)
+    public void setUpdtTokenCn(String updtTokenCn)
     {
-        this.refreshToken = refreshToken;
+        this.updtTokenCn = updtTokenCn;
     }
-    public String getAccessToken()
+    public String getAcsTokenCn()
     {
-        return accessToken;
+        return acsTokenCn;
     }
-    public void setAccessToken(String accessToken)
+    public void setAcsTokenCn(String acsTokenCn)
     {
-        this.accessToken = accessToken;
+        this.acsTokenCn = acsTokenCn;
     }
     public String getRgtrId()
     {

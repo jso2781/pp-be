@@ -10,9 +10,9 @@ public class TokenListResVO {
     private String tokenSn;          // 토큰일련번호
     private Integer adminId;         // 관리자 번호
     private Integer userId;          // 사용자번호
-    private String appId;            // 앱ID
-    private String refreshToken;     // 리프레시 토큰
-    private String accessToken;      // 액세스토큰
+    private String prgrmId;            // 프로그램아이디
+    private String updtTokenCn;     // 갱신토큰내용
+    private String acsTokenCn;      // 접근토큰내용
     private Integer inAdminId;       // 등록 관리자 번호
     private String inDatetime;       // 등록 시간
     private Integer upAdminId;       // 수정 관리자 번호
