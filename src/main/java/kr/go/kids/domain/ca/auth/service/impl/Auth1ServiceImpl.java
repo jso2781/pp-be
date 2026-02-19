@@ -25,7 +25,7 @@ public class Auth1ServiceImpl  implements Auth1Service {
 
     private long REFRESH_TOKEN_EXPIRE_TIME = 365 * 24 * 60 * 60 * 1000; //365일
     private long ACCESS_TOKEN_EXPIRE_TIME  =   7 * 24 * 60 * 60 * 1000; //7일
-    private String APP_ID  =   "kids-user";
+    private String PRGRM_ID  =   "kids-user";
 
     @Autowired
     public AuthMapper authMapper;
@@ -85,7 +85,7 @@ public class Auth1ServiceImpl  implements Auth1Service {
                      * Login Token 생성
                      */
                     String updtTokenCn = jwtToken1Provider.createUpdtTokenCn(REFRESH_TOKEN_EXPIRE_TIME);
-                    String acsTokenCn  = jwtToken1Provider.createAcsTokenCn(APP_ID, userInfo.getUserId().toString(), ACCESS_TOKEN_EXPIRE_TIME);
+                    String acsTokenCn  = jwtToken1Provider.createAcsTokenCn(PRGRM_ID, userInfo.getUserId().toString(), ACCESS_TOKEN_EXPIRE_TIME);
 
                     TokenUserUpdateReqVO tokenUpdateVO = new TokenUserUpdateReqVO();
                     tokenUpdateVO.setUserId(Long.valueOf(userInfo.getUserId()));

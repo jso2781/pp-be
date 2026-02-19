@@ -299,7 +299,7 @@ public class AuthServiceImpl implements AuthService
      * 로그아웃 처리
      */
     public ApiPrnDto logout(MbrTokenDVO mbrTokenDVO, String authorizationHeader){
-        // 1) DB에서 refresh/access 정보 삭제(token_id + mbr_id 조건)
+        // 1) DB에서 refresh/access 정보 삭제(token_sn + mbr_id 조건)
         mbrTokenMapper.deleteMbrToken(mbrTokenDVO);
 
         // Request Header의 Authorization 항목의 값에서 token 부분만 추출

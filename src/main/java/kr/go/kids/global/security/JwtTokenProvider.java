@@ -30,8 +30,8 @@ public class JwtTokenProvider {
     @Value("${jwt.refresh-token-name}")
     private String REFRESH_TOKEN_NAME;
 
-    public static final String CLAIM_TOKEN_ID = "tokenSn";
-    public static final String CLAIM_APP_ID   = "prgrmId";
+    public static final String CLAIM_TOKEN_SN = "tokenSn";
+    public static final String CLAIM_PRGRM_ID   = "prgrmId";
 
     /**
      * <PRE>
@@ -55,8 +55,8 @@ public class JwtTokenProvider {
         return Jwts.builder()
                 .setSubject(mbrId)                                 // userId & 토큰생성주체지정
                 .setIssuer(issuer)                                  // 토큰 발행자(kids_user)
-                .claim(CLAIM_TOKEN_ID, tokenSn)                     // ✅ 추가
-                .claim(CLAIM_APP_ID, prgrmId)                         // ✅ 추가(원하면 생략 가능)
+                .claim(CLAIM_TOKEN_SN, tokenSn)                     // ✅ 추가
+                .claim(CLAIM_PRGRM_ID, prgrmId)                         // ✅ 추가(원하면 생략 가능)
                 .setIssuedAt(new Date())                            // Access Token 발행 시간
                 .setExpiration(expireTime)                          // 만료 시간 설정& compact to String
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)     // key, key 암호화알고리즘설정
@@ -188,13 +188,13 @@ public class JwtTokenProvider {
 
     public String getTokenSn(String token) {
         Claims claims = getClaims(token);
-        Object v = claims.get(CLAIM_TOKEN_ID);
+        Object v = claims.get(CLAIM_TOKEN_SN);
         return v == null ? null : String.valueOf(v);
     }
 
     public String getPrgrmId(String token) {
         Claims claims = getClaims(token);
-        Object v = claims.get(CLAIM_APP_ID);
+        Object v = claims.get(CLAIM_PRGRM_ID);
         return v == null ? null : String.valueOf(v);
     }
 }
