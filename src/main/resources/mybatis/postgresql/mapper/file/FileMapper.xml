@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- fmk_iot_comm_file 테이블 MAPPER -->
-<mapper namespace="kr.or.kids.domain.file.mapper.FileMapper">
+<mapper namespace="kr.or.kids.domain.pp.file.mapper.FileMapper">
 
 
     <!-- 파일 기본 목록 조회 -->

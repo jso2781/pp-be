@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.kids.domain.dur.mapper.DurAgeBannMapper">
+<mapper namespace="kr.or.kids.domain.pp.dur.mapper.DurAgeBannMapper">
 
     <select id="getDurAgeBann" parameterType="DurAgeBannPVO" resultType="DurAgeBannRVO" >
         /* 대국민포털_DUR연령금기기본 조회 (DurAgeBannMapper.getDurAgeBann) */

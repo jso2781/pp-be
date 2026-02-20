@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- FMK_IOT_USER 테이블 MAPPER -->
-<mapper namespace="kr.or.kids.domain.test.mapper.UserMapper">
+<mapper namespace="kr.or.kids.domain.pp.test.mapper.UserMapper">
 
     <!-- 목록조회 -->
     <sql id="commonList">

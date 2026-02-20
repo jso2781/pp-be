@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.kids.domain.dur.mapper.DurSearchRoomMapper">
+<mapper namespace="kr.or.kids.domain.pp.dur.mapper.DurSearchRoomMapper">
 
-    <resultMap id="DurSearchRoomMap" type="kr.or.kids.domain.dur.vo.DurSearchRoomRVO">
+    <resultMap id="DurSearchRoomMap" type="kr.or.kids.domain.pp.dur.vo.DurSearchRoomRVO">
       <result property="igrdNm" column="igrd_nm"/>
       <result property="prdctNm" column="prdct_nm"/>
-      <result property="concList" column="conc_json_array" typeHandler="kr.or.kids.domain.dur.mapper.typehandler.ConcJsonArrayTypeHandler"/>
-      <result property="ageList" column="age_json_array" typeHandler="kr.or.kids.domain.dur.mapper.typehandler.AgeJsonArrayTypeHandler"/>
-      <result property="prgntList" column="prgnt_json_array" typeHandler="kr.or.kids.domain.dur.mapper.typehandler.PrgntJsonArrayTypeHandler"/>
-      <result property="cpctList" column="cpct_json_array" typeHandler="kr.or.kids.domain.dur.mapper.typehandler.CpctJsonArrayTypeHandler"/>
-      <result property="dosageList" column="dosage_json_array" typeHandler="kr.or.kids.domain.dur.mapper.typehandler.DosageJsonArrayTypeHandler"/>
-      <result property="eftgrpList" column="eftgrp_json_array" typeHandler="kr.or.kids.domain.dur.mapper.typehandler.EftgrpJsonArrayTypeHandler"/>
-      <result property="snctzList" column="snctz_json_array" typeHandler="kr.or.kids.domain.dur.mapper.typehandler.SnctzJsonArrayTypeHandler"/>
-      <result property="nurswList" column="nursw_json_array" typeHandler="kr.or.kids.domain.dur.mapper.typehandler.NurswJsonArrayTypeHandler"/>
+      <result property="concList" column="conc_json_array" typeHandler="kr.or.kids.domain.pp.dur.mapper.typehandler.ConcJsonArrayTypeHandler"/>
+      <result property="ageList" column="age_json_array" typeHandler="kr.or.kids.domain.pp.dur.mapper.typehandler.AgeJsonArrayTypeHandler"/>
+      <result property="prgntList" column="prgnt_json_array" typeHandler="kr.or.kids.domain.pp.dur.mapper.typehandler.PrgntJsonArrayTypeHandler"/>
+      <result property="cpctList" column="cpct_json_array" typeHandler="kr.or.kids.domain.pp.dur.mapper.typehandler.CpctJsonArrayTypeHandler"/>
+      <result property="dosageList" column="dosage_json_array" typeHandler="kr.or.kids.domain.pp.dur.mapper.typehandler.DosageJsonArrayTypeHandler"/>
+      <result property="eftgrpList" column="eftgrp_json_array" typeHandler="kr.or.kids.domain.pp.dur.mapper.typehandler.EftgrpJsonArrayTypeHandler"/>
+      <result property="snctzList" column="snctz_json_array" typeHandler="kr.or.kids.domain.pp.dur.mapper.typehandler.SnctzJsonArrayTypeHandler"/>
+      <result property="nurswList" column="nursw_json_array" typeHandler="kr.or.kids.domain.pp.dur.mapper.typehandler.NurswJsonArrayTypeHandler"/>
     </resultMap>
 
     <select id="selectDurSearchRoomList" parameterType="DurSearchRoomPVO" resultMap="DurSearchRoomMap" >

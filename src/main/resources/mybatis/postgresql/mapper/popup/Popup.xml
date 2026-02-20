@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.kids.domain.popup.mapper.PopupMapper">
+<mapper namespace="kr.or.kids.domain.pp.popup.mapper.PopupMapper">
 
     <select id="getPopup" parameterType="PopupPVO" resultType="PopupRVO" >
         /* 대국민포털_팝업기본 조회 (PopupMapper.getPopup) */

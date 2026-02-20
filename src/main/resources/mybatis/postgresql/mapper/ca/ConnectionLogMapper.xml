@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- CONNECTTION_LOG 테이블 MAPPER -->
-<mapper namespace="kr.or.kids.domain.connecionlog.mapper.ConnectionLogMapper">
+<mapper namespace="kr.or.kids.domain.pp.connecionlog.mapper.ConnectionLogMapper">
 
 
     <!-- 기본조회 -->

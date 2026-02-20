@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.kids.domain.mbr.mapper.MbrInfoMapper">
+<mapper namespace="kr.or.kids.domain.pp.mbr.mapper.MbrInfoMapper">
 
     <resultMap id="MbrInfoMap" type="MbrInfoRVO">
       <result property="mbrNo" column="mbr_no"/>
@@ -25,7 +25,7 @@
       <result property="mdfrId" column="mdfr_id"/>
       <result property="mdfcnDt" column="mdfcn_dt"/>
       <result property="expertYn" column="expert_yn"/>
-      <result property="apprInstTaskList" column="appr_inst_task_json_array" typeHandler="kr.or.kids.domain.mbr.mapper.typehandler.ApprInstTaskJsonArrayTypeHandler"/>
+      <result property="apprInstTaskList" column="appr_inst_task_json_array" typeHandler="kr.or.kids.domain.pp.mbr.mapper.typehandler.ApprInstTaskJsonArrayTypeHandler"/>
     </resultMap>
 
     <select id="verifyPassword" parameterType="VerifyPasswordPVO" resultType="int" >

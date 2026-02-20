@@ -1,0 +1,148 @@
+package kr.or.kids.domain.pp.pst.vo;
+
+import java.math.BigInteger;
+import java.util.List;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import kr.or.kids.domain.pp.atch.vo.AtchRVO;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Schema(name = "대국민포털_게시물기본", description = "대국민포털_게시물기본 Search Result VO")
+public class PstRVO {
+	/**
+	 * 게시물일련번호
+	 */
+	@Schema(description = "게시물일련번호", type = "BigInteger")
+	private BigInteger pstSn;
+
+	/**
+	 * 게시판아이디
+	 */
+	@Schema(description = "게시판아이디", type = "String")
+	private String bbsId;
+
+	/**
+	 * 게시물제목
+	 */
+	@Schema(description = "게시물제목", type = "String")
+	private String pstTtl;
+
+	/**
+	 * 게시물내용
+	 */
+	@Schema(description = "게시물내용", type = "String")
+	private String pstCn;
+
+	/**
+	 * 게시물조회수
+	 */
+	@Schema(description = "게시물조회수", type = "Long")
+	private Long pstInqCnt;
+
+	/**
+	 * 게시물공공누리저작권유형코드
+	 */
+	@Schema(description = "게시물공공누리저작권유형코드", type = "String")
+	private String pstKoglCprgtTypeCd;
+
+	/**
+	 * 첨부파일그룹아이디
+	 */
+	@Schema(description = "첨부파일그룹아이디", type = "String")
+	private String atchFileGroupId;
+
+	/**
+	 * 썸네일아이디
+	 */
+	@Schema(description = "썸네일아이디", type = "String")
+	private String thmbId;
+
+	/**
+	 * 고정여부
+	 */
+	@Schema(description = "고정여부", type = "String")
+	private String fixYn;
+
+
+	/**
+	 * 작성자부서명
+	 */
+	@Schema(description = "작성자부서명", type = "String")
+	private String wrtrDeptNm;
+
+	/**
+	 * 수정자부서명
+	 */
+	@Schema(description = "수정자부서명", type = "String")
+	private String mdfrDeptNm;
+
+	/**
+	 * 등록자아이디
+	 */
+	@Schema(description = "등록자아이디", type = "String")
+	private String rgtrId;
+
+	/**
+	 * 등록일시
+	 */
+	@Schema(description = "등록일시", type = "String")
+	private String regDt;
+
+	/**
+	 * 수정자아이디
+	 */
+	@Schema(description = "수정자아이디", type = "String")
+	private String mdfrId;
+
+	/**
+	 * 수정일시
+	 */
+	@Schema(description = "수정일시", type = "String")
+	private String mdfcnDt;
+
+	/**
+	 * 첨부파일 목록
+	 */
+	@Schema(description = "첨부파일 목록", type = "AtchRVO")	
+	private List<AtchRVO> atchRVOs;
+	
+    /**
+     * 이미지 첨부파일명
+     */
+    @Schema(description = "이미지 첨부파일명", type = "String")
+    private String imgFileNm;
+
+    /**
+     * 이미지 첨부파일경로
+     */
+    @Schema(description = "이미지 첨부파일경로", type = "String")
+    private String imgFilePath;
+    
+    /**
+     * 썸네일 첨부파일명
+     */
+    @Schema(description = "썸네일 첨부파일명", type = "String")
+    private String thmbFileNm;
+
+    /**
+     * 썸네일 첨부파일경로
+     */
+    @Schema(description = "썸네일 첨부파일경로", type = "String")
+    private String thmbFilePath;
+           
+    /**
+     * 유튜브 동영상 ID
+     */
+    @Schema(description = "동영상 ID", type = "String")
+    private String videoId;
+    
+	/**
+	 * 조회수 증가
+	 */
+	public void increaseInqCnt() {
+		this.pstInqCnt++;
+	}
+}

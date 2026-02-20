@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.kids.domain.mbr.mapper.SttyAgtInfoMapper">
+<mapper namespace="kr.or.kids.domain.pp.mbr.mapper.SttyAgtInfoMapper">
 
     <select id="getSttyAgtInfo" parameterType="SttyAgtInfoPVO" resultType="SttyAgtInfoRVO" >
         /* 대국민포털_법정대리인정보기본 조회 (SttyAgtInfoMapper.getSttyAgtInfo) */

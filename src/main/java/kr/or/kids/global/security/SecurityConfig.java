@@ -17,8 +17,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import kr.or.kids.domain.auth.service.IdleTokenService;
-import kr.or.kids.domain.auth.service.TokenBlacklistService;
+import kr.or.kids.domain.pp.auth.service.IdleTokenService;
+import kr.or.kids.domain.pp.auth.service.TokenBlacklistService;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 

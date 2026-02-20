@@ -13,8 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import kr.or.kids.domain.auth.service.IdleTokenService;
-import kr.or.kids.domain.auth.service.TokenBlacklistService;
+import kr.or.kids.domain.pp.auth.service.IdleTokenService;
+import kr.or.kids.domain.pp.auth.service.TokenBlacklistService;
 
 public class JwtAuthFilter extends OncePerRequestFilter {
 
