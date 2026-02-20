@@ -7,6 +7,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.kids.domain.ca.common.file.service.FileService;
+import kr.or.kids.domain.ca.common.file.vo.FileDataReqVO;
+import kr.or.kids.domain.ca.common.file.vo.FileDeleteReqVO;
+import kr.or.kids.domain.ca.common.file.vo.FileGroupInsertReq;
+import kr.or.kids.domain.ca.common.file.vo.FileGroupReqData;
+
 import kr.go.kids.domain.atch.service.AtchService;
 import kr.go.kids.domain.opnn.mapper.OpnnMapper;
 import kr.go.kids.domain.opnn.service.OpnnService;
