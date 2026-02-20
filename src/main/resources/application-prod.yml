@@ -91,12 +91,12 @@ file:
 
 logging:
   level:
-    kr.go.kids.domain: INFO
+    kr.or.kids.domain: INFO
     jdbc.sqltiming: INFO
     jdbc.resultsettable: INFO
 
 mybatis:
-  type-aliases-package: kr.go.kids.domain
+  type-aliases-package: kr.or.kids.domain
   mapper-locations: mybatis/postgresql/mapper/**/*.xml
   configuration:
     cache-enabled: true

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.go.kids.domain.dur.mapper.DurNurswMapper">
+<mapper namespace="kr.or.kids.domain.dur.mapper.DurNurswMapper">
 
     <select id="getDurNursw" parameterType="DurNurswPVO" resultType="DurNurswRVO" >
         /* 대국민포털_DUR수유부주의기본 조회 (DurNurswMapper.getDurNursw) */

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.go.kids.domain.cms.mapper.CmsMapper">
+<mapper namespace="kr.or.kids.domain.cms.mapper.CmsMapper">
 
     <select id="getCms" parameterType="CmsPVO" resultType="CmsRVO" >
         /* 대국민포털_콘탠츠기본 정보 조회 (CmsMapper.getCms) */

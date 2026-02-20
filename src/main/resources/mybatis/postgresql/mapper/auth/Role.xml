@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.go.kids.domain.auth.mapper.RoleMapper">
+<mapper namespace="kr.or.kids.domain.auth.mapper.RoleMapper">
 
     <select id="getRole" parameterType="RolePVO" resultType="RoleRVO" >
         /* 대국민포털_역할기본 조회 (RoleMapper.getRole) */

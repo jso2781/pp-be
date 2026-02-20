@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.go.kids.domain.opnn.mapper.OpnnMapper">
+<mapper namespace="kr.or.kids.domain.opnn.mapper.OpnnMapper">
 
     <select id="nextOpnnSn" resultType="long">
 	SELECT nextval('kids_own.sq_pp_opnn_sn')

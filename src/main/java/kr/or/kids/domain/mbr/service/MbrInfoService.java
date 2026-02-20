@@ -1,0 +1,83 @@
+package kr.or.kids.domain.mbr.service;
+
+import kr.or.kids.domain.mbr.vo.MbrInfoDVO;
+import kr.or.kids.domain.mbr.vo.MbrInfoPVO;
+import kr.or.kids.domain.mbr.vo.MbrInfoRVO;
+import kr.or.kids.domain.mbr.vo.VerifyPasswordPVO;
+import kr.or.kids.global.system.common.vo.ApiPrnDto;
+
+public interface MbrInfoService
+{
+    /**
+     * 대국민포털_회원정보기본 기존 아이디, 패스워드 기준으로 데이터 존재 여부 조회
+     * @param verifyPasswordPVO
+     * @return 조회시 데이터가 존재하면 'Y', 아니면 'N'
+     */
+    public ApiPrnDto verifyPassword( VerifyPasswordPVO verifyPasswordPVO);
+    /**
+     * 대국민포털_회원정보기본 기존 아이디, 이메일 존재여부 조회
+     * 
+     * @param mbrInfoPVO 조회용 파라메터 정보
+     * @return 조회된 대국민포털_회원정보기본
+     */
+    public ApiPrnDto existMbrInfo(MbrInfoPVO mbrInfoPVO);
+
+    /**
+     * 대국민포털_회원정보기본 정보 조회 
+     *
+     * @param mbrInfoPVO 조회용 파라메터 정보 
+     * @return 조회된 대국민포털_회원정보기본 
+     */
+    public MbrInfoRVO getMbrInfo(MbrInfoPVO mbrInfoPVO);
+
+    /**
+     * 대국민포털_회원정보기본 정보 입력 
+     *
+     * @param mbrInfoPVO 입력할 대국민포털_회원정보기본 정보 
+     * @return 입력 결과 ApiPrnDto 객체 반환
+     */
+    public ApiPrnDto insertMbrInfo(MbrInfoPVO mbrInfoPVO);
+
+    /**
+     * 대국민포털_회원정보기본 정보 수정 
+     *
+     * @param mbrInfoPVO 수정할 대국민포털_회원정보기본 정보 
+     * @return 업데이트 결과 ApiPrnDto 객체 반환
+     */
+    public ApiPrnDto updateMbrInfo(MbrInfoPVO mbrInfoPVO);
+
+    /**
+     * 대국민포털_회원정보기본 정보 저장 
+     * <p>
+     * 기존 데이터가 존재하지 않으면 입력하고, 존재하면 수정한다.
+     * </p>
+     *
+     * @param mbrInfoPVO 저장할 대국민포털_회원정보기본 정보 
+     * @return 저장된 건수 
+     */
+    public int saveMbrInfo(MbrInfoPVO mbrInfoPVO);
+
+    /**
+     * 대국민포털_회원정보기본 정보 삭제 
+     *
+     * @param mbrInfoDVO 삭제용 파라메터 정보 
+     * @return 삭제된 건수 
+     */
+    public int deleteMbrInfo(MbrInfoDVO mbrInfoDVO);
+    
+    /**
+     * 대국민포털_회원정보기본 ID 존재 여부 조회
+     * 
+     * @param mbrInfoPVO
+     * @return ApiPrnDto API성공/실패여부
+     */
+    public ApiPrnDto findMbrInfoId(MbrInfoPVO mbrInfoPVO);
+    
+    /**
+     * 대국민포털_회원정보기본 패스워드 정보 수정
+     * 
+     * @param mbrInfoPVO
+     * @return ApiPrnDto API성공/실패여부
+     */
+    public ApiPrnDto updateMbrInfoPw(MbrInfoPVO mbrInfoPVO);
+}

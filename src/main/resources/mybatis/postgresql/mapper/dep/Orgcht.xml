@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.go.kids.domain.dep.mapper.OrgchtMapper">
+<mapper namespace="kr.or.kids.domain.dep.mapper.OrgchtMapper">
 
     <select id="getOrgcht" parameterType="OrgchtPVO" resultType="OrgchtRVO" >
         /* 대국민포털_KIDS조직도기본 조회 (OrgchtMapper.getOrgcht) */

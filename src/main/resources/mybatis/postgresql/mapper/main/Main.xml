@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.go.kids.domain.main.mapper.MainMapper">
+<mapper namespace="kr.or.kids.domain.main.mapper.MainMapper">
 
     <select id="selectRecent4PstListByTaskCd" parameterType="String" resultType="MainRVO" >
         /* 대국민포털_메인화면 최근 게시물 조회 (SNS 및 홍보존) (MainMapper.selectRecent4PstListByTaskCd) */

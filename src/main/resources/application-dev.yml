@@ -93,13 +93,13 @@ file:
 
 logging:
   level:
-    kr.go.kids.domain: DEBUG
+    kr.or.kids.domain: DEBUG
     jdbc.sqltiming: INFO
     jdbc.resultsettable: INFO
     org.springframework.boot.context.config: DEBUG
 
 mybatis:
-  type-aliases-package: kr.go.kids.domain
+  type-aliases-package: kr.or.kids.domain
   mapper-locations: mybatis/postgresql/mapper/**/*.xml
   configuration:
     cache-enabled: true
