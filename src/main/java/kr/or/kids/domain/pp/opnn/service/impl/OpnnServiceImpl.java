@@ -6,13 +6,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.kids.domain.pp.atch.service.AtchService;
-import kr.or.kids.domain.pp.ca.common.file.service.FileService;
-import kr.or.kids.domain.pp.ca.common.file.vo.FileDataReqVO;
-import kr.or.kids.domain.pp.ca.common.file.vo.FileDeleteReqVO;
-import kr.or.kids.domain.pp.ca.common.file.vo.FileGroupInsertReq;
-import kr.or.kids.domain.pp.ca.common.file.vo.FileGroupReqData;
+import kr.or.kids.domain.ca.common.file.service.FileService;
+import kr.or.kids.domain.ca.common.file.vo.FileDataReqVO;
+import kr.or.kids.domain.ca.common.file.vo.FileDeleteReqVO;
+import kr.or.kids.domain.ca.common.file.vo.FileGroupInsertReq;
+import kr.or.kids.domain.ca.common.file.vo.FileGroupReqData;
 import kr.or.kids.domain.pp.opnn.mapper.OpnnMapper;
 import kr.or.kids.domain.pp.opnn.service.OpnnService;
 import kr.or.kids.domain.pp.opnn.vo.OpnnPVO;
@@ -36,39 +37,42 @@ public class OpnnServiceImpl implements OpnnService
 
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         
-        try{
-            
+        try {
+            MultipartFile[] attachFileArr = opnnPVO.getAttachFiles();
 
-            HashMap<String, Object> params = new HashMap<String, Object>();
-            params.put("menuSn", opnnPVO.getMenuSn());
-            params.put("menuType", opnnPVO.getMenuType());
-            
-            String atchFileSnStr = "";
-            
-            if(opnnPVO.getAttachFiles() != null) {
+            if(attachFileArr != null && attachFileArr.length > 0){
+
+                FileGroupInsertReq fgir = new FileGroupInsertReq();
+                fgir.setTaskSeCd("pp");
+                fgir.setTaskSeTrgtId("2");
+
+                // 신규 파일그룹 일련번호 구하기
+                ApiPrnDto groupInsertResult = fileService.groupInsert(fgir);
+
+                Object atchFileGroupIdObj = groupInsertResult.getData().get("atchFileGroupId");
+                String atchFileGroupId = String.valueOf(atchFileGroupIdObj);
+
+                HashMap<String, Object> params = new HashMap<>();
+                params.put("savePath", "pp");                       // 파일경로 정보
+                params.put("atchFileGroupId", atchFileGroupId);     // 첨부파일그룹아이디
+                params.put("prvcInclYn", "0");                      // 개인정보 여부
+                params.put("isExcel", "0");                         // 엑셀파일 여부
+
                 // 대국민포털_의견제안 첨부파일 저장
-                // (params, opnnPVO.getAttachFiles());
-                ApiPrnDto fileResult = fileService.uploadFiles(params, opnnPVO.getAttachFiles());
-                
-                HashMap<String, Object> fileMap = fileResult.getData();
-                List<HashMap<String, Object>> fileList = (List<HashMap<String, Object>>) fileMap.get("uploadList");
-                for(HashMap<String, Object> fileInfo : fileList) {
-                    atchFileSnStr += fileInfo.get("fileId") + ",";
-                }
-                if (atchFileSnStr.endsWith(",")) {
-                    atchFileSnStr = atchFileSnStr.substring(0, atchFileSnStr.length() - 1);
+                ApiPrnDto fileResult = fileService.uploadFiles(params, attachFileArr);
+
+                if("0".equals(fileResult.getCode())){
+                    opnnPVO.setAtchFileGroupId(atchFileGroupId);
                 }
             }
-            
+
             long nextOpnnSn = opnnMapper.nextOpnnSn();
 
             opnnPVO.setOpnnSn(BigInteger.valueOf(nextOpnnSn));
-            opnnPVO.setAtchFileGroupId(atchFileSnStr);
-            
+
             opnnMapper.insertOpnn(opnnPVO);
-            
         }catch(Exception e){
-            log.debug("의견제안 등록 실패", e);
+            log.debug("OpnnServiceImpl insertOpnn fail!! ", e);
             result = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
             result.setMsg(MessageContextHolder.getMessage("api.error.500"));
         }
