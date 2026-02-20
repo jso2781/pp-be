@@ -54,10 +54,9 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
             exprtTaskPVO.setMbrNo(exprtApplyIVO.getMbrNo());
             ExprtTaskRVO info = exprtTaskMapper.selectExprtInfo(exprtTaskPVO);
 
-            if (Arrays.asList("W", "A").contains(info.getExprtAprvSttsCode())) {
+            data.put("nextStepYn", true);
+            if (info != null && Arrays.asList("W", "A").contains(info.getExprtAprvSttsCode())) {
                 data.put("nextStepYn", false);
-            } else {
-                data.put("nextStepYn", true);
             }
         } else {
             data.put("taskSystemList", new ArrayList<ExprtApplyRVO>());
