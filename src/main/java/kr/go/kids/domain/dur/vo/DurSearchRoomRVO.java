@@ -48,6 +48,11 @@ public class DurSearchRoomRVO {
         @Schema(description = "병용금기 성분", type = "String")
         private String prohibitIgrdNm;
         /**
+         * 병용금기 제품명
+         */
+        @Schema(description = "병용금기 제품명", type = "String")
+        private String prohibitPrdctNm;
+        /**
          * 상세정보
          */
         @Schema(description = "상세정보", type = "String")
