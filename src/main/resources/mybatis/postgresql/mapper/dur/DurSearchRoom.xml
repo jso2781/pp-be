@@ -270,8 +270,8 @@
             FROM(
                 SELECT
                     'eftgrp' as bann_type_cd
-                    ,item_nm  as prdct_nm                           /* 검색한 제품명 */
-                    ,gnrl_nm as igrd_nm                             /* 검색한 제품의 성분 */
+                    ,eg.item_nm  as prdct_nm                           /* 검색한 제품명 */
+                    ,eg.gnrl_nm as igrd_nm                             /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
@@ -279,23 +279,32 @@
                     ,null as condi_grd_cd
                     ,null as day_max_admin_cpct
                     ,null as max_admin_prd_day_cnt
-                    ,eff_group_nm                                   /* 효능그룹명 */
-                    ,group_nm                                       /* 계열(그룹명) */
+                    ,eg.eff_group_nm                                   /* 효능그룹명 */
+                    ,(
+                        select
+                            dc.com_dtl_cd_nm
+                        from kids_own.tb_ca_c_dtl_code dc
+                        inner join kids_own.tb_ca_c_group_code gc
+                            on dc.com_group_cd = gc.com_group_cd
+                        where gc.group_cd_nm = eg.eff_group_nm
+                        and dc.com_dtl_cd = eg.group_nm
+                        LIMIT 1
+                     ) as group_nm                                  /* 계열(그룹명) */
                     ,null as dtl_info_cn
                     ,null as rmrk_cn
-	            FROM kids_own.tb_pp_m_dur_eftgrp
-	            WHERE oper_stts_cd = 'O' 
-                AND group_nm_1 IN(
-	                SELECT
-	                    e.group_nm_1                                       /* 그룹명_1 */
-	                FROM kids_own.tb_pp_m_dur_eftgrp e
-	                WHERE oper_stts_cd = 'O' 
-	                <if test="igrdNm != null and igrdNm != ''">
-	                    AND (e.gnrl_nm like '%' || #{igrdNm} || '%' OR e.mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
-	                </if>
-	                <if test="prdctNm != null and prdctNm != ''">
-	                    AND (e.item_nm like '%' || #{prdctNm} || '%' OR e.mfds_prdct_nm like '%' || #{prdctNm} || '%')
-	                </if>
+                FROM kids_own.tb_pp_m_dur_eftgrp eg
+                WHERE eg.oper_stts_cd = 'O' 
+                AND eg.group_nm_1 IN(
+                    SELECT
+                        e.group_nm_1                                       /* 그룹명_1 */
+                    FROM kids_own.tb_pp_m_dur_eftgrp e
+                    WHERE oper_stts_cd = 'O' 
+                    <if test="igrdNm != null and igrdNm != ''">
+                        AND (e.gnrl_nm like '%' || #{igrdNm} || '%' OR e.mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
+                    </if>
+                    <if test="prdctNm != null and prdctNm != ''">
+                        AND (e.item_nm like '%' || #{prdctNm} || '%' OR e.mfds_prdct_nm like '%' || #{prdctNm} || '%')
+                    </if>
                 )
             ) EFT
             UNION ALL
@@ -462,12 +471,21 @@
     <select id="selectEftgrpDetailList" parameterType="DurEftgrpDetailPVO" resultType="DurEftgrpDetailRVO">
         /* 효능군중복주의 상세 조회(특정 성분의 그룹1 기준으로 조회, 팝업용) */
         SELECT
-             eff_group_nm                                   /* 효능그룹명 */
-            ,group_nm                                       /* 계열(그룹명) */
-            ,coalesce(gnrl_nm, mfds_igrd_nm_cn) as igrd_nm  /* 성분 */
-        FROM kids_own.tb_pp_m_dur_eftgrp
-        WHERE oper_stts_cd = 'O' 
-        AND group_nm_1 IN(
+             eg.eff_group_nm                                   /* 효능그룹명 */
+            ,(
+                select
+                    dc.com_dtl_cd_nm
+                from kids_own.tb_ca_c_dtl_code dc
+                inner join kids_own.tb_ca_c_group_code gc
+                    on dc.com_group_cd = gc.com_group_cd
+                where gc.group_cd_nm = eg.eff_group_nm
+                and dc.com_dtl_cd = eg.group_nm
+                LIMIT 1
+             ) as group_nm                                  /* 계열(그룹명) */
+            ,coalesce(eg.gnrl_nm, eg.mfds_igrd_nm_cn) as igrd_nm  /* 성분 */
+        FROM kids_own.tb_pp_m_dur_eftgrp eg
+        WHERE eg.oper_stts_cd = 'O' 
+        AND eg.group_nm_1 IN(
             SELECT
                 e.group_nm_1                /* 그룹명_1 */
             FROM kids_own.tb_pp_m_dur_eftgrp e
