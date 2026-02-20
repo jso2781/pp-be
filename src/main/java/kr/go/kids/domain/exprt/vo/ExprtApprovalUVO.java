@@ -59,6 +59,12 @@ public class ExprtApprovalUVO{
     private String taskRjctRsn;
 
     /**
+     * 전문가 재직여부
+     */
+    @Schema(description = "전문가 재직여부", type = "String")
+    private String exprtHdofYn;
+
+    /**
      * 전문가 업무시스템 권한 목록
      */
     @Schema(description = "업무시스템 반려사유", type = "ExprtApprovalAuthRVO")

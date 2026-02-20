@@ -30,6 +30,7 @@
            AND it.bzmn_task_mng_no = et.bzmn_task_mng_no
            AND et.exprt_no = ei.exprt_no
            AND ei.encpt_exprt_flnm LIKE '%' || #{searchWrd} || '%'
+           AND ei.aprv_stts_cd != 'C'
         <if test="aprvSttsCode != 'all'">
            AND et.aprv_stts_cd = #{aprvSttsCode}
         </if>
@@ -67,6 +68,7 @@
              , date_trunc('second', et.aprv_prcs_dt) AS task_aprv_prcs_dt
              , date_trunc('second', ei.reg_dt) AS exprt_info_reg_dt
              , ei.exprt_no
+             , et.bzmn_task_mng_no
         FROM kids_own.TB_PP_M_EXPRT_TASK et
                 , kids_own.TB_PP_M_EXPRT_INFO ei
                 , kids_own.TB_PP_M_INST_TASK it
@@ -155,11 +157,10 @@
     <update id="collectExprtApproval" parameterType="ExprtApprovalUVO">
         /* 대국민포털_전문가업무신청관리 소속 전문가 회원 회수처리 (ExprtApprovalMapper.collectExprtApproval) */
         UPDATE kids_own.TB_PP_M_EXPRT_INFO
-        SET aprv_stts_cd = 'C'
-          , rjct_rsn = NULL
-          , encpt_exprt_flnm = NULL
-          , encpt_exprt_inst_eml_nm = NULL
-          , exprt_hdof_yn = 'N'
+        SET aprv_stts_cd = #{exprtAprvSttsCode}
+          , encpt_exprt_flnm = '********'
+          , encpt_exprt_inst_eml_nm = '********'
+          , exprt_hdof_yn = #{exprtHdofYn}
           , mdfr_id = #{mbrId}
           , mdfcn_dt = CURRENT_TIMESTAMP
         WHERE exprt_no = #{exprtNo}
@@ -169,7 +170,6 @@
         /* 대국민포털_전문가업무신청관리 소속 전문가 회원 업무 회수처리 (ExprtApprovalMapper.collectExprtTaskApproval) */
         UPDATE kids_own.TB_PP_M_EXPRT_TASK
         SET aprv_stts_cd = 'C'
-          , rjct_rsn = NULL
           , mdfr_id = #{mbrId}
           , mdfcn_dt = CURRENT_TIMESTAMP
         WHERE exprt_no = #{exprtNo}

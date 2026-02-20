@@ -5,6 +5,8 @@ import kr.go.kids.global.system.common.vo.PageRequestDto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Schema(name = "대국민포털_전문가업무신청관리", description = "대국민포털_전문가업무신청관리 Search Parameter VO")
@@ -39,4 +41,10 @@ public class ExprtApprovalPVO extends PageRequestDto{
      */
     @Schema(description = "업무구분코드", type = "String")
     private String taskSeCd;
+
+    /**
+     * 사업자업무관리번호 목록
+     */
+    @Schema(description = "사업자업무관리번호 목록", type = "String")
+    private List<String> bzmnTaskMngNos;
 }

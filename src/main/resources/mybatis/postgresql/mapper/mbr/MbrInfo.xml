@@ -93,8 +93,9 @@
             FROM kids_own.tb_pp_m_exprt_info ex1
             INNER JOIN kids_own.tb_pp_m_exprt_task et
                 ON ex1.exprt_no = et.exprt_no
-            LEFT JOIN kids_own.tb_pp_m_inst_task it
+            INNER JOIN kids_own.tb_pp_m_inst_task it
                 ON et.bzmn_task_mng_no = it.bzmn_task_mng_no
+               AND it.use_yn = 'Y'
             WHERE mbr.mbr_no = ex1.mbr_no
             AND ex1.exprt_hdof_yn = 'Y'
         ) ex ON TRUE

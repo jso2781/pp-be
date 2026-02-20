@@ -54,6 +54,12 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
 
         ExprtApprovalRVO detail = exprtApprovalMapper.selectExprtApproval(exprtApprovalPVO);
 
+        if (StringUtils.isBlank(detail.getBzmnTaskMngNo()) || !exprtApprovalPVO.getBzmnTaskMngNos().contains(detail.getBzmnTaskMngNo())){
+            data.put("defenseYn", true);
+            result.setData(data);
+            return result;
+        }
+
         // masking
         detail.setMbrId(MaskingUtil.maskId(detail.getMbrId().trim()));
         detail.setName(MaskingUtil.maskName(detail.getName().trim()));
@@ -103,6 +109,10 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
 
                 // 전문가 회원 전환 신청 반려 시 로직 수행 (업무시스템 삭제, 이메일 발송)
                 if ("R".equals(exprtApprovalUVO.getExprtAprvSttsCode())) {
+                    exprtApprovalUVO.setExprtAprvSttsCode("R");
+                    exprtApprovalUVO.setExprtHdofYn("Y");
+                    exprtApprovalMapper.collectExprtApproval(exprtApprovalUVO);
+
                     exprtReject(exprtApprovalUVO);
 
                     data.put("result", "SUCCESS");
@@ -150,6 +160,8 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         exprtApprovalMapper.collectExprtTaskApproval(exprtApprovalUVO);
 
         // 전문가 정보 개인정보 삭제 및 회수처리
+        exprtApprovalUVO.setExprtAprvSttsCode("C");
+        exprtApprovalUVO.setExprtHdofYn("N");
         exprtApprovalMapper.collectExprtApproval(exprtApprovalUVO);
 
         data.put("result", "SUCCESS");

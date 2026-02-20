@@ -128,4 +128,10 @@ public class ExprtApprovalRVO extends ExprtApplyRVO {
      */
     @Schema(description = "업무시스템 승인상태코드라벨", type = "String")
     private String taskAprvSttsLabel;
+
+    /**
+     * 사업자업무관리번호
+     */
+    @Schema(description = "사업자업무관리번호", type = "String")
+    private String bzmnTaskMngNo;
 }
