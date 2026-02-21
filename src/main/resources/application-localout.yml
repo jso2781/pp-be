@@ -99,7 +99,7 @@ logging:
 
 mybatis:
   type-aliases-package: kr.or.kids.domain
-  mapper-locations: mybatis/postgresql/mapper/**/*.xml
+  mapper-locations: classpath*:/mybatis/postgresql/mapper/**/*.xml
   configuration:
     cache-enabled: true
     lazy-loading-enabled: true

@@ -1,7 +1,7 @@
 -- kids_own.sq_ca_atch_file_group_id definition
 
 -- DROP SEQUENCE kids_own.sq_ca_atch_file_group_id;
-
+-- SELECT setval('kids_own.sq_ca_atch_file_group_id', (SELECT COALESCE(MAX(atch_file_group_id)::bigint, 0) FROM kids_own.tb_ca_e_file_group_trsm), true);
 CREATE SEQUENCE kids_own.sq_ca_atch_file_group_id
 	INCREMENT BY 1
 	MINVALUE 1
@@ -33,7 +33,7 @@ GRANT USAGE, SELECT ON SEQUENCE kids_own.sq_ca_atch_file_group_id TO ca_dev;
 -- kids_own.sq_ca_atch_file_id definition
 
 -- DROP SEQUENCE kids_own.sq_ca_atch_file_id;
-
+-- SELECT setval('kids_own.sq_ca_atch_file_id', (SELECT COALESCE(MAX(atch_file_id)::bigint, 0) FROM kids_own.tb_ca_e_file_trsm), true);
 CREATE SEQUENCE kids_own.sq_ca_atch_file_id
 	INCREMENT BY 1
 	MINVALUE 1

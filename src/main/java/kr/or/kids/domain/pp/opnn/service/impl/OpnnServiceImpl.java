@@ -32,6 +32,18 @@ public class OpnnServiceImpl implements OpnnService
 
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
 
+        /*
+         * 1.fileService.groupInsert에서 kids_own.tb_ca_e_file_group_trsm 입력될 때, rgtr_id, mdfr_id 칼럼의 not null 오류 방지
+         * 2.opnnMapper.insertOpnn에서 kids_own.TB_PP_M_OPNN 입력될 때, rgtr_id, mdfr_id 칼럼의 not null 오류 방지
+         */
+        if(opnnPVO.getRgtrId() == null){
+            opnnPVO.setRgtrId("admin");
+        }
+
+        if(opnnPVO.getMdfrId() == null){
+            opnnPVO.setMdfrId("admin");
+        }
+
         try {
             MultipartFile[] attachFileArr = opnnPVO.getAttachFiles();
 
@@ -40,7 +52,13 @@ public class OpnnServiceImpl implements OpnnService
                 FileGroupInsertReq fgir = new FileGroupInsertReq();
                 fgir.setTaskSeCd("pp");
                 fgir.setTaskSeTrgtId("2");
+                fgir.setRgtrId(opnnPVO.getRgtrId());
+                fgir.setMdfrId(opnnPVO.getMdfrId());
 
+                log.info("ApiPrnDto loaded from: {}", ApiPrnDto.class.getProtectionDomain().getCodeSource().getLocation());
+
+                log.info("FileService loaded from: {}", FileService.class.getProtectionDomain().getCodeSource().getLocation());
+                      
                 // 신규 파일그룹 일련번호 구하기
                 ApiPrnDto groupInsertResult = fileService.groupInsert(fgir);
 

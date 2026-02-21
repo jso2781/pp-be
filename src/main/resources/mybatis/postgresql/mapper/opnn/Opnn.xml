@@ -39,10 +39,10 @@
             ,#{refMttrCn}
             ,#{insdRefMttrCn}
             ,#{atchFileGroupId}
-		    ,NULL
-		    ,now()
-		    ,NULL
-		    ,now()
+            ,#{rgtrId}
+            ,now()
+            ,#{mdfrId}
+            ,now()
         )
     </insert>
 </mapper>
