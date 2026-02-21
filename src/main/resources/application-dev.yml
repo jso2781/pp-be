@@ -89,6 +89,8 @@ springdoc:
 
 file:
   storePath: C:\data
+  encryptkey: 12345678901234567890123456789012
+  algorithm: AES/CBC/PKCS5Padding
   url: /files
 
 logging:
