@@ -18,16 +18,10 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
-import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -48,6 +42,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         logger.info("WebMvcConfig 생성됨.");
     }
 
+    /*
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         // /pp/config/** 경로에 대한 CORS 설정
@@ -65,6 +60,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
                 .allowCredentials(true);
     }
+    */
 
     /**
      * messages.properties / messages_ko.properties / messages_en.properties 로딩

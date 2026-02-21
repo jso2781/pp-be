@@ -1,5 +1,9 @@
 package kr.or.kids.global.security;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,10 +24,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import kr.or.kids.domain.pp.auth.service.IdleTokenService;
 import kr.or.kids.domain.pp.auth.service.TokenBlacklistService;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
-import java.util.Arrays;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -38,6 +38,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
         .cors(withDefaults())
         .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        // Authorization(인가)
         .authorizeHttpRequests(requests -> requests
             // Any-ID 정적 리소스/설정
             .antMatchers("/anyid/**", "/config/**").permitAll()
@@ -48,8 +49,11 @@ public class SecurityConfig {
 
             .antMatchers("/api/auth/login", "/api/auth/refresh").permitAll()
             .antMatchers("/api/auth/logout", "/api/auth/extend").authenticated()
+            .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            .anyRequest().permitAll()
 //            .anyRequest().authenticated()
         )
+        // Authentication(인증)
         .addFilterBefore(new JwtAuthFilter(jwtTokenProvider, tokenBlacklistService, idleTokenService), UsernamePasswordAuthenticationFilter.class)
         .formLogin(login -> login.disable())
         .httpBasic(basic -> basic.disable())
@@ -62,7 +66,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:3000", "http://192.168.2.149:30020", "http://192.168.2.148:30020", "http://192.168.2.149:30022"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
