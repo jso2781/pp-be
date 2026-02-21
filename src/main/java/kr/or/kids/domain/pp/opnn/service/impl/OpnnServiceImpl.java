@@ -2,18 +2,13 @@ package kr.or.kids.domain.pp.opnn.service.impl;
 
 import java.math.BigInteger;
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.or.kids.domain.pp.atch.service.AtchService;
 import kr.or.kids.domain.ca.common.file.service.FileService;
-import kr.or.kids.domain.ca.common.file.vo.FileDataReqVO;
-import kr.or.kids.domain.ca.common.file.vo.FileDeleteReqVO;
 import kr.or.kids.domain.ca.common.file.vo.FileGroupInsertReq;
-import kr.or.kids.domain.ca.common.file.vo.FileGroupReqData;
 import kr.or.kids.domain.pp.opnn.mapper.OpnnMapper;
 import kr.or.kids.domain.pp.opnn.service.OpnnService;
 import kr.or.kids.domain.pp.opnn.vo.OpnnPVO;
@@ -31,12 +26,12 @@ public class OpnnServiceImpl implements OpnnService
 
     @Autowired
     private FileService fileService;
-    
+
     @Override
     public ApiPrnDto insertOpnn(OpnnPVO opnnPVO) {
 
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
-        
+
         try {
             MultipartFile[] attachFileArr = opnnPVO.getAttachFiles();
 
