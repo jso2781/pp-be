@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.util.unit.DataSize;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
@@ -39,7 +40,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     public WebMvcConfig()
     {
-        logger.info("WebMvcConfig 생성됨.");
+        logger.info("======================= pp-be WebMvcConfig 생성됨.");
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        // 맨 앞에 넣어서 기본 resolver보다 먼저 기회 얻기
+        resolvers.add(0, new JwtAuditModelAttributeArgumentResolver());
     }
 
     /*

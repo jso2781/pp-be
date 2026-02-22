@@ -1,6 +1,6 @@
 package kr.or.kids.domain.pp.opnn.controller;
 
-import java.math.BigInteger;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,10 +17,13 @@ import kr.or.kids.domain.pp.opnn.service.OpnnService;
 import kr.or.kids.domain.pp.opnn.vo.OpnnPVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
+import kr.or.kids.global.util.JwtAudit;
+import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "OpnnController", description = "대국민포털_의견제안 관리")
 @RestController
 @RequestMapping(value="/api/opnn")
+@Slf4j
 public class OpnnController
 { 
     @Value("${file.storePath}")
@@ -33,10 +35,11 @@ public class OpnnController
     @Operation(summary = "대국민포털_의견제안 입력 ", description = "대국민포털_의견제안 입력한다.")
     @PostMapping(value="/insertOpnn")
     @ResponseBody
-    public ResponseEntity<ApiPrnDto> insertOpnn(@ModelAttribute OpnnPVO opnnPVO) {
-        opnnPVO.setMenuSn(new BigInteger("111"));//메뉴 일련번호
-        opnnPVO.setMenuType("tempType1");//메뉴 유형
+    public ResponseEntity<ApiPrnDto> insertOpnn(@ModelAttribute OpnnPVO opnnPVO, HttpServletRequest request) {
         
+        // JWT Audit 정보 주입 메서드 호출
+        JwtAudit.injectJwtInfo(opnnPVO, request);
+
         ApiPrnDto apiPrnDto = opnnService.insertOpnn(opnnPVO);
 
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());

@@ -1,9 +1,7 @@
 package kr.or.kids.global.advice;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +13,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdvice;
+
+import kr.or.kids.global.util.JwtAudit;
 
 /**
  * @RequestBody를 받는 모든 객체에 JWT 정보를 자동 주입하는 ControllerAdvice
@@ -47,8 +47,8 @@ public class RequestBodyControllerAdvice implements RequestBodyAdvice {
             return body;
         }
 
-        // JWT 정보 주입 메서드 호출
-        injectJwtInfo(body, request);
+        // JWT Audit 정보 주입 메서드 호출
+        JwtAudit.injectJwtInfo(body, request);
 
         return body;
     }
@@ -73,48 +73,5 @@ public class RequestBodyControllerAdvice implements RequestBodyAdvice {
         return null;
     }
 
-    /**
-     * JWT 정보를 객체에 주입한다
-     * 
-     * @param body VO 객체
-     * @param request HttpServletRequest
-     */
-    private void injectJwtInfo(Object body, HttpServletRequest request) {
-        try {
-            // JWT 정보 추출
-            String mbrId = (String) request.getAttribute("mbrId");
 
-            if(mbrId != null){
-                // Audit 속성을 mbrId 설정
-                invokeMethodSafely(body, "setRgtrId", mbrId);
-                invokeMethodSafely(body, "setMdfrId", mbrId);
-            }
-        }catch(Exception e){}
-    }
-
-    /**
-     * 안전한 메서드 호출 방식
-     */
-    private void invokeMethodSafely(Object target, String methodName, String userId){
-        String simpleClassName = target.getClass().getSimpleName();
-        try{
-            if("ArrayList".equals(simpleClassName)){
-                if(target instanceof ArrayList){
-                    ArrayList<?> list = (ArrayList<?>)target;
-
-                    for(Object obj : list){
-                        Method method = obj.getClass().getMethod(methodName, String.class);
-                        method.invoke(obj, userId);
-                    }
-                }
-            }else{
-                Method method = target.getClass().getMethod(methodName, String.class);
-                method.invoke(target, userId);
-            }
-        }catch(NoSuchMethodException e){
-            // 메서드가 없으면 무시 (선택적 기능)
-        }catch(Exception e){
-            // 기타 오류는 로깅만
-        }
-    }
 }

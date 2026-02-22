@@ -15,7 +15,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import kr.or.kids.domain.pp.auth.service.IdleTokenService;
 import kr.or.kids.domain.pp.auth.service.TokenBlacklistService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
@@ -61,6 +63,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(mbrId, null, List.of());
                 SecurityContextHolder.getContext().setAuthentication(auth);
 
+                log.debug("================ pp-be JwtAuthFilter doFilterInternal token mbrId="+mbrId);
                 // 6) RVO, PVO 객체의 Audit 정보 설정용
                 request.setAttribute("mbrId", mbrId);
             }catch(Exception e){
