@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import kr.or.kids.domain.ca.common.file.service.FileService;
+import kr.or.kids.domain.ca.common.file.vo.FileDataReqVO;
+import kr.or.kids.domain.ca.common.file.vo.FileDownResVO;
 import kr.or.kids.domain.pp.atch.service.AtchService;
-import kr.or.kids.domain.pp.atch.vo.AtchDWVO;
 import kr.or.kids.domain.pp.atch.vo.AtchPVO;
 import kr.or.kids.domain.pp.atch.vo.AtchRVO;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +41,11 @@ public class AtchController
 {
     @Autowired
     private AtchService atchService;
+
+    @Autowired
+    private FileService fileService;
     
+
     @Value("${file.storePath}")
     private String fileStorePath;
 
@@ -65,9 +71,9 @@ public class AtchController
     
     @Operation(summary = "공통_첨부파일기본 첨부파일 다운로드", description = "공통_첨부파일기본 첨부파일을 다운로드한다.")
     @PostMapping(value="/download")
-    public ResponseEntity<Resource> downloadFile(@RequestBody AtchPVO atchPVO)
+    public ResponseEntity<Resource> downloadFile(@RequestBody FileDataReqVO fdrv)
     {
-        AtchDWVO downloadParam = atchService.downloadFile(atchPVO);
+        FileDownResVO downloadParam = fileService.downloadFile(fdrv);
 
         Resource resource = downloadParam.getResource();
 
@@ -85,8 +91,8 @@ public class AtchController
         return ResponseEntity.ok()
                 .headers(headers)
                 .body(resource);
-    }       
-    
+    }
+
     @Operation(summary = "공통_첨부파일기본 썸네일 조회", description = "공통_첨부파일기본 썸네일 파일을 조회한다.")
     @GetMapping(value="/thumb/**")
     public ResponseEntity<Resource> getThumb(HttpServletRequest request)

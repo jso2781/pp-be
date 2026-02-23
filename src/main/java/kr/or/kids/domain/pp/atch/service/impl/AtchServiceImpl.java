@@ -272,7 +272,7 @@ public class AtchServiceImpl implements AtchService
             }
             
             // 파일명 검증 (경로 조작 공격 방지)
-            if (!isValidFilename(filename)) {
+            if(!isValidFilename(filename)) {
                 log.error("File name verification failed: {}", filename);
                 throw new ApplicationException("api.error.file.validation.name");  
             }
