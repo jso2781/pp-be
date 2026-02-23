@@ -101,14 +101,11 @@ public class AtchController
         String basePath = "/thumb/";
         String relativePath = requestUri.substring(requestUri.indexOf(basePath) + basePath.length());
 
-        Path baseDir = Paths.get(fileStorePath).normalize();
-        Path filePath = baseDir.resolve(relativePath).normalize();
+        FileDataReqVO fdrv = new FileDataReqVO();
+        fdrv.setSrvrFileNm(relativePath);
+        FileDownResVO downloadParam = fileService.downloadFile(fdrv);
 
-        if (!filePath.startsWith(baseDir)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
-        Resource resource = new FileSystemResource(filePath.toFile());
+        Resource resource = downloadParam.getResource();
 
         if (!resource.exists()) {
             return ResponseEntity.notFound().build();
