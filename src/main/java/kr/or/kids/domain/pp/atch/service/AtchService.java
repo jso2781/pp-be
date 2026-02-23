@@ -71,12 +71,4 @@ public interface AtchService
      * @return 업로드후 응답결과 객체 반환
      */
     public ApiPrnDto uploadFile(HashMap<String, Object> params, MultipartFile[] uploadFiles);
-    
-    /**
-     * 공통_첨부파일기본 파일 다운로드 
-     *
-     * @param atchPVO 다운로드 파라메터 정보 
-     * @return 세팅된 다운로드 파라메터 정보 
-     */
-    public AtchDWVO downloadFile(AtchPVO atchPVO);        
 }

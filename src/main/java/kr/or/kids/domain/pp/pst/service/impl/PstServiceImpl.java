@@ -1,19 +1,6 @@
 package kr.or.kids.domain.pp.pst.service.impl;
 
-import java.math.BigInteger;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Service;
-
 import com.github.pagehelper.PageHelper;
-
-import kr.or.kids.domain.pp.atch.mapper.AtchMapper;
-import kr.or.kids.domain.pp.atch.vo.AtchPVO;
 import kr.or.kids.domain.pp.atch.vo.AtchRVO;
 import kr.or.kids.domain.pp.pst.mapper.PstMapper;
 import kr.or.kids.domain.pp.pst.service.PstService;
@@ -24,6 +11,13 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 import kr.or.kids.global.util.PagingUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
+
+import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -31,7 +25,6 @@ import lombok.extern.slf4j.Slf4j;
 public class PstServiceImpl implements PstService {
 
     private final PstMapper pstMapper;
-    private final AtchMapper atchMapper;
 
     @Override
     public ApiPrnDto selectPstList(PstPVO pstPVO) {
@@ -69,11 +62,8 @@ public class PstServiceImpl implements PstService {
             pstRVO.increaseInqCnt();
 
             String atchFileGroupId = pstRVO.getAtchFileGroupId();
-            if (StringUtils.isNotBlank(atchFileGroupId)) {                
-                AtchPVO atchPVO = new AtchPVO();
-                atchPVO.setAtchFileGroupId(atchFileGroupId);
-
-                List<AtchRVO> atchList = atchMapper.getAtchList(atchPVO);
+            if (StringUtils.isNotBlank(atchFileGroupId)) {
+                List<AtchRVO> atchList = pstMapper.getAtchList(atchFileGroupId);
                 pstRVO.setAtchRVOs(atchList);
             }
 

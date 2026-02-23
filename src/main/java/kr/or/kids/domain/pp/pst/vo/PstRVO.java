@@ -114,31 +114,25 @@ public class PstRVO {
      */
     @Schema(description = "이미지 첨부파일명", type = "String")
     private String imgFileNm;
-
-    /**
-     * 이미지 첨부파일경로
-     */
-    @Schema(description = "이미지 첨부파일경로", type = "String")
-    private String imgFilePath;
     
     /**
      * 썸네일 첨부파일명
      */
     @Schema(description = "썸네일 첨부파일명", type = "String")
     private String thmbFileNm;
-
-    /**
-     * 썸네일 첨부파일경로
-     */
-    @Schema(description = "썸네일 첨부파일경로", type = "String")
-    private String thmbFilePath;
            
     /**
      * 유튜브 동영상 ID
      */
     @Schema(description = "동영상 ID", type = "String")
     private String videoId;
-    
+
+	/**
+	 * 첨부파일 목록
+	 */
+	@Schema(description = "재직증명서 파일", type = "String")
+	private List<AtchRVO> files;
+
 	/**
 	 * 조회수 증가
 	 */

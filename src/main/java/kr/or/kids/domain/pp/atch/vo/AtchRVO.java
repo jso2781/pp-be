@@ -1,7 +1,5 @@
 package kr.or.kids.domain.pp.atch.vo;
 
-import java.math.BigInteger;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,10 +35,10 @@ public class AtchRVO
     private String fileStrgPathDsctn;
 
     /**
-     * 암호화파일명 (encpt_file_nm)
+     * 서버파일명 (encpt_file_nm)
      */
-    @Schema(description = "암호화파일명", type = "String")
-    private String encptFileNm;
+    @Schema(description = "서버파일명", type = "String")
+    private String srvrFileNm;
 
     /**
      * 개인정보포함여부 (prvc_incl_yn)
