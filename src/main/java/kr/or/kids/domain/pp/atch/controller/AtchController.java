@@ -105,6 +105,10 @@ public class AtchController
         fdrv.setSrvrFileNm(relativePath);
         FileDownResVO downloadParam = fileService.downloadFile(fdrv);
 
+        if (downloadParam == null) {
+            return ResponseEntity.notFound().build();
+        }
+
         Resource resource = downloadParam.getResource();
 
         if (!resource.exists()) {
