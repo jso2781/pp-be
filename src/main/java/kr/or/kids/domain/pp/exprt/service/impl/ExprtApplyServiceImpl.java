@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import kr.or.kids.domain.ca.common.file.service.FileService;
+import kr.or.kids.domain.ca.common.file.vo.FileGroupInsertReq;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,9 +29,11 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ExprtApplyServiceImpl implements ExprtApplyService {
     private final ExprtApplyMapper exprtApplyMapper;
     private final ExprtTaskMapper exprtTaskMapper;
+    private final FileService fileService;
 
     @Override
     public ApiPrnDto existsInstByBrno(ExprtApplyIVO exprtApplyIVO) {
@@ -109,9 +114,37 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
         }
 
         // 첨부파일 등록
-        // FIXME 첨부파일 관련 공통 라이브러리 확정 시 수정 필요
-        exprtApplyIVO.setAtchFileGroupId("999");
-        
+        MultipartFile[] attachFileArr = new MultipartFile[]{file};
+
+        FileGroupInsertReq fgir = new FileGroupInsertReq();
+        fgir.setTaskSeCd("pp");
+        fgir.setTaskSeTrgtId("2");
+        fgir.setRgtrId(exprtApplyIVO.getMbrId());
+        fgir.setMdfrId(exprtApplyIVO.getMbrId());
+
+        log.info("ApiPrnDto loaded from: {}", ApiPrnDto.class.getProtectionDomain().getCodeSource().getLocation());
+
+        log.info("FileService loaded from: {}", FileService.class.getProtectionDomain().getCodeSource().getLocation());
+
+        // 신규 파일그룹 일련번호 구하기
+        ApiPrnDto groupInsertResult = fileService.groupInsert(fgir);
+
+        Object atchFileGroupIdObj = groupInsertResult.getData().get("atchFileGroupId");
+        String atchFileGroupId = String.valueOf(atchFileGroupIdObj);
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("savePath", "pp");                       // 파일경로 정보
+        params.put("atchFileGroupId", atchFileGroupId);     // 첨부파일그룹아이디
+        params.put("prvcInclYn", "0");                      // 개인정보 여부
+        params.put("isExcel", "0");                         // 엑셀파일 여부
+
+        // 대국민포털_전문가 회원 전환 신청 첨부파일 저장
+        ApiPrnDto fileResult = fileService.uploadFiles(params, attachFileArr);
+
+        if("0".equals(fileResult.getCode())){
+            exprtApplyIVO.setAtchFileGroupId(atchFileGroupId);
+        }
+
         // 전문가정보기본 등록
         int step2Result = exprtApplyMapper.insertExprtInfo(exprtApplyIVO);
         if (step2Result != 1) {

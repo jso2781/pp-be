@@ -19,9 +19,15 @@
                  WHERE com_group_cd = 'PP000004'
                    AND com_dtl_cd = et.aprv_stts_cd) AS task_aprv_stts_label
              , et.exprt_task_sn
+             , ft.file_extn_nm AS "file.file_extn_nm"
           FROM kids_own.TB_PP_M_INST_TASK it
              , kids_own.TB_PP_M_EXPRT_TASK et
              , kids_own.TB_PP_M_EXPRT_INFO ei
+          LEFT OUTER JOIN kids_own.tb_ca_e_file_trsm ft
+            ON ft.atch_file_group_id = ei.atch_file_group_id
+           AND ft.atch_file_id = (SELECT MAX(f.atch_file_id)
+                                    FROM kids_own.tb_ca_e_file_trsm f
+                                   WHERE f.atch_file_group_id = ei.atch_file_group_id)
          WHERE it.tkcg_exprt_no = (SELECT MAX(exprt_no)
                                      FROM kids_own.TB_PP_M_EXPRT_INFO
                                     WHERE mbr_no = #{mbrNo}
@@ -69,10 +75,19 @@
              , date_trunc('second', ei.reg_dt) AS exprt_info_reg_dt
              , ei.exprt_no
              , et.bzmn_task_mng_no
+             , ft.atch_file_id AS "file.atch_file_id"
+             , ft.file_nm AS "file.file_nm"
+             , ft.file_extn_nm AS "file.file_extn_nm"
+             , ft.file_sz AS "file.file_sz"
         FROM kids_own.TB_PP_M_EXPRT_TASK et
-                , kids_own.TB_PP_M_EXPRT_INFO ei
-                , kids_own.TB_PP_M_INST_TASK it
-                , kids_own.TB_PP_M_MBR_INFO mi
+           , kids_own.TB_PP_M_INST_TASK it
+           , kids_own.TB_PP_M_MBR_INFO mi
+           , kids_own.TB_PP_M_EXPRT_INFO ei
+        LEFT OUTER JOIN kids_own.tb_ca_e_file_trsm ft
+          ON ft.atch_file_group_id = ei.atch_file_group_id
+         AND ft.atch_file_id = (SELECT MAX(f.atch_file_id)
+                                  FROM kids_own.tb_ca_e_file_trsm f
+                                 WHERE f.atch_file_group_id = ei.atch_file_group_id)
         WHERE et.exprt_task_sn = #{exprtTaskSn}
           AND et.exprt_no = ei.exprt_no
           AND et.bzmn_task_mng_no = it.bzmn_task_mng_no

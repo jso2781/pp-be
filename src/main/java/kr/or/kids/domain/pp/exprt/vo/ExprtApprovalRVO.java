@@ -1,6 +1,7 @@
 package kr.or.kids.domain.pp.exprt.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import kr.or.kids.domain.pp.atch.vo.AtchRVO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -134,4 +135,10 @@ public class ExprtApprovalRVO extends ExprtApplyRVO {
      */
     @Schema(description = "사업자업무관리번호", type = "String")
     private String bzmnTaskMngNo;
+
+    /**
+     * 재직증명서 파일
+     */
+    @Schema(description = "재직증명서 파일", type = "String")
+    private AtchRVO file;
 }
