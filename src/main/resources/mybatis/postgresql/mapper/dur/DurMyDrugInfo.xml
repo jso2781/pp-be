@@ -406,8 +406,8 @@
             FROM (
                 SELECT
                     'eftgrp' as bann_type_cd
-                    ,item_nm as prdct_nm
-                    ,gnrl_nm as igrd_nm
+                    ,eg.item_nm  as prdct_nm                           /* 검색한 제품명 */
+                    ,eg.gnrl_nm as igrd_nm                             /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
@@ -415,13 +415,22 @@
                     ,null as condi_grd_cd
                     ,null as day_max_admin_cpct
                     ,null as max_admin_prd_day_cnt
-                    ,eff_group_nm
-                    ,group_nm
+                    ,eg.eff_group_nm                                   /* 효능그룹명 */
+                    ,(
+                        select
+                            dc.com_dtl_cd_nm
+                        from kids_own.tb_ca_c_dtl_code dc
+                        inner join kids_own.tb_ca_c_group_code gc
+                            on dc.com_group_cd = gc.com_group_cd
+                        where gc.group_cd_nm = eg.eff_group_nm
+                        and dc.com_dtl_cd = eg.group_nm
+                        LIMIT 1
+                    ) as group_nm                                  /* 계열(그룹명) */
                     ,null as dtl_info_cn
                     ,null as rmrk_cn
-                FROM kids_own.tb_pp_m_dur_eftgrp
-                WHERE oper_stts_cd = 'O'
-                AND group_nm_1 IN (
+                FROM kids_own.tb_pp_m_dur_eftgrp eg
+                WHERE eg.oper_stts_cd = 'O'
+                AND eg.group_nm_1 IN (
                     SELECT e.group_nm_1
                     FROM kids_own.tb_pp_m_dur_eftgrp e
                     WHERE oper_stts_cd = 'O'
