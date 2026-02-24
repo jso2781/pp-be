@@ -36,7 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 @Tag(name = "AtchController", description = "공통_첨부파일기본 관리")
 @RestController
 @Slf4j
-@RequestMapping(value="/api/atch")
+@RequestMapping(value="/api/pp/atch")
 public class AtchController
 {
     @Autowired

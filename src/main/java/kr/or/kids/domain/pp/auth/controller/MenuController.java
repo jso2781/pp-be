@@ -24,7 +24,7 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "MenuController", description = "대국민포털_메뉴기본 관리")
 @RestController
-@RequestMapping(value="/api/auth")
+@RequestMapping(value="/api/pp/auth")
 public class MenuController
 {
     @Autowired

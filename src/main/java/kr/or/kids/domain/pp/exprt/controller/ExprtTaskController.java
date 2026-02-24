@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "ExprtTaskController", description = "대국민포털_전문가내업무관리")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value="/api/exprt/task")
+@RequestMapping(value="/api/pp/exprt/task")
 public class ExprtTaskController
 {
     private final ExprtTaskService exprtTaskService;

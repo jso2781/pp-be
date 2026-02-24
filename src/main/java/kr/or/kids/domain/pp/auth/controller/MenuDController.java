@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.auth.vo.MenuDRVO;
 
 @Tag(name = "MenuDController", description = "대국민포털_메뉴상세 관리")
 @RestController
-@RequestMapping(value="/api/auth")
+@RequestMapping(value="/api/pp/auth")
 public class MenuDController
 {
     @Autowired

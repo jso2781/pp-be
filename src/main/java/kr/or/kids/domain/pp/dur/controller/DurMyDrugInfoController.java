@@ -19,7 +19,7 @@ import java.util.List;
 @Tag(name = "DurMyDrugInfoController", description = "내가 먹는 약의 DUR 정보")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/dur/mydrug")
+@RequestMapping(value = "/api/pp/dur/mydrug")
 public class DurMyDrugInfoController {
 
     private final DurMyDrugInfoService durMyDrugInfoService;

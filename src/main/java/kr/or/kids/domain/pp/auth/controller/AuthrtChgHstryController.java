@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.auth.vo.AuthrtChgHstryRVO;
 
 @Tag(name = "AuthrtChgHstryController", description = "대국민포털_권한변경이력기본 관리")
 @RestController
-@RequestMapping(value="/api/auth")
+@RequestMapping(value="/api/pp/auth")
 public class AuthrtChgHstryController
 {
     @Autowired

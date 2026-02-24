@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.trm.vo.TrmRVO;
 
 @Tag(name = "TrmController", description = "대국민포털_용어기본 관리")
 @RestController
-@RequestMapping(value="/api/trm")
+@RequestMapping(value="/api/pp/trm")
 public class TrmController
 {
     @Autowired

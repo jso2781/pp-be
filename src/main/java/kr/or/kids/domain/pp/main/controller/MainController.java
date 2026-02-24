@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @Tag(name = "MainController", description = "대국민포털_메인화면 컨텐츠 조회")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/main")
+@RequestMapping(value = "/api/pp/main")
 public class MainController {
 
     private final MainService mainService;

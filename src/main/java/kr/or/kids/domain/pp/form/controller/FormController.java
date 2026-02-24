@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.form.vo.FormRVO;
 
 @Tag(name = "FormController", description = "대국민포털_양식기본 관리")
 @RestController
-@RequestMapping(value="/api/form")
+@RequestMapping(value="/api/pp/form")
 public class FormController
 {
     @Autowired

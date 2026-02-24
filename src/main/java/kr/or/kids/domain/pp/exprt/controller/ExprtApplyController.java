@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @Tag(name = "ExprtApplyController", description = "대국민포털_전문가회원전환신청관리")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/exprt/apply")
+@RequestMapping(value = "/api/pp/exprt/apply")
 public class ExprtApplyController {
     private final ExprtApplyService exprtApplyService;
 

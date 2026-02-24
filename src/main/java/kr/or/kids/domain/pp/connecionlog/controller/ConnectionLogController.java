@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/connectionlog")
+@RequestMapping("/api/pp/connectionlog")
 public class ConnectionLogController {
 
 

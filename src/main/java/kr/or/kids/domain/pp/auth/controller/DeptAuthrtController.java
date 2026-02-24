@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.auth.vo.DeptAuthrtRVO;
 
 @Tag(name = "DeptAuthrtController", description = "대국민포털_부서권한기본 관리")
 @RestController
-@RequestMapping(value="/api/auth")
+@RequestMapping(value="/api/pp/auth")
 public class DeptAuthrtController
 {
     @Autowired

@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.dur.vo.DurDosageRVO;
 
 @Tag(name = "DurDosageController", description = "대국민포털_DUR투여기간주의기본 관리")
 @RestController
-@RequestMapping(value="/api/dur")
+@RequestMapping(value="/api/pp/dur")
 public class DurDosageController
 {
     @Autowired

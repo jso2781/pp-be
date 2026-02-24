@@ -18,7 +18,7 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "dshstyDclrController", description = "대국민포털_부정신고 기본 관리")
 @RestController
-@RequestMapping(value="/api/dshstyDclr")
+@RequestMapping(value="/api/pp/dshstyDclr")
 public class DshstyDclrController
 {
     @Autowired

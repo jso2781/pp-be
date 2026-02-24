@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.popup.vo.PopupRVO;
 
 @Tag(name = "PopupController", description = "대국민포털_팝업기본 관리")
 @RestController
-@RequestMapping(value="/api/popup")
+@RequestMapping(value="/api/pp/popup")
 public class PopupController
 {
     @Autowired

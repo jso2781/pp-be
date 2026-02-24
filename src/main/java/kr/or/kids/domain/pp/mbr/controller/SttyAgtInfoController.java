@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.mbr.vo.SttyAgtInfoRVO;
 
 @Tag(name = "SttyAgtInfoController", description = "대국민포털_법정대리인정보기본 관리")
 @RestController
-@RequestMapping(value="/api/mbr")
+@RequestMapping(value="/api/pp/mbr")
 public class SttyAgtInfoController
 {
     @Autowired

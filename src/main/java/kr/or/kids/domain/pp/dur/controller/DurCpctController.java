@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.dur.vo.DurCpctRVO;
 
 @Tag(name = "DurCpctController", description = "대국민포털_DUR용량주의기본 관리")
 @RestController
-@RequestMapping(value="/api/dur")
+@RequestMapping(value="/api/pp/dur")
 public class DurCpctController
 {
     @Autowired

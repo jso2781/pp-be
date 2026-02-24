@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.auth.vo.PicAuthrtRVO;
 
 @Tag(name = "PicAuthrtController", description = "대국민포털_담당자권한기본 관리")
 @RestController
-@RequestMapping(value="/api/auth")
+@RequestMapping(value="/api/pp/auth")
 public class PicAuthrtController
 {
     @Autowired

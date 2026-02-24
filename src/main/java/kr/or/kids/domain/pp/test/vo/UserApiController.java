@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.or.kids.global.exception.ApplicationException;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/pp/users")
 public class UserApiController {
 
     @PostMapping

@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.emp.vo.EmpRVO;
 
 @Tag(name = "EmpController", description = "대국민포털_관리자정보기본 관리")
 @RestController
-@RequestMapping(value="/api/emp")
+@RequestMapping(value="/api/pp/emp")
 public class EmpController
 {
     @Autowired

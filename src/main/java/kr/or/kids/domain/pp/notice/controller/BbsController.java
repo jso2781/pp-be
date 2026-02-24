@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.notice.vo.BbsRVO;
 
 @Tag(name = "BbsController", description = "대국민포털_게시판기본 관리")
 @RestController
-@RequestMapping(value="/api/notice")
+@RequestMapping(value="/api/pp/notice")
 public class BbsController
 {
     @Autowired

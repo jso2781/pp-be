@@ -17,7 +17,7 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "CmsController", description = "대국민포털_콘탠츠기본 정보 관리")
 @RestController
-@RequestMapping(value="/api/cms")
+@RequestMapping(value="/api/pp/cms")
 public class CmsController
 {
     @Autowired

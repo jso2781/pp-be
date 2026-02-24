@@ -26,7 +26,7 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "Auth1Controller", description = "대국민포털_로그인토큰 관리(JWT)")
 @RestController
-@RequestMapping(value="/api/auth")
+@RequestMapping(value="/api/pp/auth")
 public class AuthController {
 
     @Autowired

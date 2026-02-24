@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.word.vo.WordRVO;
 
 @Tag(name = "WordController", description = "대국민포털_단어기본 관리")
 @RestController
-@RequestMapping(value="/api/word")
+@RequestMapping(value="/api/pp/word")
 public class WordController
 {
     @Autowired

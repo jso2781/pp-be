@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.dur.vo.DurConcBannRVO;
 
 @Tag(name = "DurConcBannController", description = "대국민포털_DUR병용금기기본 관리")
 @RestController
-@RequestMapping(value="/api/dur")
+@RequestMapping(value="/api/pp/dur")
 public class DurConcBannController
 {
     @Autowired

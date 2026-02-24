@@ -23,7 +23,7 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "DgstfnExmnController", description = "대국민포털_만족도조사기본 관리")
 @RestController
-@RequestMapping(value="/api/dgstfn")
+@RequestMapping(value="/api/pp/dgstfn")
 public class DgstfnExmnController
 {
     @Autowired

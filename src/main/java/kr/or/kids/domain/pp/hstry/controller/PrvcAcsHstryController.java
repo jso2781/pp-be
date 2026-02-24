@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.hstry.vo.PrvcAcsHstryRVO;
 
 @Tag(name = "PrvcAcsHstryController", description = "대국민포털_개인정보접근이력기본 관리")
 @RestController
-@RequestMapping(value="/api/hstry")
+@RequestMapping(value="/api/pp/hstry")
 public class PrvcAcsHstryController
 {
     @Autowired

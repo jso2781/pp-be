@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.task.vo.TaskCdRVO;
 
 @Tag(name = "TaskCdController", description = "대국민포털_업무코드기본 관리")
 @RestController
-@RequestMapping(value="/api/task")
+@RequestMapping(value="/api/pp/task")
 public class TaskCdController
 {
     @Autowired

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "ExprtApprovalController", description = "대국민포털_전문가업무신청관리")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api/exprt/approval")
+@RequestMapping(value = "/api/pp/exprt/approval")
 public class ExprtApprovalController {
     private final ExprtApprovalService exprtApprovalService;
 

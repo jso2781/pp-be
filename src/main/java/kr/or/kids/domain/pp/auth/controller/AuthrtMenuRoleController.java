@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.auth.vo.AuthrtMenuRoleRVO;
 
 @Tag(name = "AuthrtMenuRoleController", description = "대국민포털_권한메뉴롤기본 관리")
 @RestController
-@RequestMapping(value="/api/auth")
+@RequestMapping(value="/api/pp/auth")
 public class AuthrtMenuRoleController
 {
     @Autowired

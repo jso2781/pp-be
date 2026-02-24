@@ -25,7 +25,7 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "MbrInfoController", description = "대국민포털_회원정보기본 관리")
 @RestController
-@RequestMapping(value="/api/mbr")
+@RequestMapping(value="/api/pp/mbr")
 public class MbrInfoController
 {
     @Autowired

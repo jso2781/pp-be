@@ -18,7 +18,7 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "FaqController", description = "대국민포털_FAQ기본 관리")
 @RestController
-@RequestMapping(value="/api/faq")
+@RequestMapping(value="/api/pp/faq")
 public class FaqController
 {
     @Autowired

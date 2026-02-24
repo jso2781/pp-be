@@ -19,7 +19,7 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "DurSearchRoomController", description = "DUR 정보 검색 관리")
 @RestController
-@RequestMapping(value="/api/dur")
+@RequestMapping(value="/api/pp/dur")
 public class DurSearchRoomController {
 
     @Autowired

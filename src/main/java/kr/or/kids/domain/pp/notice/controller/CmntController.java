@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.notice.vo.CmntRVO;
 
 @Tag(name = "CmntController", description = "대국민포털_댓글기본 관리")
 @RestController
-@RequestMapping(value="/api/notice")
+@RequestMapping(value="/api/pp/notice")
 public class CmntController
 {
     @Autowired

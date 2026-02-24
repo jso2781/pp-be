@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.auth.vo.ExprtAuthrtRVO;
 
 @Tag(name = "ExprtAuthrtController", description = "대국민포털_전문가권한기본 관리")
 @RestController
-@RequestMapping(value="/api/auth")
+@RequestMapping(value="/api/pp/auth")
 public class ExprtAuthrtController
 {
     @Autowired

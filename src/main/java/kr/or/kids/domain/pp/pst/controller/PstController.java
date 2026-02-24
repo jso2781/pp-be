@@ -17,7 +17,7 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "PstController", description = "대국민포털_게시물기본 관리")
 @RestController
-@RequestMapping(value = "/api/pst/")
+@RequestMapping(value = "/api/pp/pst/")
 public class PstController {
 	@Autowired
 	private PstService pstService;

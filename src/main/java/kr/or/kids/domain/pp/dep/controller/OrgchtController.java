@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.dep.vo.OrgchtRVO;
 
 @Tag(name = "OrgchtController", description = "대국민포털_KIDS조직도기본 관리")
 @RestController
-@RequestMapping(value="/api/dep")
+@RequestMapping(value="/api/pp/dep")
 public class OrgchtController
 {
     @Autowired

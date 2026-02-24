@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.auth.vo.BbsAuthrtRVO;
 
 @Tag(name = "BbsAuthrtController", description = "대국민포털_게시판권한기본 관리")
 @RestController
-@RequestMapping(value="/api/auth")
+@RequestMapping(value="/api/pp/auth")
 public class BbsAuthrtController
 {
     @Autowired

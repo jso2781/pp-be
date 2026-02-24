@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/pp/auth")
 @Tag(
         name = "인증",
         description = "세션(JSESSIONID) 기반 인증 API입니다. Any-ID 인증이 성공하면 프론트에서 ssob/tag를 받아 /api/auth/anyid/login 으로 전달하고, 서버가 세션을 생성합니다. 이후 요청은 Authorization 헤더가 아니라 쿠키(JSESSIONID)를 사용합니다."

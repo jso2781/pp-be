@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.dur.vo.DurEftgrpIgrdRVO;
 
 @Tag(name = "DurEftgrpIgrdController", description = "대국민포털_DUR효능군중복성분기본 관리")
 @RestController
-@RequestMapping(value="/api/dur")
+@RequestMapping(value="/api/pp/dur")
 public class DurEftgrpIgrdController
 {
     @Autowired

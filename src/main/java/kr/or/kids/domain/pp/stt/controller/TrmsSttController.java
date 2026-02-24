@@ -18,7 +18,7 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
 @Tag(name = "TrmsSttController", description = "대국민포털_약관법령기본 관리")
 @RestController
-@RequestMapping(value="/api/stt")
+@RequestMapping(value="/api/pp/stt")
 public class TrmsSttController
 {
     @Autowired

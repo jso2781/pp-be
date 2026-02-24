@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.auth.vo.RoleRVO;
 
 @Tag(name = "RoleController", description = "대국민포털_역할기본 관리")
 @RestController
-@RequestMapping(value="/api/auth")
+@RequestMapping(value="/api/pp/auth")
 public class RoleController
 {
     @Autowired

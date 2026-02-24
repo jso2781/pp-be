@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.com.vo.ComCdRVO;
 
 @Tag(name = "ComCdController", description = "공통_공통코드기본 관리")
 @RestController
-@RequestMapping(value="/api/com")
+@RequestMapping(value="/api/pp/com")
 public class ComCdController
 {
     @Autowired

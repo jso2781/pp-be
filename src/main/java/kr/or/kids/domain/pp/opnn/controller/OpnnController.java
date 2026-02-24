@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "OpnnController", description = "대국민포털_의견제안 관리")
 @RestController
-@RequestMapping(value="/api/opnn")
+@RequestMapping(value="/api/pp/opnn")
 @Slf4j
 public class OpnnController
 { 

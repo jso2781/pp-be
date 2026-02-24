@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.dur.vo.DurPrgntItemRVO;
 
 @Tag(name = "DurPrgntItemController", description = "대국민포털_DUR임부금기품목기본 관리")
 @RestController
-@RequestMapping(value="/api/dur")
+@RequestMapping(value="/api/pp/dur")
 public class DurPrgntItemController
 {
     @Autowired

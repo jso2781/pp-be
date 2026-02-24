@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.dmn.vo.DmnRVO;
 
 @Tag(name = "DmnController", description = "대국민포털_도메인기본 관리")
 @RestController
-@RequestMapping(value="/api/dmn")
+@RequestMapping(value="/api/pp/dmn")
 public class DmnController
 {
     @Autowired

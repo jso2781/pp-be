@@ -22,7 +22,7 @@ import kr.or.kids.domain.pp.inst.vo.InstRVO;
 
 @Tag(name = "InstController", description = "대국민포털_기관정보기본 관리")
 @RestController
-@RequestMapping(value="/api/inst")
+@RequestMapping(value="/api/pp/inst")
 public class InstController
 {
     @Autowired
