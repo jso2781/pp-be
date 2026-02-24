@@ -20,6 +20,7 @@
 	    INSERT INTO kids_own.TB_PP_M_DSHSTY_DCLR
 		(
 		    dclr_sn
+		    ,link_info_idntf_id
 			,encpt_mbr_flnm
 			,encpt_mbr_telno
 			,encpt_mbr_eml_nm
@@ -40,6 +41,7 @@
 		VALUES
 		(
 		     #{dclrSn}
+		    ,#{linkInfoIdntfId}
 		    ,#{encptMbrFlnm}
 		    ,#{encptMbrTelno}
 		    ,#{encptMbrEmlNm}

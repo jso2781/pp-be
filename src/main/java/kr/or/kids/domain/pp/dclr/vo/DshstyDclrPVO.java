@@ -16,6 +16,12 @@ public class DshstyDclrPVO
      */
     @Schema(description = "신고일련번호", type = "BigInteger")
     private BigInteger dclrSn;
+    
+    /**
+     * 연계정보식별아이디
+     */
+    @Schema(description = "연계정보식별아이디", type = "String")
+    private String linkInfoIdntfId;
 
     /**
      * 암호화회원성명
