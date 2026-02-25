@@ -36,9 +36,7 @@
         /* 대국민포털_약관법령 목록 조회 (TrmsSttPVO.selectTrmsSttList) */
         SELECT
             trms_stt_aplcn_ymd,
-            trms_stt_end_ymd,
-            trms_stt_cn,
-            atch_file_group_id
+            trms_stt_end_ymd
         FROM kids_own.TB_PP_M_TRMS_STT
         WHERE 1=1
         AND trms_stt_cd = #{trmsSttCd}
@@ -50,8 +48,7 @@
         SELECT
             trms_stt_aplcn_ymd,
             trms_stt_end_ymd,
-            trms_stt_cn,
-            atch_file_group_id
+            trms_stt_cn
         FROM kids_own.TB_PP_M_TRMS_STT
         WHERE 1=1
         AND trms_stt_cd = #{trmsSttCd}
