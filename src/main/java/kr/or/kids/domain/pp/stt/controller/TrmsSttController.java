@@ -56,5 +56,16 @@ public class TrmsSttController
     	ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
+    
+    @Operation(summary = "대국민포털_약관법령기본 단건 조회", description = "대국민포털_약관법령기본 단건 조회한다.")
+    @PostMapping(value="/getTrmsStt")
+    @ResponseBody
+    public ResponseEntity<ApiPrnDto> getTrmsStt(@RequestBody TrmsSttPVO trmsSttPVO)
+    {
+    	ApiPrnDto apiPrnDto = trmsSttService.getTrmsStt(trmsSttPVO);
+
+    	ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
+    }
 
 }

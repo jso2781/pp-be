@@ -78,4 +78,22 @@ public class TrmsSttServiceImpl implements TrmsSttService
     	result.setData(data);
         return result;
     }
+    
+    @Override
+    public ApiPrnDto getTrmsStt(TrmsSttPVO trmsSttPVO) {
+    	ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
+    	HashMap<String, Object> data = new HashMap<String, Object>();
+    	try {
+    		TrmsSttRVO trmsSttRVO = trmsSttMapper.getTrmsStt(trmsSttPVO);
+			data.put("trmsSttRVO", trmsSttRVO);
+    		
+    	} catch (Exception e) {
+            log.error("약관법령 단건 조회 실패", e);
+            result = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
+            result.setMsg(MessageContextHolder.getMessage("api.error.500"));
+    	}
+    	
+    	result.setData(data);
+        return result;
+    }
 }

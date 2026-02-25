@@ -31,4 +31,11 @@ public interface TrmsSttMapper
      * @return 조회된 대국민포털_약관법령기본 
      */
     public TrmsSttRVO getTrmsSttLatest(TrmsSttPVO trmsSttPVO);
+    /**
+     * 대국민포털_약관법령기본 단건 조회 
+     *
+     * @param trmsSttPVO 조회용 파라메터 정보 
+     * @return 조회된 대국민포털_약관법령기본 
+     */
+    public TrmsSttRVO getTrmsStt(TrmsSttPVO trmsSttPVO);
 }

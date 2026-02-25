@@ -58,5 +58,18 @@
         ORDER BY reg_dt DESC
         LIMIT 1
     </select>
+    
+    <select id="getTrmsStt" parameterType="TrmsSttPVO" resultType="TrmsSttRVO" >
+	    /* 대국민포털_약관법령 단건 조회 (TrmsSttMapper.getTrmsStt) */
+        SELECT
+            trms_stt_aplcn_ymd,
+            trms_stt_end_ymd,
+            trms_stt_cn
+        FROM kids_own.TB_PP_M_TRMS_STT
+        WHERE 1=1
+        AND trms_stt_cd = #{trmsSttCd}
+        AND trms_stt_aplcn_ymd = #{trmsSttAplcnYmd}
+        LIMIT 1
+    </select>
 
 </mapper>
