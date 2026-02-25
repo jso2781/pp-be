@@ -84,9 +84,27 @@
 						  WHERE task_cd = #{taskCd})
 		ORDER BY p.reg_dt DESC
 	   LIMIT 5       
-    </select>    
-    
-    <select id="selectPopupList" resultType="MainRVO" >
+    </select>
+
+	<select id="selectBbsUrlInfosByTaskCds">
+		/* 대국민포털_메인화면 업무구분코드에 따른 URL 정보 반환 (MainMapper.selectBbsUrlInfosByTaskCds) */
+		SELECT tc.task_cd
+			 , mm.menu_nm
+			 , dm.menu_url_addr
+		  FROM kids_own.tb_pp_m_task_cd tc
+		     , kids_own.tb_pp_d_menu dm
+		     , kids_own.tb_pp_m_menu mm
+		 WHERE tc.task_cd IN
+			<foreach collection="taskCds" item="cd" open="(" separator="," close=")">
+				#{cd}
+			</foreach>
+		   AND mm.task_se_cd = 'PP'
+		   AND mm.menu_type_cd = 'U'
+		   AND mm.menu_sn = dm.menu_sn
+		   AND split_part(dm.menu_url_addr, '/', array_length(string_to_array(dm.menu_url_addr, '/'), 1)) = tc.task_cd_vl
+	</select>
+
+	<select id="selectPopupList" resultType="MainRVO" >
         /* 대국민포털_메인화면 팝업 목록 조회 (MainMapper.selectPopupList) */
 		SELECT p.popup_ttl
 		     , p.popup_lnkg_addr
