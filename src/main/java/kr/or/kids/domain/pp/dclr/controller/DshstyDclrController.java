@@ -1,5 +1,7 @@
 package kr.or.kids.domain.pp.dclr.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +17,7 @@ import kr.or.kids.domain.pp.dclr.service.DshstyDclrService;
 import kr.or.kids.domain.pp.dclr.vo.DshstyDclrPVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
+import kr.or.kids.global.util.JwtAudit;
 
 @Tag(name = "dshstyDclrController", description = "대국민포털_부정신고 기본 관리")
 @RestController
@@ -38,8 +41,10 @@ public class DshstyDclrController
     @Operation(summary = "대국민포털_부정신고 기본 정보 입력", description = "대국민포털_부정신고 기본 정보 입력")
     @PostMapping(value="/insertDshstyDclr")
     @ResponseBody
-    public ResponseEntity<ApiPrnDto> insertDshstyDclr(@RequestBody DshstyDclrPVO dshstyDclrPVO)
+    public ResponseEntity<ApiPrnDto> insertDshstyDclr(@RequestBody DshstyDclrPVO dshstyDclrPVO, HttpServletRequest request)
     {
+        JwtAudit.injectJwtInfo(dshstyDclrPVO, request);
+    	
     	ApiPrnDto apiPrnDto = dshstyDclrService.insertDshstyDclr(dshstyDclrPVO);
 
     	ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());

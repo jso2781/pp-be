@@ -54,9 +54,9 @@
 		    ,#{dclrCnIdntyMthdCn}
 		    ,#{dshstyActIdntfRsnCn}
 		    ,#{dshstyActPrdCn}
-			  ,NULL
+			,#{rgtrId}
 			  ,now()
-			  ,NULL
+			,#{mdfrId}
 			  ,now()
 		)
 			    
