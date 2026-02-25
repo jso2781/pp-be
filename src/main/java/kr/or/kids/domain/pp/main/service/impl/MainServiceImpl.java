@@ -104,6 +104,10 @@ public class MainServiceImpl implements MainService {
         // 4.4 기관소식 카드뉴스 last5
         List<MainRVO> card = mainMapper.selectRecent5PstListByTaskCd(TASK_CD_MN_BBS8);
         data.put("card", card);
+
+        // 4.5 게시판 URL 정보 반환
+        List<MainRVO> urlInfos = mainMapper.selectBbsUrlInfosByTaskCds(Arrays.asList(TASK_CD_MN_BBS5, TASK_CD_MN_BBS6, TASK_CD_MN_BBS7, TASK_CD_MN_BBS8));
+        data.put("urlInfos", urlInfos);
         
         // 5. 팝업 목록조회
         List<MainRVO> popup = mainMapper.selectPopupList();

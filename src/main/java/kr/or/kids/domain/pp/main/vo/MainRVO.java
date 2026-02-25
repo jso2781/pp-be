@@ -94,4 +94,16 @@ public class MainRVO {
      */
     @Schema(description = "업무구분코드", type = "String")
     private String taskCd;
+
+    /**
+     * 메뉴명
+     */
+    @Schema(description = "메뉴명", type = "String")
+    private String menuNm;
+
+    /**
+     * 메뉴 URL
+     */
+    @Schema(description = "메뉴URL", type = "String")
+    private String menuUrlAddr;
 }
