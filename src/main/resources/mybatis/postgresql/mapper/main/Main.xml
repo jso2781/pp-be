@@ -13,15 +13,19 @@
 		    ,p.reg_dt
 		    ,p.pst_cn
 		    ,p.vdo_url_addr as video_id
-		FROM kids_own.TB_PP_M_PST p
-		LEFT OUTER JOIN kids_own.TB_CA_E_FILE_TRSM f
+		FROM kids_own.TB_PP_M_BBS b
+		   , kids_own.TB_PP_M_PST p
+	 	LEFT OUTER JOIN kids_own.TB_CA_E_FILE_TRSM f
 		  ON f.atch_file_group_id = p.thmb_id
 		 AND f.atch_file_id = (SELECT MAX(atch_file_id)
-								  FROM kids_own.tb_ca_e_file_trsm
-								 WHERE atch_file_group_id = p.thmb_id)
+								 FROM kids_own.tb_ca_e_file_trsm
+								WHERE atch_file_group_id = p.thmb_id)
 	   WHERE p.bbs_id = (SELECT task_cd_vl
 		          		   FROM kids_own.TB_PP_M_TASK_CD
 		         		  WHERE task_cd = #{taskCd})
+		 AND b.bbs_id = p.bbs_id
+		 AND b.use_yn = 'Y'
+		 AND p.expsr_yn = 'Y'
 	   ORDER BY p.reg_dt DESC
 	   LIMIT 4       
     </select>
@@ -44,7 +48,8 @@
 			 WHEN 'MN_BBS4' THEN '블로그'
 			 ELSE '기타'
 			  END AS sns_type
-		FROM kids_own.TB_PP_M_TASK_CD t
+		FROM kids_own.TB_PP_M_BBS b
+		   , kids_own.TB_PP_M_TASK_CD t
 		LEFT JOIN kids_own.TB_PP_M_PST p
 		  ON t.task_cd_vl = p.bbs_id
 		LEFT JOIN kids_own.TB_CA_E_FILE_TRSM f
@@ -60,6 +65,9 @@
 	                     close=")">
 	                #{taskCd}
 	            </foreach>
+		  AND b.bbs_id = p.bbs_id
+		  AND b.use_yn = 'Y'
+		  AND p.expsr_yn = 'Y'
 	    ORDER BY p.reg_dt DESC
 	    LIMIT 20
 	</select>    
@@ -73,8 +81,9 @@
 		    ,p.thmb_id
         	,f.srvr_file_nm as thmb_file_nm
 		    ,p.reg_dt
-		FROM kids_own.TB_PP_M_PST p
-		LEFT JOIN kids_own.TB_CA_E_FILE_TRSM f
+		FROM kids_own.TB_PP_M_BBS b
+		   , kids_own.TB_PP_M_PST p
+	 	LEFT OUTER JOIN kids_own.TB_CA_E_FILE_TRSM f
 		  ON f.atch_file_group_id = p.thmb_id
 	     AND f.atch_file_id = (SELECT MAX(atch_file_id)
 							     FROM kids_own.tb_ca_e_file_trsm
@@ -82,7 +91,10 @@
 	   WHERE p.bbs_id = (SELECT task_cd_vl
 						   FROM kids_own.TB_PP_M_TASK_CD
 						  WHERE task_cd = #{taskCd})
-		ORDER BY p.reg_dt DESC
+		 AND b.bbs_id = p.bbs_id
+		 AND b.use_yn = 'Y'
+		 AND p.expsr_yn = 'Y'
+	   ORDER BY p.reg_dt DESC
 	   LIMIT 5       
     </select>
 
