@@ -11,7 +11,7 @@
             ,p.pst_cn
             ,p.pst_inq_cnt
             ,p.fix_yn
-            ,p.wrtr_dept_nm
+            , CASE WHEN b.dept_expsr_yn = 'Y' THEN p.wrtr_dept_nm ELSE '' END AS wrtr_dept_nm
             ,p.mdfr_dept_nm
             ,p.rgtr_id
             ,DATE(p.reg_dt) as reg_dt
@@ -19,13 +19,17 @@
             ,p.mdfr_id
             ,p.mdfcn_dt
         	,ft.srvr_file_nm as thmb_file_nm
-        FROM kids_own.TB_PP_M_PST p
+        FROM kids_own.TB_PP_M_BBS b
+           , kids_own.TB_PP_M_PST p
         LEFT OUTER JOIN kids_own.TB_CA_E_FILE_TRSM ft
           ON ft.atch_file_group_id = p.thmb_id
          AND ft.atch_file_id = (SELECT MAX(f.atch_file_id)
                                   FROM kids_own.tb_ca_e_file_trsm f
                                  WHERE f.atch_file_group_id = p.thmb_id)
        WHERE p.bbs_id = #{bbsId}
+         AND b.bbs_id = p.bbs_id
+         AND b.use_yn = 'Y'
+         AND p.expsr_yn = 'Y'
 	<if test="searchWrd != null and searchWrd != ''">
 	  <choose>
 	    <when test="searchCnd == 'title'">
@@ -51,7 +55,9 @@
             ,p.atch_file_group_id
             ,p.thmb_id
             ,p.fix_yn
-            ,p.wrtr_dept_nm
+            , CASE WHEN b.dept_expsr_yn = 'Y' THEN COALESCE(ei.emp_nm || ' [' || p.wrtr_dept_nm || ']', p.wrtr_dept_nm)
+                   ELSE ei.emp_nm
+                    END AS wrtr_dept_nm
             ,p.mdfr_dept_nm
             ,p.rgtr_id
             ,DATE(p.reg_dt) as reg_dt
@@ -64,8 +70,14 @@
                ORDER BY ft.file_seq ASC, ft.reg_dt ASC
                LIMIT 1) as img_file_nm
         FROM kids_own.TB_PP_M_PST p
+        LEFT OUTER JOIN kids_own.tb_pp_m_emp_info ei
+          ON p.rgtr_id = ei.emp_no
+           , kids_own.TB_PP_M_BBS b
        WHERE p.bbs_id = #{bbsId}
          AND p.pst_sn = #{pstSn}
+         AND p.bbs_id = b.bbs_id
+         AND b.use_yn = 'Y'
+         AND p.expsr_yn = 'Y'
     </select>
 
     <select id="getAtchList" parameterType="String" resultType="AtchRVO" >
