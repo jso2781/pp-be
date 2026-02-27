@@ -40,7 +40,7 @@ public interface MainMapper
      * @param taskCd 조회용 업무구분코드
      * @return 조회된 대국민포털_게시물
      */
-    List<MainRVO> selectBbsUrlInfosByTaskCds(List<String> taskCds);
+    List<MainRVO> selectBbsUrlInfosByTaskCds(@Param("taskCds") List<String> taskCds);
     
     /**
      * 대국민포털_메인화면 팝업 목록 조회
