@@ -32,7 +32,7 @@
                   FROM us_dsadba.drc_ingr
                  WHERE ingr_eng_name LIKE '%' || #{searchValue} || '%'
                    AND ori_material_yn = 'Y'
-                   AND material_ingr_gb = 'M') din
+				   AND material_ingr_gb = 'M') din
     INNER JOIN us_dsadba.drb_item_ingr dii ON din.ingr_code = dii.material_code
     INNER JOIN us_dsadba.sp_drug_standard_code st ON dii.item_seq = st.item_seq
     INNER JOIN us_dsadba.drb_item dit ON dit.item_seq = st.item_seq
@@ -323,7 +323,17 @@
                     ,null as rmrk_cn
             FROM kids_own.tb_pp_m_dur_age_bann
             WHERE oper_stts_cd = 'O'
-            <include refid="condInList"/>
+	        <if test="list != null and list.size() > 0">
+	            AND (
+	            <foreach collection="list" item="item" separator=" OR ">
+	                (
+	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>prdct_cd = #{item.prdctCd}</otherwise></choose>
+	                AND
+	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>(igrd_cd = #{item.igrdCd} OR mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%')</otherwise></choose>	                	               	               
+	                )
+	            </foreach>
+	            )
+	        </if>	          	          	           
             UNION ALL
             /* 대국민포털_DUR임부금기기본 */
             SELECT distinct
@@ -352,7 +362,17 @@
                     ,null as rmrk_cn
             FROM kids_own.tb_pp_m_dur_prgnt_bann
             WHERE oper_stts_cd = 'O'
-            <include refid="condInList"/>
+	        <if test="list != null and list.size() > 0">
+	            AND (
+	            <foreach collection="list" item="item" separator=" OR ">
+	                (
+	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>prdct_cd = #{item.prdctCd}</otherwise></choose>
+	                AND
+	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>(igrd_cd = #{item.igrdCd} OR mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%')</otherwise></choose>	                	               	               
+	                )
+	            </foreach>
+	            )
+	        </if>	   
             UNION ALL
             /* 대국민포털_DUR용량주의기본 */
             SELECT distinct
@@ -494,7 +514,7 @@
                             (
                             <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>(e.mdcn_cd = #{item.prdctCd})</otherwise></choose>
                             AND
-                            <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>(e.gnrl_nm_cd = #{item.igrdCd})</otherwise></choose>
+                            <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>(e.gnrl_nm_cd = #{item.igrdCd} OR mfds_igrd_cd_cn = #{item.igrdCd})</otherwise></choose>
                             )
                         </foreach>
                         )
@@ -529,7 +549,17 @@
                     ,rmrk_cn
             FROM kids_own.tb_pp_m_dur_snctz
             WHERE oper_stts_cd = 'O'
-            <include refid="condInList"/>
+	        <if test="list != null and list.size() > 0">
+	            AND (
+	            <foreach collection="list" item="item" separator=" OR ">
+	                (
+	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>prdct_cd = #{item.prdctCd}</otherwise></choose>
+	                AND
+	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>(igrd_cd = #{item.igrdCd} OR mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%')</otherwise></choose>	                	               	               
+	                )
+	            </foreach>
+	            )
+	        </if>
             UNION ALL
             /* 대국민포털_DUR수유부주의기본 */
             SELECT distinct
@@ -558,7 +588,17 @@
                     ,rmrk_cn
             FROM kids_own.tb_pp_m_dur_nursw
             WHERE oper_stts_cd = 'O'
-            <include refid="condInList"/>
+	        <if test="list != null and list.size() > 0">
+	            AND (
+	            <foreach collection="list" item="item" separator=" OR ">
+	                (
+	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>prdct_cd = #{item.prdctCd}</otherwise></choose>
+	                AND
+	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>(igrd_cd = #{item.igrdCd} OR mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%')</otherwise></choose>	                	               	               
+	                )
+	            </foreach>
+	            )
+	        </if>	
         ) A
         GROUP BY A.igrd_nm, A.prdct_nm
     </select>
