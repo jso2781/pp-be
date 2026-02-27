@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.kids.domain.pp.search.mapper.IntegratedSearchMapper">
+
+    <resultMap id="IntegratedSearchMap" type="kr.or.kids.domain.pp.search.vo.IntegratedSearchRVO">
+      <result property="totalList" column="total_json_array" typeHandler="kr.or.kids.domain.pp.search.mapper.typehandler.TotalJsonArrayTypeHandler"/>
+      <result property="mainTaskList" column="main_task_json_array" typeHandler="kr.or.kids.domain.pp.search.mapper.typehandler.MainTaskJsonArrayTypeHandler"/>
+      <result property="infoOpenList" column="info_open_json_array" typeHandler="kr.or.kids.domain.pp.search.mapper.typehandler.InfoOpenJsonArrayTypeHandler"/>
+      <result property="instNewsList" column="inst_news_json_array" typeHandler="kr.or.kids.domain.pp.search.mapper.typehandler.InstNewsJsonArrayTypeHandler"/>
+      <result property="instIntroList" column="inst_intro_json_array" typeHandler="kr.or.kids.domain.pp.search.mapper.typehandler.InstIntroJsonArrayTypeHandler"/>
+    </resultMap>
+
+    <select id="getIntegratedSearchJson" parameterType="IntegratedSearchPVO" resultMap="IntegratedSearchMap" >
+        /* 통합검색 (IntegratedSearchMapper.getIntegratedSearchJson) */
+        WITH RECURSIVE menu_tree AS (
+            SELECT
+                m.menu_sn,
+                m.up_menu_sn,
+                1 AS dep_level,
+                m.menu_sn AS root_sn,
+                m.menu_nm,
+                m.menu_seq,
+                (m.menu_sn::text) AS path,
+                m.menu_nm::text AS path_nm,
+                m.lang_se_cd
+            FROM kids_own.TB_PP_M_MENU m
+            WHERE m.use_yn = 'Y'
+            AND m.up_menu_sn IS NULL
+            AND m.task_se_cd = 'PP'
+            AND m.menu_type_cd = 'U'
+            UNION ALL
+            SELECT
+                c.menu_sn,
+                c.up_menu_sn,
+                p.dep_level + 1,
+                p.root_sn,
+                c.menu_nm,
+                c.menu_seq,
+                (p.path || ' > ' || c.menu_sn::text) AS path,
+                (p.path_nm || ' > ' || c.menu_nm::text) AS path_nm,
+                c.lang_se_cd
+            FROM kids_own.TB_PP_M_MENU c
+            JOIN menu_tree p
+                ON c.up_menu_sn = p.menu_sn
+            WHERE c.use_yn = 'Y'
+            AND c.task_se_cd = 'PP'
+            AND c.menu_type_cd = 'U'
+        )
+        
+        select
+             COALESCE(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'root_menu_sn', A.root_menu_sn,
+                        'root_menu_nm', A.root_menu_nm,
+                        'menu_sn', A.menu_sn,
+                        'menu_nm', A.menu_nm,
+                        'path', A.path,
+                        'path_nm', A.path_nm,
+                        'menu_url_addr', A.menu_url_addr,
+                        'doc_sn', A.doc_sn,
+                        'doc_ttl', A.doc_ttl,
+                        'doc_cn', A.doc_cn
+                    )
+                ) FILTER (WHERE 1=1), '[]'::jsonb
+             ) AS total_json_array
+            ,COALESCE(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'root_menu_sn', A.root_menu_sn,
+                        'root_menu_nm', A.root_menu_nm,
+                        'menu_sn', A.menu_sn,
+                        'menu_nm', A.menu_nm,
+                        'path', A.path,
+                        'path_nm', A.path_nm,
+                        'menu_url_addr', A.menu_url_addr,
+                        'doc_sn', A.doc_sn,
+                        'doc_ttl', A.doc_ttl,
+                        'doc_cn', A.doc_cn
+                    )
+                ) FILTER (WHERE A.root_menu_nm = '주요업무'), '[]'::jsonb
+             ) AS main_task_json_array
+            ,COALESCE(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'root_menu_sn', A.root_menu_sn,
+                        'root_menu_nm', A.root_menu_nm,
+                        'menu_sn', A.menu_sn,
+                        'menu_nm', A.menu_nm,
+                        'path', A.path,
+                        'path_nm', A.path_nm,
+                        'menu_url_addr', A.menu_url_addr,
+                        'doc_sn', A.doc_sn,
+                        'doc_ttl', A.doc_ttl,
+                        'doc_cn', A.doc_cn
+                    )
+                ) FILTER (WHERE A.root_menu_nm = '정보공개'), '[]'::jsonb
+             ) AS info_open_json_array
+            ,COALESCE(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'root_menu_sn', A.root_menu_sn,
+                        'root_menu_nm', A.root_menu_nm,
+                        'menu_sn', A.menu_sn,
+                        'menu_nm', A.menu_nm,
+                        'path', A.path,
+                        'path_nm', A.path_nm,
+                        'menu_url_addr', A.menu_url_addr,
+                        'doc_sn', A.doc_sn,
+                        'doc_ttl', A.doc_ttl,
+                        'doc_cn', A.doc_cn
+                    )
+                ) FILTER (WHERE A.root_menu_nm = '기관소식'), '[]'::jsonb
+             ) AS inst_news_json_array
+            ,COALESCE(
+                jsonb_agg(
+                    jsonb_build_object(
+                        'root_menu_sn', A.root_menu_sn,
+                        'root_menu_nm', A.root_menu_nm,
+                        'menu_sn', A.menu_sn,
+                        'menu_nm', A.menu_nm,
+                        'path', A.path,
+                        'path_nm', A.path_nm,
+                        'menu_url_addr', A.menu_url_addr,
+                        'doc_sn', A.doc_sn,
+                        'doc_ttl', A.doc_ttl,
+                        'doc_cn', A.doc_cn
+                    )
+                ) FILTER (WHERE A.root_menu_nm = '기관소개'), '[]'::jsonb
+             ) AS inst_intro_json_array
+        FROM(
+            SELECT
+                 tm.root_sn as root_menu_sn
+                ,rm.menu_nm as root_menu_nm
+                ,tm.menu_sn
+                ,tm.menu_nm
+                ,tm.path
+                ,tm.path_nm
+                ,dm.menu_url_addr
+                ,mp.pst_sn::text as doc_sn
+                ,mp.pst_ttl as doc_ttl
+                ,mp.pst_cn as doc_cn
+            FROM kids_own.tb_pp_m_pst mp
+            INNER JOIN kids_own.tb_pp_d_menu dm
+                ON (
+                    /* ex) /pp/ko/board/general/BBS_COM_005 */
+                    mp.bbs_id = substring(dm.menu_url_addr FROM position('/general/' in dm.menu_url_addr) + length('/general/')) or
+                    /* ex) /pp/ko/board/gallery/BBS_GAL_001 */
+                    mp.bbs_id = substring(dm.menu_url_addr FROM position('/gallery/' in dm.menu_url_addr) + length('/gallery/')) or
+                    /* ex) /pp/ko/board/video/BBS_VDO_001 */
+                    mp.bbs_id = substring(dm.menu_url_addr FROM position('/video/' in dm.menu_url_addr) + length('/video/'))
+                )
+            INNER JOIN menu_tree tm
+                ON tm.menu_sn = dm.menu_sn
+            INNER JOIN kids_own.tb_pp_m_menu rm
+                ON rm.menu_sn = tm.root_sn
+            WHERE mp.pst_ttl like '%' || #{searchText} || '%'
+            OR mp.pst_cn like '%' || #{searchText} || '%'
+            UNION ALL
+            SELECT
+                 tm.root_sn as root_menu_sn
+                ,rm.menu_nm as root_menu_nm
+                ,tm.menu_sn
+                ,tm.menu_nm
+                ,tm.path
+                ,tm.path_nm
+                ,dm.menu_url_addr
+                ,cms.conts_sn::text as doc_sn
+                ,cms.conts_ttl as doc_ttl
+                ,cms.conts_cn as doc_cn
+            FROM kids_own.tb_pp_m_conts cms
+            INNER JOIN kids_own.tb_pp_d_menu dm
+                ON /* ex) cms0006 /pp/ko/cms/CmsPage/cms0016 */
+                    cms.conts_sn = substring(dm.menu_url_addr FROM position('/CmsPage/' in dm.menu_url_addr) + length('/CmsPage/'))
+            INNER JOIN menu_tree tm
+                ON tm.menu_sn = dm.menu_sn
+            INNER JOIN kids_own.tb_pp_m_menu rm
+                ON rm.menu_sn = tm.root_sn
+            WHERE cms.conts_ttl like '%' || #{searchText} || '%'
+            OR cms.conts_cn like '%' || #{searchText} || '%'
+        ) A
+        ORDER BY 1 ASC
+    </select>
+
+</mapper>
