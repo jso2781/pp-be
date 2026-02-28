@@ -355,6 +355,12 @@
                         AND (e.item_nm like '%' || #{prdctNm} || '%' OR e.mfds_prdct_nm like '%' || #{prdctNm} || '%')
                     </if>
                 )
+                <if test="igrdNm != null and igrdNm != ''">
+                    AND (eg.gnrl_nm like '%' || #{igrdNm} || '%' OR eg.mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
+                </if>
+                <if test="prdctNm != null and prdctNm != ''">
+                    AND (eg.item_nm like '%' || #{prdctNm} || '%' OR eg.mfds_prdct_nm like '%' || #{prdctNm} || '%')
+                </if>
             ) EFT
             UNION ALL
             /* 대국민포털_DUR노인주의기본 */
@@ -499,7 +505,7 @@
             SELECT
                  coalesce(item_nm, mfds_prdct_nm) as prdct_nm   /* 제품명 */
                 ,bzenty_nm                                      /* 제약회사(업체명) */
-            FROM kids_own.tb_pp_m_dur_eftgrp
+            FROM kids_own.tb_pp_m_dur_eftgrp eg
             WHERE oper_stts_cd = 'O' 
             AND group_nm_1 IN(
                 SELECT
@@ -510,6 +516,9 @@
                     AND (e.gnrl_nm = #{igrdNm} OR e.mfds_igrd_nm_cn = #{igrdNm})
                 </if>
             )
+            <if test="igrdNm != null and igrdNm != ''">
+                AND (eg.gnrl_nm = #{igrdNm} OR eg.mfds_igrd_nm_cn = #{igrdNm})
+            </if>
             AND 'eftgrp' = #{bannTypeCd}
             UNION ALL
             /* DUR노인주의 정보에서 제품별 제약회사 조회(성분명 조건) */
@@ -567,6 +576,9 @@
                     AND (e.gnrl_nm = #{igrdNm} OR e.mfds_igrd_nm_cn = #{igrdNm})
                 </if>
             )
+            <if test="igrdNm != null and igrdNm != ''">
+                AND (eg.gnrl_nm = #{igrdNm} OR eg.mfds_igrd_nm_cn = #{igrdNm})
+            </if>
         ) A
     </select>
 </mapper>
