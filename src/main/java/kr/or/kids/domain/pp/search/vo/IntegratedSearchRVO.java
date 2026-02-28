@@ -101,7 +101,7 @@ public class IntegratedSearchRVO {
         /**
          * 문서 내용(게시판은 tb_pp_m_pst.pst_cn, CMS는 tb_pp_m_conts.conts_cn)
          */
-        @Schema(description = "문서 제목", type = "String")
+        @Schema(description = "문서 내용", type = "String")
         private String docCn;
     }
 }

@@ -62,6 +62,9 @@
                         'doc_ttl', A.doc_ttl,
                         'doc_cn', A.doc_cn
                     )
+                    <if test="sortBy != null and sortBy != 'latest'">
+                        ORDER BY A.reg_dt DESC
+                    </if>
                 ) FILTER (WHERE 1=1), '[]'::jsonb
              ) AS total_json_array
             ,COALESCE(
@@ -78,7 +81,10 @@
                         'doc_ttl', A.doc_ttl,
                         'doc_cn', A.doc_cn
                     )
-                ) FILTER (WHERE A.root_menu_nm = '주요업무'), '[]'::jsonb
+                    <if test="sortBy != null and sortBy != 'latest'">
+                        ORDER BY A.reg_dt DESC
+                    </if>
+                ) FILTER (WHERE A.root_menu_nm = '주요 업무'), '[]'::jsonb
              ) AS main_task_json_array
             ,COALESCE(
                 jsonb_agg(
@@ -94,6 +100,9 @@
                         'doc_ttl', A.doc_ttl,
                         'doc_cn', A.doc_cn
                     )
+                    <if test="sortBy != null and sortBy != 'latest'">
+                        ORDER BY A.reg_dt DESC
+                    </if>
                 ) FILTER (WHERE A.root_menu_nm = '정보공개'), '[]'::jsonb
              ) AS info_open_json_array
             ,COALESCE(
@@ -110,6 +119,9 @@
                         'doc_ttl', A.doc_ttl,
                         'doc_cn', A.doc_cn
                     )
+                    <if test="sortBy != null and sortBy != 'latest'">
+                        ORDER BY A.reg_dt DESC
+                    </if>
                 ) FILTER (WHERE A.root_menu_nm = '기관소식'), '[]'::jsonb
              ) AS inst_news_json_array
             ,COALESCE(
@@ -126,6 +138,9 @@
                         'doc_ttl', A.doc_ttl,
                         'doc_cn', A.doc_cn
                     )
+                    <if test="sortBy != null and sortBy != 'latest'">
+                        ORDER BY A.reg_dt DESC
+                    </if>
                 ) FILTER (WHERE A.root_menu_nm = '기관소개'), '[]'::jsonb
              ) AS inst_intro_json_array
         FROM(
@@ -140,6 +155,7 @@
                 ,mp.pst_sn::text as doc_sn
                 ,mp.pst_ttl as doc_ttl
                 ,mp.pst_cn as doc_cn
+                ,mp.reg_dt as reg_dt
             FROM kids_own.tb_pp_m_pst mp
             INNER JOIN kids_own.tb_pp_d_menu dm
                 ON (
@@ -168,6 +184,7 @@
                 ,cms.conts_sn::text as doc_sn
                 ,cms.conts_ttl as doc_ttl
                 ,cms.conts_cn as doc_cn
+                ,cms.reg_dt as reg_dt
             FROM kids_own.tb_pp_m_conts cms
             INNER JOIN kids_own.tb_pp_d_menu dm
                 ON /* ex) cms0006 /pp/ko/cms/CmsPage/cms0016 */
