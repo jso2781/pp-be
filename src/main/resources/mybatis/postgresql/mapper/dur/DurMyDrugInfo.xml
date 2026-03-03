@@ -14,7 +14,7 @@
     INNER JOIN us_dsadba.dra_entp_permit dep ON dit.entp_seq = dep.entp_seq
          WHERE 1=1
            AND dit.item_name LIKE '%' || #{searchValue} || '%'
-         ORDER BY st.item_seq
+         ORDER BY st.item_seq, std_cd
     </select>
 
     <select id="selectDurMyDrugSearchItemC2">
@@ -68,19 +68,50 @@
       <result property="nurswList" column="nursw_json_array" typeHandler="kr.or.kids.domain.pp.dur.mapper.typehandler.NurswJsonArrayTypeHandler"/>
     </resultMap>
 
-    <!-- 입력 목록 중 하나라도 (제품명/성분명) 일치하면 포함. 공백이면 해당 항목은 조건 생략(=전부 허용). -->
-    <sql id="condInList">
-        <if test="list != null and list.size() > 0">
-            AND (
-            <foreach collection="list" item="item" separator=" OR ">
-                (
-                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>prdct_cd = #{item.prdctCd}</otherwise></choose>
+    <!-- 병용금기 매칭: 제품코드 우선(=), 제품코드가 없을 때만 성분코드 LIKE -->
+    <sql id="concMatchAto1">
+        (
+            (p.a_prdct_cd IS NOT NULL AND p.a_prdct_cd != '' AND cb.mfds_prdct_nm_1 = p.a_prdct_cd)
+            OR
+            (
+                (p.a_prdct_cd IS NULL OR p.a_prdct_cd = '')
                 AND
-                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>igrd_cd = #{item.igrdCd}</otherwise></choose>
-                )
-            </foreach>
+                (p.a_igrd_cd IS NULL OR p.a_igrd_cd = '' OR cb.mfds_igrd_cd_cn_1 LIKE '%' || p.a_igrd_cd || '%')
             )
-        </if>
+        )
+    </sql>
+    <sql id="concMatchBto2">
+        (
+            (p.b_prdct_cd IS NOT NULL AND p.b_prdct_cd != '' AND cb.mfds_prdct_nm_2 = p.b_prdct_cd)
+            OR
+            (
+                (p.b_prdct_cd IS NULL OR p.b_prdct_cd = '')
+                AND
+                (p.b_igrd_cd IS NULL OR p.b_igrd_cd = '' OR cb.mfds_igrd_cd_cn_2 LIKE '%' || p.b_igrd_cd || '%')
+            )
+        )
+    </sql>
+    <sql id="concMatchAto2">
+        (
+            (p.a_prdct_cd IS NOT NULL AND p.a_prdct_cd != '' AND cb.mfds_prdct_nm_2 = p.a_prdct_cd)
+            OR
+            (
+                (p.a_prdct_cd IS NULL OR p.a_prdct_cd = '')
+                AND
+                (p.a_igrd_cd IS NULL OR p.a_igrd_cd = '' OR cb.mfds_igrd_cd_cn_2 LIKE '%' || p.a_igrd_cd || '%')
+            )
+        )
+    </sql>
+    <sql id="concMatchBto1">
+        (
+            (p.b_prdct_cd IS NOT NULL AND p.b_prdct_cd != '' AND cb.mfds_prdct_nm_1 = p.b_prdct_cd)
+            OR
+            (
+                (p.b_prdct_cd IS NULL OR p.b_prdct_cd = '')
+                AND
+                (p.b_igrd_cd IS NULL OR p.b_igrd_cd = '' OR cb.mfds_igrd_cd_cn_1 LIKE '%' || p.b_igrd_cd || '%')
+            )
+        )
     </sql>
 
     <select id="selectDurMyDrugInfoConcList" resultMap="DurSearchRoomMap">
@@ -110,64 +141,46 @@
                     FROM input_items a
                     JOIN input_items b ON a.rn &lt; b.rn
                 ),
-                conc_raw AS (
+                conc_match AS (
                     SELECT DISTINCT
-                        CASE
-                            WHEN (
-                                (p.a_prdct_cd IS NULL OR p.a_prdct_cd = '' OR cb.prdct_cd_1 = p.a_prdct_cd)
-                                AND (p.a_igrd_cd IS NULL OR p.a_igrd_cd = '' OR cb.igrd_cd_1 = p.a_igrd_cd)
-                                AND (p.b_prdct_cd IS NULL OR p.b_prdct_cd = '' OR cb.prdct_cd_2 = p.b_prdct_cd)
-                                AND (p.b_igrd_cd IS NULL OR p.b_igrd_cd = '' OR cb.igrd_cd_2 = p.b_igrd_cd)
-                            ) THEN cb.prdct_nm_1
-                            ELSE cb.prdct_nm_2
-                        END AS prdct_nm,
-                        CASE
-                            WHEN (
-                                (p.a_prdct_cd IS NULL OR p.a_prdct_cd = '' OR cb.prdct_cd_1 = p.a_prdct_cd)
-                                AND (p.a_igrd_cd IS NULL OR p.a_igrd_cd = '' OR cb.igrd_cd_1 = p.a_igrd_cd)
-                                AND (p.b_prdct_cd IS NULL OR p.b_prdct_cd = '' OR cb.prdct_cd_2 = p.b_prdct_cd)
-                                AND (p.b_igrd_cd IS NULL OR p.b_igrd_cd = '' OR cb.igrd_cd_2 = p.b_igrd_cd)
-                            ) THEN cb.igrd_nm_1
-                            ELSE cb.igrd_nm_2
-                        END AS igrd_nm,
-                        CASE
-                            WHEN (
-                                (p.a_prdct_cd IS NULL OR p.a_prdct_cd = '' OR cb.prdct_cd_1 = p.a_prdct_cd)
-                                AND (p.a_igrd_cd IS NULL OR p.a_igrd_cd = '' OR cb.igrd_cd_1 = p.a_igrd_cd)
-                                AND (p.b_prdct_cd IS NULL OR p.b_prdct_cd = '' OR cb.prdct_cd_2 = p.b_prdct_cd)
-                                AND (p.b_igrd_cd IS NULL OR p.b_igrd_cd = '' OR cb.igrd_cd_2 = p.b_igrd_cd)
-                            ) THEN cb.igrd_nm_2
-                            ELSE cb.igrd_nm_1
-                        END AS prohibit_igrd_nm,
-                        CASE
-                            WHEN (
-                                (p.a_prdct_cd IS NULL OR p.a_prdct_cd = '' OR cb.prdct_cd_1 = p.a_prdct_cd)
-                                AND (p.a_igrd_cd IS NULL OR p.a_igrd_cd = '' OR cb.igrd_cd_1 = p.a_igrd_cd)
-                                AND (p.b_prdct_cd IS NULL OR p.b_prdct_cd = '' OR cb.prdct_cd_2 = p.b_prdct_cd)
-                                AND (p.b_igrd_cd IS NULL OR p.b_igrd_cd = '' OR cb.igrd_cd_2 = p.b_igrd_cd)
-                            ) THEN cb.prdct_nm_2
-                            ELSE cb.prdct_nm_1
-                        END AS prohibit_prdct_nm,
+                        cb.prdct_nm_1,
+                        cb.prdct_nm_2,
+                        cb.igrd_nm_1,
+                        cb.igrd_nm_2,
                         cb.condi_rsn AS dtl_info_cn,
-                        cb.rmrk_cn
+                        cb.rmrk_cn,
+                        TRUE AS is_forward
                     FROM input_pairs p
                     JOIN kids_own.tb_pp_m_dur_conc_bann cb
                         ON cb.oper_stts_cd = 'O'
-                       AND (
-                            (
-                                (p.a_prdct_cd IS NULL OR p.a_prdct_cd = '' OR cb.prdct_cd_1 = p.a_prdct_cd)
-                                AND (p.a_igrd_cd IS NULL OR p.a_igrd_cd = '' OR cb.igrd_cd_1 = p.a_igrd_cd)
-                                AND (p.b_prdct_cd IS NULL OR p.b_prdct_cd = '' OR cb.prdct_cd_2 = p.b_prdct_cd)
-                                AND (p.b_igrd_cd IS NULL OR p.b_igrd_cd = '' OR cb.igrd_cd_2 = p.b_igrd_cd)
-                            )
-                            OR
-                            (
-                                (p.a_prdct_cd IS NULL OR p.a_prdct_cd = '' OR cb.prdct_cd_2 = p.a_prdct_cd)
-                                AND (p.a_igrd_cd IS NULL OR p.a_igrd_cd = '' OR cb.igrd_cd_2 = p.a_igrd_cd)
-                                AND (p.b_prdct_cd IS NULL OR p.b_prdct_cd = '' OR cb.prdct_cd_1 = p.b_prdct_cd)
-                                AND (p.b_igrd_cd IS NULL OR p.b_igrd_cd = '' OR cb.igrd_cd_1 = p.b_igrd_cd)
-                            )
-                        )
+                       AND <include refid="concMatchAto1"/>
+                       AND <include refid="concMatchBto2"/>         
+                                  
+                    UNION ALL
+                    
+                    SELECT DISTINCT
+                        cb.prdct_nm_1,
+                        cb.prdct_nm_2,
+                        cb.igrd_nm_1,
+                        cb.igrd_nm_2,
+                        cb.condi_rsn AS dtl_info_cn,
+                        cb.rmrk_cn,
+                        FALSE AS is_forward
+                    FROM input_pairs p
+                    JOIN kids_own.tb_pp_m_dur_conc_bann cb
+                        ON cb.oper_stts_cd = 'O'
+                       AND <include refid="concMatchAto2"/>
+                       AND <include refid="concMatchBto1"/>                   
+                ),
+                conc_raw AS (
+                    SELECT DISTINCT
+                        CASE WHEN is_forward THEN prdct_nm_1 ELSE prdct_nm_2 END AS prdct_nm,
+                        CASE WHEN is_forward THEN igrd_nm_1 ELSE igrd_nm_2 END AS igrd_nm,
+                        CASE WHEN is_forward THEN igrd_nm_2 ELSE igrd_nm_1 END AS prohibit_igrd_nm,
+                        CASE WHEN is_forward THEN prdct_nm_2 ELSE prdct_nm_1 END AS prohibit_prdct_nm,
+                        dtl_info_cn,
+                        rmrk_cn
+                    FROM conc_match
                 )
                 SELECT distinct
                     igrd_nm,
@@ -327,9 +340,9 @@
 	            AND (
 	            <foreach collection="list" item="item" separator=" OR ">
 	                (
-	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>prdct_cd = #{item.prdctCd}</otherwise></choose>
+	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>mfds_prdct_nm = #{item.prdctCd}</otherwise></choose>
 	                AND
-	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>(igrd_cd = #{item.igrdCd} OR mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%')</otherwise></choose>	                	               	               
+	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%'</otherwise></choose>	                	               	               
 	                )
 	            </foreach>
 	            )
@@ -366,9 +379,9 @@
 	            AND (
 	            <foreach collection="list" item="item" separator=" OR ">
 	                (
-	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>prdct_cd = #{item.prdctCd}</otherwise></choose>
+	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>mfds_prdct_nm = #{item.prdctCd}</otherwise></choose>
 	                AND
-	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>(igrd_cd = #{item.igrdCd} OR mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%')</otherwise></choose>	                	               	               
+	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%'</otherwise></choose>	                	               	               
 	                )
 	            </foreach>
 	            )
@@ -405,9 +418,9 @@
                 AND (
                 <foreach collection="list" item="item" separator=" OR ">
                     (
-                    <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>(mdcn_cd = #{item.prdctCd})</otherwise></choose>
+                    <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>(mfds_prdct_nm = #{item.prdctCd})</otherwise></choose>
                     AND
-                    <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>(gnrl_nm_cd = #{item.igrdCd} OR mfds_igrd_cd_cn = #{item.igrdCd})</otherwise></choose>
+                    <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>mfds_igrd_cd_cn = #{item.igrdCd}</otherwise></choose>
                     )
                 </foreach>
                 )
@@ -444,9 +457,9 @@
                 AND (
                 <foreach collection="list" item="item" separator=" OR ">
                     (
-                    <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>(mdcn_cd = #{item.prdctCd})</otherwise></choose>
+                    <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>mfds_prdct_nm = #{item.prdctCd}</otherwise></choose>
                     AND
-                    <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>(gnrl_nm_cd = #{item.igrdCd} OR mfds_igrd_cd_cn = #{item.igrdCd})</otherwise></choose>
+                    <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>mfds_igrd_cd_cn = #{item.igrdCd}</otherwise></choose>
                     )
                 </foreach>
                 )
@@ -512,9 +525,9 @@
                         AND (
                         <foreach collection="list" item="item" separator=" OR ">
                             (
-                            <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>(e.mdcn_cd = #{item.prdctCd})</otherwise></choose>
+                            <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>e.mfds_prdct_nm = #{item.prdctCd}</otherwise></choose>
                             AND
-                            <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>(e.gnrl_nm_cd = #{item.igrdCd} OR mfds_igrd_cd_cn = #{item.igrdCd})</otherwise></choose>
+                            <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>mfds_igrd_cd_cn = #{item.igrdCd}</otherwise></choose>
                             )
                         </foreach>
                         )
@@ -553,9 +566,9 @@
 	            AND (
 	            <foreach collection="list" item="item" separator=" OR ">
 	                (
-	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>prdct_cd = #{item.prdctCd}</otherwise></choose>
+	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>mfds_prdct_nm = #{item.prdctCd}</otherwise></choose>
 	                AND
-	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>(igrd_cd = #{item.igrdCd} OR mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%')</otherwise></choose>	                	               	               
+	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%'</otherwise></choose>	                	               	               
 	                )
 	            </foreach>
 	            )
@@ -592,9 +605,9 @@
 	            AND (
 	            <foreach collection="list" item="item" separator=" OR ">
 	                (
-	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>prdct_cd = #{item.prdctCd}</otherwise></choose>
+	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>mfds_prdct_nm = #{item.prdctCd}</otherwise></choose>
 	                AND
-	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>(igrd_cd = #{item.igrdCd} OR mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%')</otherwise></choose>	                	               	               
+	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%'</otherwise></choose>	                	               	               
 	                )
 	            </foreach>
 	            )
