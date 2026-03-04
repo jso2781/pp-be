@@ -6,6 +6,9 @@ import kr.or.kids.domain.pp.exprt.mapper.ExprtApprovalMapper;
 import kr.or.kids.domain.pp.exprt.mapper.ExprtTaskMapper;
 import kr.or.kids.domain.pp.exprt.service.ExprtApprovalService;
 import kr.or.kids.domain.pp.exprt.vo.*;
+import kr.or.kids.domain.pp.external.email.client.EmailClient;
+import kr.or.kids.domain.pp.external.email.vo.EmailPVO;
+import kr.or.kids.domain.pp.external.email.vo.EmailRVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 import kr.or.kids.global.util.MaskingUtil;
@@ -27,6 +30,8 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
 
     private final ExprtApprovalMapper exprtApprovalMapper;
     private final ExprtTaskMapper exprtTaskMapper;
+
+    private final EmailClient emailClient;
 
     @Override
     public ApiPrnDto selectExprtApprovalList(ExprtApprovalPVO exprtApprovalPVO) {
@@ -204,6 +209,21 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         log.debug("sndptyEmlAddr >>>>> " + sndptyEmlAddr);
         log.debug("rcvrFlnm >>>>> " + rcvrFlnm);
         log.debug("rcvrEmlAddr >>>>> " + rcvrEmlAddr);
+
+        EmailPVO ep = new EmailPVO();
+        ep.setSndptyFlnm(sndptyFlnm);
+        ep.setSndptyEmlAddr(sndptyEmlAddr);
+        ep.setRcvrFlnm(rcvrFlnm);
+        ep.setRcvrEmlAddr(rcvrEmlAddr);
+        ep.setEmlTtl(emlTtl);
+        ep.setEmlCn(emlCn);
+
+        // 메일발송은 ca-be 백앤드 Rest API를 호출해서 메일전송 처리함.
+        EmailRVO er = emailClient.send(ep);
+
+        log.debug("==================== ExprtApprovalServiceImpl exprtReject er.getResultCode()=" + er.getResultCode());
+        log.debug("==================== ExprtApprovalServiceImpl exprtReject er.getMessageId()=" + er.getMessageId());
+        log.debug("==================== ExprtApprovalServiceImpl exprtReject er.getErrorMessage()=" + er.getErrorMessage());
     }
 
     /**
@@ -211,7 +231,7 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
      */
     private void removeAttachFile(ExprtApprovalUVO exprtApprovalUVO) {
         // TODO 첨부파일 공통 확인 후 수정 예정
-        log.debug("remove attach file");
+        log.debug("exprtReject attach file");
     }
 
     /**

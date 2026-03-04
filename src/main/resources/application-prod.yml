@@ -71,6 +71,17 @@ spring:
           timeout: 5000
           writetimeout: 5000
 
+external:
+  services:
+    email:
+      base-url: http://kids-ca-be-service.kids-dev-ca:8080
+      connect-timeout-ms: 3000
+      read-timeout-ms: 6000
+    sms:
+      base-url: http://192.168.2.149:30012
+      connect-timeout-ms: 1000
+      read-timeout-ms: 3000
+
 jwt:
   issuer: kids_user
   secret-key: ZGQtaW90LXBjd2ViLWFwaS1hZG1pbi1zZWNyZXRrZXk=
