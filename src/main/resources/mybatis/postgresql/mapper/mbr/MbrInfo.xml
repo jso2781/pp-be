@@ -150,7 +150,7 @@
             ,#{mbrWhdwlRsn}
             ,#{mbrWhdwlDt}
             ,#{encptBfrPswd}
-            ,#{pswdChgDt}
+            ,now()
             ,#{pswdErrNmtm}
             ,#{linkInfoIdntfId}
             ,#{certTokenVl}
