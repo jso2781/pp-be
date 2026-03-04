@@ -110,11 +110,17 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
 
                 // 전문가 회원 전환 신청 반려 시 로직 수행 (업무시스템 삭제, 이메일 발송)
                 if ("R".equals(exprtApprovalUVO.getExprtAprvSttsCode())) {
+                    // 개인정보 삭제 전 메일 발송을 위한 원본데이터(성명, 메일주소) 조회
+                    ExprtApprovalPVO exprtApprovalPVO = new ExprtApprovalPVO();
+                    exprtApprovalPVO.setExprtTaskSn(exprtApprovalUVO.getExprtTaskSn());
+                    ExprtApprovalRVO detail = exprtApprovalMapper.selectExprtApproval(exprtApprovalPVO);
+
+                    // 개인정보 삭제 및 반려
                     exprtApprovalUVO.setExprtAprvSttsCode("R");
                     exprtApprovalUVO.setExprtHdofYn("Y");
                     exprtApprovalMapper.collectExprtApproval(exprtApprovalUVO);
 
-                    exprtReject(exprtApprovalUVO);
+                    exprtReject(exprtApprovalUVO, detail);
 
                     data.put("result", "SUCCESS");
 
@@ -174,7 +180,7 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
     /**
      * 전문가 회원 전환 신청 반려
      */
-    private void exprtReject(ExprtApprovalUVO exprtApprovalUVO) {
+    private void exprtReject(ExprtApprovalUVO exprtApprovalUVO, ExprtApprovalRVO detail) {
         // 신청한 업무시스템 전체 삭제
         ExprtTaskPVO exprtTaskPVO = new ExprtTaskPVO();
         exprtTaskPVO.setExprtNo(exprtApprovalUVO.getExprtNo());
@@ -184,8 +190,20 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         exprtTaskPVO.setMbrNo(exprtApprovalUVO.getMbrNo());
         exprtTaskMapper.deleteAllExprtAuth(exprtTaskPVO);
 
-        // TODO 공통 확인 후 이메일 발송 로직 추가 예정 (비동기)
-        log.debug("send reject email");
+        // 반려안내 이메일 발송
+        String emlTtl = "전문가 전환 신청 결과 안내";  // 제목
+        String emlCn = "신청하신 전문가 전환 신청 건이 최종 반려되었습니다.\n내 업무 페이지에서 반려사유 확인 후 재신청 바랍니다."; // 본문
+        String sndptyFlnm = "mail.drugsafe.or.kr"; // 메일 발송 계정
+        String sndptyEmlAddr = "kids@drugsafe.or.kr"; // 발신자 메일주소
+        String rcvrFlnm = detail.getName(); // 수신자 명
+        String rcvrEmlAddr = detail.getInstEmlNm(); // 수신자 메일주소
+
+        log.debug("emlTtl >>>>> " + emlTtl);
+        log.debug("emlCn >>>>> " + emlCn);
+        log.debug("sndptyFlnm >>>>> " + sndptyFlnm);
+        log.debug("sndptyEmlAddr >>>>> " + sndptyEmlAddr);
+        log.debug("rcvrFlnm >>>>> " + rcvrFlnm);
+        log.debug("rcvrEmlAddr >>>>> " + rcvrEmlAddr);
     }
 
     /**
