@@ -62,6 +62,8 @@
                 ,mp.reg_dt  as reg_dt
                 ,kids_own.similarity(coalesce(mp.pst_ttl,'') || ' ' || coalesce(mp.pst_cn,''), #{searchText}) as relevance_score
             FROM kids_own.tb_pp_m_pst mp
+            INNER JOIN kids_own.tb_pp_m_bbs mb ON mp.bbs_id = mb.bbs_id AND mb.USE_YN = 'Y'
+            INNER JOIN kids_own.tb_pp_m_bbs_authrt mba ON mb.bbs_id = mba.bbs_id AND mba.AUTHRT_CD = 'BBS_USR'            
             INNER JOIN kids_own.tb_pp_d_menu dm
                 ON (
                     mp.bbs_id = substring(dm.menu_url_addr FROM position('/general/' in dm.menu_url_addr) + length('/general/')) OR

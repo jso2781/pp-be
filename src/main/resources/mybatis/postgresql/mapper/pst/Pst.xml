@@ -20,6 +20,7 @@
             ,p.mdfcn_dt
         	,ft.srvr_file_nm as thmb_file_nm
         FROM kids_own.TB_PP_M_BBS b
+           , kids_own.TB_PP_M_BBS_AUTHRT ba
            , kids_own.TB_PP_M_PST p
         LEFT OUTER JOIN kids_own.TB_CA_E_FILE_TRSM ft
           ON ft.atch_file_group_id = p.thmb_id
@@ -27,6 +28,8 @@
                                   FROM kids_own.tb_ca_e_file_trsm f
                                  WHERE f.atch_file_group_id = p.thmb_id)
        WHERE p.bbs_id = #{bbsId}
+         AND ba.authrt_cd = 'BBS_USR'
+         AND b.bbs_id = ba.bbs_id
          AND b.bbs_id = p.bbs_id
          AND b.use_yn = 'Y'
          AND p.expsr_yn = 'Y'
@@ -73,9 +76,12 @@
         LEFT OUTER JOIN kids_own.tb_pp_m_emp_info ei
           ON p.rgtr_id = ei.emp_no
            , kids_own.TB_PP_M_BBS b
+		   , kids_own.TB_PP_M_BBS_AUTHRT ba           
        WHERE p.bbs_id = #{bbsId}
          AND p.pst_sn = #{pstSn}
          AND p.bbs_id = b.bbs_id
+         AND ba.authrt_cd = 'BBS_USR'
+         AND b.bbs_id = ba.bbs_id         
          AND b.use_yn = 'Y'
          AND p.expsr_yn = 'Y'
     </select>
