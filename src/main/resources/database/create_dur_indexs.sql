@@ -65,3 +65,7 @@ ON kids_own.tb_pp_m_dur_nursw(lower(igrd_nm));
 -- 대국민포털_DUR수유부주의기본(인덱스 2)
 CREATE INDEX CONCURRENTLY idx_tb_pp_m_dur_nursw_2
 ON kids_own.tb_pp_m_dur_nursw(lower(mfds_igrd_nm_cn));
+
+-- 의약성분_(원료)성분(인덱스 1)
+CREATE INDEX CONCURRENTLY idx_drc_ingr_1
+ON us_dsadba.drc_ingr(lower(ingr_eng_name));
