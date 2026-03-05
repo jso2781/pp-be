@@ -128,7 +128,7 @@
             FROM kids_own.tb_pp_m_dur_conc_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND igrd_nm_1 like '%' || #{igrdNm} || '%'
+                AND lower(igrd_nm_1) like '%' || lower(#{igrdNm}) || '%'
             </if>
             <if test="prdctNm != null and prdctNm != ''">
                 AND prdct_nm_1 like '%' || #{prdctNm} || '%'
@@ -159,7 +159,7 @@
             FROM kids_own.tb_pp_m_dur_conc_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND igrd_nm_2 like '%' || #{igrdNm} || '%'
+                AND lower(igrd_nm_2) like '%' || lower(#{igrdNm}) || '%'
             </if>
             <if test="prdctNm != null and prdctNm != ''">
                 AND prdct_nm_2 like '%' || #{prdctNm} || '%'
@@ -191,7 +191,7 @@
             FROM kids_own.tb_pp_m_dur_age_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND igrd_nm like '%' || #{igrdNm} || '%'
+                AND lower(igrd_nm) like '%' || lower(#{igrdNm}) || '%'
             </if>
             <if test="prdctNm != null and prdctNm != ''">
                 AND prdct_nm like '%' || #{prdctNm} || '%'
@@ -223,7 +223,7 @@
             FROM kids_own.tb_pp_m_dur_prgnt_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND igrd_nm like '%' || #{igrdNm} || '%'
+                AND lower(igrd_nm) like '%' || lower(#{igrdNm}) || '%'
             </if>
             <if test="prdctNm != null and prdctNm != ''">
                 AND prdct_nm like '%' || #{prdctNm} || '%'
@@ -255,7 +255,7 @@
             FROM kids_own.tb_pp_m_dur_cpct
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND (gnrl_nm like '%' || #{igrdNm} || '%' OR mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
+                AND (lower(gnrl_nm) like '%' || lower(#{igrdNm}) || '%' OR lower(mfds_igrd_nm_cn) like '%' || lower(#{igrdNm}) || '%')
             </if>
             <if test="prdctNm != null and prdctNm != ''">
                 AND (mdcn_nm like '%' || #{prdctNm} || '%' OR mfds_prdct_nm like '%' || #{prdctNm} || '%')
@@ -287,7 +287,7 @@
             FROM kids_own.tb_pp_m_dur_dosage
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND (gnrl_nm like '%' || #{igrdNm} || '%' OR mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
+                AND (lower(gnrl_nm) like '%' || lower(#{igrdNm}) || '%' OR lower(mfds_igrd_nm_cn) like '%' || lower(#{igrdNm}) || '%')
             </if>
             <if test="prdctNm != null and prdctNm != ''">
                 AND (mdcn_nm like '%' || #{prdctNm} || '%' OR mfds_prdct_nm like '%' || #{prdctNm} || '%')
@@ -349,14 +349,14 @@
                     FROM kids_own.tb_pp_m_dur_eftgrp e
                     WHERE oper_stts_cd = 'O' 
                     <if test="igrdNm != null and igrdNm != ''">
-                        AND (e.gnrl_nm like '%' || #{igrdNm} || '%' OR e.mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
+                        AND (lower(e.gnrl_nm) like '%' || lower(#{igrdNm}) || '%' OR lower(e.mfds_igrd_nm_cn) like '%' || lower(#{igrdNm}) || '%')
                     </if>
                     <if test="prdctNm != null and prdctNm != ''">
                         AND (e.item_nm like '%' || #{prdctNm} || '%' OR e.mfds_prdct_nm like '%' || #{prdctNm} || '%')
                     </if>
                 )
                 <if test="igrdNm != null and igrdNm != ''">
-                    AND (eg.gnrl_nm like '%' || #{igrdNm} || '%' OR eg.mfds_igrd_nm_cn like '%' || #{igrdNm} || '%')
+                    AND (lower(eg.gnrl_nm) like '%' || lower(#{igrdNm}) || '%' OR lower(eg.mfds_igrd_nm_cn) like '%' || lower(#{igrdNm}) || '%')
                 </if>
                 <if test="prdctNm != null and prdctNm != ''">
                     AND (eg.item_nm like '%' || #{prdctNm} || '%' OR eg.mfds_prdct_nm like '%' || #{prdctNm} || '%')
@@ -389,7 +389,7 @@
             FROM kids_own.tb_pp_m_dur_snctz
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND igrd_nm like '%' || #{igrdNm} || '%'
+                AND lower(igrd_nm) like '%' || lower(#{igrdNm}) || '%'
             </if>
             <if test="prdctNm != null and prdctNm != ''">
                 AND prdct_nm like '%' || #{prdctNm} || '%'
@@ -421,7 +421,7 @@
             FROM kids_own.tb_pp_m_dur_nursw
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND igrd_nm like '%' || #{igrdNm} || '%'
+                AND lower(igrd_nm) like '%' || lower(#{igrdNm}) || '%'
             </if>
             <if test="prdctNm != null and prdctNm != ''">
                 AND prdct_nm like '%' || #{prdctNm} || '%'
@@ -443,7 +443,7 @@
             FROM kids_own.tb_pp_m_dur_conc_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND igrd_nm_1 = #{igrdNm}
+                AND lower(igrd_nm_1) = lower(#{igrdNm})
             </if>
             AND 'conc' = #{bannTypeCd}
             UNION ALL
@@ -453,7 +453,7 @@
             FROM kids_own.tb_pp_m_dur_conc_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND igrd_nm_2 = #{igrdNm}
+                AND lower(igrd_nm_2) = lower(#{igrdNm})
             </if>
             AND 'conc' = #{bannTypeCd}
             UNION ALL
@@ -464,7 +464,7 @@
             FROM kids_own.tb_pp_m_dur_age_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND igrd_nm = #{igrdNm}
+                AND lower(igrd_nm) = lower(#{igrdNm})
             </if>
             AND 'age' = #{bannTypeCd}
             UNION ALL
@@ -475,7 +475,7 @@
             FROM kids_own.tb_pp_m_dur_prgnt_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND igrd_nm = #{igrdNm}
+                AND lower(igrd_nm) = lower(#{igrdNm})
             </if>
             AND 'prgnt' = #{bannTypeCd}
             UNION ALL
@@ -486,7 +486,7 @@
             FROM kids_own.tb_pp_m_dur_cpct
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND (gnrl_nm = #{igrdNm} OR mfds_igrd_nm_cn = #{igrdNm})
+                AND (lower(gnrl_nm) = lower(#{igrdNm}) OR lower(mfds_igrd_nm_cn) = lower(#{igrdNm}))
             </if>
             AND 'cpct' = #{bannTypeCd}
             UNION ALL
@@ -497,7 +497,7 @@
             FROM kids_own.tb_pp_m_dur_dosage
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND (gnrl_nm = #{igrdNm} OR mfds_igrd_nm_cn = #{igrdNm})
+                AND (lower(gnrl_nm) = lower(#{igrdNm}) OR lower(mfds_igrd_nm_cn) = lower(#{igrdNm}))
             </if>
             AND 'dosage' = #{bannTypeCd}
             UNION ALL
@@ -513,11 +513,11 @@
                 FROM kids_own.tb_pp_m_dur_eftgrp e
                 WHERE oper_stts_cd = 'O' 
                 <if test="igrdNm != null and igrdNm != ''">
-                    AND (e.gnrl_nm = #{igrdNm} OR e.mfds_igrd_nm_cn = #{igrdNm})
+                    AND (lower(e.gnrl_nm) = lower(#{igrdNm}) OR lower(e.mfds_igrd_nm_cn) = lower(#{igrdNm}))
                 </if>
             )
             <if test="igrdNm != null and igrdNm != ''">
-                AND (eg.gnrl_nm = #{igrdNm} OR eg.mfds_igrd_nm_cn = #{igrdNm})
+                AND (lower(eg.gnrl_nm) = lower(#{igrdNm}) OR lower(eg.mfds_igrd_nm_cn) = lower(#{igrdNm}))
             </if>
             AND 'eftgrp' = #{bannTypeCd}
             UNION ALL
@@ -528,7 +528,7 @@
             FROM kids_own.tb_pp_m_dur_snctz
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND igrd_nm = #{igrdNm}
+                AND lower(igrd_nm) = lower(#{igrdNm})
             </if>
             AND 'snctz' = #{bannTypeCd}
             UNION ALL
@@ -539,7 +539,7 @@
             FROM kids_own.tb_pp_m_dur_nursw
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND igrd_nm = #{igrdNm}
+                AND lower(igrd_nm) = lower(#{igrdNm})
             </if>
             AND 'nursw' = #{bannTypeCd}
         ) A
@@ -573,11 +573,11 @@
                 FROM kids_own.tb_pp_m_dur_eftgrp e
                 WHERE oper_stts_cd = 'O' 
                 <if test="igrdNm != null and igrdNm != ''">
-                    AND (e.gnrl_nm = #{igrdNm} OR e.mfds_igrd_nm_cn = #{igrdNm})
+                    AND (lower(e.gnrl_nm) = lower(#{igrdNm}) OR lower(e.mfds_igrd_nm_cn) = lower(#{igrdNm}))
                 </if>
             )
             <if test="igrdNm != null and igrdNm != ''">
-                AND (eg.gnrl_nm = #{igrdNm} OR eg.mfds_igrd_nm_cn = #{igrdNm})
+                AND (lower(eg.gnrl_nm) = lower(#{igrdNm}) OR lower(eg.mfds_igrd_nm_cn) = lower(#{igrdNm}))
             </if>
         ) A
     </select>
