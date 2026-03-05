@@ -36,10 +36,10 @@
 	<if test="searchWrd != null and searchWrd != ''">
 	  <choose>
 	    <when test="searchCnd == 'title'">
-	      AND p.pst_ttl LIKE '%' || #{searchWrd} || '%'
+	      AND lower(p.pst_ttl) LIKE '%' || lower(#{searchWrd}) || '%'
 	    </when>
 	    <when test="searchCnd == 'content'">
-	      AND p.pst_cn LIKE '%' || #{searchWrd} || '%'
+	      AND lower(p.pst_cn) LIKE '%' || lower(#{searchWrd}) || '%'
 	    </when>
 	  </choose>
 	</if>				

@@ -30,7 +30,7 @@
                        ingr_code
                      , ingr_eng_name
                   FROM us_dsadba.drc_ingr
-                 WHERE ingr_eng_name LIKE '%' || #{searchValue} || '%'
+                 WHERE lower(ingr_eng_name) LIKE '%' || lower(#{searchValue}) || '%'
                    AND ori_material_yn = 'Y'
 				   AND material_ingr_gb = 'M') din
     INNER JOIN us_dsadba.drb_item_ingr dii ON din.ingr_code = dii.material_code
@@ -48,7 +48,7 @@
                ingr_code
              , ingr_eng_name
           FROM us_dsadba.drc_ingr
-         WHERE ingr_eng_name LIKE '%' || #{searchValue} || '%'
+         WHERE lower(ingr_eng_name) LIKE '%' || lower(#{searchValue}) || '%'
            AND ori_material_yn = 'Y'
            AND material_ingr_gb = 'M'
          ORDER BY ingr_code, ingr_eng_name
