@@ -8,8 +8,16 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface PstMapper
-{
+public interface PstMapper {
+
+    /**
+     * 대국민포털_게시물기본 게시판 조회권한 검증
+     *
+     * @param pstPVO 조회용 파라메터 정보
+     * @return 권한정보
+     */
+    Boolean pstAuthCheck(PstPVO pstPVO);
+
     /**
      * 대국민포털_게시물기본 정보 목록 조회 
      *

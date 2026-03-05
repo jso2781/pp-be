@@ -33,6 +33,11 @@ public class CmsServiceImpl implements CmsService
         try{
             CmsRVO rvo = cmsMapper.getCms(cmsPVO);
 
+            if (rvo == null){
+                apiPrnDto = new ApiPrnDto(ApiResultCode.NOT_FOUND);
+                return apiPrnDto;
+            }
+
             HashMap<String, Object> bizData = new HashMap<>();
 
             /** 콘텐츠일련번호 */

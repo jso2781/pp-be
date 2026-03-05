@@ -31,6 +31,12 @@ public class PstServiceImpl implements PstService {
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         HashMap<String, Object> data = new HashMap<>();
 
+        // 게시판 조회권한 검증
+        if (!pstMapper.pstAuthCheck((pstPVO))) {
+            result = new ApiPrnDto(ApiResultCode.NOT_FOUND);
+            return result;
+        }
+
         PageHelper.startPage(pstPVO.getPageNum(), pstPVO.getPageSize());
         List<PstRVO> list = pstMapper.selectPstList(pstPVO);
 
@@ -50,6 +56,12 @@ public class PstServiceImpl implements PstService {
     public ApiPrnDto getPst(PstPVO pstPVO) {
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         HashMap<String, Object> data = new HashMap<>();
+
+        // 게시판 조회권한 검증
+        if (!pstMapper.pstAuthCheck((pstPVO))) {
+            result = new ApiPrnDto(ApiResultCode.NOT_FOUND);
+            return result;
+        }
 
         PstRVO pstRVO = pstMapper.getPst(pstPVO);
 
