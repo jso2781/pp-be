@@ -1,6 +1,9 @@
 package kr.or.kids.domain.pp.opnn.service.impl;
 
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +18,6 @@ import kr.or.kids.domain.pp.opnn.vo.OpnnPVO;
 import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
-import kr.or.kids.domain.pp.exprt.mapper.ExprtApprovalMapper;
-import kr.or.kids.domain.pp.exprt.mapper.ExprtTaskMapper;
 import kr.or.kids.domain.pp.external.email.client.EmailClient;
 import kr.or.kids.domain.pp.external.email.vo.EmailPVO;
 import kr.or.kids.domain.pp.external.email.vo.EmailRVO;
@@ -94,14 +95,20 @@ public class OpnnServiceImpl implements OpnnService
 
             opnnMapper.insertOpnn(opnnPVO);
             
-            // 이메일 발
+            // 이메일 발송부분
+//            String filePath = "/Users/jiwoongsong/drugsafe/sources/to_be/pp-fe/formtest.html";
+//            Path path = Paths.get(filePath);
+//            String htmlContent = Files.readString(path);
+//            
+//            htmlContent.replace("{{regDt}}", opnnPVO.getRegDt());
+//            htmlContent.replace("{{pbptCn}}", opnnPVO.getPbptCn());
+            
             String emlTtl = "DUR 정보 의견 제안 등록 안내문";  // 제목
             String emlCn = "한국의약품안전관리원 DUR 정보 의견제안 게시글이 등록되었습니다.\n 해당 의견제안에 대한 업무 처리는 관리자에서 확인해주세요."; // 본문
             String sndptyFlnm = "mail.drugsafe.or.kr"; // 메일 발송 계정
             String sndptyEmlAddr = "kids@drugsafe.or.kr"; // 발신자 메일주소
-            String rcvrFlnm = "temp"; // 수신자 명
-            String rcvrEmlAddr = "songjiwoong1020@gmail.com"; // 수신자 메일주소
-//            String rcvrEmlAddr = "kids_dur@drugsafe.kr"; // 수신자 메일주소
+            String rcvrFlnm = "한국의약품안전관리원"; // 수신자 명
+            String rcvrEmlAddr = "kids_dur@drugsafe.kr"; // 수신자 메일주소
 
             log.debug("emlTtl >>>>> " + emlTtl);
             log.debug("emlCn >>>>> " + emlCn);
