@@ -50,24 +50,48 @@ COMMENT ON COLUMN kids_own.tb_ca_addr.mdfr_id IS '수정자아이디';
 
 COMMENT ON CONSTRAINT pk_tb_ca_addr ON kids_own.tb_ca_addr IS '공통_우편번호기본 기본키';
 
--- Permissions
 
-ALTER TABLE kids_own.tb_ca_addr OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_ca_addr TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_addr TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_addr TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_addr TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_addr TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_addr TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_addr TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_addr TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_addr TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_addr TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_addr TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_addr TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_addr TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_addr TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_addr TO ca_dev;
+-- kids_own.tb_ca_btch_mng definition
+
+-- Drop table
+
+-- DROP TABLE kids_own.tb_ca_btch_mng;
+
+CREATE TABLE kids_own.tb_ca_btch_mng (
+	btch_job_id varchar(300) NOT NULL, -- 배치작업아이디
+	btch_task_se_cd varchar(20) NULL, -- 배치업무구분코드
+	btch_task_se_dtl_cd varchar(20) NULL, -- 배치업무구분상세코드
+	bgng_dt timestamp NULL, -- 시작일시
+	end_dt timestamp NULL, -- 종료일시
+	scs_yn bpchar(1) NULL, -- 성공여부
+	rtry_nmtm numeric(10) NULL, -- 재시도횟수
+	err_msg_cn text NULL, -- 오류메시지
+	reg_dt timestamp NULL, -- 등록일시
+	rgtr_id varchar(40) NULL, -- 등록자아이디
+	mdfcn_dt timestamp NULL, -- 수정일시
+	mdfr_id varchar(40) NULL, -- 수정자아이디
+	CONSTRAINT pk_tb_ca_btch_mng PRIMARY KEY (btch_job_id)
+);
+COMMENT ON TABLE kids_own.tb_ca_btch_mng IS '공통_배치관리';
+
+-- Column comments
+
+COMMENT ON COLUMN kids_own.tb_ca_btch_mng.btch_job_id IS '배치작업아이디';
+COMMENT ON COLUMN kids_own.tb_ca_btch_mng.btch_task_se_cd IS '배치업무구분코드';
+COMMENT ON COLUMN kids_own.tb_ca_btch_mng.btch_task_se_dtl_cd IS '배치업무구분상세코드';
+COMMENT ON COLUMN kids_own.tb_ca_btch_mng.bgng_dt IS '시작일시';
+COMMENT ON COLUMN kids_own.tb_ca_btch_mng.end_dt IS '종료일시';
+COMMENT ON COLUMN kids_own.tb_ca_btch_mng.scs_yn IS '성공여부';
+COMMENT ON COLUMN kids_own.tb_ca_btch_mng.rtry_nmtm IS '재시도횟수';
+COMMENT ON COLUMN kids_own.tb_ca_btch_mng.err_msg_cn IS '오류메시지';
+COMMENT ON COLUMN kids_own.tb_ca_btch_mng.reg_dt IS '등록일시';
+COMMENT ON COLUMN kids_own.tb_ca_btch_mng.rgtr_id IS '등록자아이디';
+COMMENT ON COLUMN kids_own.tb_ca_btch_mng.mdfcn_dt IS '수정일시';
+COMMENT ON COLUMN kids_own.tb_ca_btch_mng.mdfr_id IS '수정자아이디';
+
+-- Constraint comments
+
+COMMENT ON CONSTRAINT pk_tb_ca_btch_mng ON kids_own.tb_ca_btch_mng IS '공통_배치관리 기본키';
 
 
 -- kids_own.tb_ca_c_dtl_code definition
@@ -128,25 +152,6 @@ COMMENT ON COLUMN kids_own.tb_ca_c_dtl_code.mdfr_id IS '수정자아이디';
 
 COMMENT ON CONSTRAINT pk_tb_ca_c_dtl_code ON kids_own.tb_ca_c_dtl_code IS '공통_상세코드 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_ca_c_dtl_code OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_ca_c_dtl_code TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_dtl_code TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_dtl_code TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_dtl_code TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_dtl_code TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_dtl_code TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_dtl_code TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_dtl_code TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_dtl_code TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_dtl_code TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_dtl_code TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_dtl_code TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_dtl_code TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_dtl_code TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_dtl_code TO ca_dev;
-
 
 -- kids_own.tb_ca_c_group_code definition
 
@@ -191,25 +196,6 @@ COMMENT ON COLUMN kids_own.tb_ca_c_group_code.mdfr_id IS '수정자아이디';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_ca_c_group_code ON kids_own.tb_ca_c_group_code IS '공통_그룹코드 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_ca_c_group_code OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_ca_c_group_code TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_group_code TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_group_code TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_group_code TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_group_code TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_group_code TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_group_code TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_group_code TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_group_code TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_group_code TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_group_code TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_group_code TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_group_code TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_group_code TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_c_group_code TO ca_dev;
 
 
 -- kids_own.tb_ca_e_cert definition
@@ -280,25 +266,6 @@ COMMENT ON COLUMN kids_own.tb_ca_e_cert.mdfr_id IS '수정자아이디';
 
 COMMENT ON CONSTRAINT pk_tb_ca_e_cert ON kids_own.tb_ca_e_cert IS '공통_인증결과 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_ca_e_cert OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_ca_e_cert TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_cert TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_cert TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_cert TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_cert TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_cert TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_cert TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_cert TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_cert TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_cert TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_cert TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_cert TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_cert TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_cert TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_cert TO ca_dev;
-
 
 -- kids_own.tb_ca_e_doc_otpt definition
 
@@ -342,25 +309,6 @@ COMMENT ON COLUMN kids_own.tb_ca_e_doc_otpt.mdfr_id IS '수정자아이디';
 
 COMMENT ON CONSTRAINT pk_tb_ca_e_doc_otpt ON kids_own.tb_ca_e_doc_otpt IS '공통_문서출력내역 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_ca_e_doc_otpt OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_ca_e_doc_otpt TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_doc_otpt TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_doc_otpt TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_doc_otpt TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_doc_otpt TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_doc_otpt TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_doc_otpt TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_doc_otpt TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_doc_otpt TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_doc_otpt TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_doc_otpt TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_doc_otpt TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_doc_otpt TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_doc_otpt TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_doc_otpt TO ca_dev;
-
 
 -- kids_own.tb_ca_e_file_group_trsm definition
 
@@ -377,6 +325,7 @@ CREATE TABLE kids_own.tb_ca_e_file_group_trsm (
 	rgtr_id varchar(40) NOT NULL, -- 등록자아이디
 	mdfcn_dt timestamp NOT NULL, -- 수정일시
 	mdfr_id varchar(40) NOT NULL, -- 수정자아이디
+	menu_sn numeric(22) NULL,
 	CONSTRAINT pk_tb_ca_e_file_group_trsm PRIMARY KEY (atch_file_group_id)
 );
 COMMENT ON TABLE kids_own.tb_ca_e_file_group_trsm IS '공통_파일그룹전송내역';
@@ -396,25 +345,6 @@ COMMENT ON COLUMN kids_own.tb_ca_e_file_group_trsm.mdfr_id IS '수정자아이�
 
 COMMENT ON CONSTRAINT pk_tb_ca_e_file_group_trsm ON kids_own.tb_ca_e_file_group_trsm IS '공통_파일그룹전송내역 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_ca_e_file_group_trsm OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_ca_e_file_group_trsm TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_group_trsm TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_group_trsm TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_group_trsm TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_group_trsm TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_group_trsm TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_group_trsm TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_group_trsm TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_group_trsm TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_group_trsm TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_group_trsm TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_group_trsm TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_group_trsm TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_group_trsm TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_group_trsm TO ca_dev;
-
 
 -- kids_own.tb_ca_e_file_trsm definition
 
@@ -432,7 +362,7 @@ CREATE TABLE kids_own.tb_ca_e_file_trsm (
 	file_nm varchar(300) NULL,
 	file_extn_nm varchar(20) NULL,
 	file_cn text NULL,
-	file_sz numeric(10) NULL,
+	file_sz numeric(22) NULL,
 	crt_dt bpchar(14) NULL,
 	use_yn bpchar(1) NULL,
 	reg_dt timestamp NOT NULL,
@@ -441,25 +371,6 @@ CREATE TABLE kids_own.tb_ca_e_file_trsm (
 	mdfr_id varchar(40) NOT NULL,
 	CONSTRAINT pk_tb_ca_e_file_trsm PRIMARY KEY (atch_file_id)
 );
-
--- Permissions
-
-ALTER TABLE kids_own.tb_ca_e_file_trsm OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_ca_e_file_trsm TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_trsm TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_trsm TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_trsm TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_trsm TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_trsm TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_trsm TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_trsm TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_trsm TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_trsm TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_trsm TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_trsm TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_trsm TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_trsm TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_e_file_trsm TO ca_dev;
 
 
 -- kids_own.tb_ca_l_cntn_info_log definition
@@ -472,9 +383,11 @@ CREATE TABLE kids_own.tb_ca_l_cntn_info_log (
 	prvc_hstry_sn numeric(22) NOT NULL, -- 개인정보이력일련번호
 	task_sys_se_cd bpchar(2) NOT NULL, -- 업무시스템구분코드
 	menu_sn numeric(22) NULL, -- 메뉴일련번호
-	cntn_dt bpchar(14) NULL, -- 접속일시
-	acsr_info_nm varchar(200) NULL, -- 접속자정보명
+	cntn_dt timestamp NULL, -- 접속일시
 	qna_sql_cn text NULL, -- 질의응답SQL내용
+	prvc_incl_yn bpchar(1) NULL, -- 개인정보포함여부
+	rqstr_ip_addr varchar(255) NULL, -- 요청자IP주소
+	rqstr_id varchar(40) NULL, -- 요청자아이디
 	prcs_nocs numeric(10) NULL, -- 처리건수
 	dwnld_yn bpchar(1) NULL, -- 다운로드여부
 	dwnld_rsn text NULL, -- 다운로드사유
@@ -493,8 +406,10 @@ COMMENT ON COLUMN kids_own.tb_ca_l_cntn_info_log.prvc_hstry_sn IS '개인정보�
 COMMENT ON COLUMN kids_own.tb_ca_l_cntn_info_log.task_sys_se_cd IS '업무시스템구분코드';
 COMMENT ON COLUMN kids_own.tb_ca_l_cntn_info_log.menu_sn IS '메뉴일련번호';
 COMMENT ON COLUMN kids_own.tb_ca_l_cntn_info_log.cntn_dt IS '접속일시';
-COMMENT ON COLUMN kids_own.tb_ca_l_cntn_info_log.acsr_info_nm IS '접속자정보명';
 COMMENT ON COLUMN kids_own.tb_ca_l_cntn_info_log.qna_sql_cn IS '질의응답SQL내용';
+COMMENT ON COLUMN kids_own.tb_ca_l_cntn_info_log.prvc_incl_yn IS '개인정보포함여부';
+COMMENT ON COLUMN kids_own.tb_ca_l_cntn_info_log.rqstr_ip_addr IS '요청자IP주소';
+COMMENT ON COLUMN kids_own.tb_ca_l_cntn_info_log.rqstr_id IS '요청자아이디';
 COMMENT ON COLUMN kids_own.tb_ca_l_cntn_info_log.prcs_nocs IS '처리건수';
 COMMENT ON COLUMN kids_own.tb_ca_l_cntn_info_log.dwnld_yn IS '다운로드여부';
 COMMENT ON COLUMN kids_own.tb_ca_l_cntn_info_log.dwnld_rsn IS '다운로드사유';
@@ -507,25 +422,6 @@ COMMENT ON COLUMN kids_own.tb_ca_l_cntn_info_log.mdfr_id IS '수정자아이디'
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_ca_l_cntn_info_log ON kids_own.tb_ca_l_cntn_info_log IS '공통_개인정보이력 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_ca_l_cntn_info_log OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_ca_l_cntn_info_log TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_cntn_info_log TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_cntn_info_log TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_cntn_info_log TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_cntn_info_log TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_cntn_info_log TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_cntn_info_log TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_cntn_info_log TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_cntn_info_log TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_cntn_info_log TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_cntn_info_log TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_cntn_info_log TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_cntn_info_log TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_cntn_info_log TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_cntn_info_log TO ca_dev;
 
 
 -- kids_own.tb_ca_l_sesn_log_info_mng definition
@@ -584,25 +480,6 @@ COMMENT ON COLUMN kids_own.tb_ca_l_sesn_log_info_mng.mdfr_id IS '수정자아이
 
 COMMENT ON CONSTRAINT pk_tb_ca_l_sesn_log_info_mng ON kids_own.tb_ca_l_sesn_log_info_mng IS '공통_세션정보시스템로그 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_ca_l_sesn_log_info_mng OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_sesn_log_info_mng TO ca_dev;
-
 
 -- kids_own.tb_ca_l_task_acs_hstry definition
 
@@ -614,9 +491,7 @@ CREATE TABLE kids_own.tb_ca_l_task_acs_hstry (
 	menu_utztn_sn numeric(22) NOT NULL, -- 메뉴이용일련번호
 	sess_log_sn numeric(22) NULL, -- 세션로그일련번호
 	inpt_dt timestamp NULL, -- 입력일시
-	inst_cd varchar(20) NULL, -- 기관코드
-	trgt_menu_nm varchar(40) NULL, -- 대상메뉴명
-	qna_sql_cn text NULL, -- 질의응답SQL내용
+	menu_id varchar(40) NULL, -- 메뉴아이디
 	url_addr varchar(2000) NOT NULL, -- URL주소
 	task_se_cd_no varchar(10) NULL, -- 업무구분코드번호
 	cntn_dt timestamp NULL, -- 접속일시
@@ -638,9 +513,7 @@ COMMENT ON TABLE kids_own.tb_ca_l_task_acs_hstry IS '공통_업무별접근이�
 COMMENT ON COLUMN kids_own.tb_ca_l_task_acs_hstry.menu_utztn_sn IS '메뉴이용일련번호';
 COMMENT ON COLUMN kids_own.tb_ca_l_task_acs_hstry.sess_log_sn IS '세션로그일련번호';
 COMMENT ON COLUMN kids_own.tb_ca_l_task_acs_hstry.inpt_dt IS '입력일시';
-COMMENT ON COLUMN kids_own.tb_ca_l_task_acs_hstry.inst_cd IS '기관코드';
-COMMENT ON COLUMN kids_own.tb_ca_l_task_acs_hstry.trgt_menu_nm IS '대상메뉴명';
-COMMENT ON COLUMN kids_own.tb_ca_l_task_acs_hstry.qna_sql_cn IS '질의응답SQL내용';
+COMMENT ON COLUMN kids_own.tb_ca_l_task_acs_hstry.menu_id IS '메뉴아이디';
 COMMENT ON COLUMN kids_own.tb_ca_l_task_acs_hstry.url_addr IS 'URL주소';
 COMMENT ON COLUMN kids_own.tb_ca_l_task_acs_hstry.task_se_cd_no IS '업무구분코드번호';
 COMMENT ON COLUMN kids_own.tb_ca_l_task_acs_hstry.cntn_dt IS '접속일시';
@@ -657,25 +530,6 @@ COMMENT ON COLUMN kids_own.tb_ca_l_task_acs_hstry.mdfr_id IS '수정자아이디
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_ca_l_task_acs_hstry ON kids_own.tb_ca_l_task_acs_hstry IS '공통_업무별접근이력 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_ca_l_task_acs_hstry OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_ca_l_task_acs_hstry TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_task_acs_hstry TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_task_acs_hstry TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_task_acs_hstry TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_task_acs_hstry TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_task_acs_hstry TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_task_acs_hstry TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_task_acs_hstry TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_task_acs_hstry TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_task_acs_hstry TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_task_acs_hstry TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_task_acs_hstry TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_task_acs_hstry TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_task_acs_hstry TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_l_task_acs_hstry TO ca_dev;
 
 
 -- kids_own.tb_ca_m_anyid_intg_cert definition
@@ -715,25 +569,6 @@ COMMENT ON COLUMN kids_own.tb_ca_m_anyid_intg_cert.mdfr_id IS '수정자아이�
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_ca_m_anyid_intg_cert ON kids_own.tb_ca_m_anyid_intg_cert IS '공통_ANYID 통합인증기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_ca_m_anyid_intg_cert OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO ca_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_anyid_intg_cert TO pp_app;
 
 
 -- kids_own.tb_ca_m_atch definition
@@ -782,25 +617,6 @@ COMMENT ON COLUMN kids_own.tb_ca_m_atch.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_ca_m_atch ON kids_own.tb_ca_m_atch IS 'EXT_공통_첨부파일기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_ca_m_atch OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_ca_m_atch TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_atch TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_atch TO ca_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_atch TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_atch TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_atch TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_atch TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_atch TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_atch TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_atch TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_atch TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_atch TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_atch TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_atch TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_atch TO pp_app;
-
 
 -- kids_own.tb_ca_m_eml_sndng definition
 
@@ -814,6 +630,7 @@ CREATE TABLE kids_own.tb_ca_m_eml_sndng (
 	eml_cn varchar(4000) NULL, -- 이메일내용
 	sndpty_flnm varchar(100) NULL, -- 발신자성명
 	sndpty_eml_addr varchar(320) NOT NULL, -- 발신자이메일주소
+	otsd_eml_dmnd_id varchar(40) NULL, -- 외부이메일요청아이디
 	rcvr_flnm varchar(100) NULL, -- 수신자성명
 	rcvr_eml_addr varchar(320) NOT NULL, -- 수신자이메일주소
 	rcvr_jbps_nm varchar(100) NULL, -- 수신자직위명
@@ -835,6 +652,7 @@ COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng.eml_ttl IS '이메일제목';
 COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng.eml_cn IS '이메일내용';
 COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng.sndpty_flnm IS '발신자성명';
 COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng.sndpty_eml_addr IS '발신자이메일주소';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng.otsd_eml_dmnd_id IS '외부이메일요청아이디';
 COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng.rcvr_flnm IS '수신자성명';
 COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng.rcvr_eml_addr IS '수신자이메일주소';
 COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng.rcvr_jbps_nm IS '수신자직위명';
@@ -850,24 +668,54 @@ COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng.mdfr_id IS '수정자아이디';
 
 COMMENT ON CONSTRAINT pk_tb_ca_m_eml_sndng ON kids_own.tb_ca_m_eml_sndng IS '공통_메일발송기본 기본키';
 
--- Permissions
 
-ALTER TABLE kids_own.tb_ca_m_eml_sndng OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_ca_m_eml_sndng TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_eml_sndng TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_eml_sndng TO ca_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_eml_sndng TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_eml_sndng TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_eml_sndng TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_eml_sndng TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_eml_sndng TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_eml_sndng TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_eml_sndng TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_eml_sndng TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_eml_sndng TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_eml_sndng TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_eml_sndng TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_eml_sndng TO pp_app;
+-- kids_own.tb_ca_m_eml_sndng_hist definition
+
+-- Drop table
+
+-- DROP TABLE kids_own.tb_ca_m_eml_sndng_hist;
+
+CREATE TABLE kids_own.tb_ca_m_eml_sndng_hist (
+	eml_sndng_hstry_sn numeric(22) NOT NULL, -- 이메일발송이력일련번호
+	eml_sndng_sn numeric(22) NOT NULL, -- 이메일발송일련번호
+	rcvr_eml_addr varchar(320) NULL, -- 수신자이메일주소
+	rcvr_flnm varchar(100) NULL, -- 수신자성명
+	sndng_rslt_cd varchar(10) NULL, -- 발송결과코드
+	fail_rsn varchar(2000) NULL, -- 실패사유
+	rsnd_nmtm numeric(10) NULL, -- 재발송횟수
+	dsptch_dt bpchar(14) NULL, -- 발신일시
+	otsd_eml_orgnl_rslt_cd varchar(50) NULL, -- 외부이메일원본결과코드
+	otsd_eml_err_msg_cn varchar(2000) NULL, -- 외부이메일오류메시지
+	otsd_eml_msg_id varchar(2000) NULL, -- 외부이메일메시지아이디
+	reg_dt timestamp NOT NULL, -- 등록일시
+	rgtr_id varchar(40) NOT NULL, -- 등록자아이디
+	mdfcn_dt timestamp NOT NULL, -- 수정일시
+	mdfr_id varchar(40) NOT NULL, -- 수정자아이디
+	CONSTRAINT pk_tb_ca_m_eml_sndng_hist PRIMARY KEY (eml_sndng_hstry_sn)
+);
+COMMENT ON TABLE kids_own.tb_ca_m_eml_sndng_hist IS '공통_메일발송이력';
+
+-- Column comments
+
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.eml_sndng_hstry_sn IS '이메일발송이력일련번호';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.eml_sndng_sn IS '이메일발송일련번호';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.rcvr_eml_addr IS '수신자이메일주소';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.rcvr_flnm IS '수신자성명';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.sndng_rslt_cd IS '발송결과코드';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.fail_rsn IS '실패사유';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.rsnd_nmtm IS '재발송횟수';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.dsptch_dt IS '발신일시';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.otsd_eml_orgnl_rslt_cd IS '외부이메일원본결과코드';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.otsd_eml_err_msg_cn IS '외부이메일오류메시지';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.otsd_eml_msg_id IS '외부이메일메시지아이디';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.reg_dt IS '등록일시';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.rgtr_id IS '등록자아이디';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.mdfcn_dt IS '수정일시';
+COMMENT ON COLUMN kids_own.tb_ca_m_eml_sndng_hist.mdfr_id IS '수정자아이디';
+
+-- Constraint comments
+
+COMMENT ON CONSTRAINT pk_tb_ca_m_eml_sndng_hist ON kids_own.tb_ca_m_eml_sndng_hist IS '공통_메일발송이력 기본키';
 
 
 -- kids_own.tb_ca_m_mbr_token definition
@@ -905,25 +753,6 @@ COMMENT ON COLUMN kids_own.tb_ca_m_mbr_token.mdfr_id IS '수정자아이디';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_ca_m_mbr_token ON kids_own.tb_ca_m_mbr_token IS '공통_회원JWT토큰관리 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_ca_m_mbr_token OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_ca_m_mbr_token TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_mbr_token TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_mbr_token TO ca_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_mbr_token TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_mbr_token TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_mbr_token TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_mbr_token TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_mbr_token TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_mbr_token TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_mbr_token TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_mbr_token TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_mbr_token TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_mbr_token TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_mbr_token TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_ca_m_mbr_token TO pp_app;
 
 
 -- kids_own.tb_pp_d_menu definition
@@ -980,25 +809,6 @@ COMMENT ON COLUMN kids_own.tb_pp_d_menu.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_d_menu ON kids_own.tb_pp_d_menu IS '대국민포털_메뉴상세 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_d_menu OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_d_menu TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO ca_dev;
-
 
 -- kids_own.tb_pp_m_authrt definition
 
@@ -1007,10 +817,10 @@ GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_d_menu TO ca_dev;
 -- DROP TABLE kids_own.tb_pp_m_authrt;
 
 CREATE TABLE kids_own.tb_pp_m_authrt (
-	authrt_cd varchar(10) NOT NULL, -- 권한코드
-	up_authrt_cd varchar(10) NULL, -- 상위권한코드
+	authrt_cd varchar(20) NOT NULL, -- 권한코드
+	up_authrt_cd varchar(20) NULL, -- 상위권한코드
 	task_se_cd varchar(10) NULL, -- 업무구분코드
-	authrt_nm varchar(20) NULL, -- 권한명
+	authrt_nm varchar(100) NULL, -- 권한명
 	authrt_type_cd varchar(20) NULL, -- 권한유형코드
 	authrt_expln varchar(4000) NULL, -- 권한설명
 	use_yn bpchar(1) NOT NULL, -- 사용여부
@@ -1044,25 +854,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_authrt.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_authrt ON kids_own.tb_pp_m_authrt IS '대국민포털_권한기본 기본키2';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_authrt OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_authrt TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO ca_dev;
-
 
 -- kids_own.tb_pp_m_authrt_chg_hstry definition
 
@@ -1072,7 +863,7 @@ GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt TO ca_dev;
 
 CREATE TABLE kids_own.tb_pp_m_authrt_chg_hstry (
 	authrt_chg_sn numeric(10) NOT NULL, -- 권한변경일련번호
-	authrt_cd varchar(10) NOT NULL, -- 권한코드
+	authrt_cd varchar(20) NOT NULL, -- 권한코드
 	menu_sn numeric(22) NULL, -- 메뉴일련번호
 	aplcn_trgt_type_cd bpchar(5) NOT NULL, -- 적용대상유형코드
 	chg_role_list_cn varchar(4000) NULL, -- 변경역할목록내용
@@ -1106,25 +897,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_authrt_chg_hstry.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_authrt_chg_hstry ON kids_own.tb_pp_m_authrt_chg_hstry IS '대국민포털_권한변경이력기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_authrt_chg_hstry OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry TO ca_dev;
-
 
 -- kids_own.tb_pp_m_authrt_menu definition
 
@@ -1133,7 +905,7 @@ GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_chg_hstry 
 -- DROP TABLE kids_own.tb_pp_m_authrt_menu;
 
 CREATE TABLE kids_own.tb_pp_m_authrt_menu (
-	authrt_cd varchar(10) NOT NULL, -- 권한코드
+	authrt_cd varchar(20) NOT NULL, -- 권한코드
 	menu_sn numeric(22) NOT NULL, -- 메뉴일련번호
 	authrt_menu_role_rmrk_cn varchar(1000) NULL, -- 권한메뉴역할비고내용
 	rgtr_id varchar(40) NOT NULL, -- 등록자아이디
@@ -1158,25 +930,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_authrt_menu.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_authrt_menu ON kids_own.tb_pp_m_authrt_menu IS '대국민포털_권한메뉴기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_authrt_menu OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_authrt_menu TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO ca_dev;
-
 
 -- kids_own.tb_pp_m_authrt_menu_role definition
 
@@ -1185,7 +938,7 @@ GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu TO ca
 -- DROP TABLE kids_own.tb_pp_m_authrt_menu_role;
 
 CREATE TABLE kids_own.tb_pp_m_authrt_menu_role (
-	authrt_cd varchar(10) NOT NULL, -- 권한코드
+	authrt_cd varchar(20) NOT NULL, -- 권한코드
 	role_cd varchar(20) NOT NULL, -- 역할코드
 	menu_sn numeric(22) NOT NULL, -- 메뉴일련번호
 	rgtr_id varchar(40) NOT NULL, -- 등록자아이디
@@ -1209,25 +962,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_authrt_menu_role.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_authrt_menu_role ON kids_own.tb_pp_m_authrt_menu_role IS '대국민포털_권한메뉴롤기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_authrt_menu_role OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_authrt_menu_role TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu_role TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu_role TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu_role TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu_role TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu_role TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu_role TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu_role TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu_role TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu_role TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu_role TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu_role TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu_role TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu_role TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_authrt_menu_role TO ca_dev;
 
 
 -- kids_own.tb_pp_m_bbs definition
@@ -1280,25 +1014,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_bbs.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_bbs ON kids_own.tb_pp_m_bbs IS '대국민포털_게시판기본 기본키2';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_bbs OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_bbs TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO ca_dev;
-
 
 -- kids_own.tb_pp_m_bbs_authrt definition
 
@@ -1308,7 +1023,7 @@ GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs TO ca_dev;
 
 CREATE TABLE kids_own.tb_pp_m_bbs_authrt (
 	bbs_id varchar(20) NOT NULL, -- 게시판아이디
-	authrt_cd varchar(10) NOT NULL, -- 권한코드
+	authrt_cd varchar(20) NOT NULL, -- 권한코드
 	rgtr_id varchar(40) NOT NULL, -- 등록자아이디
 	reg_dt timestamp NOT NULL, -- 등록일시
 	mdfr_id varchar(40) NOT NULL, -- 수정자아이디
@@ -1329,25 +1044,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_bbs_authrt.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_bbs_authrt ON kids_own.tb_pp_m_bbs_authrt IS '대국민포털_게시판권한기본 기본키2';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_bbs_authrt OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_bbs_authrt TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs_authrt TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs_authrt TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs_authrt TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs_authrt TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs_authrt TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs_authrt TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs_authrt TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs_authrt TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs_authrt TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs_authrt TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs_authrt TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs_authrt TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs_authrt TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_bbs_authrt TO ca_dev;
 
 
 -- kids_own.tb_pp_m_c definition
@@ -1402,25 +1098,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_c.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_c ON kids_own.tb_pp_m_c IS '대국민포털_부정신고기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_c OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_c TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_c TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_c TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_c TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_c TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_c TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_c TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_c TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_c TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_c TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_c TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_c TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_c TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_c TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_c TO ca_dev;
-
 
 -- kids_own.tb_pp_m_cmnt definition
 
@@ -1458,24 +1135,42 @@ COMMENT ON COLUMN kids_own.tb_pp_m_cmnt.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_cmnt ON kids_own.tb_pp_m_cmnt IS '대국민포털_댓글기본 기본키2';
 
--- Permissions
 
-ALTER TABLE kids_own.tb_pp_m_cmnt OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_cmnt TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_cmnt TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_cmnt TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_cmnt TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_cmnt TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_cmnt TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_cmnt TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_cmnt TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_cmnt TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_cmnt TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_cmnt TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_cmnt TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_cmnt TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_cmnt TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_cmnt TO ca_dev;
+-- kids_own.tb_pp_m_cntn_stats definition
+
+-- Drop table
+
+-- DROP TABLE kids_own.tb_pp_m_cntn_stats;
+
+CREATE TABLE kids_own.tb_pp_m_cntn_stats (
+	cntn_stats_sn numeric(22) NOT NULL, -- 접속통계일련번호
+	stats_ymd bpchar(8) NOT NULL, -- 통계일자
+	whol_vstr_cnt numeric(7) NULL, -- 전체방문자수
+	vstr_cnt numeric(7) NULL, -- 방문자수
+	menu_view_cnt numeric(7) NULL, -- 메뉴뷰수
+	rgtr_id varchar(40) NOT NULL, -- 등록자아이디
+	reg_dt timestamp NOT NULL, -- 등록일시
+	mdfr_id varchar(40) NOT NULL, -- 수정자아이디
+	mdfcn_dt timestamp NOT NULL, -- 수정일시
+	CONSTRAINT pk_tb_pp_m_cntn_stats PRIMARY KEY (cntn_stats_sn)
+);
+COMMENT ON TABLE kids_own.tb_pp_m_cntn_stats IS '대국민포털_접속통계기본';
+
+-- Column comments
+
+COMMENT ON COLUMN kids_own.tb_pp_m_cntn_stats.cntn_stats_sn IS '접속통계일련번호';
+COMMENT ON COLUMN kids_own.tb_pp_m_cntn_stats.stats_ymd IS '통계일자';
+COMMENT ON COLUMN kids_own.tb_pp_m_cntn_stats.whol_vstr_cnt IS '전체방문자수';
+COMMENT ON COLUMN kids_own.tb_pp_m_cntn_stats.vstr_cnt IS '방문자수';
+COMMENT ON COLUMN kids_own.tb_pp_m_cntn_stats.menu_view_cnt IS '메뉴뷰수';
+COMMENT ON COLUMN kids_own.tb_pp_m_cntn_stats.rgtr_id IS '등록자아이디';
+COMMENT ON COLUMN kids_own.tb_pp_m_cntn_stats.reg_dt IS '등록일시';
+COMMENT ON COLUMN kids_own.tb_pp_m_cntn_stats.mdfr_id IS '수정자아이디';
+COMMENT ON COLUMN kids_own.tb_pp_m_cntn_stats.mdfcn_dt IS '수정일시';
+
+-- Constraint comments
+
+COMMENT ON CONSTRAINT pk_tb_pp_m_cntn_stats ON kids_own.tb_pp_m_cntn_stats IS '대국민포털_접속통계기본 기본키';
 
 
 -- kids_own.tb_pp_m_conts definition
@@ -1496,6 +1191,7 @@ CREATE TABLE kids_own.tb_pp_m_conts (
 	mdfcn_dt timestamp NOT NULL, -- 수정일시
 	CONSTRAINT pk_tb_pp_m_conts PRIMARY KEY (conts_sn, conts_ver_no)
 );
+CREATE INDEX tb_pp_m_conts_ix01 ON kids_own.tb_pp_m_conts USING gin (((((COALESCE(conts_ttl, ''::character varying))::text || ' '::text) || COALESCE(conts_cn, ''::text))) kids_own.gin_trgm_ops);
 COMMENT ON TABLE kids_own.tb_pp_m_conts IS '대국민포탈_콘텐츠기본';
 
 -- Column comments
@@ -1514,25 +1210,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_conts.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_conts ON kids_own.tb_pp_m_conts IS '대국민포탈_콘텐츠기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_conts OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_conts TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO ca_dev;
-
 
 -- kids_own.tb_pp_m_dept_authrt definition
 
@@ -1542,7 +1219,7 @@ GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_conts TO ca_dev;
 
 CREATE TABLE kids_own.tb_pp_m_dept_authrt (
 	dept_no varchar(20) NOT NULL, -- 부서번호
-	authrt_cd varchar(10) NOT NULL, -- 권한코드
+	authrt_cd varchar(20) NOT NULL, -- 권한코드
 	dept_authrt_rmrk_cn varchar(1000) NULL, -- 부서권한비고내용
 	rgtr_id varchar(40) NOT NULL, -- 등록자아이디
 	reg_dt timestamp NOT NULL, -- 등록일시
@@ -1565,25 +1242,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_dept_authrt.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_dept_authrt ON kids_own.tb_pp_m_dept_authrt IS '대국민포털_부서권한기본 기본키2';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_dept_authrt OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_dept_authrt TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_authrt TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_authrt TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_authrt TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_authrt TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_authrt TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_authrt TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_authrt TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_authrt TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_authrt TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_authrt TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_authrt TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_authrt TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_authrt TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_authrt TO ca_dev;
 
 
 -- kids_own.tb_pp_m_dept_info definition
@@ -1618,25 +1276,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_dept_info.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_dept_info ON kids_own.tb_pp_m_dept_info IS '대국민포털_KIDS부서정보기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_dept_info OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_dept_info TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_info TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_info TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_info TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_info TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_info TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_info TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_info TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_info TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_info TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_info TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_info TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_info TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_info TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dept_info TO ca_dev;
-
 
 -- kids_own.tb_pp_m_dgstfn_exmn definition
 
@@ -1669,25 +1308,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_dgstfn_exmn.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_dgstfn_exmn ON kids_own.tb_pp_m_dgstfn_exmn IS '대국민포털_만족도조사기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_dgstfn_exmn OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dgstfn_exmn TO ca_dev;
 
 
 -- kids_own.tb_pp_m_dmn definition
@@ -1733,25 +1353,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_dmn.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_dmn ON kids_own.tb_pp_m_dmn IS '대국민포털_도메인기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_dmn OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_dmn TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dmn TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dmn TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dmn TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dmn TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dmn TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dmn TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dmn TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dmn TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dmn TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dmn TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dmn TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dmn TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dmn TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dmn TO ca_dev;
 
 
 -- kids_own.tb_pp_m_dshsty_dclr definition
@@ -1807,25 +1408,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_dshsty_dclr.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_dshsty_dclr ON kids_own.tb_pp_m_dshsty_dclr IS '대국민포털_부정신고기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_dshsty_dclr OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_dshsty_dclr TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dshsty_dclr TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dshsty_dclr TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dshsty_dclr TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dshsty_dclr TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dshsty_dclr TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dshsty_dclr TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dshsty_dclr TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dshsty_dclr TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dshsty_dclr TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dshsty_dclr TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dshsty_dclr TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dshsty_dclr TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dshsty_dclr TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dshsty_dclr TO ca_dev;
 
 
 -- kids_own.tb_pp_m_dur_age_bann definition
@@ -1890,25 +1472,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_dur_age_bann.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_dur_age_bann ON kids_own.tb_pp_m_dur_age_bann IS '대국민포털_DUR연령금기기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_dur_age_bann OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_dur_age_bann TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_age_bann TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_age_bann TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_age_bann TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_age_bann TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_age_bann TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_age_bann TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_age_bann TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_age_bann TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_age_bann TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_age_bann TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_age_bann TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_age_bann TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_age_bann TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_age_bann TO ca_dev;
-
 
 -- kids_own.tb_pp_m_dur_conc_bann definition
 
@@ -1948,6 +1511,10 @@ CREATE TABLE kids_own.tb_pp_m_dur_conc_bann (
 	mdfcn_dt timestamp NOT NULL, -- 수정일시
 	CONSTRAINT pk_tb_pp_m_dur_conc_bann PRIMARY KEY (cth_condi_sn)
 );
+CREATE INDEX idx_tb_pp_m_dur_conc_bann_1 ON kids_own.tb_pp_m_dur_conc_bann USING btree (lower((igrd_nm_1)::text));
+CREATE INDEX idx_tb_pp_m_dur_conc_bann_2 ON kids_own.tb_pp_m_dur_conc_bann USING btree (lower((igrd_nm_2)::text));
+CREATE INDEX idx_tb_pp_m_dur_conc_bann_3 ON kids_own.tb_pp_m_dur_conc_bann USING btree (lower((mfds_igrd_nm_cn_1)::text));
+CREATE INDEX idx_tb_pp_m_dur_conc_bann_4 ON kids_own.tb_pp_m_dur_conc_bann USING btree (lower((mfds_igrd_nm_cn_2)::text));
 COMMENT ON TABLE kids_own.tb_pp_m_dur_conc_bann IS '대국민포털_DUR병용금기기본';
 
 -- Column comments
@@ -1985,25 +1552,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_dur_conc_bann.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_dur_conc_bann ON kids_own.tb_pp_m_dur_conc_bann IS '대국민포털_DUR병용금기기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_dur_conc_bann OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_dur_conc_bann TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_conc_bann TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_conc_bann TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_conc_bann TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_conc_bann TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_conc_bann TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_conc_bann TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_conc_bann TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_conc_bann TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_conc_bann TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_conc_bann TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_conc_bann TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_conc_bann TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_conc_bann TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_conc_bann TO ca_dev;
 
 
 -- kids_own.tb_pp_m_dur_cpct definition
@@ -2066,25 +1614,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_dur_cpct.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_dur_cpct ON kids_own.tb_pp_m_dur_cpct IS '대국민포털_DUR용량주의기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_dur_cpct OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_dur_cpct TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_cpct TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_cpct TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_cpct TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_cpct TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_cpct TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_cpct TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_cpct TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_cpct TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_cpct TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_cpct TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_cpct TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_cpct TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_cpct TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_cpct TO ca_dev;
-
 
 -- kids_own.tb_pp_m_dur_dosage definition
 
@@ -2142,25 +1671,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_dur_dosage.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_dur_dosage ON kids_own.tb_pp_m_dur_dosage IS '대국민포털_DUR투여기간주의기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_dur_dosage OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_dur_dosage TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_dosage TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_dosage TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_dosage TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_dosage TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_dosage TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_dosage TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_dosage TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_dosage TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_dosage TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_dosage TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_dosage TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_dosage TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_dosage TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_dosage TO ca_dev;
-
 
 -- kids_own.tb_pp_m_dur_eftgrp definition
 
@@ -2177,7 +1687,7 @@ CREATE TABLE kids_own.tb_pp_m_dur_eftgrp (
 	gnrl_nm varchar(1000) NULL, -- 일반명
 	eff_group_dpcn_chck_cd bpchar(8) NOT NULL, -- 효능그룹중복점검코드
 	mdcn_cd bpchar(9) NOT NULL, -- 약품코드
-	item_nm varchar(1000) NULL, -- 품목명
+	item_nm varchar(2000) NULL, -- 품목명
 	bzenty_nm varchar(100) NULL, -- 업체명
 	mfds_igrd_cd_cn varchar(1000) NULL, -- 식약처성분코드내용
 	mfds_igrd_nm_cn varchar(2000) NULL, -- 식약처성분명내용
@@ -2223,25 +1733,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_dur_eftgrp.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_dur_eftgrp ON kids_own.tb_pp_m_dur_eftgrp IS '대국민포털_DUR효능군중복기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_dur_eftgrp OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_dur_eftgrp TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_eftgrp TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_eftgrp TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_eftgrp TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_eftgrp TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_eftgrp TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_eftgrp TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_eftgrp TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_eftgrp TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_eftgrp TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_eftgrp TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_eftgrp TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_eftgrp TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_eftgrp TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_eftgrp TO ca_dev;
 
 
 -- kids_own.tb_pp_m_dur_nursw definition
@@ -2300,25 +1791,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_dur_nursw.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_dur_nursw ON kids_own.tb_pp_m_dur_nursw IS '대국민포털_DUR수유부주의기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_dur_nursw OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_dur_nursw TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_nursw TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_nursw TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_nursw TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_nursw TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_nursw TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_nursw TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_nursw TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_nursw TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_nursw TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_nursw TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_nursw TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_nursw TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_nursw TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_nursw TO ca_dev;
-
 
 -- kids_own.tb_pp_m_dur_prgnt_bann definition
 
@@ -2332,7 +1804,7 @@ CREATE TABLE kids_own.tb_pp_m_dur_prgnt_bann (
 	igrd_cd varchar(20) NOT NULL, -- 성분코드
 	prdct_cd bpchar(9) NOT NULL, -- 제품코드
 	prdct_nm varchar(1000) NULL, -- 제품명
-	bzenty_nm varchar(1000) NULL, -- 업체명
+	bzenty_nm varchar(100) NULL, -- 업체명
 	mfds_igrd_cd_cn varchar(1000) NULL, -- 식약처성분코드내용
 	mfds_igrd_nm_cn varchar(2000) NULL, -- 식약처성분명내용
 	mfds_prdct_nm varchar(1000) NULL, -- 식약처제품명
@@ -2377,25 +1849,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_dur_prgnt_bann.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_dur_prgnt_bann ON kids_own.tb_pp_m_dur_prgnt_bann IS '대국민포털_DUR임부금기기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_dur_prgnt_bann OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_prgnt_bann TO ca_dev;
 
 
 -- kids_own.tb_pp_m_dur_snctz definition
@@ -2456,25 +1909,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_dur_snctz.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_dur_snctz ON kids_own.tb_pp_m_dur_snctz IS '대국민포털_DUR노인주의기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_dur_snctz OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_dur_snctz TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_snctz TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_snctz TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_snctz TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_snctz TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_snctz TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_snctz TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_snctz TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_snctz TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_snctz TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_snctz TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_snctz TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_snctz TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_snctz TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_dur_snctz TO ca_dev;
-
 
 -- kids_own.tb_pp_m_emp_info definition
 
@@ -2514,25 +1948,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_emp_info.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_emp_info ON kids_own.tb_pp_m_emp_info IS '대국민포털_KIDS직원정보기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_emp_info OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_emp_info TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO ca_dev;
-
 
 -- kids_own.tb_pp_m_exprt_authrt definition
 
@@ -2543,7 +1958,7 @@ GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_emp_info TO ca_de
 CREATE TABLE kids_own.tb_pp_m_exprt_authrt (
 	mbr_no varchar(10) NOT NULL, -- 회원번호
 	exprt_task_sn numeric(10) NULL, -- 전문가업무일련번호
-	authrt_cd varchar(10) NOT NULL, -- 권한코드
+	authrt_cd varchar(20) NOT NULL, -- 권한코드
 	rgtr_id varchar(40) NOT NULL, -- 등록자아이디
 	reg_dt timestamp NOT NULL, -- 등록일시
 	mdfr_id varchar(40) NOT NULL, -- 수정자아이디
@@ -2565,25 +1980,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_exprt_authrt.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_exprt_authrt ON kids_own.tb_pp_m_exprt_authrt IS '대국민포털_전문가권한기본 기본키2';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_exprt_authrt OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_exprt_authrt TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_authrt TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_authrt TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_authrt TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_authrt TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_authrt TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_authrt TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_authrt TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_authrt TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_authrt TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_authrt TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_authrt TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_authrt TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_authrt TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_authrt TO ca_dev;
 
 
 -- kids_own.tb_pp_m_exprt_info definition
@@ -2632,25 +2028,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_exprt_info.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_exprt_info ON kids_own.tb_pp_m_exprt_info IS '대국민포털_전문가정보기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_exprt_info OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_exprt_info TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_info TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_info TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_info TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_info TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_info TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_info TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_info TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_info TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_info TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_info TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_info TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_info TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_info TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_info TO ca_dev;
-
 
 -- kids_own.tb_pp_m_exprt_task definition
 
@@ -2693,25 +2070,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_exprt_task.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_exprt_task ON kids_own.tb_pp_m_exprt_task IS '대국민포털_전문가업무기본 기본키2';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_exprt_task OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_exprt_task TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_task TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_task TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_task TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_task TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_task TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_task TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_task TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_task TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_task TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_task TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_task TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_task TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_task TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_exprt_task TO ca_dev;
 
 
 -- kids_own.tb_pp_m_faq definition
@@ -2762,25 +2120,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_faq.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_faq ON kids_own.tb_pp_m_faq IS '대국민포털_FAQ기본 기본키2';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_faq OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_faq TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO ca_dev;
-
 
 -- kids_own.tb_pp_m_file definition
 
@@ -2789,7 +2128,7 @@ GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_faq TO ca_dev;
 -- DROP TABLE kids_own.tb_pp_m_file;
 
 CREATE TABLE kids_own.tb_pp_m_file (
-	file_sn numeric(10) NOT NULL, -- 파일일련번호
+	file_sn numeric(22) NOT NULL, -- 파일일련번호
 	atch_file_id varchar(40) NULL, -- 첨부파일아이디
 	file_type_cd bpchar(1) NULL, -- 파일유형코드
 	file_knd_cd varchar(20) NULL, -- 파일종류코드
@@ -2817,25 +2156,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_file.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_file ON kids_own.tb_pp_m_file IS '대국민포털_파일기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_file OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_file TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_file TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_file TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_file TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_file TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_file TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_file TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_file TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_file TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_file TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_file TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_file TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_file TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_file TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_file TO ca_dev;
 
 
 -- kids_own.tb_pp_m_form definition
@@ -2874,25 +2194,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_form.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_form ON kids_own.tb_pp_m_form IS '대국민포털_양식기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_form OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_form TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_form TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_form TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_form TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_form TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_form TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_form TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_form TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_form TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_form TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_form TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_form TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_form TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_form TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_form TO ca_dev;
-
 
 -- kids_own.tb_pp_m_inst definition
 
@@ -2925,25 +2226,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_inst.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_inst ON kids_own.tb_pp_m_inst IS '대국민포털_기관정보기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_inst OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_inst TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst TO ca_dev;
 
 
 -- kids_own.tb_pp_m_inst_task definition
@@ -2981,25 +2263,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_inst_task.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_inst_task ON kids_own.tb_pp_m_inst_task IS '대국민포털_기관업무기본 기본키2';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_inst_task OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_inst_task TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst_task TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst_task TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst_task TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst_task TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst_task TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst_task TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst_task TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst_task TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst_task TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst_task TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst_task TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst_task TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst_task TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_inst_task TO ca_dev;
 
 
 -- kids_own.tb_pp_m_mbr_info definition
@@ -3062,24 +2325,42 @@ COMMENT ON COLUMN kids_own.tb_pp_m_mbr_info.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_mbr_info ON kids_own.tb_pp_m_mbr_info IS '대국민포털_회원정보기본 기본키2';
 
--- Permissions
 
-ALTER TABLE kids_own.tb_pp_m_mbr_info OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_mbr_info TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mbr_info TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mbr_info TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mbr_info TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mbr_info TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mbr_info TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mbr_info TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mbr_info TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mbr_info TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mbr_info TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mbr_info TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mbr_info TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mbr_info TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mbr_info TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mbr_info TO ca_dev;
+-- kids_own.tb_pp_m_mbr_stats definition
+
+-- Drop table
+
+-- DROP TABLE kids_own.tb_pp_m_mbr_stats;
+
+CREATE TABLE kids_own.tb_pp_m_mbr_stats (
+	mbr_stats_sn numeric(22) NOT NULL, -- 회원통계일련번호
+	stats_ymd bpchar(8) NOT NULL, -- 통계일자
+	mbr_type_cd bpchar(1) NULL, -- 회원유형코드
+	join_cnt numeric(4) NULL, -- 가입수
+	whdwl_cnt numeric(4) NULL, -- 탈퇴수
+	rgtr_id varchar(40) NOT NULL, -- 등록자아이디
+	reg_dt timestamp NOT NULL, -- 등록일시
+	mdfr_id varchar(40) NOT NULL, -- 수정자아이디
+	mdfcn_dt timestamp NOT NULL, -- 수정일시
+	CONSTRAINT pk_tb_pp_m_mbr_stats PRIMARY KEY (mbr_stats_sn)
+);
+COMMENT ON TABLE kids_own.tb_pp_m_mbr_stats IS '대국민포털_회원통계기본';
+
+-- Column comments
+
+COMMENT ON COLUMN kids_own.tb_pp_m_mbr_stats.mbr_stats_sn IS '회원통계일련번호';
+COMMENT ON COLUMN kids_own.tb_pp_m_mbr_stats.stats_ymd IS '통계일자';
+COMMENT ON COLUMN kids_own.tb_pp_m_mbr_stats.mbr_type_cd IS '회원유형코드';
+COMMENT ON COLUMN kids_own.tb_pp_m_mbr_stats.join_cnt IS '가입수';
+COMMENT ON COLUMN kids_own.tb_pp_m_mbr_stats.whdwl_cnt IS '탈퇴수';
+COMMENT ON COLUMN kids_own.tb_pp_m_mbr_stats.rgtr_id IS '등록자아이디';
+COMMENT ON COLUMN kids_own.tb_pp_m_mbr_stats.reg_dt IS '등록일시';
+COMMENT ON COLUMN kids_own.tb_pp_m_mbr_stats.mdfr_id IS '수정자아이디';
+COMMENT ON COLUMN kids_own.tb_pp_m_mbr_stats.mdfcn_dt IS '수정일시';
+
+-- Constraint comments
+
+COMMENT ON CONSTRAINT pk_tb_pp_m_mbr_stats ON kids_own.tb_pp_m_mbr_stats IS '대국민포털_회원통계기본 기본키';
 
 
 -- kids_own.tb_pp_m_menu definition
@@ -3130,24 +2411,44 @@ COMMENT ON COLUMN kids_own.tb_pp_m_menu.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_menu ON kids_own.tb_pp_m_menu IS '대국민포털_메뉴기본 기본키';
 
--- Permissions
 
-ALTER TABLE kids_own.tb_pp_m_menu OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_menu TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_menu TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_menu TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_menu TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_menu TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_menu TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_menu TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_menu TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_menu TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_menu TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_menu TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_menu TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_menu TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_menu TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_menu TO ca_dev;
+-- kids_own.tb_pp_m_menu_stats definition
+
+-- Drop table
+
+-- DROP TABLE kids_own.tb_pp_m_menu_stats;
+
+CREATE TABLE kids_own.tb_pp_m_menu_stats (
+	menu_stats_sn numeric(22) NOT NULL, -- 메뉴통계일련번호
+	stats_ymd bpchar(8) NOT NULL, -- 통계일자
+	task_se_cd varchar(10) NULL, -- 업무구분코드
+	menu_type_cd varchar(20) NULL, -- 메뉴유형코드
+	menu_sn numeric(22) NULL, -- 메뉴일련번호
+	cntn_cnt numeric(7) NULL, -- 접속수
+	rgtr_id varchar(40) NOT NULL, -- 등록자아이디
+	reg_dt timestamp NOT NULL, -- 등록일시
+	mdfr_id varchar(40) NOT NULL, -- 수정자아이디
+	mdfcn_dt timestamp NOT NULL, -- 수정일시
+	CONSTRAINT pk_tb_pp_m_menu_stats PRIMARY KEY (menu_stats_sn)
+);
+COMMENT ON TABLE kids_own.tb_pp_m_menu_stats IS '대국민포털_메뉴통계기본';
+
+-- Column comments
+
+COMMENT ON COLUMN kids_own.tb_pp_m_menu_stats.menu_stats_sn IS '메뉴통계일련번호';
+COMMENT ON COLUMN kids_own.tb_pp_m_menu_stats.stats_ymd IS '통계일자';
+COMMENT ON COLUMN kids_own.tb_pp_m_menu_stats.task_se_cd IS '업무구분코드';
+COMMENT ON COLUMN kids_own.tb_pp_m_menu_stats.menu_type_cd IS '메뉴유형코드';
+COMMENT ON COLUMN kids_own.tb_pp_m_menu_stats.menu_sn IS '메뉴일련번호';
+COMMENT ON COLUMN kids_own.tb_pp_m_menu_stats.cntn_cnt IS '접속수';
+COMMENT ON COLUMN kids_own.tb_pp_m_menu_stats.rgtr_id IS '등록자아이디';
+COMMENT ON COLUMN kids_own.tb_pp_m_menu_stats.reg_dt IS '등록일시';
+COMMENT ON COLUMN kids_own.tb_pp_m_menu_stats.mdfr_id IS '수정자아이디';
+COMMENT ON COLUMN kids_own.tb_pp_m_menu_stats.mdfcn_dt IS '수정일시';
+
+-- Constraint comments
+
+COMMENT ON CONSTRAINT pk_tb_pp_m_menu_stats ON kids_own.tb_pp_m_menu_stats IS '대국민포털_메뉴통계기본 기본키';
 
 
 -- kids_own.tb_pp_m_mngr_info definition
@@ -3185,25 +2486,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_mngr_info.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_mngr_info ON kids_own.tb_pp_m_mngr_info IS '대국민포털_관리자정보기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_mngr_info OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_mngr_info TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mngr_info TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mngr_info TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mngr_info TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mngr_info TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mngr_info TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mngr_info TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mngr_info TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mngr_info TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mngr_info TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mngr_info TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mngr_info TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mngr_info TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mngr_info TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_mngr_info TO ca_dev;
 
 
 -- kids_own.tb_pp_m_opnn definition
@@ -3254,25 +2536,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_opnn.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_opnn ON kids_own.tb_pp_m_opnn IS '대국민포털_의견제안기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_opnn OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_opnn TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO ca_dev;
-
 
 -- kids_own.tb_pp_m_pic_authrt definition
 
@@ -3282,7 +2545,7 @@ GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_opnn TO ca_dev;
 
 CREATE TABLE kids_own.tb_pp_m_pic_authrt (
 	emp_no varchar(20) NOT NULL, -- 직원번호
-	authrt_cd varchar(10) NOT NULL, -- 권한코드
+	authrt_cd varchar(20) NOT NULL, -- 권한코드
 	pic_authrt_rmrk_cn varchar(1000) NULL, -- 담당자권한비고내용
 	rgtr_id varchar(40) NOT NULL, -- 등록자아이디
 	reg_dt timestamp NOT NULL, -- 등록일시
@@ -3305,25 +2568,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_pic_authrt.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_pic_authrt ON kids_own.tb_pp_m_pic_authrt IS '대국민포털_담당자권한기본 기본키2';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_pic_authrt OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_pic_authrt TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pic_authrt TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pic_authrt TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pic_authrt TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pic_authrt TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pic_authrt TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pic_authrt TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pic_authrt TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pic_authrt TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pic_authrt TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pic_authrt TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pic_authrt TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pic_authrt TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pic_authrt TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pic_authrt TO ca_dev;
 
 
 -- kids_own.tb_pp_m_popup definition
@@ -3376,91 +2620,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_popup.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_popup ON kids_own.tb_pp_m_popup IS '대국민포털_팝업기본 기본키2';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_popup OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_popup TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_popup TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_popup TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_popup TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_popup TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_popup TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_popup TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_popup TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_popup TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_popup TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_popup TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_popup TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_popup TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_popup TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_popup TO ca_dev;
-
-
--- kids_own.tb_pp_m_prvc_acs_hstry definition
-
--- Drop table
-
--- DROP TABLE kids_own.tb_pp_m_prvc_acs_hstry;
-
-CREATE TABLE kids_own.tb_pp_m_prvc_acs_hstry (
-	prvc_acs_sn numeric(10) NOT NULL, -- 개인정보접근일련번호
-	inq_crtr_dt timestamp NOT NULL, -- 조회기준일시
-	srvc_cd bpchar(2) NOT NULL, -- 서비스코드
-	menu_sn numeric(22) NULL, -- 메뉴일련번호
-	메소드명 varchar(100) NOT NULL, -- 메소드명
-	inq_info_cn varchar(1000) NOT NULL, -- 조회정보내용
-	rqstr_id varchar(40) NOT NULL, -- 요청자아이디
-	rqstr_ip_addr varchar(255) NULL, -- 요청자IP주소
-	inq_cnd_cn varchar(4000) NOT NULL, -- 조회조건내용
-	inq_telgm_cn text NOT NULL, -- 조회전문내용
-	rgtr_id varchar(40) NOT NULL, -- 등록자아이디
-	reg_dt timestamp NOT NULL, -- 등록일시
-	mdfr_id varchar(40) NOT NULL, -- 수정자아이디
-	mdfcn_dt timestamp NOT NULL, -- 수정일시
-	CONSTRAINT pk_tb_pp_m_prvc_acs_hstry PRIMARY KEY (prvc_acs_sn)
-);
-COMMENT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry IS '대국민포털_개인정보접근이력기본';
-
--- Column comments
-
-COMMENT ON COLUMN kids_own.tb_pp_m_prvc_acs_hstry.prvc_acs_sn IS '개인정보접근일련번호';
-COMMENT ON COLUMN kids_own.tb_pp_m_prvc_acs_hstry.inq_crtr_dt IS '조회기준일시';
-COMMENT ON COLUMN kids_own.tb_pp_m_prvc_acs_hstry.srvc_cd IS '서비스코드';
-COMMENT ON COLUMN kids_own.tb_pp_m_prvc_acs_hstry.menu_sn IS '메뉴일련번호';
-COMMENT ON COLUMN kids_own.tb_pp_m_prvc_acs_hstry.메소드명 IS '메소드명';
-COMMENT ON COLUMN kids_own.tb_pp_m_prvc_acs_hstry.inq_info_cn IS '조회정보내용';
-COMMENT ON COLUMN kids_own.tb_pp_m_prvc_acs_hstry.rqstr_id IS '요청자아이디';
-COMMENT ON COLUMN kids_own.tb_pp_m_prvc_acs_hstry.rqstr_ip_addr IS '요청자IP주소';
-COMMENT ON COLUMN kids_own.tb_pp_m_prvc_acs_hstry.inq_cnd_cn IS '조회조건내용';
-COMMENT ON COLUMN kids_own.tb_pp_m_prvc_acs_hstry.inq_telgm_cn IS '조회전문내용';
-COMMENT ON COLUMN kids_own.tb_pp_m_prvc_acs_hstry.rgtr_id IS '등록자아이디';
-COMMENT ON COLUMN kids_own.tb_pp_m_prvc_acs_hstry.reg_dt IS '등록일시';
-COMMENT ON COLUMN kids_own.tb_pp_m_prvc_acs_hstry.mdfr_id IS '수정자아이디';
-COMMENT ON COLUMN kids_own.tb_pp_m_prvc_acs_hstry.mdfcn_dt IS '수정일시';
-
--- Constraint comments
-
-COMMENT ON CONSTRAINT pk_tb_pp_m_prvc_acs_hstry ON kids_own.tb_pp_m_prvc_acs_hstry IS '대국민포털_개인정보접근이력기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_prvc_acs_hstry OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO ca_dev;
-
 
 -- kids_own.tb_pp_m_pst definition
 
@@ -3471,7 +2630,7 @@ GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_prvc_acs_hstry TO
 CREATE TABLE kids_own.tb_pp_m_pst (
 	pst_sn numeric(22) NOT NULL, -- 게시물일련번호
 	bbs_id varchar(20) NOT NULL, -- 게시판아이디
-	pst_ttl varchar(100) NULL, -- 게시물제목
+	pst_ttl varchar(300) NULL, -- 게시물제목
 	pst_cn text NULL, -- 게시물내용
 	pst_inq_cnt numeric(10) NOT NULL, -- 게시물조회수
 	pst_kogl_cprgt_type_cd bpchar(1) NULL, -- 게시물공공누리저작권유형코드
@@ -3482,14 +2641,15 @@ CREATE TABLE kids_own.tb_pp_m_pst (
 	fix_end_ymd bpchar(8) NULL, -- 고정종료일자
 	vdo_url_addr varchar(200) NULL, -- 동영상URL주소
 	expsr_yn bpchar(1) NOT NULL, -- 노출여부
-	wrtr_dept_nm varchar(80) NULL, -- 작성자부서명
-	mdfr_dept_nm varchar(80) NULL, -- 수정자부서명
+	wrtr_dept_nm varchar(40) NULL, -- 작성자부서명
+	mdfr_dept_nm varchar(40) NULL, -- 수정자부서명
 	rgtr_id varchar(40) NOT NULL, -- 등록자아이디
 	reg_dt timestamp NOT NULL, -- 등록일시
 	mdfr_id varchar(40) NOT NULL, -- 수정자아이디
 	mdfcn_dt timestamp NOT NULL, -- 수정일시
 	CONSTRAINT pk_tb_pp_m_pst PRIMARY KEY (pst_sn)
 );
+CREATE INDEX tb_pp_m_pst_ix01 ON kids_own.tb_pp_m_pst USING gin (((((COALESCE(pst_ttl, ''::character varying))::text || ' '::text) || COALESCE(pst_cn, ''::text))) kids_own.gin_trgm_ops);
 COMMENT ON TABLE kids_own.tb_pp_m_pst IS '대국민포털_게시물기본';
 
 -- Column comments
@@ -3517,25 +2677,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_pst.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_pst ON kids_own.tb_pp_m_pst IS '대국민포털_게시물기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_pst OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_pst TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pst TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pst TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pst TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pst TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pst TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pst TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pst TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pst TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pst TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pst TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pst TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pst TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pst TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_pst TO ca_dev;
 
 
 -- kids_own.tb_pp_m_role definition
@@ -3578,25 +2719,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_role.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_role ON kids_own.tb_pp_m_role IS '대국민포털_역할기본 기본키';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_role OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_role TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_role TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_role TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_role TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_role TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_role TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_role TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_role TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_role TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_role TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_role TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_role TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_role TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_role TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_role TO ca_dev;
-
 
 -- kids_own.tb_pp_m_stty_agt_info definition
 
@@ -3635,25 +2757,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_stty_agt_info.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_stty_agt_info ON kids_own.tb_pp_m_stty_agt_info IS '대국민포털_법정대리인정보기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_stty_agt_info OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_stty_agt_info TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_stty_agt_info TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_stty_agt_info TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_stty_agt_info TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_stty_agt_info TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_stty_agt_info TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_stty_agt_info TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_stty_agt_info TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_stty_agt_info TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_stty_agt_info TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_stty_agt_info TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_stty_agt_info TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_stty_agt_info TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_stty_agt_info TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_stty_agt_info TO ca_dev;
 
 
 -- kids_own.tb_pp_m_task_cd definition
@@ -3694,25 +2797,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_task_cd.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_task_cd ON kids_own.tb_pp_m_task_cd IS '대국민포털_업무코드기본 기본키2';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_task_cd OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_task_cd TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_task_cd TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_task_cd TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_task_cd TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_task_cd TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_task_cd TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_task_cd TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_task_cd TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_task_cd TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_task_cd TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_task_cd TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_task_cd TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_task_cd TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_task_cd TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_task_cd TO ca_dev;
-
 
 -- kids_own.tb_pp_m_trm definition
 
@@ -3751,25 +2835,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_trm.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_trm ON kids_own.tb_pp_m_trm IS '대국민포털_용어기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_trm OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_trm TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trm TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trm TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trm TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trm TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trm TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trm TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trm TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trm TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trm TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trm TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trm TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trm TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trm TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trm TO ca_dev;
 
 
 -- kids_own.tb_pp_m_trms_stt definition
@@ -3814,25 +2879,6 @@ COMMENT ON COLUMN kids_own.tb_pp_m_trms_stt.mdfcn_dt IS '수정일시';
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_trms_stt ON kids_own.tb_pp_m_trms_stt IS '대국민포털_약관법령기본 기본키2';
 
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_trms_stt OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_trms_stt TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trms_stt TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trms_stt TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trms_stt TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trms_stt TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trms_stt TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trms_stt TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trms_stt TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trms_stt TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trms_stt TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trms_stt TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trms_stt TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trms_stt TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trms_stt TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_trms_stt TO ca_dev;
-
 
 -- kids_own.tb_pp_m_word definition
 
@@ -3873,22 +2919,3 @@ COMMENT ON COLUMN kids_own.tb_pp_m_word.mdfcn_dt IS '수정일시';
 -- Constraint comments
 
 COMMENT ON CONSTRAINT pk_tb_pp_m_word ON kids_own.tb_pp_m_word IS '대국민포털_단어기본 기본키';
-
--- Permissions
-
-ALTER TABLE kids_own.tb_pp_m_word OWNER TO kids_own;
-GRANT ALL ON TABLE kids_own.tb_pp_m_word TO kids_own;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_word TO bo_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_word TO bo_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_word TO cm_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_word TO cm_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_word TO cr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_word TO cr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_word TO dr_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_word TO dr_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_word TO ex_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_word TO ex_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_word TO pp_dev;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_word TO pp_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_word TO ca_app;
-GRANT DELETE, UPDATE, SELECT, INSERT ON TABLE kids_own.tb_pp_m_word TO ca_dev;
