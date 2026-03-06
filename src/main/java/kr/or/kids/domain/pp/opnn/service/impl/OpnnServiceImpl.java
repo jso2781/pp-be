@@ -15,10 +15,17 @@ import kr.or.kids.domain.pp.opnn.vo.OpnnPVO;
 import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
+import kr.or.kids.domain.pp.exprt.mapper.ExprtApprovalMapper;
+import kr.or.kids.domain.pp.exprt.mapper.ExprtTaskMapper;
+import kr.or.kids.domain.pp.external.email.client.EmailClient;
+import kr.or.kids.domain.pp.external.email.vo.EmailPVO;
+import kr.or.kids.domain.pp.external.email.vo.EmailRVO;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class OpnnServiceImpl implements OpnnService
 {
     @Autowired
@@ -26,6 +33,8 @@ public class OpnnServiceImpl implements OpnnService
 
     @Autowired
     private FileService fileService;
+    
+    private final EmailClient emailClient;
 
     @Override
     public ApiPrnDto insertOpnn(OpnnPVO opnnPVO) {
@@ -84,6 +93,38 @@ public class OpnnServiceImpl implements OpnnService
             opnnPVO.setOpnnSn(BigInteger.valueOf(nextOpnnSn));
 
             opnnMapper.insertOpnn(opnnPVO);
+            
+            // 이메일 발
+            String emlTtl = "DUR 정보 의견 제안 등록 안내문";  // 제목
+            String emlCn = "한국의약품안전관리원 DUR 정보 의견제안 게시글이 등록되었습니다.\n 해당 의견제안에 대한 업무 처리는 관리자에서 확인해주세요."; // 본문
+            String sndptyFlnm = "mail.drugsafe.or.kr"; // 메일 발송 계정
+            String sndptyEmlAddr = "kids@drugsafe.or.kr"; // 발신자 메일주소
+            String rcvrFlnm = "temp"; // 수신자 명
+            String rcvrEmlAddr = "songjiwoong1020@gmail.com"; // 수신자 메일주소
+//            String rcvrEmlAddr = "kids_dur@drugsafe.kr"; // 수신자 메일주소
+
+            log.debug("emlTtl >>>>> " + emlTtl);
+            log.debug("emlCn >>>>> " + emlCn);
+            log.debug("sndptyFlnm >>>>> " + sndptyFlnm);
+            log.debug("sndptyEmlAddr >>>>> " + sndptyEmlAddr);
+            log.debug("rcvrFlnm >>>>> " + rcvrFlnm);
+            log.debug("rcvrEmlAddr >>>>> " + rcvrEmlAddr);
+
+            EmailPVO ep = new EmailPVO();
+            
+            ep.setSndptyFlnm(sndptyFlnm);
+            ep.setSndptyEmlAddr(sndptyEmlAddr);
+            ep.setRcvrFlnm(rcvrFlnm);
+            ep.setRcvrEmlAddr(rcvrEmlAddr);
+            ep.setEmlTtl(emlTtl);
+            ep.setEmlCn(emlCn);
+            
+            EmailRVO er = emailClient.send(ep);
+
+            log.debug("==================== OpnnServiceImpl insertOpnn er.getResultCode()=" + er.getResultCode());
+            log.debug("==================== OpnnServiceImpl insertOpnn er.getMessageId()=" + er.getMessageId());
+            log.debug("==================== OpnnServiceImpl insertOpnn er.getErrorMessage()=" + er.getErrorMessage());
+            
         }catch(Exception e){
             log.debug("OpnnServiceImpl insertOpnn fail!! ", e);
             result = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
