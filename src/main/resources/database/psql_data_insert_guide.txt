@@ -13,4 +13,6 @@ SET client_encoding TO 'UTF8';
 \c "\copy us_dsadba.sp_drug_standard_code FROM '/drugsafe/doc/DB/dev_data/us_dsadba_data_csv/sp_drug_standard_code_202603061259.csv' WITH (FORMAT csv, HEADER true)"
 
 # psql로 접속해서 insert문.sql 파일을 입력시키기
-\i /drugsafe/doc/DB/dev_data/us_dsadba_data/drb_total_content_drugsafe_202602240906.sql
+\i /drugsafe/doc/DB/dev_data/us_dsadba_data/sp_drug_standard_code_202602240906.sql
+
+\i /drugsafe/doc/DB/dev_data/us_dsadba_data/drb_item_ingr_202602240906.sql
