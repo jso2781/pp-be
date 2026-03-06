@@ -1,19 +1,25 @@
 -- 대국민포털_DUR병용금기기본(인덱스 1)
 CREATE INDEX CONCURRENTLY idx_tb_pp_m_dur_conc_bann_1
-ON kids_own.tb_pp_m_dur_conc_bann(lower(igrd_nm_1));
+ON kids_own.tb_pp_m_dur_conc_bann
+USING gin (lower(igrd_nm_1) gin_trgm_ops);
 
 -- 대국민포털_DUR병용금기기본(인덱스 2)
 CREATE INDEX CONCURRENTLY idx_tb_pp_m_dur_conc_bann_2
-ON kids_own.tb_pp_m_dur_conc_bann(lower(igrd_nm_2));
+ON kids_own.tb_pp_m_dur_conc_bann
+USING gin (lower(igrd_nm_2) gin_trgm_ops);
 
 -- 대국민포털_DUR병용금기기본(인덱스 3)
 CREATE INDEX CONCURRENTLY idx_tb_pp_m_dur_conc_bann_3
-ON kids_own.tb_pp_m_dur_conc_bann(lower(mfds_igrd_nm_cn_1));
+ON kids_own.tb_pp_m_dur_conc_bann
+USING gin (lower(mfds_igrd_nm_cn_1) gin_trgm_ops);
 
 -- 대국민포털_DUR병용금기기본(인덱스 4)
 CREATE INDEX CONCURRENTLY idx_tb_pp_m_dur_conc_bann_4
-ON kids_own.tb_pp_m_dur_conc_bann(lower(mfds_igrd_nm_cn_2));
+ON kids_own.tb_pp_m_dur_conc_bann
+USING gin (lower(mfds_igrd_nm_cn_2) gin_trgm_ops);
 
+
+/*
 -- 대국민포털_DUR연령금기기본(인덱스 1)
 CREATE INDEX CONCURRENTLY idx_tb_pp_m_dur_age_bann_1
 ON kids_own.tb_pp_m_dur_age_bann(lower(igrd_nm));
@@ -69,3 +75,4 @@ ON kids_own.tb_pp_m_dur_nursw(lower(mfds_igrd_nm_cn));
 -- 의약성분_(원료)성분(인덱스 1)
 CREATE INDEX CONCURRENTLY idx_drc_ingr_1
 ON us_dsadba.drc_ingr(lower(ingr_eng_name));
+*/

@@ -35,22 +35,22 @@ COMMENT ON COLUMN us_dsadba.com_code_detail.update_ts IS '수정TIMESTAMP';
 
 -- Permissions
 
-ALTER TABLE us_dsadba.com_code_detail OWNER TO postgres;
-GRANT ALL ON TABLE us_dsadba.com_code_detail TO postgres;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO bo_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO bo_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO cm_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO cm_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO cr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO cr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO dr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO dr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO ex_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO ex_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO pp_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO pp_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO ca_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO ca_dev;
+--ALTER TABLE us_dsadba.com_code_detail OWNER TO postgres;
+--GRANT ALL ON TABLE us_dsadba.com_code_detail TO postgres;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO bo_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO bo_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO cm_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO cm_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO cr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO cr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO dr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO dr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO ex_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO ex_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO pp_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO pp_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO ca_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.com_code_detail TO ca_dev;
 
 
 -- us_dsadba.dra_entp_permit definition
@@ -78,22 +78,22 @@ COMMENT ON COLUMN us_dsadba.dra_entp_permit.cancel_date IS '날짜';
 
 -- Permissions
 
-ALTER TABLE us_dsadba.dra_entp_permit OWNER TO postgres;
-GRANT ALL ON TABLE us_dsadba.dra_entp_permit TO postgres;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO bo_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO bo_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO cm_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO cm_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO cr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO cr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO dr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO dr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO ex_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO ex_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO pp_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO pp_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO ca_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO ca_dev;
+--ALTER TABLE us_dsadba.dra_entp_permit OWNER TO postgres;
+--GRANT ALL ON TABLE us_dsadba.dra_entp_permit TO postgres;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO bo_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO bo_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO cm_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO cm_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO cr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO cr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO dr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO dr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO ex_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO ex_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO pp_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO pp_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO ca_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.dra_entp_permit TO ca_dev;
 
 
 -- us_dsadba.drb_item definition
@@ -169,22 +169,22 @@ COMMENT ON COLUMN us_dsadba.drb_item.update_ts IS '수정/TIMESTAMP';
 
 -- Permissions
 
-ALTER TABLE us_dsadba.drb_item OWNER TO postgres;
-GRANT ALL ON TABLE us_dsadba.drb_item TO postgres;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO bo_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO bo_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO cm_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO cm_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO cr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO cr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO dr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO dr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO ex_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO ex_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO pp_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO pp_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO ca_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO ca_dev;
+--ALTER TABLE us_dsadba.drb_item OWNER TO postgres;
+--GRANT ALL ON TABLE us_dsadba.drb_item TO postgres;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO bo_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO bo_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO cm_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO cm_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO cr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO cr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO dr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO dr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO ex_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO ex_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO pp_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO pp_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO ca_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item TO ca_dev;
 
 
 -- us_dsadba.drb_item_ingr definition
@@ -238,22 +238,22 @@ COMMENT ON COLUMN us_dsadba.drb_item_ingr.material_actvty_mttr_qy IS '원료활�
 
 -- Permissions
 
-ALTER TABLE us_dsadba.drb_item_ingr OWNER TO postgres;
-GRANT ALL ON TABLE us_dsadba.drb_item_ingr TO postgres;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO bo_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO bo_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO cm_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO cm_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO cr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO cr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO dr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO dr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO ex_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO ex_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO pp_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO pp_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO ca_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO ca_dev;
+--ALTER TABLE us_dsadba.drb_item_ingr OWNER TO postgres;
+--GRANT ALL ON TABLE us_dsadba.drb_item_ingr TO postgres;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO bo_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO bo_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO cm_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO cm_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO cr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO cr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO dr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO dr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO ex_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO ex_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO pp_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO pp_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO ca_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr TO ca_dev;
 
 
 -- us_dsadba.drb_item_ingr_hist definition
@@ -311,22 +311,22 @@ COMMENT ON COLUMN us_dsadba.drb_item_ingr_hist.history_regist_ts IS '이력등�
 
 -- Permissions
 
-ALTER TABLE us_dsadba.drb_item_ingr_hist OWNER TO postgres;
-GRANT ALL ON TABLE us_dsadba.drb_item_ingr_hist TO postgres;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO bo_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO bo_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO cm_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO cm_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO cr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO cr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO dr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO dr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO ex_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO ex_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO pp_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO pp_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO ca_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO ca_dev;
+--ALTER TABLE us_dsadba.drb_item_ingr_hist OWNER TO postgres;
+--GRANT ALL ON TABLE us_dsadba.drb_item_ingr_hist TO postgres;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO bo_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO bo_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO cm_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO cm_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO cr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO cr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO dr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO dr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO ex_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO ex_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO pp_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO pp_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO ca_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_item_ingr_hist TO ca_dev;
 
 
 -- us_dsadba.drb_total_content_drugsafe definition
@@ -360,22 +360,22 @@ COMMENT ON COLUMN us_dsadba.drb_total_content_drugsafe.totqy_num1 IS '총량1(�
 
 -- Permissions
 
-ALTER TABLE us_dsadba.drb_total_content_drugsafe OWNER TO postgres;
-GRANT ALL ON TABLE us_dsadba.drb_total_content_drugsafe TO postgres;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO bo_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO bo_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO cm_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO cm_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO cr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO cr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO dr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO dr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO ex_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO ex_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO pp_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO pp_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO ca_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO ca_dev;
+--ALTER TABLE us_dsadba.drb_total_content_drugsafe OWNER TO postgres;
+--GRANT ALL ON TABLE us_dsadba.drb_total_content_drugsafe TO postgres;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO bo_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO bo_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO cm_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO cm_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO cr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO cr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO dr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO dr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO ex_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO ex_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO pp_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO pp_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO ca_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drb_total_content_drugsafe TO ca_dev;
 
 
 -- us_dsadba.drc_ingr definition
@@ -421,22 +421,22 @@ COMMENT ON COLUMN us_dsadba.drc_ingr.bio_prodt_yn IS '생물학적제제여부';
 
 -- Permissions
 
-ALTER TABLE us_dsadba.drc_ingr OWNER TO postgres;
-GRANT ALL ON TABLE us_dsadba.drc_ingr TO postgres;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO bo_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO bo_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO cm_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO cm_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO cr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO cr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO dr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO dr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO ex_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO ex_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO pp_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO pp_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO ca_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO ca_dev;
+--ALTER TABLE us_dsadba.drc_ingr OWNER TO postgres;
+--GRANT ALL ON TABLE us_dsadba.drc_ingr TO postgres;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO bo_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO bo_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO cm_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO cm_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO cr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO cr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO dr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO dr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO ex_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO ex_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO pp_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO pp_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO ca_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.drc_ingr TO ca_dev;
 
 
 -- us_dsadba.sp_drug_standard_code definition
@@ -481,19 +481,19 @@ CREATE TABLE us_dsadba.sp_drug_standard_code (
 
 -- Permissions
 
-ALTER TABLE us_dsadba.sp_drug_standard_code OWNER TO postgres;
-GRANT ALL ON TABLE us_dsadba.sp_drug_standard_code TO postgres;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO bo_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO bo_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO cm_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO cm_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO cr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO cr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO dr_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO dr_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO ex_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO ex_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO pp_dev;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO pp_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO ca_app;
-GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO ca_dev;
+--ALTER TABLE us_dsadba.sp_drug_standard_code OWNER TO postgres;
+--GRANT ALL ON TABLE us_dsadba.sp_drug_standard_code TO postgres;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO bo_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO bo_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO cm_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO cm_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO cr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO cr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO dr_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO dr_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO ex_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO ex_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO pp_dev;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO pp_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO ca_app;
+--GRANT UPDATE, INSERT, SELECT, DELETE ON TABLE us_dsadba.sp_drug_standard_code TO ca_dev;
