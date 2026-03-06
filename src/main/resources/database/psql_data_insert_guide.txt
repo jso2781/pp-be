@@ -1,0 +1,16 @@
+cmd 창에서
+
+psql -h 100.66.39.64 -p 5432 -U drugsafe -d drugsafe 접속 후
+
+SHOW server_encoding;
+SHOW client_encoding;
+
+SET client_encoding TO 'UTF8';
+
+클라이언트 엔코딩 설정을 UTF8로 변경함.
+
+# psql로 접속해서 csv파일을 이용해서 데이터 입력하기
+\c "\copy us_dsadba.sp_drug_standard_code FROM '/drugsafe/doc/DB/dev_data/us_dsadba_data_csv/sp_drug_standard_code_202603061259.csv' WITH (FORMAT csv, HEADER true)"
+
+# psql로 접속해서 insert문.sql 파일을 입력시키기
+\i /drugsafe/doc/DB/dev_data/us_dsadba_data/drb_total_content_drugsafe_202602240906.sql
