@@ -114,6 +114,46 @@
         )
     </sql>
 
+    <sql id="durFilterLike">
+        <if test="list != null and list.size() > 0">
+            <choose>
+                <when test="list[0].igrdCd != null and list[0].igrdCd != ''">
+                    AND (
+                    <foreach collection="list" item="item" separator=" OR ">
+                        mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%'
+                    </foreach>
+                    )
+                </when>
+                <otherwise>
+                    AND mfds_prdct_nm IN
+                    <foreach collection="list" item="item" open="(" separator="," close=")">
+                        #{item.prdctCd}
+                    </foreach>
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
+
+    <sql id="durFilterLikeE">
+        <if test="list != null and list.size() > 0">
+            <choose>
+                <when test="list[0].igrdCd != null and list[0].igrdCd != ''">
+                    AND (
+                    <foreach collection="list" item="item" separator=" OR ">
+                        e.mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%'
+                    </foreach>
+                    )
+                </when>
+                <otherwise>
+                    AND e.mfds_prdct_nm IN
+                    <foreach collection="list" item="item" open="(" separator="," close=")">
+                        #{item.prdctCd}
+                    </foreach>
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
+
     <select id="selectDurMyDrugInfoConcList" resultMap="DurSearchRoomMap">
         <choose>
             <when test="list != null and list.size() > 1">
@@ -125,8 +165,16 @@
                     FROM (
                         <foreach collection="list" item="item" separator=" UNION ALL ">
                             SELECT
-                                #{item.prdctCd}::varchar AS prdct_cd,
-                                #{item.igrdCd}::varchar AS igrd_cd
+                                <choose>
+                                    <when test="list[0].igrdCd != null and list[0].igrdCd != ''">
+                                        NULL::varchar AS prdct_cd,
+                                        #{item.igrdCd}::varchar AS igrd_cd
+                                    </when>
+                                    <otherwise>
+                                        #{item.prdctCd}::varchar AS prdct_cd,
+                                        NULL::varchar AS igrd_cd
+                                    </otherwise>
+                                </choose>
                         </foreach>
                     ) x
                 ),
@@ -154,10 +202,10 @@
                     JOIN kids_own.tb_pp_m_dur_conc_bann cb
                         ON cb.oper_stts_cd = 'O'
                        AND <include refid="concMatchAto1"/>
-                       AND <include refid="concMatchBto2"/>         
-                                  
+                       AND <include refid="concMatchBto2"/>
+
                     UNION ALL
-                    
+
                     SELECT DISTINCT
                         cb.prdct_nm_1,
                         cb.prdct_nm_2,
@@ -170,7 +218,7 @@
                     JOIN kids_own.tb_pp_m_dur_conc_bann cb
                         ON cb.oper_stts_cd = 'O'
                        AND <include refid="concMatchAto2"/>
-                       AND <include refid="concMatchBto1"/>                   
+                       AND <include refid="concMatchBto1"/>
                 ),
                 conc_raw AS (
                     SELECT DISTINCT
@@ -336,17 +384,7 @@
                     ,null as rmrk_cn
             FROM kids_own.tb_pp_m_dur_age_bann
             WHERE oper_stts_cd = 'O'
-	        <if test="list != null and list.size() > 0">
-	            AND (
-	            <foreach collection="list" item="item" separator=" OR ">
-	                (
-	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>mfds_prdct_nm = #{item.prdctCd}</otherwise></choose>
-	                AND
-	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%'</otherwise></choose>	                	               	               
-	                )
-	            </foreach>
-	            )
-	        </if>	          	          	           
+            <include refid="durFilterLike"/>
             UNION ALL
             /* 대국민포털_DUR임부금기기본 */
             SELECT distinct
@@ -375,17 +413,7 @@
                     ,null as rmrk_cn
             FROM kids_own.tb_pp_m_dur_prgnt_bann
             WHERE oper_stts_cd = 'O'
-	        <if test="list != null and list.size() > 0">
-	            AND (
-	            <foreach collection="list" item="item" separator=" OR ">
-	                (
-	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>mfds_prdct_nm = #{item.prdctCd}</otherwise></choose>
-	                AND
-	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%'</otherwise></choose>	                	               	               
-	                )
-	            </foreach>
-	            )
-	        </if>	   
+            <include refid="durFilterLike"/>
             UNION ALL
             /* 대국민포털_DUR용량주의기본 */
             SELECT distinct
@@ -414,17 +442,7 @@
                     ,null as rmrk_cn
             FROM kids_own.tb_pp_m_dur_cpct
             WHERE oper_stts_cd = 'O'
-            <if test="list != null and list.size() > 0">
-                AND (
-                <foreach collection="list" item="item" separator=" OR ">
-                    (
-                    <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>(mfds_prdct_nm = #{item.prdctCd})</otherwise></choose>
-                    AND
-                    <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>mfds_igrd_cd_cn = #{item.igrdCd}</otherwise></choose>
-                    )
-                </foreach>
-                )
-            </if>
+            <include refid="durFilterLike"/>
             UNION ALL
             /* 대국민포털_DUR투여기간주의기본 */
             SELECT distinct
@@ -453,17 +471,7 @@
                     ,rmrk_cn
             FROM kids_own.tb_pp_m_dur_dosage
             WHERE oper_stts_cd = 'O'
-            <if test="list != null and list.size() > 0">
-                AND (
-                <foreach collection="list" item="item" separator=" OR ">
-                    (
-                    <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>mfds_prdct_nm = #{item.prdctCd}</otherwise></choose>
-                    AND
-                    <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>mfds_igrd_cd_cn = #{item.igrdCd}</otherwise></choose>
-                    )
-                </foreach>
-                )
-            </if>
+            <include refid="durFilterLike"/>
             UNION ALL
             /* 대국민포털_DUR효능군중복기본 */
             SELECT distinct
@@ -521,17 +529,7 @@
                     SELECT e.group_nm_1
                     FROM kids_own.tb_pp_m_dur_eftgrp e
                     WHERE oper_stts_cd = 'O'
-                    <if test="list != null and list.size() > 0">
-                        AND (
-                        <foreach collection="list" item="item" separator=" OR ">
-                            (
-                            <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>e.mfds_prdct_nm = #{item.prdctCd}</otherwise></choose>
-                            AND
-                            <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>mfds_igrd_cd_cn = #{item.igrdCd}</otherwise></choose>
-                            )
-                        </foreach>
-                        )
-                    </if>
+                    <include refid="durFilterLikeE"/>
                 )
             ) EFT
             UNION ALL
@@ -562,17 +560,7 @@
                     ,rmrk_cn
             FROM kids_own.tb_pp_m_dur_snctz
             WHERE oper_stts_cd = 'O'
-	        <if test="list != null and list.size() > 0">
-	            AND (
-	            <foreach collection="list" item="item" separator=" OR ">
-	                (
-	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>mfds_prdct_nm = #{item.prdctCd}</otherwise></choose>
-	                AND
-	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%'</otherwise></choose>	                	               	               
-	                )
-	            </foreach>
-	            )
-	        </if>
+            <include refid="durFilterLike"/>
             UNION ALL
             /* 대국민포털_DUR수유부주의기본 */
             SELECT distinct
@@ -601,17 +589,7 @@
                     ,rmrk_cn
             FROM kids_own.tb_pp_m_dur_nursw
             WHERE oper_stts_cd = 'O'
-	        <if test="list != null and list.size() > 0">
-	            AND (
-	            <foreach collection="list" item="item" separator=" OR ">
-	                (
-	                <choose><when test="item.prdctCd == null or item.prdctCd == ''">1=1</when><otherwise>mfds_prdct_nm = #{item.prdctCd}</otherwise></choose>
-	                AND
-	                <choose><when test="item.igrdCd == null or item.igrdCd == ''">1=1</when><otherwise>mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%'</otherwise></choose>	                	               	               
-	                )
-	            </foreach>
-	            )
-	        </if>	
+            <include refid="durFilterLike"/>
         ) A
         GROUP BY A.igrd_nm, A.prdct_nm
     </select>
