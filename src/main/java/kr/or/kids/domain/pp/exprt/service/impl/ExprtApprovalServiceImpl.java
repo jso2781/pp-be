@@ -175,7 +175,7 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
 
         // 권한 삭제
         ExprtTaskPVO exprtTaskPVO = new ExprtTaskPVO();
-        exprtTaskPVO.setMbrNo(exprtApprovalUVO.getMbrNo());
+        exprtTaskPVO.setExprtNo(exprtApprovalUVO.getExprtNo());
         exprtTaskMapper.deleteAllExprtAuth(exprtTaskPVO);
 
         // 업무 시스템 회수처리
@@ -202,7 +202,6 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         exprtTaskMapper.deleteAllExprtTask(exprtTaskPVO);
 
         // 전문가 권한 전부 삭제
-        exprtTaskPVO.setMbrNo(exprtApprovalUVO.getMbrNo());
         exprtTaskMapper.deleteAllExprtAuth(exprtTaskPVO);
 
         // localout 프로파일에서는 메일 발송 생략.

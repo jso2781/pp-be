@@ -67,7 +67,9 @@
     <delete id="deleteAllExprtAuth" parameterType="ExprtTaskPVO">
         /* 대국민포털_전문가내업무관리 전문가회원 권한 전체 삭제 (ExprtTaskMapper.deleteExprtAuth) */
         DELETE FROM kids_own.TB_PP_M_EXPRT_AUTHRT
-        WHERE mbr_no = #{mbrNo}
+        WHERE mbr_no = (SELECT MAX(mbr_no)
+                          FROM kids_own.tb_pp_m_exprt_info
+                         WHERE exprt_no = #{exprtNo})
     </delete>
 
     <delete id="deleteExprtAuth" parameterType="ExprtTaskPVO">

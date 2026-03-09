@@ -115,13 +115,13 @@ public class MbrInfoServiceImpl implements MbrInfoService
 
             if (exprtTaskRVO != null && StringUtils.isNotBlank(exprtTaskRVO.getExprtNo()) && Arrays.asList("W", "A").contains(exprtTaskRVO.getExprtAprvSttsCode())) {
                 // 전문가 권한 삭제
+                exprtTaskPVO.setExprtNo(exprtTaskRVO.getExprtNo());
                 exprtTaskMapper.deleteAllExprtAuth(exprtTaskPVO);
 
                 // 업무 시스템 회수처리
                 ExprtApprovalUVO exprtApprovalUVO = new ExprtApprovalUVO();
                 exprtApprovalUVO.setMbrNo(mbrInfoPVO.getMbrNo());
                 exprtApprovalUVO.setMbrId(mbrInfoPVO.getMbrId());
-                exprtApprovalUVO.setExprtNo(exprtTaskRVO.getExprtNo());
                 exprtApprovalMapper.collectExprtTaskApproval(exprtApprovalUVO);
 
                 // 전문가 정보 개인정보 삭제 및 회수처리
