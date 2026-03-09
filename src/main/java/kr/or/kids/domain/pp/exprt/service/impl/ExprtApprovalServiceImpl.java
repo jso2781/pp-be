@@ -2,6 +2,8 @@ package kr.or.kids.domain.pp.exprt.service.impl;
 
 import com.github.pagehelper.PageHelper;
 
+import kr.or.kids.domain.ca.common.file.service.FileService;
+import kr.or.kids.domain.ca.common.file.vo.FileDeleteReqVO;
 import kr.or.kids.domain.pp.exprt.mapper.ExprtApprovalMapper;
 import kr.or.kids.domain.pp.exprt.mapper.ExprtTaskMapper;
 import kr.or.kids.domain.pp.exprt.service.ExprtApprovalService;
@@ -16,6 +18,8 @@ import kr.or.kids.global.util.PagingUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +36,8 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
     private final ExprtTaskMapper exprtTaskMapper;
 
     private final EmailClient emailClient;
+    private final FileService fileService;
+    private final Environment environment;
 
     @Override
     public ApiPrnDto selectExprtApprovalList(ExprtApprovalPVO exprtApprovalPVO) {
@@ -111,7 +117,11 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
                 exprtApprovalMapper.updateExprtApproval(exprtApprovalUVO);
 
                 // 첨부파일 제거
-                removeAttachFile(exprtApprovalUVO);
+                if (StringUtils.isNotBlank(beforeRVO.getAtchFileGroupId())) {
+                    FileDeleteReqVO fileDeleteReqVO = new FileDeleteReqVO();
+                    fileDeleteReqVO.setAtchFileGroupId(beforeRVO.getAtchFileGroupId());
+                    fileService.deleteGroupFiles(fileDeleteReqVO);
+                }
 
                 // 전문가 회원 전환 신청 반려 시 로직 수행 (업무시스템 삭제, 이메일 발송)
                 if ("R".equals(exprtApprovalUVO.getExprtAprvSttsCode())) {
@@ -195,6 +205,12 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         exprtTaskPVO.setMbrNo(exprtApprovalUVO.getMbrNo());
         exprtTaskMapper.deleteAllExprtAuth(exprtTaskPVO);
 
+        // localout 프로파일에서는 메일 발송 생략.
+        if (environment.acceptsProfiles(Profiles.of("localout"))) {
+            log.info("Skip reject email on profile local-out. exprtNo={}", exprtApprovalUVO.getExprtNo());
+            return;
+        }
+
         // 반려안내 이메일 발송
         String emlTtl = "전문가 전환 신청 결과 안내";  // 제목
         String emlCn = "신청하신 전문가 전환 신청 건이 최종 반려되었습니다.\n내 업무 페이지에서 반려사유 확인 후 재신청 바랍니다."; // 본문
@@ -224,14 +240,6 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         log.debug("==================== ExprtApprovalServiceImpl exprtReject er.getResultCode()=" + er.getResultCode());
         log.debug("==================== ExprtApprovalServiceImpl exprtReject er.getMessageId()=" + er.getMessageId());
         log.debug("==================== ExprtApprovalServiceImpl exprtReject er.getErrorMessage()=" + er.getErrorMessage());
-    }
-
-    /**
-     * 첨부파일 제거
-     */
-    private void removeAttachFile(ExprtApprovalUVO exprtApprovalUVO) {
-        // TODO 첨부파일 공통 확인 후 수정 예정
-        log.debug("exprtReject attach file");
     }
 
     /**
