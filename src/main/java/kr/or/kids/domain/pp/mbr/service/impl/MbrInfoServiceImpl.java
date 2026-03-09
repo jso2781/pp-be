@@ -1,12 +1,10 @@
 package kr.or.kids.domain.pp.mbr.service.impl;
 
-import java.util.HashMap;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import kr.or.kids.domain.pp.faq.vo.FaqRVO;
+import kr.or.kids.domain.pp.exprt.mapper.ExprtApprovalMapper;
+import kr.or.kids.domain.pp.exprt.mapper.ExprtTaskMapper;
+import kr.or.kids.domain.pp.exprt.vo.ExprtApprovalUVO;
+import kr.or.kids.domain.pp.exprt.vo.ExprtTaskPVO;
+import kr.or.kids.domain.pp.exprt.vo.ExprtTaskRVO;
 import kr.or.kids.domain.pp.mbr.mapper.MbrInfoMapper;
 import kr.or.kids.domain.pp.mbr.service.MbrInfoService;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoDVO;
@@ -16,14 +14,23 @@ import kr.or.kids.domain.pp.mbr.vo.VerifyPasswordPVO;
 import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Arrays;
+import java.util.HashMap;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class MbrInfoServiceImpl implements MbrInfoService
 {
-    @Autowired
-    private MbrInfoMapper mbrInfoMapper;
+    private final MbrInfoMapper mbrInfoMapper;
+    private final ExprtApprovalMapper exprtApprovalMapper;
+    private final ExprtTaskMapper exprtTaskMapper;
 
     public ApiPrnDto verifyPassword(VerifyPasswordPVO yerifyPasswordPVO) {
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
@@ -86,6 +93,7 @@ public class MbrInfoServiceImpl implements MbrInfoService
     }
 
     @Override
+    @Transactional
     public ApiPrnDto updateMbrInfo(MbrInfoPVO mbrInfoPVO)
     {
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
@@ -99,6 +107,28 @@ public class MbrInfoServiceImpl implements MbrInfoService
             dataMap.put("updateCnt", 1);
             dataMap.put("userInfo", userInfo);
             apiPrnDto.setData(dataMap);
+
+            // 전문가 회원일 경우 전문가 개인정보 삭제 및 업무시스템 회수
+            ExprtTaskPVO exprtTaskPVO = new ExprtTaskPVO();
+            exprtTaskPVO.setMbrNo(mbrInfoPVO.getMbrNo());
+            ExprtTaskRVO exprtTaskRVO = exprtTaskMapper.selectExprtInfo(exprtTaskPVO);
+
+            if (exprtTaskRVO != null && StringUtils.isNotBlank(exprtTaskRVO.getExprtNo()) && Arrays.asList("W", "A").contains(exprtTaskRVO.getExprtAprvSttsCode())) {
+                // 전문가 권한 삭제
+                exprtTaskMapper.deleteAllExprtAuth(exprtTaskPVO);
+
+                // 업무 시스템 회수처리
+                ExprtApprovalUVO exprtApprovalUVO = new ExprtApprovalUVO();
+                exprtApprovalUVO.setMbrNo(mbrInfoPVO.getMbrNo());
+                exprtApprovalUVO.setMbrId(mbrInfoPVO.getMbrId());
+                exprtApprovalUVO.setExprtNo(exprtTaskRVO.getExprtNo());
+                exprtApprovalMapper.collectExprtTaskApproval(exprtApprovalUVO);
+
+                // 전문가 정보 개인정보 삭제 및 회수처리
+                exprtApprovalUVO.setExprtAprvSttsCode("C");
+                exprtApprovalUVO.setExprtHdofYn("N");
+                exprtApprovalMapper.collectExprtApproval(exprtApprovalUVO);
+            }
 
             return apiPrnDto;
         }
