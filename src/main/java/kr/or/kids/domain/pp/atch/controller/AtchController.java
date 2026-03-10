@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -86,7 +87,31 @@ public class AtchController
         headers.add(HttpHeaders.CONTENT_TYPE, downloadParam.getContentType());
         headers.add(HttpHeaders.CONTENT_LENGTH, String.valueOf(downloadParam.getContentLength()));
 
-        log.info("File download started: {}, size: {} bytes", downloadParam.getFilename(), downloadParam.getContentLength());
+        log.info("downloadFile File download started: {}, size: {} bytes", downloadParam.getFilename(), downloadParam.getContentLength());
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(resource);
+    }
+
+    @Operation(summary = "공통_첨부파일기본 첨부파일 다운로드(GET)", description = "공통_첨부파일기본 첨부파일을 다운로드한다.(GET)")
+    @GetMapping(value="/downloadParam")
+    public ResponseEntity<Resource> downloadParam(@RequestParam FileDataReqVO fdrv)
+    {
+        FileDownResVO downloadParam = fileService.downloadFile(fdrv);
+
+        Resource resource = downloadParam.getResource();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentDisposition(
+            ContentDisposition.attachment()
+                .filename(downloadParam.getFilename(), StandardCharsets.UTF_8)
+                .build()
+        );
+        headers.add(HttpHeaders.CONTENT_TYPE, downloadParam.getContentType());
+        headers.add(HttpHeaders.CONTENT_LENGTH, String.valueOf(downloadParam.getContentLength()));
+
+        log.info("downloadParam File download started: {}, size: {} bytes", downloadParam.getFilename(), downloadParam.getContentLength());
 
         return ResponseEntity.ok()
                 .headers(headers)

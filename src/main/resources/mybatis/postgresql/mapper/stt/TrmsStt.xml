@@ -25,7 +25,7 @@
             ON ts.trms_stt_cd = tc.task_cd 
             WHERE 1=1
             AND '' != trim(ts.trms_stt_cn)
-            AND tc.task_cd IN('UTZTN', 'STT_PRVC', 'CLCT', 'STTY_AGT')
+            AND tc.task_cd IN('UTZTN', 'STT_PRVC_PP', 'CLCT', 'STTY_AGT')
             AND to_char(now(), 'yyyymmdd') between ts.trms_stt_aplcn_ymd AND ts.trms_stt_end_ymd
             AND tc.use_yn = 'Y'
         ) A
