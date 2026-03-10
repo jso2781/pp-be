@@ -42,6 +42,19 @@
         </if>
          ORDER BY et.exprt_task_sn DESC
     </select>
+    
+    <select id="selectBzmnTaskMngNo" >
+        /* 대국민포털_전문가업무신청관리 사업자업무관리번호 조회 (ExprtApprovalMapper.selectBzmnTaskMngNo) */
+        SELECT it.bzmn_task_mng_no
+          FROM kids_own.TB_PP_M_INST_TASK it
+             , kids_own.TB_PP_M_EXPRT_INFO ei        
+             , kids_own.TB_PP_M_EXPRT_TASK et
+         WHERE ei.mbr_no = #{mbrNo}
+           AND ei.EXPRT_HDOF_YN = 'Y'
+           AND ei.exprt_no = et.exprt_no
+           AND ei.exprt_no = it.tkcg_exprt_no
+           AND et.bzmn_task_mng_no = it.bzmn_task_mng_no
+    </select>    
 
     <select id="selectExprtApproval" parameterType="ExprtApprovalPVO" resultType="ExprtApprovalRVO" >
         /* 대국민포털_전문가업무신청관리 소속 전문가 회원 상세 조회 (ExprtApprovalMapper.selectExprtApproval) */

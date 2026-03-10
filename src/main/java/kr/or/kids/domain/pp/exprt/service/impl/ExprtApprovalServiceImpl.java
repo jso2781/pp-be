@@ -22,6 +22,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,27 +64,35 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
     public ApiPrnDto selectExprtApproval(ExprtApprovalPVO exprtApprovalPVO) {
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         HashMap<String, Object> data = new HashMap<>();
+        
+        if (StringUtils.isNotBlank(exprtApprovalPVO.getMbrNo())) {
+        	List<String> bzmnTaskMngNos = exprtApprovalMapper.selectBzmnTaskMngNo(exprtApprovalPVO.getMbrNo());        	
+        	
+        	if (!ObjectUtils.isEmpty(bzmnTaskMngNos)) {
+        		
+                ExprtApprovalRVO detail = exprtApprovalMapper.selectExprtApproval(exprtApprovalPVO);
 
-        ExprtApprovalRVO detail = exprtApprovalMapper.selectExprtApproval(exprtApprovalPVO);
+                if (detail != null && bzmnTaskMngNos.contains(detail.getBzmnTaskMngNo())){
+                	                
+                    // masking
+                    detail.setMbrId(MaskingUtil.maskId(detail.getMbrId().trim()));
+                    detail.setName(MaskingUtil.maskName(detail.getName().trim()));
+                    detail.setTelNo(MaskingUtil.maskPhone(detail.getTelNo().trim()));
+                    detail.setInstEmlNm(MaskingUtil.maskEmail(detail.getInstEmlNm().trim()));
+                    data.put("detail", detail);
 
-        if (StringUtils.isBlank(detail.getBzmnTaskMngNo()) || !exprtApprovalPVO.getBzmnTaskMngNos().contains(detail.getBzmnTaskMngNo())){
-            data.put("defenseYn", true);
-            result.setData(data);
-            return result;
-        }
+                    List<ExprtApprovalAuthRVO> list = exprtApprovalMapper.selectExprtTaskAuthList(exprtApprovalPVO.getExprtTaskSn());
+                    data.put("authList", list);
 
-        // masking
-        detail.setMbrId(MaskingUtil.maskId(detail.getMbrId().trim()));
-        detail.setName(MaskingUtil.maskName(detail.getName().trim()));
-        detail.setTelNo(MaskingUtil.maskPhone(detail.getTelNo().trim()));
-        detail.setInstEmlNm(MaskingUtil.maskEmail(detail.getInstEmlNm().trim()));
-        data.put("detail", detail);
-
-        List<ExprtApprovalAuthRVO> list = exprtApprovalMapper.selectExprtTaskAuthList(exprtApprovalPVO.getExprtTaskSn());
-        data.put("authList", list);
-
-        result.setData(data);
-        return result;
+                    result.setData(data);
+                    return result;
+                }	
+        	}
+        }         
+        
+		data.put("defenseYn", true);
+		result.setData(data);
+		return result;        
     }
 
     @Override

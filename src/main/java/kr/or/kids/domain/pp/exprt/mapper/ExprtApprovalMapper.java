@@ -21,6 +21,14 @@ public interface ExprtApprovalMapper {
     List<ExprtApprovalRVO> selectExprtApprovalList(ExprtApprovalPVO exprtApprovalPVO);
 
     /**
+     * 대국민포털_전문가업무신청관리 사업자업무관리번호 조회 
+     *
+     * @param exprtApprovalPVO 파라메터 정보
+     * @return 소속 전문가 회원 목록
+     */    
+    List<String> selectBzmnTaskMngNo(String mbrNo);
+    
+    /**
      * 대국민포털_전문가업무신청관리 소속 전문가 회원 상세 조회
      *
      * @param exprtApprovalPVO 파라메터 정보
