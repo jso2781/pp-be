@@ -58,9 +58,17 @@
                 ,dm.menu_url_addr
                 ,mp.pst_sn::text as doc_sn
                 ,mp.pst_ttl as doc_ttl
-                ,mp.pst_cn  as doc_cn
+                ,CASE
+                     WHEN strpos(lower(pst.clean_cn), lower(#{searchText})) > 0
+                         THEN substring(
+                             pst.clean_cn
+                             from GREATEST(strpos(lower(pst.clean_cn), lower(#{searchText})) - 30, 1)
+                             for 230
+                         )
+                     ELSE substring(pst.clean_cn from 1 for 200)
+                 END as doc_cn
                 ,mp.reg_dt  as reg_dt
-                ,kids_own.similarity(coalesce(mp.pst_ttl,'') || ' ' || coalesce(mp.pst_cn,''), #{searchText}) as relevance_score
+                ,kids_own.similarity(coalesce(mp.pst_ttl,'') || ' ' || coalesce(pst.clean_cn,''), #{searchText}) as relevance_score
             FROM kids_own.tb_pp_m_pst mp
             INNER JOIN kids_own.tb_pp_m_bbs mb ON mp.bbs_id = mb.bbs_id AND mb.USE_YN = 'Y'
             INNER JOIN kids_own.tb_pp_m_bbs_authrt mba ON mb.bbs_id = mba.bbs_id AND mba.AUTHRT_CD = 'BBS_USR'            
@@ -72,8 +80,18 @@
                 )
             INNER JOIN menu_tree tm ON tm.menu_sn = dm.menu_sn
             INNER JOIN kids_own.tb_pp_m_menu rm ON rm.menu_sn = tm.root_sn
+            CROSS JOIN LATERAL (
+                SELECT trim(
+                    regexp_replace(
+                        regexp_replace(coalesce(mp.pst_cn, ''), <![CDATA['<[^>]*>']]>, '', 'g'),
+                        '\s+',
+                        ' ',
+                        'g'
+                    )
+                ) AS clean_cn
+            ) pst
             WHERE mp.pst_ttl LIKE '%' || #{searchText} || '%'
-               OR mp.pst_cn  LIKE '%' || #{searchText} || '%'
+               OR pst.clean_cn  LIKE '%' || #{searchText} || '%'
         
             UNION ALL
         
@@ -88,16 +106,34 @@
                 ,dm.menu_url_addr
                 ,cms.conts_sn::text as doc_sn
                 ,cms.conts_ttl as doc_ttl
-                ,cms.conts_cn  as doc_cn
-                ,cms.reg_dt    as reg_dt
-                ,kids_own.similarity(coalesce(cms.conts_ttl,'') || ' ' || coalesce(cms.conts_cn,''), #{searchText}) as relevance_score
+                ,CASE
+                     WHEN strpos(lower(cts.clean_cn), lower(#{searchText})) > 0
+                         THEN substring(
+                             cts.clean_cn
+                             from GREATEST(strpos(lower(cts.clean_cn), lower(#{searchText})) - 30, 1)
+                             for 230
+                         )
+                     ELSE substring(cts.clean_cn from 1 for 200)
+                 END as doc_cn
+                ,cms.reg_dt as reg_dt
+                ,kids_own.similarity(coalesce(cms.conts_ttl,'') || ' ' || coalesce(cts.clean_cn,''), #{searchText}) as relevance_score
             FROM kids_own.tb_pp_m_conts cms
             INNER JOIN kids_own.tb_pp_d_menu dm
                 ON cms.conts_sn = substring(dm.menu_url_addr FROM position('/CmsPage/' in dm.menu_url_addr) + length('/CmsPage/'))
             INNER JOIN menu_tree tm ON tm.menu_sn = dm.menu_sn
             INNER JOIN kids_own.tb_pp_m_menu rm ON rm.menu_sn = tm.root_sn
+            CROSS JOIN LATERAL (
+                SELECT trim(
+                    regexp_replace(
+                        regexp_replace(coalesce(cms.conts_cn, ''), <![CDATA['<[^>]*>']]>, '', 'g'),
+                        '\s+',
+                        ' ',
+                        'g'
+                    )
+                ) AS clean_cn
+            ) cts
             WHERE cms.conts_ttl LIKE '%' || #{searchText} || '%'
-               OR cms.conts_cn  LIKE '%' || #{searchText} || '%'
+               OR cts.clean_cn  LIKE '%' || #{searchText} || '%'
         ),
         ranked AS (
             SELECT
