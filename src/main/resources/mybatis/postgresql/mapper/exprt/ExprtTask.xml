@@ -171,9 +171,9 @@
         d.encpt_pic_telno,
         d.menu_kogl_cprgt_type_cd,
         d.menu_pic_id,
-        coalesce(emp.emp_nm, m.pic_flnm) as menu_pic_flnm,
+        coalesce(emp.emp_nm, '') as menu_pic_flnm,
         emp.dept_no as menu_tkcg_dept_no,
-        coalesce(emp.dept_nm, m.pic_dept_nm) as menu_tkcg_dept_nm
+        coalesce(emp.dept_nm, '') as menu_tkcg_dept_nm
         FROM menu_tree mt
         LEFT JOIN kids_own.tb_pp_m_menu m
         ON mt.menu_sn = m.menu_sn

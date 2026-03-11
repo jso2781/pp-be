@@ -57,9 +57,9 @@
             d.encpt_pic_telno,
             d.menu_kogl_cprgt_type_cd,
             d.menu_pic_id,
-            coalesce(emp.emp_nm, m.pic_flnm) as menu_pic_flnm,
+            coalesce(emp.emp_nm, '') as menu_pic_flnm,
             emp.dept_no as menu_tkcg_dept_no,
-            coalesce(emp.dept_nm, m.pic_dept_nm) as menu_tkcg_dept_nm
+            coalesce(emp.dept_nm, '') as menu_tkcg_dept_nm
         FROM menu_tree mt
         LEFT JOIN kids_own.tb_pp_m_menu m
             ON mt.menu_sn = m.menu_sn
@@ -89,23 +89,27 @@
     <select id="getMenu" parameterType="MenuPVO" resultType="MenuRVO" >
         /* 대국민포털_메뉴기본 조회 (MenuMapper.getMenu) */
         SELECT
-             menu_sn
-            ,menu_nm
-            ,up_menu_sn
-            ,task_se_cd
-            ,menu_type_cd
-            ,menu_seq
-            ,menu_expln
-            ,pic_dept_nm
-            ,pic_flnm
-            ,use_yn
-            ,rgtr_id
-            ,reg_dt
-
-            ,mdfr_id
-            ,mdfcn_dt
-
-        FROM kids_own.TB_PP_M_MENU
+             m.menu_sn
+            ,m.menu_nm
+            ,m.up_menu_sn
+            ,m.task_se_cd
+            ,m.menu_type_cd
+            ,m.menu_seq
+            ,m.menu_expln
+            ,di.dept_nm as pic_dept_nm
+            ,ei.emp_nm as pic_flnm
+            ,m.use_yn
+            ,m.rgtr_id
+            ,m.reg_dt
+            ,m.mdfr_id
+            ,m.mdfcn_dt
+        FROM kids_own.TB_PP_M_MENU m
+        LEFT JOIN kids_own.TB_PP_D_MENU dm
+            ON dm.menu_sn = m.menu_sn
+        LEFT JOIN kids_own.tb_pp_m_emp_info ei
+            ON ei.emp_no = dm.menu_pic_id
+        LEFT JOIN kids_own.kids_own.tb_pp_m_dept_info di
+            ON di.dept_no = dm.menu_tkcg_dept_no
         WHERE 1=1
         AND menu_sn = #{menuSn}
     </select>
@@ -121,15 +125,11 @@
             ,menu_type_cd
             ,menu_seq
             ,menu_expln
-            ,pic_dept_nm
-            ,pic_flnm
             ,use_yn
             ,rgtr_id
             ,reg_dt
-
             ,mdfr_id
             ,mdfcn_dt
-
         )
         VALUES
         (
@@ -140,12 +140,9 @@
             ,#{menuTypeCd}
             ,#{menuSeq}
             ,#{menuExpln}
-            ,#{picDeptNm}
-            ,#{picFlnm}
             ,#{useYn}
             ,#{rgtrId}
             ,now()
-
             ,#{mdfrId}
             ,now()
 
@@ -162,12 +159,9 @@
             ,menu_type_cd = coalesce(#{menuTypeCd}, menu_type_cd)
             ,menu_seq = coalesce(#{menuSeq}, menu_seq)
             ,menu_expln = coalesce(#{menuExpln}, menu_expln)
-            ,pic_dept_nm = coalesce(#{picDeptNm}, pic_dept_nm)
-            ,pic_flnm = coalesce(#{picFlnm}, pic_flnm)
             ,use_yn = coalesce(#{useYn}, use_yn)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-
         WHERE 1=1
         AND menu_sn = #{menuSn}
     </update>
@@ -183,15 +177,11 @@
             ,menu_type_cd
             ,menu_seq
             ,menu_expln
-            ,pic_dept_nm
-            ,pic_flnm
             ,use_yn
             ,rgtr_id
             ,reg_dt
-
             ,mdfr_id
             ,mdfcn_dt
-
         )
         VALUES
         (
@@ -202,15 +192,11 @@
             ,#{menuTypeCd}
             ,#{menuSeq}
             ,#{menuExpln}
-            ,#{picDeptNm}
-            ,#{picFlnm}
             ,#{useYn}
             ,#{rgtrId}
             ,now()
-
             ,#{mdfrId}
             ,now()
-
         )
         ON CONFLICT(menu_sn)
         DO UPDATE SET
@@ -220,8 +206,6 @@
             ,menu_type_cd = coalesce(excluded.menu_type_cd, kids_own.TB_PP_M_MENU.menu_type_cd)
             ,menu_seq = coalesce(excluded.menu_seq, kids_own.TB_PP_M_MENU.menu_seq)
             ,menu_expln = coalesce(excluded.menu_expln, kids_own.TB_PP_M_MENU.menu_expln)
-            ,pic_dept_nm = coalesce(excluded.pic_dept_nm, kids_own.TB_PP_M_MENU.pic_dept_nm)
-            ,pic_flnm = coalesce(excluded.pic_flnm, kids_own.TB_PP_M_MENU.pic_flnm)
             ,use_yn = coalesce(excluded.use_yn, kids_own.TB_PP_M_MENU.use_yn)
             ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_MENU.mdfr_id)
             ,mdfcn_dt = now()
