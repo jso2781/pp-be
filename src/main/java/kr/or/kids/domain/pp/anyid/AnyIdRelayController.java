@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  *  - /vrs/extract
  */
 @RestController
-@Hidden
+@RequestMapping("/api/pp/auth")
 @Tag(name = "Any-ID(내부)", description = "Any-ID 프론트 모듈이 호출하는 중계형 SDK 내부 엔드포인트입니다.")
 public class AnyIdRelayController {
 
