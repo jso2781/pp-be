@@ -30,6 +30,14 @@
 		       AND aprv_stts_cd IN ('W', 'A')
 		)
     </select>
+    
+    <select id="selectMenuSn">
+        /* 대국민포털_전문가회원전환신청관리 메뉴일련번호 조회 (ExprtApplyMapper.selectMenuSn) */
+		SELECT COALESCE(
+				(SELECT menu_sn
+				   FROM kids_own.tb_pp_d_menu
+				  WHERE menu_url_addr LIKE '%' || #{menuUrlAddr} || '%'), 0)
+    </select>    
 
     <insert id="insertExprtInfo" parameterType="ExprtApplyIVO">
         <selectKey keyProperty="exprtNo" resultType="String" order="BEFORE">

@@ -12,6 +12,7 @@ import kr.or.kids.domain.pp.exprt.vo.ExprtTaskRVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -93,10 +94,28 @@ public class ExprtTaskServiceImpl implements ExprtTaskService {
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         HashMap<String, Object> data = new HashMap<>();
 
-        List<MenuRVO> exprtMenus = exprtTaskMapper.selectExprtMenus(exprtTaskPVO.getMbrNo());
+        List<MenuRVO> exprtMenus = new ArrayList<>();
+        exprtMenus.add(createExpertMyWorkMenu());
+        exprtMenus.addAll(exprtTaskMapper.selectExprtMenus(exprtTaskPVO.getMbrNo()));
         data.put("exprtMenus", exprtMenus);
 
         result.setData(data);
         return result;
+    }
+
+    private MenuRVO createExpertMyWorkMenu() {
+        MenuRVO menu = new MenuRVO();
+        menu.setMenuSn(0L);
+        menu.setMenuNm("내 업무");
+        menu.setMenuUrlAddr("/pp/ko/expert/ExpertMyWork");
+        menu.setDepLevel(1);
+        menu.setRootSn(0L);
+        menu.setPath("0");
+        menu.setMenuSeq(0);
+        menu.setLangSeCd("KOR");
+        menu.setUseYn("Y");
+        menu.setMenuExpsrYn("Y");
+        menu.setLgnYn("Y");
+        return menu;
     }
 }

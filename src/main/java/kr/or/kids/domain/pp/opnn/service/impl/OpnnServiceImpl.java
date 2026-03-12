@@ -1,17 +1,22 @@
 package kr.or.kids.domain.pp.opnn.service.impl;
 
 import java.math.BigInteger;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import kr.or.kids.domain.ca.common.file.service.FileService;
 import kr.or.kids.domain.ca.common.file.vo.FileGroupInsertReq;
+import kr.or.kids.domain.pp.atch.mapper.AtchMapper;
+import kr.or.kids.domain.pp.atch.vo.AtchPVO;
 import kr.or.kids.domain.pp.opnn.mapper.OpnnMapper;
 import kr.or.kids.domain.pp.opnn.service.OpnnService;
 import kr.or.kids.domain.pp.opnn.vo.OpnnPVO;
@@ -21,6 +26,9 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 import kr.or.kids.domain.pp.external.email.client.EmailClient;
 import kr.or.kids.domain.pp.external.email.vo.EmailPVO;
 import kr.or.kids.domain.pp.external.email.vo.EmailRVO;
+import kr.or.kids.domain.pp.form.service.FormService;
+import kr.or.kids.domain.pp.form.vo.FormPVO;
+import kr.or.kids.domain.pp.form.vo.FormRVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,9 +43,18 @@ public class OpnnServiceImpl implements OpnnService
     @Autowired
     private FileService fileService;
     
+    @Autowired
+    private AtchMapper atchMapper;    
+    
+    private final FormService formService;
+    
     private final EmailClient emailClient;
 
+    private final SpringTemplateEngine emailTemplateEngine;
+    
+
     @Override
+    @Transactional
     public ApiPrnDto insertOpnn(OpnnPVO opnnPVO) {
 
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
@@ -64,6 +81,7 @@ public class OpnnServiceImpl implements OpnnService
                 fgir.setTaskSeTrgtId("2");
                 fgir.setRgtrId(opnnPVO.getRgtrId());
                 fgir.setMdfrId(opnnPVO.getMdfrId());
+                
 
                 log.info("ApiPrnDto loaded from: {}", ApiPrnDto.class.getProtectionDomain().getCodeSource().getLocation());
 
@@ -95,20 +113,35 @@ public class OpnnServiceImpl implements OpnnService
 
             opnnMapper.insertOpnn(opnnPVO);
             
+            // 첨부파일그룹 데이터 후처리
+            if (StringUtils.isNotBlank(opnnPVO.getAtchFileGroupId())) {
+            	AtchPVO atchPVO = new AtchPVO();
+            	atchPVO.setAtchFileGroupId(opnnPVO.getAtchFileGroupId());
+            	atchPVO.setMenuSn(opnnPVO.getMenuSn());
+            	atchPVO.setTaskSeTrgtId(String.valueOf(nextOpnnSn));
+            	
+            	atchMapper.updateAtchGroup(atchPVO);
+            }
+            
             // 이메일 발송부분
-//            String filePath = "/Users/jiwoongsong/drugsafe/sources/to_be/pp-fe/formtest.html";
-//            Path path = Paths.get(filePath);
-//            String htmlContent = Files.readString(path);
-//            
-//            htmlContent.replace("{{regDt}}", opnnPVO.getRegDt());
-//            htmlContent.replace("{{pbptCn}}", opnnPVO.getPbptCn());
+
+            FormPVO formPVO = new FormPVO();
+            formPVO.setFormSn(BigInteger.valueOf(3));//3번 의견제안   
+            FormRVO formRVO = formService.getForm(formPVO);
+
+            // 변수 바인딩 후 처리
+            Context ctx = new Context();
+            String regDt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));  
+            ctx.setVariable("regDt", regDt);
+            ctx.setVariable("pbptCn", opnnPVO.getPbptCn());
             
             String emlTtl = "DUR 정보 의견 제안 등록 안내문";  // 제목
-            String emlCn = "한국의약품안전관리원 DUR 정보 의견제안 게시글이 등록되었습니다.\n 해당 의견제안에 대한 업무 처리는 관리자에서 확인해주세요."; // 본문
+            String emlCn = emailTemplateEngine.process(formRVO.getFormCn(), ctx); // HTML 본문
             String sndptyFlnm = "mail.drugsafe.or.kr"; // 메일 발송 계정
             String sndptyEmlAddr = "kids@drugsafe.or.kr"; // 발신자 메일주소
             String rcvrFlnm = "한국의약품안전관리원"; // 수신자 명
-            String rcvrEmlAddr = "kids_dur@drugsafe.kr"; // 수신자 메일주소
+//            String rcvrEmlAddr = "kids_dur@drugsafe.kr"; // 수신자 메일주소
+            String rcvrEmlAddr = "songjiwoong1020@gmail.com"; // 수신자 메일주소
 
             log.debug("emlTtl >>>>> " + emlTtl);
             log.debug("emlCn >>>>> " + emlCn);

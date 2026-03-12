@@ -2,9 +2,13 @@ package kr.or.kids.domain.pp.form.vo;
 
 import java.math.BigInteger;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Schema(name = "대국민포털_양식기본", description = "대국민포털_양식기본 Search Parameter VO")
+@Getter
+@Setter
 public class FormPVO
 {
     /**
@@ -24,12 +28,12 @@ public class FormPVO
      */
     @Schema(description = "양식명", type = "String")
     private String formNm;
-
+    
     /**
-     * 양식경로
+     * 양식내용
      */
-    @Schema(description = "양식경로", type = "String")
-    private String formPath;
+    @Schema(description = "양식내용", type = "String")
+    private String formCn;
 
     /**
      * 사용여부
@@ -60,86 +64,5 @@ public class FormPVO
      */
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
-
-    public BigInteger getFormSn()
-    {
-        return formSn;
-    }
-    public void setFormSn(BigInteger formSn)
-    {
-        this.formSn = formSn;
-    }
-    public String getTaskCd()
-    {
-        return taskCd;
-    }
-    public void setTaskCd(String taskCd)
-    {
-        this.taskCd = taskCd;
-    }
-    public String getFormNm()
-    {
-        return formNm;
-    }
-    public void setFormNm(String formNm)
-    {
-        this.formNm = formNm;
-    }
-    public String getFormPath()
-    {
-        return formPath;
-    }
-    public void setFormPath(String formPath)
-    {
-        this.formPath = formPath;
-    }
-    public String getUseYn()
-    {
-        return useYn;
-    }
-    public void setUseYn(String useYn)
-    {
-        this.useYn = useYn;
-    }
-    public String getRgtrId()
-    {
-        return rgtrId;
-    }
-    public void setRgtrId(String rgtrId)
-    {
-        this.rgtrId = rgtrId;
-    }
-    public String getRegDt()
-    {
-        return regDt;
-    }
-    public void setRegDt(String regDt)
-    {
-        this.regDt = regDt;
-    }
-
-    
-
-    
-    public String getMdfrId()
-    {
-        return mdfrId;
-    }
-    public void setMdfrId(String mdfrId)
-    {
-        this.mdfrId = mdfrId;
-    }
-    public String getMdfcnDt()
-    {
-        return mdfcnDt;
-    }
-    public void setMdfcnDt(String mdfcnDt)
-    {
-        this.mdfcnDt = mdfcnDt;
-    }
-
-    
-
-    
 
 }

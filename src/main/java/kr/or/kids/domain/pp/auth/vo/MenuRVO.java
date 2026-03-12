@@ -28,6 +28,12 @@ public class MenuRVO
     private String taskSeCd;
 
     /**
+     * 업무구분명
+     */
+    @Schema(description = "업무구분명", type = "String")
+    private String taskSeNm;
+
+    /**
      * 언어구분코드
      */
     @Schema(description = "언어구분코드", type = "String", example = "ko - 한국어, en - 영어")

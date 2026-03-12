@@ -15,7 +15,7 @@ public interface FormService
     public FormRVO getForm(FormPVO formPVO);
 
     /**
-     * 대국민포털_양식기본 정보 입력 
+     * 대국민포털_양식기본 정보 입력
      *
      * @param formPVO 입력할 대국민포털_양식기본 정보 
      * @return 입력된 건수 

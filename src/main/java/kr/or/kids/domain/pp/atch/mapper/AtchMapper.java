@@ -89,4 +89,12 @@ public interface AtchMapper
      * @return 삭제된 건수 
      */
     public int deleteAtchGroup(AtchDVO atchDVO);
+    
+    /**
+     * 첨부파일그룹 정보 수정
+     *
+     * @param atchPVO 수정용 파라메터 정보 
+     * @return 수정된 건수 
+     */
+    public int updateAtchGroup(AtchPVO atchPVO);    
 }
