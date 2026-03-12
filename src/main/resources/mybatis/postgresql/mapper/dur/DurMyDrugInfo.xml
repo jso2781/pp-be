@@ -32,7 +32,8 @@
                   FROM us_dsadba.drc_ingr
                  WHERE lower(ingr_eng_name) LIKE '%' || lower(#{searchValue}) || '%'
                    AND ori_material_yn = 'Y'
-				   AND material_ingr_gb = 'M') din
+				   AND material_ingr_gb = 'M'
+                   AND drug_cosmetic_gb = 'D') din
     INNER JOIN us_dsadba.drb_item_ingr dii ON din.ingr_code = dii.material_code
     INNER JOIN us_dsadba.sp_drug_standard_code st ON dii.item_seq = st.item_seq
     INNER JOIN us_dsadba.drb_item dit ON dit.item_seq = st.item_seq
@@ -51,6 +52,7 @@
          WHERE lower(ingr_eng_name) LIKE '%' || lower(#{searchValue}) || '%'
            AND ori_material_yn = 'Y'
            AND material_ingr_gb = 'M'
+           AND drug_cosmetic_gb = 'D'
          ORDER BY ingr_code, ingr_eng_name
     </select>
 
