@@ -23,6 +23,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.StringTemplateResolver;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -178,4 +181,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //
 //        return templateResolver;
 //    }
+    
+    @Bean("emailTemplateEngine")
+    SpringTemplateEngine emailTemplateEngine() {
+    	
+	  SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+	  
+	  StringTemplateResolver resolver = new StringTemplateResolver();
+	  resolver.setTemplateMode(TemplateMode.HTML);
+	  templateEngine.setTemplateResolver(resolver);
+	  
+	  return templateEngine;
+	}
 }

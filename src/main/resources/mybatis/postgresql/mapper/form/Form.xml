@@ -5,20 +5,12 @@
     <select id="getForm" parameterType="FormPVO" resultType="FormRVO" >
         /* 대국민포털_양식기본 조회 (FormMapper.getForm) */
         SELECT
-             form_sn
-            ,task_cd
-            ,form_nm
-            ,form_path
-            ,use_yn
-            ,rgtr_id
-            ,reg_dt
-
-            ,mdfr_id
-            ,mdfcn_dt
-
+            form_cn
         FROM kids_own.TB_PP_M_FORM
         WHERE 1=1
         AND form_sn = #{formSn}
+        AND use_yn = 'Y'
+        LIMIT 1
     </select>
 
     <insert id="insertForm" parameterType="FormPVO">
