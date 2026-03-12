@@ -1,5 +1,6 @@
 package kr.or.kids.domain.pp.exprt.vo;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -70,4 +71,10 @@ public class ExprtApplyIVO
      */
     @Schema(description = "전문가번호", type = "String")
     private String exprtNo;
+    
+    /**
+     * 메뉴일련번호(첨부파일 업로드시 파일정보 입력시 사용)
+     */
+    @Schema(description = "메뉴일련번호(첨부파일 업로드시 파일정보 입력시 사용)", type = "BigInteger")
+    private String menuSn;    
 }

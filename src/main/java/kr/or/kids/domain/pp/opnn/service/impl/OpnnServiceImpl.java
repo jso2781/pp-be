@@ -1,26 +1,27 @@
 package kr.or.kids.domain.pp.opnn.service.impl;
 
 import java.math.BigInteger;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.kids.domain.ca.common.file.service.FileService;
 import kr.or.kids.domain.ca.common.file.vo.FileGroupInsertReq;
+import kr.or.kids.domain.pp.atch.mapper.AtchMapper;
+import kr.or.kids.domain.pp.atch.vo.AtchPVO;
+import kr.or.kids.domain.pp.external.email.client.EmailClient;
+import kr.or.kids.domain.pp.external.email.vo.EmailPVO;
+import kr.or.kids.domain.pp.external.email.vo.EmailRVO;
 import kr.or.kids.domain.pp.opnn.mapper.OpnnMapper;
 import kr.or.kids.domain.pp.opnn.service.OpnnService;
 import kr.or.kids.domain.pp.opnn.vo.OpnnPVO;
 import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
-import kr.or.kids.domain.pp.external.email.client.EmailClient;
-import kr.or.kids.domain.pp.external.email.vo.EmailPVO;
-import kr.or.kids.domain.pp.external.email.vo.EmailRVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,9 +36,13 @@ public class OpnnServiceImpl implements OpnnService
     @Autowired
     private FileService fileService;
     
+    @Autowired
+    private AtchMapper atchMapper;    
+    
     private final EmailClient emailClient;
 
     @Override
+    @Transactional
     public ApiPrnDto insertOpnn(OpnnPVO opnnPVO) {
 
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
@@ -64,6 +69,7 @@ public class OpnnServiceImpl implements OpnnService
                 fgir.setTaskSeTrgtId("2");
                 fgir.setRgtrId(opnnPVO.getRgtrId());
                 fgir.setMdfrId(opnnPVO.getMdfrId());
+                
 
                 log.info("ApiPrnDto loaded from: {}", ApiPrnDto.class.getProtectionDomain().getCodeSource().getLocation());
 
@@ -94,6 +100,16 @@ public class OpnnServiceImpl implements OpnnService
             opnnPVO.setOpnnSn(BigInteger.valueOf(nextOpnnSn));
 
             opnnMapper.insertOpnn(opnnPVO);
+            
+            // 첨부파일그룹 데이터 후처리
+            if (StringUtils.isNotBlank(opnnPVO.getAtchFileGroupId())) {
+            	AtchPVO atchPVO = new AtchPVO();
+            	atchPVO.setAtchFileGroupId(opnnPVO.getAtchFileGroupId());
+            	atchPVO.setMenuSn(opnnPVO.getMenuSn());
+            	atchPVO.setTaskSeTrgtId(String.valueOf(nextOpnnSn));
+            	
+            	atchMapper.updateAtchGroup(atchPVO);
+            }
             
             // 이메일 발송부분
 //            String filePath = "/Users/jiwoongsong/drugsafe/sources/to_be/pp-fe/formtest.html";

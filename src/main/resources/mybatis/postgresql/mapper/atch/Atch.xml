@@ -252,5 +252,13 @@
         WHERE 1=1
         AND atch_file_group_id = #{atchFileGroupId}
     </delete>
+    
+    <update id="updateAtchGroup">
+        /* 공통_첨부파일기본 수정 (AtchMapper.updateAtchGroup) */
+     UPDATE kids_own.tb_ca_e_file_group_trsm
+        SET task_se_trgt_id = #{taskSeTrgtId}
+          , menu_sn = #{menuSn} 
+      WHERE atch_file_group_id = #{atchFileGroupId}
+    </update>    
 
 </mapper>

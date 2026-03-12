@@ -120,4 +120,9 @@ public class AtchPVO
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
 
+    /**
+     * 메뉴일련번호
+     */
+    @Schema(description = "메뉴일련번호", type = "BigInteger")
+    private BigInteger menuSn;    
 }

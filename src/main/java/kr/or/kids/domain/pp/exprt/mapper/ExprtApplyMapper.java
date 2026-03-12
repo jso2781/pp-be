@@ -1,5 +1,6 @@
 package kr.or.kids.domain.pp.exprt.mapper;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -26,6 +27,14 @@ public interface ExprtApplyMapper
      */    
     public List<ExprtApplyRVO> selectInstTaskSystemByBrno(String brno);    
  
+    /**
+     * 대국민포털_전문가회원전환신청관리 메뉴일련번호 조회
+     *
+     * @param menuUrl 메뉴URL
+     * @return 메뉴일련번호 
+     */    
+    public BigInteger selectMenuSn(String menuUrl);
+    
     /**
      * 대국민포털_전문가회원전환신청관리 이메일 중복검사 
      *

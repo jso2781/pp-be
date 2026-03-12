@@ -1,19 +1,21 @@
 package kr.or.kids.domain.pp.exprt.service.impl;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import kr.or.kids.domain.ca.common.file.service.FileService;
-import kr.or.kids.domain.ca.common.file.vo.FileGroupInsertReq;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.kids.domain.ca.common.file.service.FileService;
+import kr.or.kids.domain.ca.common.file.vo.FileGroupInsertReq;
+import kr.or.kids.domain.pp.atch.mapper.AtchMapper;
+import kr.or.kids.domain.pp.atch.vo.AtchPVO;
 import kr.or.kids.domain.pp.exprt.mapper.ExprtApplyMapper;
 import kr.or.kids.domain.pp.exprt.mapper.ExprtTaskMapper;
 import kr.or.kids.domain.pp.exprt.service.ExprtApplyService;
@@ -26,6 +28,7 @@ import kr.or.kids.global.exception.ApplicationException;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +37,7 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
     private final ExprtApplyMapper exprtApplyMapper;
     private final ExprtTaskMapper exprtTaskMapper;
     private final FileService fileService;
+    private final AtchMapper atchMapper;
 
     @Override
     public ApiPrnDto existsInstByBrno(ExprtApplyIVO exprtApplyIVO) {
@@ -155,6 +159,18 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
         int step3Result = exprtApplyMapper.insertExprtTask(exprtApplyIVO);        
         if (step3Result == 0) {
             throw new ApplicationException("api.error.default");
+        }
+        
+        // 첨부파일그룹 데이터 후처리
+        if (StringUtils.isNotBlank(atchFileGroupId)) {
+        	BigInteger menuSn = exprtApplyMapper.selectMenuSn(exprtApplyIVO.getMenuSn());
+        	
+        	AtchPVO atchPVO = new AtchPVO();
+        	atchPVO.setAtchFileGroupId(atchFileGroupId);
+        	atchPVO.setMenuSn(menuSn);
+        	atchPVO.setTaskSeTrgtId(exprtApplyIVO.getExprtNo());
+        	
+        	atchMapper.updateAtchGroup(atchPVO);
         }
         
         data.put("result", "SUCCESS");
