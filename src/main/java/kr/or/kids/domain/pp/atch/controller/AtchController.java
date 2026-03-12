@@ -96,7 +96,7 @@ public class AtchController
 
     @Operation(summary = "공통_첨부파일기본 첨부파일 다운로드(GET)", description = "공통_첨부파일기본 첨부파일을 다운로드한다.(GET)")
     @GetMapping(value="/downloadParam")
-    public ResponseEntity<Resource> downloadParam(@RequestParam FileDataReqVO fdrv)
+    public ResponseEntity<Resource> downloadParam(FileDataReqVO fdrv)
     {
         FileDownResVO downloadParam = fileService.downloadFile(fdrv);
 
