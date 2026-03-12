@@ -42,13 +42,15 @@ public class SecurityConfig {
         .authorizeHttpRequests(requests -> requests
             // Any-ID 정적 리소스/설정
             .antMatchers("/anyid/**", "/config/**").permitAll()
+            // Any-ID 중계 API(esign, pid, vrs) - AnyID SDK가 호출되는 경로
+            .antMatchers("/esign/**", "/pid/**", "/vrs/**").permitAll()
             // Auth API
-            .antMatchers(HttpMethod.POST, "/api/auth/anyid/login").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/auth/me").permitAll()
+            .antMatchers(HttpMethod.POST, "/api/pp/auth/anyid/login").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/pp/auth/me").permitAll()
             .antMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
-            .antMatchers("/api/auth/login", "/api/auth/refresh").permitAll()
-            .antMatchers("/api/auth/logout", "/api/auth/extend").authenticated()
+            .antMatchers("/api/pp/auth/login", "/api/pp/auth/refresh").permitAll()
+            .antMatchers("/api/pp/auth/logout", "/api/pp/auth/extend").authenticated()
             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
             .anyRequest().permitAll()
 //            .anyRequest().authenticated()
