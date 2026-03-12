@@ -123,4 +123,24 @@
         AND task_cd = #{taskCd}
     </delete>
 
+    <select id="getFileIdFromTaskCd" parameterType="FileIdFromTaskCdPVO" resultType="FileIdFromTaskCdRVO" >
+        /* 업무코드로부터 업무별 업로드된 파일의 첨부파일ID를 가져오기(TaskCdMapper.getFileIdFromTaskCd) */
+        SELECT
+            ft.atch_file_id
+        FROM kids_own.tb_ca_e_file_trsm ft
+        INNER JOIN (
+            SELECT
+                tc.task_cd,
+                tc.task_cd_nm,
+                max(f.atch_file_id) atch_file_id
+            FROM kids_own.tb_pp_m_task_cd tc
+            INNER JOIN kids_own.tb_pp_m_file f
+                ON tc.up_task_cd = f.file_type_cd
+                AND tc.task_cd = f.file_knd_cd 
+            WHERE tc.up_task_cd in('DUR', 'GNL')
+            AND tc.task_cd = #{taskCd}
+            GROUP BY tc.task_cd, tc.task_cd_nm
+        ) tf
+            ON ft.atch_file_id = tf.atch_file_id
+    </select>
 </mapper>

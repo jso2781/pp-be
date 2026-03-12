@@ -2,6 +2,8 @@ package kr.or.kids.domain.pp.task.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import kr.or.kids.domain.pp.task.vo.FileIdFromTaskCdPVO;
+import kr.or.kids.domain.pp.task.vo.FileIdFromTaskCdRVO;
 import kr.or.kids.domain.pp.task.vo.TaskCdDVO;
 import kr.or.kids.domain.pp.task.vo.TaskCdPVO;
 import kr.or.kids.domain.pp.task.vo.TaskCdRVO;
@@ -51,4 +53,11 @@ public interface TaskCdMapper
      * @return 삭제된 건수 
      */
     public int deleteTaskCd(TaskCdDVO taskCdDVO);
+
+    /**
+     * 업무코드로부터 업무별 업로드된 파일의 첨부파일ID를 가져오기
+     * @param param
+     * @return
+     */
+    public FileIdFromTaskCdRVO getFileIdFromTaskCd(FileIdFromTaskCdPVO param);
 }

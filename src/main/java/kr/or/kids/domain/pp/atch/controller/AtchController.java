@@ -32,6 +32,7 @@ import kr.or.kids.domain.ca.common.file.vo.FileDownResVO;
 import kr.or.kids.domain.pp.atch.service.AtchService;
 import kr.or.kids.domain.pp.atch.vo.AtchPVO;
 import kr.or.kids.domain.pp.atch.vo.AtchRVO;
+import kr.or.kids.domain.pp.task.vo.FileIdFromTaskCdPVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "AtchController", description = "공통_첨부파일기본 관리")
@@ -96,9 +97,33 @@ public class AtchController
 
     @Operation(summary = "공통_첨부파일기본 첨부파일 다운로드(GET)", description = "공통_첨부파일기본 첨부파일을 다운로드한다.(GET)")
     @GetMapping(value="/downloadParam")
-    public ResponseEntity<Resource> downloadParam(@RequestParam FileDataReqVO fdrv)
+    public ResponseEntity<Resource> downloadParam(FileDataReqVO fdrv)
     {
         FileDownResVO downloadParam = fileService.downloadFile(fdrv);
+
+        Resource resource = downloadParam.getResource();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentDisposition(
+            ContentDisposition.attachment()
+                .filename(downloadParam.getFilename(), StandardCharsets.UTF_8)
+                .build()
+        );
+        headers.add(HttpHeaders.CONTENT_TYPE, downloadParam.getContentType());
+        headers.add(HttpHeaders.CONTENT_LENGTH, String.valueOf(downloadParam.getContentLength()));
+
+        log.info("downloadParam File download started: {}, size: {} bytes", downloadParam.getFilename(), downloadParam.getContentLength());
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(resource);
+    }
+
+    @Operation(summary = "업무코드로부터 업무별 업로드된 파일을 다운로드(GET)", description = "업무코드로부터 업무별 업로드된 파일을 다운로드한다.(GET)")
+    @GetMapping(value="/downloadFromTaskCd")
+    public ResponseEntity<Resource> downloadFromTaskCd(FileIdFromTaskCdPVO fdrv)
+    {
+        FileDownResVO downloadParam = atchService.downloadFromTaskCd(fdrv);
 
         Resource resource = downloadParam.getResource();
 

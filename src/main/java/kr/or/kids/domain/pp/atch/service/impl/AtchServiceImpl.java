@@ -3,9 +3,6 @@ package kr.or.kids.domain.pp.atch.service.impl;
 import static kr.or.kids.global.system.common.ApiResultCode.SUCCESS;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -15,21 +12,23 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.kids.domain.ca.common.file.service.FileService;
+import kr.or.kids.domain.ca.common.file.vo.FileDataReqVO;
+import kr.or.kids.domain.ca.common.file.vo.FileDownResVO;
 import kr.or.kids.domain.pp.atch.mapper.AtchMapper;
 import kr.or.kids.domain.pp.atch.service.AtchService;
 import kr.or.kids.domain.pp.atch.vo.AtchDVO;
-import kr.or.kids.domain.pp.atch.vo.AtchDWVO;
 import kr.or.kids.domain.pp.atch.vo.AtchPVO;
 import kr.or.kids.domain.pp.atch.vo.AtchRVO;
+import kr.or.kids.domain.pp.task.mapper.TaskCdMapper;
+import kr.or.kids.domain.pp.task.vo.FileIdFromTaskCdPVO;
+import kr.or.kids.domain.pp.task.vo.FileIdFromTaskCdRVO;
 import kr.or.kids.global.config.FileProperties;
-import kr.or.kids.global.exception.ApplicationException;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 import kr.or.kids.global.util.DrugsafeUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +41,13 @@ public class AtchServiceImpl implements AtchService
     private FileProperties fileProperties;
 
     @Autowired
+    private FileService fileService;
+
+    @Autowired
     private AtchMapper atchMapper;
+
+    @Autowired
+    private TaskCdMapper taskCdMapper;
 
     @Value("${file.storePath}")
     private String fileStorePath;
@@ -299,5 +304,15 @@ public class AtchServiceImpl implements AtchService
         log.info("savePath(before return) = {}", savePath);
 
         return savePath;
+    }
+
+    @Override
+    public FileDownResVO downloadFromTaskCd(FileIdFromTaskCdPVO param) {
+        FileIdFromTaskCdRVO resultVo = taskCdMapper.getFileIdFromTaskCd(param);
+        
+        FileDataReqVO fdrv = new FileDataReqVO();
+        fdrv.setAtchFileId(resultVo.getAtchFileId());
+
+        return fileService.downloadFile(fdrv);
     }
 }

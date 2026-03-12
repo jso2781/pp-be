@@ -5,10 +5,11 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.kids.domain.ca.common.file.vo.FileDownResVO;
 import kr.or.kids.domain.pp.atch.vo.AtchDVO;
-import kr.or.kids.domain.pp.atch.vo.AtchDWVO;
 import kr.or.kids.domain.pp.atch.vo.AtchPVO;
 import kr.or.kids.domain.pp.atch.vo.AtchRVO;
+import kr.or.kids.domain.pp.task.vo.FileIdFromTaskCdPVO;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
 public interface AtchService
@@ -71,4 +72,11 @@ public interface AtchService
      * @return 업로드후 응답결과 객체 반환
      */
     public ApiPrnDto uploadFile(HashMap<String, Object> params, MultipartFile[] uploadFiles);
+
+    /**
+     * 업무코드로부터 업무별 업로드된 파일의 첨부파일ID를 가져오기
+     * @param param 업무별 업로드된 파일의 첨부파일ID를 가져올때 필요한 업무코드
+     * @return 업무별 업로드된 파일의 첨부파일ID
+     */
+    public FileDownResVO downloadFromTaskCd(FileIdFromTaskCdPVO param);
 }
