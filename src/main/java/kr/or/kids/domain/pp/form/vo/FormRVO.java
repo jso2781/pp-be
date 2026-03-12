@@ -35,12 +35,6 @@ public class FormRVO
     private String formCn;
 
     /**
-     * 양식경로
-     */
-    @Schema(description = "양식경로", type = "String")
-    private String formPath;
-
-    /**
      * 사용여부
      */
     @Schema(description = "사용여부", type = "String")
