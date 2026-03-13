@@ -2,75 +2,116 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.kids.domain.pp.dep.mapper.OrgchtMapper">
 
-    <select id="getOrgcht" parameterType="OrgchtPVO" resultType="OrgchtRVO" >
-        /* 대국민포털_KIDS조직도기본 조회 (OrgchtMapper.getOrgcht) */
+    <select id="selectOrgchtTree">
+        /* 조직도 부서 트리 조회 (OrgchtMapper.selectOrgchtTree) */
+        WITH RECURSIVE root_dept AS (
+            SELECT
+                CASE
+                    WHEN (
+                        SELECT COUNT(*)
+                        FROM kids_own.tb_pp_t_dept_info
+                        WHERE up_dept_no IS NULL
+                    ) = 1
+                        THEN (
+                            SELECT MAX(dept_no)
+                            FROM kids_own.tb_pp_t_dept_info
+                            WHERE up_dept_no IS NULL
+                        )
+                    ELSE 'B552894'
+                END AS dept_no
+        ),
+        dept_tree AS (
+            SELECT
+                 d.dept_no
+                ,CASE
+                    WHEN lower(COALESCE(#{langSeCd}, 'ko')) = 'en'
+                        THEN COALESCE(NULLIF(d.dept_eng_nm, ''), d.dept_nm)
+                    ELSE d.dept_nm
+                 END AS dept_nm
+                ,d.up_dept_no
+                ,d.dept_seq
+                ,d.dept_no AS top_dept_no
+                ,CASE
+                    WHEN lower(COALESCE(#{langSeCd}, 'ko')) = 'en'
+                        THEN COALESCE(NULLIF(d.dept_eng_nm, ''), d.dept_nm)
+                    ELSE d.dept_nm
+                 END AS top_dept_nm
+                ,1 AS dept_level
+                ,LPAD(COALESCE(d.dept_seq::text, '99999'), 5, '0') || '_' || d.dept_no AS sort_key
+            FROM kids_own.tb_pp_t_dept_info d
+            JOIN root_dept r
+              ON d.up_dept_no = r.dept_no
+            UNION ALL
+            SELECT
+                 c.dept_no
+                ,CASE
+                    WHEN lower(COALESCE(#{langSeCd}, 'ko')) = 'en'
+                        THEN COALESCE(NULLIF(c.dept_eng_nm, ''), c.dept_nm)
+                    ELSE c.dept_nm
+                 END AS dept_nm
+                ,c.up_dept_no
+                ,c.dept_seq
+                ,p.top_dept_no
+                ,p.top_dept_nm
+                ,p.dept_level + 1 AS dept_level
+                ,p.sort_key || '>' || LPAD(COALESCE(c.dept_seq::text, '99999'), 5, '0') || '_' || c.dept_no AS sort_key
+            FROM kids_own.tb_pp_t_dept_info c
+            JOIN dept_tree p
+              ON c.up_dept_no = p.dept_no
+        )
         SELECT
-             emp_no
+             top_dept_no
+            ,top_dept_nm
             ,dept_no
             ,dept_nm
-            ,emp_nm
-        FROM kids_own.TB_PP_M_ORGCHT
-        WHERE 1=1
-        AND emp_no = #{empNo}
+            ,up_dept_no
+            ,dept_level
+            ,dept_seq
+        FROM dept_tree
+        ORDER BY sort_key
     </select>
 
-    <insert id="insertOrgcht" parameterType="OrgchtPVO">
-        /* 대국민포털_KIDS조직도기본 입력 (OrgchtMapper.insertOrgcht) */
-        INSERT INTO kids_own.TB_PP_M_ORGCHT
-        (
-             emp_no
-            ,dept_no
-            ,dept_nm
-            ,emp_nm
+    <select id="selectOrgchtEmployees">
+        /* 조직도 직원 조회 (OrgchtMapper.selectOrgchtEmployees) */
+        WITH RECURSIVE sub_dept AS (
+            SELECT
+                 d.dept_no
+                ,d.dept_nm
+                ,d.up_dept_no
+                ,d.dept_seq
+                ,LPAD(COALESCE(d.dept_seq::text, '99999'), 5, '0') || '_' || d.dept_no AS sort_key
+            FROM kids_own.tb_pp_t_dept_info d
+            WHERE d.dept_no = #{deptNo}
+            UNION ALL
+            SELECT
+                 c.dept_no
+                ,c.dept_nm
+                ,c.up_dept_no
+                ,c.dept_seq
+                ,p.sort_key || '>' || LPAD(COALESCE(c.dept_seq::text, '99999'), 5, '0') || '_' || c.dept_no AS sort_key
+            FROM kids_own.tb_pp_t_dept_info c
+            JOIN sub_dept p
+              ON c.up_dept_no = p.dept_no
         )
-        VALUES
-        (
-             #{empNo}
-            ,#{deptNo}
-            ,#{deptNm}
-            ,#{empNm}
-        )
-    </insert>
-
-    <update id="updateOrgcht" parameterType="OrgchtPVO">
-        /* 대국민포털_KIDS조직도기본 수정 (OrgchtMapper.updateOrgcht) */
-        UPDATE kids_own.TB_PP_M_ORGCHT
-        SET
-             dept_no = coalesce(#{deptNo}, dept_no)
-            ,dept_nm = coalesce(#{deptNm}, dept_nm)
-            ,emp_nm = coalesce(#{empNm}, emp_nm)
-        WHERE 1=1
-        AND emp_no = #{empNo}
-    </update>
-
-    <insert id="saveOrgcht" parameterType="OrgchtPVO">
-        /* 대국민포털_KIDS조직도기본 저장 (OrgchtMapper.insertOrgcht) */
-        INSERT INTO kids_own.TB_PP_M_ORGCHT
-        (
-             emp_no
-            ,dept_no
-            ,dept_nm
-            ,emp_nm
-        )
-        VALUES
-        (
-             #{empNo}
-            ,#{deptNo}
-            ,#{deptNm}
-            ,#{empNm}
-        )
-        ON CONFLICT(emp_no)
-        DO UPDATE SET
-             dept_no = coalesce(excluded.dept_no, kids_own.TB_PP_M_ORGCHT.dept_no)
-            ,dept_nm = coalesce(excluded.dept_nm, kids_own.TB_PP_M_ORGCHT.dept_nm)
-            ,emp_nm = coalesce(excluded.emp_nm, kids_own.TB_PP_M_ORGCHT.emp_nm)
-    </insert>
-
-    <delete id="deleteOrgcht" parameterType="OrgchtDVO">
-        /* 대국민포털_KIDS조직도기본 삭제 (OrgchtMapper.deleteOrgcht) */
-        DELETE FROM kids_own.TB_PP_M_ORGCHT
-        WHERE 1=1
-        AND emp_no = #{empNo}
-    </delete>
+        SELECT
+             e.emp_no
+            ,e.emp_nm
+            ,s.dept_no
+            ,s.dept_nm
+            ,e.jbgd_nm
+            ,e.jbttl_nm
+            ,COALESCE(NULLIF(e.jbttl_nm, ''), e.jbgd_nm) AS position_nm
+            ,e.encpt_emp_telno
+            ,e.encpt_emp_eml_nm
+            ,e.main_task_cn
+            ,e.emp_seq
+        FROM sub_dept s
+        JOIN kids_own.tb_pp_t_emp_info e
+          ON e.dept_no = s.dept_no
+        ORDER BY
+             s.sort_key
+            ,COALESCE(e.emp_seq, 99999)
+            ,e.emp_no
+    </select>
 
 </mapper>
