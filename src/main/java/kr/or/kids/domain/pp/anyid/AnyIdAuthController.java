@@ -1,17 +1,11 @@
 package kr.or.kids.domain.pp.anyid;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginRequest;
-import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginResponse;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,6 +18,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginRequest;
+import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginResponse;
+import kr.or.kids.global.system.common.ApiResultCode;
+import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
 @RestController
 @RequestMapping("/api/pp/auth")
@@ -117,4 +122,9 @@ public class AnyIdAuthController {
         SecurityContextHolder.clearContext();
         return ResponseEntity.ok(java.util.Map.of("status", "ok"));
     }
+
+    // [제거] generateTx() 엔드포인트 삭제
+    // SSO 어댑터(/oidc/redirect)가 KMS 서버에서 tx를 발급하여
+    // loginPage.uri?tx=XXX 형태로 LoginMethod 페이지에 전달합니다.
+    // UUID로 직접 생성하던 방식은 KMS 미등록 값이라 extractInfo 검증 실패하므로 사용 불가.
 }

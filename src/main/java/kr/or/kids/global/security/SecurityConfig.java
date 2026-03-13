@@ -42,8 +42,10 @@ public class SecurityConfig {
         .authorizeHttpRequests(requests -> requests
             // Any-ID 정적 리소스/설정
             .antMatchers("/anyid/**", "/config/**").permitAll()
-            // Any-ID 중계 API(esign, pid, vrs) - AnyID SDK가 호출되는 경로
+            // Any-ID 중계 API(esign, pid, vrs) - AnyID SDK가 호출하는 경로
             .antMatchers("/esign/**", "/pid/**", "/vrs/**").permitAll()
+            // SSO 어댑터 서블릿 경로 - 인증 없이 접근 허용
+            .antMatchers("/oidc/**").permitAll()
             // Auth API
             .antMatchers(HttpMethod.POST, "/api/pp/auth/anyid/login").permitAll()
             .antMatchers(HttpMethod.GET, "/api/pp/auth/me").permitAll()
