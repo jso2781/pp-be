@@ -136,7 +136,7 @@ public class AtchController
         headers.add(HttpHeaders.CONTENT_TYPE, downloadParam.getContentType());
         headers.add(HttpHeaders.CONTENT_LENGTH, String.valueOf(downloadParam.getContentLength()));
 
-        log.info("downloadParam File download started: {}, size: {} bytes", downloadParam.getFilename(), downloadParam.getContentLength());
+        log.info("downloadFromTaskCd File download started: {}, size: {} bytes", downloadParam.getFilename(), downloadParam.getContentLength());
 
         return ResponseEntity.ok()
                 .headers(headers)
