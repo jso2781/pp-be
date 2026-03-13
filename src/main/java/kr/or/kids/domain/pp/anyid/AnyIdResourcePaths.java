@@ -34,7 +34,7 @@ public class AnyIdResourcePaths {
                 return kdistApiJsonPath.toAbsolutePath().toString();
             }
             try {
-                kdistApiJsonPath = copyToTempFile("anyid/WEB-INF/config/kdist/kdist-api.json", "kdist-api", ".json");
+                kdistApiJsonPath = copyToTempFile("config/kdist/kdist-api.json", "kdist-api", ".json");
             } catch (IOException e) {
                 throw new IllegalStateException("Failed to prepare Any-ID kdist-api.json temp file", e);
             }
@@ -52,7 +52,7 @@ public class AnyIdResourcePaths {
                 return esignProviderKeyJsonPath.toAbsolutePath().toString();
             }
             try {
-                esignProviderKeyJsonPath = copyToTempFile("anyid/WEB-INF/config/esign/provider-key.json", "provider-key", ".json");
+                esignProviderKeyJsonPath = copyToTempFile("config/esign/provider-key.json", "provider-key", ".json");
             } catch (IOException e) {
                 throw new IllegalStateException("Failed to prepare Any-ID provider-key.json temp file", e);
             }
@@ -70,7 +70,7 @@ public class AnyIdResourcePaths {
                 return pidApiJsonPath.toAbsolutePath().toString();
             }
             try {
-                pidApiJsonPath = copyToTempFile("anyid/resources/config/pid/pid_api.json", "pid_api", ".json");
+                pidApiJsonPath = copyToTempFile("config/pid/pid_api.json", "pid_api", ".json");
             } catch (IOException e) {
                 throw new IllegalStateException("Failed to prepare Any-ID pid_api.json temp file", e);
             }
