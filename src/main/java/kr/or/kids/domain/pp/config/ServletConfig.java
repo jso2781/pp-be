@@ -14,6 +14,7 @@ import kr.or.anyid.adaptor.web.servlet.LoginPageServlet;
 import kr.or.anyid.adaptor.web.servlet.LogoutServlet;
 import kr.or.anyid.adaptor.web.servlet.ReAuthLevelServlet;
 import kr.or.anyid.adaptor.web.servlet.RedirectServlet;
+import kr.or.anyid.adaptor.web.servlet.ScheduleServlet;
 import kr.or.anyid.adaptor.web.servlet.SsoLoginServlet;
 import kr.or.anyid.adaptor.web.servlet.SsoLogoutServlet;
 import kr.or.anyid.adaptor.web.servlet.UserCheckServlet;
@@ -32,7 +33,7 @@ public class ServletConfig {
         } catch (Exception e) {
             throw new RuntimeException(AdaptorErrorCode.CALLBACK_INITIALIZATION_FAILED.getMessage(), e);
         }
-        PropertiesManager.adaptorInitFlag = true;
+        PropertiesManager.adaptorInitFlag = true;  // ScheduleManager 동작에 필수
     }
 
     @Bean
@@ -95,6 +96,15 @@ public class ServletConfig {
     public ServletRegistrationBean<UserCheckServlet> getUserCheckServletRegistrationBean() {
         ServletRegistrationBean<UserCheckServlet> registrationBean = new ServletRegistrationBean<>(new UserCheckServlet());
         registrationBean.addUrlMappings("/oidc/userCheck");
+        return registrationBean;
+    }
+
+    // ScheduleManager가 5초마다 /oidc/schedule 로 GET 요청
+    // 미등록 시 404 반복 → "Adaptor Schedules Max Try Excess" 에러
+    @Bean
+    public ServletRegistrationBean<ScheduleServlet> getScheduleServletRegistrationBean() {
+        ServletRegistrationBean<ScheduleServlet> registrationBean = new ServletRegistrationBean<>(new ScheduleServlet());
+        registrationBean.addUrlMappings("/oidc/schedule");
         return registrationBean;
     }
 }
