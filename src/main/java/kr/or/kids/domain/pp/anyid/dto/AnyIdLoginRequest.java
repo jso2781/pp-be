@@ -4,5 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record AnyIdLoginRequest(
         @JsonProperty("ssob") String ssob,
-        @JsonProperty("tag") String tag
+        @JsonProperty("tag") String tag,
+        @JsonProperty("ci") String ci
 ) {}

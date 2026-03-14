@@ -2,8 +2,10 @@ package kr.or.kids.domain.pp.anyid;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginRequest;
 import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginResponse;
+import kr.or.kids.domain.pp.anyid.vo.AnyIdLoginResponseRVO;
+import kr.or.kids.domain.pp.mbr.service.MbrInfoService;
+import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
+import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
@@ -39,9 +45,11 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 public class AnyIdAuthController {
 
     private final AnyIdAuthService anyIdAuthService;
+    private final MbrInfoService mbrInfoService;
 
-    public AnyIdAuthController(AnyIdAuthService anyIdAuthService) {
+    public AnyIdAuthController(AnyIdAuthService anyIdAuthService, MbrInfoService mbrInfoService) {
         this.anyIdAuthService = anyIdAuthService;
+        this.mbrInfoService = mbrInfoService;
     }
 
     /**
@@ -59,22 +67,42 @@ public class AnyIdAuthController {
             @ApiResponse(responseCode = "401", description = "ssob 검증 실패(위변조/만료 등)"),
             @ApiResponse(responseCode = "500", description = "SDK 처리 오류")
     })
-    public ResponseEntity<AnyIdLoginResponse> anyidLogin(
-            @RequestBody AnyIdLoginRequest req,
-            HttpServletRequest httpRequest
-    ) {
-        AnyIdLoginResponse extracted = anyIdAuthService.verifyAndExtract(req);
+    public ResponseEntity<ApiPrnDto> anyidLogin(@RequestBody AnyIdLoginRequest req, HttpServletRequest httpRequest, HttpServletResponse response){
+        // ApiPrnDto apiPrnDto = anyIdAuthService.verifyAndExtract(req);
+        String ci = req.ci();
+        ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+
+//        HashMap<String, Object> bizData = apiPrnDto.getData();
+//        AnyIdLoginResponseRVO resultVo = (AnyIdLoginResponseRVO)bizData.get("result");
 
         // 최소 식별키는 CI (연계정보) 사용 권장 (가이드에서 CI 정의) 
         // - CI는 본인확인기관에서 본인을 식별하기 위해 생성한 연계정보
         // - ssob 내 제공 항목(인증수단별 제공항목) 중 ci가 존재
-        String principal = extracted.ci() != null ? extracted.ci() : (extracted.name() != null ? extracted.name() : "anyid-user");
+//        String principal = resultVo.getCi() != null ? resultVo.getCi() : (resultVo.getName() != null ? resultVo.getName() : "anyid-user");
 
-        Authentication auth = new UsernamePasswordAuthenticationToken(
-                principal,
-                "N/A",
-                List.of(new SimpleGrantedAuthority("ROLE_USER"))
-        );
+        // CI 정보를 기준으로 회원 정보 조회
+        MbrInfoPVO mbrInfoPVO = new MbrInfoPVO();
+        mbrInfoPVO.setLinkInfoIdntfId(ci);
+
+        MbrInfoRVO resultVo = mbrInfoService.getMbrInfo(mbrInfoPVO);
+
+        Authentication auth = null;
+        HashMap<String, Object> bizData = new HashMap<String, Object>();
+
+        /*
+         * 기존 회원 정보가 존재하면,
+         * 회원아이디로 기준으로 인증 객체(Authentication)를 생성함.
+         */
+        if(resultVo != null){
+            auth = new UsernamePasswordAuthenticationToken(resultVo.getMbrId(), "N/A", List.of(new SimpleGrantedAuthority("ROLE_USER")));
+            bizData.put("result", "LoggedIn");
+        }
+        // AnyId CI 를 기준으로 회원정보를 조회가 안되는 경우, 회원가입 절차 진행.
+        else{
+            bizData.put("result", "SignUpSel");
+//            auth = new UsernamePasswordAuthenticationToken(ci, "N/A", List.of(new SimpleGrantedAuthority("ROLE_USER")));
+//        	response.sendRedirect("/pp/ko/auth/SignUpSel");
+        }
 
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(auth);
@@ -83,7 +111,10 @@ public class AnyIdAuthController {
         HttpSession session = httpRequest.getSession(true);
         session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
 
-        return ResponseEntity.ok(extracted);
+        apiPrnDto.setData(bizData);
+
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
     }
 
     @GetMapping("/me")

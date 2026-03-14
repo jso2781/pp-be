@@ -13,29 +13,38 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.or.anyid.util.AnyidCertRef;
 import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginRequest;
-import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginResponse;
+import kr.or.kids.domain.pp.anyid.vo.AnyIdLoginResponseRVO;
+import kr.or.kids.global.config.OpenApiConfig;
+import kr.or.kids.global.system.common.ApiResultCode;
+import kr.or.kids.global.system.common.vo.ApiPrnDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
 public class AnyIdAuthService {
 
+    private final OpenApiConfig openApiConfig;
+
     private final AnyIdResourcePaths resourcePaths;
     private final ObjectMapper objectMapper;
 
-    public AnyIdAuthService(AnyIdResourcePaths resourcePaths, ObjectMapper objectMapper) {
+    public AnyIdAuthService(AnyIdResourcePaths resourcePaths, ObjectMapper objectMapper, OpenApiConfig openApiConfig) {
         this.resourcePaths = resourcePaths;
         this.objectMapper = objectMapper;
+        this.openApiConfig = openApiConfig;
     }
 
     /**
      * Any-ID SDK 중계형: 프론트에서 전달된 ssob(인증정보) + tag(tx) 를 복호화/검증하고,
      * 필요한 사용자 정보를 추출합니다.
      */
-    public AnyIdLoginResponse verifyAndExtract(AnyIdLoginRequest req) {
+    public ApiPrnDto verifyAndExtract(AnyIdLoginRequest req) {
         if (req == null || req.ssob() == null || req.ssob().isBlank() || req.tag() == null || req.tag().isBlank()) {
             throw new IllegalArgumentException("ssob and tag are required");
         }
+
+        ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+        HashMap<String, Object> bizData = new HashMap<>();
 
         // orgLogin.jsp 샘플 로직과 동일한 흐름
         String ssobStr = null;
@@ -64,23 +73,33 @@ public class AnyIdAuthService {
             String timestamp = asString(ssob.get("timestamp"));
             String clientIp = asString(ssob.get("clientIp"));
 
-            // Map.of()는 null 값 허용 안 함 -> HashMap 사용
-            Map<String, Object> raw = new HashMap<>();
-            raw.put("decrypt", resultMap);
-            raw.put("ssob", ssob);
+            AnyIdLoginResponseRVO resultVo = new AnyIdLoginResponseRVO();
+            resultVo.setStatus("success");
+            resultVo.setCi(ci);
+            resultVo.setName(name);
+            resultVo.setAuthLvl(authLvl);
+            resultVo.setGroup(group);
+            resultVo.setTimestamp(timestamp);
+            resultVo.setClientIp(clientIp);
+            resultVo.setSso(ssob);
 
-            return new AnyIdLoginResponse("success", ci, name, authLvl, group, timestamp, clientIp, raw);
+            bizData.put("result", resultVo);
+
+            apiPrnDto.setData(bizData);
         }catch(Exception e){
-            // TODO Auto-generated catch block
             e.printStackTrace();
 
-            // Map.of()는 null 값 허용 안 함 -> HashMap 사용
-            Map<String, Object> raw = new HashMap<>();
-            raw.put("decrypt", null);
-            raw.put("ssob", null);
-            
-            return new AnyIdLoginResponse("fail", null, null, null, null, null, null, raw);
+            apiPrnDto = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
+            apiPrnDto.setMsg(e.getMessage());
+
+            AnyIdLoginResponseRVO resultVo = new AnyIdLoginResponseRVO();
+            resultVo.setStatus("fail");
+            bizData.put("result", resultVo);
+
+            apiPrnDto.setData(bizData);
         }
+
+        return apiPrnDto;
     }
 
     private Map<String, Object> readJsonMap(String json) {
