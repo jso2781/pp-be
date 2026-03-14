@@ -1,17 +1,22 @@
 package kr.or.kids.domain.pp.anyid;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import kr.or.anyid.auth.AnyidAuth;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import kr.or.anyid.util.AnyidCertRef;
 import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginRequest;
 import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginResponse;
+import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.stereotype.Service;
-
+@Slf4j
 @Service
 public class AnyIdAuthService {
 
@@ -32,48 +37,49 @@ public class AnyIdAuthService {
             throw new IllegalArgumentException("ssob and tag are required");
         }
 
+        // orgLogin.jsp 샘플 로직과 동일한 흐름
+        String ssobStr = null;
         AnyidCertRef anyidCertRef = new AnyidCertRef();
         try {
-            Map<String, Object> resultMap = anyidCertRef.decryptSsob(req.ssob(), req.tag(), resourcePaths.kdistApiJsonFilePath());
 
-            String ssobStr = (String) resultMap.get("ssobStr");
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before ssob="+req.ssob());
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before tag="+req.tag());
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before resourcePaths.kdistApiJsonFilePath()="+resourcePaths.kdistApiJsonFilePath());
+
+            Resource resource = new ClassPathResource("config/kdist/kdist-api.json");
+            InputStream inputStream = resource.getInputStream();
+            
+            Map<String, Object> resultMap = anyidCertRef.decryptSsob(req.ssob(), req.tag(), inputStream);
+            ssobStr = (String) resultMap.get("ssobStr");
             if (ssobStr == null || ssobStr.isBlank()) {
                 throw new IllegalStateException("decryptSsob did not return ssobStr");
             }
 
             Map<String, Object> ssob = readJsonMap(ssobStr);
 
-            String ci        = asString(ssob.get("ci"));
-            String name      = asString(ssob.get("name"));
-            Integer authLvl  = asInt(ssob.get("authLvl"));
-            String group     = asString(ssob.get("group"));
+            String ci = asString(ssob.get("ci"));
+            String name = asString(ssob.get("name"));
+            Integer authLvl = asInt(ssob.get("authLvl"));
+            String group = asString(ssob.get("group"));
             String timestamp = asString(ssob.get("timestamp"));
-            String clientIp  = asString(ssob.get("clientIp"));
+            String clientIp = asString(ssob.get("clientIp"));
 
-            // Map.of()는 null 값 허용 안 함 → HashMap 사용
+            // Map.of()는 null 값 허용 안 함 -> HashMap 사용
             Map<String, Object> raw = new HashMap<>();
             raw.put("decrypt", resultMap);
             raw.put("ssob", ssob);
 
-            return new AnyIdLoginResponse(
-                    "success",
-                    ci, name, authLvl, group, timestamp, clientIp,
-                    raw
-            );
-
-        } catch (Exception e) {
+            return new AnyIdLoginResponse("success", ci, name, authLvl, group, timestamp, clientIp, raw);
+        }catch(Exception e){
+            // TODO Auto-generated catch block
             e.printStackTrace();
 
-            // Map.of()는 null 허용 안 함 → 빈 HashMap 사용
+            // Map.of()는 null 값 허용 안 함 -> HashMap 사용
             Map<String, Object> raw = new HashMap<>();
             raw.put("decrypt", null);
             raw.put("ssob", null);
-
-            return new AnyIdLoginResponse(
-                    "fail",
-                    null, null, null, null, null, null,
-                    raw
-            );
+            
+            return new AnyIdLoginResponse("fail", null, null, null, null, null, null, raw);
         }
     }
 
@@ -85,7 +91,6 @@ public class AnyIdAuthService {
         }
     }
 
-    
     private static String asString(Object v) {
         return v == null ? null : String.valueOf(v);
     }
