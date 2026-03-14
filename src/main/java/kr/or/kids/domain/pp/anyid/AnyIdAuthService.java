@@ -85,6 +85,7 @@ public class AnyIdAuthService {
         }
     }
 
+    
     private static String asString(Object v) {
         return v == null ? null : String.valueOf(v);
     }
