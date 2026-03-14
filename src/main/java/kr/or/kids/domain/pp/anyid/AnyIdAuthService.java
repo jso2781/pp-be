@@ -2,15 +2,23 @@ package kr.or.kids.domain.pp.anyid;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.InputStream;
+import java.util.Iterator;
 import java.util.Map;
 
 import kr.or.anyid.auth.AnyidAuth;
 import kr.or.anyid.util.AnyidCertRef;
 import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginRequest;
 import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginResponse;
+import kr.or.kids.domain.pp.atch.service.impl.AtchServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class AnyIdAuthService {
 
@@ -33,54 +41,66 @@ public class AnyIdAuthService {
 
         // orgLogin.jsp 샘플 로직과 동일한 흐름
         String ssobStr = null;
-        AnyidAuth anyidAuth = new AnyidAuth();
         AnyidCertRef anyidCertRef = new AnyidCertRef();
-		try {
-			Map<String, Object> resultMap = anyidCertRef.decryptSsob(req.ssob(), req.tag(), resourcePaths.kdistApiJsonFilePath());
-	        ssobStr = (String) resultMap.get("ssobStr");
-	        if (ssobStr == null || ssobStr.isBlank()) {
-	            throw new IllegalStateException("decryptSsob did not return ssobStr");
-	        }
+        try {
 
-	        Map<String, Object> ssob = readJsonMap(ssobStr);
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before ssob="+req.ssob());
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before tag="+req.tag());
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before resourcePaths.kdistApiJsonFilePath()="+resourcePaths.kdistApiJsonFilePath());
 
-	        String ci = asString(ssob.get("ci"));
-	        String name = asString(ssob.get("name"));
-	        Integer authLvl = asInt(ssob.get("authLvl"));
-	        String group = asString(ssob.get("group"));
-	        String timestamp = asString(ssob.get("timestamp"));
-	        String clientIp = asString(ssob.get("clientIp"));
+            Resource resource = new ClassPathResource("config/kdist/kdist-api.json");
+            InputStream inputStream = resource.getInputStream();
 
-	        return new AnyIdLoginResponse(
-	                "success",
-	                ci,
-	                name,
-	                authLvl,
-	                group,
-	                timestamp,
-	                clientIp,
-	                Map.of(
-	                        "decrypt", resultMap,
-	                        "ssob", ssob
-	                )
-	        );
-		}catch(Exception e){
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-	        return new AnyIdLoginResponse(
-	                "fail",
-	                null,
-	                null,
-	                null,
-	                null,
-	                null,
-	                null,
-	                Map.of(
-	                        "decrypt", null /* resultMap */,
-	                        "ssob", null /* ssob */
-	                )
-	        );
-		}
+            Map<String, Object> resultMap = anyidCertRef.decryptSsob(req.ssob(), req.tag(), inputStream);
+
+            if(resultMap != null && resultMap.size() > 0) {
+                Iterator<String> iter = resultMap.keySet().iterator();
+
+                String key = null;
+                while(iter.hasNext()) {
+                    key = iter.next();
+                    log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob after key="+key+", value="+resultMap.get(key));
+                }
+            }
+
+            ssobStr = (String) resultMap.get("ssobStr");
+            if (ssobStr == null || ssobStr.isBlank()) {
+                throw new IllegalStateException("decryptSsob did not return ssobStr");
+            }
+
+            Map<String, Object> ssob = readJsonMap(ssobStr);
+
+            String ci = asString(ssob.get("ci"));
+            String name = asString(ssob.get("name"));
+            Integer authLvl = asInt(ssob.get("authLvl"));
+            String group = asString(ssob.get("group"));
+            String timestamp = asString(ssob.get("timestamp"));
+            String clientIp = asString(ssob.get("clientIp"));
+
+            return new AnyIdLoginResponse(
+                    "success",
+                    ci,
+                    name,
+                    authLvl,
+                    group,
+                    timestamp,
+                    clientIp,
+                    ssob
+            );
+        }catch(Exception e){
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return new AnyIdLoginResponse(
+                    "fail",
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+        }
     }
 
     private Map<String, Object> readJsonMap(String json) {
