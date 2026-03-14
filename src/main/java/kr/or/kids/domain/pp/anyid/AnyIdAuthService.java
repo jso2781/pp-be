@@ -2,6 +2,7 @@ package kr.or.kids.domain.pp.anyid;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.HashMap;
 import java.util.Map;
 
 import kr.or.anyid.auth.AnyidAuth;
@@ -31,56 +32,49 @@ public class AnyIdAuthService {
             throw new IllegalArgumentException("ssob and tag are required");
         }
 
-        // orgLogin.jsp 샘플 로직과 동일한 흐름
-        String ssobStr = null;
-        AnyidAuth anyidAuth = new AnyidAuth();
         AnyidCertRef anyidCertRef = new AnyidCertRef();
-		try {
-			Map<String, Object> resultMap = anyidCertRef.decryptSsob(req.ssob(), req.tag(), resourcePaths.kdistApiJsonFilePath());
-	        ssobStr = (String) resultMap.get("ssobStr");
-	        if (ssobStr == null || ssobStr.isBlank()) {
-	            throw new IllegalStateException("decryptSsob did not return ssobStr");
-	        }
+        try {
+            Map<String, Object> resultMap = anyidCertRef.decryptSsob(req.ssob(), req.tag(), resourcePaths.kdistApiJsonFilePath());
 
-	        Map<String, Object> ssob = readJsonMap(ssobStr);
+            String ssobStr = (String) resultMap.get("ssobStr");
+            if (ssobStr == null || ssobStr.isBlank()) {
+                throw new IllegalStateException("decryptSsob did not return ssobStr");
+            }
 
-	        String ci = asString(ssob.get("ci"));
-	        String name = asString(ssob.get("name"));
-	        Integer authLvl = asInt(ssob.get("authLvl"));
-	        String group = asString(ssob.get("group"));
-	        String timestamp = asString(ssob.get("timestamp"));
-	        String clientIp = asString(ssob.get("clientIp"));
+            Map<String, Object> ssob = readJsonMap(ssobStr);
 
-	        return new AnyIdLoginResponse(
-	                "success",
-	                ci,
-	                name,
-	                authLvl,
-	                group,
-	                timestamp,
-	                clientIp,
-	                Map.of(
-	                        "decrypt", resultMap,
-	                        "ssob", ssob
-	                )
-	        );
-		}catch(Exception e){
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-	        return new AnyIdLoginResponse(
-	                "fail",
-	                null,
-	                null,
-	                null,
-	                null,
-	                null,
-	                null,
-	                Map.of(
-	                        "decrypt", null /* resultMap */,
-	                        "ssob", null /* ssob */
-	                )
-	        );
-		}
+            String ci        = asString(ssob.get("ci"));
+            String name      = asString(ssob.get("name"));
+            Integer authLvl  = asInt(ssob.get("authLvl"));
+            String group     = asString(ssob.get("group"));
+            String timestamp = asString(ssob.get("timestamp"));
+            String clientIp  = asString(ssob.get("clientIp"));
+
+            // Map.of()는 null 값 허용 안 함 → HashMap 사용
+            Map<String, Object> raw = new HashMap<>();
+            raw.put("decrypt", resultMap);
+            raw.put("ssob", ssob);
+
+            return new AnyIdLoginResponse(
+                    "success",
+                    ci, name, authLvl, group, timestamp, clientIp,
+                    raw
+            );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            // Map.of()는 null 허용 안 함 → 빈 HashMap 사용
+            Map<String, Object> raw = new HashMap<>();
+            raw.put("decrypt", null);
+            raw.put("ssob", null);
+
+            return new AnyIdLoginResponse(
+                    "fail",
+                    null, null, null, null, null, null,
+                    raw
+            );
+        }
     }
 
     private Map<String, Object> readJsonMap(String json) {
