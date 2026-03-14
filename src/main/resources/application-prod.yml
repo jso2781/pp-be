@@ -70,6 +70,8 @@ spring:
           connectiontimeout: 5000
           timeout: 5000
           writetimeout: 5000
+  config:
+    import: optional:classpath:sso-adaptor-conf-prod.properties
 
 external:
   services:
