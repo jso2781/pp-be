@@ -95,7 +95,7 @@ public class AnyIdAuthController {
          */
         if(resultVo != null){
             auth = new UsernamePasswordAuthenticationToken(resultVo.getMbrId(), "N/A", List.of(new SimpleGrantedAuthority("ROLE_USER")));
-            bizData.put("result", "LoggedIn");
+            bizData.put("status", "LoggedIn");
 
             SecurityContext context = SecurityContextHolder.createEmptyContext();
             context.setAuthentication(auth);
@@ -106,7 +106,7 @@ public class AnyIdAuthController {
         }
         // AnyId CI 를 기준으로 회원정보를 조회가 안되는 경우, 회원가입 절차 진행. 로그인된 상태가 아님.
         else{
-            bizData.put("result", "SignUpSel");
+            bizData.put("status", "SignUpSel");
             bizData.put("ci", ci);
         }
 
