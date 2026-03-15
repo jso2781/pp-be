@@ -4,8 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import kr.or.kids.domain.pp.mbr.service.MbrInfoService;
+import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
+import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
 
 /**
  * AnyID SSO 어댑터가 인증 완료 후 호출하는 loginPage.uri 처리 컨트롤러.

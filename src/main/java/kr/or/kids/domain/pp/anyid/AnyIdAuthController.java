@@ -96,20 +96,19 @@ public class AnyIdAuthController {
         if(resultVo != null){
             auth = new UsernamePasswordAuthenticationToken(resultVo.getMbrId(), "N/A", List.of(new SimpleGrantedAuthority("ROLE_USER")));
             bizData.put("result", "LoggedIn");
+
+            SecurityContext context = SecurityContextHolder.createEmptyContext();
+            context.setAuthentication(auth);
+            SecurityContextHolder.setContext(context);
+
+            HttpSession session = httpRequest.getSession(true);
+            session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
         }
-        // AnyId CI 를 기준으로 회원정보를 조회가 안되는 경우, 회원가입 절차 진행.
+        // AnyId CI 를 기준으로 회원정보를 조회가 안되는 경우, 회원가입 절차 진행. 로그인된 상태가 아님.
         else{
             bizData.put("result", "SignUpSel");
-//            auth = new UsernamePasswordAuthenticationToken(ci, "N/A", List.of(new SimpleGrantedAuthority("ROLE_USER")));
-//        	response.sendRedirect("/pp/ko/auth/SignUpSel");
+            bizData.put("ci", ci);
         }
-
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        context.setAuthentication(auth);
-        SecurityContextHolder.setContext(context);
-
-        HttpSession session = httpRequest.getSession(true);
-        session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
 
         apiPrnDto.setData(bizData);
 
