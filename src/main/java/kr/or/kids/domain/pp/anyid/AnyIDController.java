@@ -49,7 +49,7 @@ public class AnyIDController {
         resultVo.setTag(txId);
         resultVo.setLvl(3);
         resultVo.setBypass(0);
-        resultVo.setTheme("4.2.2");
+        resultVo.setTheme("4.1.0");
         resultVo.setToggle(true);
 
         bizData.put("result", resultVo);

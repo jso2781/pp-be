@@ -248,10 +248,11 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         FormRVO formRVO = formService.getForm(formPVO);
        
         // 변수 바인딩 후 처리
-        Context ctx = new Context();
-        String regDt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));  
-        ctx.setVariable("regDate", detail.getExprtInfoRegDt());
-        ctx.setVariable("aprvDate", regDt);
+        Context ctx = new Context();        
+        String regDt = detail.getExprtInfoRegDt().length() >= 10 ? detail.getExprtInfoRegDt().substring(0, 10) : detail.getExprtInfoRegDt();
+        String aprvDt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        ctx.setVariable("regDate", regDt);
+        ctx.setVariable("aprvDate", aprvDt);
         ctx.setVariable("rjctRsn", detail.getExprtRjctRsn());
         ctx.setVariable("taskNm", detail.getLabel());
         
