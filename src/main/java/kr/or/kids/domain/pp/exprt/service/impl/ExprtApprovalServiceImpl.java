@@ -1,5 +1,21 @@
 package kr.or.kids.domain.pp.exprt.service.impl;
 
+import java.math.BigInteger;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+
 import com.github.pagehelper.PageHelper;
 
 import kr.or.kids.domain.ca.common.file.service.FileService;
@@ -7,26 +23,23 @@ import kr.or.kids.domain.ca.common.file.vo.FileDeleteReqVO;
 import kr.or.kids.domain.pp.exprt.mapper.ExprtApprovalMapper;
 import kr.or.kids.domain.pp.exprt.mapper.ExprtTaskMapper;
 import kr.or.kids.domain.pp.exprt.service.ExprtApprovalService;
-import kr.or.kids.domain.pp.exprt.vo.*;
+import kr.or.kids.domain.pp.exprt.vo.ExprtApprovalAuthRVO;
+import kr.or.kids.domain.pp.exprt.vo.ExprtApprovalPVO;
+import kr.or.kids.domain.pp.exprt.vo.ExprtApprovalRVO;
+import kr.or.kids.domain.pp.exprt.vo.ExprtApprovalUVO;
+import kr.or.kids.domain.pp.exprt.vo.ExprtTaskPVO;
 import kr.or.kids.domain.pp.external.email.client.EmailClient;
 import kr.or.kids.domain.pp.external.email.vo.EmailPVO;
 import kr.or.kids.domain.pp.external.email.vo.EmailRVO;
+import kr.or.kids.domain.pp.form.service.FormService;
+import kr.or.kids.domain.pp.form.vo.FormPVO;
+import kr.or.kids.domain.pp.form.vo.FormRVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 import kr.or.kids.global.util.MaskingUtil;
 import kr.or.kids.global.util.PagingUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.core.env.Environment;
-import org.springframework.core.env.Profiles;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ObjectUtils;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 @Service
 @Slf4j
@@ -37,7 +50,9 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
     private final ExprtTaskMapper exprtTaskMapper;
 
     private final EmailClient emailClient;
+    private final SpringTemplateEngine emailTemplateEngine;
     private final FileService fileService;
+    private final FormService formService;
     private final Environment environment;
 
     @Override
@@ -132,13 +147,12 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
                     fileService.deleteGroupFiles(fileDeleteReqVO);
                 }
 
+                ExprtApprovalPVO exprtApprovalPVO = new ExprtApprovalPVO();
+                exprtApprovalPVO.setExprtTaskSn(exprtApprovalUVO.getExprtTaskSn());
+                ExprtApprovalRVO detail = exprtApprovalMapper.selectExprtApproval(exprtApprovalPVO);
+                
                 // 전문가 회원 전환 신청 반려 시 로직 수행 (업무시스템 삭제, 이메일 발송)
                 if ("R".equals(exprtApprovalUVO.getExprtAprvSttsCode())) {
-                    // 개인정보 삭제 전 메일 발송을 위한 원본데이터(성명, 메일주소) 조회
-                    ExprtApprovalPVO exprtApprovalPVO = new ExprtApprovalPVO();
-                    exprtApprovalPVO.setExprtTaskSn(exprtApprovalUVO.getExprtTaskSn());
-                    ExprtApprovalRVO detail = exprtApprovalMapper.selectExprtApproval(exprtApprovalPVO);
-
                     // 개인정보 삭제 및 반려
                     exprtApprovalUVO.setExprtAprvSttsCode("R");
                     exprtApprovalUVO.setExprtHdofYn("Y");
@@ -150,6 +164,8 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
 
                     result.setData(data);
                     return result;
+                } else if ("A".equals(exprtApprovalUVO.getExprtAprvSttsCode())) {
+                	sendEmail(detail, 1);
                 }
             }
             if (StringUtils.isNotBlank(beforeTaskAprvSttsCode) && !beforeTaskAprvSttsCode.equals(exprtApprovalUVO.getTaskAprvSttsCode())) {
@@ -213,20 +229,39 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         // 전문가 권한 전부 삭제
         exprtTaskMapper.deleteAllExprtAuth(exprtTaskPVO);
 
+        // 반려 메일 발송
+        sendEmail(detail, 2);
+    }
+    
+    /**
+     * 전문가 회원 전환 승인(1) / 반려(2) 메일발송
+     */    
+    private void sendEmail(ExprtApprovalRVO detail, int aprvDivision) {
         // localout 프로파일에서는 메일 발송 생략.
         if (environment.acceptsProfiles(Profiles.of("localout"))) {
-            log.info("Skip reject email on profile local-out. exprtNo={}", exprtApprovalUVO.getExprtNo());
+            log.info("Skip reject email on profile local-out. exprtNo={}", detail.getExprtNo());
             return;
-        }
-
-        // 반려안내 이메일 발송
-        String emlTtl = "전문가 전환 신청 결과 안내";  // 제목
-        String emlCn = "신청하신 전문가 전환 신청 건이 최종 반려되었습니다.\n내 업무 페이지에서 반려사유 확인 후 재신청 바랍니다."; // 본문
+        }    	
+    	
+        FormPVO formPVO = new FormPVO();
+        formPVO.setFormSn(BigInteger.valueOf(aprvDivision)); // 1,2번 전문가회원전환 신청 승인/반려   
+        FormRVO formRVO = formService.getForm(formPVO);
+       
+        // 변수 바인딩 후 처리
+        Context ctx = new Context();
+        String regDt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));  
+        ctx.setVariable("regDate", detail.getExprtInfoRegDt());
+        ctx.setVariable("aprvDate", regDt);
+        ctx.setVariable("rjctRsn", detail.getExprtRjctRsn());
+        ctx.setVariable("taskNm", detail.getLabel());
+        
+        String emlTtl = "전문가회원 신청 결과 안내문";  // 제목
+        String emlCn = emailTemplateEngine.process(formRVO.getFormCn(), ctx); // HTML 본문
         String sndptyFlnm = "mail.drugsafe.or.kr"; // 메일 발송 계정
         String sndptyEmlAddr = "kids@drugsafe.or.kr"; // 발신자 메일주소
         String rcvrFlnm = detail.getName(); // 수신자 명
-        String rcvrEmlAddr = detail.getInstEmlNm(); // 수신자 메일주소
-
+        String rcvrEmlAddr = detail.getInstEmlNm(); // 수신자 메일주소  	
+        
         log.debug("emlTtl >>>>> " + emlTtl);
         log.debug("emlCn >>>>> " + emlCn);
         log.debug("sndptyFlnm >>>>> " + sndptyFlnm);
@@ -247,9 +282,9 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
 
         log.debug("==================== ExprtApprovalServiceImpl exprtReject er.getResultCode()=" + er.getResultCode());
         log.debug("==================== ExprtApprovalServiceImpl exprtReject er.getMessageId()=" + er.getMessageId());
-        log.debug("==================== ExprtApprovalServiceImpl exprtReject er.getErrorMessage()=" + er.getErrorMessage());
+        log.debug("==================== ExprtApprovalServiceImpl exprtReject er.getErrorMessage()=" + er.getErrorMessage());        
     }
-
+    
     /**
      * 전문가 권한 업데이트
      */

@@ -9,12 +9,12 @@
                 CASE
                     WHEN (
                         SELECT COUNT(*)
-                        FROM kids_own.tb_pp_t_dept_info
+                        FROM kids_own.tb_pp_m_dept_info
                         WHERE up_dept_no IS NULL
                     ) = 1
                         THEN (
                             SELECT MAX(dept_no)
-                            FROM kids_own.tb_pp_t_dept_info
+                            FROM kids_own.tb_pp_m_dept_info
                             WHERE up_dept_no IS NULL
                         )
                     ELSE 'B552894'
@@ -38,7 +38,7 @@
                  END AS top_dept_nm
                 ,1 AS dept_level
                 ,LPAD(COALESCE(d.dept_seq::text, '99999'), 5, '0') || '_' || d.dept_no AS sort_key
-            FROM kids_own.tb_pp_t_dept_info d
+            FROM kids_own.tb_pp_m_dept_info d
             JOIN root_dept r
               ON d.up_dept_no = r.dept_no
             UNION ALL
@@ -55,7 +55,7 @@
                 ,p.top_dept_nm
                 ,p.dept_level + 1 AS dept_level
                 ,p.sort_key || '>' || LPAD(COALESCE(c.dept_seq::text, '99999'), 5, '0') || '_' || c.dept_no AS sort_key
-            FROM kids_own.tb_pp_t_dept_info c
+            FROM kids_own.tb_pp_m_dept_info c
             JOIN dept_tree p
               ON c.up_dept_no = p.dept_no
         )
@@ -80,7 +80,7 @@
                 ,d.up_dept_no
                 ,d.dept_seq
                 ,LPAD(COALESCE(d.dept_seq::text, '99999'), 5, '0') || '_' || d.dept_no AS sort_key
-            FROM kids_own.tb_pp_t_dept_info d
+            FROM kids_own.tb_pp_m_dept_info d
             WHERE d.dept_no = #{deptNo}
             UNION ALL
             SELECT
@@ -89,7 +89,7 @@
                 ,c.up_dept_no
                 ,c.dept_seq
                 ,p.sort_key || '>' || LPAD(COALESCE(c.dept_seq::text, '99999'), 5, '0') || '_' || c.dept_no AS sort_key
-            FROM kids_own.tb_pp_t_dept_info c
+            FROM kids_own.tb_pp_m_dept_info c
             JOIN sub_dept p
               ON c.up_dept_no = p.dept_no
         )
@@ -106,7 +106,7 @@
             ,e.main_task_cn
             ,e.emp_seq
         FROM sub_dept s
-        JOIN kids_own.tb_pp_t_emp_info e
+        JOIN kids_own.tb_pp_m_emp_info e
           ON e.dept_no = s.dept_no
         ORDER BY
              s.sort_key
