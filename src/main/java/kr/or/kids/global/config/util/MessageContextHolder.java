@@ -2,6 +2,7 @@ package kr.or.kids.global.config.util;
 
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -12,7 +13,7 @@ public class MessageContextHolder implements MessageSourceAware{
 
     private static MessageSource messageSource;
 
-    @Override
+    @Autowired
     public void setMessageSource(MessageSource messageSource) {
         MessageContextHolder.messageSource = messageSource;
     }
