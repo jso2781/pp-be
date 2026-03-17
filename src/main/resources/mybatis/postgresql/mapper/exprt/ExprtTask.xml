@@ -127,6 +127,7 @@
                      JOIN kids_own.tb_pp_m_menu m
                           ON am.menu_sn = m.menu_sn
             WHERE ea.mbr_no = #{mbrNo}
+              AND ea.exprt_task_sn > 0
               AND m.use_yn = 'Y'
         ),
                        menu_tree AS (
@@ -170,8 +171,9 @@
             (
                 SELECT com_dtl_cd_nm
                 FROM kids_own.tb_ca_c_dtl_code
-                WHERE com_group_cd = 'PP000013'
+                WHERE com_group_cd = 'PP000012'
                   AND com_dtl_cd = mt.task_se_cd
+                  AND com_dtl_cd != 'PP'
             ) AS task_se_nm,
             mt.menu_seq,
             mt.lang_se_cd,
