@@ -30,6 +30,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginRequest;
 import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginResponse;
 import kr.or.kids.domain.pp.anyid.vo.AnyIdLoginResponseRVO;
+import kr.or.kids.domain.pp.auth.service.AuthService;
 import kr.or.kids.domain.pp.mbr.service.MbrInfoService;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
@@ -46,10 +47,12 @@ public class AnyIdAuthController {
 
     private final AnyIdAuthService anyIdAuthService;
     private final MbrInfoService mbrInfoService;
+    private final AuthService authService;
 
-    public AnyIdAuthController(AnyIdAuthService anyIdAuthService, MbrInfoService mbrInfoService) {
+    public AnyIdAuthController(AnyIdAuthService anyIdAuthService, MbrInfoService mbrInfoService, AuthService authService) {
         this.anyIdAuthService = anyIdAuthService;
         this.mbrInfoService = mbrInfoService;
+        this.authService = authService;
     }
 
     /**
@@ -70,7 +73,7 @@ public class AnyIdAuthController {
     public ResponseEntity<ApiPrnDto> anyidLogin(@RequestBody AnyIdLoginRequest req, HttpServletRequest httpRequest, HttpServletResponse response){
         // ApiPrnDto apiPrnDto = anyIdAuthService.verifyAndExtract(req);
         String ci = req.ci();
-        ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+        ApiPrnDto apiPrnDto = null;
 
 //        HashMap<String, Object> bizData = apiPrnDto.getData();
 //        AnyIdLoginResponseRVO resultVo = (AnyIdLoginResponseRVO)bizData.get("result");
@@ -90,10 +93,13 @@ public class AnyIdAuthController {
         HashMap<String, Object> bizData = new HashMap<String, Object>();
 
         /*
-         * 기존 회원 정보가 존재하면,
-         * 회원아이디로 기준으로 인증 객체(Authentication)를 생성함.
+         * CI로 조회했을 때 사용자 정보가 존재한다면,
+         * 그 이후 로그인 후 처리는 자체 로그인과 동일한 프로세트(login 메소드)를 따른다.
          */
         if(resultVo != null){
+            apiPrnDto = authService.loginFromAnyId(resultVo);
+
+            // 회원 아이디 기준으로 인증 객체(Authentication)를 생성하고, Session 에 등록함.
             auth = new UsernamePasswordAuthenticationToken(resultVo.getMbrId(), "N/A", List.of(new SimpleGrantedAuthority("ROLE_USER")));
             bizData.put("status", "LoggedIn");
 
@@ -106,6 +112,8 @@ public class AnyIdAuthController {
         }
         // AnyId CI 를 기준으로 회원정보를 조회가 안되는 경우, 회원가입 절차 진행. 로그인된 상태가 아님.
         else{
+        	apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+
             bizData.put("status", "SignUpSel");
             bizData.put("ci", ci);
         }

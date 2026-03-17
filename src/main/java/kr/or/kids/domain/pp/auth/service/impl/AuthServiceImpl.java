@@ -242,6 +242,79 @@ public class AuthServiceImpl implements AuthService
         return apiPrnDto;
     }
 
+    @Override
+    public ApiPrnDto loginFromAnyId(MbrInfoRVO userInfo){
+        ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+        HashMap<String, Object> bizData = new HashMap<>();
+
+        MbrInfoPVO mp = new MbrInfoPVO();
+        mp.setMbrId(userInfo.getMbrId());
+
+        try{
+            String mbrId = userInfo.getMbrId();
+
+            BigInteger tokenSn = null;
+
+            long newTokenSn = mbrTokenMapper.nextMbrTokenSn();
+            tokenSn = BigInteger.valueOf(newTokenSn);
+
+            // Refresh Token 생성(Access Token, Refresh Token)
+            String updtTokenCn = jwtTokenProvider.createUpdtTokenCn(ISSUER, mbrId, REFRESH_TOKEN_EXPIRE_TIME);
+
+            // ✅ acsTokenCn은 tokenSn/prgrmId claim 포함해서 생성
+            String acsTokenCn  = jwtTokenProvider.createAcsTokenCn(ISSUER, mbrId, ACCESS_TOKEN_EXPIRE_TIME, tokenSn.toString(), ISSUER);
+
+            log.debug("AuthServiceImpl loginFromAnyId userInfo != null, acsTokenCn="+acsTokenCn);
+
+            MbrTokenPVO tokenInsertVO = new MbrTokenPVO();
+            tokenInsertVO.setTokenSn(tokenSn);
+            tokenInsertVO.setPrgrmId(ISSUER);
+            tokenInsertVO.setMbrId(mbrId);
+            tokenInsertVO.setUpdtTokenCn(updtTokenCn);
+            tokenInsertVO.setAcsTokenCn(acsTokenCn);
+            tokenInsertVO.setRgtrId(mbrId);
+            tokenInsertVO.setMdfrId(mbrId);
+
+            mbrTokenMapper.insertMbrToken(tokenInsertVO);
+
+            userInfo.setTokenSn(tokenSn);
+            userInfo.setAcsTokenCn(acsTokenCn);
+            userInfo.setUpdtTokenCn(updtTokenCn);
+            userInfo.setPswdErrNmtm(0);             // 로그인 성공했으므로 기존 로그인 실패 횟수를 0으로 초기화
+
+            // UI 에 전달할 사용자 정보(userInfo), 토큰 정보(tokenSn, acsTokenCn, updtTokenCn)
+            bizData.put("tokenSn", tokenSn);
+            bizData.put("acsTokenCn", acsTokenCn);
+            bizData.put("updtTokenCn", updtTokenCn);
+            bizData.put("pswdErrNmtm", 0);
+            bizData.put("userInfo", userInfo);
+
+            // 로그인 성공하변 회원정보기본에서 인증토큰(acsTokenCn), 로그인 실패 횟수=0 지정
+//                    mp.setCertTokenVl(acsTokenCn); // acsTokenCn 입력시 character varying(40) 자료형에 너무 긴 자료를 담으려고 합니다.
+            mp.setPswdErrNmtm(0);
+            mp.setMdfrId(mbrId);
+
+            mbrInfoMapper.updateMbrInfo(mp);
+
+            // Redis Idle 키 생성(30분)
+            idleTokenService.touch(tokenSn.toString());
+
+            // Redis Active 키 생성(ACCESS_TOKEN_EXPIRE_TIME 만료시간 설정)
+            activeTokenService.markActive(mbrId, tokenSn.toString(), ACCESS_TOKEN_EXPIRE_TIME);
+
+            // 로그인되었습니다.
+            apiPrnDto.setMsg(MessageContextHolder.getMessage("ui.msg.login.success"));
+
+            apiPrnDto.setData(bizData);
+
+            return apiPrnDto;
+        }catch(Exception e){
+            apiPrnDto = DrugsafeUtil.getApiPrnDto("-1", e.toString());
+        }
+
+        return apiPrnDto;
+    }
+
     public ApiPrnDto refresh(BigInteger tokenSn, String updtTokenCn) {
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
 
