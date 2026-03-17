@@ -55,6 +55,14 @@ public class AnyIdAuthController {
         this.authService = authService;
     }
 
+    @PostMapping("/anyid/verifyAndExtractTest")
+    public ResponseEntity<ApiPrnDto> verifyAndExtractTest(@RequestBody AnyIdLoginRequest req){
+        ApiPrnDto apiPrnDto = anyIdAuthService.verifyAndExtract(req);
+
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
+    }
+
     /**
      * React 로그인 페이지에서 Any-ID 인증 성공 후 ssob/tag를 전달받아 서버에서 검증/복호화하고,
      * 세션 기반으로 로그인 처리합니다.
@@ -71,7 +79,7 @@ public class AnyIdAuthController {
             @ApiResponse(responseCode = "500", description = "SDK 처리 오류")
     })
     public ResponseEntity<ApiPrnDto> anyidLogin(@RequestBody AnyIdLoginRequest req, HttpServletRequest httpRequest, HttpServletResponse response){
-        // ApiPrnDto apiPrnDto = anyIdAuthService.verifyAndExtract(req);
+//        ApiPrnDto apiPrnDto = anyIdAuthService.verifyAndExtract(req);
         String ci = req.ci();
         ApiPrnDto apiPrnDto = null;
 

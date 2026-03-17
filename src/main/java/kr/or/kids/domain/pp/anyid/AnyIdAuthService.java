@@ -1,6 +1,9 @@
 package kr.or.kids.domain.pp.anyid;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,9 +58,23 @@ public class AnyIdAuthService {
             log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before tag="+req.tag());
             log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before resourcePaths.kdistApiJsonFilePath()="+resourcePaths.kdistApiJsonFilePath());
 
+            Resource resource2 = new ClassPathResource("config/kdist/kdist-api.json");
+
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before resource.getFilename()="+resource2.getFilename());
+
+
+            BufferedReader br = new BufferedReader(new FileReader(resource2.getFile(), Charset.forName("UTF-8")));
+
+            String strLine = null;
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before resource.getFilename()="+resource2.getFilename()+" Content Start =====================================");
+            while((strLine = br.readLine()) != null) {
+                log.debug(strLine);
+            }
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before resource.getFilename()="+resource2.getFilename()+" Content End =====================================");
+            br.close();
+
             Resource resource = new ClassPathResource("config/kdist/kdist-api.json");
             InputStream inputStream = resource.getInputStream();
-            
             Map<String, Object> resultMap = anyidCertRef.decryptSsob(req.ssob(), req.tag(), inputStream);
             ssobStr = (String) resultMap.get("ssobStr");
             if (ssobStr == null || ssobStr.isBlank()) {
