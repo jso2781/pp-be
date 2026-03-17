@@ -60,10 +60,11 @@ public class AnyIdAuthService {
 
             Resource resource2 = new ClassPathResource("config/kdist/kdist-api.json");
 
-            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before resource.getFilename()="+resource2.getFilename());
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob 232323 before resource.getFilename()="+resource2.getFilename());
 
 
-            BufferedReader br = new BufferedReader(new FileReader(resource2.getFile(), Charset.forName("UTF-8")));
+            BufferedReader br = new BufferedReader(new FileReader(resourcePaths.kdistApiJsonFilePath()));
+
 
             String strLine = null;
             log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before resource.getFilename()="+resource2.getFilename()+" Content Start =====================================");
