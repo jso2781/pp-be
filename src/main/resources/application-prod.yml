@@ -1,6 +1,6 @@
 server:
-  address: localhost
-  port: 80
+  address: 0.0.0.0
+  port: 8080
   servlet:
     context-path: /
     encoding:
@@ -8,9 +8,9 @@ server:
       enabled: true
       force: true
   error:
-    include-message: never
-    include-exception: false
-    include-stacktrace: never
+    include-message: always
+    include-exception: true
+    include-stacktrace: always
     include-binding-errors: never
     path: /error
     whitelabel:
@@ -18,9 +18,9 @@ server:
 
 spring:
   redis:
-    host: 127.0.0.1
+    host: redis-dev-headless.redis-dev
     port: 6379
-    password: drugsafe123456  # 필요하면 사용
+    password: kids2025!
     timeout: 2000ms
   servlet:
     multipart:
@@ -32,15 +32,15 @@ spring:
     cache: false
   mvc:
     view:
-      prefix: /WEB-INF/jsp/
+      prefix: /views
       suffix: .jsp
   jmx:
     enabled: false
   datasource:
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:postgresql://127.0.0.1:5432/drugsafe?tcpKeepAlive=true&connectTimeout=10&socketTimeout=600
-    username: drugsafe
-    password: 7mw8kw8mw7kw
+    url: ${DB_URL}?tcpKeepAlive=true&connectTimeout=10&socketTimeout=600
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     hikari:
       connection-timeout: 5000
       validation-timeout: 1000
@@ -48,19 +48,20 @@ spring:
       minimum-idle: 5
       connection-test-query: SELECT 1
   path:
-    fileUploadDir: /inusquare/upload
+    fileUploadDir: /data/upload
     urlFilePath: /
     evdnDocFileUploadDir: /resources/doc
   web:
     resources:
       add-mappings: true
   mail:
-    host: email-smtp.ap-northeast-2.amazonaws.com
+    host: mail.drugsafe.or.kr
     port: 587
-    username: your_email@gmail.com
-    password: your_app_password   # Gmail 앱 비밀번호
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
     protocol: smtp
     default-encoding: UTF-8
+    test-mode: true
     properties:
       mail:
         smtp:
@@ -70,8 +71,9 @@ spring:
           connectiontimeout: 5000
           timeout: 5000
           writetimeout: 5000
+          debug: true
   config:
-    import: optional:classpath:sso-adaptor-conf-prod.properties
+    import: optional:classpath:sso-adaptor-conf-dev.properties
 
 external:
   services:
@@ -87,8 +89,8 @@ external:
 jwt:
   issuer: kids_user
   secret-key: ZGQtaW90LXBjd2ViLWFwaS1hZG1pbi1zZWNyZXRrZXk=
-  access-token-expiration: 1800000        # 30분 (ms), 7 * 24 * 60 * 60 * 1000 -> 7일
-  refresh-token-expiration: 1209600000   # 14일 (ms), 365 * 24 * 60 * 60 * 1000 -> 365일
+  access-token-expiration: 1800000        # 30분 (ms), ex) 7 * 24 * 60 * 60 * 1000 -> 7일
+  refresh-token-expiration: 1209600000   # 14일 (ms), ex) 365 * 24 * 60 * 60 * 1000 -> 365일
   refresh-token-name: KIDS_REFRESH_TOKEN
   idle-timeout-millis: 1800000  # 30분
 
@@ -106,9 +108,10 @@ file:
 
 logging:
   level:
-    kr.or.kids.domain: INFO
+    kr.or.kids.domain: DEBUG
     jdbc.sqltiming: INFO
     jdbc.resultsettable: INFO
+    org.springframework.boot.context.config: DEBUG
 
 mybatis:
   type-aliases-package: kr.or.kids.domain

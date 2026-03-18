@@ -34,6 +34,7 @@ import kr.or.kids.domain.pp.auth.service.AuthService;
 import kr.or.kids.domain.pp.mbr.service.MbrInfoService;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
+import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
@@ -98,7 +99,6 @@ public class AnyIdAuthController {
         MbrInfoRVO resultVo = mbrInfoService.getMbrInfo(mbrInfoPVO);
 
         Authentication auth = null;
-        HashMap<String, Object> bizData = new HashMap<String, Object>();
 
         /*
          * CI로 조회했을 때 사용자 정보가 존재한다면,
@@ -109,6 +109,9 @@ public class AnyIdAuthController {
 
             // 회원 아이디 기준으로 인증 객체(Authentication)를 생성하고, Session 에 등록함.
             auth = new UsernamePasswordAuthenticationToken(resultVo.getMbrId(), "N/A", List.of(new SimpleGrantedAuthority("ROLE_USER")));
+
+            // CI 기존으로 회원정보도 존재하므로 로그인 성공 - status 변경(UI에서 main 화면전환시 사용)
+            HashMap<String, Object> bizData = apiPrnDto.getData();
             bizData.put("status", "LoggedIn");
 
             SecurityContext context = SecurityContextHolder.createEmptyContext();
@@ -120,13 +123,17 @@ public class AnyIdAuthController {
         }
         // AnyId CI 를 기준으로 회원정보를 조회가 안되는 경우, 회원가입 절차 진행. 로그인된 상태가 아님.
         else{
-        	apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+            apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+            apiPrnDto.setMsg(MessageContextHolder.getMessage("ui.msg.anyid.signup"));
 
+            HashMap<String, Object> bizData = new HashMap<String, Object>();
+
+            // CI 기존으로 회원정보도 존재하지 않으면 회원가입으로 화면전환 - status 변경(UI에서 회원가입 화면전환시 사용)
             bizData.put("status", "SignUpSel");
             bizData.put("ci", ci);
-        }
 
-        apiPrnDto.setData(bizData);
+            apiPrnDto.setData(bizData);
+        }
 
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
