@@ -21,6 +21,9 @@ import kr.or.kids.domain.pp.external.email.vo.EmailRVO;
 import kr.or.kids.domain.pp.form.service.FormService;
 import kr.or.kids.domain.pp.form.vo.FormPVO;
 import kr.or.kids.domain.pp.form.vo.FormRVO;
+import kr.or.kids.domain.pp.task.service.TaskCdService;
+import kr.or.kids.domain.pp.task.vo.TaskCdPVO;
+import kr.or.kids.domain.pp.task.vo.TaskCdRVO;
 import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
@@ -36,6 +39,8 @@ public class DshstyDclrServiceImpl implements DshstyDclrService
     private DshstyDclrMapper dshstyDclrMapper;
     
     private final FormService formService;
+    
+    private final TaskCdService taskCdService;
     
     private final EmailClient emailClient;
     
@@ -82,6 +87,11 @@ public class DshstyDclrServiceImpl implements DshstyDclrService
             formPVO.setFormSn(BigInteger.valueOf(4));//4번 클린신고서   
             FormRVO formRVO = formService.getForm(formPVO);
             
+            TaskCdPVO taskCdPVO = new TaskCdPVO();
+            taskCdPVO.setTaskCd("EML_PP_DSHSTY_DCLR");//업무코드로 이메일 관리중.
+            TaskCdRVO taskCdRVO = taskCdService.getTaskCd(taskCdPVO);
+            
+            
             // 변수 바인딩 후 처리
             Context ctx = new Context();
             String regDt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh시 mm분"));  
@@ -104,8 +114,7 @@ public class DshstyDclrServiceImpl implements DshstyDclrService
             String sndptyFlnm = "mail.drugsafe.or.kr"; // 메일 발송 계정
             String sndptyEmlAddr = "kids@drugsafe.or.kr"; // 발신자 메일주소
             String rcvrFlnm = "한국의약품안전관리원"; // 수신자 명
-//            String rcvrEmlAddr = "kids_dur@drugsafe.kr"; // 수신자 메일주소
-            String rcvrEmlAddr = "songjiwoong1020@gmail.com"; // 수신자 메일주소
+            String rcvrEmlAddr = taskCdRVO.getTaskCdVl();// 수신자 메일주소
 
             log.debug("emlTtl >>>>> " + emlTtl);
             log.debug("emlCn >>>>> " + emlCn);
