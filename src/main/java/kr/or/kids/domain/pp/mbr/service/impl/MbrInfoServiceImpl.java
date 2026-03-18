@@ -97,9 +97,41 @@ public class MbrInfoServiceImpl implements MbrInfoService
     public ApiPrnDto updateMbrInfo(MbrInfoPVO mbrInfoPVO)
     {
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+
         int updateCnt = mbrInfoMapper.updateMbrInfo(mbrInfoPVO);
 
         if(0 < updateCnt) {
+
+            // 탈퇴시
+            if ("W".equals(mbrInfoPVO.getMbrJoinSttsCd())) {
+                // 개인정보비식별화
+                mbrInfoMapper.updateMbrPersonalInfo(mbrInfoPVO);
+
+                // 전문가 회원일 경우 전문가 개인정보 삭제 및 업무시스템 회수
+                ExprtTaskPVO exprtTaskPVO = new ExprtTaskPVO();
+                exprtTaskPVO.setMbrNo(mbrInfoPVO.getMbrNo());
+                ExprtTaskRVO exprtTaskRVO = exprtTaskMapper.selectExprtInfo(exprtTaskPVO);
+
+                if (exprtTaskRVO != null && StringUtils.isNotBlank(exprtTaskRVO.getExprtNo()) && Arrays.asList("W", "A").contains(exprtTaskRVO.getExprtAprvSttsCode())) {
+                    // 전문가 권한 삭제
+                    exprtTaskPVO.setExprtNo(exprtTaskRVO.getExprtNo());
+                    exprtTaskMapper.deleteAllExprtAuth(exprtTaskPVO);
+
+                    // 업무 시스템 회수처리
+                    ExprtApprovalUVO exprtApprovalUVO = new ExprtApprovalUVO();
+                    exprtApprovalUVO.setExprtNo(exprtTaskRVO.getExprtNo());
+                    exprtApprovalUVO.setMbrId(mbrInfoPVO.getMbrId());
+                    exprtApprovalMapper.collectExprtTaskApproval(exprtApprovalUVO);
+
+                    // 전문가 정보 개인정보 삭제 및 회수처리
+                    exprtApprovalUVO.setExprtAprvSttsCode("C");
+                    exprtApprovalUVO.setExprtHdofYn("N");
+                    exprtApprovalMapper.collectExprtApproval(exprtApprovalUVO);
+                }
+
+                mbrInfoPVO.setMbrId(null);
+            }
+
             // 수정된 회원 정보를 다시 조회해서 UI에 반환한다.
             MbrInfoRVO userInfo = mbrInfoMapper.getMbrInfo(mbrInfoPVO);
 
@@ -107,28 +139,6 @@ public class MbrInfoServiceImpl implements MbrInfoService
             dataMap.put("updateCnt", 1);
             dataMap.put("userInfo", userInfo);
             apiPrnDto.setData(dataMap);
-
-            // 전문가 회원일 경우 전문가 개인정보 삭제 및 업무시스템 회수
-            ExprtTaskPVO exprtTaskPVO = new ExprtTaskPVO();
-            exprtTaskPVO.setMbrNo(mbrInfoPVO.getMbrNo());
-            ExprtTaskRVO exprtTaskRVO = exprtTaskMapper.selectExprtInfo(exprtTaskPVO);
-
-            if (exprtTaskRVO != null && StringUtils.isNotBlank(exprtTaskRVO.getExprtNo()) && Arrays.asList("W", "A").contains(exprtTaskRVO.getExprtAprvSttsCode())) {
-                // 전문가 권한 삭제
-                exprtTaskPVO.setExprtNo(exprtTaskRVO.getExprtNo());
-                exprtTaskMapper.deleteAllExprtAuth(exprtTaskPVO);
-
-                // 업무 시스템 회수처리
-                ExprtApprovalUVO exprtApprovalUVO = new ExprtApprovalUVO();
-                exprtApprovalUVO.setMbrNo(mbrInfoPVO.getMbrNo());
-                exprtApprovalUVO.setMbrId(mbrInfoPVO.getMbrId());
-                exprtApprovalMapper.collectExprtTaskApproval(exprtApprovalUVO);
-
-                // 전문가 정보 개인정보 삭제 및 회수처리
-                exprtApprovalUVO.setExprtAprvSttsCode("C");
-                exprtApprovalUVO.setExprtHdofYn("N");
-                exprtApprovalMapper.collectExprtApproval(exprtApprovalUVO);
-            }
 
             return apiPrnDto;
         }
