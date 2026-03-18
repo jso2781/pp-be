@@ -92,4 +92,12 @@ public interface MbrInfoMapper
      * @return update 성공 row 갯수
      */
     public int updateMbrInfoPw(MbrInfoPVO mbrInfoPVO);
+
+    /**
+     * 대국민포털_회원정보기본 개인정보 비식별화
+     *
+     * @param mbrInfoPVO
+     * @return update 성공 row 갯수
+     */
+    public int updateMbrPersonalInfo(MbrInfoPVO mbrInfoPVO);
 }

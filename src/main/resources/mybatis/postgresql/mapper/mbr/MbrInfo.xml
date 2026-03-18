@@ -364,4 +364,15 @@
             AND mbr_no = #{mbrNo}
     </update>
 
+    <update id="updateMbrPersonalInfo" parameterType="MbrInfoPVO">
+        /* 대국민포털_회원정보 개인정보 비식별화 (MbrInfoMapper.updateMbrPersonalInfo) */
+       UPDATE kids_own.TB_PP_M_MBR_INFO
+          SET mbr_id            = '********'
+            , encpt_mbr_flnm    = '********'
+            , encpt_mbr_eml_nm  = '********'
+            , encpt_mbr_telno   = '********'
+        WHERE 1=1
+          AND mbr_no = #{mbrNo}
+    </update>
+
 </mapper>
