@@ -206,7 +206,7 @@
                           ON a.dept_no = b.dept_no
         ) emp
                            ON d.menu_pic_id = emp.emp_no
-        ORDER BY mt.task_se_cd, mt.root_sn, mt.path, mt.menu_seq, mt.menu_sn
+        ORDER BY mt.task_se_cd, mt.menu_seq, mt.menu_sn
     </select>
 
 </mapper>
