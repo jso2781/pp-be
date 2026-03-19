@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import kr.or.kids.domain.pp.mbr.mapper.MbrInfoMapper;
+import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
@@ -54,6 +56,7 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
     private final FileService fileService;
     private final FormService formService;
     private final Environment environment;
+    private final MbrInfoMapper mbrInfoMapper;
 
     @Override
     public ApiPrnDto selectExprtApprovalList(ExprtApprovalPVO exprtApprovalPVO) {
@@ -146,10 +149,6 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
                     fileDeleteReqVO.setAtchFileGroupId(beforeRVO.getAtchFileGroupId());
                     fileService.deleteGroupFiles(fileDeleteReqVO);
                 }
-
-                ExprtApprovalPVO exprtApprovalPVO = new ExprtApprovalPVO();
-                exprtApprovalPVO.setExprtTaskSn(exprtApprovalUVO.getExprtTaskSn());
-                ExprtApprovalRVO detail = exprtApprovalMapper.selectExprtApproval(exprtApprovalPVO);
                 
                 // 전문가 회원 전환 신청 반려 시 로직 수행 (업무시스템 삭제, 이메일 발송)
                 if ("R".equals(exprtApprovalUVO.getExprtAprvSttsCode())) {
@@ -158,14 +157,21 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
                     exprtApprovalUVO.setExprtHdofYn("Y");
                     exprtApprovalMapper.collectExprtApproval(exprtApprovalUVO);
 
-                    exprtReject(exprtApprovalUVO, detail);
+                    exprtReject(exprtApprovalUVO, beforeRVO);
 
                     data.put("result", "SUCCESS");
 
                     result.setData(data);
                     return result;
                 } else if ("A".equals(exprtApprovalUVO.getExprtAprvSttsCode())) {
-                	sendEmail(detail, 1);
+                    // 승인 메일 발송
+                	sendEmail(beforeRVO, 1);
+
+                    // 회원유형 전문가 유형으로 변경
+                    MbrInfoPVO mbrInfoPVO = new MbrInfoPVO();
+                    mbrInfoPVO.setMbrNo(beforeRVO.getMbrNo());
+                    mbrInfoPVO.setMbrTypeCd("E");
+                    mbrInfoMapper.updateMbrInfo(mbrInfoPVO);
                 }
             }
             if (StringUtils.isNotBlank(beforeTaskAprvSttsCode) && !beforeTaskAprvSttsCode.equals(exprtApprovalUVO.getTaskAprvSttsCode())) {
@@ -210,6 +216,12 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         exprtApprovalUVO.setExprtAprvSttsCode("C");
         exprtApprovalUVO.setExprtHdofYn("N");
         exprtApprovalMapper.collectExprtApproval(exprtApprovalUVO);
+
+        // 회원유형 일반 유형으로 변경
+        MbrInfoPVO mbrInfoPVO = new MbrInfoPVO();
+        mbrInfoPVO.setMbrNo(exprtApprovalUVO.getMbrNo());
+        mbrInfoPVO.setMbrTypeCd("G");
+        mbrInfoMapper.updateMbrInfo(mbrInfoPVO);
 
         data.put("result", "SUCCESS");
 
