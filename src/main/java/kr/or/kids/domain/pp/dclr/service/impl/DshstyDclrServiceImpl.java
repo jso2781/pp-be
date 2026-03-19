@@ -109,7 +109,7 @@ public class DshstyDclrServiceImpl implements DshstyDclrService
             ctx.setVariable("dshstyActIdntfRsnCn", dshstyDclrPVO.getDshstyActIdntfRsnCn());
             ctx.setVariable("dshstyActPrdCn",      dshstyDclrPVO.getDshstyActPrdCn());
             
-            String emlTtl = "클린신고서 등록 안내문";  // 제목
+            String emlTtl = "클린신고 접수";  // 제목
             String emlCn = emailTemplateEngine.process(formRVO.getFormCn(), ctx); // HTML 본문
             String sndptyFlnm = "mail.drugsafe.or.kr"; // 메일 발송 계정
             String sndptyEmlAddr = "kids@drugsafe.or.kr"; // 발신자 메일주소
