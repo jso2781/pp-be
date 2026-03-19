@@ -7,16 +7,14 @@
         SELECT
              mbr_no
             ,stty_agt_nm
-            ,stty_agt_encpt_telno
-            ,stty_agt_rel
+            ,encpt_stty_agt_telno
+            ,stty_agt_rel_nm
             ,link_info_idntf_id
             ,cert_token_vl
             ,rgtr_id
             ,reg_dt
-
             ,mdfr_id
             ,mdfcn_dt
-
         FROM kids_own.TB_PP_M_STTY_AGT_INFO
         WHERE 1=1
         AND mbr_no = #{mbrNo}
@@ -28,31 +26,27 @@
         (
              mbr_no
             ,stty_agt_nm
-            ,stty_agt_encpt_telno
-            ,stty_agt_rel
+            ,encpt_stty_agt_telno
+            ,stty_agt_rel_nm
             ,link_info_idntf_id
             ,cert_token_vl
             ,rgtr_id
             ,reg_dt
-
             ,mdfr_id
             ,mdfcn_dt
-
         )
         VALUES
         (
              #{mbrNo}
             ,#{sttyAgtNm}
-            ,#{sttyAgtEncptTelno}
-            ,#{sttyAgtRel}
+            ,#{encptSttyAgTelno}
+            ,#{sttyAgtRelNm}
             ,#{linkInfoIdntfId}
             ,#{certTokenVl}
             ,#{rgtrId}
             ,now()
-
             ,#{mdfrId}
             ,now()
-
         )
     </insert>
 
@@ -61,8 +55,8 @@
         UPDATE kids_own.TB_PP_M_STTY_AGT_INFO
         SET
              stty_agt_nm = coalesce(#{sttyAgtNm}, stty_agt_nm)
-            ,stty_agt_encpt_telno = coalesce(#{sttyAgtEncptTelno}, stty_agt_encpt_telno)
-            ,stty_agt_rel = coalesce(#{sttyAgtRel}, stty_agt_rel)
+            ,encpt_stty_agt_telno = coalesce(#{encptSttyAgTelno}, encpt_stty_agt_telno)
+            ,stty_agt_rel_nm = coalesce(#{sttyAgtRelNm}, stty_agt_rel_nm)
             ,link_info_idntf_id = coalesce(#{linkInfoIdntfId}, link_info_idntf_id)
             ,cert_token_vl = coalesce(#{certTokenVl}, cert_token_vl)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
@@ -78,37 +72,33 @@
         (
              mbr_no
             ,stty_agt_nm
-            ,stty_agt_encpt_telno
-            ,stty_agt_rel
+            ,encpt_stty_agt_telno
+            ,stty_agt_rel_nm
             ,link_info_idntf_id
             ,cert_token_vl
             ,rgtr_id
             ,reg_dt
-
             ,mdfr_id
             ,mdfcn_dt
-
         )
         VALUES
         (
              #{mbrNo}
             ,#{sttyAgtNm}
-            ,#{sttyAgtEncptTelno}
-            ,#{sttyAgtRel}
+            ,#{encptSttyAgTelno}
+            ,#{sttyAgtRelNm}
             ,#{linkInfoIdntfId}
             ,#{certTokenVl}
             ,#{rgtrId}
             ,now()
-
             ,#{mdfrId}
             ,now()
-
         )
         ON CONFLICT(mbr_no)
         DO UPDATE SET
              stty_agt_nm = coalesce(excluded.stty_agt_nm, kids_own.TB_PP_M_STTY_AGT_INFO.stty_agt_nm)
-            ,stty_agt_encpt_telno = coalesce(excluded.stty_agt_encpt_telno, kids_own.TB_PP_M_STTY_AGT_INFO.stty_agt_encpt_telno)
-            ,stty_agt_rel = coalesce(excluded.stty_agt_rel, kids_own.TB_PP_M_STTY_AGT_INFO.stty_agt_rel)
+            ,encpt_stty_agt_telno = coalesce(excluded.encpt_stty_agt_telno, kids_own.TB_PP_M_STTY_AGT_INFO.encpt_stty_agt_telno)
+            ,stty_agt_rel_nm = coalesce(excluded.stty_agt_rel_nm, kids_own.TB_PP_M_STTY_AGT_INFO.stty_agt_rel_nm)
             ,link_info_idntf_id = coalesce(excluded.link_info_idntf_id, kids_own.TB_PP_M_STTY_AGT_INFO.link_info_idntf_id)
             ,cert_token_vl = coalesce(excluded.cert_token_vl, kids_own.TB_PP_M_STTY_AGT_INFO.cert_token_vl)
             ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.TB_PP_M_STTY_AGT_INFO.mdfr_id)

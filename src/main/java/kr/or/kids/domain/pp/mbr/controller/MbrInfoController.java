@@ -19,6 +19,7 @@ import kr.or.kids.domain.pp.mbr.service.MbrInfoService;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoDVO;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
+import kr.or.kids.domain.pp.mbr.vo.MbrInfoWithSttyAgtInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.VerifyPasswordPVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
@@ -68,6 +69,20 @@ public class MbrInfoController
     public ResponseEntity<ApiPrnDto> insertMbrInfo(@RequestBody MbrInfoPVO mbrInfo)
     {
         ApiPrnDto apiPrnDto = mbrInfoService.insertMbrInfo(mbrInfo);
+
+        if("0".equals(apiPrnDto.getCode())) {
+            return ResponseEntity.ok(apiPrnDto);
+        }else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiPrnDto);
+        }
+    }
+
+    @Operation(summary = "대국민포털_회원정보기본 입력(법정 대리인 정보 포함)", description = "대국민포털_회원정보기본(법정 대리인 정보 포함) 입력한다.")
+    @PostMapping(value="/insertMbrInfoWithSttyAgtInfo")
+    @ResponseBody
+    public ResponseEntity<ApiPrnDto> insertMbrInfoWithSttyAgtInfo(@RequestBody MbrInfoWithSttyAgtInfoPVO param)
+    {
+        ApiPrnDto apiPrnDto = mbrInfoService.insertMbrInfoWithSttyAgtInfo(param);
 
         if("0".equals(apiPrnDto.getCode())) {
             return ResponseEntity.ok(apiPrnDto);

@@ -6,10 +6,13 @@ import kr.or.kids.domain.pp.exprt.vo.ExprtApprovalUVO;
 import kr.or.kids.domain.pp.exprt.vo.ExprtTaskPVO;
 import kr.or.kids.domain.pp.exprt.vo.ExprtTaskRVO;
 import kr.or.kids.domain.pp.mbr.mapper.MbrInfoMapper;
+import kr.or.kids.domain.pp.mbr.mapper.SttyAgtInfoMapper;
 import kr.or.kids.domain.pp.mbr.service.MbrInfoService;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoDVO;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
+import kr.or.kids.domain.pp.mbr.vo.MbrInfoWithSttyAgtInfoPVO;
+import kr.or.kids.domain.pp.mbr.vo.SttyAgtInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.VerifyPasswordPVO;
 import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
@@ -29,6 +32,7 @@ import java.util.HashMap;
 public class MbrInfoServiceImpl implements MbrInfoService
 {
     private final MbrInfoMapper mbrInfoMapper;
+    private final SttyAgtInfoMapper sttyAgtInfoMapper;
     private final ExprtApprovalMapper exprtApprovalMapper;
     private final ExprtTaskMapper exprtTaskMapper;
 
@@ -84,6 +88,30 @@ public class MbrInfoServiceImpl implements MbrInfoService
         if(0 < insertCnt) {
             HashMap<String, Object> dataMap = new HashMap<String, Object>();
             dataMap.put("insertCnt", 1);
+            apiPrnDto.setData(dataMap);
+
+            return apiPrnDto;
+        }
+
+        return ApiPrnDto.fail(ApiResultCode.SYSTEM_ERROR);
+    }
+
+    @Override
+    public ApiPrnDto insertMbrInfoWithSttyAgtInfo(MbrInfoWithSttyAgtInfoPVO param)
+    {
+        ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+        int insertCnt = mbrInfoMapper.insertMbrInfo(param.getMbrInfo());
+
+        if(0 < insertCnt) {
+            HashMap<String, Object> dataMap = new HashMap<String, Object>();
+            dataMap.put("insertCnt", 1);
+
+            SttyAgtInfoPVO saip = param.getSttyAgtInfo();
+
+            if(saip.getEncptSttyAgtTelno() != null && saip.getLinkInfoIdntfId() != null){
+                sttyAgtInfoMapper.insertSttyAgtInfo(saip);
+            }
+
             apiPrnDto.setData(dataMap);
 
             return apiPrnDto;

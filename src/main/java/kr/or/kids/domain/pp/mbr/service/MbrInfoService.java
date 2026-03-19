@@ -3,6 +3,7 @@ package kr.or.kids.domain.pp.mbr.service;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoDVO;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
+import kr.or.kids.domain.pp.mbr.vo.MbrInfoWithSttyAgtInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.VerifyPasswordPVO;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
@@ -37,6 +38,14 @@ public interface MbrInfoService
      * @return 입력 결과 ApiPrnDto 객체 반환
      */
     public ApiPrnDto insertMbrInfo(MbrInfoPVO mbrInfoPVO);
+
+    /**
+     * 대국민포털_회원정보기본 정보(법정 대리인 정보 포함) 입력 
+     *
+     * @param mbrInfoPVO 입력할 대국민포털_회원정보기본 정보((법정 대리인 정보 포함))
+     * @return 입력 결과 ApiPrnDto 객체 반환
+     */
+    public ApiPrnDto insertMbrInfoWithSttyAgtInfo(MbrInfoWithSttyAgtInfoPVO param);
 
     /**
      * 대국민포털_회원정보기본 정보 수정 
