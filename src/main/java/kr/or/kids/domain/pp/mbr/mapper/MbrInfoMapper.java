@@ -34,6 +34,8 @@ public interface MbrInfoMapper
      */
     public MbrInfoRVO getMbrInfo(MbrInfoPVO mbrInfoPVO);
 
+    public String nextMbrNo();
+
     /**
      * 대국민포털_회원정보기본 정보 입력
      *

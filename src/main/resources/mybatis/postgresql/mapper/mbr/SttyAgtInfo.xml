@@ -39,7 +39,7 @@
         (
              #{mbrNo}
             ,#{sttyAgtNm}
-            ,#{encptSttyAgTelno}
+            ,#{encptSttyAgtTelno}
             ,#{sttyAgtRelNm}
             ,#{linkInfoIdntfId}
             ,#{certTokenVl}
@@ -55,7 +55,7 @@
         UPDATE kids_own.TB_PP_M_STTY_AGT_INFO
         SET
              stty_agt_nm = coalesce(#{sttyAgtNm}, stty_agt_nm)
-            ,encpt_stty_agt_telno = coalesce(#{encptSttyAgTelno}, encpt_stty_agt_telno)
+            ,encpt_stty_agt_telno = coalesce(#{encptSttyAgtTelno}, encpt_stty_agt_telno)
             ,stty_agt_rel_nm = coalesce(#{sttyAgtRelNm}, stty_agt_rel_nm)
             ,link_info_idntf_id = coalesce(#{linkInfoIdntfId}, link_info_idntf_id)
             ,cert_token_vl = coalesce(#{certTokenVl}, cert_token_vl)
@@ -85,7 +85,7 @@
         (
              #{mbrNo}
             ,#{sttyAgtNm}
-            ,#{encptSttyAgTelno}
+            ,#{encptSttyAgtTelno}
             ,#{sttyAgtRelNm}
             ,#{linkInfoIdntfId}
             ,#{certTokenVl}

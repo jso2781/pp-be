@@ -83,6 +83,10 @@ public class MbrInfoServiceImpl implements MbrInfoService
     public ApiPrnDto insertMbrInfo(MbrInfoPVO mbrInfoPVO)
     {
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+
+        String mbrNo = mbrInfoMapper.nextMbrNo();
+        mbrInfoPVO.setMbrNo(mbrNo);
+
         int insertCnt = mbrInfoMapper.insertMbrInfo(mbrInfoPVO);
 
         if(0 < insertCnt) {
@@ -100,6 +104,10 @@ public class MbrInfoServiceImpl implements MbrInfoService
     public ApiPrnDto insertMbrInfoWithSttyAgtInfo(MbrInfoWithSttyAgtInfoPVO param)
     {
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+
+        String mbrNo = mbrInfoMapper.nextMbrNo();
+        param.getMbrInfo().setMbrNo(mbrNo);
+
         int insertCnt = mbrInfoMapper.insertMbrInfo(param.getMbrInfo());
 
         if(0 < insertCnt) {
@@ -108,7 +116,8 @@ public class MbrInfoServiceImpl implements MbrInfoService
 
             SttyAgtInfoPVO saip = param.getSttyAgtInfo();
 
-            if(saip.getEncptSttyAgtTelno() != null && saip.getLinkInfoIdntfId() != null){
+            if(saip.getEncptSttyAgtTelno() != null){
+                saip.setMbrNo(mbrNo);
                 sttyAgtInfoMapper.insertSttyAgtInfo(saip);
             }
 
