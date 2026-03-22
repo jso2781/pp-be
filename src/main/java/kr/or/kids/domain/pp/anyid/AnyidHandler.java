@@ -13,6 +13,7 @@ import kr.or.anyid.adaptor.Sso;
 import kr.or.anyid.adaptor.agency.interfaces.SsoLoginCallback;
 import kr.or.anyid.adaptor.core.exception.AdaptorErrorCode;
 import kr.or.anyid.adaptor.core.exception.AdaptorException;
+import kr.or.kids.global.config.ApplicationContextProvider;
 
 /**
  * anyid adaptor 로그인시 호출됩니다.
@@ -24,29 +25,62 @@ public class AnyidHandler implements SsoLoginCallback {
 
     private Sso sso = new Sso();
 
+    /**
+     * anyid adaptor 로그인시 호출됩니다.
+     * 
+     * 1. accessToken으로 리소스서버에서 사용자 정보 조회 예제
+     * 2. refreshToken으로 accessToken 재발급 예제
+     * 3. idToken으로 acrValues, certGroupCd 추출
+     *    certGroupCd : 01(모바일) 02(금융) 03(민간인증) 04(민간ID) 05(공동) -> 로그인 인증 수단입니다.
+     *    acrValues : 01 = 1, 02,03,05 = 2, 04 = 3 -> 현재 로그인한 사용자의 certGroupCd의 그룹입니다.
+     *                acrValues는 이후 다른 로직에도 사용하기에 세션 또는 레디스 와 같이 이용기관 자체적으로 현재 로그인한 사용자별로 보관해야합니다.
+     *                
+     * 4. 이용기관 자체 로그인 로직 코딩영역 -> 본클래스 or 이용기관 클래스 호출 등 로그인로직 개발하면 됩니다.
+     * 
+     * 유의사항 : accessToken, refreshToken, acrValues, certGroupCd는
+     *          이용기관 상황에 맞춰 저장하여 관리.
+     *          위 4가지 값은 사용자 로그아웃 전까지는 유출 될 시 보안 사고로 이어질 수 있으므로,
+     *          보관에 유의 할 것
+     * 
+     * @param accessToken : 리소스서버에서 사용자 정보 조회시 필요
+     * @param refreshToken : accessToken 재발급시 필요
+     * @param idToken : acrValues, certGroupCd 추출시 필요
+     * 
+     */
     @Override
-    public void onSsoLoginSuccess(HttpServletRequest request, HttpServletResponse response,
-                                  String accessToken, String refreshToken, String idToken, String endPoint) {
+    public void onSsoLoginSuccess(HttpServletRequest request, HttpServletResponse response, String accessToken, String refreshToken, String idToken, String endPoint){
         System.out.println("onSsoLoginSuccess");
 
         // accessToken으로 리소스서버에서 사용자 정보 조회
-        try {
+        try{
             Map<String, Object> resultMap = sso.getUserInfoByAccessToken(accessToken);
             String resultCode = (String) resultMap.get("resultCode");
-            if ("0".equals(resultCode)) {
-                Map<String, Object> anyidSession = new HashMap<>();
-                anyidSession.put("sso", resultMap.get("userInfo"));
-                request.getSession().setAttribute("anyid", anyidSession);
-                System.out.println("userinfo : " + resultMap.get("userInfo"));
+
+            if("0".equals(resultCode)){
+//                Map<String, Object> anyidSession = new HashMap<>();
+//                anyidSession.put("sso", resultMap.get("userInfo"));
+//                request.getSession().setAttribute("anyid", anyidSession);
+//                System.out.println("userinfo : " + resultMap.get("userInfo"));
+
+                Map<String, Object> userInfoMap = (Map<String, Object>) resultMap.get("userInfo");
+
+                // CI 추출 (SDK가 이미 복호화해서 줌) → REST /anyid/login 과 동일한 AnyIdLoginBizService 로 세션 생성
+                String ci = (String) userInfoMap.get("CI");
+
+                if(ci != null && !ci.isBlank()){
+                    AnyIdLoginBizService svc = ApplicationContextProvider.getBean(AnyIdLoginBizService.class);
+                    svc.loginByCi(ci, request, response);
+                    return;
+                }
             }
-        } catch (AdaptorException e) {
+        }catch(AdaptorException e){
             System.out.println(e.getAdaptorErrorCode().getCodeMessage());
-            if (e.getErrorCode() == -1012 || e.getErrorCode() == -803) {
+            if(e.getErrorCode() == -1012 || e.getErrorCode() == -803){
                 // accessToken 만료 → refreshToken으로 재발급 필요
-            } else {
+            }else{
                 // 재로그인 처리
             }
-        } catch (Exception e) {
+        }catch(Exception e){
             System.err.println(e.getLocalizedMessage());
         }
 
@@ -54,6 +88,13 @@ public class AnyidHandler implements SsoLoginCallback {
         onSsoSendRedirect(response, endPoint);
     }
 
+    /**
+     * anyid adaptor 에러 발생 시 호출됩니다.
+     * 에러 발생 시 로그 처리 하고 에러 처리 및 이동할 페이지 코딩하면 됩니다.
+     * 
+     * @param errorCode : adaptorErrorCode -> adaptor에서 인지 가능한 에러코드, 가이드문서에 명시 되어있습니다.
+     *                    Exception -> 기본자바 에러코드. e애서 정보 추출하면 됩니다.
+     */
     @Override
     public void onSsoError(HttpServletResponse response, Exception exception) {
         System.out.println("onSsoError");
@@ -72,6 +113,11 @@ public class AnyidHandler implements SsoLoginCallback {
         onSsoSendRedirect(response, "/");
     }
 
+    /**
+     * anyid adaptor SsoLogout시 호출됩니다.
+     * 이용기관 자체적으로 로그아웃 로직을 연결 or 로직구현 하면 됩니다.
+     * 
+     */
     @Override
     public void onSsoLogout(HttpServletRequest request) {
         System.out.println("onSsoLogout");
@@ -79,6 +125,23 @@ public class AnyidHandler implements SsoLoginCallback {
         session.invalidate();
     }
 
+    /**
+     * anyid adaptor svc to svc시 호출됩니다.
+     * 타 이용기관에서 본 이용기관으로 SSO로그인 + 해당페이지 접근 하기 위한 기능입니다.
+     * 
+     * validation 순서
+     * 1. 넘겨받은 endPoint가 본 이용기관이 관리하는 endPoint인지 체크
+     *    - 관리하는 endPoint가 아니면 이용기관 자체 예외처리
+     * 2. 넘겨받은 endPoint의 acrValues(CheckCcrValues) 요구치와 로그인한 사용자의 acrValues(sessionAcrValues) 비교
+     *    - CheckCcrValues >= sessionAcrValues : 페이지 이동
+     *    - CheckCcrValues < sessionAcrValues : 재인증 이동
+     * 
+     * 이용기관에서 수정 할 영역은 {이용기관코딩영역} Start ~ {이용기관코딩영역} End 입니다.
+     * 이용기관 상황에 맞게 관리할 endPoint와 acrValues를 맵핑시켜놓고 CheckCcrValues, sessionAcrValues에 세팅만 하면 됩니다.
+     * 
+     * @param endPoint : 최종 도착지의 contextpath
+     *        ReAuthLevelUrl : 
+     */
     @Override
     public void onSsoSvcToSvc(HttpServletRequest request, HttpServletResponse response, String endPoint) {
         int result = acrValuesCheck(request, endPoint);
@@ -106,11 +169,30 @@ public class AnyidHandler implements SsoLoginCallback {
         }
     }
 
+    /**
+     * endPoint 검증시 사용될 메소드입니다.
+     * 이용기관자체적으로 endPoint 화이트 리스트를 관리하면 됩니다.
+     * 아래 구현방법은 자유롭게 하시면 되고 @param endPoint 와 검증 하는 로직 구현 하시면 됩니다.
+     * 만약 endPoint에 endPoint?ddd=ddd 와 같이 파라미터가 붙은 경우 알아서 비교로직 만들면 됩니다.
+     * @param endPoint : 최종 도착지의 contextpath
+     */
     public boolean endPointCheck(String endPoint) {
         // 포털은 모든 endPoint 허용 (필요시 화이트리스트 추가)
         return true;
     }
 
+    /**
+     * endPoint의 acrValues 와 사용자의 sessionAcrValues 검증시 사용될 메소드입니다.
+     * 이용기관자체적으로 endPoint와 acrValues를  화이트 리스트로 관리하면 됩니다.
+     * 아래 구현방법은 자유롭게 하시면 되고 @param endPoint 와 로그인한 사용자의 acrValues 검증 하는 로직 구현 하시면 됩니다.
+     * endPointCheck 이후 acrValues 아래와 같은 결과를 리턴하면 됩니다.
+     *    0 : [정상]이동하려는 화면의 acrValues 보다 로그인한 사용자의 acrValues가 높아서 화면 이동가능
+     *    1 : [재인증필요]이동하려는 화면의 acrValues 보다 로그인한 사용자의 acrValues가 높아서 화면 이동가능 불가능
+     *        상위 인증수단을 통해 재로그인 필요함 -> 재로그인 페이지로 이동
+     *  999 : [등록 필요 or 검증]화이트리스트에 endPoint 없어서 화면 이동 불가능
+     * @param endPoint : 최종 도착지의 contextpath
+     * @param sessionAcrValues : 현재 로그인한 사용자의 acrValues
+     */
     public int acrValuesCheck(HttpServletRequest request, String endPoint) {
         Map<String, Integer> endPointCheck = new HashMap<>();
         endPointCheck.put("/pp/ko/auth/LoginMethod", 3);

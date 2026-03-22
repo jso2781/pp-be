@@ -11,8 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import kr.or.anyid.auth.access.AccessConfigurer;
+import kr.or.anyid.auth.access.DefaultEsignAccessor;
+import kr.or.anyid.auth.access.DefaultPIDAccessor;
+import kr.or.anyid.auth.access.IAccessor;
+import kr.or.anyid.auth.extract.DefaultEsignExtractor;
+import kr.or.anyid.auth.extract.DefaultPIDExtractor;
+import kr.or.anyid.auth.extract.DefaultVrsExtractor;
+import kr.or.anyid.auth.extract.ExtractConfigurer;
+import kr.or.anyid.auth.extract.IExtractor;
 
 /**
  * rrs_vue(AnyID 인증서버)의 relay 컨트롤러를 포털 백엔드에 이식.
@@ -45,8 +53,8 @@ public class AnyIdRelayController {
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
 
-        new kr.or.anyid.auth.access.AccessConfigurer(
-            new kr.or.anyid.auth.access.DefaultEsignAccessor() {}
+        new AccessConfigurer(
+            new DefaultEsignAccessor() {}
         ).build(
             resourcePaths.esignProviderKeyJsonFilePath(),
             request.getInputStream(),
@@ -65,8 +73,8 @@ public class AnyIdRelayController {
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
 
-        new kr.or.anyid.auth.extract.ExtractConfigurer(
-            new kr.or.anyid.auth.extract.DefaultEsignExtractor() {
+        new ExtractConfigurer<>(
+            new DefaultEsignExtractor() {
                 @Override
                 public String type() {
                     return "relay";
@@ -80,7 +88,7 @@ public class AnyIdRelayController {
                     return hashed;
                 }
                 @Override
-                public kr.or.anyid.auth.extract.IExtractor writeSsobExtensions(Object writable) throws Exception {
+                public IExtractor writeSsobExtensions(Object writable) throws Exception {
                     if (writable instanceof Map) {
                         ((Map) writable).put("clientIp", clientIP);
                     }
@@ -104,14 +112,14 @@ public class AnyIdRelayController {
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
 
-        new kr.or.anyid.auth.access.AccessConfigurer(
-            new kr.or.anyid.auth.access.DefaultPIDAccessor() {
+        new AccessConfigurer(
+            new DefaultPIDAccessor() {
                 @Override
                 public boolean isStore() {
                     return true;
                 }
                 @Override
-                public kr.or.anyid.auth.access.IAccessor store(Object value) throws Exception {
+                public IAccessor store(Object value) throws Exception {
                     Map<String, Object> anyidSession = new HashMap<>();
                     anyidSession.put("pid", value);
                     session.setAttribute("anyid", anyidSession);
@@ -137,8 +145,8 @@ public class AnyIdRelayController {
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
 
-        new kr.or.anyid.auth.extract.ExtractConfigurer(
-            new kr.or.anyid.auth.extract.DefaultPIDExtractor() {
+        new ExtractConfigurer(
+            new DefaultPIDExtractor() {
                 @Override
                 public boolean isHashed() {
                     return true;
@@ -158,7 +166,7 @@ public class AnyIdRelayController {
                     return anyid.get("pid");
                 }
                 @Override
-                public kr.or.anyid.auth.extract.IExtractor writeSsobExtensions(Object writable) throws Exception {
+                public IExtractor writeSsobExtensions(Object writable) throws Exception {
                     if (writable instanceof Map) {
                         ((Map) writable).put("clientIp", clientIP);
                     }
@@ -186,8 +194,8 @@ public class AnyIdRelayController {
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
 
-        new kr.or.anyid.auth.extract.ExtractConfigurer(
-            new kr.or.anyid.auth.extract.DefaultVrsExtractor() {
+        new ExtractConfigurer(
+            new DefaultVrsExtractor() {
                 @Override
                 public boolean isHashed() {
                     return true;
@@ -197,7 +205,7 @@ public class AnyIdRelayController {
                     return hashed;
                 }
                 @Override
-                public kr.or.anyid.auth.extract.IExtractor writeSsobExtensions(Object writable) throws Exception {
+                public IExtractor writeSsobExtensions(Object writable) throws Exception {
                     if (writable instanceof Map) {
                         ((Map) writable).put("clientIp", clientIP);
                     }

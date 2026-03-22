@@ -1,20 +1,12 @@
 package kr.or.kids.domain.pp.anyid;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,12 +21,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginRequest;
 import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginResponse;
-import kr.or.kids.domain.pp.anyid.vo.AnyIdLoginResponseRVO;
-import kr.or.kids.domain.pp.auth.service.AuthService;
-import kr.or.kids.domain.pp.mbr.service.MbrInfoService;
-import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
-import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
-import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
@@ -47,13 +33,11 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 public class AnyIdAuthController {
 
     private final AnyIdAuthService anyIdAuthService;
-    private final MbrInfoService mbrInfoService;
-    private final AuthService authService;
+    private final AnyIdLoginBizService anyIdLoginBizService;
 
-    public AnyIdAuthController(AnyIdAuthService anyIdAuthService, MbrInfoService mbrInfoService, AuthService authService) {
+    public AnyIdAuthController(AnyIdAuthService anyIdAuthService, AnyIdLoginBizService anyIdLoginBizService) {
         this.anyIdAuthService = anyIdAuthService;
-        this.mbrInfoService = mbrInfoService;
-        this.authService = authService;
+        this.anyIdLoginBizService = anyIdLoginBizService;
     }
 
     @PostMapping("/anyid/verifyAndExtractTest")
@@ -80,60 +64,7 @@ public class AnyIdAuthController {
             @ApiResponse(responseCode = "500", description = "SDK 처리 오류")
     })
     public ResponseEntity<ApiPrnDto> anyidLogin(@RequestBody AnyIdLoginRequest req, HttpServletRequest httpRequest, HttpServletResponse response){
-//        ApiPrnDto apiPrnDto = anyIdAuthService.verifyAndExtract(req);
-        String ci = req.ci();
-        ApiPrnDto apiPrnDto = null;
-
-//        HashMap<String, Object> bizData = apiPrnDto.getData();
-//        AnyIdLoginResponseRVO resultVo = (AnyIdLoginResponseRVO)bizData.get("result");
-
-        // 최소 식별키는 CI (연계정보) 사용 권장 (가이드에서 CI 정의) 
-        // - CI는 본인확인기관에서 본인을 식별하기 위해 생성한 연계정보
-        // - ssob 내 제공 항목(인증수단별 제공항목) 중 ci가 존재
-//        String principal = resultVo.getCi() != null ? resultVo.getCi() : (resultVo.getName() != null ? resultVo.getName() : "anyid-user");
-
-        // CI 정보를 기준으로 회원 정보 조회
-        MbrInfoPVO mbrInfoPVO = new MbrInfoPVO();
-        mbrInfoPVO.setLinkInfoIdntfId(ci);
-
-        MbrInfoRVO resultVo = mbrInfoService.getMbrInfo(mbrInfoPVO);
-
-        Authentication auth = null;
-
-        /*
-         * CI로 조회했을 때 사용자 정보가 존재한다면,
-         * 그 이후 로그인 후 처리는 자체 로그인과 동일한 프로세트(login 메소드)를 따른다.
-         */
-        if(resultVo != null){
-            apiPrnDto = authService.loginFromAnyId(resultVo);
-
-            // 회원 아이디 기준으로 인증 객체(Authentication)를 생성하고, Session 에 등록함.
-            auth = new UsernamePasswordAuthenticationToken(resultVo.getMbrId(), "N/A", List.of(new SimpleGrantedAuthority("ROLE_USER")));
-
-            // CI 기존으로 회원정보도 존재하므로 로그인 성공 - status 변경(UI에서 main 화면전환시 사용)
-            HashMap<String, Object> bizData = apiPrnDto.getData();
-            bizData.put("status", "LoggedIn");
-
-            SecurityContext context = SecurityContextHolder.createEmptyContext();
-            context.setAuthentication(auth);
-            SecurityContextHolder.setContext(context);
-
-            HttpSession session = httpRequest.getSession(true);
-            session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
-        }
-        // AnyId CI 를 기준으로 회원정보를 조회가 안되는 경우, 회원가입 절차 진행. 로그인된 상태가 아님.
-        else{
-            apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
-            apiPrnDto.setMsg(MessageContextHolder.getMessage("ui.msg.anyid.signup"));
-
-            HashMap<String, Object> bizData = new HashMap<String, Object>();
-
-            // CI 기존으로 회원정보도 존재하지 않으면 회원가입으로 화면전환 - status 변경(UI에서 회원가입 화면전환시 사용)
-            bizData.put("status", "SignUpSel");
-            bizData.put("ci", ci);
-
-            apiPrnDto.setData(bizData);
-        }
+        ApiPrnDto apiPrnDto = anyIdLoginBizService.loginByCi(req.ci(), httpRequest, req.redirectUri());
 
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
