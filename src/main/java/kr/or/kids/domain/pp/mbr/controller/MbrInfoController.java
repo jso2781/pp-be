@@ -56,11 +56,15 @@ public class MbrInfoController
     @Operation(summary = "대국민포털_회원정보기본 조회", description = "대국민포털_회원정보기본 조회한다.")
     @PostMapping(value="/getMbrInfo")
     @ResponseBody
-    public ResponseEntity<MbrInfoRVO> getMbrInfo(@RequestBody MbrInfoPVO mbrInfoPVO)
+    public ResponseEntity<ApiPrnDto> getMbrInfo(@RequestBody MbrInfoPVO mbrInfoPVO)
     {
-        MbrInfoRVO mbrInfo = mbrInfoService.getMbrInfo(mbrInfoPVO);
+    	ApiPrnDto apiPrnDto = mbrInfoService.getMbrInfo(mbrInfoPVO);
 
-        return ResponseEntity.ok(mbrInfo);
+        if("0".equals(apiPrnDto.getCode())) {
+            return ResponseEntity.ok(apiPrnDto);
+        }else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiPrnDto);
+        }
     }
 
     @Operation(summary = "대국민포털_회원정보기본 입력", description = "대국민포털_회원정보기본 입력한다.")

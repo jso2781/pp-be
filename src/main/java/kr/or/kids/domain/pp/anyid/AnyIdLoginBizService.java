@@ -17,7 +17,7 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.auth.service.AuthService;
-import kr.or.kids.domain.pp.mbr.service.MbrInfoService;
+import kr.or.kids.domain.pp.mbr.mapper.MbrInfoMapper;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
 import kr.or.kids.global.config.util.MessageContextHolder;
@@ -34,11 +34,11 @@ public class AnyIdLoginBizService {
     public static final String DEFAULT_LOGGED_IN_REDIRECT = "/pp/ko";
     public static final String DEFAULT_SIGN_UP_REDIRECT = "/pp/ko/auth/SignUpSel";
 
-    private final MbrInfoService mbrInfoService;
+    private final MbrInfoMapper mbrInfoMapper;
     private final AuthService authService;
 
-    public AnyIdLoginBizService(MbrInfoService mbrInfoService, AuthService authService) {
-        this.mbrInfoService = mbrInfoService;
+    public AnyIdLoginBizService(MbrInfoMapper mbrInfoMapper, AuthService authService) {
+        this.mbrInfoMapper = mbrInfoMapper;
         this.authService = authService;
     }
 
@@ -57,7 +57,7 @@ public class AnyIdLoginBizService {
         MbrInfoPVO mbrInfoPVO = new MbrInfoPVO();
         mbrInfoPVO.setLinkInfoIdntfId(ci);
 
-        MbrInfoRVO resultVo = mbrInfoService.getMbrInfo(mbrInfoPVO);
+        MbrInfoRVO resultVo = mbrInfoMapper.getMbrInfo(mbrInfoPVO);
 
         if (resultVo != null) {
             ApiPrnDto apiPrnDto = authService.loginFromAnyId(resultVo);
@@ -107,7 +107,7 @@ public class AnyIdLoginBizService {
         MbrInfoPVO mbrInfoPVO = new MbrInfoPVO();
         mbrInfoPVO.setLinkInfoIdntfId(ci);
 
-        MbrInfoRVO resultVo = mbrInfoService.getMbrInfo(mbrInfoPVO);
+        MbrInfoRVO resultVo = mbrInfoMapper.getMbrInfo(mbrInfoPVO);
 
         try{
             if(resultVo != null){

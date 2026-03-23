@@ -29,7 +29,7 @@ public interface MbrInfoService
      * @param mbrInfoPVO 조회용 파라메터 정보 
      * @return 조회된 대국민포털_회원정보기본 
      */
-    public MbrInfoRVO getMbrInfo(MbrInfoPVO mbrInfoPVO);
+    public ApiPrnDto getMbrInfo(MbrInfoPVO mbrInfoPVO);
 
     /**
      * 대국민포털_회원정보기본 정보 입력 

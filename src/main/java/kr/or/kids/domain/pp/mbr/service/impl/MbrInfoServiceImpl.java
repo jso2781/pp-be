@@ -14,9 +14,11 @@ import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoWithSttyAgtInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.SttyAgtInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.VerifyPasswordPVO;
+import kr.or.kids.domain.pp.search.vo.IntegratedSearchRVO;
 import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
+import kr.or.kids.global.util.DrugsafeUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -74,9 +76,21 @@ public class MbrInfoServiceImpl implements MbrInfoService
     }
 
     @Override
-    public MbrInfoRVO getMbrInfo(MbrInfoPVO mbrInfoPVO)
+    public ApiPrnDto getMbrInfo(MbrInfoPVO mbrInfoPVO)
     {
-        return mbrInfoMapper.getMbrInfo(mbrInfoPVO);
+        ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+
+        try{
+            HashMap<String, Object> data = new HashMap<String, Object>();
+            MbrInfoRVO resultObj = mbrInfoMapper.getMbrInfo(mbrInfoPVO);
+            data.put("result", resultObj);
+
+            apiPrnDto.setData(data);
+        }catch(Exception e){
+            apiPrnDto = DrugsafeUtil.getApiPrnDto("-1", e.toString());
+        }
+
+        return apiPrnDto;
     }
 
     @Override
@@ -116,7 +130,7 @@ public class MbrInfoServiceImpl implements MbrInfoService
 
             SttyAgtInfoPVO saip = param.getSttyAgtInfo();
 
-            if(saip.getEncptSttyAgtTelno() != null){
+            if(saip != null && saip.getEncptSttyAgtTelno() != null){
                 saip.setMbrNo(mbrNo);
                 sttyAgtInfoMapper.insertSttyAgtInfo(saip);
             }
