@@ -14,7 +14,6 @@ import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoWithSttyAgtInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.SttyAgtInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.VerifyPasswordPVO;
-import kr.or.kids.domain.pp.search.vo.IntegratedSearchRVO;
 import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
@@ -80,7 +79,7 @@ public class MbrInfoServiceImpl implements MbrInfoService
     {
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
 
-        try{
+        try {
             HashMap<String, Object> data = new HashMap<String, Object>();
             MbrInfoRVO resultObj = mbrInfoMapper.getMbrInfo(mbrInfoPVO);
             data.put("result", resultObj);
@@ -117,6 +116,26 @@ public class MbrInfoServiceImpl implements MbrInfoService
     @Override
     public ApiPrnDto insertMbrInfoWithSttyAgtInfo(MbrInfoWithSttyAgtInfoPVO param)
     {
+        MbrInfoPVO mbrInfo = param.getMbrInfo();
+        if (mbrInfo != null && (mbrInfo.getLinkInfoIdntfId() == null || mbrInfo.getLinkInfoIdntfId().isBlank())){
+            ApiPrnDto err = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
+            err.setMsg("ci is required");
+            return err;
+        }
+
+        String ci = mbrInfo.getLinkInfoIdntfId();
+
+        MbrInfoPVO mbrInfoPVO = new MbrInfoPVO();
+        mbrInfoPVO.setLinkInfoIdntfId(ci);
+
+        MbrInfoRVO resultVo = mbrInfoMapper.getMbrInfo(mbrInfoPVO);
+
+        if(resultVo != null){
+            ApiPrnDto err = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
+            err.setMsg("ci is duplicate");
+            return err;
+        }
+
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
 
         String mbrNo = mbrInfoMapper.nextMbrNo();
