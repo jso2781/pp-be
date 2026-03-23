@@ -58,7 +58,7 @@ public class MbrInfoController
     @ResponseBody
     public ResponseEntity<ApiPrnDto> getMbrInfo(@RequestBody MbrInfoPVO mbrInfoPVO)
     {
-    	ApiPrnDto apiPrnDto = mbrInfoService.getMbrInfo(mbrInfoPVO);
+        ApiPrnDto apiPrnDto = mbrInfoService.getMbrInfo(mbrInfoPVO);
 
         if("0".equals(apiPrnDto.getCode())) {
             return ResponseEntity.ok(apiPrnDto);
