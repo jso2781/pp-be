@@ -109,126 +109,127 @@ public class AuthServiceImpl implements AuthService
             MbrInfoRVO userInfo = mbrInfoMapper.getMbrInfo(mp);
 
             if(userInfo == null) {
-                // 로그인 정보가 일치하지 않습니다.
                 apiPrnDto = DrugsafeUtil.getApiPrnDto("0", MessageContextHolder.getMessage("ui.msg.login.nofound"));
-
-                log.debug("AuthServiceImpl login userInfo == null");
+                return apiPrnDto;
             }
-            // 로그인 정보와 일치한 경우
-            else{
-                String mbrId = userInfo.getMbrId();
+
+            String lgnSeCd = userInfo.getLgnSeCd();
+            String mbrId = userInfo.getMbrId();
 
 //                if(!passwordEncoder.matches(loginVO.getEncptMbrPswd(), userInfo.getEncptMbrPswd())) {
-                if(loginVO.getEncptMbrPswd() != null && !loginVO.getEncptMbrPswd().equals(userInfo.getEncptMbrPswd())){
-                    apiPrnDto = DrugsafeUtil.getApiPrnDto("0", MessageContextHolder.getMessage("ui.msg.login.nofound"));
+            if(loginVO.getEncptMbrPswd() != null && !loginVO.getEncptMbrPswd().equals(userInfo.getEncptMbrPswd())){
+                apiPrnDto = DrugsafeUtil.getApiPrnDto("0", MessageContextHolder.getMessage("ui.msg.login.nofound"));
 
-                    int pswdErrNmtm = userInfo.getPswdErrNmtm();
-                    pswdErrNmtm = pswdErrNmtm + 1;
+                int pswdErrNmtm = userInfo.getPswdErrNmtm();
+                pswdErrNmtm = pswdErrNmtm + 1;
 
-                    // 로그인 성공하변 회원정보기본에서 로그인 실패 횟수 + 1 증가
-                    mp.setPswdErrNmtm(pswdErrNmtm);
-                    mp.setMdfrId(mbrId);
+                // 로그인 성공하변 회원정보기본에서 로그인 실패 횟수 + 1 증가
+                mp.setPswdErrNmtm(pswdErrNmtm);
+                mp.setMdfrId(mbrId);
 
 
-                    mbrInfoMapper.updateMbrInfo(mp);
+                mbrInfoMapper.updateMbrInfo(mp);
 
-                    log.debug("AuthServiceImpl login userInfo != null, password is not same!! userInfo.getPswdErrNmtm()="+userInfo.getPswdErrNmtm());
-                    HashMap<String, Object> failMap = new HashMap<String, Object>();
+                log.debug("AuthServiceImpl login userInfo != null, password is not same!! userInfo.getPswdErrNmtm()="+userInfo.getPswdErrNmtm());
+                HashMap<String, Object> failMap = new HashMap<String, Object>();
 
-                    // 패스워드 불일치로 로그인 실패 횟수 정보 반환
-                    failMap.put("pswdErrNmtm", pswdErrNmtm);
+                // 패스워드 불일치로 로그인 실패 횟수 정보 반환
+                failMap.put("pswdErrNmtm", pswdErrNmtm);
 
-                    apiPrnDto.setData(failMap);
+                apiPrnDto.setData(failMap);
+            }else{
+                BigInteger tokenSn = null;
+
+                // 기존 토큰 정보가 존재하면 없데이트, 없으면 토큰 생성후 토큰정보 입력,
+                MbrTokenRVO mtr = mbrTokenMapper.getMbrToken(loginVO);
+
+                if(mtr == null){
+                    long newTokenSn = mbrTokenMapper.nextMbrTokenSn();
+                    tokenSn = BigInteger.valueOf(newTokenSn);
                 }else{
-                    BigInteger tokenSn = null;
-
-                    // 기존 토큰 정보가 존재하면 없데이트, 없으면 토큰 생성후 토큰정보 입력,
-                    MbrTokenRVO mtr = mbrTokenMapper.getMbrToken(loginVO);
-
-                    if(mtr == null){
-                        long newTokenSn = mbrTokenMapper.nextMbrTokenSn();
-                        tokenSn = BigInteger.valueOf(newTokenSn);
-                    }else{
-                        tokenSn = mtr.getTokenSn();
-                    }
-
-                    // Refresh Token 생성(Access Token, Refresh Token)
-                    String updtTokenCn = jwtTokenProvider.createUpdtTokenCn(ISSUER, mbrId, REFRESH_TOKEN_EXPIRE_TIME);
-
-                    // ✅ acsTokenCn은 tokenSn/prgrmId claim 포함해서 생성
-                    String acsTokenCn  = jwtTokenProvider.createAcsTokenCn(ISSUER, mbrId, ACCESS_TOKEN_EXPIRE_TIME, tokenSn.toString(), ISSUER);
-
-                    log.debug("AuthServiceImpl login userInfo != null, acsTokenCn="+acsTokenCn);
-
-                    if(mtr == null){
-                        MbrTokenPVO tokenInsertVO = new MbrTokenPVO();
-                        tokenInsertVO.setTokenSn(tokenSn);
-                        tokenInsertVO.setPrgrmId(ISSUER);
-                        tokenInsertVO.setMbrId(mbrId);
-                        tokenInsertVO.setUpdtTokenCn(updtTokenCn);
-                        tokenInsertVO.setAcsTokenCn(acsTokenCn);
-                        tokenInsertVO.setRgtrId(mbrId);
-                        tokenInsertVO.setMdfrId(mbrId);
-
-                        mbrTokenMapper.insertMbrToken(tokenInsertVO);
-
-                        userInfo.setTokenSn(tokenSn);
-                        userInfo.setAcsTokenCn(acsTokenCn);
-                        userInfo.setUpdtTokenCn(updtTokenCn);
-                        userInfo.setPswdErrNmtm(0);             // 로그인 성공했으므로 기존 로그인 실패 횟수를 0으로 초기화
-
-                        // UI 에 전달한 사용자 정보(userInfo), 토큰 정보(tokenSn, acsTokenCn, updtTokenCn)
-                        bizData.put("tokenSn", tokenSn);
-                        bizData.put("acsTokenCn", acsTokenCn);
-                        bizData.put("updtTokenCn", updtTokenCn);
-                        bizData.put("pswdErrNmtm", 0);
-                        bizData.put("userInfo", userInfo);
-                    }
-                    // 기존 토큰 정보가 존재하면, 업데이트
-                    else{
-                        MbrTokenPVO tokenUpdateVO = new MbrTokenPVO();
-                        tokenUpdateVO.setTokenSn(tokenSn);
-                        tokenUpdateVO.setPrgrmId(ISSUER);
-                        tokenUpdateVO.setMbrId(mbrId);
-                        tokenUpdateVO.setUpdtTokenCn(updtTokenCn);
-                        tokenUpdateVO.setAcsTokenCn(acsTokenCn);
-                        tokenUpdateVO.setMdfrId(mbrId);
-
-                        mbrTokenMapper.updateMbrToken(tokenUpdateVO);
-
-                        userInfo.setTokenSn(tokenSn);
-                        userInfo.setAcsTokenCn(acsTokenCn);
-                        userInfo.setUpdtTokenCn(updtTokenCn);
-                        userInfo.setPswdErrNmtm(0);             // 로그인 성공했으므로 기존 로그인 실패 횟수를 0으로 초기화
-
-                        // UI 에 전달한 사용자 정보(userInfo), 토큰 정보(tokenSn, acsTokenCn, updtTokenCn)
-                        bizData.put("tokenSn", tokenSn);
-                        bizData.put("acsTokenCn", acsTokenCn);
-                        bizData.put("updtTokenCn", updtTokenCn);
-                        bizData.put("pswdErrNmtm", 0);
-                        bizData.put("userInfo", userInfo);
-                    }
-
-                    // 로그인 성공하변 회원정보기본에서 인증토큰(acsTokenCn), 로그인 실패 횟수=0 지정
-//                    mp.setCertTokenVl(acsTokenCn); // acsTokenCn 입력시 character varying(40) 자료형에 너무 긴 자료를 담으려고 합니다.
-                    mp.setPswdErrNmtm(0);
-                    mp.setMdfrId(mbrId);
-
-                    mbrInfoMapper.updateMbrInfo(mp);
-
-                    // Redis Idle 키 생성(30분)
-                    idleTokenService.touch(tokenSn.toString());
-
-                    // Redis Active 키 생성(ACCESS_TOKEN_EXPIRE_TIME 만료시간 설정)
-                    activeTokenService.markActive(mbrId, tokenSn.toString(), ACCESS_TOKEN_EXPIRE_TIME);
-
-                    // 로그인되었습니다.
-                    apiPrnDto.setMsg(MessageContextHolder.getMessage("ui.msg.login.success"));
-
-                    apiPrnDto.setData(bizData);
-
-                    return apiPrnDto;
+                    tokenSn = mtr.getTokenSn();
                 }
+
+                // Refresh Token 생성(Access Token, Refresh Token)
+                String updtTokenCn = jwtTokenProvider.createUpdtTokenCn(ISSUER, mbrId, REFRESH_TOKEN_EXPIRE_TIME);
+
+                // ✅ acsTokenCn은 tokenSn/prgrmId claim 포함해서 생성
+                String acsTokenCn  = jwtTokenProvider.createAcsTokenCn(ISSUER, mbrId, ACCESS_TOKEN_EXPIRE_TIME, tokenSn.toString(), ISSUER);
+
+                log.debug("AuthServiceImpl login userInfo != null, acsTokenCn="+acsTokenCn);
+
+                if(mtr == null){
+                    MbrTokenPVO tokenInsertVO = new MbrTokenPVO();
+                    tokenInsertVO.setTokenSn(tokenSn);
+                    tokenInsertVO.setPrgrmId(ISSUER);
+                    tokenInsertVO.setMbrId(mbrId);
+                    tokenInsertVO.setUpdtTokenCn(updtTokenCn);
+                    tokenInsertVO.setAcsTokenCn(acsTokenCn);
+                    tokenInsertVO.setRgtrId(mbrId);
+                    tokenInsertVO.setMdfrId(mbrId);
+
+                    mbrTokenMapper.insertMbrToken(tokenInsertVO);
+
+                    userInfo.setLgnSeCd(lgnSeCd);
+                    userInfo.setTokenSn(tokenSn);
+                    userInfo.setAcsTokenCn(acsTokenCn);
+                    userInfo.setUpdtTokenCn(updtTokenCn);
+                    userInfo.setPswdErrNmtm(0);             // 로그인 성공했으므로 기존 로그인 실패 횟수를 0으로 초기화
+
+                    // UI 에 전달한 사용자 정보(userInfo), 토큰 정보(lgnSeCd, tokenSn, acsTokenCn, updtTokenCn, pswdErrNmtm)
+                    bizData.put("lgnSeCd", lgnSeCd);
+                    bizData.put("tokenSn", tokenSn);
+                    bizData.put("acsTokenCn", acsTokenCn);
+                    bizData.put("updtTokenCn", updtTokenCn);
+                    bizData.put("pswdErrNmtm", 0);
+                    bizData.put("userInfo", userInfo);
+                }
+                // 기존 토큰 정보가 존재하면, 업데이트
+                else{
+                    MbrTokenPVO tokenUpdateVO = new MbrTokenPVO();
+                    tokenUpdateVO.setTokenSn(tokenSn);
+                    tokenUpdateVO.setPrgrmId(ISSUER);
+                    tokenUpdateVO.setMbrId(mbrId);
+                    tokenUpdateVO.setUpdtTokenCn(updtTokenCn);
+                    tokenUpdateVO.setAcsTokenCn(acsTokenCn);
+                    tokenUpdateVO.setMdfrId(mbrId);
+
+                    mbrTokenMapper.updateMbrToken(tokenUpdateVO);
+
+                    userInfo.setLgnSeCd(lgnSeCd);
+                    userInfo.setTokenSn(tokenSn);
+                    userInfo.setAcsTokenCn(acsTokenCn);
+                    userInfo.setUpdtTokenCn(updtTokenCn);
+                    userInfo.setPswdErrNmtm(0);             // 로그인 성공했으므로 기존 로그인 실패 횟수를 0으로 초기화
+
+                    // UI 에 전달한 사용자 정보(userInfo), 토큰 정보(lgnSeCd, tokenSn, acsTokenCn, updtTokenCn, pswdErrNmtm)
+                    bizData.put("lgnSeCd", lgnSeCd);
+                    bizData.put("tokenSn", tokenSn);
+                    bizData.put("acsTokenCn", acsTokenCn);
+                    bizData.put("updtTokenCn", updtTokenCn);
+                    bizData.put("pswdErrNmtm", 0);
+                    bizData.put("userInfo", userInfo);
+                }
+
+                // 로그인 성공하변 회원정보기본에서 인증토큰(acsTokenCn), 로그인 실패 횟수=0 지정
+//                    mp.setCertTokenVl(acsTokenCn); // acsTokenCn 입력시 character varying(40) 자료형에 너무 긴 자료를 담으려고 합니다.
+                mp.setPswdErrNmtm(0);
+                mp.setMdfrId(mbrId);
+
+                mbrInfoMapper.updateMbrInfo(mp);
+
+                // Redis Idle 키 생성(30분)
+                idleTokenService.touch(tokenSn.toString());
+
+                // Redis Active 키 생성(ACCESS_TOKEN_EXPIRE_TIME 만료시간 설정)
+                activeTokenService.markActive(mbrId, tokenSn.toString(), ACCESS_TOKEN_EXPIRE_TIME);
+
+                // 로그인되었습니다.
+                apiPrnDto.setMsg(MessageContextHolder.getMessage("ui.msg.login.success"));
+
+                apiPrnDto.setData(bizData);
+
+                return apiPrnDto;
             }
         }catch(Exception e){
             apiPrnDto = DrugsafeUtil.getApiPrnDto("-1", e.toString());
@@ -247,6 +248,7 @@ public class AuthServiceImpl implements AuthService
 
         try{
             String mbrId = userInfo.getMbrId();
+            String lgnSeCd = userInfo.getLgnSeCd();
 
             BigInteger tokenSn = null;
 
@@ -272,12 +274,14 @@ public class AuthServiceImpl implements AuthService
 
             mbrTokenMapper.insertMbrToken(tokenInsertVO);
 
+            userInfo.setLgnSeCd(lgnSeCd);
             userInfo.setTokenSn(tokenSn);
             userInfo.setAcsTokenCn(acsTokenCn);
             userInfo.setUpdtTokenCn(updtTokenCn);
             userInfo.setPswdErrNmtm(0);             // 로그인 성공했으므로 기존 로그인 실패 횟수를 0으로 초기화
 
-            // UI 에 전달할 사용자 정보(userInfo), 토큰 정보(tokenSn, acsTokenCn, updtTokenCn)
+            // UI 에 전달할 사용자 정보(userInfo), 토큰 정보(lgnSeCd, tokenSn, acsTokenCn, updtTokenCn, pswdErrNmtm)
+            bizData.put("lgnSeCd", lgnSeCd);
             bizData.put("tokenSn", tokenSn);
             bizData.put("acsTokenCn", acsTokenCn);
             bizData.put("updtTokenCn", updtTokenCn);
@@ -348,10 +352,13 @@ public class AuthServiceImpl implements AuthService
 
         // 토큰과 연계된 사용자 정보 조회
         MbrInfoRVO userInfo = mbrInfoMapper.getMbrInfo(mp);
+        String lgnSeCd = userInfo.getLgnSeCd();
 
+        userInfo.setLgnSeCd(lgnSeCd);
         userInfo.setTokenSn(tokenSn);
 
         HashMap<String, Object> bizData = new HashMap<>();
+        bizData.put("lgnSeCd", lgnSeCd);
         bizData.put("tokenSn", tokenSn);
         bizData.put("acsTokenCn", newAcsTokenCn);
         bizData.put("updtTokenCn", newUpdtTokenCn);

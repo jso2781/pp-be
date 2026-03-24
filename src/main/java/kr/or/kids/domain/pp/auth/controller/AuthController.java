@@ -1,7 +1,5 @@
 package kr.or.kids.domain.pp.auth.controller;
 
-import java.math.BigInteger;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -9,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +19,6 @@ import kr.or.kids.domain.pp.auth.vo.MbrTokenPVO;
 import kr.or.kids.domain.pp.auth.vo.RefreshPVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
-
 import lombok.RequiredArgsConstructor;
 @Tag(name = "Auth1Controller", description = "대국민포털_로그인토큰 관리(JWT)")
 @RestController
