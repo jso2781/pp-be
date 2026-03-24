@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.pst.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,12 +14,13 @@ import kr.or.kids.domain.pp.pst.vo.PstPVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "PstController", description = "대국민포털_게시물기본 관리")
 @RestController
 @RequestMapping(value = "/api/pp/pst/")
+@RequiredArgsConstructor
 public class PstController {
-	@Autowired
-	private PstService pstService;
+	private final PstService pstService;
 
 	@Operation(summary = "대국민포털_게시물기본 목록 조회", description = "대국민포털_게시물기본 목록을 조회한다.")
 	@PostMapping(value = "/selectPstList")

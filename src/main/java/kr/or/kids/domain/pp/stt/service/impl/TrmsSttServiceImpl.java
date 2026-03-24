@@ -3,7 +3,6 @@ package kr.or.kids.domain.pp.stt.service.impl;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.stt.mapper.TrmsSttMapper;
@@ -13,14 +12,15 @@ import kr.or.kids.domain.pp.stt.vo.TrmsSttRVO;
 import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class TrmsSttServiceImpl implements TrmsSttService
 {
-    @Autowired
-    private TrmsSttMapper trmsSttMapper;
+    private final TrmsSttMapper trmsSttMapper;
 
     @Override
     public ApiPrnDto selectTrmsListForSignUp() {

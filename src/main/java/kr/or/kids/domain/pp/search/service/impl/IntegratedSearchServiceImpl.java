@@ -2,7 +2,6 @@ package kr.or.kids.domain.pp.search.service.impl;
 
 import java.util.HashMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.search.mapper.IntegratedSearchMapper;
@@ -12,14 +11,15 @@ import kr.or.kids.domain.pp.search.vo.IntegratedSearchRVO;
 import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class IntegratedSearchServiceImpl implements IntegratedSearchService{
 
-	@Autowired
-	private IntegratedSearchMapper integratedSearchMapper;
+	private final IntegratedSearchMapper integratedSearchMapper;
 
 	@Override
 	public ApiPrnDto getIntegratedSearchJson(IntegratedSearchPVO paramPVO){

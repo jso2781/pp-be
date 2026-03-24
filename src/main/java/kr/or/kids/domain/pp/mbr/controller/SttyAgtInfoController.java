@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.mbr.vo.SttyAgtInfoDVO;
 import kr.or.kids.domain.pp.mbr.vo.SttyAgtInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.SttyAgtInfoRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "SttyAgtInfoController", description = "대국민포털_법정대리인정보기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/mbr")
+@RequiredArgsConstructor
 public class SttyAgtInfoController
 {
-    @Autowired
-    private SttyAgtInfoService sttyAgtInfoService;
+    private final SttyAgtInfoService sttyAgtInfoService;
 
     @Operation(summary = "대국민포털_법정대리인정보기본 조회", description = "대국민포털_법정대리인정보기본 조회한다.")
     @PostMapping(value="/getSttyAgtInfo")

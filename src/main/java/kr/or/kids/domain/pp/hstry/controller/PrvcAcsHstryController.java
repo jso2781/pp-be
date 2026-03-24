@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.hstry.vo.PrvcAcsHstryDVO;
 import kr.or.kids.domain.pp.hstry.vo.PrvcAcsHstryPVO;
 import kr.or.kids.domain.pp.hstry.vo.PrvcAcsHstryRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "PrvcAcsHstryController", description = "대국민포털_개인정보접근이력기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/hstry")
+@RequiredArgsConstructor
 public class PrvcAcsHstryController
 {
-    @Autowired
-    private PrvcAcsHstryService prvcAcsHstryService;
+    private final PrvcAcsHstryService prvcAcsHstryService;
 
     @Operation(summary = "대국민포털_개인정보접근이력기본 조회", description = "대국민포털_개인정보접근이력기본 조회한다.")
     @PostMapping(value="/getPrvcAcsHstry")

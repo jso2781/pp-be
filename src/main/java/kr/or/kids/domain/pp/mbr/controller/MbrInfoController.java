@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,13 +23,14 @@ import kr.or.kids.domain.pp.mbr.vo.VerifyPasswordPVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "MbrInfoController", description = "대국민포털_회원정보기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/mbr")
+@RequiredArgsConstructor
 public class MbrInfoController
 {
-    @Autowired
-    private MbrInfoService mbrInfoService;
+    private final MbrInfoService mbrInfoService;
 
 
     @Operation(summary = "대국민포털_회원정보기본 기존 아이디, 패스워드 기준으로 데이터 존재 여부 조회", description = "대국민포털_회원정보기본 기존 아이디, 패스워드 기준으로 데이터 존재 여부 조회한다.")

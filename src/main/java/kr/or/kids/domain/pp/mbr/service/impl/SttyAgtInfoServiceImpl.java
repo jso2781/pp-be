@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.mbr.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.mbr.mapper.SttyAgtInfoMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.mbr.vo.SttyAgtInfoDVO;
 import kr.or.kids.domain.pp.mbr.vo.SttyAgtInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.SttyAgtInfoRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class SttyAgtInfoServiceImpl implements SttyAgtInfoService
 {
-    @Autowired
-    private SttyAgtInfoMapper sttyAgtInfoMapper;
+    private final SttyAgtInfoMapper sttyAgtInfoMapper;
 
     @Override
     public SttyAgtInfoRVO getSttyAgtInfo(SttyAgtInfoPVO sttyAgtInfoPVO)

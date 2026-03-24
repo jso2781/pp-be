@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.notice.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.notice.mapper.BbsMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.notice.vo.BbsDVO;
 import kr.or.kids.domain.pp.notice.vo.BbsPVO;
 import kr.or.kids.domain.pp.notice.vo.BbsRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class BbsServiceImpl implements BbsService
 {
-    @Autowired
-    private BbsMapper bbsMapper;
+    private final BbsMapper bbsMapper;
 
     @Override
     public BbsRVO getBbs(BbsPVO bbsPVO)

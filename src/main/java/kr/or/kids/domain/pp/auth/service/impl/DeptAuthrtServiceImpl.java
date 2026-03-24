@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.auth.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.auth.mapper.DeptAuthrtMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.auth.vo.DeptAuthrtDVO;
 import kr.or.kids.domain.pp.auth.vo.DeptAuthrtPVO;
 import kr.or.kids.domain.pp.auth.vo.DeptAuthrtRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class DeptAuthrtServiceImpl implements DeptAuthrtService
 {
-    @Autowired
-    private DeptAuthrtMapper deptAuthrtMapper;
+    private final DeptAuthrtMapper deptAuthrtMapper;
 
     @Override
     public DeptAuthrtRVO getDeptAuthrt(DeptAuthrtPVO deptAuthrtPVO)

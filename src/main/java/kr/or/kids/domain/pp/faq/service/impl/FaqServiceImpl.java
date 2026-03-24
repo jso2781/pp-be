@@ -3,7 +3,6 @@ package kr.or.kids.domain.pp.faq.service.impl;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.faq.mapper.FaqMapper;
@@ -13,14 +12,15 @@ import kr.or.kids.domain.pp.faq.vo.FaqRVO;
 import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class FaqServiceImpl implements FaqService
 {
-    @Autowired
-    private FaqMapper faqMapper;
+    private final FaqMapper faqMapper;
 
     @Override
     public ApiPrnDto selectFaqList(FaqPVO faqPVO) {

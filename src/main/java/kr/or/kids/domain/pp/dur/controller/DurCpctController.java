@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.dur.vo.DurCpctDVO;
 import kr.or.kids.domain.pp.dur.vo.DurCpctPVO;
 import kr.or.kids.domain.pp.dur.vo.DurCpctRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "DurCpctController", description = "대국민포털_DUR용량주의기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/dur")
+@RequiredArgsConstructor
 public class DurCpctController
 {
-    @Autowired
-    private DurCpctService durCpctService;
+    private final DurCpctService durCpctService;
 
     @Operation(summary = "대국민포털_DUR용량주의기본 조회", description = "대국민포털_DUR용량주의기본 조회한다.")
     @PostMapping(value="/getDurCpct")

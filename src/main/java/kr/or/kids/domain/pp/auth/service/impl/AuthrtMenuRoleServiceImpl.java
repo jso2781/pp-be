@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.auth.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.auth.mapper.AuthrtMenuRoleMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.auth.vo.AuthrtMenuRoleDVO;
 import kr.or.kids.domain.pp.auth.vo.AuthrtMenuRolePVO;
 import kr.or.kids.domain.pp.auth.vo.AuthrtMenuRoleRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class AuthrtMenuRoleServiceImpl implements AuthrtMenuRoleService
 {
-    @Autowired
-    private AuthrtMenuRoleMapper authrtMenuRoleMapper;
+    private final AuthrtMenuRoleMapper authrtMenuRoleMapper;
 
     @Override
     public AuthrtMenuRoleRVO getAuthrtMenuRole(AuthrtMenuRolePVO authrtMenuRolePVO)

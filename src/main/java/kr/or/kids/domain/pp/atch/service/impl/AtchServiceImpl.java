@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,23 +30,21 @@ import kr.or.kids.domain.pp.task.vo.FileIdFromTaskCdRVO;
 import kr.or.kids.global.config.FileProperties;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 import kr.or.kids.global.util.DrugsafeUtil;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class AtchServiceImpl implements AtchService
 {
-    @Autowired
-    private FileProperties fileProperties;
+    private final FileProperties fileProperties;
 
-    @Autowired
-    private FileService fileService;
+    private final FileService fileService;
 
-    @Autowired
-    private AtchMapper atchMapper;
+    private final AtchMapper atchMapper;
 
-    @Autowired
-    private TaskCdMapper taskCdMapper;
+    private final TaskCdMapper taskCdMapper;
 
     @Value("${file.storePath}")
     private String fileStorePath;

@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.dur.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.dur.mapper.DurPrgntItemMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.dur.vo.DurPrgntItemDVO;
 import kr.or.kids.domain.pp.dur.vo.DurPrgntItemPVO;
 import kr.or.kids.domain.pp.dur.vo.DurPrgntItemRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class DurPrgntItemServiceImpl implements DurPrgntItemService
 {
-    @Autowired
-    private DurPrgntItemMapper durPrgntItemMapper;
+    private final DurPrgntItemMapper durPrgntItemMapper;
 
     @Override
     public DurPrgntItemRVO getDurPrgntItem(DurPrgntItemPVO durPrgntItemPVO)

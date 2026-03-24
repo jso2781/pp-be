@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.popup.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.popup.mapper.PopupMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.popup.vo.PopupDVO;
 import kr.or.kids.domain.pp.popup.vo.PopupPVO;
 import kr.or.kids.domain.pp.popup.vo.PopupRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class PopupServiceImpl implements PopupService
 {
-    @Autowired
-    private PopupMapper popupMapper;
+    private final PopupMapper popupMapper;
 
     @Override
     public PopupRVO getPopup(PopupPVO popupPVO)

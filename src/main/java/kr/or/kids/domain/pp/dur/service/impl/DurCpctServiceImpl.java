@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.dur.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.dur.mapper.DurCpctMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.dur.vo.DurCpctDVO;
 import kr.or.kids.domain.pp.dur.vo.DurCpctPVO;
 import kr.or.kids.domain.pp.dur.vo.DurCpctRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class DurCpctServiceImpl implements DurCpctService
 {
-    @Autowired
-    private DurCpctMapper durCpctMapper;
+    private final DurCpctMapper durCpctMapper;
 
     @Override
     public DurCpctRVO getDurCpct(DurCpctPVO durCpctPVO)

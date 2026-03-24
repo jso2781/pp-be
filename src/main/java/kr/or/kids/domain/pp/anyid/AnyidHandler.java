@@ -75,11 +75,7 @@ public class AnyidHandler implements SsoLoginCallback {
             }
         }catch(AdaptorException e){
             System.out.println(e.getAdaptorErrorCode().getCodeMessage());
-            if(e.getErrorCode() == -1012 || e.getErrorCode() == -803){
-                // accessToken 만료 → refreshToken으로 재발급 필요
-            }else{
-                // 재로그인 처리
-            }
+            // accessToken 만료/재로그인 등 예외 상황은 아래 공통 리다이렉트로 처리
         }catch(Exception e){
             System.err.println(e.getLocalizedMessage());
         }

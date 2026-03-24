@@ -2,7 +2,6 @@ package kr.or.kids.domain.pp.auth.controller;
 
 import java.math.BigInteger;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -24,13 +23,14 @@ import kr.or.kids.domain.pp.auth.vo.RefreshPVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "Auth1Controller", description = "대국민포털_로그인토큰 관리(JWT)")
 @RestController
 @RequestMapping(value="/api/pp/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private AuthService authService;
+    private final AuthService authService;
 
     /**
      * 로그인 처리
