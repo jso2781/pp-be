@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -28,6 +30,8 @@ import kr.or.kids.global.util.DrugsafeUtil;
  *   anyid.adaptor.agency.handler=kr.or.kids.domain.pp.anyid.AnyidHandler
  */
 public class AnyidHandler implements SsoLoginCallback {
+
+    private Logger logger = LoggerFactory.getLogger(AnyidHandler.class);
 
     private Sso sso = new Sso();
 
@@ -55,12 +59,12 @@ public class AnyidHandler implements SsoLoginCallback {
      */
     @Override
     public void onSsoLoginSuccess(HttpServletRequest request, HttpServletResponse response, String accessToken, String refreshToken, String idToken, String endPoint){
-        System.out.println("onSsoLoginSuccess");
-
         // accessToken으로 리소스서버에서 사용자 정보 조회
         try{
             Map<String, Object> resultMap = sso.getUserInfoByAccessToken(accessToken);
             String resultCode = (String) resultMap.get("resultCode");
+
+            logger.debug("AnyidHandler onSsoLoginSuccess resultCode="+resultCode);
 
             if("0".equals(resultCode)){
 //                Map<String, Object> anyidSession = new HashMap<>();
@@ -72,6 +76,8 @@ public class AnyidHandler implements SsoLoginCallback {
 
                 // CI 추출 (SDK가 이미 복호화해서 줌) → REST /anyid/login 과 동일한 AnyIdLoginBizService 로 세션 생성
                 String ci = (String) userInfoMap.get("CI");
+
+                logger.debug("AnyidHandler onSsoLoginSuccess resultCode=0, ci="+ci);
 
                 if(ci != null && !ci.isBlank()){
                     AnyIdLoginBizService svc = ApplicationContextProvider.getBean(AnyIdLoginBizService.class);
@@ -99,7 +105,7 @@ public class AnyidHandler implements SsoLoginCallback {
      */
     @Override
     public void onSsoError(HttpServletResponse response, Exception exception) {
-        System.out.println("onSsoError");
+        logger.debug("AnyidHandler onSsoError !!");
         String errorMsg = "";
 
         if (exception instanceof AdaptorException) {
@@ -110,7 +116,7 @@ public class AnyidHandler implements SsoLoginCallback {
         } else {
             errorMsg = AdaptorErrorCode.EXCEPTION_FAIL.getCodeMessage();
         }
-        System.out.println("errorMsg : " + errorMsg);
+        logger.debug("AnyidHandler onSsoError errorMsg : " + errorMsg);
 
         onSsoSendRedirect(response, "/");
     }
@@ -122,7 +128,7 @@ public class AnyidHandler implements SsoLoginCallback {
      */
     @Override
     public void onSsoLogout(HttpServletRequest request) {
-        System.out.println("onSsoLogout");
+        logger.debug("AnyidHandler onSsoLogout");
 
         /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그아웃 기록) 시작 ************************************************/
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -130,6 +136,7 @@ public class AnyidHandler implements SsoLoginCallback {
             Object principal = authentication.getPrincipal();
             String mbrId = (principal instanceof String) ? (String) principal : null;
 
+            logger.debug("AnyidHandler onSsoLogout mbrId="+mbrId);
             ConnectionLogClient conn = ApplicationContextProvider.getBean(ConnectionLogClient.class);
 
             DrugsafeUtil  util = new DrugsafeUtil();
@@ -170,6 +177,7 @@ public class AnyidHandler implements SsoLoginCallback {
             // 수정자 아이디
             req.setMdfrId(mbrId);
 
+            logger.debug("AnyidHandler onSsoLogout ConnectionLogClient.insert ConnectionLogInsertReqVO="+req.toString());
             conn.insert(req);
         }
         /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그아웃 기록) 끝 ************************************************/

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,6 +37,8 @@ import kr.or.kids.global.util.DrugsafeUtil;
 @Service
 public class AnyIdLoginBizService {
 
+    private Logger logger = LoggerFactory.getLogger(AnyIdLoginBizService.class);
+
     public static final String DEFAULT_LOGGED_IN_REDIRECT = "/pp/ko";
     public static final String DEFAULT_SIGN_UP_REDIRECT = "/pp/ko/auth/SignUpSel";
 
@@ -51,7 +55,7 @@ public class AnyIdLoginBizService {
      * @param httpRequest           세션 저장용
      * @param redirectUriAfterLogin 로그인 성공 시 이동할 SPA 경로(선택). 없으면 {@link #DEFAULT_LOGGED_IN_REDIRECT}
      */
-    public ApiPrnDto loginByCi(String ci, HttpServletRequest httpRequest, String redirectUriAfterLogin) {
+    public ApiPrnDto loginByCi(String ci, HttpServletRequest request, String redirectUriAfterLogin) {
         if (ci == null || ci.isBlank()) {
             ApiPrnDto err = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
             err.setMsg("ci is required");
@@ -63,6 +67,8 @@ public class AnyIdLoginBizService {
 
         MbrInfoRVO resultVo = mbrInfoMapper.getMbrInfo(mbrInfoPVO);
 
+        logger.debug("AnyIdLoginBizService loginByCi(String ci, HttpServletRequest httpRequest, String redirectUriAfterLogin) ci="+ci);
+
         if (resultVo != null) {
             ApiPrnDto apiPrnDto = authService.loginFromAnyId(resultVo);
 
@@ -73,28 +79,83 @@ public class AnyIdLoginBizService {
                 bizData = new HashMap<>();
                 apiPrnDto.setData(bizData);
             }
+
+            String redirectUrl = sanitizeRedirectPath(redirectUriAfterLogin, DEFAULT_LOGGED_IN_REDIRECT);
+
             bizData.put("status", "LoggedIn");
-            bizData.put("redirectUrl", sanitizeRedirectPath(redirectUriAfterLogin, DEFAULT_LOGGED_IN_REDIRECT));
+            bizData.put("redirectUrl", redirectUrl);
 
             SecurityContext context = SecurityContextHolder.createEmptyContext();
             context.setAuthentication(auth);
             SecurityContextHolder.setContext(context);
 
-            HttpSession session = httpRequest.getSession(true);
+            HttpSession session = request.getSession(true);
             session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
+
+            /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그인 성공 기록) 시작 ************************************************/
+            ConnectionLogClient conn = ApplicationContextProvider.getBean(ConnectionLogClient.class);
+
+            String mbrId = resultVo.getMbrId();
+            DrugsafeUtil  util = new DrugsafeUtil();
+            String clientIp = util.getClientIp(request);
+
+            ConnectionLogInsertReqVO req = new ConnectionLogInsertReqVO();
+
+            // 로그인구분코드(1 : ID 로그인 , 2 : 애니아이디 로그인)
+            req.setLgnSeCd("2");
+
+            // 네트워크 구분코드(1 : 내부망, 2 : 외부망)
+            req.setNetSeCd(clientIp != null && clientIp.indexOf("192.168") > -1 ? "1" : "2");
+
+            // 서비스사용자 아이디
+            req.setSrvcUserId(mbrId);
+
+            // 요청자IP주소
+            req.setRqstrIpAddr(clientIp);
+
+            // 접속구분번호(1 : 로그인, 2:로그아웃) 
+            req.setCntnSeNo("1");
+
+            // 접속 상세 설명
+            req.setCntnDtlExpln("LoginIn");
+
+            // 인증토큰값(CI 값을 넣을지 확정 안됨.)
+            req.setCertTokenVl("");
+
+            // 서비스명
+            req.setSrvcNm("kids_pp");
+
+            // 업무구분코드
+            req.setTaskSeCd("PP");
+
+            // 등록자 아이디
+            req.setRgtrId(mbrId);
+
+            // 수정자 아이디
+            req.setMdfrId(mbrId);
+
+            conn.insert(req);
+            /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그인 성공 기록) 끝 ************************************************/
+
+            logger.debug("AnyIdLoginBizService loginByCi(String ci, HttpServletRequest httpRequest, String redirectUriAfterLogin) ConnectionLogClient.insert status=LoggedIn, UI redirectUrl="+redirectUrl+", mbrId="+mbrId+", ConnectionLogInsertReqVO="+req.toString());
 
             return apiPrnDto;
         }
 
+        String redirectUrl = sanitizeRedirectPath(DEFAULT_SIGN_UP_REDIRECT, DEFAULT_SIGN_UP_REDIRECT);
+        
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
         apiPrnDto.setMsg(MessageContextHolder.getMessage("ui.msg.anyid.signup"));
 
         HashMap<String, Object> bizData = new HashMap<>();
         bizData.put("status", "SignUpSel");
         bizData.put("ci", ci);
-        bizData.put("redirectUrl", sanitizeRedirectPath(DEFAULT_SIGN_UP_REDIRECT, DEFAULT_SIGN_UP_REDIRECT));
+        bizData.put("redirectUrl", redirectUrl);
 
         apiPrnDto.setData(bizData);
+
+        logger.debug("AnyIdLoginBizService loginByCi(String ci, HttpServletRequest httpRequest, String redirectUriAfterLogin) status=SignUpSel, UI redirectUrl="+redirectUrl);
+
         return apiPrnDto;
     }
 
@@ -107,6 +168,8 @@ public class AnyIdLoginBizService {
         if (ci == null || ci.isBlank()) {
             return;
         }
+
+        logger.debug("AnyIdLoginBizService loginByCi(String ci, HttpServletRequest request, HttpServletResponse response) ci="+ci);
 
         MbrInfoPVO mbrInfoPVO = new MbrInfoPVO();
         mbrInfoPVO.setLinkInfoIdntfId(ci);
@@ -126,60 +189,67 @@ public class AnyIdLoginBizService {
                 HttpSession session = request.getSession(true);
                 session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
 
+                /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그인 성공 기록) 시작 ************************************************/
+                ConnectionLogClient conn = ApplicationContextProvider.getBean(ConnectionLogClient.class);
+
+                String mbrId = resultVo.getMbrId();
+                DrugsafeUtil  util = new DrugsafeUtil();
+                String clientIp = util.getClientIp(request);
+
+                ConnectionLogInsertReqVO req = new ConnectionLogInsertReqVO();
+
+                // 로그인구분코드(1 : ID 로그인 , 2 : 애니아이디 로그인)
+                req.setLgnSeCd("2");
+
+                // 네트워크 구분코드(1 : 내부망, 2 : 외부망)
+                req.setNetSeCd(clientIp != null && clientIp.indexOf("192.168") > -1 ? "1" : "2");
+
+                // 서비스사용자 아이디
+                req.setSrvcUserId(mbrId);
+
+                // 요청자IP주소
+                req.setRqstrIpAddr(clientIp);
+
+                // 접속구분번호(1 : 로그인, 2:로그아웃) 
+                req.setCntnSeNo("1");
+
+                // 접속 상세 설명
+                req.setCntnDtlExpln("LoginIn");
+
+                // 인증토큰값(CI 값을 넣을지 확정 안됨.)
+                req.setCertTokenVl("");
+
+                // 서비스명
+                req.setSrvcNm("kids_pp");
+
+                // 업무구분코드
+                req.setTaskSeCd("PP");
+
+                // 등록자 아이디
+                req.setRgtrId(mbrId);
+
+                // 수정자 아이디
+                req.setMdfrId(mbrId);
+
+                conn.insert(req);
+                /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그인 성공 기록) 끝 ************************************************/
+
+                logger.debug("AnyIdLoginBizService loginByCi(String ci, HttpServletRequest request, HttpServletResponse response) mbrId="+mbrId+", ConnectionLogClient.insert, ConnectionLogInsertReqVO="+req.toString());
+
                 if(!response.isCommitted()){
 
-                    /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그인 성공 기록) 시작 ************************************************/
-                    ConnectionLogClient conn = ApplicationContextProvider.getBean(ConnectionLogClient.class);
-
-                    String mbrId = resultVo.getMbrId();
-                    DrugsafeUtil  util = new DrugsafeUtil();
-                    String clientIp = util.getClientIp(request);
-
-                    ConnectionLogInsertReqVO req = new ConnectionLogInsertReqVO();
-
-                    // 로그인구분코드(1 : ID 로그인 , 2 : 애니아이디 로그인)
-                    req.setLgnSeCd("2");
-
-                    // 네트워크 구분코드(1 : 내부망, 2 : 외부망)
-                    req.setNetSeCd(clientIp != null && clientIp.indexOf("192.168") > -1 ? "1" : "2");
-
-                    // 서비스사용자 아이디
-                    req.setSrvcUserId(mbrId);
-
-                    // 요청자IP주소
-                    req.setRqstrIpAddr(clientIp);
-
-                    // 접속구분번호(1 : 로그인, 2:로그아웃) 
-                    req.setCntnSeNo("1");
-
-                    // 접속 상세 설명
-                    req.setCntnDtlExpln("LoginIn");
-
-                    // 인증토큰값(CI 값을 넣을지 확정 안됨.)
-                    req.setCertTokenVl("");
-
-                    // 서비스명
-                    req.setSrvcNm("kids_pp");
-
-                    // 업무구분코드
-                    req.setTaskSeCd("PP");
-
-                    // 등록자 아이디
-                    req.setRgtrId(mbrId);
-
-                    // 수정자 아이디
-                    req.setMdfrId(mbrId);
-
-                    conn.insert(req);
-                    /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그인 성공 기록) 끝 ************************************************/
-
-                    // UI 특정 URL로 리다이렉트
+                    logger.debug("AnyIdLoginBizService loginByCi(String ci, HttpServletRequest request, HttpServletResponse response) status=LoggedIn, redirectUrl="+DEFAULT_LOGGED_IN_REDIRECT+", mbrId="+mbrId);
+                    // 홈 화면으로 이동
                     response.sendRedirect(DEFAULT_LOGGED_IN_REDIRECT);
                 }
             }
-
-            if(!response.isCommitted()){
-                response.sendRedirect(DEFAULT_SIGN_UP_REDIRECT);
+            // CI 기준으로 회원정보가 존재하지 않는 경우, 회원가입 화면으로 이동
+            else
+            {
+                if(!response.isCommitted()){
+                    logger.debug("AnyIdLoginBizService loginByCi(String ci, HttpServletRequest request, HttpServletResponse response) status=SignUpSel, redirectUrl="+DEFAULT_SIGN_UP_REDIRECT);
+                    response.sendRedirect(DEFAULT_SIGN_UP_REDIRECT);
+                }
             }
         }catch(IOException e){
             

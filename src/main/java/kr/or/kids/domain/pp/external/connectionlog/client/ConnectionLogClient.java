@@ -10,7 +10,7 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
 @Component
 public class ConnectionLogClient {
-    private static final String SERVICE_KEY = "connectionLogInsert";
+    private static final String SERVICE_KEY = "connectionlog";
     private final ExternalApiClient api;
 
     public ConnectionLogClient(ExternalApiClient api) {
@@ -21,7 +21,7 @@ public class ConnectionLogClient {
         return api.post(
                 SERVICE_KEY,
                 "/api/ca/connectionlog/insert",
-                Map.of("X-Client", "ca-be"),
+                Map.of("X-Client", "ca-auth"),
                 null,
                 req,
                 ApiPrnDto.class

@@ -85,6 +85,10 @@ external:
       base-url: http://192.168.2.149:30012
       connect-timeout-ms: 1000
       read-timeout-ms: 3000
+    connectionlog:
+      base-url: http://kids-ca-auth-service.kids-dev-ca:8080
+      connect-timeout-ms: 3000
+      read-timeout-ms: 6000
 
 jwt:
   issuer: kids_user
