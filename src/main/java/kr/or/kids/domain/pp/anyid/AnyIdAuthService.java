@@ -74,9 +74,10 @@ public class AnyIdAuthService {
             log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before resource.getFilename()="+resource2.getFilename()+" Content End =====================================");
             br.close();
 
-            Resource resource = new ClassPathResource("config/kdist/kdist-api.json");
-            InputStream inputStream = resource.getInputStream();
-            Map<String, Object> resultMap = anyidCertRef.decryptSsob(req.ssob(), req.tag(), inputStream);
+//            Resource resource = new ClassPathResource("config/kdist/kdist-api.json");
+//            InputStream inputStream = resource.getInputStream();
+            String kdistApiJsonFilePath = resourcePaths.kdistApiJsonFilePath();
+            Map<String, Object> resultMap = anyidCertRef.decryptSsob(req.ssob(), req.tag(), kdistApiJsonFilePath);
             ssobStr = (String) resultMap.get("ssobStr");
             if (ssobStr == null || ssobStr.isBlank()) {
                 throw new IllegalStateException("decryptSsob did not return ssobStr");

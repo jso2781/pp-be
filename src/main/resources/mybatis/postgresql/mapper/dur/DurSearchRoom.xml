@@ -502,20 +502,20 @@
             AND 'dosage' = #{bannTypeCd}
             UNION ALL
             /* DUR효능군중복 정보에서 제품별 제약회사 조회(성분명에 대한 그룹명_1 소속 전체 제품 조회) */
-			SELECT
-			      coalesce(eg.item_nm, eg.mfds_prdct_nm) as prdct_nm   /* 제품명 */
-			    , eg.bzenty_nm                                      /* 제약회사(업체명) */
-			FROM kids_own.tb_pp_m_dur_eftgrp eg
-			   , (SELECT MAX(eff_group_nm) AS eff_group_nm, MAX(group_nm_1) AS group_nm_1
-			        FROM kids_own.tb_pp_m_dur_eftgrp
-			       WHERE oper_stts_cd = 'O'
-			    <if test="igrdNm != null and igrdNm != ''">
-			        AND (lower(gnrl_nm) = lower(#{igrdNm}))
-			    </if>
-			       GROUP BY eff_group_nm, group_nm_1) eg2 
-			WHERE eg2.eff_group_nm = eg.eff_group_nm
-			  AND eg2.group_nm_1 = eg.group_nm_1
-			  AND eg.oper_stts_cd = 'O'
+            SELECT
+                  coalesce(eg.item_nm, eg.mfds_prdct_nm) as prdct_nm   /* 제품명 */
+                , eg.bzenty_nm                                      /* 제약회사(업체명) */
+            FROM kids_own.tb_pp_m_dur_eftgrp eg
+               , (SELECT MAX(eff_group_nm) AS eff_group_nm, MAX(group_nm_1) AS group_nm_1
+                    FROM kids_own.tb_pp_m_dur_eftgrp
+                   WHERE oper_stts_cd = 'O'
+                <if test="igrdNm != null and igrdNm != ''">
+                    AND (lower(gnrl_nm) = lower(#{igrdNm}))
+                </if>
+                   GROUP BY eff_group_nm, group_nm_1) eg2 
+            WHERE eg2.eff_group_nm = eg.eff_group_nm
+              AND eg2.group_nm_1 = eg.group_nm_1
+              AND eg.oper_stts_cd = 'O'
               AND 'eftgrp' = #{bannTypeCd}
             UNION ALL
             /* DUR노인주의 정보에서 제품별 제약회사 조회(성분명 조건) */
@@ -542,43 +542,6 @@
         ) A
     </select>
 
-    <select id="selectEftgrpDetailList_backup" parameterType="DurEftgrpDetailPVO" resultType="DurEftgrpDetailRVO">
-        /* 효능군중복주의 상세 조회(특정 성분의 그룹1 기준으로 조회, 팝업용) */
-        SELECT 
-             eff_group_nm           /* 효능그룹명 */
-            ,group_nm               /* 계열(그룹명) */
-            ,igrd_nm                /* 성분 */
-        FROM(
-            SELECT distinct
-                 eg.eff_group_nm
-                ,(
-                    select
-                        dc.com_dtl_cd_nm
-                    from kids_own.tb_ca_c_dtl_code dc
-                    inner join kids_own.tb_ca_c_group_code gc
-                        on dc.com_group_cd = gc.com_group_cd
-                    where gc.group_cd_nm = eg.eff_group_nm
-                    and dc.com_dtl_cd = eg.group_nm
-                    LIMIT 1
-                 ) as group_nm
-                ,coalesce(eg.gnrl_nm, eg.mfds_igrd_nm_cn) as igrd_nm
-            FROM kids_own.tb_pp_m_dur_eftgrp eg
-            WHERE eg.oper_stts_cd = 'O' 
-            AND eg.group_nm_1 IN(
-                SELECT
-                    e.group_nm_1    /* 그룹명_1 */
-                FROM kids_own.tb_pp_m_dur_eftgrp e
-                WHERE oper_stts_cd = 'O' 
-                <if test="igrdNm != null and igrdNm != ''">
-                    AND (lower(e.gnrl_nm) = lower(#{igrdNm}))
-                </if>
-            )
-            <if test="igrdNm != null and igrdNm != ''">
-                AND (lower(eg.gnrl_nm) = lower(#{igrdNm}))
-            </if>
-        ) A
-    </select>
-    
     <select id="selectEftgrpDetailList" parameterType="DurEftgrpDetailPVO" resultType="DurEftgrpDetailRVO">
         /* 효능군중복주의 상세 조회(특정 성분의 그룹1 기준으로 조회, 팝업용) */
         SELECT 
@@ -599,17 +562,17 @@
                     LIMIT 1
                  ) as group_nm
                 ,coalesce(eg.gnrl_nm, eg.mfds_igrd_nm_cn) as igrd_nm
-		    FROM kids_own.tb_pp_m_dur_eftgrp eg
-		       , (SELECT MAX(eff_group_nm) AS eff_group_nm, MAX(group_nm_1) AS group_nm_1
-		            FROM kids_own.tb_pp_m_dur_eftgrp
-		           WHERE oper_stts_cd = 'O'
+            FROM kids_own.tb_pp_m_dur_eftgrp eg
+               , (SELECT MAX(eff_group_nm) AS eff_group_nm, MAX(group_nm_1) AS group_nm_1
+                    FROM kids_own.tb_pp_m_dur_eftgrp
+                   WHERE oper_stts_cd = 'O'
                 <if test="igrdNm != null and igrdNm != ''">
                      AND lower(gnrl_nm) = lower(#{igrdNm})
-                </if>		           
-		          GROUP BY eff_group_nm, group_nm_1) eg2 
-		    WHERE eg2.eff_group_nm = eg.eff_group_nm
-		      AND eg2.group_nm_1 = eg.group_nm_1
-		      AND eg.oper_stts_cd = 'O'
+                </if>                   
+                  GROUP BY eff_group_nm, group_nm_1) eg2 
+            WHERE eg2.eff_group_nm = eg.eff_group_nm
+              AND eg2.group_nm_1 = eg.group_nm_1
+              AND eg.oper_stts_cd = 'O'
         ) A
     </select>    
 </mapper>
