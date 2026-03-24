@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,14 +36,11 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class OpnnServiceImpl implements OpnnService
 {
-    @Autowired
-    private OpnnMapper opnnMapper;
+    private final OpnnMapper opnnMapper;
 
-    @Autowired
-    private FileService fileService;
+    private final FileService fileService;
     
-    @Autowired
-    private AtchMapper atchMapper;    
+    private final AtchMapper atchMapper;    
     
     private final FormService formService;
     

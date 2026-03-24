@@ -3,7 +3,6 @@ package kr.or.kids.domain.pp.auth.service.impl;
 import java.math.BigInteger;
 import java.util.HashMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -25,10 +24,12 @@ import kr.or.kids.global.security.JwtTokenProvider;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 import kr.or.kids.global.util.DrugsafeUtil;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService
 {
     @Value("${jwt.refresh-token-expiration}")
@@ -40,26 +41,20 @@ public class AuthServiceImpl implements AuthService
     @Value("${jwt.issuer}")
     private String ISSUER;
 
-    @Autowired
-    public MbrInfoMapper mbrInfoMapper;
+    public final MbrInfoMapper mbrInfoMapper;
 
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    @Autowired
-    private MbrTokenMapper mbrTokenMapper;
+    private final MbrTokenMapper mbrTokenMapper;
 
-    @Autowired
-    private TokenBlacklistService tokenBlacklistService;
+    private final TokenBlacklistService tokenBlacklistService;
 
-    @Autowired
-    private ActiveTokenService activeTokenService;
+    private final ActiveTokenService activeTokenService;
 
-    @Autowired
-    private IdleTokenService idleTokenService;
+    private final IdleTokenService idleTokenService;
 
     @Override
     public MbrTokenRVO getMbrToken(MbrTokenPVO mbrTokenPVO)

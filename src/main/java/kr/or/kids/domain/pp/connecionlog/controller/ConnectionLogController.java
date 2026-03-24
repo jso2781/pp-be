@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.connecionlog.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +12,15 @@ import kr.or.kids.global.util.DrugsafeUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
+import lombok.RequiredArgsConstructor;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/pp/connectionlog")
+@RequiredArgsConstructor
 public class ConnectionLogController {
 
 
-    @Autowired
-    private ConnectionLogService connectionLogService;
+    private final ConnectionLogService connectionLogService;
 
     /**
      * 로그인접속정보 등록

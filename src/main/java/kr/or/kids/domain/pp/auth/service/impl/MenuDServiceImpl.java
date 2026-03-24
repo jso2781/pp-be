@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.auth.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.auth.mapper.MenuDMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.auth.vo.MenuDDVO;
 import kr.or.kids.domain.pp.auth.vo.MenuDPVO;
 import kr.or.kids.domain.pp.auth.vo.MenuDRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class MenuDServiceImpl implements MenuDService
 {
-    @Autowired
-    private MenuDMapper menuDMapper;
+    private final MenuDMapper menuDMapper;
 
     @Override
     public MenuDRVO getMenuD(MenuDPVO menuDPVO)

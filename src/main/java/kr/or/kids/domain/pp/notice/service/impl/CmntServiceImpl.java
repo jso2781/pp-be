@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.notice.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.notice.mapper.CmntMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.notice.vo.CmntDVO;
 import kr.or.kids.domain.pp.notice.vo.CmntPVO;
 import kr.or.kids.domain.pp.notice.vo.CmntRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class CmntServiceImpl implements CmntService
 {
-    @Autowired
-    private CmntMapper cmntMapper;
+    private final CmntMapper cmntMapper;
 
     @Override
     public CmntRVO getCmnt(CmntPVO cmntPVO)

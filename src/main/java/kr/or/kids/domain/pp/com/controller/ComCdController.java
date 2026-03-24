@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.com.vo.ComCdDVO;
 import kr.or.kids.domain.pp.com.vo.ComCdPVO;
 import kr.or.kids.domain.pp.com.vo.ComCdRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "ComCdController", description = "공통_공통코드기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/com")
+@RequiredArgsConstructor
 public class ComCdController
 {
-    @Autowired
-    private ComCdService comCdService;
+    private final ComCdService comCdService;
 
     @Operation(summary = "공통_공통코드기본 조회", description = "공통_공통코드기본 조회한다.")
     @PostMapping(value="/getComCd")

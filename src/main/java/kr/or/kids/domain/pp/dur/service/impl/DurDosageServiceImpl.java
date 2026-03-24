@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.dur.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.dur.mapper.DurDosageMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.dur.vo.DurDosageDVO;
 import kr.or.kids.domain.pp.dur.vo.DurDosagePVO;
 import kr.or.kids.domain.pp.dur.vo.DurDosageRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class DurDosageServiceImpl implements DurDosageService
 {
-    @Autowired
-    private DurDosageMapper durDosageMapper;
+    private final DurDosageMapper durDosageMapper;
 
     @Override
     public DurDosageRVO getDurDosage(DurDosagePVO durDosagePVO)

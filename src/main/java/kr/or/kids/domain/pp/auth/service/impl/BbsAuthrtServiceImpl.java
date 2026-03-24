@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.auth.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.auth.mapper.BbsAuthrtMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.auth.vo.BbsAuthrtDVO;
 import kr.or.kids.domain.pp.auth.vo.BbsAuthrtPVO;
 import kr.or.kids.domain.pp.auth.vo.BbsAuthrtRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class BbsAuthrtServiceImpl implements BbsAuthrtService
 {
-    @Autowired
-    private BbsAuthrtMapper bbsAuthrtMapper;
+    private final BbsAuthrtMapper bbsAuthrtMapper;
 
     @Override
     public BbsAuthrtRVO getBbsAuthrt(BbsAuthrtPVO bbsAuthrtPVO)

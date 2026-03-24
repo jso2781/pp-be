@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.emp.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.emp.mapper.EmpMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.emp.vo.EmpDVO;
 import kr.or.kids.domain.pp.emp.vo.EmpPVO;
 import kr.or.kids.domain.pp.emp.vo.EmpRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class EmpServiceImpl implements EmpService
 {
-    @Autowired
-    private EmpMapper empMapper;
+    private final EmpMapper empMapper;
 
     @Override
     public EmpRVO getEmp(EmpPVO empPVO)

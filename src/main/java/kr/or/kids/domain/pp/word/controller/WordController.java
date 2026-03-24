@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.word.vo.WordDVO;
 import kr.or.kids.domain.pp.word.vo.WordPVO;
 import kr.or.kids.domain.pp.word.vo.WordRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "WordController", description = "대국민포털_단어기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/word")
+@RequiredArgsConstructor
 public class WordController
 {
-    @Autowired
-    private WordService wordService;
+    private final WordService wordService;
 
     @Operation(summary = "대국민포털_단어기본 조회", description = "대국민포털_단어기본 조회한다.")
     @PostMapping(value="/getWord")

@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.dmn.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.dmn.mapper.DmnMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.dmn.vo.DmnDVO;
 import kr.or.kids.domain.pp.dmn.vo.DmnPVO;
 import kr.or.kids.domain.pp.dmn.vo.DmnRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class DmnServiceImpl implements DmnService
 {
-    @Autowired
-    private DmnMapper dmnMapper;
+    private final DmnMapper dmnMapper;
 
     @Override
     public DmnRVO getDmn(DmnPVO dmnPVO)

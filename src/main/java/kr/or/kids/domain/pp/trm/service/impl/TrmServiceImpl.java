@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.trm.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.trm.mapper.TrmMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.trm.vo.TrmDVO;
 import kr.or.kids.domain.pp.trm.vo.TrmPVO;
 import kr.or.kids.domain.pp.trm.vo.TrmRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class TrmServiceImpl implements TrmService
 {
-    @Autowired
-    private TrmMapper trmMapper;
+    private final TrmMapper trmMapper;
 
     @Override
     public TrmRVO getTrm(TrmPVO trmPVO)

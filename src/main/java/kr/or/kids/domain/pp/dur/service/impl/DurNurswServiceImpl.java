@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.dur.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.dur.mapper.DurNurswMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.dur.vo.DurNurswDVO;
 import kr.or.kids.domain.pp.dur.vo.DurNurswPVO;
 import kr.or.kids.domain.pp.dur.vo.DurNurswRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class DurNurswServiceImpl implements DurNurswService
 {
-    @Autowired
-    private DurNurswMapper durNurswMapper;
+    private final DurNurswMapper durNurswMapper;
 
     @Override
     public DurNurswRVO getDurNursw(DurNurswPVO durNurswPVO)

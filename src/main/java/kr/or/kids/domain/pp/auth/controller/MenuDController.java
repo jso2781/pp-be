@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.auth.vo.MenuDDVO;
 import kr.or.kids.domain.pp.auth.vo.MenuDPVO;
 import kr.or.kids.domain.pp.auth.vo.MenuDRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "MenuDController", description = "대국민포털_메뉴상세 관리")
 @RestController
 @RequestMapping(value="/api/pp/auth")
+@RequiredArgsConstructor
 public class MenuDController
 {
-    @Autowired
-    private MenuDService menuDService;
+    private final MenuDService menuDService;
 
     @Operation(summary = "대국민포털_메뉴상세 조회", description = "대국민포털_메뉴상세 조회한다.")
     @PostMapping(value="/getMenuD")

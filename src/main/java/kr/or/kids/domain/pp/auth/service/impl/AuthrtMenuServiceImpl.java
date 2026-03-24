@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.auth.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.auth.mapper.AuthrtMenuMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.auth.vo.AuthrtMenuDVO;
 import kr.or.kids.domain.pp.auth.vo.AuthrtMenuPVO;
 import kr.or.kids.domain.pp.auth.vo.AuthrtMenuRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class AuthrtMenuServiceImpl implements AuthrtMenuService
 {
-    @Autowired
-    private AuthrtMenuMapper authrtMenuMapper;
+    private final AuthrtMenuMapper authrtMenuMapper;
 
     @Override
     public AuthrtMenuRVO getAuthrtMenu(AuthrtMenuPVO authrtMenuPVO)

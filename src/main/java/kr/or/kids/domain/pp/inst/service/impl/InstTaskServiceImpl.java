@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.inst.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.inst.mapper.InstTaskMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.inst.vo.InstTaskDVO;
 import kr.or.kids.domain.pp.inst.vo.InstTaskPVO;
 import kr.or.kids.domain.pp.inst.vo.InstTaskRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class InstTaskServiceImpl implements InstTaskService
 {
-    @Autowired
-    private InstTaskMapper instTaskMapper;
+    private final InstTaskMapper instTaskMapper;
 
     @Override
     public InstTaskRVO getInstTask(InstTaskPVO instTaskPVO)

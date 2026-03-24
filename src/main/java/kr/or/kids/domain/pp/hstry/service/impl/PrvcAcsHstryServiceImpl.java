@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.hstry.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.hstry.mapper.PrvcAcsHstryMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.hstry.vo.PrvcAcsHstryDVO;
 import kr.or.kids.domain.pp.hstry.vo.PrvcAcsHstryPVO;
 import kr.or.kids.domain.pp.hstry.vo.PrvcAcsHstryRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class PrvcAcsHstryServiceImpl implements PrvcAcsHstryService
 {
-    @Autowired
-    private PrvcAcsHstryMapper prvcAcsHstryMapper;
+    private final PrvcAcsHstryMapper prvcAcsHstryMapper;
 
     @Override
     public PrvcAcsHstryRVO getPrvcAcsHstry(PrvcAcsHstryPVO prvcAcsHstryPVO)

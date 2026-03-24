@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.com.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.com.mapper.ComCdMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.com.vo.ComCdDVO;
 import kr.or.kids.domain.pp.com.vo.ComCdPVO;
 import kr.or.kids.domain.pp.com.vo.ComCdRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class ComCdServiceImpl implements ComCdService
 {
-    @Autowired
-    private ComCdMapper comCdMapper;
+    private final ComCdMapper comCdMapper;
 
     @Override
     public ComCdRVO getComCd(ComCdPVO comCdPVO)

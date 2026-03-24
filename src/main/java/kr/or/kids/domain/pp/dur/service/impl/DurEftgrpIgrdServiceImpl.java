@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.dur.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.dur.mapper.DurEftgrpIgrdMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.dur.vo.DurEftgrpIgrdDVO;
 import kr.or.kids.domain.pp.dur.vo.DurEftgrpIgrdPVO;
 import kr.or.kids.domain.pp.dur.vo.DurEftgrpIgrdRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class DurEftgrpIgrdServiceImpl implements DurEftgrpIgrdService
 {
-    @Autowired
-    private DurEftgrpIgrdMapper durEftgrpIgrdMapper;
+    private final DurEftgrpIgrdMapper durEftgrpIgrdMapper;
 
     @Override
     public DurEftgrpIgrdRVO getDurEftgrpIgrd(DurEftgrpIgrdPVO durEftgrpIgrdPVO)

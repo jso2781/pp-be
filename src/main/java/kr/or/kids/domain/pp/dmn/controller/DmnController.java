@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.dmn.vo.DmnDVO;
 import kr.or.kids.domain.pp.dmn.vo.DmnPVO;
 import kr.or.kids.domain.pp.dmn.vo.DmnRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "DmnController", description = "대국민포털_도메인기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/dmn")
+@RequiredArgsConstructor
 public class DmnController
 {
-    @Autowired
-    private DmnService dmnService;
+    private final DmnService dmnService;
 
     @Operation(summary = "대국민포털_도메인기본 조회", description = "대국민포털_도메인기본 조회한다.")
     @PostMapping(value="/getDmn")

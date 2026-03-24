@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.task.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.task.mapper.TaskCdMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.task.vo.TaskCdDVO;
 import kr.or.kids.domain.pp.task.vo.TaskCdPVO;
 import kr.or.kids.domain.pp.task.vo.TaskCdRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class TaskCdServiceImpl implements TaskCdService
 {
-    @Autowired
-    private TaskCdMapper taskCdMapper;
+    private final TaskCdMapper taskCdMapper;
 
     @Override
     public TaskCdRVO getTaskCd(TaskCdPVO taskCdPVO)

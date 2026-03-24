@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.task.vo.TaskCdDVO;
 import kr.or.kids.domain.pp.task.vo.TaskCdPVO;
 import kr.or.kids.domain.pp.task.vo.TaskCdRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "TaskCdController", description = "대국민포털_업무코드기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/task")
+@RequiredArgsConstructor
 public class TaskCdController
 {
-    @Autowired
-    private TaskCdService taskCdService;
+    private final TaskCdService taskCdService;
 
     @Operation(summary = "대국민포털_업무코드기본 조회", description = "대국민포털_업무코드기본 조회한다.")
     @PostMapping(value="/getTaskCd")

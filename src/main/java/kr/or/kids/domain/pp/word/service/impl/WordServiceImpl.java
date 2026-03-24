@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.word.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.word.mapper.WordMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.word.vo.WordDVO;
 import kr.or.kids.domain.pp.word.vo.WordPVO;
 import kr.or.kids.domain.pp.word.vo.WordRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class WordServiceImpl implements WordService
 {
-    @Autowired
-    private WordMapper wordMapper;
+    private final WordMapper wordMapper;
 
     @Override
     public WordRVO getWord(WordPVO wordPVO)
