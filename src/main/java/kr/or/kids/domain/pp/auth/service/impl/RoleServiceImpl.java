@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.auth.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.auth.mapper.RoleMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.auth.vo.RoleDVO;
 import kr.or.kids.domain.pp.auth.vo.RolePVO;
 import kr.or.kids.domain.pp.auth.vo.RoleRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService
 {
-    @Autowired
-    private RoleMapper roleMapper;
+    private final RoleMapper roleMapper;
 
     @Override
     public RoleRVO getRole(RolePVO rolePVO)

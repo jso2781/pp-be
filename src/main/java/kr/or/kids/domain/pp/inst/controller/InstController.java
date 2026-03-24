@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.inst.vo.InstDVO;
 import kr.or.kids.domain.pp.inst.vo.InstPVO;
 import kr.or.kids.domain.pp.inst.vo.InstRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "InstController", description = "대국민포털_기관정보기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/inst")
+@RequiredArgsConstructor
 public class InstController
 {
-    @Autowired
-    private InstService instService;
+    private final InstService instService;
 
     @Operation(summary = "대국민포털_기관정보기본 조회", description = "대국민포털_기관정보기본 조회한다.")
     @PostMapping(value="/getInst")

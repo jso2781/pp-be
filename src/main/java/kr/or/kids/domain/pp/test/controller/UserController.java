@@ -9,18 +9,18 @@ import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 import kr.or.kids.global.system.common.vo.PageRequestDto;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import lombok.RequiredArgsConstructor;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/pp/user")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     /**
      * 사용자목록

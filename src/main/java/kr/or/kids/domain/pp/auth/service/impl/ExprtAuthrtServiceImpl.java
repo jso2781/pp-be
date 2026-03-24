@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.auth.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.auth.mapper.ExprtAuthrtMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.auth.vo.ExprtAuthrtDVO;
 import kr.or.kids.domain.pp.auth.vo.ExprtAuthrtPVO;
 import kr.or.kids.domain.pp.auth.vo.ExprtAuthrtRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class ExprtAuthrtServiceImpl implements ExprtAuthrtService
 {
-    @Autowired
-    private ExprtAuthrtMapper exprtAuthrtMapper;
+    private final ExprtAuthrtMapper exprtAuthrtMapper;
 
     @Override
     public ExprtAuthrtRVO getExprtAuthrt(ExprtAuthrtPVO exprtAuthrtPVO)

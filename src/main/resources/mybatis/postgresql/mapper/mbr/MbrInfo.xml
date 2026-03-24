@@ -83,10 +83,10 @@
         FROM kids_own.tb_pp_m_mbr_info mbr
         LEFT JOIN LATERAL (
             select log1.lgn_se_cd
-            from tb_ca_l_sesn_log_info_mng log1
-            where sess_log_sn = (
-                                    SELECT coalesce(MAX(sess_log_sn), 0) as sess_log_sn
-                                    FROM tb_ca_l_sesn_log_info_mng log2
+            from kids_own.tb_ca_l_sesn_log_info_mng log1
+            where log1.sess_log_sn = (
+                                    SELECT coalesce(MAX(log2.sess_log_sn), 0) as sess_log_sn
+                                    FROM kids_own.tb_ca_l_sesn_log_info_mng log2
                                     WHERE log2.srvc_user_id = mbr.mbr_id
                                     and log2.cntn_se_no = '1'
                                 )

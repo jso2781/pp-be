@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.auth.vo.AuthrtMenuRoleDVO;
 import kr.or.kids.domain.pp.auth.vo.AuthrtMenuRolePVO;
 import kr.or.kids.domain.pp.auth.vo.AuthrtMenuRoleRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "AuthrtMenuRoleController", description = "대국민포털_권한메뉴롤기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/auth")
+@RequiredArgsConstructor
 public class AuthrtMenuRoleController
 {
-    @Autowired
-    private AuthrtMenuRoleService authrtMenuRoleService;
+    private final AuthrtMenuRoleService authrtMenuRoleService;
 
     @Operation(summary = "대국민포털_권한메뉴롤기본 조회", description = "대국민포털_권한메뉴롤기본 조회한다.")
     @PostMapping(value="/getAuthrtMenuRole")

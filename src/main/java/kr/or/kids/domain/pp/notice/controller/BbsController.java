@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.notice.vo.BbsDVO;
 import kr.or.kids.domain.pp.notice.vo.BbsPVO;
 import kr.or.kids.domain.pp.notice.vo.BbsRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "BbsController", description = "대국민포털_게시판기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/notice")
+@RequiredArgsConstructor
 public class BbsController
 {
-    @Autowired
-    private BbsService bbsService;
+    private final BbsService bbsService;
 
     @Operation(summary = "대국민포털_게시판기본 조회", description = "대국민포털_게시판기본 조회한다.")
     @PostMapping(value="/getBbs")

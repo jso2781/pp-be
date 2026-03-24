@@ -17,12 +17,16 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.auth.service.AuthService;
+import kr.or.kids.domain.pp.external.connectionlog.client.ConnectionLogClient;
+import kr.or.kids.domain.pp.external.connectionlog.vo.ConnectionLogInsertReqVO;
 import kr.or.kids.domain.pp.mbr.mapper.MbrInfoMapper;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
 import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
+import kr.or.kids.global.config.ApplicationContextProvider;
 import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
+import kr.or.kids.global.util.DrugsafeUtil;
 
 /**
  * Any-ID CI 기준 로그인 처리 (SSO 콜백 {@code onSsoLoginSuccess} 와 REST {@code /api/pp/auth/anyid/login} 공통).
@@ -123,6 +127,53 @@ public class AnyIdLoginBizService {
                 session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
 
                 if(!response.isCommitted()){
+
+                    /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그인 성공 기록) 시작 ************************************************/
+                    ConnectionLogClient conn = ApplicationContextProvider.getBean(ConnectionLogClient.class);
+
+                    String mbrId = resultVo.getMbrId();
+                    DrugsafeUtil  util = new DrugsafeUtil();
+                    String clientIp = util.getClientIp(request);
+
+                    ConnectionLogInsertReqVO req = new ConnectionLogInsertReqVO();
+
+                    // 로그인구분코드(1 : ID 로그인 , 2 : 애니아이디 로그인)
+                    req.setLgnSeCd("2");
+
+                    // 네트워크 구분코드(1 : 내부망, 2 : 외부망)
+                    req.setNetSeCd(clientIp != null && clientIp.indexOf("192.168") > -1 ? "1" : "2");
+
+                    // 서비스사용자 아이디
+                    req.setSrvcUserId(mbrId);
+
+                    // 요청자IP주소
+                    req.setRqstrIpAddr(clientIp);
+
+                    // 접속구분번호(1 : 로그인, 2:로그아웃) 
+                    req.setCntnSeNo("1");
+
+                    // 접속 상세 설명
+                    req.setCntnDtlExpln("LoginIn");
+
+                    // 인증토큰값(CI 값을 넣을지 확정 안됨.)
+                    req.setCertTokenVl("");
+
+                    // 서비스명
+                    req.setSrvcNm("kids_pp");
+
+                    // 업무구분코드
+                    req.setTaskSeCd("PP");
+
+                    // 등록자 아이디
+                    req.setRgtrId(mbrId);
+
+                    // 수정자 아이디
+                    req.setMdfrId(mbrId);
+
+                    conn.insert(req);
+                    /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그인 성공 기록) 끝 ************************************************/
+
+                    // UI 특정 URL로 리다이렉트
                     response.sendRedirect(DEFAULT_LOGGED_IN_REDIRECT);
                 }
             }

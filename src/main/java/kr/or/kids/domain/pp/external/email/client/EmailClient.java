@@ -21,7 +21,7 @@ public class EmailClient {
         return api.post(
                 SERVICE_KEY,
                 "/api/ca/mail/send",
-                Map.of("X-Client", "my-backend"),
+                Map.of("X-Client", "ca-be"),
                 null,
                 req,
                 EmailRVO.class

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.auth.vo.AuthrtDVO;
 import kr.or.kids.domain.pp.auth.vo.AuthrtPVO;
 import kr.or.kids.domain.pp.auth.vo.AuthrtRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "AuthrtController", description = "대국민포털_권한기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/auth")
+@RequiredArgsConstructor
 public class AuthrtController
 {
-    @Autowired
-    private AuthrtService authrtService;
+    private final AuthrtService authrtService;
 
     @Operation(summary = "대국민포털_권한기본 조회", description = "대국민포털_권한기본 조회한다.")
     @PostMapping(value="/getAuthrt")

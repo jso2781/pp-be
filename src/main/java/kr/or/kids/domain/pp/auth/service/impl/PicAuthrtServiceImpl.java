@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.auth.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.auth.mapper.PicAuthrtMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.auth.vo.PicAuthrtDVO;
 import kr.or.kids.domain.pp.auth.vo.PicAuthrtPVO;
 import kr.or.kids.domain.pp.auth.vo.PicAuthrtRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class PicAuthrtServiceImpl implements PicAuthrtService
 {
-    @Autowired
-    private PicAuthrtMapper picAuthrtMapper;
+    private final PicAuthrtMapper picAuthrtMapper;
 
     @Override
     public PicAuthrtRVO getPicAuthrt(PicAuthrtPVO picAuthrtPVO)

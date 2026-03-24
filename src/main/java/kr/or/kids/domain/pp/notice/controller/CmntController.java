@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.notice.vo.CmntDVO;
 import kr.or.kids.domain.pp.notice.vo.CmntPVO;
 import kr.or.kids.domain.pp.notice.vo.CmntRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "CmntController", description = "대국민포털_댓글기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/notice")
+@RequiredArgsConstructor
 public class CmntController
 {
-    @Autowired
-    private CmntService cmntService;
+    private final CmntService cmntService;
 
     @Operation(summary = "대국민포털_댓글기본 조회", description = "대국민포털_댓글기본 조회한다.")
     @PostMapping(value="/getCmnt")

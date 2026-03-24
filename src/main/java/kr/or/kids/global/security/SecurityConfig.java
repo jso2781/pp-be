@@ -4,7 +4,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 import java.util.Arrays;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -24,14 +23,14 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import kr.or.kids.domain.pp.auth.service.IdleTokenService;
 import kr.or.kids.domain.pp.auth.service.TokenBlacklistService;
 
+import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
-    @Autowired
-    private TokenBlacklistService tokenBlacklistService;
+    private final TokenBlacklistService tokenBlacklistService;
 
-    @Autowired
-    private IdleTokenService idleTokenService;
+    private final IdleTokenService idleTokenService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtTokenProvider jwtTokenProvider) throws Exception {

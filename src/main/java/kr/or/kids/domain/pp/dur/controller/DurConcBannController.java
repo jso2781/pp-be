@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.dur.vo.DurConcBannDVO;
 import kr.or.kids.domain.pp.dur.vo.DurConcBannPVO;
 import kr.or.kids.domain.pp.dur.vo.DurConcBannRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "DurConcBannController", description = "대국민포털_DUR병용금기기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/dur")
+@RequiredArgsConstructor
 public class DurConcBannController
 {
-    @Autowired
-    private DurConcBannService concBannService;
+    private final DurConcBannService concBannService;
 
     @Operation(summary = "대국민포털_DUR병용금기기본 조회", description = "대국민포털_DUR병용금기기본 조회한다.")
     @PostMapping(value="/getDurConcBann")

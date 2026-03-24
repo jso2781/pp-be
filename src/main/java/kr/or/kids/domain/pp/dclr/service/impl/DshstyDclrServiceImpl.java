@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -35,8 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class DshstyDclrServiceImpl implements DshstyDclrService
 {
-    @Autowired
-    private DshstyDclrMapper dshstyDclrMapper;
+    private final DshstyDclrMapper dshstyDclrMapper;
     
     private final FormService formService;
     

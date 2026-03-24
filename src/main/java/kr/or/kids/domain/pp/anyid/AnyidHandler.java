@@ -9,11 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import kr.or.anyid.adaptor.Sso;
 import kr.or.anyid.adaptor.agency.interfaces.SsoLoginCallback;
 import kr.or.anyid.adaptor.core.exception.AdaptorErrorCode;
 import kr.or.anyid.adaptor.core.exception.AdaptorException;
+import kr.or.kids.domain.pp.external.connectionlog.client.ConnectionLogClient;
+import kr.or.kids.domain.pp.external.connectionlog.vo.ConnectionLogInsertReqVO;
 import kr.or.kids.global.config.ApplicationContextProvider;
+import kr.or.kids.global.util.DrugsafeUtil;
 
 /**
  * anyid adaptor 로그인시 호출됩니다.
@@ -75,11 +81,7 @@ public class AnyidHandler implements SsoLoginCallback {
             }
         }catch(AdaptorException e){
             System.out.println(e.getAdaptorErrorCode().getCodeMessage());
-            if(e.getErrorCode() == -1012 || e.getErrorCode() == -803){
-                // accessToken 만료 → refreshToken으로 재발급 필요
-            }else{
-                // 재로그인 처리
-            }
+            // accessToken 만료/재로그인 등 예외 상황은 아래 공통 리다이렉트로 처리
         }catch(Exception e){
             System.err.println(e.getLocalizedMessage());
         }
@@ -121,6 +123,57 @@ public class AnyidHandler implements SsoLoginCallback {
     @Override
     public void onSsoLogout(HttpServletRequest request) {
         System.out.println("onSsoLogout");
+
+        /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그아웃 기록) 시작 ************************************************/
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication != null && authentication.isAuthenticated()){
+            Object principal = authentication.getPrincipal();
+            String mbrId = (principal instanceof String) ? (String) principal : null;
+
+            ConnectionLogClient conn = ApplicationContextProvider.getBean(ConnectionLogClient.class);
+
+            DrugsafeUtil  util = new DrugsafeUtil();
+            String clientIp = util.getClientIp(request);
+
+            ConnectionLogInsertReqVO req = new ConnectionLogInsertReqVO();
+
+            // 로그인구분코드(1 : ID 로그인 , 2 : 애니아이디 로그인)
+            req.setLgnSeCd("2");
+
+            // 네트워크 구분코드(1 : 내부망, 2 : 외부망)
+            req.setNetSeCd(clientIp != null && clientIp.indexOf("192.168") > -1 ? "1" : "2");
+
+            // 서비스사용자 아이디
+            req.setSrvcUserId(mbrId);
+
+            // 요청자IP주소
+            req.setRqstrIpAddr(clientIp);
+
+            // 접속구분번호(1 : 로그인, 2:로그아웃) 
+            req.setCntnSeNo("2");
+
+            // 접속 상세 설명
+            req.setCntnDtlExpln("LogOut");
+
+            // 인증토큰값(CI 값을 넣을지 확정 안됨.)
+            req.setCertTokenVl("");
+
+            // 서비스명
+            req.setSrvcNm("kids_pp");
+
+            // 업무구분코드
+            req.setTaskSeCd("PP");
+
+            // 등록자 아이디
+            req.setRgtrId(mbrId);
+
+            // 수정자 아이디
+            req.setMdfrId(mbrId);
+
+            conn.insert(req);
+        }
+        /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그아웃 기록) 끝 ************************************************/
+
         HttpSession session = request.getSession();
         session.invalidate();
     }

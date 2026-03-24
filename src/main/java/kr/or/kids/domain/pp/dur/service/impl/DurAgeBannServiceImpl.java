@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.dur.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.dur.mapper.DurAgeBannMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.dur.vo.DurAgeBannDVO;
 import kr.or.kids.domain.pp.dur.vo.DurAgeBannPVO;
 import kr.or.kids.domain.pp.dur.vo.DurAgeBannRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class DurAgeBannServiceImpl implements DurAgeBannService
 {
-    @Autowired
-    private DurAgeBannMapper durAgeBannMapper;
+    private final DurAgeBannMapper durAgeBannMapper;
 
     @Override
     public DurAgeBannRVO getDurAgeBann(DurAgeBannPVO durAgeBannPVO)

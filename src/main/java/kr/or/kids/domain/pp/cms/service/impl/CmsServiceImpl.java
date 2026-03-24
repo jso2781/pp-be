@@ -2,7 +2,6 @@ package kr.or.kids.domain.pp.cms.service.impl;
 
 import java.util.HashMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -16,11 +15,12 @@ import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 import kr.or.kids.global.util.DrugsafeUtil;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class CmsServiceImpl implements CmsService
 {
-    @Autowired
-    private CmsMapper cmsMapper;
+    private final CmsMapper cmsMapper;
 
     @Override
     public ApiPrnDto getCms(CmsPVO cmsPVO){

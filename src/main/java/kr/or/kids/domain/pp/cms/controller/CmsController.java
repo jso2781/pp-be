@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.cms.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,13 +14,14 @@ import kr.or.kids.domain.pp.cms.vo.CmsPVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "CmsController", description = "대국민포털_콘탠츠기본 정보 관리")
 @RestController
 @RequestMapping(value="/api/pp/cms")
+@RequiredArgsConstructor
 public class CmsController
 {
-    @Autowired
-    private CmsService cmsService;
+    private final CmsService cmsService;
 
     @Operation(summary = "대국민포털_콘탠츠기본 정보 조회", description = "대국민포털_콘탠츠기본 정보 조회한다.")
     @PostMapping(value="/getCms")

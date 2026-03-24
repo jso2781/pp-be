@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.faq.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,13 +15,14 @@ import kr.or.kids.domain.pp.faq.vo.FaqPVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "FaqController", description = "대국민포털_FAQ기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/faq")
+@RequiredArgsConstructor
 public class FaqController
 {
-    @Autowired
-    private FaqService faqService;
+    private final FaqService faqService;
 
     @Operation(summary = "대국민포털_FAQ 목록 조회", description = "대국민포털_FAQ 목록 조회한다.")
     @PostMapping(value="/selectFaqList")

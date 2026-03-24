@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -33,19 +32,19 @@ import kr.or.kids.domain.pp.atch.service.AtchService;
 import kr.or.kids.domain.pp.atch.vo.AtchPVO;
 import kr.or.kids.domain.pp.atch.vo.AtchRVO;
 import kr.or.kids.domain.pp.task.vo.FileIdFromTaskCdPVO;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "AtchController", description = "공통_첨부파일기본 관리")
 @RestController
 @Slf4j
 @RequestMapping(value="/api/pp/atch")
+@RequiredArgsConstructor
 public class AtchController
 {
-    @Autowired
-    private AtchService atchService;
+    private final AtchService atchService;
 
-    @Autowired
-    private FileService fileService;
+    private final FileService fileService;
     
 
     @Value("${file.storePath}")

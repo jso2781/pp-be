@@ -2,7 +2,6 @@ package kr.or.kids.domain.pp.opnn.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,19 +17,20 @@ import kr.or.kids.domain.pp.opnn.vo.OpnnPVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 import kr.or.kids.global.util.JwtAudit;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "OpnnController", description = "대국민포털_의견제안 관리")
 @RestController
 @RequestMapping(value="/api/pp/opnn")
 @Slf4j
+@RequiredArgsConstructor
 public class OpnnController
 { 
     @Value("${file.storePath}")
     private String savePath;
     
-    @Autowired
-    private OpnnService opnnService;
+    private final OpnnService opnnService;
 
     @Operation(summary = "대국민포털_의견제안 입력 ", description = "대국민포털_의견제안 입력한다.")
     @PostMapping(value="/insertOpnn")

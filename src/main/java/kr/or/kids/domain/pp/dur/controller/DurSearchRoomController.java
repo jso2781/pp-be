@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.dur.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,13 +16,14 @@ import kr.or.kids.domain.pp.dur.vo.DurSearchRoomPVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "DurSearchRoomController", description = "DUR 정보 검색 관리")
 @RestController
 @RequestMapping(value="/api/pp/dur")
+@RequiredArgsConstructor
 public class DurSearchRoomController {
 
-    @Autowired
-    private DurSearchRoomService durSearchRoomService;
+    private final DurSearchRoomService durSearchRoomService;
 
     @Operation(summary = "DUR 정보 검색", description = "DUR 정보 검색한다.")
     @PostMapping(value="/selectDurSearchRoomList")

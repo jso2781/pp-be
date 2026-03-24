@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.form.vo.FormDVO;
 import kr.or.kids.domain.pp.form.vo.FormPVO;
 import kr.or.kids.domain.pp.form.vo.FormRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "FormController", description = "대국민포털_양식기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/form")
+@RequiredArgsConstructor
 public class FormController
 {
-    @Autowired
-    private FormService formService;
+    private final FormService formService;
 
     @Operation(summary = "대국민포털_양식기본 조회", description = "대국민포털_양식기본 조회한다.")
     @PostMapping(value="/getForm")

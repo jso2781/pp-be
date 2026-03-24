@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,13 +19,14 @@ import kr.or.kids.domain.pp.trm.vo.TrmDVO;
 import kr.or.kids.domain.pp.trm.vo.TrmPVO;
 import kr.or.kids.domain.pp.trm.vo.TrmRVO;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "TrmController", description = "대국민포털_용어기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/trm")
+@RequiredArgsConstructor
 public class TrmController
 {
-    @Autowired
-    private TrmService trmService;
+    private final TrmService trmService;
 
     @Operation(summary = "대국민포털_용어기본 조회", description = "대국민포털_용어기본 조회한다.")
     @PostMapping(value="/getTrm")

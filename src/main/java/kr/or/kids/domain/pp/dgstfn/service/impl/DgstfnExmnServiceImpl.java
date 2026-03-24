@@ -2,7 +2,6 @@ package kr.or.kids.domain.pp.dgstfn.service.impl;
 
 import java.util.HashMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.dgstfn.mapper.DgstfnExmnMapper;
@@ -13,11 +12,12 @@ import kr.or.kids.domain.pp.dgstfn.vo.DgstfnExmnRVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class DgstfnExmnServiceImpl implements DgstfnExmnService
 {
-    @Autowired
-    private DgstfnExmnMapper dgstfnExmnMapper;
+    private final DgstfnExmnMapper dgstfnExmnMapper;
 
     @Override
     public DgstfnExmnRVO getDgstfnExmn(DgstfnExmnPVO dgstfnExmnPVO)

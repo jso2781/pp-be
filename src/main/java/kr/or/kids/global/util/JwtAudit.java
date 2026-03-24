@@ -139,9 +139,10 @@ public class JwtAudit{
                 if(target instanceof ArrayList){
                     ArrayList<?> list = (ArrayList<?>)target;
 
-                    for(Object obj : list){
+                    if(!list.isEmpty()){
+                        Object obj = list.get(0);
                         Method method = obj.getClass().getMethod(methodName);
-                        Object result = method.invoke(target);
+                        Object result = method.invoke(obj);
                         return result != null ? result.toString() : null;
                     }
                 }

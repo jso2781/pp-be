@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.stt.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,13 +15,14 @@ import kr.or.kids.domain.pp.stt.vo.TrmsSttPVO;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 
+import lombok.RequiredArgsConstructor;
 @Tag(name = "TrmsSttController", description = "대국민포털_약관법령기본 관리")
 @RestController
 @RequestMapping(value="/api/pp/stt")
+@RequiredArgsConstructor
 public class TrmsSttController
 {
-    @Autowired
-    private TrmsSttService trmsSttService;
+    private final TrmsSttService trmsSttService;
 
     @Operation(summary = "대국민포털 회원가입용 약관법령 목록 조회", description = "대국민포털 회원가입용 약관법령 목록 조회한다.")
     @PostMapping(value="/selectTrmsListForSignUp")

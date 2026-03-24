@@ -1,6 +1,5 @@
 package kr.or.kids.domain.pp.form.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kids.domain.pp.form.mapper.FormMapper;
@@ -9,11 +8,12 @@ import kr.or.kids.domain.pp.form.vo.FormDVO;
 import kr.or.kids.domain.pp.form.vo.FormPVO;
 import kr.or.kids.domain.pp.form.vo.FormRVO;
 
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class FormServiceImpl implements FormService
 {
-    @Autowired
-    private FormMapper formMapper;
+    private final FormMapper formMapper;
 
     @Override
     public FormRVO getForm(FormPVO formPVO)

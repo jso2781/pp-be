@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
@@ -21,14 +20,15 @@ import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
 import kr.or.kids.global.util.PagingUtil;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class DurSearchRoomServiceImpl implements DurSearchRoomService{
 
-    @Autowired
-    private DurSearchRoomMapper durSearchRoomMapper;
+    private final DurSearchRoomMapper durSearchRoomMapper;
 
     @Override
     public ApiPrnDto selectDurSearchRoomList(DurSearchRoomPVO durSearchRoomPVO) {
