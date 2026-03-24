@@ -1,3 +1,19 @@
 spring:
   profiles:
     active: localout
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: never
+  endpoints:
+    web:
+      exposure:
+        include: health
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true

@@ -26,6 +26,7 @@ tasks.withType(JavaCompile) {
 dependencies {
     // Web / Security / View
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     // webflux 제거: spring-mvc와 동시 사용 시 Jackson MVC MessageConverter 미등록으로
     // HttpMediaTypeNotAcceptableException 발생 (ResponseEntity JSON 직렬화 실패)
     // implementation 'org.springframework.boot:spring-boot-starter-webflux'

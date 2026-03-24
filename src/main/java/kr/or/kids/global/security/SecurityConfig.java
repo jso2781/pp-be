@@ -39,6 +39,7 @@ public class SecurityConfig {
         .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         // Authorization(인가)
         .authorizeHttpRequests(requests -> requests
+            .antMatchers("/actuator/health", "/actuator/health/**").permitAll()
             // Any-ID 정적 리소스/설정
             .antMatchers("/anyid/**", "/config/**").permitAll()
             // Any-ID 중계 API(esign, pid, vrs) - AnyID SDK가 호출하는 경로
@@ -95,4 +96,3 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
-
