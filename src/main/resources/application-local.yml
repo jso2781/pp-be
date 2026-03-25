@@ -87,6 +87,10 @@ external:
       base-url: http://localhost:8088
       connect-timeout-ms: 3000
       read-timeout-ms: 6000
+    workaccesslog:
+      base-url: http://localhost:8084
+      connect-timeout-ms: 3000
+      read-timeout-ms: 6000
 
 jwt:
   issuer: kids_user

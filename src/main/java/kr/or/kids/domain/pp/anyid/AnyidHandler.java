@@ -59,6 +59,7 @@ public class AnyidHandler implements SsoLoginCallback {
      */
     @Override
     public void onSsoLoginSuccess(HttpServletRequest request, HttpServletResponse response, String accessToken, String refreshToken, String idToken, String endPoint){
+        logger.debug("AnyidHandler onSsoLoginSuccess");
         // accessToken으로 리소스서버에서 사용자 정보 조회
         try{
             Map<String, Object> resultMap = sso.getUserInfoByAccessToken(accessToken);
