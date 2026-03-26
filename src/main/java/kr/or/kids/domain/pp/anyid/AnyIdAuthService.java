@@ -1,9 +1,13 @@
 package kr.or.kids.domain.pp.anyid;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.FileReader;
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,7 +54,7 @@ public class AnyIdAuthService {
         HashMap<String, Object> bizData = new HashMap<>();
 
         // orgLogin.jsp 샘플 로직과 동일한 흐름
-        String ssobStr = null;
+        // String ssobStr = null;
         AnyidCertRef anyidCertRef = new AnyidCertRef();
         try {
 
@@ -74,16 +78,50 @@ public class AnyIdAuthService {
             log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before resource.getFilename()="+resource2.getFilename()+" Content End =====================================");
             br.close();
 
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            PrintStream capture = new PrintStream(baos, true, StandardCharsets.UTF_8);
+            PrintStream originalOut = System.out;
+            PrintStream originalErr = System.err;
+            System.setOut(capture);
+            System.setErr(capture);
+
 //            Resource resource = new ClassPathResource("config/kdist/kdist-api.json");
 //            InputStream inputStream = resource.getInputStream();
             String kdistApiJsonFilePath = resourcePaths.kdistApiJsonFilePath();
             Map<String, Object> resultMap = anyidCertRef.decryptSsob(req.ssob(), req.tag(), kdistApiJsonFilePath);
-            ssobStr = (String) resultMap.get("ssobStr");
-            if (ssobStr == null || ssobStr.isBlank()) {
-                throw new IllegalStateException("decryptSsob did not return ssobStr");
-            }
+            
+
+            System.setOut(originalOut);
+            System.setOut(originalErr);
+            String consoleOutput = baos.toString(StandardCharsets.UTF_8);
+
+            log.debug("캡처된 출력:\n{}", consoleOutput);
+
+            // ssobStr 파싱
+            String ssobStr = Arrays.stream(consoleOutput.split("\n"))
+                    .filter(line -> line.startsWith("ssobStr : "))
+                    .map(line -> line.substring("ssobStr : ".length()).trim())
+                    .findFirst()
+                    .orElse(null);
+
+            log.debug("추출된 ssobStr = {}", ssobStr);
+
+
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob after resultMap={}",resultMap);
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob after keys : {}",resultMap.keySet());
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob after values : {}",resultMap);
+            log.debug(kdistApiJsonFilePath);
+            
+           // String ssobStr = (String) resultMap.get("ssobStr");
+
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob after ssobStr="+ssobStr);
+//            if (ssobStr == null || ssobStr.isBlank()) {
+//                throw new IllegalStateException("decryptSsob did not return ssobStr");
+//            }
 
             Map<String, Object> ssob = readJsonMap(ssobStr);
+
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob after readJsonMap ssob Map=", ssob);
 
             String ci = asString(ssob.get("ci"));
             String name = asString(ssob.get("name"));
