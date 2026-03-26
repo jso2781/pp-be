@@ -64,7 +64,10 @@ public class AnyIdAuthController {
             @ApiResponse(responseCode = "500", description = "SDK 처리 오류")
     })
     public ResponseEntity<ApiPrnDto> anyidLogin(@RequestBody AnyIdLoginRequest req, HttpServletRequest httpRequest, HttpServletResponse response){
-        ApiPrnDto apiPrnDto = anyIdLoginBizService.loginByCi(req.ci(), httpRequest, req.redirectUri());
+        // ssob 를 복호화해서 ssob json 내용 중 CI 정보 추출
+        String ci = anyIdAuthService.getCiFromSsob(req.ssob(), req.tag());
+
+        ApiPrnDto apiPrnDto = anyIdLoginBizService.loginByCi(ci, httpRequest, req.redirectUri());
 
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
