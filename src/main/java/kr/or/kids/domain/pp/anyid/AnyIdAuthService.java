@@ -197,6 +197,61 @@ public class AnyIdAuthService {
         return ci;
     }
 
+    public Map<String, Object> getUserInfoFromSsob(String ssob, String tag) {
+        AnyidCertRef anyidCertRef = new AnyidCertRef();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream capture = new PrintStream(baos, true, StandardCharsets.UTF_8);
+        PrintStream originalOut = System.out;
+        PrintStream originalErr = System.err;
+        System.setOut(capture);
+        System.setErr(capture);
+
+        String kdistApiJsonFilePath = resourcePaths.kdistApiJsonFilePath();
+
+        log.debug("AnyIdAuthService getUserInfoFromSsob anyidCertRef.decryptSsob before kdistApiJsonFilePath = {}", kdistApiJsonFilePath);
+        try{
+            anyidCertRef.decryptSsob(ssob, tag, kdistApiJsonFilePath);
+        }
+        catch(Exception e){
+            log.debug("AnyIdAuthService getUserInfoFromSsob anyidCertRef.decryptSsob after exception : \n{}", e.getMessage());
+            e.printStackTrace();
+        }
+
+        System.setOut(originalOut);
+        System.setOut(originalErr);
+        String consoleOutput = baos.toString(StandardCharsets.UTF_8);
+
+        log.debug("캡처된 출력:\n{}", consoleOutput);
+
+        // ssobStr 파싱
+        String ssobStr = Arrays.stream(consoleOutput.split("\n"))
+                .filter(line -> line.startsWith("ssobStr : "))
+                .map(line -> line.substring("ssobStr : ".length()).trim())
+                .findFirst()
+                .orElse(null);
+
+        log.debug("AnyIdAuthService getUserInfoFromSsob anyidCertRef.decryptSsob after ssobStr = {}", ssobStr);
+
+        /* ssobMap = 
+         * {
+         *     "userSeCd": "01",
+         *     "phone": "01037898540",
+         *     "ci": "BSE8/HaCwUt6jOXI5sicOQf4QF5a5eOxZKyOZVhHoNa603/laU7SLBkK8OnDmBLEE1Cb6cT2myEL5S4zC4oLow==",
+         *     "vendor": "esign",
+         *     "clientIp": "172.16.10.95",
+         *     "name": "박성주",
+         *     "authLvl": 2,
+         *     "brdt": "19770728",
+         *     "group": "03",
+         *     "timestamp": "2026-03-25 06:31:04:0351"
+         * }
+         */
+        Map<String, Object> ssobMap = readJsonMap(ssobStr);
+
+        return ssobMap;
+    }
+
     private Map<String, Object> readJsonMap(String json) {
         try {
             return objectMapper.readValue(json, new TypeReference<Map<String, Object>>() {});

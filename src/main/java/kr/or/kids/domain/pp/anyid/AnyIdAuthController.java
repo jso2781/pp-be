@@ -1,5 +1,8 @@
 package kr.or.kids.domain.pp.anyid;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,7 +26,9 @@ import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginRequest;
 import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginResponse;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/pp/auth")
 @Tag(
@@ -43,6 +48,44 @@ public class AnyIdAuthController {
     @PostMapping("/anyid/verifyAndExtractTest")
     public ResponseEntity<ApiPrnDto> verifyAndExtractTest(@RequestBody AnyIdLoginRequest req){
         ApiPrnDto apiPrnDto = anyIdAuthService.verifyAndExtract(req);
+
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
+    }
+
+    @PostMapping("/anyid/getCiFromSsob")
+    @Operation(summary = "Any-ID의 본인인증시 인증 완료(success) 후 전달받은 ssob를 백앤드에서 복호화해서 ssob 의 내용중 ci 부분만 다시 화면으로 전달", description = "Any-ID의 본인인증시 인증 완료(success) 후 전달받은 ssob를 백앤드에서 복호화해서 ssob 의 내용중 ci 부분만 다시 화면으로 전달해줌.")
+    public ResponseEntity<ApiPrnDto> getCiFromSsob(@RequestBody AnyIdLoginRequest req){
+        ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+        HashMap<String, Object> bizData = new HashMap<>();
+
+        try{
+            String ci = anyIdAuthService.getCiFromSsob(req.ssob(), req.tag());
+            bizData.put("ci", ci);
+            apiPrnDto.setData(bizData);
+        }catch(Exception e){
+            log.debug("AnyIdAuthController getCiFromSsob anyIdAuthService.getCiFromSsob after exception : \n{}", e.getMessage());
+            apiPrnDto = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
+        }
+
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
+    }
+
+    @PostMapping("/anyid/getUserInfoFromSsob")
+    @Operation(summary = "Any-ID의 본인인증시 인증 완료(success) 후 전달받은 ssob를 백앤드에서 복호화해서 ssob 내용 전체(JSON)를 다시 화면으로 전달", description = "Any-ID의 본인인증시 인증 완료(success) 후 전달받은 ssob를 백앤드에서 복호화해서 ssob 내용 전체(JSON)를 다시 화면으로 전달해줌.")
+    public ResponseEntity<ApiPrnDto> getUserInfoFromSsob(@RequestBody AnyIdLoginRequest req){
+        ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+
+        try{
+            Map<String, Object> oriUserInfoMap = anyIdAuthService.getUserInfoFromSsob(req.ssob(), req.tag());
+            HashMap<String, Object> userInfoMap = oriUserInfoMap != null ? new HashMap<>(oriUserInfoMap) : new HashMap<>();
+
+            apiPrnDto.setData(userInfoMap);
+        }catch(Exception e){
+            log.debug("AnyIdAuthController getUserInfoFromSsob anyIdAuthService.getUserInfoFromSsob after exception : \n{}", e.getMessage());
+            apiPrnDto = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
+        }
 
         ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
         return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
