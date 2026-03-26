@@ -20,7 +20,7 @@ public class ConnectionLogClient {
     public ApiPrnDto insert(ConnectionLogInsertReqVO req) {
         return api.post(
                 SERVICE_KEY,
-                "/api/ca/connectionlog/insert",
+                "/api/ca/auth/connectionlog/insert",
                 Map.of("X-Client", "ca-auth"),
                 null,
                 req,

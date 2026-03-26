@@ -20,8 +20,8 @@ public class WorkAccessLogClient {
     public ApiPrnDto insert(WorkAccessLogInsertVO req) {
         return api.post(
                 SERVICE_KEY,
-                "/api/ca/workAccessLog/insert",
-                Map.of("X-Client", "ca-be"),
+                "/api/ca/auth/workAccessLog/insert",
+                Map.of("X-Client", "ca-auth"),
                 null,
                 req,
                 ApiPrnDto.class
