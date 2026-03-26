@@ -133,7 +133,11 @@ public class AnyidHandler implements SsoLoginCallback {
 
         /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그아웃 기록) 시작 ************************************************/
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication != null && authentication.isAuthenticated()){
+        if(
+            authentication != null && authentication.isAuthenticated() &&
+            !"anonymousUser".equals(authentication.getPrincipal()) &&
+            !(authentication instanceof org.springframework.security.authentication.AnonymousAuthenticationToken)
+        ){
             Object principal = authentication.getPrincipal();
             String mbrId = (principal instanceof String) ? (String) principal : null;
 
