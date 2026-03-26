@@ -90,7 +90,7 @@ external:
       connect-timeout-ms: 3000
       read-timeout-ms: 6000
     workaccesslog:
-      base-url: http://kids-ca-be-service.kids-dev-ca:8080
+      base-url: http://kids-ca-auth-service.kids-dev-ca:8080
       connect-timeout-ms: 3000
       read-timeout-ms: 6000
 
