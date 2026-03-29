@@ -9,8 +9,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -19,24 +24,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.or.anyid.util.AnyidCertRef;
 import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginRequest;
 import kr.or.kids.domain.pp.anyid.vo.AnyIdLoginResponseRVO;
-import kr.or.kids.global.config.OpenApiConfig;
+import kr.or.kids.domain.pp.external.connectionlog.client.ConnectionLogClient;
+import kr.or.kids.domain.pp.external.connectionlog.vo.ConnectionLogInsertReqVO;
+import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
+import kr.or.kids.global.util.DrugsafeUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
 public class AnyIdAuthService {
 
-    private final OpenApiConfig openApiConfig;
-
     private final AnyIdResourcePaths resourcePaths;
     private final ObjectMapper objectMapper;
+    private final ConnectionLogClient connectionLogClient;
 
-    public AnyIdAuthService(AnyIdResourcePaths resourcePaths, ObjectMapper objectMapper, OpenApiConfig openApiConfig) {
+    public AnyIdAuthService(AnyIdResourcePaths resourcePaths, ObjectMapper objectMapper, ConnectionLogClient connectionLogClient) {
         this.resourcePaths = resourcePaths;
         this.objectMapper = objectMapper;
-        this.openApiConfig = openApiConfig;
+        this.connectionLogClient = connectionLogClient;
     }
 
     /**
@@ -250,6 +257,81 @@ public class AnyIdAuthService {
         Map<String, Object> ssobMap = readJsonMap(ssobStr);
 
         return ssobMap;
+    }
+
+    public ApiPrnDto processAnyIdLogout(HttpServletRequest request) {        
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
+
+        log.debug("AnyIdAuthService processAnyIdLogout principal="+authentication.getPrincipal());
+
+        /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그아웃 기록) 시작 ************************************************/
+        if(
+            authentication != null && authentication.isAuthenticated() &&
+            !"anonymousUser".equals(authentication.getPrincipal()) &&
+            !(authentication instanceof org.springframework.security.authentication.AnonymousAuthenticationToken)
+        ){
+            Object principal = authentication.getPrincipal();
+            String mbrId = (principal instanceof String) ? (String) principal : null;
+
+            log.debug("AnyIdAuthService processAnyIdLogout mbrId="+mbrId);
+
+            DrugsafeUtil util = new DrugsafeUtil();
+            String clientIp = util.getClientIp(request);
+
+            ConnectionLogInsertReqVO req = new ConnectionLogInsertReqVO();
+
+            // 로그인구분코드(1 : ID 로그인 , 2 : 애니아이디 로그인)
+            req.setLgnSeCd("2");
+
+            // 네트워크 구분코드(1 : 내부망, 2 : 외부망)
+            req.setNetSeCd(clientIp != null && clientIp.indexOf("192.168") > -1 ? "1" : "2");
+
+            // 서비스사용자 아이디
+            req.setSrvcUserId(mbrId);
+
+            // 요청자IP주소
+            req.setRqstrIpAddr(clientIp);
+
+            // 접속구분번호(1 : 로그인, 2:로그아웃) 
+            req.setCntnSeNo("2");
+
+            // 접속 상세 설명
+            req.setCntnDtlExpln("LogOut");
+
+            // 인증토큰값(CI 값을 넣을지 확정 안됨.)
+            req.setCertTokenVl("");
+
+            // 서비스명
+            req.setSrvcNm("kids_pp");
+
+            // 업무구분코드
+            req.setTaskSeCd("PP");
+
+            // 등록자 아이디
+            req.setRgtrId(mbrId);
+
+            // 수정자 아이디
+            req.setMdfrId(mbrId);
+
+            log.debug("AnyIdAuthService processAnyIdLogout ConnectionLogClient.insert ConnectionLogInsertReqVO="+req.toString());
+            connectionLogClient.insert(req);
+        }
+        /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그아웃 기록) 끝 ************************************************/
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        SecurityContextHolder.clearContext();
+
+        log.debug("AnyIdAuthService processAnyIdLogout SecurityContextHolder.clearContext();!!");
+
+        // 로그아웃되었습니다.
+        apiPrnDto.setMsg(MessageContextHolder.getMessage("ui.msg.logout.success"));
+
+        return apiPrnDto;
     }
 
     private Map<String, Object> readJsonMap(String json) {

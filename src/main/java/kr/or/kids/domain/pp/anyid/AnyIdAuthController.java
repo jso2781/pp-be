@@ -92,8 +92,12 @@ public class AnyIdAuthController {
     }
 
     /**
-     * React 로그인 페이지에서 Any-ID 인증 성공 후 ssob/tag를 전달받아 서버에서 검증/복호화하고,
-     * 세션 기반으로 로그인 처리합니다.
+     * Any-ID 인증 결과로 세션 로그인
+     *
+     * Any-ID 화면에서 인증 성공 후 전달된 ssob/tag를 검증/복호화하여 사용자 정보를 추출하고, Spring Security 세션을 생성합니다.
+     * 브라우저는 Set-Cookie로 내려오는 JSESSIONID를 유지해야 하며,
+     * 프론트(React)는 axios/fetch에서 withCredentials를 사용해야 합니다.
+     *
      */
     @PostMapping("/anyid/login")
     @Operation(
@@ -118,7 +122,7 @@ public class AnyIdAuthController {
 
     @GetMapping("/me")
     @Operation(
-            summary = "현재 세션 인증 상태 조회",
+            summary = "Any-ID 현재 세션 인증 상태 조회",
             description = "세션(JSESSIONID) 기준으로 현재 로그인 여부와 principal/권한을 반환합니다."
     )
     @ApiResponses(value = {
@@ -136,25 +140,31 @@ public class AnyIdAuthController {
         ));
     }
 
+    /**
+     * Any-ID 로그아웃 처리(세션 무효화)
+     * 1.Spring Security 인증 객체로부터 회원번호를 추출해서 해당 사용자의 로그아웃(lgnSeCd=2, cntnSeNo=2)에 대해 로그 접속이력을 남김.
+     * 2.session.invalidate(), SecurityContextHolder.clearContext() 처리
+     *
+     * @param request
+     * @return
+     */
     @PostMapping("/anyid/logout")
     @Operation(
-            summary = "로그아웃(세션 무효화)",
+            summary = "Any-ID 로그아웃 처리(세션 무효화)",
             description = "현재 세션을 invalidate하고 SecurityContext를 정리합니다."
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "로그아웃 성공")
     })
-    public ResponseEntity<?> logout(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-        SecurityContextHolder.clearContext();
-        return ResponseEntity.ok(java.util.Map.of("status", "ok"));
-    }
+    public ResponseEntity<ApiPrnDto> logout(HttpServletRequest request) {
 
-    // [제거] generateTx() 엔드포인트 삭제
-    // SSO 어댑터(/oidc/redirect)가 KMS 서버에서 tx를 발급하여
-    // loginPage.uri?tx=XXX 형태로 LoginMethod 페이지에 전달합니다.
-    // UUID로 직접 생성하던 방식은 KMS 미등록 값이라 extractInfo 검증 실패하므로 사용 불가.
+        /*
+         * 1.Spring Security 인증 객체로부터 회원번호를 추출해서 해당 사용자의 로그아웃(lgnSeCd=2, cntnSeNo=2)에 대해 로그 접속이력을 남김.
+         * 2.session.invalidate(), SecurityContextHolder.clearContext() 처리
+         */
+        ApiPrnDto apiPrnDto = anyIdAuthService.processAnyIdLogout(request);
+
+        ApiResultCode resultCode = ApiResultCode.fromCode(apiPrnDto.getCode());
+        return ResponseEntity.status(resultCode.getHttpStatus()).body(apiPrnDto);
+    }
 }

@@ -86,6 +86,9 @@ public class AuthServiceImpl implements AuthService
         return mbrTokenMapper.deleteMbrToken(mbrTokenDVO);
     }
 
+    /**
+     * 자체 로그인을 통한 로그인인 경우(lgnSeCd=1)
+     */
     @Override
     public ApiPrnDto login(MbrTokenPVO loginVO){
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
@@ -113,7 +116,8 @@ public class AuthServiceImpl implements AuthService
                 return apiPrnDto;
             }
 
-            String lgnSeCd = userInfo.getLgnSeCd();
+            // 로그인 구분코드(1 - 자체로그인, 2 - Any-ID 로그인)
+            String lgnSeCd = "1";
             String mbrId = userInfo.getMbrId();
 
 //                if(!passwordEncoder.matches(loginVO.getEncptMbrPswd(), userInfo.getEncptMbrPswd())) {
@@ -238,6 +242,9 @@ public class AuthServiceImpl implements AuthService
         return apiPrnDto;
     }
 
+    /**
+     * Any-ID를 통한 로그인인 경우(lgnSeCd=2 설정)
+     */
     @Override
     public ApiPrnDto loginFromAnyId(MbrInfoRVO userInfo){
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
@@ -248,7 +255,8 @@ public class AuthServiceImpl implements AuthService
 
         try{
             String mbrId = userInfo.getMbrId();
-            String lgnSeCd = userInfo.getLgnSeCd();
+            // 로그인 구분코드(1 - 자체로그인, 2 - Any-ID 로그인)
+            String lgnSeCd = "2";
 
             BigInteger tokenSn = null;
 
@@ -352,6 +360,10 @@ public class AuthServiceImpl implements AuthService
 
         // 토큰과 연계된 사용자 정보 조회
         MbrInfoRVO userInfo = mbrInfoMapper.getMbrInfo(mp);
+
+        /*
+         * 최종 로그인구분코드 가져옴.(1 - 자체로그인, 2 - Any-ID 로그인)
+         */
         String lgnSeCd = userInfo.getLgnSeCd();
 
         userInfo.setLgnSeCd(lgnSeCd);
