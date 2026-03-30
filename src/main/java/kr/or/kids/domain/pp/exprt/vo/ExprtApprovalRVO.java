@@ -26,13 +26,13 @@ public class ExprtApprovalRVO extends ExprtApplyRVO {
      * 성명
      */
     @Schema(description = "성명", type = "String")
-    private String name;
+    private String encptExprtFlnm;
 
     /**
      * 전화번호
      */
     @Schema(description = "전화번호", type = "String")
-    private String telNo;
+    private String encptMbrTelno;
 
     /**
      * 전문가번호
@@ -50,7 +50,7 @@ public class ExprtApprovalRVO extends ExprtApplyRVO {
      * 기관 이메일
      */
     @Schema(description = "기관 이메일", type = "String")
-    private String instEmlNm;
+    private String encptExprtInstEmlNm;
 
     /**
      * 전문가재직여부

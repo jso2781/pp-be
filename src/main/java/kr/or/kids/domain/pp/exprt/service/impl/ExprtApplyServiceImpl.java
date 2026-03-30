@@ -80,14 +80,14 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         HashMap<String, Object> data = new HashMap<>();
 
-        String email = exprtApplyIVO.getEmail();
+        String email = exprtApplyIVO.getEncptExprtInstEmlNm();
         if (StringUtils.isBlank(email)) {
             // 이메일 필수 파라메터가 누락되었습니다.
             throw new ApplicationException("error.param.required",
                     new String[] { MessageContextHolder.getMessage("label.user.email") });
         }
 
-        boolean isExists = exprtApplyMapper.existsByEmail(email);
+        boolean isExists = exprtApplyMapper.existsByEmail(exprtApplyIVO);
         data.put("isExists", isExists);
         
         result.setData(data);
@@ -104,7 +104,7 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
             // 사업자등록번호 필수 파라메터가 누락되었습니다.
             throw new ApplicationException("error.param.required",
                     new String[] { MessageContextHolder.getMessage("label.inst.brno") });
-        } else if (StringUtils.isBlank(exprtApplyIVO.getEmail())) {
+        } else if (StringUtils.isBlank(exprtApplyIVO.getEncptExprtInstEmlNm())) {
             // 이메일 필수 파라메터가 누락되었습니다.
             throw new ApplicationException("error.param.required",
                     new String[] { MessageContextHolder.getMessage("label.user.email") });

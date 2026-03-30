@@ -68,8 +68,8 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
 
         // masking
         list.forEach(l -> {
-            l.setName(MaskingUtil.maskName(l.getName().trim()));
-            l.setInstEmlNm(MaskingUtil.maskEmail(l.getInstEmlNm().trim()));
+            l.setEncptExprtFlnm(MaskingUtil.maskName(l.getEncptExprtFlnm().trim()));
+            l.setEncptExprtInstEmlNm(MaskingUtil.maskEmail(l.getEncptExprtInstEmlNm().trim()));
         });
 
         data = PagingUtil.getPagingInfo(list);
@@ -94,9 +94,9 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
                 	                
                     // masking
                     detail.setMbrId(MaskingUtil.maskId(detail.getMbrId().trim()));
-                    detail.setName(MaskingUtil.maskName(detail.getName().trim()));
-                    detail.setTelNo(MaskingUtil.maskPhone(detail.getTelNo().trim()));
-                    detail.setInstEmlNm(MaskingUtil.maskEmail(detail.getInstEmlNm().trim()));
+                    detail.setEncptExprtFlnm(MaskingUtil.maskName(detail.getEncptExprtFlnm().trim()));
+                    detail.setEncptMbrTelno(MaskingUtil.maskPhone(detail.getEncptMbrTelno().trim()));
+                    detail.setEncptExprtInstEmlNm(MaskingUtil.maskEmail(detail.getEncptExprtInstEmlNm().trim()));
                     data.put("detail", detail);
 
                     List<ExprtApprovalAuthRVO> list = exprtApprovalMapper.selectExprtTaskAuthList(exprtApprovalPVO.getExprtTaskSn());
@@ -155,6 +155,8 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
                     // 개인정보 삭제 및 반려
                     exprtApprovalUVO.setExprtAprvSttsCode("R");
                     exprtApprovalUVO.setExprtHdofYn("Y");
+                    exprtApprovalUVO.setEncptExprtFlnm("********");
+                    exprtApprovalUVO.setEncptExprtInstEmlNm("********");
                     exprtApprovalMapper.collectExprtApproval(exprtApprovalUVO);
 
                     exprtReject(exprtApprovalUVO, beforeRVO);
@@ -215,6 +217,8 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         // 전문가 정보 개인정보 삭제 및 회수처리
         exprtApprovalUVO.setExprtAprvSttsCode("C");
         exprtApprovalUVO.setExprtHdofYn("N");
+        exprtApprovalUVO.setEncptExprtFlnm("********");
+        exprtApprovalUVO.setEncptExprtInstEmlNm("********");
         exprtApprovalMapper.collectExprtApproval(exprtApprovalUVO);
 
         // 회원유형 일반 유형으로 변경
@@ -272,8 +276,8 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         String emlCn = emailTemplateEngine.process(formRVO.getFormCn(), ctx); // HTML 본문
         String sndptyFlnm = "mail.drugsafe.or.kr"; // 메일 발송 계정
         String sndptyEmlAddr = "kids@drugsafe.or.kr"; // 발신자 메일주소
-        String rcvrFlnm = detail.getName(); // 수신자 명
-        String rcvrEmlAddr = detail.getInstEmlNm(); // 수신자 메일주소  	
+        String rcvrFlnm = detail.getEncptExprtFlnm(); // 수신자 명
+        String rcvrEmlAddr = detail.getEncptExprtInstEmlNm(); // 수신자 메일주소
         
         log.debug("emlTtl >>>>> " + emlTtl);
         log.debug("emlCn >>>>> " + emlCn);

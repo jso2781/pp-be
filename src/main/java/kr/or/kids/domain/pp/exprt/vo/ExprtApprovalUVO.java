@@ -75,4 +75,16 @@ public class ExprtApprovalUVO{
      */
     @Schema(description = "권한코드", type = "String")
     private String authrtCd;
+
+    /**
+     * 성명
+     */
+    @Schema(description = "성명", type = "String")
+    private String encptExprtFlnm;
+
+    /**
+     * 기관 이메일
+     */
+    @Schema(description = "기관 이메일", type = "String")
+    private String encptExprtInstEmlNm;
 }

@@ -40,13 +40,13 @@ public class ExprtApplyIVO
      * 성명
      */
     @Schema(description = "성명", type = "String")
-    private String name;
+    private String encptExprtFlnm;
 
     /**
      * 이메일
      */
     @Schema(description = "이메일", type = "String")
-    private String email;    
+    private String encptExprtInstEmlNm;
 
     /**
      * 전문가재직여부

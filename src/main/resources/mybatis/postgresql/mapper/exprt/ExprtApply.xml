@@ -21,12 +21,12 @@
            AND t.use_yn = 'Y'
     </select>
 
-    <select id="existsByEmail" parameterType="String" resultType="boolean" >
+    <select id="existsByEmail" parameterType="ExprtApplyIVO" resultType="boolean" >
         /* 대국민포털_전문가회원전환신청관리 이메일 중복검사 (ExprtApplyMapper.existsByEmail) */        
 		SELECT EXISTS (
 		    SELECT 1
 		      FROM kids_own.TB_PP_M_EXPRT_INFO
-		     WHERE encpt_exprt_inst_eml_nm = #{email}
+		     WHERE encpt_exprt_inst_eml_nm = #{encptExprtInstEmlNm}
 		       AND aprv_stts_cd IN ('W', 'A')
 		)
     </select>
@@ -67,8 +67,8 @@
             #{exprtNo}
             ,#{mbrNo}
             ,#{brno}
-            ,#{name}
-            ,#{email}
+            ,#{encptExprtFlnm}
+            ,#{encptExprtInstEmlNm}
             ,'Y'
             ,'W'
             ,#{atchFileGroupId}

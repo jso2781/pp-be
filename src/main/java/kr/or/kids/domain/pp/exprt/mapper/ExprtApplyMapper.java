@@ -41,7 +41,7 @@ public interface ExprtApplyMapper
      * @param brno 사업자등록번호
      * @return 기관존재여부 
      */    
-    public boolean existsByEmail(String email);
+    public boolean existsByEmail(ExprtApplyIVO exprtApplyIVO);
     
     /**
      * 대국민포털_전문가회원전환신청관리 전문가정보기본 입력

@@ -31,10 +31,10 @@ public class ExprtApprovalPVO extends PageRequestDto{
     private String aprvSttsCode;
 
     /**
-     * 검색어
+     * 전문가명
      */
-    @Schema(description = "검색어", type = "String")
-    private String searchWrd;
+    @Schema(description = "전문가명", type = "String")
+    private String encptExprtFlnm;
 
     /**
      * 업무구분코드
