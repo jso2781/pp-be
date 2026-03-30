@@ -4,8 +4,8 @@
 
     <select id="selectExprtApprovalList" parameterType="ExprtApprovalPVO" resultType="ExprtApprovalRVO" >
         /* 대국민포털_전문가업무신청관리 소속 전문가 회원 목록 조회 (ExprtApprovalMapper.selectExprtApprovalList) */
-        SELECT ei.encpt_exprt_flnm AS name
-             , ei.encpt_exprt_inst_eml_nm AS instEmlNm
+        SELECT ei.encpt_exprt_flnm
+             , ei.encpt_exprt_inst_eml_nm
              , (SELECT com_dtl_cd_nm
                   FROM kids_own.TB_CA_C_DTL_CODE
                  WHERE com_group_cd = 'PP000013'
@@ -35,7 +35,9 @@
            AND it.use_yn = 'Y'
            AND it.bzmn_task_mng_no = et.bzmn_task_mng_no
            AND et.exprt_no = ei.exprt_no
-           AND ei.encpt_exprt_flnm LIKE '%' || #{searchWrd} || '%'
+        <if test="encptExprtFlnm != null and encptExprtFlnm != ''">
+            AND ei.encpt_exprt_flnm = #{encptExprtFlnm}
+        </if>
            AND ei.aprv_stts_cd != 'C'
         <if test="aprvSttsCode != 'all'">
            AND et.aprv_stts_cd = #{aprvSttsCode}
@@ -60,9 +62,9 @@
         /* 대국민포털_전문가업무신청관리 소속 전문가 회원 상세 조회 (ExprtApprovalMapper.selectExprtApproval) */
         SELECT mi.mbr_id
              , mi.mbr_no
-             , mi.encpt_mbr_flnm AS name
-             , mi.encpt_mbr_telno AS telNo
-             , ei.encpt_exprt_inst_eml_nm AS instEmlNm
+             , mi.encpt_mbr_telno AS encpt_mbr_telno
+             , ei.encpt_exprt_flnm AS encpt_exprt_flnm
+             , ei.encpt_exprt_inst_eml_nm AS encpt_exprt_inst_eml_nm
              , date_trunc('second', et.reg_dt) AS task_apply_reg_dt
              , ei.exprt_hdof_yn
              , ei.atch_file_group_id
@@ -186,8 +188,8 @@
         /* 대국민포털_전문가업무신청관리 소속 전문가 회원 회수처리 (ExprtApprovalMapper.collectExprtApproval) */
         UPDATE kids_own.TB_PP_M_EXPRT_INFO
         SET aprv_stts_cd = #{exprtAprvSttsCode}
-          , encpt_exprt_flnm = '********'
-          , encpt_exprt_inst_eml_nm = '********'
+          , encpt_exprt_flnm = #{encptExprtFlnm}
+          , encpt_exprt_inst_eml_nm = #{encptExprtInstEmlNm}
           , exprt_hdof_yn = #{exprtHdofYn}
           , mdfr_id = #{mbrId}
           , mdfcn_dt = CURRENT_TIMESTAMP

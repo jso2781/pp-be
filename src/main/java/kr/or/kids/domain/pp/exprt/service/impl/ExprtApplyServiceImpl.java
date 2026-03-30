@@ -80,20 +80,20 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         HashMap<String, Object> data = new HashMap<>();
 
-        String email = exprtApplyIVO.getEmail();
+        String email = exprtApplyIVO.getEncptExprtInstEmlNm();
         if (StringUtils.isBlank(email)) {
             // 이메일 필수 파라메터가 누락되었습니다.
             throw new ApplicationException("error.param.required",
                     new String[] { MessageContextHolder.getMessage("label.user.email") });
         }
 
-        boolean isExists = exprtApplyMapper.existsByEmail(email);
+        boolean isExists = exprtApplyMapper.existsByEmail(exprtApplyIVO);
         data.put("isExists", isExists);
-        
+
         result.setData(data);
         return result;
     }
-        
+
     @Override
     @Transactional
     public ApiPrnDto expertApply(ExprtApplyIVO exprtApplyIVO, MultipartFile file) {
@@ -104,14 +104,14 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
             // 사업자등록번호 필수 파라메터가 누락되었습니다.
             throw new ApplicationException("error.param.required",
                     new String[] { MessageContextHolder.getMessage("label.inst.brno") });
-        } else if (StringUtils.isBlank(exprtApplyIVO.getEmail())) {
+        } else if (StringUtils.isBlank(exprtApplyIVO.getEncptExprtInstEmlNm())) {
             // 이메일 필수 파라메터가 누락되었습니다.
             throw new ApplicationException("error.param.required",
                     new String[] { MessageContextHolder.getMessage("label.user.email") });
         } else if (ObjectUtils.isEmpty(exprtApplyIVO.getTaskSystemCodes())) {
             // 업무시스템 필수 파라메터가 누락되었습니다.
             throw new ApplicationException("error.param.required",
-                    new String[] { MessageContextHolder.getMessage("label.inst.system") });            
+                    new String[] { MessageContextHolder.getMessage("label.inst.system") });
         } else if (ObjectUtils.isEmpty(file)) {
             // File 파라메터가 누락되었습니다.
             throw new ApplicationException("error.param.required", new String[] {"File"});
@@ -154,27 +154,27 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
         if (step2Result != 1) {
             throw new ApplicationException("api.error.default");
         }
-                
+
         // 전문가업무기본 등록
-        int step3Result = exprtApplyMapper.insertExprtTask(exprtApplyIVO);        
+        int step3Result = exprtApplyMapper.insertExprtTask(exprtApplyIVO);
         if (step3Result == 0) {
             throw new ApplicationException("api.error.default");
         }
-        
+
         // 첨부파일그룹 데이터 후처리
         if (StringUtils.isNotBlank(atchFileGroupId)) {
-        	BigInteger menuSn = exprtApplyMapper.selectMenuSn(exprtApplyIVO.getMenuSn());
-        	
-        	AtchPVO atchPVO = new AtchPVO();
-        	atchPVO.setAtchFileGroupId(atchFileGroupId);
-        	atchPVO.setMenuSn(menuSn);
-        	atchPVO.setTaskSeTrgtId(exprtApplyIVO.getExprtNo());
-        	
-        	atchMapper.updateAtchGroup(atchPVO);
+            BigInteger menuSn = exprtApplyMapper.selectMenuSn(exprtApplyIVO.getMenuSn());
+
+            AtchPVO atchPVO = new AtchPVO();
+            atchPVO.setAtchFileGroupId(atchFileGroupId);
+            atchPVO.setMenuSn(menuSn);
+            atchPVO.setTaskSeTrgtId(exprtApplyIVO.getExprtNo());
+
+            atchMapper.updateAtchGroup(atchPVO);
         }
-        
+
         data.put("result", "SUCCESS");
-        
+
         result.setData(data);
         return result;
     }

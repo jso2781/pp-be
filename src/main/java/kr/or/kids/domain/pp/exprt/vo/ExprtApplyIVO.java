@@ -16,14 +16,14 @@ public class ExprtApplyIVO
      * 회원번호
      */
     @Schema(description = "회원번호", type = "String")
-    private String mbrNo;    
-    
+    private String mbrNo;
+
     /**
      * 회원아이디
      */
     @Schema(description = "회원아이디", type = "String")
-    private String mbrId;        
-    
+    private String mbrId;
+
     /**
      * 사업자등록번호
      */
@@ -40,26 +40,26 @@ public class ExprtApplyIVO
      * 성명
      */
     @Schema(description = "성명", type = "String")
-    private String name;
+    private String encptExprtFlnm;
 
     /**
      * 이메일
      */
     @Schema(description = "이메일", type = "String")
-    private String email;    
+    private String encptExprtInstEmlNm;
 
     /**
      * 전문가재직여부
      */
     @Schema(description = "전문가재직여부", type = "String")
-    private String exprtHdofYn;    
-    
+    private String exprtHdofYn;
+
     /**
      * 첨부파일그룹아이디
      */
     @Schema(description = "첨부파일그룹아이디", type = "String")
     private String atchFileGroupId;
-    
+
     /**
      * 업무시스템 코드목록
      */
@@ -71,10 +71,10 @@ public class ExprtApplyIVO
      */
     @Schema(description = "전문가번호", type = "String")
     private String exprtNo;
-    
+
     /**
      * 메뉴일련번호(첨부파일 업로드시 파일정보 입력시 사용)
      */
     @Schema(description = "메뉴일련번호(첨부파일 업로드시 파일정보 입력시 사용)", type = "BigInteger")
-    private String menuSn;    
+    private String menuSn;
 }
