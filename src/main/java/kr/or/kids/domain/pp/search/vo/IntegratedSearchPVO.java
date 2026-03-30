@@ -20,4 +20,10 @@ public class IntegratedSearchPVO {
      */
     @Schema(description = "정렬기준", type = "String")
     private String sortBy;
+
+    /**
+     * 언어구분코드(3자리, KOR, ENG)
+     */
+    @Schema(description = "언어구분코드(3자리, KOR, ENG)", type = "String")
+    private String langSeCd;
 }

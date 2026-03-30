@@ -28,6 +28,9 @@
             AND m.up_menu_sn IS NULL
             AND m.task_se_cd = 'PP'
             AND m.menu_type_cd = 'U'
+            <if test="langSeCd != null and langSeCd != ''">
+                AND m.lang_se_cd = #{langSeCd}
+            </if>
             UNION ALL
             SELECT
                 c.menu_sn,
@@ -45,6 +48,9 @@
             WHERE c.use_yn = 'Y'
             AND c.task_se_cd = 'PP'
             AND c.menu_type_cd = 'U'
+            <if test="langSeCd != null and langSeCd != ''">
+                AND c.lang_se_cd = #{langSeCd}
+            </if>
         ),
         base AS (
             -- 게시글
@@ -159,11 +165,9 @@
                     obj
                     ORDER BY
                         -- sortBy='relevance'면 관련도 우선
-                        CASE WHEN #{sortBy} = 'relevance' THEN relevance_score END DESC NULLS LAST,
-                        -- 동점이면 최신
-                        CASE WHEN #{sortBy} = 'relevance' THEN reg_dt END DESC NULLS LAST,
-                        -- 그 외는 최신순 latest
-                        CASE WHEN #{sortBy} != 'relevance' THEN reg_dt END DESC NULLS LAST
+                        CASE WHEN COALESCE(#{sortBy}, 'latest') = 'relevance' THEN relevance_score END DESC NULLS LAST,
+                        -- 그외 최신순
+                        reg_dt DESC NULLS LAST
                 ) AS arr
             FROM ranked
             GROUP BY GROUPING SETS ((root_menu_nm), ())
