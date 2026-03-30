@@ -175,6 +175,9 @@ public class MbrInfoServiceImpl implements MbrInfoService
             // 탈퇴시
             if ("W".equals(mbrInfoPVO.getMbrJoinSttsCd())) {
                 // 개인정보비식별화
+                mbrInfoPVO.setEncptMbrFlnm("********");
+                mbrInfoPVO.setEncptMbrTelno("********");
+                mbrInfoPVO.setEncptMbrEmlNm("********");
                 mbrInfoMapper.updateMbrPersonalInfo(mbrInfoPVO);
 
                 // 전문가 회원일 경우 전문가 개인정보 삭제 및 업무시스템 회수
@@ -196,6 +199,8 @@ public class MbrInfoServiceImpl implements MbrInfoService
                     // 전문가 정보 개인정보 삭제 및 회수처리
                     exprtApprovalUVO.setExprtAprvSttsCode("C");
                     exprtApprovalUVO.setExprtHdofYn("N");
+                    exprtApprovalUVO.setEncptExprtFlnm("********");
+                    exprtApprovalUVO.setEncptExprtInstEmlNm("********");
                     exprtApprovalMapper.collectExprtApproval(exprtApprovalUVO);
                 }
 
@@ -244,13 +249,13 @@ public class MbrInfoServiceImpl implements MbrInfoService
         }
         return result;
     }
-    
+
     @Override
     public ApiPrnDto updateMbrInfoPw(MbrInfoPVO mbrInfoPVO)
     {
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         try {
-	        	mbrInfoMapper.updateMbrInfoPw(mbrInfoPVO);
+            mbrInfoMapper.updateMbrInfoPw(mbrInfoPVO);
         } catch (Exception e) {
             log.error("회원정보기본 PW 정보 수정 실패", e);
             result = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
