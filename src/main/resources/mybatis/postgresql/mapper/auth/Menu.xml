@@ -8,6 +8,7 @@
             SELECT
                 m.menu_sn,
                 m.up_menu_sn,
+                m.menu_type_cd,
                 1 AS dep_level,
                 m.menu_sn AS root_sn,
                 m.menu_nm,
@@ -18,11 +19,12 @@
             WHERE m.use_yn = 'Y'
             AND m.up_menu_sn IS NULL
             AND m.task_se_cd = 'PP'
-            AND m.menu_type_cd = 'U'
+            AND m.menu_type_cd IN('U', 'Z')
             UNION ALL
             SELECT
                 c.menu_sn,
                 c.up_menu_sn,
+                c.menu_type_cd,
                 p.dep_level + 1,
                 p.root_sn,
                 c.menu_nm,
@@ -34,11 +36,12 @@
                 ON c.up_menu_sn = p.menu_sn
             WHERE c.use_yn = 'Y'
             AND c.task_se_cd = 'PP'
-            AND c.menu_type_cd = 'U'
+            AND c.menu_type_cd IN('U', 'Z')
         )
         SELECT
             mt.menu_sn,
             mt.up_menu_sn,
+            mt.menu_type_cd,
             mt.dep_level,
             mt.root_sn,
             mt.path,
