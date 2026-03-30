@@ -77,6 +77,10 @@ spring:
 
 external:
   services:
+    crypto:
+      base-url: http://kids-ca-auth-service.kids-dev-ca:8080
+      connect-timeout-ms: 3000
+      read-timeout-ms: 6000
     email:
       base-url: http://kids-ca-be-service.kids-dev-ca:8080
       connect-timeout-ms: 3000
@@ -120,6 +124,10 @@ logging:
     jdbc.sqltiming: INFO
     jdbc.resultsettable: INFO
     org.springframework.boot.context.config: DEBUG
+
+crypto:
+  sql-interceptor:
+    enabled: false
 
 mybatis:
   type-aliases-package: kr.or.kids.domain
