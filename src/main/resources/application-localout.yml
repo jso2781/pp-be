@@ -75,12 +75,16 @@ spring:
 
 external:
   services:
+    crypto:
+      base-url: http://localhost:8088
+      connect-timeout-ms: 3000
+      read-timeout-ms: 6000
     email:
-      base-url: http://localhost:8082
+      base-url: http://localhost:8088
       connect-timeout-ms: 3000
       read-timeout-ms: 6000
     sms:
-      base-url: https://order.example.com
+      base-url: http://localhost:8088
       connect-timeout-ms: 1000
       read-timeout-ms: 3000
     connectionlog:
@@ -102,7 +106,7 @@ jwt:
 
 springdoc:
   swagger-ui:
-#    doc-expansion: full           # API 목록 접힘 (선택)
+    #    doc-expansion: full           # API 목록 접힘 (선택)
     default-model-expand-depth: 5
     default-models-expand-depth: 5
 
@@ -117,6 +121,10 @@ logging:
     kr.or.kids.domain: DEBUG
     jdbc.sqltiming: INFO
     jdbc.resultsettable: INFO
+
+crypto:
+  sql-interceptor:
+    enabled: false
 
 mybatis:
   type-aliases-package: kr.or.kids.domain
