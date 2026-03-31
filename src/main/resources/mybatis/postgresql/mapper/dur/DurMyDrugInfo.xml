@@ -533,6 +533,23 @@
                     WHERE oper_stts_cd = 'O'
                     <include refid="durFilterLikeE"/>
                 )
+        <if test="list != null and list.size() > 0">
+            <choose>
+                <when test="list[0].igrdCd != null and list[0].igrdCd != ''">
+                    AND (
+                    <foreach collection="list" item="item" separator=" OR ">
+                        eg.mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%'
+                    </foreach>
+                    )
+                </when>
+                <otherwise>
+                    AND eg.mfds_prdct_nm IN
+                    <foreach collection="list" item="item" open="(" separator="," close=")">
+                        #{item.prdctCd}
+                    </foreach>
+                </otherwise>
+            </choose>
+        </if>
             ) EFT
             UNION ALL
             /* 대국민포털_DUR노인주의기본 */
