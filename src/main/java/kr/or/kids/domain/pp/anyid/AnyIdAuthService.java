@@ -26,6 +26,9 @@ import kr.or.kids.domain.pp.anyid.dto.AnyIdLoginRequest;
 import kr.or.kids.domain.pp.anyid.vo.AnyIdLoginResponseRVO;
 import kr.or.kids.domain.pp.external.connectionlog.client.ConnectionLogClient;
 import kr.or.kids.domain.pp.external.connectionlog.vo.ConnectionLogInsertReqVO;
+import kr.or.kids.domain.pp.mbr.mapper.MbrInfoMapper;
+import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
+import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
 import kr.or.kids.global.config.util.MessageContextHolder;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
@@ -39,11 +42,13 @@ public class AnyIdAuthService {
     private final AnyIdResourcePaths resourcePaths;
     private final ObjectMapper objectMapper;
     private final ConnectionLogClient connectionLogClient;
+    private final MbrInfoMapper mbrInfoMapper;
 
-    public AnyIdAuthService(AnyIdResourcePaths resourcePaths, ObjectMapper objectMapper, ConnectionLogClient connectionLogClient) {
+    public AnyIdAuthService(AnyIdResourcePaths resourcePaths, ObjectMapper objectMapper, ConnectionLogClient connectionLogClient, MbrInfoMapper mbrInfoMapper) {
         this.resourcePaths = resourcePaths;
         this.objectMapper = objectMapper;
         this.connectionLogClient = connectionLogClient;
+        this.mbrInfoMapper = mbrInfoMapper;
     }
 
     /**
@@ -277,6 +282,17 @@ public class AnyIdAuthService {
 
             log.debug("AnyIdAuthService processAnyIdLogout mbrId="+mbrId);
 
+            MbrInfoPVO mbrInfoPVO = new MbrInfoPVO();
+            mbrInfoPVO.setMbrId(mbrId);
+
+            MbrInfoRVO resultVo = mbrInfoMapper.getMbrInfo(mbrInfoPVO);
+
+            String mbrNo = null;
+
+            if(resultVo != null){
+                mbrNo = resultVo.getMbrNo();
+            }
+
             DrugsafeUtil util = new DrugsafeUtil();
             String clientIp = util.getClientIp(request);
 
@@ -310,10 +326,10 @@ public class AnyIdAuthService {
             req.setTaskSeCd("PP");
 
             // 등록자 아이디
-            req.setRgtrId(mbrId);
+            req.setRgtrId(mbrNo);
 
             // 수정자 아이디
-            req.setMdfrId(mbrId);
+            req.setMdfrId(mbrNo);
 
             log.debug("AnyIdAuthService processAnyIdLogout ConnectionLogClient.insert ConnectionLogInsertReqVO="+req.toString());
             connectionLogClient.insert(req);
