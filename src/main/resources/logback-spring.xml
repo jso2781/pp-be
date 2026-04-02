@@ -8,13 +8,6 @@
   <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5level [%X{requestId}] %logger - %msg%n"/>
   <property name="LOG_FILE_PATH" value="logs"/>
 
-  <!-- 콘솔 -->
-  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-    </encoder>
-  </appender>
-
   <!-- 파일 (활성 파일 + 크기/일자 롤링) -->
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>${LOG_FILE_PATH}/api.log</file>
@@ -36,13 +29,18 @@
   <!-- 기본 루트 -->
   <!-- 
   <root level="INFO">
-    <appender-ref ref="CONSOLE"/>
     <appender-ref ref="FILE"/>
   </root>
   -->
 
   <!-- ===== 외부 로컬 개발(localout) ===== -->
   <springProfile name="localout">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder>
+        <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+      </encoder>
+    </appender>
+
     <!-- log4jdbc 사용 시에만 유효 -->
     <logger name="jdbc" level="OFF"/>
     <logger name="jdbc.sqlonly" level="OFF"/>
@@ -71,6 +69,12 @@
 
   <!-- ===== 내부 로컬 개발(local) ===== -->
   <springProfile name="local">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder>
+        <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+      </encoder>
+    </appender>
+
     <!-- log4jdbc 사용 시에만 유효 -->
     <logger name="jdbc" level="OFF"/>
     <logger name="jdbc.sqlonly" level="OFF"/>
@@ -120,7 +124,6 @@
     <logger name="org.hibernate.orm.jdbc.extract" level="OFF"/>
 
     <root level="DEBUG">
-      <appender-ref ref="CONSOLE"/>
       <appender-ref ref="FILE"/>
     </root>
   </springProfile>
@@ -138,7 +141,6 @@
     <logger name="org.hibernate.orm.jdbc.extract" level="TRACE"/>
 
     <root level="INFO">
-      <appender-ref ref="CONSOLE"/>
       <appender-ref ref="FILE"/>
     </root>
   </springProfile>
