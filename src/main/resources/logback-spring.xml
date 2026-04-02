@@ -54,6 +54,7 @@
     <logger name="org.mybatis" level="DEBUG"/>
     <logger name="org.apache.ibatis" level="DEBUG"/>
     <logger name="org.springframework.jdbc.core" level="OFF"/>
+    <logger name="kr.or.kids.domain.ca.common.file" level="OFF"/>
     <logger name="kr.or.kids.domain.pp" level="DEBUG"/>
 
     <!-- DEBUG 6 -->
@@ -88,6 +89,7 @@
     <logger name="org.mybatis" level="DEBUG"/>
     <logger name="org.apache.ibatis" level="DEBUG"/>
     <logger name="org.springframework.jdbc.core" level="OFF"/>
+    <logger name="kr.or.kids.domain.ca.common.file" level="OFF"/>
     <logger name="kr.or.kids.domain.pp" level="DEBUG"/>
 
     <!-- DEBUG 6 -->
