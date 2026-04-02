@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ContentDisposition;
@@ -152,20 +153,40 @@ public class AtchController
 
         FileDataReqVO fdrv = new FileDataReqVO();
         fdrv.setSrvrFileNm(relativePath);
-        FileDownResVO downloadParam = fileService.downloadFile(fdrv);
 
-        if (downloadParam == null) {
-            return ResponseEntity.notFound().build();
+        try {
+            FileDownResVO downloadParam = fileService.downloadFile(fdrv);
+
+            if (downloadParam == null) {
+                return buildBackupThumbResponse();
+            }
+
+            Resource resource = downloadParam.getResource();
+
+            if (resource == null || !resource.exists()) {
+                return buildBackupThumbResponse();
+            }
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.IMAGE_PNG)
+                    .body(resource);
+        } catch (Exception e) {
+            log.warn("getThumb fallback to backup image. srvrFileNm={}", relativePath, e.getMessage());
+            return buildBackupThumbResponse();
         }
+    }         
 
-        Resource resource = downloadParam.getResource();
+    private ResponseEntity<Resource> buildBackupThumbResponse()
+    {
+        Resource backupResource = new ClassPathResource("static/image/thumb_backup1.png");
 
-        if (!resource.exists()) {
-            return ResponseEntity.notFound().build();
+        if (!backupResource.exists()) {
+            log.error("Backup thumbnail not found: static/image/thumb_backup1.png");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_PNG)
-                .body(resource);                
-    }         
+                .body(backupResource);
+    }
 }

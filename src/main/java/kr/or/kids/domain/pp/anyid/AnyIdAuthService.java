@@ -113,7 +113,6 @@ public class AnyIdAuthService {
 
             apiPrnDto.setData(bizData);
         }catch(Exception e){
-            e.printStackTrace();
 
             apiPrnDto = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
             apiPrnDto.setMsg(e.getMessage());
@@ -146,7 +145,6 @@ public class AnyIdAuthService {
         }
         catch(Exception e){
             log.debug("AnyIdAuthService customDecryptSsob anyidCertRef.decryptSsob after exception : \n{}", e.getMessage());
-            e.printStackTrace();
         }
 
         System.setOut(originalOut);
@@ -185,7 +183,6 @@ public class AnyIdAuthService {
         }
         catch(Exception e){
             log.debug("AnyIdAuthService getCiFromSsob anyidCertRef.decryptSsob after exception : \n{}", e.getMessage());
-            e.printStackTrace();
         }
 
         System.setOut(originalOut);
@@ -227,7 +224,6 @@ public class AnyIdAuthService {
         }
         catch(Exception e){
             log.debug("AnyIdAuthService getUserInfoFromSsob anyidCertRef.decryptSsob after exception : \n{}", e.getMessage());
-            e.printStackTrace();
         }
 
         System.setOut(originalOut);

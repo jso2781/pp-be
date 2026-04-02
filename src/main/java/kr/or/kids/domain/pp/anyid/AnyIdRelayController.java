@@ -1,5 +1,7 @@
 package kr.or.kids.domain.pp.anyid;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -229,11 +231,38 @@ public class AnyIdRelayController {
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "*");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with, origin, content-type, accept, hashed");
-        String origin = request.getHeader("Origin");
+        String origin = normalizeOrigin(request.getHeader("Origin"));
         if (origin != null && !origin.isBlank()) {
             response.setHeader("Access-Control-Allow-Origin", origin);
         }
         response.setHeader("Access-Control-Max-Age", "3600");
+    }
+
+    private static String normalizeOrigin(String origin) {
+        if (origin == null || origin.isBlank()) {
+            return null;
+        }
+        if (origin.contains("\r") || origin.contains("\n")) {
+            return null;
+        }
+
+        try {
+            URI uri = new URI(origin.trim());
+            String scheme = uri.getScheme();
+            String authority = uri.getRawAuthority();
+            if (scheme == null || authority == null) {
+                return null;
+            }
+            if (!"http".equalsIgnoreCase(scheme) && !"https".equalsIgnoreCase(scheme)) {
+                return null;
+            }
+            if (uri.getRawPath() != null || uri.getRawQuery() != null || uri.getRawFragment() != null || uri.getRawUserInfo() != null) {
+                return null;
+            }
+            return scheme + "://" + authority;
+        } catch (URISyntaxException e) {
+            return null;
+        }
     }
 
     private static String clientIP(HttpServletRequest request) {

@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -76,8 +77,12 @@ public class DshstyDclrServiceImpl implements DshstyDclrService
             long nextDclrSn = dshstyDclrMapper.nextDclrSn();
 
             dshstyDclrPVO.setDclrSn(BigInteger.valueOf(nextDclrSn));
-            
-            dshstyDclrMapper.insertDshstyDclr(dshstyDclrPVO);
+
+            // 암호화 필드가 포함퇸 테이블 INSERT시 CryptoMyBatisInterceptor를 통한 필드 암호화가 동작하여 VO의 필드를 암호화 하므로 INSERT VO는 복제하여 사용
+            DshstyDclrPVO insertPVO = new DshstyDclrPVO();
+            BeanUtils.copyProperties(dshstyDclrPVO, insertPVO);
+
+            dshstyDclrMapper.insertDshstyDclr(insertPVO);
             
             // 이메일 발송부분
             
