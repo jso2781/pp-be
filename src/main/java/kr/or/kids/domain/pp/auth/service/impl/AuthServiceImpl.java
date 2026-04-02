@@ -254,7 +254,9 @@ public class AuthServiceImpl implements AuthService
         mp.setMbrId(userInfo.getMbrId());
 
         try{
+            String mbrNo = userInfo.getMbrNo();
             String mbrId = userInfo.getMbrId();
+
             // 로그인 구분코드(1 - 자체로그인, 2 - Any-ID 로그인)
             String lgnSeCd = "2";
 
@@ -277,8 +279,8 @@ public class AuthServiceImpl implements AuthService
             tokenInsertVO.setMbrId(mbrId);
             tokenInsertVO.setUpdtTokenCn(updtTokenCn);
             tokenInsertVO.setAcsTokenCn(acsTokenCn);
-            tokenInsertVO.setRgtrId(mbrId);
-            tokenInsertVO.setMdfrId(mbrId);
+            tokenInsertVO.setRgtrId(mbrNo);
+            tokenInsertVO.setMdfrId(mbrNo);
 
             mbrTokenMapper.insertMbrToken(tokenInsertVO);
 
