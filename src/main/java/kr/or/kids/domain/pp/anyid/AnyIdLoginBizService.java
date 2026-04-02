@@ -135,7 +135,9 @@ public class AnyIdLoginBizService {
             // 수정자 아이디
             req.setMdfrId(mbrNo);
 
-            conn.insert(req);
+            ApiPrnDto connLogInsert = conn.insert(req);
+            HashMap <String, Object> connLogInsertMap = connLogInsert.getData();
+            bizData.put("cntnLogSn", connLogInsertMap.get("cntnLogSn"));
             /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그인 성공 기록) 끝 ************************************************/
 
             logger.debug("AnyIdLoginBizService loginByCi(String ci, HttpServletRequest httpRequest, String redirectUriAfterLogin) ConnectionLogClient.insert status=LoggedIn, UI redirectUrl="+redirectUrl+", mbrId="+mbrId+", ConnectionLogInsertReqVO="+req.toString());
@@ -193,6 +195,7 @@ public class AnyIdLoginBizService {
                 /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그인 성공 기록) 시작 ************************************************/
                 ConnectionLogClient conn = ApplicationContextProvider.getBean(ConnectionLogClient.class);
 
+                String mbrNo = resultVo.getMbrNo();
                 String mbrId = resultVo.getMbrId();
                 DrugsafeUtil  util = new DrugsafeUtil();
                 String clientIp = util.getClientIp(request);
@@ -227,10 +230,10 @@ public class AnyIdLoginBizService {
                 req.setTaskSeCd("PP");
 
                 // 등록자 아이디
-                req.setRgtrId(mbrId);
+                req.setRgtrId(mbrNo);
 
                 // 수정자 아이디
-                req.setMdfrId(mbrId);
+                req.setMdfrId(mbrNo);
 
                 conn.insert(req);
                 /**************************************** 공통_세션정보시스템로그 Rest API 호출(tb_ca_l_sesn_log_info_mng 로그인 성공 기록) 끝 ************************************************/
