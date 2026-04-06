@@ -3,6 +3,7 @@ package kr.or.kids.domain.pp.anyid;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,13 +56,14 @@ public class AnyIdLoginBizService {
      * @param httpRequest           세션 저장용
      * @param redirectUriAfterLogin 로그인 성공 시 이동할 SPA 경로(선택). 없으면 {@link #DEFAULT_LOGGED_IN_REDIRECT}
      */
-    public ApiPrnDto loginByCi(String ci, HttpServletRequest request, String redirectUriAfterLogin) {
-        if (ci == null || ci.isBlank()) {
+    public ApiPrnDto loginByCi(Map<String, Object> userInfoFromSsob, HttpServletRequest request, String redirectUriAfterLogin) {
+        if(userInfoFromSsob == null || userInfoFromSsob.isEmpty()){
             ApiPrnDto err = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
             err.setMsg("ci is required");
             return err;
         }
 
+        String ci = (String)userInfoFromSsob.get("ci");
         MbrInfoPVO mbrInfoPVO = new MbrInfoPVO();
         mbrInfoPVO.setLinkInfoIdntfId(ci);
 
@@ -69,7 +71,7 @@ public class AnyIdLoginBizService {
 
         logger.debug("AnyIdLoginBizService loginByCi(String ci, HttpServletRequest httpRequest, String redirectUriAfterLogin) ci="+ci);
 
-        if (resultVo != null) {
+        if(resultVo != null){
             ApiPrnDto apiPrnDto = authService.loginFromAnyId(resultVo);
 
             Authentication auth = new UsernamePasswordAuthenticationToken(resultVo.getMbrId(), "N/A", List.of(new SimpleGrantedAuthority("ROLE_USER")));
@@ -79,6 +81,9 @@ public class AnyIdLoginBizService {
                 bizData = new HashMap<>();
                 apiPrnDto.setData(bizData);
             }
+
+            // Any-ID측의 사용자 정보(Any-ID 인증성공시 Any-ID로 넘겨받은 ssob를 복호화하여 추출한 Any-ID측의 사용자 정보)
+            bizData.put("userInfoFromSsob", userInfoFromSsob);
 
             String redirectUrl = sanitizeRedirectPath(redirectUriAfterLogin, DEFAULT_LOGGED_IN_REDIRECT);
 
@@ -152,7 +157,7 @@ public class AnyIdLoginBizService {
 
         HashMap<String, Object> bizData = new HashMap<>();
         bizData.put("status", "SignUpSel");
-        bizData.put("ci", ci);
+        bizData.put("userInfoFromSsob", userInfoFromSsob);
         bizData.put("redirectUrl", redirectUrl);
 
         apiPrnDto.setData(bizData);

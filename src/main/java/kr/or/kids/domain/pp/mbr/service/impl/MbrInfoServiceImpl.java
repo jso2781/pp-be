@@ -131,7 +131,7 @@ public class MbrInfoServiceImpl implements MbrInfoService
         MbrInfoRVO resultVo = mbrInfoMapper.getMbrInfo(mbrInfoPVO);
 
         if(resultVo != null){
-            ApiPrnDto err = new ApiPrnDto(ApiResultCode.SYSTEM_ERROR);
+            ApiPrnDto err = new ApiPrnDto(ApiResultCode.DUPLICATE_ERROR);
             err.setMsg("ci is duplicate");
             return err;
         }
