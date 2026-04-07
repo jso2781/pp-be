@@ -78,7 +78,7 @@ public class AnyIdAuthController {
         ApiPrnDto apiPrnDto = new ApiPrnDto(ApiResultCode.SUCCESS);
 
         try{
-            Map<String, Object> oriUserInfoMap = anyIdAuthService.getUserInfoFromSsob(req.ssob(), req.tag());
+            Map<String, Object> oriUserInfoMap = anyIdAuthService.getUserInfoFromSsob(req.ssob(), req.tag(), req.isCheckMbr());
             HashMap<String, Object> userInfoMap = oriUserInfoMap != null ? new HashMap<>(oriUserInfoMap) : new HashMap<>();
 
             apiPrnDto.setData(userInfoMap);
@@ -112,7 +112,7 @@ public class AnyIdAuthController {
     })
     public ResponseEntity<ApiPrnDto> anyidLogin(@RequestBody AnyIdLoginRequest req, HttpServletRequest httpRequest, HttpServletResponse response){
         // ssob 를 복호화해서 ssob json 내용 중 CI 정보 추출
-        Map<String, Object> userInfoFromSsob = anyIdAuthService.getUserInfoFromSsob(req.ssob(), req.tag());
+        Map<String, Object> userInfoFromSsob = anyIdAuthService.getUserInfoFromSsob(req.ssob(), req.tag(), false);
 
         ApiPrnDto apiPrnDto = anyIdLoginBizService.loginByCi(userInfoFromSsob, httpRequest, req.redirectUri());
 

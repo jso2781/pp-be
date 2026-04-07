@@ -206,7 +206,7 @@ public class AnyIdAuthService {
         return ci;
     }
 
-    public Map<String, Object> getUserInfoFromSsob(String ssob, String tag) {
+    public Map<String, Object> getUserInfoFromSsob(String ssob, String tag, boolean isCheckMbr){
         AnyidCertRef anyidCertRef = new AnyidCertRef();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -257,6 +257,28 @@ public class AnyIdAuthService {
          */
         Map<String, Object> ssobMap = readJsonMap(ssobStr);
 
+        if(isCheckMbr){
+
+            String ci = asString(ssobMap.get("ci"));
+
+            if(ci != null){
+                MbrInfoPVO mbrInfoPVO = new MbrInfoPVO();
+
+                mbrInfoPVO.setLinkInfoIdntfId(ci);
+
+                MbrInfoRVO resultVo = mbrInfoMapper.getMbrInfo(mbrInfoPVO);
+
+                if(resultVo != null){
+                    ssobMap.put("existMbrInfo", "Y");
+                }
+                else{
+                    ssobMap.put("existMbrInfo", "N");
+                }
+            }
+            else{
+                ssobMap.put("existMbrInfo", "N");
+            }
+        }
         return ssobMap;
     }
 
