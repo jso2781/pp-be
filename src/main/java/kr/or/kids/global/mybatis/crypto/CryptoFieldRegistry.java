@@ -40,23 +40,23 @@ public final class CryptoFieldRegistry {
      * 2) pp-be VO 필드명과의 관계를 여기 추가해야 한다.</p>
      */
     public static final Map<String, String> ENCRYPT_FIELD_TO_PLAIN = Map.ofEntries(
-            Map.entry("encptMbrFlnm", "mbrFlnm"),
-            Map.entry("encptMbrEmlNm", "mbrEmlNm"),
-            Map.entry("encptMbrPswd", "mbrPswd"),
-            Map.entry("encptMbrTelno", "mbrTelno"),
-            Map.entry("encptEmpTelno", "empTelno"),
-            Map.entry("encptEmpEmlNm", "empEmlNm"),
-            Map.entry("encptMngrPswd", "mngrPswd"),
-            Map.entry("encptCnstnMbcmtRrno", "cnstnMbcmtRrno"),
-            Map.entry("encptCnstnMbcmtActno", "cnstnMbcmtActno"),
-            Map.entry("encptBfrPswd", "bfrPswd"),
-            Map.entry("encptCmntPswd", "cmntPswd"),
-            Map.entry("encptPicTelno", "picTelno"),
-            Map.entry("encptSttyAgtTelno", "sttyAgtTelno"),
-            Map.entry("encptExprtFlnm", "exprtFlnm"),
-            Map.entry("encptExprtInstEmlNm", "exprtInstEmlNm"),
-            Map.entry("encptWrtrFlnm", "wrtrFlnm"),
-            Map.entry("encptWrtrTelno", "wrtrTelno")
+        Map.entry("encptMbrFlnm", "mbrFlnm"),
+        Map.entry("encptMbrEmlNm", "mbrEmlNm"),
+        Map.entry("encptMbrPswd", "mbrPswd"),
+        Map.entry("encptMbrTelno", "mbrTelno"),
+        Map.entry("encptEmpTelno", "empTelno"),
+        Map.entry("encptEmpEmlNm", "empEmlNm"),
+        Map.entry("encptMngrPswd", "mngrPswd"),
+        Map.entry("encptCnstnMbcmtRrno", "cnstnMbcmtRrno"),
+        Map.entry("encptCnstnMbcmtActno", "cnstnMbcmtActno"),
+        Map.entry("encptBfrPswd", "bfrPswd"),
+        Map.entry("encptCmntPswd", "cmntPswd"),
+        Map.entry("encptPicTelno", "picTelno"),
+        Map.entry("encptSttyAgtTelno", "sttyAgtTelno"),
+        Map.entry("encptExprtFlnm", "exprtFlnm"),
+        Map.entry("encptExprtInstEmlNm", "exprtInstEmlNm"),
+        Map.entry("encptWrtrFlnm", "wrtrFlnm"),
+        Map.entry("encptWrtrTelno", "wrtrTelno")
     );
 
     /**
@@ -69,19 +69,21 @@ public final class CryptoFieldRegistry {
      * 즉 "암호화 가능"과 "복호화 가능"의 집합은 완전히 같지 않을 수 있다.</p>
      */
     public static final Set<String> DECRYPT_FIELDS = Set.of(
-            "encptMbrFlnm",
-            "encptMbrEmlNm",
-            "encptMbrTelno",
-            "encptEmpTelno",
-            "encptEmpEmlNm",
-            "encptCnstnMbcmtRrno",
-            "encptCnstnMbcmtActno",
-            "encptPicTelno",
-            "encptSttyAgtTelno",
-            "encptExprtFlnm",
-            "encptExprtInstEmlNm",
-            "encptWrtrFlnm",
-            "encptWrtrTelno"
+    /*
+        "encptMbrFlnm",     // 회원암호화성명 복호화 대상에서 제외
+        "encptMbrEmlNm",    // 회원암호화이메일 복호화 대상에서 제외
+        "encptMbrTelno",    // 회원암호화전화번호 복호화 대상에서 제외
+    */
+        "encptEmpTelno",
+        "encptEmpEmlNm",
+        "encptCnstnMbcmtRrno",
+        "encptCnstnMbcmtActno",
+        "encptPicTelno",
+        "encptSttyAgtTelno",
+        "encptExprtFlnm",
+        "encptExprtInstEmlNm",
+        "encptWrtrFlnm",
+        "encptWrtrTelno"
     );
 
     /**
@@ -95,10 +97,10 @@ public final class CryptoFieldRegistry {
      * <p>요구사항에 따라 현재는 이름에 Pswd 가 들어가는 필드를 모두 명시한다.</p>
      */
     public static final Set<String> DECRYPT_BLOCKED_FIELDS = Set.of(
-            "encptMbrPswd",
-            "encptMngrPswd",
-            "encptBfrPswd",
-            "encptCmntPswd"
+        "encptMbrPswd",
+        "encptMngrPswd",
+        "encptBfrPswd",
+        "encptCmntPswd"
     );
 
     /**
