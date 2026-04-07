@@ -124,7 +124,7 @@ logging:
 
 crypto:
   sql-interceptor:
-    enabled: false
+    enabled: true
 
 mybatis:
   type-aliases-package: kr.or.kids.domain
