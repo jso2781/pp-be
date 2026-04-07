@@ -18,9 +18,14 @@ server:
 
 spring:
   redis:
-    host: redis-dev-headless.redis-dev
-    port: 6379
-    password: kids2025!
+    password: ${REDIS_PASSWORD}
+    sentinel:
+      master: mymaster
+      nodes:
+       - redis-prod-node-0.redis-prod-headless.redis-prod.svc.cluster.local:26379
+       - redis-prod-node-1.redis-prod-headless.redis-prod.svc.cluster.local:26379
+       - redis-prod-node-2.redis-prod-headless.redis-prod.svc.cluster.local:26379
+      password: ${REDIS_PASSWORD}
     timeout: 2000ms
   servlet:
     multipart:
@@ -73,16 +78,16 @@ spring:
           writetimeout: 5000
           debug: true
   config:
-    import: optional:classpath:sso-adaptor-conf-dev.properties
+    import: optional:classpath:sso-adaptor-conf-prod.properties
 
 external:
   services:
     crypto:
-      base-url: http://kids-ca-auth-service.kids-dev-ca:8080
+      base-url: http://kids-ca-auth-service.kids-prod-ca:8080
       connect-timeout-ms: 3000
       read-timeout-ms: 6000
     email:
-      base-url: http://kids-ca-be-service.kids-dev-ca:8080
+      base-url: http://kids-ca-be-service.kids-prod-ca:8080
       connect-timeout-ms: 3000
       read-timeout-ms: 6000
     sms:
@@ -90,11 +95,11 @@ external:
       connect-timeout-ms: 1000
       read-timeout-ms: 3000
     connectionlog:
-      base-url: http://kids-ca-auth-service.kids-dev-ca:8080
+      base-url: http://kids-ca-auth-service.kids-prod-ca:8080
       connect-timeout-ms: 3000
       read-timeout-ms: 6000
     workaccesslog:
-      base-url: http://kids-ca-auth-service.kids-dev-ca:8080
+      base-url: http://kids-ca-auth-service.kids-prod-ca:8080
       connect-timeout-ms: 3000
       read-timeout-ms: 6000
 
