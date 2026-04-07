@@ -246,6 +246,7 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
         exprtTaskMapper.deleteAllExprtAuth(exprtTaskPVO);
 
         // 반려 메일 발송
+        detail.setExprtRjctRsn(exprtApprovalUVO.getExprtRjctRsn());
         sendEmail(detail, 2);
     }
 
