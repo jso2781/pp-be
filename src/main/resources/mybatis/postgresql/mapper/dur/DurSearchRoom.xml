@@ -110,11 +110,11 @@
                             ,null as prdct_nm                       /* 검색한 제품명 */
                         </when>
                         <otherwise>
-                            ,prdct_nm_1 as prdct_nm                 /* 검색한 제품명 */
+                            ,mfds_prdct_nm_1 as prdct_nm                 /* 검색한 제품명 */
                         </otherwise>
                     </choose>
-                    ,igrd_nm_1 as igrd_nm                           /* 검색한 제품의 성분 */
-                    ,igrd_nm_2 as prohibit_igrd_nm                  /* 병용금기 성분 */
+                    ,mfds_igrd_nm_cn_1 as igrd_nm                           /* 검색한 제품의 성분 */
+                    ,mfds_igrd_nm_cn_2 as prohibit_igrd_nm                  /* 병용금기 성분 */
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
                     ,null as age_prcs_cnd_nm
@@ -128,10 +128,10 @@
             FROM kids_own.tb_pp_m_dur_conc_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND lower(igrd_nm_1) like '%' || lower(#{igrdNm}) || '%'
+                AND lower(mfds_igrd_nm_cn_1) like '%' || lower(#{igrdNm}) || '%'
             </if>
             <if test="prdctNm != null and prdctNm != ''">
-                AND prdct_nm_1 like '%' || #{prdctNm} || '%'
+                AND mfds_prdct_nm_1 like '%' || #{prdctNm} || '%'
             </if>
             UNION ALL
             SELECT distinct
@@ -141,11 +141,11 @@
                             ,null as prdct_nm                       /* 검색한 제품명 */
                         </when>
                         <otherwise>
-                            ,prdct_nm_2 as prdct_nm                 /* 검색한 제품명 */
+                            ,mfds_prdct_nm_2 as prdct_nm                 /* 검색한 제품명 */
                         </otherwise>
                     </choose>
-                    ,igrd_nm_2 as igrd_nm                           /* 검색한 제품의 성분 */
-                    ,igrd_nm_1 as prohibit_igrd_nm                  /* 병용금기 성분 */
+                    ,mfds_igrd_nm_cn_2 as igrd_nm                           /* 검색한 제품의 성분 */
+                    ,mfds_igrd_nm_cn_1 as prohibit_igrd_nm                  /* 병용금기 성분 */
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
                     ,null as age_prcs_cnd_nm
@@ -159,10 +159,10 @@
             FROM kids_own.tb_pp_m_dur_conc_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND lower(igrd_nm_2) like '%' || lower(#{igrdNm}) || '%'
+                AND lower(mfds_igrd_nm_cn_2) like '%' || lower(#{igrdNm}) || '%'
             </if>
             <if test="prdctNm != null and prdctNm != ''">
-                AND prdct_nm_2 like '%' || #{prdctNm} || '%'
+                AND mfds_prdct_nm_2 like '%' || #{prdctNm} || '%'
             </if>
             UNION ALL
             /* 대국민포털_DUR연령금기기본 */
@@ -173,10 +173,10 @@
                             ,null as prdct_nm                       /* 검색한 제품명 */
                         </when>
                         <otherwise>
-                            ,prdct_nm                               /* 검색한 제품명 */
+                            ,mfds_prdct_nm as prdct_nm              /* 검색한 제품명 */
                         </otherwise>
                     </choose>
-                    ,igrd_nm                                        /* 검색한 제품의 성분 */
+                    ,mfds_igrd_nm_cn as igrd_nm                     /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,rlvt_age::varchar                              /* 해당 연령 */ 
                     ,rlvt_age_unit_nm                               /* 해당 연령 단위명 */
@@ -191,10 +191,10 @@
             FROM kids_own.tb_pp_m_dur_age_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND lower(igrd_nm) like '%' || lower(#{igrdNm}) || '%'
+                AND lower(mfds_igrd_nm_cn) like '%' || lower(#{igrdNm}) || '%'
             </if>
             <if test="prdctNm != null and prdctNm != ''">
-                AND prdct_nm like '%' || #{prdctNm} || '%'
+                AND mfds_prdct_nm like '%' || #{prdctNm} || '%'
             </if>
             UNION ALL
             /* 대국민포털_DUR임부금기기본 */
@@ -205,10 +205,10 @@
                             ,null as prdct_nm                       /* 검색한 제품명 */
                         </when>
                         <otherwise>
-                            ,prdct_nm                               /* 검색한 제품명 */
+                            ,mfds_prdct_nm as prdct_nm              /* 검색한 제품명 */
                         </otherwise>
                     </choose>
-                    ,igrd_nm                                        /* 검색한 제품의 성분 */
+                    ,mfds_igrd_nm_cn as igrd_nm                     /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
@@ -223,10 +223,10 @@
             FROM kids_own.tb_pp_m_dur_prgnt_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND lower(igrd_nm) like '%' || lower(#{igrdNm}) || '%'
+                AND lower(mfds_igrd_nm_cn) like '%' || lower(#{igrdNm}) || '%'
             </if>
             <if test="prdctNm != null and prdctNm != ''">
-                AND prdct_nm like '%' || #{prdctNm} || '%'
+                AND mfds_prdct_nm like '%' || #{prdctNm} || '%'
             </if>
             UNION ALL
             /* 대국민포털_DUR용량주의기본 */
@@ -237,16 +237,16 @@
                             ,null as prdct_nm                       /* 검색한 제품명 */
                         </when>
                         <otherwise>
-                            ,mdcn_nm as prdct_nm                    /* 검색한 제품명 */
+                            ,mfds_prdct_nm as prdct_nm              /* 검색한 제품명 */
                         </otherwise>
                     </choose>
-                    ,gnrl_nm as igrd_nm                             /* 검색한 제품의 성분 */
+                    ,mfds_igrd_nm_cn as igrd_nm                     /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
                     ,null as age_prcs_cnd_nm
                     ,null as condi_grd_cd
-                    ,day_max_admin_cpct_cn as day_max_admin_cpct        /* 1일 최대용량 */
+                    ,day_max_admin_cpct_cn as day_max_admin_cpct    /* 1일 최대용량 */
                     ,null as max_admin_prd_day_cnt
                     ,null as eff_group_nm
                     ,null as group_nm
@@ -255,10 +255,10 @@
             FROM kids_own.tb_pp_m_dur_cpct
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND (lower(gnrl_nm) like '%' || lower(#{igrdNm}) || '%')
+                AND (lower(mfds_igrd_nm_cn) like '%' || lower(#{igrdNm}) || '%')
             </if>
             <if test="prdctNm != null and prdctNm != ''">
-                AND (mdcn_nm like '%' || #{prdctNm} || '%')
+                AND (mfds_prdct_nm like '%' || #{prdctNm} || '%')
             </if>
             UNION ALL
             /* 대국민포털_DUR투여기간주의기본 */
@@ -269,10 +269,10 @@
                             ,null as prdct_nm                       /* 검색한 제품명 */
                         </when>
                         <otherwise>
-                            ,mdcn_nm as prdct_nm                    /* 검색한 제품명 */
+                            ,mfds_prdct_nm as prdct_nm              /* 검색한 제품명 */
                         </otherwise>
                     </choose>
-                    ,gnrl_nm as igrd_nm                             /* 검색한 제품의 성분 */
+                    ,mfds_igrd_nm_cn as igrd_nm                     /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
@@ -287,10 +287,10 @@
             FROM kids_own.tb_pp_m_dur_dosage
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND (lower(gnrl_nm) like '%' || lower(#{igrdNm}) || '%')
+                AND (lower(mfds_igrd_nm_cn) like '%' || lower(#{igrdNm}) || '%')
             </if>
             <if test="prdctNm != null and prdctNm != ''">
-                AND (mdcn_nm like '%' || #{prdctNm} || '%')
+                AND (mfds_prdct_nm like '%' || #{prdctNm} || '%')
             </if>
             UNION ALL
             /* 대국민포털_DUR효능군중복기본 */
@@ -317,10 +317,10 @@
                             ,null  as prdct_nm                      /* 검색한 제품명 */
                         </when>
                         <otherwise>
-                            ,eg.item_nm  as prdct_nm                /* 검색한 제품명 */
+                            ,eg.mfds_prdct_nm  as prdct_nm          /* 검색한 제품명 */
                         </otherwise>
                     </choose>
-                    ,eg.gnrl_nm as igrd_nm                          /* 검색한 제품의 성분 */
+                    ,eg.mfds_igrd_nm_cn as igrd_nm                  /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
@@ -349,17 +349,17 @@
                     FROM kids_own.tb_pp_m_dur_eftgrp e
                     WHERE oper_stts_cd = 'O' 
                     <if test="igrdNm != null and igrdNm != ''">
-                        AND (lower(e.gnrl_nm) like '%' || lower(#{igrdNm}) || '%')
+                        AND (lower(e.mfds_igrd_nm_cn) like '%' || lower(#{igrdNm}) || '%')
                     </if>
                     <if test="prdctNm != null and prdctNm != ''">
-                        AND (e.item_nm like '%' || #{prdctNm} || '%')
+                        AND (e.mfds_prdct_nm like '%' || #{prdctNm} || '%')
                     </if>
                 )
                 <if test="igrdNm != null and igrdNm != ''">
-                    AND (lower(eg.gnrl_nm) like '%' || lower(#{igrdNm}) || '%')
+                    AND (lower(eg.mfds_igrd_nm_cn) like '%' || lower(#{igrdNm}) || '%')
                 </if>
                 <if test="prdctNm != null and prdctNm != ''">
-                    AND (eg.item_nm like '%' || #{prdctNm} || '%')
+                    AND (eg.mfds_prdct_nm like '%' || #{prdctNm} || '%')
                 </if>
             ) EFT
             UNION ALL
@@ -371,10 +371,10 @@
                             ,null as prdct_nm                       /* 검색한 제품명 */
                         </when>
                         <otherwise>
-                            ,prdct_nm                               /* 검색한 제품명 */
+                            ,mfds_prdct_nm as prdct_nm              /* 검색한 제품명 */
                         </otherwise>
                     </choose>
-                    ,igrd_nm                                        /* 검색한 제품의 성분 */
+                    ,mfds_igrd_nm_cn as igrd_nm                     /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
@@ -389,10 +389,10 @@
             FROM kids_own.tb_pp_m_dur_snctz
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND lower(igrd_nm) like '%' || lower(#{igrdNm}) || '%'
+                AND lower(mfds_igrd_nm_cn) like '%' || lower(#{igrdNm}) || '%'
             </if>
             <if test="prdctNm != null and prdctNm != ''">
-                AND prdct_nm like '%' || #{prdctNm} || '%'
+                AND mfds_prdct_nm like '%' || #{prdctNm} || '%'
             </if>
             UNION ALL
             /* 대국민포털_DUR수유부주의기본 */
@@ -403,10 +403,10 @@
                             ,null as prdct_nm                       /* 검색한 제품명 */
                         </when>
                         <otherwise>
-                            ,prdct_nm                               /* 검색한 제품명 */
+                            ,mfds_prdct_nm as prdct_nm              /* 검색한 제품명 */
                         </otherwise>
                     </choose>
-                    ,igrd_nm                                        /* 검색한 제품의 성분 */
+                    ,mfds_igrd_nm_cn as igrd_nm                     /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
@@ -421,10 +421,10 @@
             FROM kids_own.tb_pp_m_dur_nursw
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND lower(igrd_nm) like '%' || lower(#{igrdNm}) || '%'
+                AND lower(mfds_igrd_nm_cn) like '%' || lower(#{igrdNm}) || '%'
             </if>
             <if test="prdctNm != null and prdctNm != ''">
-                AND prdct_nm like '%' || #{prdctNm} || '%'
+                AND mfds_prdct_nm like '%' || #{prdctNm} || '%'
             </if>
         ) A
         GROUP BY A.igrd_nm
@@ -438,79 +438,79 @@
             <!-- ,bzenty_nm  /* 제약회사(업체명) */ -->
         FROM(
             select
-                 prdct_nm_1 as prdct_nm                         /* 제품명(제품명_1) */
+                 mfds_prdct_nm_1 as prdct_nm                         /* 제품명(제품명_1) */
                 ,bzenty_nm_1 as bzenty_nm                       /* 제약회사(업체명_1) */
             FROM kids_own.tb_pp_m_dur_conc_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND lower(igrd_nm_1) = lower(#{igrdNm})
+                AND lower(mfds_igrd_nm_cn_1) = lower(#{igrdNm})
             </if>
             AND 'conc' = #{bannTypeCd}
             UNION ALL
             SELECT
-                 prdct_nm_2 as prdct_nm                         /* 제품명(제품명_2) */
+                 mfds_prdct_nm_2 as prdct_nm                         /* 제품명(제품명_2) */
                 ,bzenty_nm_2 as bzenty_nm                       /* 제약회사(업체명_2) */
             FROM kids_own.tb_pp_m_dur_conc_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND lower(igrd_nm_2) = lower(#{igrdNm})
+                AND lower(mfds_igrd_nm_cn_2) = lower(#{igrdNm})
             </if>
             AND 'conc' = #{bannTypeCd}
             UNION ALL
             /* DUR연령금기 정보에서 제품별 제약회사 조회(성분명 조건) */
             SELECT
-                 prdct_nm                                       /* 제품명 */
+                 mfds_prdct_nm as prdct_nm                      /* 제품명 */
                 ,bzenty_nm                                      /* 제약회사(업체명) */
             FROM kids_own.tb_pp_m_dur_age_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND lower(igrd_nm) = lower(#{igrdNm})
+                AND lower(mfds_igrd_nm_cn) = lower(#{igrdNm})
             </if>
             AND 'age' = #{bannTypeCd}
             UNION ALL
             /* DUR임부금기 정보에서 제품별 제약회사 조회(성분명 조건) */
             SELECT
-                 prdct_nm                                       /* 제품명 */
+                 mfds_prdct_nm as prdct_nm                      /* 제품명 */
                 ,bzenty_nm                                      /* 제약회사(업체명) */
             FROM kids_own.tb_pp_m_dur_prgnt_bann
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND lower(igrd_nm) = lower(#{igrdNm})
+                AND lower(mfds_igrd_nm_cn) = lower(#{igrdNm})
             </if>
             AND 'prgnt' = #{bannTypeCd}
             UNION ALL
             /* DUR용량주의 정보에서 제품별 제약회사 조회(성분명 조건) */
             SELECT
-                 coalesce(mdcn_nm, mfds_prdct_nm) as prdct_nm   /* 제품명 */
+                 mfds_prdct_nm as prdct_nm                      /* 제품명 */
                 ,'' as bzenty_nm                                /* 제약회사(업체명) */
             FROM kids_own.tb_pp_m_dur_cpct
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND (lower(gnrl_nm) = lower(#{igrdNm}))
+                AND (lower(mfds_igrd_nm_cn) = lower(#{igrdNm}))
             </if>
             AND 'cpct' = #{bannTypeCd}
             UNION ALL
             /* DUR투여기간주의 정보에서 제품별 제약회사 조회(성분명 조건) */
             SELECT
-                 mdcn_nm as prdct_nm                            /* 제품명 */
+                 mfds_prdct_nm as prdct_nm                      /* 제품명 */
                 ,'' as bzenty_nm                                /* 제약회사(업체명) */
             FROM kids_own.tb_pp_m_dur_dosage
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND (lower(gnrl_nm) = lower(#{igrdNm}))
+                AND (lower(mfds_igrd_nm_cn) = lower(#{igrdNm}))
             </if>
             AND 'dosage' = #{bannTypeCd}
             UNION ALL
             /* DUR효능군중복 정보에서 제품별 제약회사 조회(성분명에 대한 그룹명_1 소속 전체 제품 조회) */
             SELECT
-                  coalesce(eg.item_nm, eg.mfds_prdct_nm) as prdct_nm   /* 제품명 */
+                  eg.mfds_prdct_nm as prdct_nm                         /* 제품명 */
                 , eg.bzenty_nm                                      /* 제약회사(업체명) */
             FROM kids_own.tb_pp_m_dur_eftgrp eg
                , (SELECT MAX(eff_group_nm) AS eff_group_nm, MAX(group_nm_1) AS group_nm_1
                     FROM kids_own.tb_pp_m_dur_eftgrp
                    WHERE oper_stts_cd = 'O'
                 <if test="igrdNm != null and igrdNm != ''">
-                    AND (lower(gnrl_nm) = lower(#{igrdNm}))
+                    AND (lower(mfds_igrd_nm_cn) = lower(#{igrdNm}))
                 </if>
                    GROUP BY eff_group_nm, group_nm_1) eg2 
             WHERE eg2.eff_group_nm = eg.eff_group_nm
@@ -520,23 +520,23 @@
             UNION ALL
             /* DUR노인주의 정보에서 제품별 제약회사 조회(성분명 조건) */
             SELECT
-                 prdct_nm                                       /* 제품명 */
-                ,bzenty_nm                                      /* 제약회사(업체명) */
+                 mfds_prdct_nm as prdct_nm                         /* 제품명 */
+                ,bzenty_nm                                         /* 제약회사(업체명) */
             FROM kids_own.tb_pp_m_dur_snctz
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND lower(igrd_nm) = lower(#{igrdNm})
+                AND lower(mfds_igrd_nm_cn) = lower(#{igrdNm})
             </if>
             AND 'snctz' = #{bannTypeCd}
             UNION ALL
             /* DUR수유부주의 정보에서 제품별 제약회사 조회(성분명 조건) */
             SELECT
-                 prdct_nm                                       /* 제품명 */
+                 mfds_prdct_nm as prdct_nm                      /* 제품명 */
                 ,bzenty_nm                                      /* 제약회사(업체명) */
             FROM kids_own.tb_pp_m_dur_nursw
             WHERE oper_stts_cd = 'O'
             <if test="igrdNm != null and igrdNm != ''">
-                AND lower(igrd_nm) = lower(#{igrdNm})
+                AND lower(mfds_igrd_nm_cn) = lower(#{igrdNm})
             </if>
             AND 'nursw' = #{bannTypeCd}
         ) A
@@ -547,7 +547,7 @@
         SELECT 
              eff_group_nm           /* 효능그룹명 */
             ,group_nm               /* 계열(그룹명) */
-            ,igrd_nm                /* 성분 */
+            ,mfds_igrd_nm_cn as igrd_nm                /* 성분 */
         FROM(
             SELECT distinct
                  eg.eff_group_nm
@@ -561,13 +561,13 @@
                     and dc.com_dtl_cd = eg.group_nm
                     LIMIT 1
                  ) as group_nm
-                ,coalesce(eg.gnrl_nm, eg.mfds_igrd_nm_cn) as igrd_nm
+                ,eg.mfds_igrd_nm_cn as igrd_nm
             FROM kids_own.tb_pp_m_dur_eftgrp eg
                , (SELECT MAX(eff_group_nm) AS eff_group_nm, MAX(group_nm_1) AS group_nm_1
                     FROM kids_own.tb_pp_m_dur_eftgrp
                    WHERE oper_stts_cd = 'O'
                 <if test="igrdNm != null and igrdNm != ''">
-                     AND lower(gnrl_nm) = lower(#{igrdNm})
+                     AND lower(mfds_igrd_nm_cn) = lower(#{igrdNm})
                 </if>                   
                   GROUP BY eff_group_nm, group_nm_1) eg2 
             WHERE eg2.eff_group_nm = eg.eff_group_nm

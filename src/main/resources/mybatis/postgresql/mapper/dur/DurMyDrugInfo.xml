@@ -78,7 +78,7 @@
             (
                 (p.a_prdct_cd IS NULL OR p.a_prdct_cd = '')
                 AND
-                (p.a_igrd_cd IS NULL OR p.a_igrd_cd = '' OR cb.mfds_igrd_cd_cn_1 LIKE '%' || p.a_igrd_cd || '%')
+                (p.a_igrd_cd IS NULL OR p.a_igrd_cd = '' OR cb.mfds_igrd_nm_cn_1 LIKE '%' || p.a_igrd_cd || '%')
             )
         )
     </sql>
@@ -89,7 +89,7 @@
             (
                 (p.b_prdct_cd IS NULL OR p.b_prdct_cd = '')
                 AND
-                (p.b_igrd_cd IS NULL OR p.b_igrd_cd = '' OR cb.mfds_igrd_cd_cn_2 LIKE '%' || p.b_igrd_cd || '%')
+                (p.b_igrd_cd IS NULL OR p.b_igrd_cd = '' OR cb.mfds_igrd_nm_cn_2 LIKE '%' || p.b_igrd_cd || '%')
             )
         )
     </sql>
@@ -100,7 +100,7 @@
             (
                 (p.a_prdct_cd IS NULL OR p.a_prdct_cd = '')
                 AND
-                (p.a_igrd_cd IS NULL OR p.a_igrd_cd = '' OR cb.mfds_igrd_cd_cn_2 LIKE '%' || p.a_igrd_cd || '%')
+                (p.a_igrd_cd IS NULL OR p.a_igrd_cd = '' OR cb.mfds_igrd_nm_cn_2 LIKE '%' || p.a_igrd_cd || '%')
             )
         )
     </sql>
@@ -111,7 +111,7 @@
             (
                 (p.b_prdct_cd IS NULL OR p.b_prdct_cd = '')
                 AND
-                (p.b_igrd_cd IS NULL OR p.b_igrd_cd = '' OR cb.mfds_igrd_cd_cn_1 LIKE '%' || p.b_igrd_cd || '%')
+                (p.b_igrd_cd IS NULL OR p.b_igrd_cd = '' OR cb.mfds_igrd_nm_cn_1 LIKE '%' || p.b_igrd_cd || '%')
             )
         )
     </sql>
@@ -122,7 +122,7 @@
                 <when test="list[0].igrdCd != null and list[0].igrdCd != ''">
                     AND (
                     <foreach collection="list" item="item" separator=" OR ">
-                        mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%'
+                        mfds_igrd_nm_cn LIKE '%' || #{item.igrdCd} || '%'
                     </foreach>
                     )
                 </when>
@@ -142,7 +142,7 @@
                 <when test="list[0].igrdCd != null and list[0].igrdCd != ''">
                     AND (
                     <foreach collection="list" item="item" separator=" OR ">
-                        e.mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%'
+                        e.mfds_igrd_nm_cn LIKE '%' || #{item.igrdCd} || '%'
                     </foreach>
                     )
                 </when>
@@ -193,10 +193,10 @@
                 ),
                 conc_match AS (
                     SELECT DISTINCT
-                        cb.prdct_nm_1,
-                        cb.prdct_nm_2,
-                        cb.igrd_nm_1,
-                        cb.igrd_nm_2,
+                        cb.mfds_prdct_nm_1 as prdct_nm_1,
+                        cb.mfds_prdct_nm_2 as prdct_nm_2,
+                        cb.mfds_igrd_nm_cn_1 as igrd_nm_1,
+                        cb.mfds_igrd_nm_cn_2 as igrd_nm_2,
                         cb.condi_rsn AS dtl_info_cn,
                         cb.rmrk_cn,
                         TRUE AS is_forward
@@ -209,10 +209,10 @@
                     UNION ALL
 
                     SELECT DISTINCT
-                        cb.prdct_nm_1,
-                        cb.prdct_nm_2,
-                        cb.igrd_nm_1,
-                        cb.igrd_nm_2,
+                        cb.mfds_prdct_nm_1 as prdct_nm_1,
+                        cb.mfds_prdct_nm_2 as prdct_nm_2,
+                        cb.mfds_igrd_nm_cn_1 as igrd_nm_1,
+                        cb.mfds_igrd_nm_cn_2 as igrd_nm_2,
                         cb.condi_rsn AS dtl_info_cn,
                         cb.rmrk_cn,
                         FALSE AS is_forward
@@ -368,11 +368,11 @@
                                 ,null as prdct_nm                       /* 검색한 제품명 */
                             </when>
                             <otherwise>
-                                ,prdct_nm                               /* 검색한 제품명 */
+                                ,mfds_prdct_nm as prdct_nm              /* 검색한 제품명 */
                             </otherwise>
                         </choose>
                     </if>
-                    ,igrd_nm
+                    ,mfds_igrd_nm_cn as igrd_nm                     /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,rlvt_age::varchar as rlvt_age
                     ,rlvt_age_unit_nm as rlvt_age_unit_nm
@@ -397,11 +397,11 @@
                                 ,null as prdct_nm                       /* 검색한 제품명 */
                             </when>
                             <otherwise>
-                                ,prdct_nm                               /* 검색한 제품명 */
+                                ,mfds_prdct_nm as prdct_nm              /* 검색한 제품명 */
                             </otherwise>
                         </choose>
                     </if>
-                    ,igrd_nm
+                    ,mfds_igrd_nm_cn as igrd_nm                     /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
@@ -426,11 +426,11 @@
                                 ,null as prdct_nm                       /* 검색한 제품명 */
                             </when>
                             <otherwise>
-                                ,mdcn_nm  as prdct_nm                   /* 검색한 제품명 */
+                                ,mfds_prdct_nm as prdct_nm              /* 검색한 제품명 */
                             </otherwise>
                         </choose>
                     </if>
-                    ,gnrl_nm as igrd_nm
+                    ,mfds_igrd_nm_cn as igrd_nm                     /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
@@ -455,11 +455,11 @@
                                 ,null as prdct_nm                       /* 검색한 제품명 */
                             </when>
                             <otherwise>
-                                ,mdcn_nm  as prdct_nm                   /* 검색한 제품명 */
+                                ,mfds_prdct_nm as prdct_nm              /* 검색한 제품명 */
                             </otherwise>
                         </choose>
                     </if>
-                    ,gnrl_nm as igrd_nm
+                    ,mfds_igrd_nm_cn as igrd_nm                         /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
@@ -500,11 +500,11 @@
                                 ,null as prdct_nm                       /* 검색한 제품명 */
                             </when>
                             <otherwise>
-                                ,eg.item_nm  as prdct_nm                /* 검색한 제품명 */
+                                ,eg.mfds_prdct_nm  as prdct_nm          /* 검색한 제품명 */
                             </otherwise>
                         </choose>
                     </if>
-                    ,eg.gnrl_nm as igrd_nm                             /* 검색한 제품의 성분 */
+                    ,eg.mfds_igrd_nm_cn as igrd_nm                      /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
@@ -538,7 +538,7 @@
                 <when test="list[0].igrdCd != null and list[0].igrdCd != ''">
                     AND (
                     <foreach collection="list" item="item" separator=" OR ">
-                        eg.mfds_igrd_cd_cn LIKE '%' || #{item.igrdCd} || '%'
+                        eg.mfds_igrd_nm_cn LIKE '%' || #{item.igrdCd} || '%'
                     </foreach>
                     )
                 </when>
@@ -561,11 +561,11 @@
                                 ,null as prdct_nm                   /* 검색한 제품명 */
                             </when>
                             <otherwise>
-                                ,prdct_nm                           /* 검색한 제품명 */
+                                ,mfds_prdct_nm as prdct_nm              /* 검색한 제품명 */
                             </otherwise>
                         </choose>
                     </if>
-                    ,igrd_nm
+                    ,mfds_igrd_nm_cn as igrd_nm                     /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
@@ -590,11 +590,11 @@
                                 ,null as prdct_nm                   /* 검색한 제품명 */
                             </when>
                             <otherwise>
-                                ,prdct_nm                           /* 검색한 제품명 */
+                                ,mfds_prdct_nm as prdct_nm              /* 검색한 제품명 */
                             </otherwise>
                         </choose>
                     </if>
-                    ,igrd_nm
+                    ,mfds_igrd_nm_cn as igrd_nm                     /* 검색한 제품의 성분 */
                     ,null as prohibit_igrd_nm
                     ,null as rlvt_age
                     ,null as rlvt_age_unit_nm
