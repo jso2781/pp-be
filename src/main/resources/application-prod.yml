@@ -91,7 +91,7 @@ external:
       connect-timeout-ms: 3000
       read-timeout-ms: 6000
     sms:
-      base-url: http://192.168.2.149:30012
+      base-url: http://kids-ca-be-service.kids-prod-ca:8080
       connect-timeout-ms: 1000
       read-timeout-ms: 3000
     connectionlog:
