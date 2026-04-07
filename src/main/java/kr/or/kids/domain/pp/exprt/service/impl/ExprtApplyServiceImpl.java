@@ -6,9 +6,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import kr.or.kids.domain.pp.mbr.mapper.MbrInfoMapper;
-import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
-import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
+import kr.or.kids.domain.pp.external.crypto.client.CryptoClient;
+import kr.or.kids.domain.pp.external.crypto.vo.CryptoEncryptoPVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,7 +40,7 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
     private final ExprtTaskMapper exprtTaskMapper;
     private final FileService fileService;
     private final AtchMapper atchMapper;
-    private final MbrInfoMapper mbrInfoMapper;
+    private final CryptoClient cryptoClient;
 
     @Override
     public ApiPrnDto existsInstByBrno(ExprtApplyIVO exprtApplyIVO) {
@@ -154,12 +153,13 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
         }
 
         // 성명 복호화
-        MbrInfoPVO mbrInfoPVO = new MbrInfoPVO();
-        mbrInfoPVO.setMbrNo(exprtApplyIVO.getMbrNo());
-        MbrInfoRVO mbrInfoRVO = mbrInfoMapper.getMbrInfo(mbrInfoPVO);
+        CryptoEncryptoPVO req = new CryptoEncryptoPVO();
+        req.setEncptMbrFlnm(exprtApplyIVO.getEncptExprtFlnm());
+        ApiPrnDto crypto = cryptoClient.decrypto(req);
+        String decryptedName = (String) crypto.getData().get("decptMbrFlnm");
 
         // 전문가정보기본 등록
-        exprtApplyIVO.setEncptExprtFlnm(mbrInfoRVO.getEncptMbrFlnm());
+        exprtApplyIVO.setEncptExprtFlnm(decryptedName);
         int step2Result = exprtApplyMapper.insertExprtInfo(exprtApplyIVO);
         if (step2Result != 1) {
             throw new ApplicationException("api.error.default");
