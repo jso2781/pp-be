@@ -126,6 +126,7 @@
     <logger name="org.hibernate.orm.jdbc.extract" level="OFF"/>
 
     <root level="DEBUG">
+      <appender-ref ref="CONSOLE"/>
       <appender-ref ref="FILE"/>
     </root>
   </springProfile>
@@ -143,6 +144,7 @@
     <logger name="org.hibernate.orm.jdbc.extract" level="TRACE"/>
 
     <root level="INFO">
+      <appender-ref ref="CONSOLE"/>
       <appender-ref ref="FILE"/>
     </root>
   </springProfile>

@@ -16,22 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Slf4j
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/pp/crypto")
 public class CryptoController {
 
     private final CryptoClient cryptoClient;
-    private final Environment environment;
 
     @PostMapping(value = "/encrypto")
     public ResponseEntity<ApiPrnDto> encrypto(@RequestBody CryptoEncryptoPVO req) {
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         result.setMsg("FAIL");
 
-        if (!environment.acceptsProfiles(Profiles.of("local", "localout", "dev"))) {
-            return null;
-        }
         try {
             result = cryptoClient.encrypto(req);
             result.setMsg("SUCCESS");
@@ -47,9 +42,6 @@ public class CryptoController {
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         result.setMsg("FAIL");
 
-        if (!environment.acceptsProfiles(Profiles.of("local", "localout", "dev"))) {
-            return null;
-        }
         try {
             result = cryptoClient.encryptoList(req);
             result.setMsg("SUCCESS");
@@ -65,9 +57,6 @@ public class CryptoController {
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         result.setMsg("FAIL");
 
-        if (!environment.acceptsProfiles(Profiles.of("local", "localout", "dev"))) {
-            return null;
-        }
         try {
             result = cryptoClient.decrypto(req);
             result.setMsg("SUCCESS");
@@ -83,9 +72,6 @@ public class CryptoController {
         ApiPrnDto result = new ApiPrnDto(ApiResultCode.SUCCESS);
         result.setMsg("FAIL");
 
-        if (!environment.acceptsProfiles(Profiles.of("local", "localout", "dev"))) {
-            return null;
-        }
         try {
             result = cryptoClient.decryptoList(req);
             result.setMsg("SUCCESS");
