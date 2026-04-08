@@ -30,6 +30,8 @@ import kr.or.kids.domain.pp.exprt.vo.ExprtApprovalPVO;
 import kr.or.kids.domain.pp.exprt.vo.ExprtApprovalRVO;
 import kr.or.kids.domain.pp.exprt.vo.ExprtApprovalUVO;
 import kr.or.kids.domain.pp.exprt.vo.ExprtTaskPVO;
+import kr.or.kids.domain.pp.external.crypto.client.CryptoClient;
+import kr.or.kids.domain.pp.external.crypto.vo.CryptoEncryptoPVO;
 import kr.or.kids.domain.pp.external.email.client.EmailClient;
 import kr.or.kids.domain.pp.external.email.vo.EmailPVO;
 import kr.or.kids.domain.pp.external.email.vo.EmailRVO;
@@ -57,6 +59,7 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
     private final FormService formService;
     private final Environment environment;
     private final MbrInfoMapper mbrInfoMapper;
+    private final CryptoClient cryptoClient;
 
     @Override
     public ApiPrnDto selectExprtApprovalList(ExprtApprovalPVO exprtApprovalPVO) {
@@ -95,8 +98,15 @@ public class ExprtApprovalServiceImpl implements ExprtApprovalService {
                     // masking
                     detail.setMbrId(MaskingUtil.maskId(detail.getMbrId().trim()));
                     detail.setEncptExprtFlnm(MaskingUtil.maskName(detail.getEncptExprtFlnm().trim()));
-                    detail.setEncptMbrTelno(MaskingUtil.maskPhone(detail.getEncptMbrTelno().trim()));
-                    detail.setEncptExprtInstEmlNm(MaskingUtil.maskEmail(detail.getEncptExprtInstEmlNm().trim()));
+                    detail.setEncptExprtInstEmlNm(MaskingUtil.maskEmail(detail.getEncptExprtInstEmlNm().trim()));                    
+                    
+                    // 휴대전화번호는 복호화 후 마스킹
+                    CryptoEncryptoPVO req = new CryptoEncryptoPVO();
+                    req.setEncptMbrTelno(detail.getEncptMbrTelno());
+                    ApiPrnDto crypto = cryptoClient.decrypto(req);
+                    String decrypted = (String) crypto.getData().get("decptMbrTelno");                    
+                    detail.setEncptMbrTelno(MaskingUtil.maskPhone(decrypted.trim()));                    
+                    
                     data.put("detail", detail);
 
                     List<ExprtApprovalAuthRVO> list = exprtApprovalMapper.selectExprtTaskAuthList(exprtApprovalPVO.getExprtTaskSn());
