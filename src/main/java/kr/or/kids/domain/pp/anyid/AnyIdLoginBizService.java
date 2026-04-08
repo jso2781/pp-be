@@ -114,7 +114,7 @@ public class AnyIdLoginBizService {
             req.setNetSeCd(clientIp != null && clientIp.indexOf("192.168") > -1 ? "1" : "2");
 
             // 서비스사용자 아이디
-            req.setSrvcUserId(mbrId);
+            req.setSrvcUserId(mbrNo);
 
             // 요청자IP주소
             req.setRqstrIpAddr(clientIp);
@@ -214,7 +214,7 @@ public class AnyIdLoginBizService {
                 req.setNetSeCd(clientIp != null && clientIp.indexOf("192.168") > -1 ? "1" : "2");
 
                 // 서비스사용자 아이디
-                req.setSrvcUserId(mbrId);
+                req.setSrvcUserId(mbrNo);
 
                 // 요청자IP주소
                 req.setRqstrIpAddr(clientIp);

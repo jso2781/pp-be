@@ -20,6 +20,9 @@ import kr.or.anyid.adaptor.core.exception.AdaptorErrorCode;
 import kr.or.anyid.adaptor.core.exception.AdaptorException;
 import kr.or.kids.domain.pp.external.connectionlog.client.ConnectionLogClient;
 import kr.or.kids.domain.pp.external.connectionlog.vo.ConnectionLogInsertReqVO;
+import kr.or.kids.domain.pp.mbr.mapper.MbrInfoMapper;
+import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
+import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
 import kr.or.kids.global.config.ApplicationContextProvider;
 import kr.or.kids.global.util.DrugsafeUtil;
 
@@ -141,7 +144,21 @@ public class AnyidHandler implements SsoLoginCallback {
             Object principal = authentication.getPrincipal();
             String mbrId = (principal instanceof String) ? (String) principal : null;
 
-            logger.debug("AnyidHandler onSsoLogout mbrId="+mbrId);
+            MbrInfoPVO mbrInfoPVO = new MbrInfoPVO();
+            mbrInfoPVO.setMbrId(mbrId);
+
+            MbrInfoMapper mbrInfoMapper = ApplicationContextProvider.getBean(MbrInfoMapper.class);
+
+            MbrInfoRVO resultVo = mbrInfoMapper.getMbrInfo(mbrInfoPVO);
+
+            String mbrNo = null;
+
+            if(resultVo != null){
+                mbrNo = resultVo.getMbrNo();
+            }
+
+            logger.debug("AnyidHandler onSsoLogout mbrNo="+mbrNo+", mbrId="+mbrId);
+
             ConnectionLogClient conn = ApplicationContextProvider.getBean(ConnectionLogClient.class);
 
             DrugsafeUtil  util = new DrugsafeUtil();
@@ -156,7 +173,7 @@ public class AnyidHandler implements SsoLoginCallback {
             req.setNetSeCd(clientIp != null && clientIp.indexOf("192.168") > -1 ? "1" : "2");
 
             // 서비스사용자 아이디
-            req.setSrvcUserId(mbrId);
+            req.setSrvcUserId(mbrNo);
 
             // 요청자IP주소
             req.setRqstrIpAddr(clientIp);
@@ -177,10 +194,10 @@ public class AnyidHandler implements SsoLoginCallback {
             req.setTaskSeCd("PP");
 
             // 등록자 아이디
-            req.setRgtrId(mbrId);
+            req.setRgtrId(mbrNo);
 
             // 수정자 아이디
-            req.setMdfrId(mbrId);
+            req.setMdfrId(mbrNo);
 
             logger.debug("AnyidHandler onSsoLogout ConnectionLogClient.insert ConnectionLogInsertReqVO="+req.toString());
             conn.insert(req);
