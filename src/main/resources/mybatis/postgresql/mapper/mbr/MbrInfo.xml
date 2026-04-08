@@ -233,10 +233,9 @@
             ,#{pswdErrNmtm}
             ,#{linkInfoIdntfId}
             ,#{certTokenVl}
-            ,#{rgtrId}
+            ,seq.yyyy || LPAD(seq.last_seq::text, 6, '0')
             ,now()
-
-            ,#{mdfrId}
+            ,seq.yyyy || LPAD(seq.last_seq::text, 6, '0')
             ,now()
 
           FROM seq
