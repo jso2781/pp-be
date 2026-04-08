@@ -76,15 +76,15 @@ spring:
 external:
   services:
     crypto:
-      base-url: http://localhost:8088
+      base-url: https://stg.drugsafe.or.kr
       connect-timeout-ms: 3000
       read-timeout-ms: 6000
     email:
-      base-url: http://localhost:8088
+      base-url: https://stg.drugsafe.or.kr
       connect-timeout-ms: 3000
       read-timeout-ms: 6000
     sms:
-      base-url: http://localhost:8088
+      base-url: https://stg.drugsafe.or.kr
       connect-timeout-ms: 1000
       read-timeout-ms: 3000
     connectionlog:
