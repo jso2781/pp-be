@@ -118,4 +118,10 @@ public class DshstyDclrRVO
      */
     @Schema(description = "수정일시", type = "String")
     private String mdfcnDt;
+
+    /**
+     * 개인정보선택동의여부(Y/N)
+     */
+    @Schema(description = "개인정보선택동의여부(Y/N)", type = "String")
+    private String prvcChcAgreYn;
 }

@@ -25,6 +25,7 @@
       <result property="regDt" column="reg_dt"/>
       <result property="mdfrId" column="mdfr_id"/>
       <result property="mdfcnDt" column="mdfcn_dt"/>
+      <result property="prvcChcAgreYn" column="prvc_chc_agre_yn"/>
       <result property="expertYn" column="expert_yn"/>
       <result property="apprInstTaskList" column="appr_inst_task_json_array" typeHandler="kr.or.kids.domain.pp.mbr.mapper.typehandler.ApprInstTaskJsonArrayTypeHandler"/>
     </resultMap>
@@ -80,6 +81,7 @@
             ,mbr.reg_dt
             ,mbr.mdfr_id
             ,mbr.mdfcn_dt
+            ,mbr.prvc_chc_agre_yn
             ,ex.expert_yn
             ,ex.appr_inst_task_json_array
         FROM kids_own.tb_pp_m_mbr_info mbr
@@ -156,7 +158,7 @@
             ,reg_dt
             ,mdfr_id
             ,mdfcn_dt
-
+            ,prvc_chc_agre_yn
         )VALUES(
              #{mbrNo}
             ,#{mbrId}
@@ -178,6 +180,7 @@
             ,now()
             ,#{mdfrId}
             ,now()
+            ,#{prvcChcAgreYn}
         )
     </insert>
 
@@ -191,55 +194,54 @@
           RETURNING yyyy, last_seq
         ),
         ins AS (
-          INSERT INTO kids_own.tb_pp_m_mbr_info
-          (
-               mbr_no
-              ,mbr_id
-              ,encpt_mbr_flnm
-              ,encpt_mbr_eml_nm
-              ,encpt_mbr_pswd
-              ,encpt_mbr_telno
-              ,mbr_type_cd
-              ,mbr_join_stts_cd
-              ,mbr_join_dt
-              ,mbr_whdwl_rsn
-              ,mbr_whdwl_dt
-              ,encpt_bfr_pswd
-              ,pswd_chg_dt
-              ,pswd_err_nmtm
-              ,link_info_idntf_id
-              ,cert_token_vl
-              ,rgtr_id
-              ,reg_dt
-
-              ,mdfr_id
-              ,mdfcn_dt
-
-          )
-          SELECT
-             seq.yyyy || LPAD(seq.last_seq::text, 6, '0') AS mbr_no
-            ,#{mbrId}
-            ,#{encptMbrFlnm}
-            ,#{encptMbrEmlNm}
-            ,#{encptMbrPswd}
-            ,#{encptMbrTelno}
-            ,#{mbrTypeCd}
-            ,#{mbrJoinSttsCd}
-            ,to_timestamp(#{mbrJoinDt}, 'YYYY-MM-DD HH24:MI:SS')
-            ,#{mbrWhdwlRsn}
-            ,#{mbrWhdwlDt}
-            ,#{encptBfrPswd}
-            ,#{pswdChgDt}
-            ,#{pswdErrNmtm}
-            ,#{linkInfoIdntfId}
-            ,#{certTokenVl}
-            ,seq.yyyy || LPAD(seq.last_seq::text, 6, '0')
-            ,now()
-            ,seq.yyyy || LPAD(seq.last_seq::text, 6, '0')
-            ,now()
-
-          FROM seq
-          RETURNING mbr_no
+            INSERT INTO kids_own.tb_pp_m_mbr_info
+            (
+                 mbr_no
+                ,mbr_id
+                ,encpt_mbr_flnm
+                ,encpt_mbr_eml_nm
+                ,encpt_mbr_pswd
+                ,encpt_mbr_telno
+                ,mbr_type_cd
+                ,mbr_join_stts_cd
+                ,mbr_join_dt
+                ,mbr_whdwl_rsn
+                ,mbr_whdwl_dt
+                ,encpt_bfr_pswd
+                ,pswd_chg_dt
+                ,pswd_err_nmtm
+                ,link_info_idntf_id
+                ,cert_token_vl
+                ,rgtr_id
+                ,reg_dt
+                ,mdfr_id
+                ,mdfcn_dt
+                ,prvc_chc_agre_yn
+            )
+            SELECT
+                 seq.yyyy || LPAD(seq.last_seq::text, 6, '0') AS mbr_no
+                ,#{mbrId}
+                ,#{encptMbrFlnm}
+                ,#{encptMbrEmlNm}
+                ,#{encptMbrPswd}
+                ,#{encptMbrTelno}
+                ,#{mbrTypeCd}
+                ,#{mbrJoinSttsCd}
+                ,to_timestamp(#{mbrJoinDt}, 'YYYY-MM-DD HH24:MI:SS')
+                ,#{mbrWhdwlRsn}
+                ,#{mbrWhdwlDt}
+                ,#{encptBfrPswd}
+                ,#{pswdChgDt}
+                ,#{pswdErrNmtm}
+                ,#{linkInfoIdntfId}
+                ,#{certTokenVl}
+                ,seq.yyyy || LPAD(seq.last_seq::text, 6, '0')
+                ,now()
+                ,seq.yyyy || LPAD(seq.last_seq::text, 6, '0')
+                ,now()
+                ,#{prvcChcAgreYn}
+            FROM seq
+            RETURNING mbr_no
         )
         SELECT mbr_no FROM ins
     </select>
@@ -264,7 +266,7 @@
             ,cert_token_vl = coalesce(#{certTokenVl}, cert_token_vl)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
-
+            ,prvc_chc_agre_yn = coalesce(#{prvcChcAgreYn}, prvc_chc_agre_yn)
         WHERE 1=1
         <if test="mbrNo != null and mbrNo != ''">
             AND mbr_no = #{mbrNo}
@@ -296,10 +298,9 @@
             ,cert_token_vl
             ,rgtr_id
             ,reg_dt
-
             ,mdfr_id
             ,mdfcn_dt
-
+            ,prvc_chc_agre_yn
         )
         VALUES
         (
@@ -321,10 +322,9 @@
             ,#{certTokenVl}
             ,#{rgtrId}
             ,now()
-
             ,#{mdfrId}
             ,now()
-
+            ,#{prvcChcAgreYn}
         )
         ON CONFLICT(mbr_no)
         DO UPDATE SET
@@ -345,7 +345,7 @@
             ,cert_token_vl = coalesce(excluded.cert_token_vl, kids_own.tb_pp_m_mbr_info.cert_token_vl)
             ,mdfr_id = coalesce(excluded.mdfr_id, kids_own.tb_pp_m_mbr_info.mdfr_id)
             ,mdfcn_dt = now()
-
+            ,prvc_chc_agre_yn = coalesce(excluded.prvc_chc_agre_yn, kids_own.tb_pp_m_mbr_info.prvc_chc_agre_yn)
     </insert>
 
     <delete id="deleteMbrInfo" parameterType="MbrInfoDVO">
@@ -373,7 +373,7 @@
         /* 대국민포털_회원정보 PW 수정 (MbrInfoMapper.updateMbrInfoPw) */
         UPDATE kids_own.tb_pp_m_mbr_info
         SET
-            encpt_mbr_pswd = coalesce(#{encptMbrPswd}, encpt_mbr_pswd)
+             encpt_mbr_pswd = coalesce(#{encptMbrPswd}, encpt_mbr_pswd)
             ,mdfr_id = coalesce(#{mdfrId}, mdfr_id)
             ,mdfcn_dt = now()
         WHERE 1=1

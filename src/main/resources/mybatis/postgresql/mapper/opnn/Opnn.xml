@@ -25,6 +25,7 @@
             ,reg_dt
             ,mdfr_id
             ,mdfcn_dt
+            ,prvc_chc_agre_yn
         )
         VALUES
         (
@@ -43,6 +44,7 @@
             ,now()
             ,#{mdfrId}
             ,now()
+            ,#{prvcChcAgreYn}
         )
     </insert>
 </mapper>
