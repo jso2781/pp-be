@@ -104,6 +104,12 @@ public class OpnnPVO
     private String mdfcnDt;
 
     /**
+     * 개인정보선택동의여부(Y/N)
+     */
+    @Schema(description = "개인정보선택동의여부(Y/N)", type = "String")
+    private String prvcChcAgreYn;
+
+    /**
      * 메뉴일련번호(첨부파일 업로드시 파일정보 입력시 사용)
      */
     @Schema(description = "메뉴일련번호(첨부파일 업로드시 파일정보 입력시 사용)", type = "BigInteger")

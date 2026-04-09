@@ -145,6 +145,12 @@ public class MbrInfoRVO
     private String mdfcnDt;
 
     /**
+     * 개인정보선택동의여부(Y/N)
+     */
+    @Schema(description = "개인정보선택동의여부(Y/N)", type = "String")
+    private String prvcChcAgreYn;
+
+    /**
      * JWT토큰일련번호
      */
     @Schema(description = "JWT토큰일련번호", type = "BigInteger")
