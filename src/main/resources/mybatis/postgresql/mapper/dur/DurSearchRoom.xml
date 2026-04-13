@@ -547,7 +547,7 @@
         SELECT 
              eff_group_nm           /* 효능그룹명 */
             ,group_nm               /* 계열(그룹명) */
-            ,mfds_igrd_nm_cn as igrd_nm                /* 성분 */
+            ,igrd_nm                /* 성분 */
         FROM(
             SELECT distinct
                  eg.eff_group_nm
