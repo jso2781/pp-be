@@ -466,6 +466,9 @@
             <if test="igrdNm != null and igrdNm != ''">
                 AND lower(mfds_igrd_nm_cn) = lower(#{igrdNm})
             </if>
+            <if test="rlvtAge != null and rlvtAge != ''">
+                AND rlvt_age = #{rlvtAge}
+            </if>            
             AND 'age' = #{bannTypeCd}
             UNION ALL
             /* DUR임부금기 정보에서 제품별 제약회사 조회(성분명 조건) */

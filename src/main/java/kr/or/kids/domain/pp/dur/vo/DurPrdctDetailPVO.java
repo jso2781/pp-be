@@ -29,4 +29,10 @@ public class DurPrdctDetailPVO extends PageRequestDto{
      */
     @Schema(description = "금기 유형 코드", type = "String")
     private String bannTypeCd;
+    
+    /**
+     * 연령금기 해당연령
+     */
+    @Schema(description = "해당연령", type = "Long")
+    private Long rlvtAge;    
 }
