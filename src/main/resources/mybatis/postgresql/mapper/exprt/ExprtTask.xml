@@ -112,15 +112,12 @@
 
     <select id="selectExprtMenus" parameterType="String" resultType="MenuRVO">
         /* 대국민포털_전문가내업무관리 업무시스템에 해당하는 메뉴 목록 조회 (ExprtTaskMapper.selectExprtMenus) */
-        WITH RECURSIVE auth_menu AS (
+        WITH RECURSIVE
+        /* [1] 로그인 사용자 권한에 매핑된 메뉴 목록 */
+        auth_menu AS (
             SELECT DISTINCT
                 m.menu_sn,
-                m.up_menu_sn,
-                m.menu_nm,
-                m.task_se_cd,
-                m.menu_seq,
-                m.lang_se_cd,
-                m.use_yn
+                m.up_menu_sn
             FROM kids_own.tb_pp_m_exprt_authrt ea
                      JOIN kids_own.tb_pp_m_authrt_menu am
                           ON ea.authrt_cd = am.authrt_cd
@@ -130,53 +127,75 @@
               AND ea.exprt_task_sn > 0
               AND m.use_yn = 'Y'
         ),
-                       menu_tree AS (
-                           SELECT
-                               m.menu_sn,
-                               NULL::numeric AS up_menu_sn,
-                                   1 AS dep_level,
-                               m.menu_sn AS root_sn,
-                               m.menu_nm,
-                               m.task_se_cd,
-                               m.menu_seq,
-                               m.menu_sn::text AS path,
-                                   m.lang_se_cd
-                           FROM auth_menu m
-                                    LEFT JOIN auth_menu p
-                                              ON m.up_menu_sn = p.menu_sn
-                           WHERE p.menu_sn IS NULL
-                           UNION ALL
-                           SELECT
-                               c.menu_sn,
-                               c.up_menu_sn,
-                               p.dep_level + 1 AS dep_level,
-                               p.root_sn,
-                               c.menu_nm,
-                               c.task_se_cd,
-                               c.menu_seq,
-                               p.path || ' > ' || c.menu_sn::text AS path,
-                                   c.lang_se_cd
-                           FROM auth_menu c
-                                    JOIN menu_tree p
-                                         ON c.up_menu_sn = p.menu_sn
-                       )
+        /* [2] auth_menu 내부에서 자식이 없는(leaf) 메뉴만 추출 */
+        leaf_auth_menu AS (
+            SELECT
+                am.menu_sn,
+                am.up_menu_sn
+            FROM auth_menu am
+            WHERE NOT EXISTS (
+                SELECT 1
+                FROM auth_menu c
+                WHERE c.up_menu_sn = am.menu_sn
+            )
+        ),
+        /* [3] 최종 트리 대상 집합: auth_menu + (leaf 메뉴의 직계 부모 1단계) */
+        menu_scope AS (
+            SELECT
+                am.menu_sn,
+                am.up_menu_sn
+            FROM auth_menu am
+            UNION
+            SELECT
+                p.menu_sn,
+                p.up_menu_sn
+            FROM kids_own.tb_pp_m_menu p
+                     JOIN leaf_auth_menu lm
+                          ON lm.up_menu_sn = p.menu_sn
+            WHERE p.use_yn = 'Y'
+        ),
+        /* [4] menu_scope 집합을 루트부터 하향으로 펼쳐 트리 메타(depth/path/root) 생성 */
+        menu_tree AS (
+            SELECT
+                m.menu_sn,
+                NULL::numeric AS up_menu_sn,
+                1 AS dep_level,
+                m.menu_sn AS root_sn,
+                m.menu_sn::text AS path
+            FROM menu_scope m
+                     LEFT JOIN menu_scope p
+                               ON m.up_menu_sn = p.menu_sn
+            WHERE m.up_menu_sn IS NULL
+               OR p.menu_sn IS NULL
+            UNION ALL
+            SELECT
+                c.menu_sn,
+                c.up_menu_sn,
+                p.dep_level + 1 AS dep_level,
+                p.root_sn,
+                p.path || ' > ' || c.menu_sn::text AS path
+            FROM menu_scope c
+                     JOIN menu_tree p
+                          ON c.up_menu_sn = p.menu_sn
+        )
         SELECT
             mt.menu_sn,
             mt.up_menu_sn,
             mt.dep_level,
             mt.root_sn,
             mt.path,
-            mt.menu_nm,
-            mt.task_se_cd,
+            m.menu_nm,
+            m.task_se_cd,
+            /* [5] 업무구분 코드명을 코드테이블에서 조회 */
             (
                 SELECT com_dtl_cd_nm
                 FROM kids_own.tb_ca_c_dtl_code
                 WHERE com_group_cd = 'PP000012'
-                  AND com_dtl_cd = mt.task_se_cd
+                  AND com_dtl_cd = m.task_se_cd
                   AND com_dtl_cd != 'PP'
-            ) AS task_se_nm,
-            mt.menu_seq,
-            mt.lang_se_cd,
+                ) AS task_se_nm,
+            m.menu_seq,
+            m.lang_se_cd,
             d.menu_url_addr,
             d.menu_npag_nm,
             d.prvc_incl_yn,
@@ -193,20 +212,22 @@
             emp.dept_no AS menu_tkcg_dept_no,
             COALESCE(emp.dept_nm, '') AS menu_tkcg_dept_nm
         FROM menu_tree mt
-                 LEFT JOIN kids_own.tb_pp_d_menu d
-                           ON d.menu_sn = mt.menu_sn
-                 LEFT JOIN (
-            SELECT
-                a.emp_no,
-                a.emp_nm,
-                a.dept_no,
-                b.dept_nm
-            FROM kids_own.tb_pp_m_emp_info a
-                     JOIN kids_own.tb_pp_m_dept_info b
-                          ON a.dept_no = b.dept_no
-        ) emp
-                           ON d.menu_pic_id = emp.emp_no
-        ORDER BY mt.task_se_cd, mt.menu_seq, mt.menu_sn
+             JOIN kids_own.tb_pp_m_menu m
+               ON m.menu_sn = mt.menu_sn
+        LEFT JOIN kids_own.tb_pp_d_menu d
+               ON d.menu_sn = mt.menu_sn
+        /* [6] 메뉴 담당자(직원+부서) 조회용 파생 테이블 */
+        LEFT JOIN (
+                    SELECT a.emp_no,
+                           a.emp_nm,
+                           a.dept_no,
+                           b.dept_nm
+                      FROM kids_own.tb_pp_m_emp_info a
+                           JOIN kids_own.tb_pp_m_dept_info b
+                             ON a.dept_no = b.dept_no
+                  ) emp
+               ON d.menu_pic_id = emp.emp_no
+       ORDER BY m.task_se_cd, m.menu_seq, mt.menu_sn
     </select>
 
 </mapper>
