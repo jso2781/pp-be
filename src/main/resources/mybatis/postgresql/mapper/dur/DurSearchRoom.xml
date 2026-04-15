@@ -556,8 +556,17 @@
             ,igrd_nm                /* 성분 */
         FROM(
             SELECT distinct
-                   eg.eff_group_nm
-                 , #{groupNm} as group_nm
+                   eg.eff_group_nm                
+                ,(
+                    select
+                        dc.com_dtl_cd_nm
+                    from kids_own.tb_ca_c_dtl_code dc
+                    inner join kids_own.tb_ca_c_group_code gc
+                        on dc.com_group_cd = gc.com_group_cd
+                    where gc.group_cd_nm = eg.eff_group_nm
+                    and dc.com_dtl_cd = eg.group_nm
+                    LIMIT 1
+                 ) as group_nm                 
                  , eg.mfds_igrd_nm_cn as igrd_nm
               FROM kids_own.tb_pp_m_dur_eftgrp eg
                  , (SELECT MAX(eff_group_nm) AS eff_group_nm, MAX(group_nm_1) AS group_nm_1
