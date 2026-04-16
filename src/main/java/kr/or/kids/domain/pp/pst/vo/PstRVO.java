@@ -134,6 +134,18 @@ public class PstRVO {
 	private List<AtchRVO> files;
 
 	/**
+	 * 썸네일설명내용 
+	 */
+	@Schema(description = "썸네일설명내용", type = "String")
+	private String thmbExplnCn;
+	
+	/**
+	 * 동영상설명내용
+	 */
+	@Schema(description = "동영상설명내용", type = "String")
+	private String vdoExplnCn;	
+	
+	/**
 	 * 조회수 증가
 	 */
 	public void increaseInqCnt() {

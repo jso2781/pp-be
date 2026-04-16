@@ -32,6 +32,8 @@
             ,p.mdfr_id
             ,p.mdfcn_dt
         	,ft.srvr_file_nm as thmb_file_nm
+        	,p.thmb_expln_cn
+        	,p.vdo_expln_cn
         FROM kids_own.TB_PP_M_BBS b
            , kids_own.TB_PP_M_BBS_AUTHRT ba
            , kids_own.TB_PP_M_PST p
@@ -85,6 +87,8 @@
                WHERE ft.atch_file_group_id = p.atch_file_group_id
                ORDER BY ft.file_seq ASC, ft.reg_dt ASC
                LIMIT 1) as img_file_nm
+        	,p.thmb_expln_cn
+        	,p.vdo_expln_cn               
         FROM kids_own.TB_PP_M_PST p
         LEFT OUTER JOIN kids_own.tb_pp_m_emp_info ei
           ON p.rgtr_id = ei.emp_no

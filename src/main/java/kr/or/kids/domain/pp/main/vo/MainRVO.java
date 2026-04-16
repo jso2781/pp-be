@@ -106,4 +106,16 @@ public class MainRVO {
      */
     @Schema(description = "메뉴URL", type = "String")
     private String menuUrlAddr;
+    
+	/**
+	 * 썸네일설명내용 
+	 */
+	@Schema(description = "썸네일설명내용", type = "String")
+	private String thmbExplnCn;
+	
+	/**
+	 * 동영상설명내용
+	 */
+	@Schema(description = "동영상설명내용", type = "String")
+	private String vdoExplnCn;	    
 }
