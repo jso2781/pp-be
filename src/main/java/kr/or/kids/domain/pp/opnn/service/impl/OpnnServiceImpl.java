@@ -136,7 +136,7 @@ public class OpnnServiceImpl implements OpnnService
             String sndptyFlnm = "mail.drugsafe.or.kr"; // 메일 발송 계정
             String sndptyEmlAddr = "kids@drugsafe.or.kr"; // 발신자 메일주소
             String rcvrFlnm = "한국의약품안전관리원"; // 수신자 명
-            String rcvrEmlAddr = "kids_dur@drugsafe.kr"; // 수신자 메일주소
+            String rcvrEmlAddr = "kids_dur@drugsafe.or.kr"; // 수신자 메일주소
 
             log.debug("emlTtl >>>>> " + emlTtl);
             log.debug("emlCn >>>>> " + emlCn);
