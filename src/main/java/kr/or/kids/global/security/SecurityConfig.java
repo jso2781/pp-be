@@ -16,14 +16,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import kr.or.kids.domain.pp.auth.service.IdleTokenService;
 import kr.or.kids.domain.pp.auth.service.TokenBlacklistService;
-
 import lombok.RequiredArgsConstructor;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -34,7 +35,20 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtTokenProvider jwtTokenProvider) throws Exception {
-        http.csrf(csrf -> csrf.disable())
+        http.csrf(csrf -> csrf
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .ignoringAntMatchers(
+                        "/actuator/**",
+                        "/anyid/**",
+                        "/config/**",
+                        "/esign/**",
+                        "/pid/**",
+                        "/vrs/**",
+                        "/oidc/**",
+                        "/api/pp/auth/login",
+                        "/api/pp/auth/refresh",
+                        "/api/pp/auth/anyid/login",
+                        "/api/pp/auth/anyid/logout"))
         .cors(withDefaults())
         .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         // Authorization(인가)
