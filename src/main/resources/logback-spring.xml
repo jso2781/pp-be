@@ -133,6 +133,12 @@
     <logger name="org.springframework.jdbc.core" level="INFO"/>
     <logger name="kr.or.kids.domain.pp" level="INFO"/>
 
+    <!-- MyBatis/JDBC -->
+    <logger name="org.mybatis" level="DEBUG"/>
+    <logger name="org.apache.ibatis" level="DEBUG"/>
+    <logger name="org.springframework.jdbc.core" level="OFF"/>
+    <logger name="kr.or.kids.domain.pp" level="DEBUG"/>
+
     <logger name="org.hibernate.SQL" level="OFF"/>
     <logger name="org.hibernate.orm.jdbc.bind" level="TRACE"/>
     <logger name="org.hibernate.orm.jdbc.extract" level="TRACE"/>

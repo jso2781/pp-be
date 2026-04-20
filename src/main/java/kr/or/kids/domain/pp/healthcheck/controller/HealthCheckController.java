@@ -25,6 +25,7 @@ import kr.or.kids.domain.ca.common.file.vo.FileDataReqVO;
 import kr.or.kids.domain.ca.common.file.vo.FileDeleteReqVO;
 import kr.or.kids.domain.ca.common.file.vo.FileDownResVO;
 import kr.or.kids.domain.ca.common.file.vo.FileGroupInsertReq;
+import kr.or.kids.domain.pp.atch.mapper.AtchMapper;
 import kr.or.kids.global.exception.ApplicationException;
 import kr.or.kids.global.system.common.ApiResultCode;
 import kr.or.kids.global.system.common.vo.ApiPrnDto;
@@ -38,6 +39,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HealthCheckController {
 	
 	private final FileService fileService;
+	private final AtchMapper atchMapper;
 	private final Environment environment;
 
 	@GetMapping
@@ -87,20 +89,23 @@ public class HealthCheckController {
 			} else {
 				MultipartFile[] attachFileArr = new MultipartFile[] { file };
 
+				String nextAtchFileGroupId = atchMapper.nextAtchFileGroupId(); 								
+				Long tempMenuSn = Long.parseLong("999");
+				
 				FileGroupInsertReq fgir = new FileGroupInsertReq();
+				fgir.setAtchFileGroupId(nextAtchFileGroupId);
+				fgir.setMenuSn(tempMenuSn);
 				fgir.setTaskSeCd("pp");
 				fgir.setTaskSeTrgtId("2");
 				fgir.setRgtrId("admin");
-				fgir.setMdfrId("admin");
+				fgir.setMdfrId("admin");				
 
 				ApiPrnDto groupInsertResult = fileService.groupInsert(fgir);
-
-				Object atchFileGroupIdObj = groupInsertResult.getData().get("atchFileGroupId");
-				String atchFileGroupId = String.valueOf(atchFileGroupIdObj);
-
+				log.info("groupInsertResult >>>> " + groupInsertResult);
+				
 				HashMap<String, Object> params = new HashMap<>();
 				params.put("savePath", "pp");
-				params.put("atchFileGroupId", atchFileGroupId);
+				params.put("atchFileGroupId", nextAtchFileGroupId);
 				params.put("prvcInclYn", "0");
 				params.put("isExcel", "0");
 
@@ -109,7 +114,7 @@ public class HealthCheckController {
 				Object obj = fileResult.getData().get("uploadList");
 
 				if ("0".equals(fileResult.getCode())) {
-					result.setMsg("[SUCCESS] atchFileGroupId : " + atchFileGroupId);
+					result.setMsg("[SUCCESS] atchFileGroupId : " + nextAtchFileGroupId);
 				}
 			}
 		}

@@ -31,7 +31,7 @@ public interface AtchMapper
      * 첨부파일그룹 ID 시퀀스 발번
      * @return 발번된 첨부파일그룹 ID
      */
-    public long nextAtchFileGroupId();
+    public String nextAtchFileGroupId();
 
     /**
      * 첨부파일 ID 시퀀스 발번

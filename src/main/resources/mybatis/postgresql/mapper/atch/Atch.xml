@@ -63,9 +63,9 @@
         ORDER BY file_seq ASC, reg_dt ASC
     </select>
 
-    <select id="nextAtchFileGroupId" resultType="long">
+    <select id="nextAtchFileGroupId" resultType="String">
         /* 첨부파일그룹 ID 시퀀스 발번 (AtchMapper.nextAtchFileGroupId) */
-        SELECT nextval('kids_own.tb_ca_m_atch_group_seq')
+        SELECT nextval('kids_own.sq_ca_atch_file_group_id')
     </select>
 
     <select id="nextAtchFileId" resultType="long">

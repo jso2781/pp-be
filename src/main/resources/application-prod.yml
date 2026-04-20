@@ -123,6 +123,11 @@ file:
   algorithm: AES/CBC/PKCS5Padding
   url: /files
 
+niceid:
+  clientid: NIaa684f4b-bab3-4c06-b47a-0418add5bb8e
+  clientid-secret: ODVlNDI4ZDAtN2YxNi00NTFkLTg3YzUtZWMzY2E4OTVmNTdkMDVGODVGNDRCN0YwOTI5RERDREFDQTAy
+  return-url: https://stg.drugsafe.or.kr/api/pp/niceid/return
+
 logging:
   level:
     kr.or.kids.domain: DEBUG
