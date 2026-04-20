@@ -13,6 +13,8 @@
 		    ,p.reg_dt
 		    ,p.pst_cn
 		    ,p.vdo_url_addr as video_id
+        	,p.thmb_expln_cn
+        	,p.vdo_expln_cn     		    
 		FROM kids_own.TB_PP_M_BBS b
 		   , kids_own.TB_PP_M_BBS_AUTHRT ba
 		   , kids_own.TB_PP_M_PST p
@@ -51,6 +53,8 @@
 			 WHEN 'MN_BBS4' THEN '블로그'
 			 ELSE '기타'
 			  END AS sns_type
+        	,p.thmb_expln_cn
+        	,p.vdo_expln_cn     			  
 		FROM kids_own.TB_PP_M_BBS b
 		   , kids_own.TB_PP_M_BBS_AUTHRT ba
 		   , kids_own.TB_PP_M_TASK_CD t
@@ -87,6 +91,8 @@
 		    ,p.thmb_id
         	,f.srvr_file_nm as thmb_file_nm
 		    ,p.reg_dt
+        	,p.thmb_expln_cn
+        	,p.vdo_expln_cn     		    
 		FROM kids_own.TB_PP_M_BBS b
 		   , kids_own.TB_PP_M_BBS_AUTHRT ba
 		   , kids_own.TB_PP_M_PST p

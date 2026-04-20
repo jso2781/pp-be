@@ -123,7 +123,12 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
         // 첨부파일 등록
         MultipartFile[] attachFileArr = new MultipartFile[]{file};
 
+        String nextAtchFileGroupId = atchMapper.nextAtchFileGroupId(); 							
+        Long tempMenuSn = Long.parseLong("999");
+        
         FileGroupInsertReq fgir = new FileGroupInsertReq();
+		fgir.setAtchFileGroupId(nextAtchFileGroupId);
+		fgir.setMenuSn(tempMenuSn);        
         fgir.setTaskSeCd("pp");
         fgir.setTaskSeTrgtId("2");
         fgir.setRgtrId(exprtApplyIVO.getMbrId());
@@ -135,13 +140,11 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
 
         // 신규 파일그룹 일련번호 구하기
         ApiPrnDto groupInsertResult = fileService.groupInsert(fgir);
-
-        Object atchFileGroupIdObj = groupInsertResult.getData().get("atchFileGroupId");
-        String atchFileGroupId = String.valueOf(atchFileGroupIdObj);
+        log.info("groupInsertResult >>>> " + groupInsertResult);
 
         HashMap<String, Object> params = new HashMap<>();
         params.put("savePath", "pp");                       // 파일경로 정보
-        params.put("atchFileGroupId", atchFileGroupId);     // 첨부파일그룹아이디
+        params.put("atchFileGroupId", nextAtchFileGroupId); // 첨부파일그룹아이디
         params.put("prvcInclYn", "0");                      // 개인정보 여부
         params.put("isExcel", "0");                         // 엑셀파일 여부
 
@@ -149,7 +152,7 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
         ApiPrnDto fileResult = fileService.uploadFiles(params, attachFileArr);
 
         if("0".equals(fileResult.getCode())){
-            exprtApplyIVO.setAtchFileGroupId(atchFileGroupId);
+            exprtApplyIVO.setAtchFileGroupId(nextAtchFileGroupId);
         }
 
         // 성명 복호화
@@ -172,11 +175,11 @@ public class ExprtApplyServiceImpl implements ExprtApplyService {
         }
 
         // 첨부파일그룹 데이터 후처리
-        if (StringUtils.isNotBlank(atchFileGroupId)) {
+        if (StringUtils.isNotBlank(nextAtchFileGroupId)) {
             BigInteger menuSn = exprtApplyMapper.selectMenuSn(exprtApplyIVO.getMenuSn());
 
             AtchPVO atchPVO = new AtchPVO();
-            atchPVO.setAtchFileGroupId(atchFileGroupId);
+            atchPVO.setAtchFileGroupId(nextAtchFileGroupId);
             atchPVO.setMenuSn(menuSn);
             atchPVO.setTaskSeTrgtId(exprtApplyIVO.getExprtNo());
 

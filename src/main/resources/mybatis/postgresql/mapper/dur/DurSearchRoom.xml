@@ -466,6 +466,9 @@
             <if test="igrdNm != null and igrdNm != ''">
                 AND lower(mfds_igrd_nm_cn) = lower(#{igrdNm})
             </if>
+            <if test="rlvtAge != null and rlvtAge != ''">
+                AND rlvt_age = #{rlvtAge}
+            </if>            
             AND 'age' = #{bannTypeCd}
             UNION ALL
             /* DUR임부금기 정보에서 제품별 제약회사 조회(성분명 조건) */
@@ -516,6 +519,9 @@
             WHERE eg2.eff_group_nm = eg.eff_group_nm
               AND eg2.group_nm_1 = eg.group_nm_1
               AND eg.oper_stts_cd = 'O'
+          	<if test="igrdNm != null and igrdNm != ''">
+              AND (lower(eg.mfds_igrd_nm_cn) = lower(#{igrdNm}))
+          	</if>              
               AND 'eftgrp' = #{bannTypeCd}
             UNION ALL
             /* DUR노인주의 정보에서 제품별 제약회사 조회(성분명 조건) */
@@ -547,10 +553,10 @@
         SELECT 
              eff_group_nm           /* 효능그룹명 */
             ,group_nm               /* 계열(그룹명) */
-            ,mfds_igrd_nm_cn as igrd_nm                /* 성분 */
+            ,igrd_nm                /* 성분 */
         FROM(
             SELECT distinct
-                 eg.eff_group_nm
+                   eg.eff_group_nm                
                 ,(
                     select
                         dc.com_dtl_cd_nm
@@ -560,19 +566,28 @@
                     where gc.group_cd_nm = eg.eff_group_nm
                     and dc.com_dtl_cd = eg.group_nm
                     LIMIT 1
-                 ) as group_nm
-                ,eg.mfds_igrd_nm_cn as igrd_nm
-            FROM kids_own.tb_pp_m_dur_eftgrp eg
-               , (SELECT MAX(eff_group_nm) AS eff_group_nm, MAX(group_nm_1) AS group_nm_1
-                    FROM kids_own.tb_pp_m_dur_eftgrp
-                   WHERE oper_stts_cd = 'O'
-                <if test="igrdNm != null and igrdNm != ''">
-                     AND lower(mfds_igrd_nm_cn) = lower(#{igrdNm})
-                </if>                   
-                  GROUP BY eff_group_nm, group_nm_1) eg2 
-            WHERE eg2.eff_group_nm = eg.eff_group_nm
-              AND eg2.group_nm_1 = eg.group_nm_1
-              AND eg.oper_stts_cd = 'O'
-        ) A
+                 ) as group_nm                 
+                 , eg.mfds_igrd_nm_cn as igrd_nm
+              FROM kids_own.tb_pp_m_dur_eftgrp eg
+                 , (SELECT MAX(eff_group_nm) AS eff_group_nm, MAX(group_nm_1) AS group_nm_1
+                      FROM kids_own.tb_pp_m_dur_eftgrp
+                     WHERE oper_stts_cd = 'O'
+                     <if test="igrdNm != null and igrdNm != ''">
+                       AND lower(mfds_igrd_nm_cn) = lower(#{igrdNm})
+                     </if>
+                  	 <if test="effGroupNm != null and effGroupNm != '' and groupNm != null and groupNm != ''">		
+                       AND group_nm = (SELECT dc.com_dtl_cd
+					                     FROM kids_own.tb_ca_c_group_code gc 
+					                    INNER JOIN kids_own.tb_ca_c_dtl_code dc
+					                       ON gc.com_group_cd = dc.com_group_cd
+					                    WHERE gc.group_cd_nm = #{effGroupNm}
+					                      AND dc.com_dtl_cd_nm = #{groupNm}
+					                    LIMIT 1)	            
+                    </if>
+                     GROUP BY eff_group_nm, group_nm_1) eg2 
+             WHERE eg2.eff_group_nm = eg.eff_group_nm
+               AND eg2.group_nm_1 = eg.group_nm_1
+               AND eg.oper_stts_cd = 'O'
+           ) A
     </select>    
 </mapper>

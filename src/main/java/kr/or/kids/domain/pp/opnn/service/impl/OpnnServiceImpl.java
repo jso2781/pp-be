@@ -72,7 +72,12 @@ public class OpnnServiceImpl implements OpnnService
 
             if(attachFileArr != null && attachFileArr.length > 0){
 
+                String nextAtchFileGroupId = atchMapper.nextAtchFileGroupId(); 							
+                Long tempMenuSn = Long.parseLong("999");            	
+            	
                 FileGroupInsertReq fgir = new FileGroupInsertReq();
+        		fgir.setAtchFileGroupId(nextAtchFileGroupId);
+        		fgir.setMenuSn(tempMenuSn);                        
                 fgir.setTaskSeCd("pp");
                 fgir.setTaskSeTrgtId("2");
                 fgir.setRgtrId(opnnPVO.getRgtrId());
@@ -85,13 +90,11 @@ public class OpnnServiceImpl implements OpnnService
                       
                 // 신규 파일그룹 일련번호 구하기
                 ApiPrnDto groupInsertResult = fileService.groupInsert(fgir);
-
-                Object atchFileGroupIdObj = groupInsertResult.getData().get("atchFileGroupId");
-                String atchFileGroupId = String.valueOf(atchFileGroupIdObj);
+                log.info("groupInsertResult >>>> " + groupInsertResult);
 
                 HashMap<String, Object> params = new HashMap<>();
                 params.put("savePath", "pp");                       // 파일경로 정보
-                params.put("atchFileGroupId", atchFileGroupId);     // 첨부파일그룹아이디
+                params.put("atchFileGroupId", nextAtchFileGroupId);     // 첨부파일그룹아이디
                 params.put("prvcInclYn", "0");                      // 개인정보 여부
                 params.put("isExcel", "0");                         // 엑셀파일 여부
 
@@ -99,7 +102,7 @@ public class OpnnServiceImpl implements OpnnService
                 ApiPrnDto fileResult = fileService.uploadFiles(params, attachFileArr);
 
                 if("0".equals(fileResult.getCode())){
-                    opnnPVO.setAtchFileGroupId(atchFileGroupId);
+                    opnnPVO.setAtchFileGroupId(nextAtchFileGroupId);
                 }
             }
 
@@ -136,7 +139,7 @@ public class OpnnServiceImpl implements OpnnService
             String sndptyFlnm = "mail.drugsafe.or.kr"; // 메일 발송 계정
             String sndptyEmlAddr = "kids@drugsafe.or.kr"; // 발신자 메일주소
             String rcvrFlnm = "한국의약품안전관리원"; // 수신자 명
-            String rcvrEmlAddr = "kids_dur@drugsafe.kr"; // 수신자 메일주소
+            String rcvrEmlAddr = "kids_dur@drugsafe.or.kr"; // 수신자 메일주소
 
             log.debug("emlTtl >>>>> " + emlTtl);
             log.debug("emlCn >>>>> " + emlCn);

@@ -1,15 +1,17 @@
 package kr.or.kids.domain.pp.atch.controller;
 
+import java.io.File;
+import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
@@ -20,9 +22,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -43,6 +45,11 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class AtchController
 {
+    private static final int THUMB_REL_PATH_MAX_LEN = 512;
+
+    /** 썸네일 상대 경로의 각 디렉터리/파일 이름 조각 (Path Traversal·절대경로 방지) */
+    private static final Pattern THUMB_PATH_SEGMENT = Pattern.compile("^[a-zA-Z0-9가-힣._\\-\\s()_]{1,255}$");
+
     private final AtchService atchService;
 
     private final FileService fileService;
@@ -149,10 +156,23 @@ public class AtchController
     {
         String requestUri = request.getRequestURI();
         String basePath = "/thumb/";
-        String relativePath = requestUri.substring(requestUri.indexOf(basePath) + basePath.length());
+        int thumbIdx = requestUri.indexOf(basePath);
+        if (thumbIdx < 0) {
+            return buildBackupThumbResponse();
+        }
+        String rawTail = requestUri.substring(thumbIdx + basePath.length());
+        String safeRelative = sanitizeThumbRelativePath(rawTail);
+        if (safeRelative == null) {
+            log.warn("getThumb rejected unsafe path. rawTail={}", rawTail);
+            return buildBackupThumbResponse();
+        }
+        if (!isThumbPathUnderStoreRoot(safeRelative)) {
+            log.warn("getThumb path escapes store root. safeRelative={}", safeRelative);
+            return buildBackupThumbResponse();
+        }
 
         FileDataReqVO fdrv = new FileDataReqVO();
-        fdrv.setSrvrFileNm(relativePath);
+        fdrv.setSrvrFileNm(safeRelative);
 
         try {
             FileDownResVO downloadParam = fileService.downloadFile(fdrv);
@@ -171,10 +191,66 @@ public class AtchController
                     .contentType(MediaType.IMAGE_PNG)
                     .body(resource);
         } catch (Exception e) {
-            log.warn("getThumb fallback to backup image. srvrFileNm={}", relativePath, e.getMessage());
+            log.warn("getThumb fallback to backup image. srvrFileNm={}", safeRelative, e);
             return buildBackupThumbResponse();
         }
-    }         
+    }
+
+    /**
+     * URL 디코드 후 슬래시로 통일, 세그먼트별 화이트리스트 검증. 불가 시 null.
+     */
+    private static String sanitizeThumbRelativePath(String rawTail) {
+        if (!StringUtils.hasText(rawTail)) {
+            return null;
+        }
+        String decoded;
+        try {
+            decoded = URLDecoder.decode(rawTail, StandardCharsets.UTF_8);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+        if (decoded.indexOf('\0') >= 0) {
+            return null;
+        }
+        String n = decoded.replace('\\', '/').replaceFirst("^/+", "");
+        if (n.length() > THUMB_REL_PATH_MAX_LEN) {
+            return null;
+        }
+        if (n.contains("..")) {
+            return null;
+        }
+        String[] parts = n.split("/");
+        for (String part : parts) {
+            if (part.isEmpty()) {
+                continue;
+            }
+            if (".".equals(part) || "..".equals(part)) {
+                return null;
+            }
+            if (!THUMB_PATH_SEGMENT.matcher(part).matches()) {
+                return null;
+            }
+        }
+        return n;
+    }
+
+    /**
+     * file.storePath 기준으로 해석했을 때 저장소 밖으로 나가지 않는지 확인
+     */
+    private boolean isThumbPathUnderStoreRoot(String relativeUnixStyle) {
+        if (!StringUtils.hasText(fileStorePath) || !StringUtils.hasText(relativeUnixStyle)) {
+            return false;
+        }
+        try {
+            Path storeRoot = Paths.get(fileStorePath).toAbsolutePath().normalize();
+            String relFs = relativeUnixStyle.replace('/', File.separatorChar);
+            Path candidate = storeRoot.resolve(relFs).normalize();
+            return candidate.startsWith(storeRoot);
+        } catch (Exception e) {
+            log.debug("isThumbPathUnderStoreRoot failed: {}", e.getMessage());
+            return false;
+        }
+    }
 
     private ResponseEntity<Resource> buildBackupThumbResponse()
     {

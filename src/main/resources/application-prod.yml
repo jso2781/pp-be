@@ -9,8 +9,8 @@ server:
       force: true
   error:
     include-message: always
-    include-exception: true
-    include-stacktrace: always
+    include-exception: false
+    include-stacktrace: never
     include-binding-errors: never
     path: /error
     whitelabel:
@@ -122,6 +122,11 @@ file:
   encryptkey: 12345678901234567890123456789012
   algorithm: AES/CBC/PKCS5Padding
   url: /files
+
+niceid:
+  clientid: NIaa684f4b-bab3-4c06-b47a-0418add5bb8e
+  clientid-secret: ODVlNDI4ZDAtN2YxNi00NTFkLTg3YzUtZWMzY2E4OTVmNTdkMDVGODVGNDRCN0YwOTI5RERDREFDQTAy
+  return-url: https://stg.drugsafe.or.kr/api/pp/niceid/return
 
 logging:
   level:

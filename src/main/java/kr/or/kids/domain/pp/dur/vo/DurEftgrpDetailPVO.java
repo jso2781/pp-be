@@ -10,8 +10,20 @@ import lombok.Setter;
 @Getter
 public class DurEftgrpDetailPVO extends PageRequestDto{
     /**
+     * 효능그룹명
+     */
+    @Schema(description = "효능그룹명", type = "String")
+    private String effGroupNm;
+    
+    /**
+     * 계열(그룹명)
+     */
+    @Schema(description = "계열(그룹명)", type = "String")
+    private String groupNm;
+    
+    /**
      * 성분명
      */
     @Schema(description = "성분명", type = "String")
-    private String igrdNm;
+    private String igrdNm;    
 }
