@@ -16,4 +16,10 @@ public interface NiceidService {
      */
     public ApiPrnDto getTransctionId(NiceidPVO niceidPVO);
 
+    /**
+     * Nice 본인인증시 인증완료시 리턴받은 CI값으로부터 사용자정보 존재여부 체크
+     * @param ci Nice 본인인증시 인증완료시 리턴받은 CI값
+     * @return
+     */
+    public String getExistMbrInfo(String ci);
 }

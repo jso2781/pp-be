@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import kr.or.kids.domain.pp.mbr.vo.MbrInfoPVO;
+import kr.or.kids.domain.pp.mbr.vo.MbrInfoRVO;
 import kr.or.kids.domain.pp.niceid.service.NiceidService;
 import kr.or.kids.domain.pp.niceid.vo.NiceidPVO;
 import kr.or.kids.global.system.common.ApiResultCode;
@@ -193,10 +195,12 @@ public class NiceidController {
          */
         String name = safeExtract(intcResultResInfo.getAuthResultData().getName());
         String birthdate =  safeExtract(intcResultResInfo.getAuthResultData().getBirthdate());
-        String gender =  safeExtract(intcResultResInfo.getAuthResultData().getGender());
+//        String gender =  safeExtract(intcResultResInfo.getAuthResultData().getGender());
         String ci =  safeExtract(intcResultResInfo.getAuthResultData().getCi());
-        String di =  safeExtract(intcResultResInfo.getAuthResultData().getDi());
+//        String di =  safeExtract(intcResultResInfo.getAuthResultData().getDi());
         String mobileNo =  safeExtract(intcResultResInfo.getAuthResultData().getMobileNo());
+
+        String existMbrInfo = niceidService.getExistMbrInfo(ci);
 
         response.getWriter().write(
                 "<html><body><script>" +
@@ -204,11 +208,10 @@ public class NiceidController {
                         "  type: 'NICE_AUTH_RESULT'," +
                         "  code: '0000'," +
                         "  name: '" + name + "'," +
-                        "  birthdate: '" + birthdate + "'," +
-                        "  gender: '" + gender + "'," +
+                        "  brdt: '" + birthdate + "'," +
                         "  ci: '" + ci + "'," +
-                        "  di: '" + di + "'," +
-                        "  mobileNo: '" + mobileNo + "'" +
+                        "  phone: '" + mobileNo + "'," +
+                        "  existMbrInfo: '" + existMbrInfo + "'" +
                         "};" +
                         "if (window.opener) {" +
                         "  window.opener.postMessage(data, window.location.origin);" +
