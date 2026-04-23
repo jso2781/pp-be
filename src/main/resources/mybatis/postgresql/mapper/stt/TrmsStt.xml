@@ -34,13 +34,14 @@
 
     <select id="selectTrmsSttList" parameterType="TrmsSttPVO" resultType="TrmsSttRVO" >
         /* 대국민포털_약관법령 목록 조회 (TrmsSttPVO.selectTrmsSttList) */
-        SELECT
-            trms_stt_aplcn_ymd,
-            trms_stt_end_ymd
-        FROM kids_own.TB_PP_M_TRMS_STT
-        WHERE 1=1
-        AND trms_stt_cd = #{trmsSttCd}
-        ORDER BY reg_dt DESC
+        SELECT trms_stt_aplcn_ymd
+             , trms_stt_end_ymd
+          FROM kids_own.TB_PP_M_TRMS_STT
+         WHERE trms_stt_cd = #{trmsSttCd}
+         <![CDATA[
+           AND trms_stt_aplcn_ymd <= to_char(now(), 'YYYYMMDD')
+         ]]>
+         ORDER BY trms_stt_end_ymd DESC
     </select>
     
     <select id="getTrmsSttLatest" parameterType="TrmsSttPVO" resultType="TrmsSttRVO" >
