@@ -10,7 +10,7 @@ import lombok.Setter;
 public class AnyIdInitRVO {
 
     /**
-     * Any-ID 설정파일 경로 (기본값: /config/config.anyidc.json)
+     * Any-ID 설정파일 경로 (예: /config/local|dev|prod/config.anyidc.json)
      */
     @Schema(description = "Any-ID 설정파일 경로", type = "String")
     private String cfg;

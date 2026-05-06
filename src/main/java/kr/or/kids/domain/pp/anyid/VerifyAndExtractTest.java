@@ -29,7 +29,12 @@ public class VerifyAndExtractTest {
 		String tag_kakaobank = "20260325061903422_1000001067_30ee851b-9a45-446b-b2af-6134a270e961";
 		String tag_kk = "20260325062752976_1000001067_2ab580c0-d9bd-4fc3-9692-cb9a71a5dc38";
 //		String kdistApiJsonFilePath = "/tmp/kdist-api9517326110381048295.json";
-		Resource resource = new ClassPathResource("config/kdist/kdist-api.json");
+		Resource resource = firstExistingResource(
+			"config/local/kdist/kdist-api.json",
+			"config/dev/kdist/kdist-api.json",
+			"config/prod/kdist/kdist-api.json",
+			"config/kdist/kdist-api.json"
+		);
 		InputStream inputStream = resource.getInputStream();
 		Map<String, Object> resultMap = anyidCertRef.decryptSsob(ssob_kk, tag_kk, inputStream);
 
@@ -42,5 +47,15 @@ public class VerifyAndExtractTest {
 				System.out.println("================ AnyIdAuthService anyidCertRef.decryptSsob after key="+key+", value="+resultMap.get(key));
 			}
 		}
+	}
+
+	private static Resource firstExistingResource(String... classpathLocations) {
+		for (String classpathLocation : classpathLocations) {
+			Resource resource = new ClassPathResource(classpathLocation);
+			if (resource.exists()) {
+				return resource;
+			}
+		}
+		throw new IllegalStateException("Any-ID resource not found");
 	}
 }
