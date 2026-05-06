@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,18 +18,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class AnyIdResourcePaths {
 
-    private final AnyIdProfilePaths anyIdProfilePaths;
-
     private volatile Path kdistApiJsonPath;
     private volatile Path esignProviderKeyJsonPath;
     private volatile Path pidApiJsonPath;
 
-    public AnyIdResourcePaths(AnyIdProfilePaths anyIdProfilePaths) {
-        this.anyIdProfilePaths = anyIdProfilePaths;
-    }
-
     /**
-     * 활성 프로필(local/dev/prod)에 맞는 kdist-api.json 경로를 준비한다.
+     * WEB-INF/config/kdist/kdist-api.json (SDK 가이드 기준) 
      */
     public String kdistApiJsonFilePath() {
         if (kdistApiJsonPath != null) {
@@ -39,7 +34,7 @@ public class AnyIdResourcePaths {
                 return kdistApiJsonPath.toAbsolutePath().toString();
             }
             try {
-                kdistApiJsonPath = copyToTempFile(anyIdProfilePaths.classpathLocation("kdist/kdist-api.json"), "kdist-api", ".json");
+                kdistApiJsonPath = copyToTempFile("config/kdist/kdist-api.json", "kdist-api", ".json");
             } catch (IOException e) {
                 throw new IllegalStateException("Failed to prepare Any-ID kdist-api.json temp file", e);
             }
@@ -47,7 +42,7 @@ public class AnyIdResourcePaths {
         }
     }
 
-    /** 활성 프로필(local/dev/prod)에 맞는 provider-key.json 경로를 준비한다. */
+    /** WEB-INF/config/esign/provider-key.json */
     public String esignProviderKeyJsonFilePath() {
         if (esignProviderKeyJsonPath != null) {
             return esignProviderKeyJsonPath.toAbsolutePath().toString();
@@ -57,7 +52,7 @@ public class AnyIdResourcePaths {
                 return esignProviderKeyJsonPath.toAbsolutePath().toString();
             }
             try {
-                esignProviderKeyJsonPath = copyToTempFile(anyIdProfilePaths.classpathLocation("esign/provider-key.json"), "provider-key", ".json");
+                esignProviderKeyJsonPath = copyToTempFile("config/esign/provider-key.json", "provider-key", ".json");
             } catch (IOException e) {
                 throw new IllegalStateException("Failed to prepare Any-ID provider-key.json temp file", e);
             }
@@ -65,7 +60,7 @@ public class AnyIdResourcePaths {
         }
     }
 
-    /** 활성 프로필(local/dev/prod)에 맞는 pid_api.json 경로를 준비한다. */
+    /** resources/config/pid/pid_api.json */
     public String pidApiJsonFilePath() {
         if (pidApiJsonPath != null) {
             return pidApiJsonPath.toAbsolutePath().toString();
@@ -75,7 +70,7 @@ public class AnyIdResourcePaths {
                 return pidApiJsonPath.toAbsolutePath().toString();
             }
             try {
-                pidApiJsonPath = copyToTempFile(anyIdProfilePaths.classpathLocation("pid/pid_api.json"), "pid_api", ".json");
+                pidApiJsonPath = copyToTempFile("config/pid/pid_api.json", "pid_api", ".json");
             } catch (IOException e) {
                 throw new IllegalStateException("Failed to prepare Any-ID pid_api.json temp file", e);
             }
@@ -84,7 +79,7 @@ public class AnyIdResourcePaths {
     }
 
     private static Path copyToTempFile(String classpathLocation, String prefix, String suffix) throws IOException {
-        org.springframework.core.io.ClassPathResource res = new org.springframework.core.io.ClassPathResource(classpathLocation);
+        ClassPathResource res = new ClassPathResource(classpathLocation);
         if (!res.exists()) {
             throw new IOException("Classpath resource not found: " + classpathLocation);
         }

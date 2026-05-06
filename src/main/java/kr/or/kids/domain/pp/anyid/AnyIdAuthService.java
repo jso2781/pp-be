@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -67,18 +69,22 @@ public class AnyIdAuthService {
 
             log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before ssob="+req.ssob());
             log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before tag="+req.tag());
-            String kdistApiJsonFilePath = resourcePaths.kdistApiJsonFilePath();
-            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before resourcePaths.kdistApiJsonFilePath()="+kdistApiJsonFilePath);
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before resourcePaths.kdistApiJsonFilePath()="+resourcePaths.kdistApiJsonFilePath());
 
-            BufferedReader br = new BufferedReader(new FileReader(kdistApiJsonFilePath));
+            Resource resource2 = new ClassPathResource("config/kdist/kdist-api.json");
+
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob 232323 before resource.getFilename()="+resource2.getFilename());
+
+
+            BufferedReader br = new BufferedReader(new FileReader(resourcePaths.kdistApiJsonFilePath()));
 
 
             String strLine = null;
-            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before kdistApiJsonFilePath="+kdistApiJsonFilePath+" Content Start =====================================");
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before resource.getFilename()="+resource2.getFilename()+" Content Start =====================================");
             while((strLine = br.readLine()) != null) {
                 log.debug(strLine);
             }
-            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before kdistApiJsonFilePath="+kdistApiJsonFilePath+" Content End =====================================");
+            log.debug("================ AnyIdAuthService anyidCertRef.decryptSsob before resource.getFilename()="+resource2.getFilename()+" Content End =====================================");
             br.close();
 
             String ssobStr = customDecryptSsob(req.ssob(), req.tag());

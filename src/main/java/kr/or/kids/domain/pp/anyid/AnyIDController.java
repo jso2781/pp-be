@@ -25,12 +25,6 @@ import kr.or.kids.global.system.common.vo.ApiPrnDto;
 @RequestMapping("/api/pp/auth")
 public class AnyIDController {
 
-    private final AnyIdProfilePaths anyIdProfilePaths;
-
-    public AnyIDController(AnyIdProfilePaths anyIdProfilePaths) {
-        this.anyIdProfilePaths = anyIdProfilePaths;
-    }
-
     /**
      * AnyId 초기화 정보 조회
      * @param AnyIdInitPVO
@@ -47,7 +41,7 @@ public class AnyIDController {
         AnyIdInitRVO resultVo = new AnyIdInitRVO();
         String txId = param.getTx();
 
-        resultVo.setCfg(anyIdProfilePaths.frontConfigPath(request.getContextPath()));
+        resultVo.setCfg("/".equalsIgnoreCase(request.getContextPath()) ? "" : request.getContextPath() + "/config/config.anyidc.json");
         resultVo.setTxId(txId);
         resultVo.setTag(txId);
         resultVo.setLvl(3);
