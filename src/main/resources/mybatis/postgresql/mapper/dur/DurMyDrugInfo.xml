@@ -13,6 +13,7 @@
     INNER JOIN us_dsadba.drb_item dit ON dit.item_seq = st.item_seq
     INNER JOIN us_dsadba.dra_entp_permit dep ON dit.entp_seq = dep.entp_seq
          WHERE 1=1
+           AND dit.cancel_date IS NULL
            AND dit.item_name LIKE '%' || #{searchValue} || '%'
          ORDER BY st.item_seq, std_cd
     </select>
@@ -40,6 +41,7 @@
     INNER JOIN us_dsadba.dra_entp_permit dep ON dit.entp_seq = dep.entp_seq
          WHERE 1=1
            AND dii.material_mix_purpose_code = '001'
+           AND dit.cancel_date IS NULL
          ORDER BY st.item_seq, din.ingr_eng_name
     </select>
 
@@ -492,6 +494,39 @@
                     ,dtl_info_cn
                     ,rmrk_cn
             FROM (
+	            WITH eft_targets AS (	            
+            		SELECT eff_group_nm,  group_nm_1
+            		  FROM ( SELECT eff_group_nm
+            		              , group_nm_1
+            		              , CASE WHEN count(mfds_prdct_nm) >= 2 THEN 'Y' ELSE 'N' END AS target_yn	    
+            		           FROM ( SELECT DISTINCT on (mfds_igrd_nm_cn)
+											 eff_group_nm
+			            		           , group_nm_1
+			            		           , mfds_prdct_nm         	
+							            FROM kids_own.tb_pp_m_dur_eftgrp
+								       WHERE oper_stts_cd = 'O'
+					        <if test="list != null and list.size() > 0">
+					            <choose>
+					                <when test="list[0].igrdCd != null and list[0].igrdCd != ''">
+					                    AND mfds_igrd_nm_cn IN
+					                    <foreach collection="list" item="item" open="(" separator="," close=")">
+					                        #{item.igrdCd}
+					                    </foreach>
+					                </when>
+					                <otherwise>
+					                    AND mfds_prdct_nm IN
+					                    <foreach collection="list" item="item" open="(" separator="," close=")">
+					                        #{item.prdctCd}
+					                    </foreach>
+					                </otherwise>
+					            </choose>
+					        </if>  
+							           GROUP BY eff_group_nm, group_nm_1, mfds_igrd_nm_cn, mfds_prdct_nm
+					                ) 
+							  GROUP BY eff_group_nm, group_nm_1	
+						   ) AS etg
+				     WHERE etg.TARGET_YN ='Y'     
+	            )                            
                 SELECT
                     'eftgrp' as bann_type_cd
                     <if test="list != null and list.size() > 0">
@@ -525,22 +560,18 @@
                     ) as group_nm                                  /* 계열(그룹명) */
                     ,null as dtl_info_cn
                     ,null as rmrk_cn
-                FROM kids_own.tb_pp_m_dur_eftgrp eg
-                WHERE eg.oper_stts_cd = 'O'
-                AND eg.group_nm_1 IN (
-                    SELECT e.group_nm_1
-                    FROM kids_own.tb_pp_m_dur_eftgrp e
-                    WHERE oper_stts_cd = 'O'
-                    <include refid="durFilterLikeE"/>
-                )
+                FROM eft_targets et
+                   , kids_own.tb_pp_m_dur_eftgrp eg                  			
+               WHERE eg.oper_stts_cd = 'O'
+                 AND et.eff_group_nm = eg.eff_group_nm
+                 AND et.group_nm_1 = eg.group_nm_1
         <if test="list != null and list.size() > 0">
             <choose>
                 <when test="list[0].igrdCd != null and list[0].igrdCd != ''">
-                    AND (
-                    <foreach collection="list" item="item" separator=" OR ">
-                        eg.mfds_igrd_nm_cn LIKE '%' || #{item.igrdCd} || '%'
+                    AND eg.mfds_igrd_nm_cn IN
+                    <foreach collection="list" item="item" open="(" separator="," close=")">
+                        #{item.igrdCd}
                     </foreach>
-                    )
                 </when>
                 <otherwise>
                     AND eg.mfds_prdct_nm IN
