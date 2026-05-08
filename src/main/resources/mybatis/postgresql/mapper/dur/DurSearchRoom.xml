@@ -480,6 +480,9 @@
             <if test="igrdNm != null and igrdNm != ''">
                 AND lower(mfds_igrd_nm_cn) = lower(#{igrdNm})
             </if>
+            <if test="condiGrdCd != null and condiGrdCd != ''">
+                AND condi_grd_cd = #{condiGrdCd}
+            </if>
             AND 'prgnt' = #{bannTypeCd}
             UNION ALL
             /* DUR용량주의 정보에서 제품별 제약회사 조회(성분명 조건) */

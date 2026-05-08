@@ -226,10 +226,19 @@
                 ),
                 conc_raw AS (
                     SELECT DISTINCT
+--                      성분명 검색시 제품명 및 병용금기 제품명은 별도의 제품검색 API를 통해 조회하도록 설계.
+                <choose>
+                    <when test="list[0].igrdCd != null and list[0].igrdCd != ''">
+                        NULL::varchar AS prdct_nm,
+                        NULL::varchar AS prohibit_prdct_nm,
+                    </when>
+                    <otherwise>
                         CASE WHEN is_forward THEN prdct_nm_1 ELSE prdct_nm_2 END AS prdct_nm,
+                        CASE WHEN is_forward THEN prdct_nm_2 ELSE prdct_nm_1 END AS prohibit_prdct_nm,
+                    </otherwise>
+                </choose>
                         CASE WHEN is_forward THEN igrd_nm_1 ELSE igrd_nm_2 END AS igrd_nm,
                         CASE WHEN is_forward THEN igrd_nm_2 ELSE igrd_nm_1 END AS prohibit_igrd_nm,
-                        CASE WHEN is_forward THEN prdct_nm_2 ELSE prdct_nm_1 END AS prohibit_prdct_nm,
                         dtl_info_cn,
                         rmrk_cn
                     FROM conc_match

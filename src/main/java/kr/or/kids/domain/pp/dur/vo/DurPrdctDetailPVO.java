@@ -34,5 +34,11 @@ public class DurPrdctDetailPVO extends PageRequestDto{
      * 연령금기 해당연령
      */
     @Schema(description = "해당연령", type = "Long")
-    private Long rlvtAge;    
+    private Long rlvtAge;
+
+    /**
+     * 임부금기등급
+     */
+    @Schema(description = "임부금기등급", type = "String")
+    private String condiGrdCd;
 }
