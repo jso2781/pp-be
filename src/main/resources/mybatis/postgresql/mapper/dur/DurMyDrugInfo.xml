@@ -207,9 +207,7 @@
                         ON cb.oper_stts_cd = 'O'
                        AND <include refid="concMatchAto1"/>
                        AND <include refid="concMatchBto2"/>
-
-                    UNION ALL
-
+                    UNION
                     SELECT DISTINCT
                         cb.mfds_prdct_nm_1 as prdct_nm_1,
                         cb.mfds_prdct_nm_2 as prdct_nm_2,

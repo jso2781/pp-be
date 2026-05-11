@@ -133,7 +133,7 @@
             <if test="prdctNm != null and prdctNm != ''">
                 AND mfds_prdct_nm_1 like '%' || #{prdctNm} || '%'
             </if>
-            UNION ALL
+            UNION
             SELECT distinct
                     'conc' as bann_type_cd
                     <choose>
