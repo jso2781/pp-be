@@ -41,4 +41,10 @@ public class DurPrdctDetailPVO extends PageRequestDto{
      */
     @Schema(description = "임부금기등급", type = "String")
     private String condiGrdCd;
+
+    /**
+     * 최대투여기간(일)
+     */
+    @Schema(description = "최대투여기간(일)", type = "String")
+    private String maxAdminPrdDayCnt;
 }

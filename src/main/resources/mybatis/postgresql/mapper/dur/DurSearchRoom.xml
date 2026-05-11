@@ -505,6 +505,9 @@
             <if test="igrdNm != null and igrdNm != ''">
                 AND (lower(mfds_igrd_nm_cn) = lower(#{igrdNm}))
             </if>
+            <if test="maxAdminPrdDayCnt != null and maxAdminPrdDayCnt != ''">
+                AND max_admin_prd_day_cnt::varchar = #{maxAdminPrdDayCnt}
+            </if>
             AND 'dosage' = #{bannTypeCd}
             UNION ALL
             /* DUR효능군중복 정보에서 제품별 제약회사 조회(성분명에 대한 그룹명_1 소속 전체 제품 조회) */
