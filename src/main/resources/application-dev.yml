@@ -7,6 +7,10 @@ server:
       charset: UTF-8
       enabled: true
       force: true
+    session: # 이 부분 추가
+      cookie:
+        same-site: none
+        secure: true
   error:
     include-message: always
     include-exception: false
@@ -126,6 +130,7 @@ niceid:
 logging:
   level:
     kr.or.kids.domain: DEBUG
+    kr.or.anyid: DEBUG
     jdbc.sqltiming: INFO
     jdbc.resultsettable: INFO
     org.springframework.boot.context.config: DEBUG
