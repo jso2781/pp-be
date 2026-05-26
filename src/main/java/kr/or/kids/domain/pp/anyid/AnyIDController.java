@@ -45,9 +45,9 @@ public class AnyIDController {
         resultVo.setTxId(txId);
         resultVo.setTag(txId);
         resultVo.setLvl(3);
-        resultVo.setBypass(0);
+        resultVo.setBypass(1);
         resultVo.setTheme("4.1.0");
-        resultVo.setToggle(true);
+        resultVo.setToggle(false);
 
         bizData.put("result", resultVo);
         apiPrnDto.setData(bizData);
