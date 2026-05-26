@@ -72,7 +72,7 @@ public class AnyIDController {
         SsoInfoRVO resultVo = new SsoInfoRVO();
         resultVo.setMt(param.getMt());
         resultVo.setPortalJoinUri(param.getPortalJoinUri());
-        resultVo.setSsoByPass(0);
+        resultVo.setSsoByPass(1);
         resultVo.setAgencyContextPath("/".equalsIgnoreCase(request.getContextPath()) ? "" : request.getContextPath());
 
         bizData.put("result", resultVo);
