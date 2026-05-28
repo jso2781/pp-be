@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.boot.autoconfigure.web.ErrorProperties;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -20,9 +22,11 @@ import io.swagger.v3.oas.annotations.Hidden;
 public class CustomErrorController implements ErrorController
 {
     private final ErrorAttributes errorAttributes;
+    private final ErrorProperties errorProperties;
 
-    public CustomErrorController(ErrorAttributes errorAttributes) {
+    public CustomErrorController(ErrorAttributes errorAttributes, ServerProperties serverProperties) {
         this.errorAttributes = errorAttributes;
+        this.errorProperties = serverProperties.getError();
     }
 
     /**
@@ -33,19 +37,36 @@ public class CustomErrorController implements ErrorController
 
         ServletWebRequest webRequest = new ServletWebRequest(request);
 
-        // 운영 안전: 예외/스택트레이스 포함 X
-//        ErrorAttributeOptions options = ErrorAttributeOptions.defaults();
-        ErrorAttributeOptions options = ErrorAttributeOptions.of(
-                ErrorAttributeOptions.Include.MESSAGE,
-                ErrorAttributeOptions.Include.EXCEPTION
-                // StackTrace까지 보고 싶으면 아래도 추가
-                , ErrorAttributeOptions.Include.STACK_TRACE
-        );
+        ErrorAttributeOptions options = ErrorAttributeOptions.defaults();
+        if (shouldInclude(errorProperties.getIncludeMessage(), request.getParameter("message"))) {
+            options = options.including(ErrorAttributeOptions.Include.MESSAGE);
+        }
+        if (errorProperties.isIncludeException()) {
+            options = options.including(ErrorAttributeOptions.Include.EXCEPTION);
+        }
+        if (shouldInclude(errorProperties.getIncludeStacktrace(), request.getParameter("trace"))) {
+            options = options.including(ErrorAttributeOptions.Include.STACK_TRACE);
+        }
+        if (shouldInclude(errorProperties.getIncludeBindingErrors(), request.getParameter("errors"))) {
+            options = options.including(ErrorAttributeOptions.Include.BINDING_ERRORS);
+        }
 
         Map<String, Object> body = errorAttributes.getErrorAttributes(webRequest, options);
 
         int status = (int) body.getOrDefault("status", 500);
 
         return ResponseEntity.status(status).contentType(MediaType.APPLICATION_JSON).body(body);
+    }
+
+    private boolean shouldInclude(ErrorProperties.IncludeAttribute includeAttribute, String requestParam) {
+        switch (includeAttribute) {
+            case ALWAYS:
+                return true;
+            case ON_PARAM:
+                return requestParam != null && !"false".equalsIgnoreCase(requestParam);
+            case NEVER:
+            default:
+                return false;
+        }
     }
 }

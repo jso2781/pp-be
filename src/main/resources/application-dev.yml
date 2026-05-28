@@ -13,9 +13,9 @@ server:
         secure: true
   error:
     include-message: always
-    include-exception: false
-    include-stacktrace: never
-    include-binding-errors: never
+    include-exception: true
+    include-stacktrace: always
+    include-binding-errors: always
     path: /error
     whitelabel:
       enabled: false

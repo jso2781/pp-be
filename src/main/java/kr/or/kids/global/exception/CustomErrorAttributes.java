@@ -1,9 +1,7 @@
 package kr.or.kids.global.exception;
 
-import java.time.OffsetDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,8 +45,6 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
         Map<String, Object> base = super.getErrorAttributes(webRequest, options);
 
         int status = (int) base.getOrDefault("status", 500);
-        String path = (String) base.getOrDefault("path", "");
-        String traceId = UUID.randomUUID().toString();
 
         var locale = LocaleContextHolder.getLocale();
         String msgKey = statusMessageKey(status);
@@ -59,23 +55,26 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
             locale
         );
 
-        logger.info("CustomErrorAttributes getErrorAttributes base=",base);
+        logger.info("CustomErrorAttributes getErrorAttributes base={}", base);
         Map<String, Object> body = new LinkedHashMap<>();
-
-//        body.put("timestamp", OffsetDateTime.now().toString());
-//        body.put("status", status);
-//        body.put("error", base.getOrDefault("error", ""));
-//        body.put("message", userMessage);
-//        body.put("path", path);
-//        body.put("traceId", traceId);
 
         body.put("code", -1);
         body.put("msg", userMessage);
 
-        // 운영에서는 내부 상세 노출 금지 권장
-        body.put("detail", base.get("message"));
-        body.put("exception", base.get("exception"));
-        body.put("stackTrace", base.get("trace"));
+        Object detail = base.get("message");
+        if (detail != null) {
+            body.put("detail", detail);
+        }
+
+        Object exception = base.get("exception");
+        if (exception != null) {
+            body.put("exception", exception);
+        }
+
+        Object stackTrace = base.get("trace");
+        if (stackTrace != null) {
+            body.put("stackTrace", stackTrace);
+        }
 
         return body;
     }
